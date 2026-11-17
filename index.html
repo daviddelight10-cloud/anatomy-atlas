@@ -269,6 +269,9 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3d-lines circle{fill:#ffd60a}
 .b3d-presets{display:flex;flex-wrap:wrap;gap:5px;margin:2px 0}
 .pchip{border:1px solid var(--border);background:var(--panel);color:var(--text2);border-radius:14px;padding:3px 10px;font:600 11px var(--font);cursor:pointer}
+.pin-cap{font-size:12px;color:var(--text3);align-self:center}
+.pinchip{border-color:rgba(255,214,10,.35);color:var(--text)}
+.pinchip:hover{border-color:var(--accent);color:var(--accent)}
 .pchip:hover{color:var(--text);border-color:rgba(255,214,10,.55)}
 .pchip.on{color:#e8e8e8;background:rgba(255,214,10,.16);border-color:rgba(255,214,10,.55)}
 .b3d-views .pchip{opacity:.85}
@@ -19171,6 +19174,18 @@ function buildScene(gltf, st){
   /* exploded view + wireframe */
   let expVal = 0, explodeAmt = 0, wireOn = false;
   const dirCache = {}, _zeroV = new THREE.Vector3();
+  /* pinned structures — a personal study set, persisted locally */
+  let pins; try{ pins = new Set(JSON.parse(localStorage.getItem("atlas-pins")||"[]")); }
+    catch(e){ pins = new Set(); }
+  const savePins = () => { try{ localStorage.setItem("atlas-pins",JSON.stringify([...pins])); }catch(e){} };
+  const paintPins = () => { const el = $("#b3dpins"); if(!el) return;
+    if(!pins.size){ el.innerHTML=""; return; }
+    el.innerHTML = `<span class="pin-cap">📌</span>` + [...pins].map(id=>
+      `<button class="pchip pinchip" data-id="${id}" title="${esc(nameOf(id))}">${esc(nameOf(id))}</button>`).join("");
+    el.querySelectorAll(".pinchip").forEach(b=>b.addEventListener("click",()=>{
+      const id=b.dataset.id;
+      if(!anyVis(id)){ pushHist(); isolated=id; applyVis(); syncHiddenBar(); }
+      focusOn(id); })); };
   /* shareable deep link: #/3d/<sel>?iso=&hid=&sys=&peel=&clip= — debounced;
      declared up here because applyVis() runs before the helpers below */
   let urlT = 0;
@@ -19479,6 +19494,7 @@ function buildScene(gltf, st){
         <button data-a="hide">Hide this</button>
         <button data-a="isolate">Isolate</button>
         <button data-a="say" title="Pronounce it">🔊</button>
+        <button data-a="pin">${pins.has(id)?"📌 Pinned":"📌 Pin"}</button>
         ${hidden.size||isolated!==null?`<button data-a="showall">Show all</button>`:""}
       </div>
       ${im?`<img class="b3d-plate" src="${esc(im.thumb||im.url)}" alt="" loading="lazy">`:""}
@@ -19491,11 +19507,20 @@ function buildScene(gltf, st){
       if(a==="say"){ try{ speechSynthesis.cancel();
           const u=new SpeechSynthesisUtterance(nm); u.rate=0.95; speechSynthesis.speak(u); }catch(e){}
         return; }
+      if(a==="pin"){ pins.has(id) ? pins.delete(id) : pins.add(id);
+        savePins(); paintPins(); showInfo(id); return; }
       pushHist();
       if(a==="hide"){ hidden.add(id); applyVis(); select(null); }
       else if(a==="isolate"){ isolated=id; applyVis(); focusOn(id); }
       else { hidden.clear(); isolated=null; applyVis(); select(null); }
       syncHiddenBar();
+    }));
+    /* related-structure chips: fly to the part in-place when it's in the model */
+    info.querySelectorAll(".b3d-rel").forEach(a=>a.addEventListener("click",e=>{
+      const rid = (a.getAttribute("href")||"").replace(/^#\/part\//,"");
+      if(rid && meshes[rid]){ e.preventDefault();
+        if(!anyVis(rid)){ pushHist(); isolated=rid; applyVis(); syncHiddenBar(); }
+        focusOn(rid); }
     }));
   };
   const defInfo = `<h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p>`;
@@ -19840,6 +19865,7 @@ function buildScene(gltf, st){
       life.push({m, c:m.geometry.boundingSphere.center.clone(), p0:m.position.clone(), amp, freq}); } };
   addPulse("heart", 0.04, 1.1); addPulse("lungs", 0.018, 0.2);
 
+  paintPins();
   select(selId && meshes[selId] ? selId : null);
   if(selId && meshes[selId]) focusOn(selId);
 
@@ -19906,6 +19932,7 @@ function v3D(sel){
       <div class="b3d-search"><input id="b3dq" type="search" placeholder="Find a structure… (e.g. heart)" autocomplete="off"><div class="b3d-qres" id="b3dqres" style="display:none"></div></div>
       <div class="b3d-presets" id="b3dpre"></div>
       <div class="b3d-presets b3d-views" id="b3dvw"></div>
+      <div class="b3d-presets b3d-pins" id="b3dpins"></div>
       <div class="b3d-hbar" id="b3dhbar"></div>
       <div class="b3d-peel"><span title="Peel layers from outside in">🧅 peel</span><input id="b3dpeel" type="range" min="0" max="100" value="0" aria-label="Peel anatomical layers"><em id="b3dpeelv"></em></div>
       <div class="b3d-peel"><span title="Explode structures outward from the body center">💥 explode</span><input id="b3dexp" type="range" min="0" max="100" value="0" aria-label="Explode view"><em id="b3dexpv"></em></div>
