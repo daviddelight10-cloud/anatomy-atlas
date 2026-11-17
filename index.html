@@ -237,21 +237,14 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .lightbox .lc{color:#e8e8e8;font-size:13px;margin-top:14px;text-align:center;max-width:720px}
 .lightbox .lc a{color:#ffd60a}
 
-.b3d{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;margin-top:16px}
-.b3d-stage{position:relative;height:min(72vh,660px);background:#0a0a0a;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.b3d-stage{position:absolute;inset:0;background:#0a0a0a;overflow:hidden}
 .b3d-stage canvas{display:block;width:100%;height:100%;touch-action:none}
 .b3d-load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:12px;color:#e8e8e8;font-size:14px;background:#0a0a0a}
 .b3d-spin{width:18px;height:18px;border:2px solid #3d3d3d;border-top-color:#e8e8e8;border-radius:50%;animation:b3dsp .8s linear infinite}
 @keyframes b3dsp{to{transform:rotate(360deg)}}
 .b3d-tip{position:absolute;pointer-events:none;background:#1a1a1a;color:#e8e8e8;padding:3px 9px;border-radius:6px;font-size:12px;font-weight:600;display:none;border:1px solid #3d3d3d;z-index:5;white-space:nowrap}
-.b3d-reset{position:absolute;top:10px;right:10px;background:rgba(20,20,20,.88);color:#e8e8e8;border:1px solid #3d3d3d;border-radius:8px;padding:5px 10px;font:600 12px var(--font);cursor:pointer}
-.b3d-reset:hover{background:#242424}
-.b3d-stagebtns{position:absolute;top:10px;right:10px;display:flex;gap:6px}
-.b3d-stagebtns button{background:rgba(20,20,20,.88);color:#e8e8e8;border:1px solid #3d3d3d;border-radius:8px;padding:6px 11px;font:600 12px var(--font);cursor:pointer}
-.b3d-stagebtns button[disabled]{opacity:.35;cursor:default}
-.b3d-stagebtns button.on{background:rgba(255,214,10,.22);border-color:#ffd60a;color:#ffd60a}
 #b3dcv.quizmode{cursor:crosshair}
-.b3d-quiz{position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:rgba(14,14,14,.93);border:1px solid #3d3d3d;border-radius:12px;padding:8px 14px;z-index:6;font-size:13.5px;color:#e8e8e8;box-shadow:0 8px 24px rgba(0,0,0,.45);max-width:min(94%,620px)}
+.b3d-quiz{position:absolute;top:calc(68px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:rgba(14,14,14,.93);border:1px solid #3d3d3d;border-radius:12px;padding:8px 14px;z-index:6;font-size:13.5px;color:#e8e8e8;box-shadow:0 8px 24px rgba(0,0,0,.45);max-width:min(94%,620px)}
 .b3d-quiz .q-t{font-weight:700;color:#ffd60a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px}
 .b3d-quiz .q-s{color:#a3a3a3;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:12.5px}
 .b3d-quiz .q-streak{color:#f2a900}
@@ -259,9 +252,6 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3d-quiz button:hover{border-color:#ffd60a;color:#ffd60a}
 .b3d-quiz .q-flash-good{color:#3ddc84;font-weight:700}
 .b3d-quiz .q-flash-bad{color:#ff5d6c;font-weight:700}
-.b3d-stagebtns button:hover{background:#242424}
-
-.b3d-stagebtns button.on{background:rgba(255,214,10,.16);border-color:rgba(255,214,10,.55);color:#e8e8e8}
 .b3d-lbls{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}
 .b3dlbl{position:absolute;transform:translate(-50%,-140%);font:600 10.5px var(--font);color:#e8e8e8;background:rgba(18,18,18,.85);border:1px solid rgba(255,214,10,.4);border-radius:5px;padding:1px 6px;white-space:nowrap}
 .b3d-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}
@@ -295,20 +285,11 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3d-actions{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 10px}
 .b3d-actions button{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font:600 12px var(--font);cursor:pointer}
 .b3d-actions button:hover{border-color:var(--accent)}
-.b3d-side{display:flex;flex-direction:column;gap:10px;min-width:0}
 .b3d-filters{display:flex;flex-wrap:wrap;gap:6px}
 .fchip{border:1px solid var(--border);background:var(--panel);color:var(--text2);border-radius:20px;padding:4px 10px;font:600 11.5px var(--font);cursor:pointer;opacity:.55}
 .fchip.on{opacity:1;color:var(--text);border-color:color-mix(in srgb,var(--fc,#ffd60a) 65%,transparent);background:color-mix(in srgb,var(--fc,#ffd60a) 14%,var(--panel))}
 .b3d-info{position:relative;flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;overflow:auto}
 .b3d-iclose{display:none;position:absolute;top:8px;right:8px;width:28px;height:28px;background:#242424;color:#e8e8e8;border:1px solid #3d3d3d;border-radius:7px;font:700 13px var(--font);cursor:pointer;z-index:2}
-.b3d-side.float{position:absolute;top:52px;right:10px;bottom:10px;width:min(340px,88%);z-index:7;background:rgba(15,15,15,.94);backdrop-filter:blur(8px);border:1px solid #3d3d3d;border-radius:14px;padding:12px;overflow-y:auto;box-shadow:0 10px 30px rgba(0,0,0,.45);color:#e8e8e8}
-.b3d-side.float.phide{display:none}
-.b3d-side.float .b3d-info{flex:none;max-height:none;background:rgba(40,40,40,.6)}
-.b3d-side.float .b3d-iclose{display:block}
-.b3d-side.float .hint{color:#a3a3a3}
-.b3d-side.float .b3d-peel span,.b3d-side.float .b3d-peel em,.b3d-side.float .b3d-hbar{color:#a3a3a3}
-.b3d-side.float .b3d-cred{color:#a3a3a3}
-.b3d-side.float .b3d-cred a{color:#ffd60a}
 .b3d-aka{font-size:12px;color:var(--text3);margin:-2px 0 4px}
 .b3d-sec{margin-top:8px}
 .b3d-sec>b{display:block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);margin-bottom:2px}
@@ -333,27 +314,110 @@ a.b3d-rel{font:600 11.5px var(--font);color:var(--accent);background:color-mix(i
   #view{padding:18px 16px 50px}
   .plate{width:100%}
   .map-stage{position:static}
-  .b3d{grid-template-columns:1fr}
-  .b3d-stage{height:64vh}
   .fchip{padding:7px 13px;font-size:12.5px}
-  .b3d-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
-  .b3d-stagebtns button{padding:8px 13px}
-  .b3d-info{max-height:40vh}
   .b3d-actions button{padding:8px 12px}
 }
-/* mobile: detail card becomes a bottom sheet over the stage; ☰ opens the
-   controls as a top-anchored drawer so nothing overlaps the model */
-.b3d-info.sheet{display:none;position:absolute;left:0;right:0;bottom:0;width:auto;max-height:46%;flex:none;z-index:8;background:rgba(15,15,15,.96);backdrop-filter:blur(8px);border-top:1px solid #3d3d3d;border-radius:16px 16px 0 0;padding:14px 16px;overflow-y:auto;color:#e8e8e8;box-shadow:0 -8px 30px rgba(0,0,0,.45)}
-.b3d-info.sheet.has-sel{display:block}
-.b3d-info.sheet .b3d-iclose{display:block}
-.b3d-info.sheet h3{margin-right:30px;color:#e8e8e8}
-.b3d-info.sheet p,.b3d-info.sheet .b3d-sec p{color:#c9c2b0}
-.b3d-info.sheet .hint{color:#a3a3a3}
-.b3d-info.sheet .b3d-actions button{background:#242424;color:#e8e8e8;border-color:#3d3d3d}
-@media(max-width:640px){
-  .b3d-stagebtns{top:8px;right:8px;gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:80%}
-  .b3d-stagebtns button{padding:5px 7px;font-size:10.5px}
-  .b3d-side.float{top:46px;right:8px;bottom:8px;width:min(320px,94%)}
+
+/* ---------- full-screen 3D explorer ---------- */
+body.b3d-open{overflow:hidden}
+body.b3d-open .pwa-toast{bottom:112px}
+.b3d-app{position:fixed;left:0;top:0;right:0;height:100vh;height:100dvh;z-index:80;background:#0a0a0a;color:#e8e8e8;overflow:hidden;
+  --bg:#0a0a0a;--panel:#141414;--panel2:#1c1c1c;--card:#161616;--card-h:#1f1f1f;--text:#e8e8e8;--text2:#b5b0a3;--text3:#8d887a;
+  --border:#2e2e2e;--border2:#3d3d3d;--accent:#ffd60a;--accent-soft:rgba(255,214,10,.13);--shadow:0 12px 40px rgba(0,0,0,.5);
+  --g:rgba(16,16,16,.86);--gb:#363636;--dock-h:64px;--rail-h:0px;
+  --safe-t:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px);
+  --above:calc(var(--dock-h) + 24px + var(--safe-b))}
+.b3d-app.loading .b3d-dock,.b3d-app.loading .b3d-rail,.b3d-app.loading .b3d-search{opacity:.35;pointer-events:none}
+.b3d-top{position:absolute;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:calc(10px + var(--safe-t)) 12px 10px;pointer-events:none}
+.b3d-top>*{pointer-events:auto}
+.b3d-iconbtn{width:40px;height:40px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--g);border:1px solid var(--gb);color:#e8e8e8;border-radius:12px;font:600 17px var(--font);cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);text-decoration:none}
+.b3d-iconbtn:hover{border-color:#ffd60a;color:#ffd60a;text-decoration:none}
+.b3d-title{font-weight:700;font-size:15px;padding:0 6px 0 2px;white-space:nowrap;text-shadow:0 1px 8px #000}
+.b3d-top .b3d-search{flex:1;max-width:480px;margin:0 auto}
+.b3d-app .b3d-search input{height:40px;background:var(--g);border:1px solid var(--gb);color:#e8e8e8;border-radius:12px;padding:0 14px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.b3d-app .b3d-qres{background:#161616;border-color:#3d3d3d;box-shadow:var(--shadow)}
+.b3d-app .qhit{color:#e8e8e8;padding:10px 13px}
+.b3d-app .qhit:hover{background:#242424}
+.b3d-rail{position:absolute;left:12px;top:calc(66px + var(--safe-t));z-index:15;width:64px;max-height:calc(100dvh - 66px - var(--safe-t) - var(--above) - 12px);display:flex;flex-direction:column;gap:4px;padding:6px;overflow-y:auto;scrollbar-width:none;background:var(--g);border:1px solid var(--gb);border-radius:18px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.b3d-rail::-webkit-scrollbar{display:none}
+.b3d-rail .b3d-presets{flex-direction:column;flex-wrap:nowrap;gap:2px;margin:0}
+.b3d-rail .rail-cap{font:700 9px var(--font);letter-spacing:.12em;text-transform:uppercase;color:#6f6b60;text-align:center;margin:8px 0 2px;border-top:1px solid #2e2e2e;padding-top:8px}
+.b3d-rail .pchip{display:flex;flex-direction:column;align-items:center;gap:3px;width:100%;padding:8px 2px 6px;border-radius:12px;border:1px solid transparent;background:transparent;color:#bdb8aa;font:600 9.5px var(--font);line-height:1.1}
+.b3d-rail .pchip .ic{font-size:20px;line-height:1}
+.b3d-rail .pchip:hover{background:#242424;color:#fff}
+.b3d-rail .pchip.on{background:rgba(255,214,10,.16);border-color:rgba(255,214,10,.5);color:#ffd60a}
+.b3d-rail .b3d-views .pchip{opacity:1}
+.b3d-app .b3d-info{display:none;flex:none;position:absolute;z-index:18;right:12px;top:calc(66px + var(--safe-t));width:min(360px,calc(100% - 24px));max-height:calc(100dvh - 66px - var(--safe-t) - var(--above) - 12px);overflow-y:auto;padding:16px;background:rgba(16,16,16,.93);border:1px solid var(--gb);border-radius:18px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--shadow);color:#e8e8e8}
+.b3d-app .b3d-info.has-sel{display:block;animation:b3dIn .18s ease-out}
+@keyframes b3dIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+@keyframes b3dUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.b3d-app .b3d-iclose{display:block;top:10px;right:10px;width:30px;height:30px}
+.b3d-app .b3d-info h3{margin-right:36px;color:#fff;font-size:19px}
+.b3d-app .b3d-info p,.b3d-app .b3d-sec p{color:#c9c2b0}
+.b3d-app .b3d-info .hint{color:#a3a3a3}
+.b3d-app .b3d-aka,.b3d-app .b3d-sec>b,.b3d-app .b3d-rel>b{color:#8d887a}
+.b3d-app .b3d-actions button{background:#242424;color:#e8e8e8;border-color:#3d3d3d;padding:7px 11px}
+.b3d-app .b3d-actions button:hover{border-color:#ffd60a}
+.b3d-app a.b3d-rel{color:#ffd60a;background:rgba(255,214,10,.12);border-color:rgba(255,214,10,.35)}
+.b3d-app .b3d-open{background:#ffd60a;color:#0a0a0a}
+.b3d-dock{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(12px + var(--safe-b));z-index:20;max-width:calc(100% - 20px);overflow-x:auto;scrollbar-width:none;background:var(--g);border:1px solid var(--gb);border-radius:22px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 36px rgba(0,0,0,.55)}
+.b3d-dock::-webkit-scrollbar{display:none}
+.dock-in{display:flex;align-items:stretch;gap:2px;padding:6px;width:max-content}
+.dock-b{position:relative;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:54px;height:52px;padding:0 6px;border:0;background:transparent;color:#cfcabc;border-radius:15px;cursor:pointer;font:600 10px var(--font)}
+.dock-b i{font-style:normal;font-size:19px;line-height:1}
+.dock-b b{font-weight:600}
+.dock-b:hover{background:#242424;color:#fff}
+.dock-b.on{background:rgba(255,214,10,.18);color:#ffd60a}
+.dock-b.active::after{content:"";position:absolute;top:7px;right:13px;width:7px;height:7px;border-radius:50%;background:#ffd60a;box-shadow:0 0 0 2px #161616}
+.dock-b[disabled]{opacity:.3;pointer-events:none}
+.dock-sep{flex:none;width:1px;background:#333;margin:9px 5px}
+.b3d-pop{position:absolute;left:50%;bottom:var(--above);z-index:19;width:min(340px,calc(100% - 24px));padding:12px 16px 14px;background:rgba(16,16,16,.96);border:1px solid var(--gb);border-radius:18px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--shadow);opacity:0;pointer-events:none;transform:translate(-50%,10px);transition:opacity .15s,transform .15s}
+.b3d-pop.on{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.b3d-pop .pop-h{display:flex;align-items:baseline;gap:8px;font:700 13px var(--font);color:#fff;margin-bottom:8px}
+.b3d-pop .pop-h small{color:#8d887a;font-weight:500;font-size:11.5px}
+.b3d-pop .b3d-peel{gap:12px;color:#b5b0a3}
+.b3d-pop .b3d-peel input[type=range]{height:28px}
+.b3d-pop .b3d-peel em{min-width:34px;text-align:right;color:#ffd60a}
+.b3d-pop .b3d-ax button{padding:5px 12px;font-size:12px;background:#1c1c1c;color:#bdb8aa;border-color:#3d3d3d}
+.b3d-pop .b3d-ax button.on{background:rgba(255,214,10,.18);color:#ffd60a;border-color:rgba(255,214,10,.55)}
+.b3d-app .b3d-hbar{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--above) + var(--rail-h));z-index:17;background:var(--g);border:1px solid var(--gb);border-radius:14px;padding:6px 8px 6px 12px;color:#e8e8e8;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);white-space:nowrap;max-width:calc(100% - 24px)}
+.b3d-app .b3d-hbar button{background:#242424;color:#ffd60a;border-color:#3d3d3d;padding:5px 11px}
+.b3d-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--above) + var(--rail-h) + 6px);z-index:12;max-width:calc(100% - 32px);text-align:center;padding:7px 14px;border-radius:20px;background:rgba(16,16,16,.78);border:1px solid #333;color:#cfcabc;font:500 12.5px var(--font);pointer-events:none;transition:opacity .35s}
+.b3d-hint.gone{opacity:0}
+.b3d-scrim{position:absolute;inset:0;z-index:30;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .2s}
+.b3d-scrim.on{opacity:1;pointer-events:auto}
+.b3d-drawer{position:absolute;top:0;bottom:0;right:0;z-index:31;width:min(400px,92vw);display:flex;flex-direction:column;background:#111;border-left:1px solid var(--gb);transform:translateX(102%);transition:transform .25s;padding-bottom:var(--safe-b);box-shadow:-12px 0 40px rgba(0,0,0,.5)}
+.b3d-drawer.on{transform:none}
+.dr-head{display:flex;align-items:center;justify-content:space-between;padding:calc(14px + var(--safe-t)) 16px 12px;border-bottom:1px solid #2a2a2a;font-weight:700;font-size:16px}
+.dr-body{flex:1;overflow-y:auto;padding:4px 16px 28px}
+.dr-sec{margin-top:20px}
+.dr-sec>h4{margin:0 0 9px;font:700 11px var(--font);letter-spacing:.1em;text-transform:uppercase;color:#8d887a}
+.b3d-drawer .b3d-filters{flex-wrap:wrap;overflow:visible}
+.b3d-drawer #b3dpins:empty::before{content:"Pin a structure from its info card to build a study set.";color:#8d887a;font-size:12.5px}
+.b3d-drawer .pchip{padding:6px 12px;font-size:12px}
+.dr-help{margin:0;padding:0;list-style:none;display:grid;gap:7px;font-size:13px;color:#c9c2b0;line-height:1.45}
+.dr-help b{color:#fff}
+.b3d-drawer summary{cursor:pointer;font:600 13.5px var(--font);color:#e8e8e8;padding:4px 0}
+.b3d-drawer details .grid{grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.b3d-drawer .b3d-cred{padding-top:6px;border-top:1px solid #2a2a2a;color:#8d887a}
+.b3d-drawer .b3d-cred a{color:#ffd60a}
+.b3d-retry{margin-left:12px;background:#ffd60a;color:#0a0a0a;border:0;border-radius:9px;padding:7px 14px;font:700 13px var(--font);cursor:pointer}
+@media(max-width:760px){
+  .b3d-app{--dock-h:62px;--rail-h:56px}
+  .b3d-title{display:none}
+  .b3d-top{gap:8px;padding:calc(8px + var(--safe-t)) 8px 8px}
+  .dock-b{min-width:50px}
+  .b3d-rail{left:0;right:0;top:auto;bottom:var(--above);width:auto;max-height:none;flex-direction:row;align-items:center;gap:6px;padding:6px 10px;background:none;border:0;border-radius:0;backdrop-filter:none;-webkit-backdrop-filter:none;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity}
+  .b3d-rail .b3d-presets{flex-direction:row;flex:none;gap:6px}
+  .b3d-rail .rail-cap{display:none}
+  .b3d-rail .b3d-views{padding-left:8px;border-left:1px solid #3a3a3a}
+  .b3d-rail .pchip{flex-direction:row;gap:6px;width:auto;flex:none;padding:8px 13px;font-size:12.5px;white-space:nowrap;border-radius:20px;border-color:#363636;background:var(--g);scroll-snap-align:start}
+  .b3d-rail .pchip .ic{font-size:15px}
+  .b3d-app .b3d-info{left:8px;right:8px;top:auto;width:auto;bottom:var(--above);max-height:48dvh;animation-name:b3dUp}
+  .b3d-app .b3d-info.has-sel{animation-name:b3dUp}
+  .b3d-app .b3d-hbar{bottom:calc(var(--above) + var(--rail-h) + 4px)}
+  .b3d-drawer{width:100vw;border-left:0}
+  .b3d-drawer details .grid{grid-template-columns:1fr}
 }
 
 /* ---------- PWA ---------- */
@@ -19190,6 +19254,7 @@ function buildScene(gltf, st){
      declared up here because applyVis() runs before the helpers below */
   let urlT = 0;
   const queueUrl = () => { clearTimeout(urlT); urlT = setTimeout(()=>{
+    try{ syncDock(); }catch(e){}
     try{
       const q = new URLSearchParams();
       if(isolated!==null) q.set("iso",isolated);
@@ -19399,7 +19464,6 @@ function buildScene(gltf, st){
   /* picking */
   const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
   const tip = $("#b3dtip"), info = $("#b3di");
-  const sideEl = $(".b3d-side"), b3dEl = sideEl.parentElement;
   /* panel renders through setInfo so the floating card gets a close button */
   const setInfo = html => { info.innerHTML = `<button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button>${html}`;
     const c = info.querySelector("#b3dic"); if(c) c.addEventListener("click",()=>select(null)); };
@@ -19431,6 +19495,12 @@ function buildScene(gltf, st){
     applyVis(); syncHiddenBar(); syncUndo(); };
   if(undoBtn) undoBtn.addEventListener("click",undo);
   const onKey = e => { if(!document.body.contains(cv)){ removeEventListener("keydown",onKey); return; }
+    if(e.key==="Escape"){
+      if(pops.some(p=>p.classList.contains("on"))) closePops();
+      else if(drawer.classList.contains("on")) closeDrawer();
+      else if(quiz.on) quizStop();
+      else if(selected) select(null);
+      return; }
     if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==="z" && !e.target.matches("input,textarea")){
       e.preventDefault(); undo(); } };
   addEventListener("keydown",onKey);
@@ -19544,11 +19614,6 @@ function buildScene(gltf, st){
     queueUrl();
   };
 
-  /* collapse/expand the controls panel while it floats (fullscreen / small screens) */
-  const pnb = $("#b3dpanel");
-  if(pnb) pnb.addEventListener("click",()=>{ if(!sideEl.classList.contains("float")) return;
-    sideEl.classList.toggle("phide"); pnb.classList.toggle("on",!sideEl.classList.contains("phide")); });
-
   /* x-ray: ghost the outer (muscle/skin) layers — but never rewrite ghost clones */
   function applyXr(){ for(const id in meshes) for(const m of meshes[id]){ if(m.userData.ghost) continue;
     const s=m.userData.sys;
@@ -19629,7 +19694,7 @@ function buildScene(gltf, st){
       cv.toBlob(b=>{ if(!b) return;
         const a=document.createElement("a"); a.href=URL.createObjectURL(b);
         a.download="anatomy-3d.png"; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),4000);
-        shotBtn.textContent="📷 ✓"; setTimeout(()=>shotBtn.textContent="📷",1200); });
+        const si = shotBtn.querySelector("i"); si.textContent="✓"; setTimeout(()=>si.textContent="📷",1200); });
     }catch(e){}
   });
   /* wireframe toggle — strips shading so meshes read as pure geometry */
@@ -19797,11 +19862,12 @@ function buildScene(gltf, st){
     f.querySelectorAll(".fchip[data-s]").forEach(ch=>ch.classList.toggle("on",!!chipOn[ch.dataset.s]));
     applyVis(); syncHiddenBar(); };
   const preEl = $("#b3dpre"), vwEl = $("#b3dvw");
-  if(preEl){ preEl.innerHTML = SYSPRESETS.map((p,i)=>`<button class="pchip${i===0?" on":""}" data-i="${i}">${p[0]}</button>`).join("");
+  const chipIn = s => { const k = s.indexOf(" "); return `<span class="ic">${s.slice(0,k)}</span><span class="lb">${s.slice(k+1)}</span>`; };
+  if(preEl){ preEl.innerHTML = SYSPRESETS.map((p,i)=>`<button class="pchip${i===0?" on":""}" data-i="${i}" title="${p[0].slice(p[0].indexOf(" ")+1)}">${chipIn(p[0])}</button>`).join("");
     preEl.querySelectorAll(".pchip").forEach(b=>b.addEventListener("click",()=>{
       setLayers(SYSPRESETS[+b.dataset.i][1]);
       preEl.querySelectorAll(".pchip").forEach(x=>x.classList.toggle("on",x===b)); })); }
-  if(vwEl){ vwEl.innerHTML = VIEWS.map((v,i)=>`<button class="pchip vchip" data-i="${i}">${v[0]}</button>`).join("");
+  if(vwEl){ vwEl.innerHTML = VIEWS.map((v,i)=>`<button class="pchip vchip" data-i="${i}" title="${v[0].slice(v[0].indexOf(" ")+1)}">${chipIn(v[0])}</button>`).join("");
     vwEl.querySelectorAll(".vchip").forEach(b=>b.addEventListener("click",()=>{
       const v = VIEWS[+b.dataset.i]; setLayers(v[1]);
       if(preEl) preEl.querySelectorAll(".pchip").forEach(x=>x.classList.remove("on"));
@@ -19814,8 +19880,9 @@ function buildScene(gltf, st){
   const aob = $("#b3dao");
   if(aob){ if(lowPower) aob.style.display = "none";
     else aob.addEventListener("click",()=>{
-      if(!composer){ aob.disabled = true; aob.textContent = "🕳 loading…";
-        loadPost().then(ok=>{ aob.disabled = false; aob.textContent = "🕳 AO";
+      const aol = aob.querySelector("b");
+      if(!composer){ aob.disabled = true; aol.textContent = "loading…";
+        loadPost().then(ok=>{ aob.disabled = false; aol.textContent = "AO";
           if(!ok || !THREE.SSAOPass){ aob.style.display = "none"; return; }
           composer = new THREE.EffectComposer(renderer);
           ssaoPass = new THREE.SSAOPass(scene, camera, W(), H());
@@ -19827,36 +19894,43 @@ function buildScene(gltf, st){
       else { aoOn = !aoOn; aob.classList.toggle("on", aoOn); poke(); } }); }
 
   $("#b3dreset").addEventListener("click",()=>{ fly=null; camera.position.copy(home); controls.target.copy(home2); controls.update(); });
+  /* the explorer is already a full-viewport view; ⤢ additionally asks the browser for true fullscreen */
+  const appEl = $("#b3dapp");
   const fsbtn = $("#b3dfs");
-  if(fsbtn) fsbtn.addEventListener("click",()=>{
-    if(document.fullscreenElement) document.exitFullscreen();
-    else if(stage.requestFullscreen) stage.requestFullscreen();
-  });
-  /* float the controls inside the stage in fullscreen; on small screens the
-     info card becomes a bottom sheet and the controls collapse into the ☰ drawer */
-  const credEl = sideEl.querySelector(".b3d-cred");
-  const applyInfoFloat = () => {
-    const fs = document.fullscreenElement===stage, mob = matchMedia("(max-width:960px)").matches;
-    if(fs || mob){
-      if(sideEl.parentElement!==stage) stage.appendChild(sideEl);
-      sideEl.classList.add("float");
-      if(mob && !fs){
-        if(info.parentElement!==stage) stage.appendChild(info);
-        info.classList.add("sheet"); sideEl.classList.add("phide");
-      } else {
-        sideEl.classList.remove("phide");
-        if(info.parentElement!==sideEl){ sideEl.insertBefore(info, credEl); info.classList.remove("sheet"); }
-      }
-    } else {
-      sideEl.classList.remove("float","phide"); info.classList.remove("sheet");
-      if(info.parentElement!==sideEl) sideEl.insertBefore(info, credEl);
-      if(sideEl.parentElement!==b3dEl) b3dEl.appendChild(sideEl);
-    }
-    if(pnb) pnb.classList.toggle("on", sideEl.classList.contains("float") && !sideEl.classList.contains("phide"));
-  };
+  if(fsbtn){
+    const reqFs = appEl.requestFullscreen || appEl.webkitRequestFullscreen;
+    if(!reqFs) fsbtn.style.display = "none";
+    else fsbtn.addEventListener("click",()=>{
+      if(document.fullscreenElement) document.exitFullscreen(); else reqFs.call(appEl); });
+  }
   document.addEventListener("fullscreenchange",()=>{ if(document.body.contains(cv)){
-    camera.aspect = W()/H(); camera.updateProjectionMatrix(); renderer.setSize(W(),H()); applyInfoFloat(); } });
-  applyInfoFloat();
+    camera.aspect = W()/H(); camera.updateProjectionMatrix(); renderer.setSize(W(),H()); poke(); } });
+
+  /* chrome: dock popovers (slice / explode / peel), layers drawer, first-run hint */
+  const pops = [...appEl.querySelectorAll(".b3d-pop")], popBs = [...appEl.querySelectorAll("[data-pop]")];
+  const closePops = () => { pops.forEach(p=>p.classList.remove("on")); popBs.forEach(b=>b.classList.remove("on")); };
+  popBs.forEach(b=>b.addEventListener("click",()=>{
+    const p = $("#pop-"+b.dataset.pop), open = !p.classList.contains("on");
+    closePops(); closeDrawer(); if(open){ p.classList.add("on"); b.classList.add("on"); } }));
+  function syncDock(){ const set = (k,v)=>{ const b = appEl.querySelector(`[data-pop="${k}"]`); if(b) b.classList.toggle("active",!!v); };
+    set("slice",clipOn); set("exp",expVal>0); set("peel",peelN>0); }
+  const drawer = $("#b3ddrawer"), dscrim = $("#b3dscrim"), layersB = $("#b3dlayers");
+  function closeDrawer(){ drawer.classList.remove("on"); dscrim.classList.remove("on"); layersB.classList.remove("on"); }
+  const openDrawer = sec => { closePops(); drawer.classList.add("on"); dscrim.classList.add("on"); layersB.classList.add("on");
+    if(sec){ const t = $(sec); if(t) t.scrollIntoView({block:"start"}); } else $(".dr-body").scrollTop = 0; };
+  layersB.addEventListener("click",()=>drawer.classList.contains("on") ? closeDrawer() : openDrawer());
+  $("#b3dhelpbtn").addEventListener("click",()=>openDrawer("#b3dhelp"));
+  $("#b3ddrclose").addEventListener("click",closeDrawer);
+  dscrim.addEventListener("click",closeDrawer);
+  cv.addEventListener("pointerdown",closePops);
+  const hint = document.createElement("div"); hint.className = "b3d-hint";
+  hint.textContent = matchMedia("(pointer:coarse)").matches
+    ? "Drag to rotate · pinch to zoom · tap a structure"
+    : "Drag to rotate · scroll to zoom · click a structure · right-click hides it";
+  stage.appendChild(hint);
+  const rmHint = () => { hint.classList.add("gone"); setTimeout(()=>hint.remove(),400); };
+  cv.addEventListener("pointerdown",rmHint,{once:true}); setTimeout(rmHint,9000);
+  syncDock();
 
   /* subtle life motion — heartbeat on the heart, breathing on the lungs */
   const life = [];
@@ -19891,7 +19965,7 @@ function buildScene(gltf, st){
         renderer.render(scene,camera); } }
     raf=requestAnimationFrame(tick); };
   tick();
-  const onRs = ()=>{ if(!document.body.contains(cv)) return removeEventListener("resize",onRs); camera.aspect=W()/H(); camera.updateProjectionMatrix(); renderer.setSize(W(),H()); if(composer) composer.setSize(W(),H()); applyInfoFloat(); poke(); };
+  const onRs = ()=>{ if(!document.body.contains(cv)) return removeEventListener("resize",onRs); camera.aspect=W()/H(); camera.updateProjectionMatrix(); renderer.setSize(W(),H()); if(composer) composer.setSize(W(),H()); poke(); };
   addEventListener("resize",onRs);
 }
 
@@ -19908,47 +19982,83 @@ function v3D(sel){
     exp: Math.max(0, Math.min(100, +q.get("exp")||0)),
     clip: q.get("clip") || null };
   const ids = Object.keys(MODELS).filter(id=>byId[id]);
-  view.innerHTML = `<div class="list-head"><h1>🧊 Interactive 3D body</h1><p>A real anatomical model of the whole body — drag to rotate, scroll to zoom, and <b>tap any structure</b> to highlight it and read its details. Toggle systems on the right.</p></div>
-  <div class="b3d">
+  document.body.classList.add("b3d-open");
+  view.innerHTML = `<div class="b3d-app loading" id="b3dapp">
     <div class="b3d-stage"><canvas id="b3dcv"></canvas>
-      <div class="b3d-load" id="b3dload"><span class="b3d-spin"></span>Loading the 3D body — a few seconds the first time…</div>
+      <div class="b3d-load" id="b3dload"><span class="b3d-spin"></span><div class="b3d-prog"><div class="t">Loading the 3D body…</div></div></div>
       <div class="b3d-tip" id="b3dtip"></div>
       <svg class="b3d-lines" id="b3dln"></svg>
       <div class="b3d-lbls" id="b3dlbls" style="display:none"></div>
-      <div class="b3d-stagebtns">
-        <button id="b3dlbl" title="Show structure labels">🏷</button>
-        <button id="b3dquiz" title="Quiz: tap the named structure">🎯</button>
-        <button id="b3dshot" title="Save a screenshot (PNG)">📷</button>
-        <button id="b3dwire" title="Wireframe on/off">🕸</button>
-        <button id="b3dao" title="Depth shading (ambient occlusion)">🕳 AO</button>
-        <button id="b3dxr" title="X-ray: fade the outer layers">👻</button>
-        <button id="b3dundo" title="Undo hide/isolate (Ctrl+Z)" disabled>⎌ undo</button>
-        <button id="b3dpanel" title="Show/hide the controls panel">☰ panel</button>
-        <button id="b3dfs" title="Fullscreen">⤢</button>
-        <button id="b3dreset" title="Reset view">⟲ reset</button>
-      </div>
     </div>
-    <div class="b3d-side">
-      <div class="b3d-search"><input id="b3dq" type="search" placeholder="Find a structure… (e.g. heart)" autocomplete="off"><div class="b3d-qres" id="b3dqres" style="display:none"></div></div>
+
+    <header class="b3d-top">
+      <a class="b3d-iconbtn" id="b3dback" href="#/" title="Back to the atlas" aria-label="Back to the atlas">←</a>
+      <span class="b3d-title">Anatomy 3D</span>
+      <div class="b3d-search"><input id="b3dq" type="search" placeholder="Find a structure… (e.g. heart)" autocomplete="off" aria-label="Find a structure"><div class="b3d-qres" id="b3dqres" style="display:none"></div></div>
+      <button class="b3d-iconbtn" id="b3dfs" title="Fullscreen" aria-label="Fullscreen">⤢</button>
+      <button class="b3d-iconbtn" id="b3dhelpbtn" title="Help &amp; options" aria-label="Help">?</button>
+    </header>
+
+    <nav class="b3d-rail" aria-label="Systems and views">
       <div class="b3d-presets" id="b3dpre"></div>
+      <div class="rail-cap">Views</div>
       <div class="b3d-presets b3d-views" id="b3dvw"></div>
-      <div class="b3d-presets b3d-pins" id="b3dpins"></div>
-      <div class="b3d-hbar" id="b3dhbar"></div>
-      <div class="b3d-peel"><span title="Peel layers from outside in">🧅 peel</span><input id="b3dpeel" type="range" min="0" max="100" value="0" aria-label="Peel anatomical layers"><em id="b3dpeelv"></em></div>
-      <div class="b3d-peel"><span title="Explode structures outward from the body center">💥 explode</span><input id="b3dexp" type="range" min="0" max="100" value="0" aria-label="Explode view"><em id="b3dexpv"></em></div>
-      <div class="b3d-peel"><span title="Slice through the body on a plane">✂ slice</span><span class="b3d-ax" id="b3dax"><button data-a="x">X</button><button data-a="y">Y</button><button data-a="z" class="on">Z</button></span><input id="b3dsl" type="range" min="0" max="100" value="0" aria-label="Slice position"></div>
-      <div class="b3d-filters" id="b3df"></div>
-      <button class="fchip on b3d-cmode" id="b3dcmode" data-m="sys">🎨 colors: by system</button>
-      <div class="b3d-info" id="b3di"><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button><h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p></div>
-      <div class="b3d-cred">3D meshes: <a href="https://z-anatomy.com" target="_blank" rel="noopener">Z-Anatomy</a> — Kervyn &amp; Zieliński, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>; based on BodyParts3D © DBCLS, <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html" target="_blank" rel="noopener">CC BY-SA 2.1 Japan</a></div>
-    </div>
-  </div>
-  <h2 style="margin:28px 0 12px">Or pick a structure to inspect up close</h2>
-  <div class="grid">${ids.map(id=>cardHTML(byId[id])).join("")}</div>`;
+    </nav>
+
+    <div class="b3d-info" id="b3di"><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button><h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p></div>
+    <div class="b3d-hbar" id="b3dhbar"></div>
+
+    <div class="b3d-pop" id="pop-slice"><div class="pop-h">✂ Slice <small>cut through the body</small></div>
+      <div class="b3d-peel"><span class="b3d-ax" id="b3dax"><button data-a="x">X</button><button data-a="y">Y</button><button data-a="z" class="on">Z</button></span><input id="b3dsl" type="range" min="0" max="100" value="0" aria-label="Slice position"></div></div>
+    <div class="b3d-pop" id="pop-exp"><div class="pop-h">💥 Explode <small>push structures apart</small></div>
+      <div class="b3d-peel"><input id="b3dexp" type="range" min="0" max="100" value="0" aria-label="Explode view"><em id="b3dexpv"></em></div></div>
+    <div class="b3d-pop" id="pop-peel"><div class="pop-h">🧅 Peel layers <small>skin → muscle → … → bone</small></div>
+      <div class="b3d-peel"><input id="b3dpeel" type="range" min="0" max="100" value="0" aria-label="Peel anatomical layers"><em id="b3dpeelv"></em></div></div>
+
+    <nav class="b3d-dock" aria-label="3D tools"><div class="dock-in">
+      <button class="dock-b" id="b3dlbl" title="Show structure labels"><i>🏷</i><b>Labels</b></button>
+      <button class="dock-b" id="b3dxr" title="X-ray: fade the outer layers"><i>👻</i><b>X-ray</b></button>
+      <button class="dock-b" id="b3dwire" title="Wireframe on/off"><i>🕸</i><b>Wire</b></button>
+      <button class="dock-b" id="b3dao" title="Depth shading (ambient occlusion)"><i>🕳</i><b>AO</b></button>
+      <span class="dock-sep"></span>
+      <button class="dock-b" data-pop="slice" title="Slice through the body"><i>✂</i><b>Slice</b></button>
+      <button class="dock-b" data-pop="exp" title="Exploded view"><i>💥</i><b>Explode</b></button>
+      <button class="dock-b" data-pop="peel" title="Peel layers"><i>🧅</i><b>Peel</b></button>
+      <span class="dock-sep"></span>
+      <button class="dock-b" id="b3dquiz" title="Quiz: tap the named structure"><i>🎯</i><b>Quiz</b></button>
+      <button class="dock-b" id="b3dundo" title="Undo hide/isolate (Ctrl+Z)" disabled><i>⎌</i><b>Undo</b></button>
+      <button class="dock-b" id="b3dshot" title="Save a screenshot (PNG)"><i>📷</i><b>Photo</b></button>
+      <button class="dock-b" id="b3dreset" title="Reset view"><i>⟲</i><b>Reset</b></button>
+      <span class="dock-sep"></span>
+      <button class="dock-b" id="b3dlayers" title="Body systems, colors &amp; more"><i>☰</i><b>Layers</b></button>
+    </div></nav>
+
+    <div class="b3d-scrim" id="b3dscrim"></div>
+    <aside class="b3d-drawer" id="b3ddrawer" aria-label="Layers and options">
+      <div class="dr-head"><span>Layers &amp; options</span><button class="b3d-iconbtn" id="b3ddrclose" aria-label="Close">✕</button></div>
+      <div class="dr-body">
+        <div class="dr-sec"><h4>Body systems</h4><div class="b3d-filters" id="b3df"></div></div>
+        <div class="dr-sec"><h4>Colors</h4><button class="fchip on b3d-cmode" id="b3dcmode" data-m="sys">🎨 colors: by system</button></div>
+        <div class="dr-sec"><h4>📌 Pinned structures</h4><div class="b3d-presets b3d-pins" id="b3dpins"></div></div>
+        <div class="dr-sec" id="b3dhelp"><h4>How to use</h4>
+          <ul class="dr-help">
+            <li><b>Rotate</b> — drag · <b>Pan</b> — right-drag or two fingers · <b>Zoom</b> — scroll or pinch</li>
+            <li><b>Select</b> — tap a structure · <b>Zoom to it</b> — double-tap</li>
+            <li><b>Hide a part</b> — right-click or long-press, then ⎌ Undo (Ctrl+Z)</li>
+            <li><b>🎯 Quiz</b> — you're given a name, tap the right structure</li>
+            <li><b>Share</b> — the address bar always matches your current view; copy it to send</li>
+          </ul></div>
+        <div class="dr-sec"><details><summary>Close-up models</summary><div class="grid">${ids.map(id=>cardHTML(byId[id])).join("")}</div></details></div>
+        <div class="dr-sec b3d-cred">3D meshes: <a href="https://z-anatomy.com" target="_blank" rel="noopener">Z-Anatomy</a> — Kervyn &amp; Zieliński, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>; based on BodyParts3D © DBCLS, <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html" target="_blank" rel="noopener">CC BY-SA 2.1 Japan</a></div>
+      </div>
+    </aside>
+  </div>`;
+  $("#b3dback").addEventListener("click",e=>{ e.preventDefault(); routeN>1 ? history.back() : (location.hash = "#/"); });
   loadThree().then(loadBodyGlb).then(gltf=>{
     const el = $("#b3dload"); if(el) el.remove();
+    const app = $("#b3dapp"); if(app) app.classList.remove("loading");
     buildScene(gltf, st);
-  }).catch(e=>{ const el=$("#b3dload"); if(el) el.innerHTML = "Couldn't load the 3D body — check your connection and reload."; console.error(e); });
+  }).catch(e=>{ const el=$("#b3dload"); if(el) el.innerHTML = `<div class="b3d-prog"><div class="t">Couldn't load the 3D body — check your connection.</div></div><button class="b3d-retry" onclick="location.reload()">Retry</button>`; console.error(e); });
 }
 
 function lightbox(im){
@@ -20084,7 +20194,10 @@ function vSearch(q){
 }
 
 /* ---------- router ---------- */
+let routeN = 0;
 function route(){
+  routeN++;
+  document.body.classList.remove("b3d-open");
   const h = location.hash.replace(/^#\/?/,"");
   const [_,kind,arg] = h.match(/^(\w*)(?:\/(.*))?$/) || [];
   closeSidebar();
