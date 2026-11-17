@@ -254,9 +254,24 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3d-quiz .q-flash-bad{color:#ff5d6c;font-weight:700}
 .b3d-lbls{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}
 .b3dlbl{position:absolute;transform:translate(-50%,-140%);font:600 10.5px var(--font);color:#e8e8e8;background:rgba(18,18,18,.85);border:1px solid rgba(255,214,10,.4);border-radius:5px;padding:1px 6px;white-space:nowrap}
+.b3dlbl.mask{color:#8d887a;cursor:pointer;min-width:24px;text-align:center}
 .b3d-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}
 .b3d-lines line{stroke:rgba(255,214,10,.55);stroke-width:1}
 .b3d-lines circle{fill:#ffd60a}
+/* anchored pins — dot glued to the part, label offset with a leader line */
+.b3d-pl{position:absolute;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+.b3dpin{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;display:flex;align-items:center;gap:4px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.b3dpin:active{cursor:grabbing}
+.b3dpin .pl{display:flex;align-items:center;gap:6px;max-width:170px;background:rgba(14,14,14,.92);border:1px solid rgba(255,214,10,.5);color:#ffd60a;border-radius:8px;padding:4px 7px 4px 9px;font:600 11px var(--font);line-height:1.15;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.b3dpin .pl .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.b3dpin .pl .nt{color:#9cc8ff;font-weight:500}
+.b3dpin.noted .pl{border-color:rgba(120,180,255,.55)}
+.b3dpin .px{flex:none;width:15px;height:15px;display:none;align-items:center;justify-content:center;background:#2a2a2a;color:#a3a3a3;border:1px solid #444;border-radius:50%;font:700 9px/1 var(--font);cursor:pointer;padding:0}
+.b3dpin:hover .px{display:inline-flex}
+.b3dpin .ne{width:100%;background:#1c1c1c;border:1px solid rgba(255,214,10,.5);color:#e8e8e8;border-radius:6px;font:500 11px var(--font);padding:3px 6px;outline:none}
+.b3d-lines circle.pdot{fill:#ffd60a;stroke:#0a0a0a;stroke-width:1.5}
+.b3d-lines line.pline{stroke:rgba(255,214,10,.7);stroke-width:1.3}
+@media(pointer:coarse){.b3dpin .pl{padding:7px 9px 7px 11px;font-size:12px}}
 .b3d-presets{display:flex;flex-wrap:wrap;gap:5px;margin:2px 0}
 .pchip{border:1px solid var(--border);background:var(--panel);color:var(--text2);border-radius:14px;padding:3px 10px;font:600 11px var(--font);cursor:pointer}
 .pin-cap{font-size:12px;color:var(--text3);align-self:center}
@@ -402,6 +417,25 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-drawer .b3d-cred{padding-top:6px;border-top:1px solid #2a2a2a;color:#8d887a}
 .b3d-drawer .b3d-cred a{color:#ffd60a}
 .b3d-retry{margin-left:12px;background:#ffd60a;color:#0a0a0a;border:0;border-radius:9px;padding:7px 14px;font:700 13px var(--font);cursor:pointer}
+/* guided lesson player — a step card that sits just above the dock/rail */
+.b3d-lesson{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--above) + var(--rail-h));z-index:18;width:min(500px,calc(100% - 24px));background:rgba(16,16,16,.96);border:1px solid var(--gb);border-radius:18px;padding:12px 16px 12px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--shadow)}
+.les-top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.les-step{font:700 12px var(--font);color:#ffd60a;letter-spacing:.04em;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.les-dots{display:flex;gap:4px;flex:none}
+.les-dots i{width:7px;height:7px;border-radius:50%;background:#3a3a3a}
+.les-dots i.on{background:#ffd60a}
+.les-x{flex:none;width:26px;height:26px;background:#242424;color:#a3a3a3;border:1px solid #3d3d3d;border-radius:8px;font:700 12px var(--font);cursor:pointer}
+.les-x:hover{border-color:#ffd60a;color:#ffd60a}
+.les-body{font-size:13.5px;color:#c9c2b0;line-height:1.55;max-height:30dvh;overflow:auto}
+.les-body b{color:#e8e8e8}
+.les-nav{display:flex;align-items:center;gap:8px;margin-top:10px}
+.les-nav button{background:#242424;color:#e8e8e8;border:1px solid #3d3d3d;border-radius:9px;padding:7px 14px;font:600 12.5px var(--font);cursor:pointer}
+.les-nav button:hover{border-color:#ffd60a}
+.les-nav button.pri{background:#ffd60a;color:#0a0a0a;border-color:#ffd60a;font-weight:700}
+.les-nav button:disabled{opacity:.35;pointer-events:none}
+.les-nav button.dim{margin-left:auto}
+.les-prog{flex:1;text-align:center;font:600 11.5px var(--font);color:#8d887a}
+.les-hint{font-size:11.5px;color:#8d887a;margin-top:8px;text-align:center}
 @media(max-width:760px){
   .b3d-app{--dock-h:62px;--rail-h:56px}
   .b3d-title{display:none}
@@ -414,6 +448,7 @@ body.b3d-open .pwa-toast{bottom:112px}
   .b3d-rail .pchip{flex-direction:row;gap:6px;width:auto;flex:none;padding:8px 13px;font-size:12.5px;white-space:nowrap;border-radius:20px;border-color:#363636;background:var(--g);scroll-snap-align:start}
   .b3d-rail .pchip .ic{font-size:15px}
   .b3d-app .b3d-info{left:8px;right:8px;top:auto;width:auto;bottom:var(--above);max-height:48dvh;animation-name:b3dUp}
+  .b3d-app.lesson .b3d-info{display:none}
   .b3d-app .b3d-info.has-sel{animation-name:b3dUp}
   .b3d-app .b3d-hbar{bottom:calc(var(--above) + var(--rail-h) + 4px)}
   .b3d-drawer{width:100vw;border-left:0}
@@ -435,6 +470,33 @@ body.b3d-open .pwa-toast{bottom:112px}
 .pwa-toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(80px);display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--border2);color:var(--text);padding:11px 18px;border-radius:12px;box-shadow:var(--shadow);font-size:13.5px;z-index:100;opacity:0;transition:transform .25s,opacity .25s;pointer-events:none;max-width:92vw}
 .pwa-toast.on{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto}
 .pwa-toast button{background:var(--accent);border:none;color:#0a0a0a;font:inherit;font-weight:700;font-size:13px;padding:6px 14px;border-radius:8px;cursor:pointer;white-space:nowrap}
+/* ---------- Learn mode ---------- */
+.lpath{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--text);transition:border-color .15s,background .15s}
+.lpath:hover{border-color:var(--accent);background:var(--card-h);text-decoration:none}
+.lpath .li{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--panel2);border-radius:12px}
+.lpath .lm{flex:1;min-width:0}
+.lpath .lt{font-weight:700;font-size:15px;margin-bottom:2px}
+.lpath .ld{font-size:12.5px;color:var(--text2)}
+.lpath .lbar{height:6px;background:var(--border);border-radius:6px;overflow:hidden;margin-top:8px}
+.lpath .lbar i{display:block;height:100%;background:var(--accent);border-radius:6px}
+.lpath .ln{flex:none;font:700 12px var(--font);color:var(--text3);text-align:right}
+.lpath .ln b{display:block;font-size:15px;color:var(--text)}
+.lpath.done .li{background:color-mix(in srgb,var(--good,#3ddc84) 18%,var(--panel2))}
+.lrow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 14px;text-decoration:none;color:var(--text)}
+.lrow:hover{border-color:var(--accent);text-decoration:none}
+.lrow .lr{flex:1;min-width:0}
+.lrow .ln2{font-weight:700;font-size:14px}
+.lrow .lm2{font-size:12px;color:var(--text3);margin-top:1px}
+.lrow .lck{flex:none;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--panel2);color:var(--text3);font-size:13px}
+.lrow.done .lck{background:color-mix(in srgb,var(--good,#3ddc84) 20%,var(--panel2));color:var(--good,#3ddc84)}
+.lrow .lgo{flex:none;color:var(--text3);font-size:18px}
+.xptoast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(90px);background:var(--panel);border:1px solid var(--accent);color:var(--text);padding:10px 18px;border-radius:12px;font:700 13.5px var(--font);z-index:120;box-shadow:var(--shadow);opacity:0;transition:transform .3s,opacity .3s;pointer-events:none}
+.xptoast.on{transform:translateX(-50%) translateY(0);opacity:1}
+.learn-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.learn-head .xp{margin-left:auto;display:flex;gap:8px;align-items:center}
+.xpbadge{background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:20px;padding:5px 13px;font:700 12.5px var(--font)}
+.xpbadge b{color:var(--accent)}
+.streakb{background:var(--panel2);border:1px solid var(--border);color:#f2a900;border-radius:20px;padding:5px 13px;font:700 12.5px var(--font)}
 .hero-install{display:none!important}
 body.can-install .hero-install{display:inline-flex!important}
 </style>
@@ -18891,6 +18953,7 @@ function buildNav(){
   let h = `<div class="nav-sec"><a class="nav-link" data-href="#/" ><span class="ic">🏠</span>Overview</a>
   <a class="nav-link" data-href="#/map"><span class="ic">🗺️</span>Body map</a>
   <a class="nav-link" data-href="#/3d"><span class="ic">🧊</span>3D explorer</a>
+  <a class="nav-link" data-href="#/learn"><span class="ic">🎓</span>Learn</a>
   <a class="nav-link" data-href="#/quiz"><span class="ic">🎯</span>Quiz me</a>
   <a class="nav-link" data-href="#/gallery"><span class="ic">🖼️</span>Plates gallery</a></div>`;
   h += `<div class="nav-sec"><h4>Body systems</h4>`;
@@ -18987,7 +19050,8 @@ function vHome(){
     <h1>The complete human atlas</h1>
     <p>Every major bone, muscle, organ, nerve and vessel — ${total} structures across ${Object.keys(sysCount).length} systems and ${Object.keys(regCount).length} regions, each illustrated with a real anatomical plate.</p>
     <div class="hero-actions">
-      <a class="btn primary" href="#/map">🗺️ Open the body map</a>
+      <a class="btn primary" href="#/learn">🎓 Learn anatomy</a>
+      <a class="btn" href="#/map">🗺️ Open the body map</a>
       <a class="btn" href="#/quiz">🎯 Test yourself</a>
       <a class="btn" href="#/system/skeletal">🦴 Browse skeleton</a>
       <a class="btn hero-install" href="#" onclick="atlasInstall();return false">⬇️ Install the app</a>
@@ -19226,7 +19290,7 @@ function buildScene(gltf, st){
   const l2=new THREE.DirectionalLight(0xbcd2ff,0.4); l2.position.set(-1.2,0.4,0.6); scene.add(l2);
   const l3=new THREE.DirectionalLight(0xffd9b3,0.55); l3.position.set(0.3,0.8,-1.4); scene.add(l3);
   const group = new THREE.Group(); scene.add(group);
-  const chipOn = {}, hidden = new Set(); let isolated = null, aidsOn = false;
+  const chipOn = {}, hidden = new Set(); let isolated = null, aidsOn = false, focusSet = null;
   let hover = null, selected = null, xr = false;
   /* render-on-demand: only draw frames when something actually changed */
   let dirty = true; const poke = () => { dirty = true; };
@@ -19238,13 +19302,34 @@ function buildScene(gltf, st){
   /* exploded view + wireframe */
   let expVal = 0, explodeAmt = 0, wireOn = false;
   const dirCache = {}, _zeroV = new THREE.Vector3();
-  /* pinned structures — a personal study set, persisted locally */
-  let pins; try{ pins = new Set(JSON.parse(localStorage.getItem("atlas-pins")||"[]")); }
-    catch(e){ pins = new Set(); }
-  const savePins = () => { try{ localStorage.setItem("atlas-pins",JSON.stringify([...pins])); }catch(e){} };
+  /* anchored pins — {id:{o:[x,y,z] model-space offset from part center,
+     lo:[dx,dy] screen offset of the label, n:note}} persisted locally.
+     Migrates the old id-list study set (atlas-pins) on first load. */
+  let pinsV2; try{ pinsV2 = JSON.parse(localStorage.getItem("atlas-pins2")||"{}") || {}; }
+    catch(e){ pinsV2 = {}; }
+  let pinT = 0;
+  const savePins = () => { clearTimeout(pinT); pinT = setTimeout(()=>{
+    try{ localStorage.setItem("atlas-pins2",JSON.stringify(pinsV2)); }catch(e){} },250); };
+  const pinHas = id => !!pinsV2[id];
+  const pinAdd = (id, pt, note) => { if(!meshes[id]) return;
+    const p = pinsV2[id] = pinsV2[id] || {};
+    if(pt){ const c = partCenter(id); /* store as offset from center so the pin follows explode/peel */
+      p.o = c ? pt.clone().sub(c.c).toArray() : pt.toArray(); }
+    else if(!p.o) p.o = [0,0,0];
+    if(note!==undefined) p.n = note;
+    savePins(); paintPins(); updPins(); };
+  const pinDel = id => { delete pinsV2[id];
+    if(pnPool[id]){ pnPool[id].el.remove(); pnPool[id].g.remove(); delete pnPool[id]; }
+    savePins(); paintPins(); };
+  const pinToggle = (id, pt) => { pinHas(id) ? pinDel(id) : pinAdd(id, pt); };
+  /* migrate the legacy bookmark list — anchor each old pin at the part's center */
+  { const old = (()=>{ try{ return JSON.parse(localStorage.getItem("atlas-pins")||"[]"); }catch(e){ return []; } })();
+    if(old.length){ old.forEach(id=>{ if(id && !pinsV2[id]) pinsV2[id] = {o:[0,0,0]}; });
+      try{ localStorage.removeItem("atlas-pins"); }catch(e){} savePins(); } }
   const paintPins = () => { const el = $("#b3dpins"); if(!el) return;
-    if(!pins.size){ el.innerHTML=""; return; }
-    el.innerHTML = `<span class="pin-cap">📌</span>` + [...pins].map(id=>
+    const ids = Object.keys(pinsV2);
+    if(!ids.length){ el.innerHTML=""; return; }
+    el.innerHTML = `<span class="pin-cap">📌</span>` + ids.map(id=>
       `<button class="pchip pinchip" data-id="${id}" title="${esc(nameOf(id))}">${esc(nameOf(id))}</button>`).join("");
     el.querySelectorAll(".pinchip").forEach(b=>b.addEventListener("click",()=>{
       const id=b.dataset.id;
@@ -19262,6 +19347,9 @@ function buildScene(gltf, st){
       const onS = Object.keys(chipOn).filter(s=>chipOn[s]).sort();
       const defS = Object.keys(chipOn).filter(s=>s!=="integumentary").sort();
       if(onS.join()!==defS.join()) q.set("sys",onS.join(","));
+      const pk = Object.keys(pinsV2);
+      if(pk.length && pk.length<=24) q.set("pins",pk.join(","));
+      if(lesson.on && lesson.sys) q.set("lesson",lesson.sys);
       if(peelN) q.set("peel",peelN);
       if(expVal) q.set("exp",expVal);
       if(clipOn) q.set("clip",clipAxis+":"+Math.round(clipPos*100));
@@ -19377,6 +19465,7 @@ function buildScene(gltf, st){
   if(st.sys) for(const s in chipOn) chipOn[s] = st.sys.includes(s);
   if(st.hid) st.hid.forEach(id=>hidden.add(id));
   if(st.iso && meshes[st.iso]) isolated = st.iso;
+  if(st.pins){ st.pins.forEach(id=>{ if(meshes[id] && !pinsV2[id]) pinsV2[id] = {o:[0,0,0]}; }); savePins(); }
 
   /* outer→inner peel order for the layer slider */
   const PEEL = ["integumentary","muscular","nervous","cardiovascular","lymphatic","sensory",
@@ -19394,7 +19483,7 @@ function buildScene(gltf, st){
     for(const id in meshes) for(const m of meshes[id]){
       m.visible = chipOn[m.userData.sys] && !hidden.has(id)
         && peelOf(m.userData.sys) >= peelN && (!m.userData.aid || aidsOn);
-      m.userData.ghost = isolated!==null && id!==isolated;
+      m.userData.ghost = isolated!==null ? id!==isolated : (focusSet ? !focusSet.has(id) : false);
       const base = m.userData.baseMat || m.material;
       m.material = m.userData.ghost ? ghostOf(base)
         : (id===selected && m.userData.glowMat) ? m.userData.glowMat : base;
@@ -19402,7 +19491,7 @@ function buildScene(gltf, st){
     for(const m of loose){
       m.visible = chipOn[m.userData.sys] && isolated===null
         && peelOf(m.userData.sys) >= peelN && (!m.userData.aid || aidsOn);
-      m.userData.ghost = isolated!==null;
+      m.userData.ghost = isolated!==null || !!focusSet;
       m.material = m.userData.ghost ? ghostOf(m.userData.baseMat||m.material)
         : (m.userData.baseMat||m.material);
     }
@@ -19474,6 +19563,8 @@ function buildScene(gltf, st){
     ray.setFromCamera(ptr,camera);
     const hits = ray.intersectObjects(group.children, true);
     const h = hits.find(x => x.object.userData.partId && !x.object.userData.ghost && effVis(x.object));
+    if(h){ pick.pt = h.point.clone(); pick.pid = h.object.userData.partId; }
+    else pick.pid = null;
     return h ? h.object : null;
   };
   /* glow clones the (often shared) base material once so only the picked part lights up */
@@ -19499,6 +19590,7 @@ function buildScene(gltf, st){
       if(pops.some(p=>p.classList.contains("on"))) closePops();
       else if(drawer.classList.contains("on")) closeDrawer();
       else if(quiz.on) quizStop();
+      else if(lesson.on) lesClose();
       else if(selected) select(null);
       return; }
     if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==="z" && !e.target.matches("input,textarea")){
@@ -19523,25 +19615,31 @@ function buildScene(gltf, st){
     quiz.target = t; quizPaint(); };
   const quizStop = () => { quiz.on=false; quiz.target=null; cv.classList.remove("quizmode");
     if(quizEl){ quizEl.remove(); quizEl=null; }
-    const qb=$("#b3dquiz"); if(qb) qb.classList.remove("on"); };
-  const quizStart = () => { if(quiz.on) return;
+    const qb=$("#b3dquiz"); if(qb) qb.classList.remove("on");
+    updPins(); stSync(); if(labelsOn) updLabels(); };
+  const quizStart = first => { if(quiz.on) return;
     quiz.on=true; cv.classList.add("quizmode");
     tip.style.display="none"; if(hover){ glow(hover,0); hover=null; }
     select(null);
     quizEl = document.createElement("div"); quizEl.className="b3d-quiz"; stage.appendChild(quizEl);
     quiz.score=0; quiz.tries=0; quiz.streak=0;
     const qb=$("#b3dquiz"); if(qb) qb.classList.add("on");
+    updPins(); /* pins + labels hide during the quiz so they don't give answers away */
+    stSync(); if(labelsOn) updLabels();
     if(!quizPool().length){ quizPaint(["q-flash-bad","No visible named structures — enable more systems"]);
       quiz.target=null; return; }
-    quizNext(); };
+    if(first && meshes[first] && byId[first]){ quiz.target = first; quizPaint(); }
+    else quizNext(); };
   const quizAnswer = m => { const id = m && m.userData.partId;
     if(!quiz.target) return;
     if(id===quiz.target){ quiz.score++; quiz.streak++;
+      srRecord(id,true); PROG.quizRight=(PROG.quizRight|0)+1; PROG.xp=(PROG.xp|0)+10; touchStreak(); saveProg(); checkBadges();
       each(id,mm=>glow(mm,0x0f7a3d));
       quizPaint(["q-flash-good","✓ "+esc(nameOf(id))]);
       const done = quiz.target; quiz.target = null;
       setTimeout(()=>{ if(!quiz.on) return; each(done,mm=>glow(mm,0)); quizNext(); },700); }
     else { quiz.tries++; quiz.streak=0;
+      srRecord(quiz.target,false); saveProg();
       if(id){ each(id,mm=>glow(mm,0x7a1020));
         setTimeout(()=>each(id,mm=>glow(mm,0)),420); }
       quizPaint(["q-flash-bad","✖ "+(id?esc(nameOf(id)):"missed")+" — try again"]); } };
@@ -19564,7 +19662,7 @@ function buildScene(gltf, st){
         <button data-a="hide">Hide this</button>
         <button data-a="isolate">Isolate</button>
         <button data-a="say" title="Pronounce it">🔊</button>
-        <button data-a="pin">${pins.has(id)?"📌 Pinned":"📌 Pin"}</button>
+        <button data-a="pin">${pinHas(id)?"📌 Pinned":"📌 Pin"}</button>
         ${hidden.size||isolated!==null?`<button data-a="showall">Show all</button>`:""}
       </div>
       ${im?`<img class="b3d-plate" src="${esc(im.thumb||im.url)}" alt="" loading="lazy">`:""}
@@ -19577,8 +19675,7 @@ function buildScene(gltf, st){
       if(a==="say"){ try{ speechSynthesis.cancel();
           const u=new SpeechSynthesisUtterance(nm); u.rate=0.95; speechSynthesis.speak(u); }catch(e){}
         return; }
-      if(a==="pin"){ pins.has(id) ? pins.delete(id) : pins.add(id);
-        savePins(); paintPins(); showInfo(id); return; }
+      if(a==="pin"){ pinToggle(id, pick.pid===id ? pick.pt : null); showInfo(id); return; }
       pushHist();
       if(a==="hide"){ hidden.add(id); applyVis(); select(null); }
       else if(a==="isolate"){ isolated=id; applyVis(); focusOn(id); }
@@ -19634,7 +19731,22 @@ function buildScene(gltf, st){
   const SVGNS = "http://www.w3.org/2000/svg";
   const hideLbl = id => { if(lblPool[id]) lblPool[id].style.display="none";
     if(lnPool[id]) lnPool[id].style.display="none"; };
-  const updLabels = () => { if(!labelsOn) return;
+  /* self-test: mask the label names — tap a "?" to reveal it (dock button) */
+  let stOn = false; const revSet = new Set(); let lblCount = 0;
+  const stB = $("#b3dst");
+  const stSync = () => { if(!stB) return;
+    stB.classList.toggle("on",stOn);
+    stB.querySelector("b").textContent = stOn ? `${revSet.size}/${lblCount||"…"}` : "Test"; };
+  if(stB) stB.addEventListener("click",()=>{ stOn=!stOn; revSet.clear();
+    if(stOn && !labelsOn && lblb) lblb.click(); /* one tap turns labels on, masked */
+    lblLayer.querySelectorAll(".b3dlbl").forEach(el=>{ el.classList.remove("mask"); });
+    stSync(); updLabels(); });
+  lblLayer.addEventListener("click",e=>{ const el=e.target.closest(".b3dlbl");
+    if(!el || !stOn || !el.dataset.id || revSet.has(el.dataset.id)) return;
+    revSet.add(el.dataset.id);
+    el.textContent = nameOf(el.dataset.id); el.classList.remove("mask"); el.style.pointerEvents="";
+    stSync(); });
+  const updLabels = () => { if(!labelsOn || quiz.on){ for(const id in lblPool) hideLbl(id); return; }
     const vis = Object.keys(meshes).filter(id=>anyVis(id) && !id.startsWith("z:misc"));
     vis.sort((a,b)=>{ if(!_pcCache[a]) _pcCache[a]=partCenter(a); if(!_pcCache[b]) _pcCache[b]=partCenter(b);
       return (_pcCache[b]?_pcCache[b].r:0) - (_pcCache[a]?_pcCache[a].r:0); });
@@ -19666,9 +19778,13 @@ function buildScene(gltf, st){
         if(occT[id] && occT[id].o){ hideLbl(id); continue; } }
       seen[id]=1; placed.push([px,py]);
       if(!el){ el=document.createElement("div"); el.className="b3dlbl"; lblPool[id]=el; lblLayer.appendChild(el); }
+      el.dataset.id = id;
       el.style.display="block";
       el.style.left=px+"px"; el.style.top=py+"px";
-      el.textContent = nameOf(id);
+      const masked = stOn && !revSet.has(id);
+      el.classList.toggle("mask",masked);
+      el.style.pointerEvents = masked ? "auto" : "";
+      el.textContent = masked ? "?" : nameOf(id);
       let g = lnPool[id];
       if(!g){ g=document.createElementNS(SVGNS,"g");
         g.innerHTML = '<line/><circle r="2.2"/>'; lnSVG.appendChild(g); lnPool[id]=g; }
@@ -19677,12 +19793,111 @@ function buildScene(gltf, st){
       ln.setAttribute("x1",lx); ln.setAttribute("y1",ly);
       ln.setAttribute("x2",px); ln.setAttribute("y2",py);
       cd.setAttribute("cx",lx); cd.setAttribute("cy",ly); }
-    for(const id in lblPool) if(!seen[id]) hideLbl(id); };
+    for(const id in lblPool) if(!seen[id]) hideLbl(id);
+    lblCount = placed.length; stSync(); };
   const lblb = $("#b3dlbl");
   if(lblb) lblb.addEventListener("click",()=>{ labelsOn=!labelsOn; lblb.classList.toggle("on",labelsOn);
     lblLayer.style.display = labelsOn?"block":"none";
     if(lnSVG) lnSVG.style.display = labelsOn?"block":"none";
-    if(labelsOn) updLabels(); });
+    if(!labelsOn){ stOn=false; revSet.clear(); }
+    stSync(); if(labelsOn) updLabels(); });
+
+  /* ---- anchored pin layer: dot glued to the part, draggable label, leader line ---- */
+  const plLayer = $("#b3dpl"), pnSVG = $("#b3dlnp"), pnPool = {};
+  let pinsOn = true;
+  const hidePn = id => { const p = pnPool[id];
+    if(p){ p.el.style.display="none"; p.g.style.display="none"; } };
+  const pinAnchor = id => { const p = partCenter(id); if(!p) return null;
+    const o = pinsV2[id] && pinsV2[id].o;
+    return o ? p.c.clone().add(new THREE.Vector3(o[0],o[1],o[2])) : p.c; };
+  const mkPin = id => {
+    const el = document.createElement("div");
+    el.className = "b3dpin" + (pinsV2[id] && pinsV2[id].n ? " noted" : "");
+    el.innerHTML = `<span class="pl"><span class="nm">${esc(nameOf(id))}</span><button class="px" title="Remove pin" aria-label="Remove pin">✕</button></span>`;
+    el.title = (pinsV2[id] && pinsV2[id].n) || nameOf(id);
+    plLayer.appendChild(el);
+    const g = document.createElementNS(SVGNS,"g");
+    g.innerHTML = '<line class="pline"/><circle class="pdot" r="3.4"/>';
+    pnSVG.appendChild(g);
+    const p = pnPool[id] = {el,g};
+    el.querySelector(".px").addEventListener("click",e=>{ e.stopPropagation(); pinDel(id); if(selected===id) showInfo(id); });
+    /* drag the label to move it (updates its screen offset); a plain click focuses the part */
+    el.addEventListener("pointerdown",e=>{ e.stopPropagation(); e.preventDefault();
+      const sx=e.clientX, sy=e.clientY, pin=pinsV2[id]||(pinsV2[id]={o:[0,0,0]});
+      const lo0 = pin.lo || [16,-40]; let moved=false;
+      const mv = ev => { const dx=ev.clientX-sx, dy=ev.clientY-sy;
+        if(!moved && dx*dx+dy*dy>16) moved=true;
+        if(moved){ pin.lo=[lo0[0]+dx, lo0[1]+dy]; updPins(); } };
+      const up = ev => { removeEventListener("pointermove",mv); removeEventListener("pointerup",up);
+        if(!moved){ if(!anyVis(id)){ pushHist(); isolated=id; applyVis(); syncHiddenBar(); } focusOn(id); }
+        else savePins(); };
+      addEventListener("pointermove",mv); addEventListener("pointerup",up); });
+    /* double-click writes/removes a study note on the pin */
+    el.addEventListener("dblclick",e=>{ e.stopPropagation();
+      const pl = el.querySelector(".pl"), pin = pinsV2[id] || (pinsV2[id]={o:[0,0,0]});
+      const inp = document.createElement("input"); inp.className="ne"; inp.maxLength=80;
+      inp.value = pin.n || ""; inp.placeholder="Note… (Enter saves, Esc cancels)";
+      pl.replaceWith(inp); inp.focus();
+      const done = save => { if(save){ pin.n = inp.value.trim(); if(!pin.n) delete pin.n;
+          el.classList.toggle("noted",!!pin.n); el.title = pin.n || nameOf(id); savePins(); }
+        const npl = document.createElement("span"); npl.className="pl";
+        npl.innerHTML = `<span class="nm">${esc(nameOf(id))}</span><button class="px" title="Remove pin">✕</button>`;
+        inp.replaceWith(npl);
+        npl.querySelector(".px").addEventListener("click",ev=>{ ev.stopPropagation(); pinDel(id); if(selected===id) showInfo(id); }); };
+      inp.addEventListener("keydown",ev=>{ ev.stopPropagation();
+        if(ev.key==="Enter") done(true); else if(ev.key==="Escape") done(false); });
+      inp.addEventListener("blur",()=>done(true)); });
+    return p;
+  };
+  const updPins = () => {
+    const ids = Object.keys(pinsV2);
+    if(!pinsOn || quiz.on || !ids.length){ plLayer.style.display="none"; pnSVG.style.display="none"; return; }
+    plLayer.style.display="block"; pnSVG.style.display="block";
+    const sw=W(), sh=H(), seen={};
+    for(const id of ids){
+      /* a pin hides only when its structure is semantically gone — hidden, its
+         system layer off, peeled away, isolated-out, or outside a focus set.
+         Note some ids (e.g. humerus) map only to hidden study-aid meshes whose
+         anchors still sit on the real part — they keep their pins. */
+      const ps = sysOf(id);
+      const gone = hidden.has(id) || !chipOn[ps] || peelOf(ps) < peelN
+        || (isolated!==null && isolated!==id) || (focusSet && !focusSet.has(id));
+      if(!meshes[id] || gone){ hidePn(id); continue; }
+      const a = pinAnchor(id); if(!a){ hidePn(id); continue; }
+      _v.copy(a).project(camera);
+      if(_v.z>1){ hidePn(id); continue; }
+      const ax=(_v.x+1)/2*sw, ay=(1-_v.y)/2*sh;
+      const pin = pinsV2[id], lo = pin.lo || [16,-40];
+      const px = Math.max(64,Math.min(sw-64, ax+lo[0]));
+      const py = Math.max(18,Math.min(sh-18, ay+lo[1]));
+      seen[id]=1;
+      const p = pnPool[id] || mkPin(id);
+      p.el.style.display="flex"; p.el.style.left=px+"px"; p.el.style.top=py+"px";
+      p.g.style.display="";
+      const ln=p.g.children[0], cd=p.g.children[1];
+      ln.setAttribute("x1",ax); ln.setAttribute("y1",ay);
+      ln.setAttribute("x2",px); ln.setAttribute("y2",py);
+      cd.setAttribute("cx",ax); cd.setAttribute("cy",ay);
+      /* dim the pin when its anchor is occluded by other visible parts */
+      if(occOn){
+        const ot = performance.now(), k = "p:"+id;
+        if(!occT[k] || ot-occT[k].t>200){
+          ray.set(camera.position,_v.copy(a).sub(camera.position).normalize());
+          const hits=ray.intersectObjects(group.children,true);
+          const dC=camera.position.distanceTo(a);
+          let occ=false;
+          for(const h of hits){ if(h.distance>=dC-1e-3) break;
+            const o=h.object; if(!effVis(o)||o.userData.ghost) continue;
+            if(o.material && o.material.transparent && o.material.opacity<0.5) continue;
+            if(o.userData.partId!==id){ occ=true; break; } }
+          occT[k]={o:occ,t:ot}; }
+        p.el.style.opacity = (occT[k] && occT[k].o) ? ".38" : "";
+        p.g.style.opacity  = (occT[k] && occT[k].o) ? ".35" : ""; } }
+    for(const id in pnPool) if(!seen[id]) hidePn(id);
+  };
+  const pinB = $("#b3dpinT");
+  if(pinB){ pinB.classList.add("on");
+    pinB.addEventListener("click",()=>{ pinsOn=!pinsOn; pinB.classList.toggle("on",pinsOn); updPins(); }); }
 
   /* quiz + screenshot stage buttons */
   const qb = $("#b3dquiz");
@@ -19932,6 +20147,81 @@ function buildScene(gltf, st){
   cv.addEventListener("pointerdown",rmHint,{once:true}); setTimeout(rmHint,9000);
   syncDock();
 
+  /* ---- guided lesson: step-by-step tour through one structure ---- */
+  const lesEl = $("#b3dles");
+  const lesson = { on:false, id:null, sys:null, steps:[], i:0 };
+  const lesClose = () => { lesson.on=false; lesson.sys=null; if(lesEl) lesEl.style.display="none";
+    appEl.classList.remove("lesson");
+    focusSet=null; if(isolated===lesson.id) isolated=null;
+    applyVis(); if(selected===lesson.id) select(null); queueUrl(); };
+  const buildLesson = (id,sys) => {
+    const d = byId[id]; if(!d) return null;
+    const steps = [];
+    const reg = REGIONS[d.region] ? REGIONS[d.region].name : null;
+    const flyK = k => { const p = partCenter(id); if(p) flyTo(p.c, p.r*k); };
+    /* 1 · Location — anchor it on the body map first */
+    steps.push({ t:"📍 Location",
+      x:`The <b>${esc(d.name)}</b>${reg?` sits in the <b>${esc(reg)}</b>`:""}${d.aka?` — also called the <b>${esc(d.aka)}</b>`:""}.
+        <br><br>${esc(d.summary)}`,
+      act:()=>{ setLayers(null); focusSet=new Set([id]); applyVis(); select(id); flyK(3.0); } });
+    /* 2 · Form — what it actually looks like */
+    if(d.structure) steps.push({ t:"🔍 Form & structure", x:esc(d.structure),
+      act:()=>{ focusSet=new Set([id]); applyVis(); flyK(1.4); } });
+    /* 3 · Function — the job it does */
+    if(d.fn) steps.push({ t:"⚙️ What it does", x:esc(d.fn),
+      act:()=>{ focusSet=new Set([id]); applyVis(); } });
+    /* 4 · Neighbours — how it connects to the parts around it */
+    const rel = (d.related||[]).filter(r=>meshes[r]);
+    if(rel.length) steps.push({ t:"🔗 Neighbours",
+      x:`Now look at how it relates to its neighbours — everything else is ghosted:<br><br>` +
+        rel.slice(0,7).map(r=>`<b>${esc(nameOf(r))}</b>`).join(" · "),
+      act:()=>{ focusSet=new Set([id,...rel]); applyVis();
+        const box=new THREE.Box3(); [id,...rel].forEach(r=>{ const p=partCenter(r); if(p) box.expandByPoint(p.c); });
+        if(!box.isEmpty()){ const c=box.getCenter(new THREE.Vector3());
+          flyTo(c, Math.max(box.getSize(new THREE.Vector3()).length()/2, rad*0.02)); } } });
+    /* 5 · Clinical — why it matters in real life */
+    if(d.clinical) steps.push({ t:"🏥 Why it matters",
+      x:esc(d.clinical)+`<br><br><a href="#/part/${id}" style="color:#ffd60a">Read the full atlas entry →</a>`,
+      act:()=>{ focusSet=new Set([id]); applyVis(); flyK(1.6); } });
+    /* finish — offer a self-test */
+    steps.push({ t:"🎉 You've got it", finish:true,
+      x:`That's the ${esc(d.name)}. Tap <b>Test me</b> and find it on the body — or mark the lesson done.`,
+      act:()=>{ focusSet=null; isolated=null; hidden.clear(); applyVis(); flyK(2.4); } });
+    return steps;
+  };
+  const lesGo = i => {
+    lesson.i = Math.max(0, Math.min(lesson.steps.length-1, i));
+    const s = lesson.steps[lesson.i];
+    $("#lest").textContent = s.t;
+    $("#lesbody").innerHTML = s.x;
+    $("#lesdots").innerHTML = lesson.steps.map((_,k)=>`<i class="${k===lesson.i?"on":k<lesson.i?"done":""}"></i>`).join("");
+    $("#lesnav").innerHTML =
+      `${lesson.i>0?`<button id="lespv">← Back</button>`:""}<span class="les-prog">${lesson.i+1} / ${lesson.steps.length}</span>` +
+      (s.finish
+        ? `<button class="pri" id="lestest">🎯 Test me</button><button class="dim" id="lesdone">Done ✓</button>`
+        : `<button class="pri" id="lesnx">Next →</button>`);
+    const pv=$("#lespv"); if(pv) pv.addEventListener("click",()=>lesGo(lesson.i-1));
+    const nx=$("#lesnx"); if(nx) nx.addEventListener("click",()=>lesGo(lesson.i+1));
+    const tt=$("#lestest"); if(tt) tt.addEventListener("click",()=>quizStart(lesson.id));
+    const dn=$("#lesdone"); if(dn) dn.addEventListener("click",()=>{
+      markLesson(lesson.id); addXP(30,"lesson complete"); checkBadges();
+      const nxt = lessonsOf(lesson.sys).find(x=>!lessonDone(x.id));
+      $("#lesbody").innerHTML = `🎉 <b>${esc(nameOf(lesson.id))}</b> — lesson complete.${nxt?` Next up: <b>${esc(nxt.name)}</b>.`:" You've finished this path!"}`;
+      $("#lesnav").innerHTML = (nxt?`<button class="pri" id="lesgo2">Next lesson →</button>`:"") + `<button class="dim" id="lesout">Exit</button>`;
+      if(nxt) $("#lesgo2").addEventListener("click",()=>{ location.hash = `/3d/${nxt.id}?lesson=${lesson.sys}`; });
+      $("#lesout").addEventListener("click",lesClose);
+      $("#lest").textContent = "🎉 Lesson complete"; });
+    if(s.act) s.act();
+    queueUrl();
+  };
+  const lessonStart = (id,sys) => {
+    const steps = buildLesson(id,sys);
+    if(!steps || !lesEl) return;
+    lesson.on=true; lesson.id=id; lesson.sys=sys; lesson.steps=steps;
+    appEl.classList.add("lesson");
+    lesEl.style.display="block"; lesGo(0); };
+  if(lesEl) $("#lesx").addEventListener("click",lesClose);
+
   /* subtle life motion — heartbeat on the heart, breathing on the lungs */
   const life = [];
   const addPulse = (id, amp, freq) => { const l = meshes[id]; if(!l) return;
@@ -19942,6 +20232,7 @@ function buildScene(gltf, st){
   paintPins();
   select(selId && meshes[selId] ? selId : null);
   if(selId && meshes[selId]) focusOn(selId);
+  if(st.lesson && selId) lessonStart(selId, st.lesson);
 
   let raf;
   const tick = ()=>{ if(!document.body.contains(cv)){ cancelAnimationFrame(raf); quizStop(); return; }
@@ -19958,6 +20249,7 @@ function buildScene(gltf, st){
     const lifeVis = life.some(L=>effVis(L.m));
     const animated = !!fly || controls.autoRotate || selected!==null || lifeVis || quiz.on;
     if(labelsOn && (animated||moved||dirty)) updLabels();
+    if(animated||moved||dirty) updPins();
     if(animated || moved || dirty){
       dirty = false;
       try{ if(aoOn && composer) composer.render(); else renderer.render(scene,camera); }
@@ -19977,10 +20269,12 @@ function v3D(sel){
   const st = { sel: selId || q.get("sel") || null,
     hid: (q.get("hid")||"").split(",").filter(Boolean).slice(0,60),
     iso: q.get("iso") || null,
+    pins: (q.get("pins")||"").split(",").filter(Boolean).slice(0,30),
     sys: q.get("sys") ? q.get("sys").split(",").filter(Boolean) : null,
     peel: Math.max(0, Math.min(13, +q.get("peel")||0)),
     exp: Math.max(0, Math.min(100, +q.get("exp")||0)),
-    clip: q.get("clip") || null };
+    clip: q.get("clip") || null,
+    lesson: q.get("lesson") || null };
   const ids = Object.keys(MODELS).filter(id=>byId[id]);
   document.body.classList.add("b3d-open");
   view.innerHTML = `<div class="b3d-app loading" id="b3dapp">
@@ -19988,6 +20282,8 @@ function v3D(sel){
       <div class="b3d-load" id="b3dload"><span class="b3d-spin"></span><div class="b3d-prog"><div class="t">Loading the 3D body…</div></div></div>
       <div class="b3d-tip" id="b3dtip"></div>
       <svg class="b3d-lines" id="b3dln"></svg>
+      <svg class="b3d-lines" id="b3dlnp" style="display:none"></svg>
+      <div class="b3d-pl" id="b3dpl" style="display:none"></div>
       <div class="b3d-lbls" id="b3dlbls" style="display:none"></div>
     </div>
 
@@ -20007,6 +20303,12 @@ function v3D(sel){
 
     <div class="b3d-info" id="b3di"><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button><h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p></div>
     <div class="b3d-hbar" id="b3dhbar"></div>
+    <div class="b3d-lesson" id="b3dles" style="display:none">
+      <div class="les-top"><b class="les-step" id="lest"></b><span class="les-dots" id="lesdots"></span>
+        <button class="les-x" id="lesx" title="Exit lesson" aria-label="Exit lesson">✕</button></div>
+      <div class="les-body" id="lesbody"></div>
+      <div class="les-nav" id="lesnav"></div>
+    </div>
 
     <div class="b3d-pop" id="pop-slice"><div class="pop-h">✂ Slice <small>cut through the body</small></div>
       <div class="b3d-peel"><span class="b3d-ax" id="b3dax"><button data-a="x">X</button><button data-a="y">Y</button><button data-a="z" class="on">Z</button></span><input id="b3dsl" type="range" min="0" max="100" value="0" aria-label="Slice position"></div></div>
@@ -20017,6 +20319,8 @@ function v3D(sel){
 
     <nav class="b3d-dock" aria-label="3D tools"><div class="dock-in">
       <button class="dock-b" id="b3dlbl" title="Show structure labels"><i>🏷</i><b>Labels</b></button>
+      <button class="dock-b" id="b3dst" title="Hide the names — tap a ? to reveal it (self-test)"><i>🙈</i><b>Test</b></button>
+      <button class="dock-b" id="b3dpinT" title="Show/hide your pinned markers"><i>📌</i><b>Pins</b></button>
       <button class="dock-b" id="b3dxr" title="X-ray: fade the outer layers"><i>👻</i><b>X-ray</b></button>
       <button class="dock-b" id="b3dwire" title="Wireframe on/off"><i>🕸</i><b>Wire</b></button>
       <button class="dock-b" id="b3dao" title="Depth shading (ambient occlusion)"><i>🕳</i><b>AO</b></button>
@@ -20045,7 +20349,9 @@ function v3D(sel){
             <li><b>Rotate</b> — drag · <b>Pan</b> — right-drag or two fingers · <b>Zoom</b> — scroll or pinch</li>
             <li><b>Select</b> — tap a structure · <b>Zoom to it</b> — double-tap</li>
             <li><b>Hide a part</b> — right-click or long-press, then ⎌ Undo (Ctrl+Z)</li>
+            <li><b>📌 Pin a structure</b> — from its info card; the marker sticks to the body — drag the label, double-click it to add a note</li>
             <li><b>🎯 Quiz</b> — you're given a name, tap the right structure</li>
+            <li><b>🎓 Guided lessons</b> — open <a href="#/learn" style="color:#ffd60a">Learn</a> for step-by-step tours that drive the camera</li>
             <li><b>Share</b> — the address bar always matches your current view; copy it to send</li>
           </ul></div>
         <div class="dr-sec"><details><summary>Close-up models</summary><div class="grid">${ids.map(id=>cardHTML(byId[id])).join("")}</div></details></div>
@@ -20102,25 +20408,43 @@ function vGallery(){
 /* ---------- quiz ---------- */
 let quiz = {score:0, asked:0, cur:null};
 function vQuiz(sys){
-  const pool = DATA.filter(d=>d.summary && (!sys || d.system===sys));
-  crumbs([{t:"Home",href:"#/"},{t:"Quiz"}]);
+  const isDue = sys==="due";
+  const dueIds = isDue ? srDue() : null;
+  if(isDue && !dueIds.length){ location.hash = "/learn/review"; return; }
+  const pool = DATA.filter(d=>d.summary && (isDue || !sys || d.system===sys));
+  crumbs([{t:"Home",href:"#/"},...(isDue?[{t:"Learn",href:"#/learn"},{t:"Review"}]:[{t:"Quiz"}])]);
   view.innerHTML = `<div class="quiz-box">
     <div class="quiz-score">
+      ${isDue?`<span class="badge">🧠 Review · left <b id="qr">${Math.min(20,dueIds.length)}</b></span>`:""}
       <span class="badge">Score: <b id="qs">0</b></span>
       <span class="badge">Answered: <b id="qa">0</b></span>
       <span class="badge">Streak: <b id="qk">0</b></span>
-      <select id="qsys" style="background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:4px 8px">
+      ${isDue?"":`<select id="qsys" style="background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:4px 8px">
         <option value="">All systems</option>${META.systemOrder.map(s=>`<option value="${s}" ${s===sys?"selected":""}>${SYSTEMS[s].name}</option>`).join("")}
-      </select>
+      </select>`}
     </div>
     <div class="qcard" id="qcard"></div></div>`;
-  $("#qsys").addEventListener("change",e=>{ location.hash = "/quiz"+(e.target.value?"/"+e.target.value:""); });
-  quiz = {score:0, asked:0, streak:0, pool};
+  const qsel = $("#qsys"); if(qsel) qsel.addEventListener("change",e=>{ location.hash = "/quiz"+(e.target.value?"/"+e.target.value:""); });
+  quiz = {score:0, asked:0, streak:0, pool,
+    queue: isDue ? shuffle(dueIds.slice(0,20)) : null};
   nextQ();
 }
 function nextQ(){
   const pool = quiz.pool || DATA.filter(d=>d.summary);
-  const d = pool[Math.floor(Math.random()*pool.length)];
+  let d;
+  if(quiz.queue){
+    if(!quiz.queue.length){
+      const pct = quiz.asked ? Math.round(quiz.score/quiz.asked*100) : 0;
+      $("#qcard").innerHTML = `<div class="q">Review complete 🎉</div>
+        <div class="qsub">${quiz.score} of ${quiz.asked} correct (${pct}%)</div>
+        <div class="quiz-foot"><a class="btn primary" href="#/learn">← Back to learn</a>
+          <a class="btn" href="#/quiz" style="margin-left:8px">Keep quizzing →</a></div>`;
+      if(quiz.asked>=10) giveBadge("review-10");
+      if(quiz.score) addXP(quiz.score*2,"review session");
+      return; }
+    d = quiz.queue.pop();
+    const qr = $("#qr"); if(qr) qr.textContent = quiz.queue.length;
+  } else d = pool[Math.floor(Math.random()*pool.length)];
   quiz.cur = d;
   const same = pool.filter(x=>x.id!==d.id && x.system===d.system);
   const others = pool.filter(x=>x.id!==d.id && x.system!==d.system);
@@ -20141,6 +20465,8 @@ function nextQ(){
     $("#qcard").querySelectorAll(".opt").forEach(x=>{ x.disabled=true; if(x.dataset.id===d.id) x.classList.add("right"); });
     if(!right) b.classList.add("wrong");
     quiz.asked++; if(right){quiz.score++; quiz.streak=(quiz.streak||0)+1;} else quiz.streak=0;
+    srRecord(d.id, right);
+    if(right){ PROG.quizRight=(PROG.quizRight|0)+1; PROG.xp=(PROG.xp|0)+10; touchStreak(); saveProg(); checkBadges(); }
     try{ if(right && window.parent !== window) parent.postMessage({type:"atlas:quiz-correct", id:d.id}, location.origin); }catch(e){}
     $("#qs").textContent=quiz.score; $("#qa").textContent=quiz.asked; $("#qk").textContent=quiz.streak;
     $("#qnote").innerHTML = right ? "Correct." : `It was <b>${d.name}</b>.`;
@@ -20150,6 +20476,107 @@ function nextQ(){
   }));
 }
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+/* ---------- learning progress: XP, lessons, streak, spaced repetition ---------- */
+const PROG = (()=>{ try{ const p=JSON.parse(localStorage.getItem("atlas-progress")||"{}");
+    return p && typeof p==="object" ? p : {}; }catch(e){ return {}; } })();
+const saveProg = () => { try{ localStorage.setItem("atlas-progress",JSON.stringify(PROG)); }catch(e){} };
+const today = () => Math.floor(Date.now()/86400000);
+const touchStreak = () => { const t=today();
+  if(PROG.stLast===t) return;
+  PROG.streak = PROG.stLast===t-1 ? (PROG.streak||0)+1 : 1;
+  PROG.stLast = t; saveProg(); };
+let xpT = null;
+const learnToast = (msg,ms) => {
+  if(!xpT){ xpT = document.createElement("div"); xpT.className="xptoast"; document.body.appendChild(xpT); }
+  xpT.textContent = msg; xpT.classList.add("on");
+  clearTimeout(xpT._t); xpT._t = setTimeout(()=>xpT.classList.remove("on"), ms||2400); };
+const addXP = (n,why) => { PROG.xp = (PROG.xp|0)+n; touchStreak(); saveProg();
+  learnToast(`+${n} XP${why?" · "+why:""}`); };
+const lessonDone = id => !!(PROG.lessons && PROG.lessons[id]);
+const markLesson = id => { (PROG.lessons=PROG.lessons||{})[id]=1; saveProg(); };
+/* Leitner boxes — right answer advances a box (longer gap), wrong resets it */
+const SR_GAP = [0,1,2,4,8,16];
+const srBox = id => (PROG.boxes=PROG.boxes||{})[id];
+const srRecord = (id,ok) => { if(!id) return;
+  const b = srBox(id) || (PROG.boxes[id] = {b:1,due:today()});
+  b.b = ok ? Math.min(5,b.b+1) : 1; b.due = today()+SR_GAP[b.b]; saveProg(); };
+const srDue = () => { const t=today(), boxes=PROG.boxes||{};
+  return Object.keys(boxes).filter(id=>byId[id] && boxes[id].due<=t); };
+const BADGES = [
+  ["first-lesson","🎓 First steps","Finish your first guided lesson"],
+  ["five-lessons","📚 Scholar","Finish 5 lessons"],
+  ["ten-pins","📌 Cartographer","Pin 10 structures in 3D"],
+  ["quiz-25","🎯 Sharp eye","Answer 25 quiz questions correctly"],
+  ["streak-3","🔥 On a roll","Learn 3 days in a row"],
+  ["review-10","🧠 Long-term memory","Clear 10 spaced-repetition reviews"] ];
+const badgeHas = id => (PROG.badges||[]).includes(id);
+const giveBadge = id => { if(badgeHas(id)) return;
+  const b = BADGES.find(x=>x[0]===id); if(!b) return;
+  (PROG.badges=PROG.badges||[]).push(id); saveProg();
+  learnToast(`🏅 Badge earned: ${b[1]}`, 3200); };
+const checkBadges = () => {
+  const nl = Object.keys(PROG.lessons||{}).length;
+  if(nl>=1) giveBadge("first-lesson");
+  if(nl>=5) giveBadge("five-lessons");
+  if((PROG.quizRight|0)>=25) giveBadge("quiz-25");
+  if((PROG.streak|0)>=3) giveBadge("streak-3");
+  try{ const p = JSON.parse(localStorage.getItem("atlas-pins2")||"{}");
+    if(Object.keys(p).length>=10) giveBadge("ten-pins"); }catch(e){} };
+
+/* ---------- learn mode: guided paths through the systems ---------- */
+const LEARN_ORDER = ["skeletal","muscular","cardiovascular","nervous","respiratory",
+  "digestive","urinary","reproductive","endocrine","lymphatic","integumentary","sensory"];
+const lessonsOf = sys => DATA.filter(d=>d.system===sys && d.summary);
+const nextLesson = sys => { const l = lessonsOf(sys).find(d=>!lessonDone(d.id));
+  return l || lessonsOf(sys)[0]; };
+
+function vLearn(arg){
+  crumbs([{t:"Home",href:"#/"},{t:"Learn"}]);
+  if(arg && SYSTEMS[arg]){ /* lesson list for one system */
+    const c = SYSTEMS[arg], items = lessonsOf(arg);
+    const done = items.filter(d=>lessonDone(d.id)).length;
+    const nx = nextLesson(arg);
+    crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:c.name}]);
+    view.innerHTML = `<div class="list-head"><h1><span class="ic">${c.icon}</span>Learn ${c.name.toLowerCase()}</h1>
+      <p>${done}/${items.length} lessons complete — each one walks you through the structure in the 3D body: where it is, what it looks like, what it does and what sits next to it.</p></div>
+      ${nx?`<p><a class="btn primary" href="#/3d/${nx.id}?lesson=${arg}">▶ ${done?"Continue":"Start"}: ${esc(nx.name)}</a>
+        <a class="btn" href="#/quiz/${arg}">🎯 Quiz this system</a></p>`:""}
+      <div class="grid tight" style="grid-template-columns:1fr">${items.map(d=>
+        `<a class="lrow${lessonDone(d.id)?" done":""}" href="#/3d/${d.id}?lesson=${arg}">
+          <span class="lck">${lessonDone(d.id)?"✓":""}</span>
+          <span class="lr"><span class="ln2">${esc(d.name)}</span><span class="lm2">${REGIONS[d.region].name}${d.aka?" · "+esc(d.aka):""}</span></span>
+          <span class="lgo">›</span></a>`).join("")}</div>`;
+    return; }
+  /* course map */
+  const due = srDue().length;
+  const nx = LEARN_ORDER.map(s=>({s,d:nextLesson(s)})).find(x=>x.d && !lessonDone(x.d.id));
+  view.innerHTML = `<div class="list-head"><h1>🎓 Learn anatomy</h1>
+    <p>Guided lessons that walk you through each structure inside the 3D body — location, shape, function and neighbours, one step at a time. Method inspired by the "why, not what" approach of TeachMeAnatomy and AnatomyQuest.</p></div>
+    <div class="learn-head">
+      ${nx?`<a class="btn primary" href="#/3d/${nx.d.id}?lesson=${nx.s}">▶ Continue learning: ${esc(nx.d.name)}</a>`:`<span class="badge">🎉 All lessons complete!</span>`}
+      <a class="btn" href="#/learn/review">🧠 Review${due?` (${due} due)`:""}</a>
+      <span class="xp"><span class="xpbadge">⭐ <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">🔥 ${PROG.streak} days</span>`:""}</span>
+    </div>
+    ${(PROG.badges||[]).length?`<p class="hint" style="margin:-4px 0 14px">Badges: ${PROG.badges.map(b=>{const x=BADGES.find(y=>y[0]===b);return x?x[1].split(" ")[0]+" "+x[1].split(" ").slice(1).join(" "):"";}).join(" · ")}</p>`:""}
+    <div class="grid tight" style="grid-template-columns:1fr">${LEARN_ORDER.filter(s=>sysCount[s]).map(s=>{
+      const items = lessonsOf(s), done = items.filter(d=>lessonDone(d.id)).length;
+      const pct = items.length ? Math.round(done/items.length*100) : 0;
+      return `<a class="lpath${done===items.length&&items.length?" done":""}" href="#/learn/${s}">
+        <span class="li">${SYSTEMS[s].icon}</span>
+        <span class="lm"><span class="lt">${SYSTEMS[s].name}</span>
+          <span class="ld">${items.length} lessons${done?` · ${done} done`:""}</span>
+          <span class="lbar"><i style="width:${pct}%"></i></span></span>
+        <span class="ln"><b>${pct}%</b>${done===items.length?"✓":"›"}</span></a>`; }).join("")}</div>`;
+}
+function vReview(){
+  const due = srDue();
+  crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:"Review"}]);
+  if(!due.length){ view.innerHTML = `<div class="list-head"><h1>🧠 Review</h1>
+    <p>Nothing due right now — structures you miss in quizzes come back here on a spaced schedule (1, 2, 4, 8 and 16 days) until they stick.</p>
+    <p><a class="btn" href="#/quiz">🎯 Take a quiz</a> <a class="btn" href="#/learn">← Back to learn</a></p></div>`; return; }
+  location.hash = "/quiz/due";
+}
 
 /* ---------- search ---------- */
 function search(q){
@@ -20209,6 +20636,7 @@ function route(){
   else if(kind==="part" && byId[arg]){ vDetail(arg); }
   else if(kind==="map"){ vMap(); mark("map"); }
   else if(kind==="quiz"){ vQuiz(arg||null); mark("quiz"); }
+  else if(kind==="learn"){ arg==="review" ? vReview() : vLearn(arg||null); mark("learn"); }
   else if(kind==="gallery"){ vGallery(); mark("gallery"); }
   else if(kind==="3d"){ v3D(arg||null); mark("3d"); }
   else if(kind==="search"){ vSearch(arg||""); }
