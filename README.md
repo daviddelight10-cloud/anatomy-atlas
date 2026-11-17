@@ -8,8 +8,12 @@ Z-Anatomy (CC BY-SA 4.0, based on BodyParts3D © DBCLS).
 ## Features
 
 - 📖 500+ anatomical structures with labeled plates (Gray's Anatomy 1918, Wikimedia Commons)
-- 🧊 Interactive 3D body explorer — drag, zoom, tap structures (three.js + Draco)
-- 🗺️ Body map, quizzes, searchable index, dark/light themes
+- 🧊 Full-screen 3D explorer — drag, zoom, tap structures (three.js + Draco), presets, peel/slice/explode, X-ray, wireframe
+- 📌 **Anchored pins** — pin any structure: a marker sticks to the body with a leader-line label (drag it, double-click for a note), survives reloads and deep links
+- 🎓 **Learn mode** (`#/learn`) — guided lessons that fly the camera through Location → Form → Function → Neighbours → Clinical for every structure, in method inspired by TeachMeAnatomy/AnatomyQuest
+- 🙈 Hide-the-labels self-test, 2D + 3D quizzes, XP/streaks/badges
+- 🧠 **Spaced repetition** — structures you miss come back for review on a 1/2/4/8/16-day schedule
+- 🗺️ Body map, searchable index, dark/light themes
 - 📲 **Installable PWA** — add to home screen on Android, iOS, or desktop
 - ⚡ Works offline: the app shell, visited pages, anatomy plates, and the 3D body are cached locally
 - 💾 Optional "Save 3D body for offline" — the ~22 MB model downloads once, then never again
