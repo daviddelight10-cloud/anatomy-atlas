@@ -248,6 +248,17 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3d-reset:hover{background:#242424}
 .b3d-stagebtns{position:absolute;top:10px;right:10px;display:flex;gap:6px}
 .b3d-stagebtns button{background:rgba(20,20,20,.88);color:#e8e8e8;border:1px solid #3d3d3d;border-radius:8px;padding:6px 11px;font:600 12px var(--font);cursor:pointer}
+.b3d-stagebtns button[disabled]{opacity:.35;cursor:default}
+.b3d-stagebtns button.on{background:rgba(255,214,10,.22);border-color:#ffd60a;color:#ffd60a}
+#b3dcv.quizmode{cursor:crosshair}
+.b3d-quiz{position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:rgba(14,14,14,.93);border:1px solid #3d3d3d;border-radius:12px;padding:8px 14px;z-index:6;font-size:13.5px;color:#e8e8e8;box-shadow:0 8px 24px rgba(0,0,0,.45);max-width:min(94%,620px)}
+.b3d-quiz .q-t{font-weight:700;color:#ffd60a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px}
+.b3d-quiz .q-s{color:#a3a3a3;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:12.5px}
+.b3d-quiz .q-streak{color:#f2a900}
+.b3d-quiz button{background:#242424;border:1px solid #3d3d3d;color:#e8e8e8;border-radius:7px;padding:3px 9px;font:600 11.5px var(--font);cursor:pointer;white-space:nowrap}
+.b3d-quiz button:hover{border-color:#ffd60a;color:#ffd60a}
+.b3d-quiz .q-flash-good{color:#3ddc84;font-weight:700}
+.b3d-quiz .q-flash-bad{color:#ff5d6c;font-weight:700}
 .b3d-stagebtns button:hover{background:#242424}
 
 .b3d-stagebtns button.on{background:rgba(255,214,10,.16);border-color:rgba(255,214,10,.55);color:#e8e8e8}
@@ -19079,7 +19090,7 @@ function loadPost(){
 async function fetchModel(prog){
   const r = await fetch("model.bin");
   if(!r.ok) throw new Error("model.bin download failed: "+r.status);
-  const total = +r.headers.get("content-length") || 22221082;
+  const total = +r.headers.get("content-length") || 20565892;
   if(!r.body || !r.body.getReader) return new Uint8Array(await r.arrayBuffer());
   const rd = r.body.getReader(), parts = [];
   let got = 0, last = 0;
@@ -19119,8 +19130,9 @@ async function loadBodyGlb(){
   return gltf;
 }
 
-function buildScene(gltf, selId){
+function buildScene(gltf, st){
   const cv = $("#b3dcv"); if(!cv) return;
+  const selId = st.sel;
   const stage = cv.parentElement;
   const H = () => stage.clientHeight, W = () => stage.clientWidth;
   const lowPower = (navigator.hardwareConcurrency||8)<=4 || matchMedia("(pointer:coarse)").matches;
@@ -19149,6 +19161,29 @@ function buildScene(gltf, selId){
   const group = new THREE.Group(); scene.add(group);
   const chipOn = {}, hidden = new Set(); let isolated = null, aidsOn = false;
   let hover = null, selected = null, xr = false;
+  /* render-on-demand: only draw frames when something actually changed */
+  let dirty = true; const poke = () => { dirty = true; };
+  /* undo stack for hide / isolate / layer-reset actions */
+  const undoStack = [];
+  /* tap-the-structure quiz state */
+  const quiz = { on:false, target:null, score:0, tries:0, streak:0 };
+  let quizEl = null;
+  /* shareable deep link: #/3d/<sel>?iso=&hid=&sys=&peel=&clip= — debounced;
+     declared up here because applyVis() runs before the helpers below */
+  let urlT = 0;
+  const queueUrl = () => { clearTimeout(urlT); urlT = setTimeout(()=>{
+    try{
+      const q = new URLSearchParams();
+      if(isolated!==null) q.set("iso",isolated);
+      if(hidden.size && hidden.size<=24) q.set("hid",[...hidden].join(","));
+      const onS = Object.keys(chipOn).filter(s=>chipOn[s]).sort();
+      const defS = Object.keys(chipOn).filter(s=>s!=="integumentary").sort();
+      if(onS.join()!==defS.join()) q.set("sys",onS.join(","));
+      if(peelN) q.set("peel",peelN);
+      if(clipOn) q.set("clip",clipAxis+":"+Math.round(clipPos*100));
+      const qs = q.toString();
+      history.replaceState(null,"","#/3d/"+(selected||"")+(qs?"?"+qs:""));
+    }catch(e){} }, 200); };
   const SYS_ROUGH = { skeletal:.62, muscular:.82, nervous:.68, cardiovascular:.52, respiratory:.58,
     digestive:.5, urinary:.55, reproductive:.55, endocrine:.5, lymphatic:.58, integumentary:.88,
     sensory:.5, general:.7 };
@@ -19253,12 +19288,19 @@ function buildScene(gltf, selId){
       (bySysM[sys] = bySysM[sys] || []).push(o);
     } }
   for(const s in bySysM) chipOn[s] = s !== "integumentary";
+  /* restore deep-linked state (?sys=&hid=&iso=&peel=&clip=) */
+  if(st.sys) for(const s in chipOn) chipOn[s] = st.sys.includes(s);
+  if(st.hid) st.hid.forEach(id=>hidden.add(id));
+  if(st.iso && meshes[st.iso]) isolated = st.iso;
 
   /* outer→inner peel order for the layer slider */
   const PEEL = ["integumentary","muscular","nervous","cardiovascular","lymphatic","sensory",
     "respiratory","digestive","urinary","reproductive","endocrine","general","skeletal"];
-  let peelN = 0;
+  let peelN = Math.min(PEEL.length, st.peel|0);
   const peelOf = s => PEEL.indexOf(s);
+  let clipSt = null;
+  if(st.clip){ const mm = /^([xyz]):(\d{1,3})$/.exec(st.clip);
+    if(mm) clipSt = {a:mm[1], p:Math.min(94,+mm[2])/100}; }
   /* ghost material — isolate fades the rest of the body instead of hiding it */
   const ghostOf = bm => { if(!bm.userData.__g){ const g = bm.clone();
       g.transparent = true; g.opacity = 0.09; g.depthWrite = false; bm.userData.__g = g; }
@@ -19279,7 +19321,8 @@ function buildScene(gltf, selId){
       m.material = m.userData.ghost ? ghostOf(m.userData.baseMat||m.material)
         : (m.userData.baseMat||m.material);
     }
-    applyXr();
+    applyXr(); poke(); queueUrl();
+    if(quiz.on && quiz.target && !anyVis(quiz.target)) quizNext();
   };
   applyVis();
   window.__b3d = {group, meshes};
@@ -19294,7 +19337,7 @@ function buildScene(gltf, selId){
     clipPlane.normal.set(0,0,0); clipPlane.normal.setComponent(a,-1);
     clipPlane.constant = bb.max.getComponent(a)
       - clipPos*(bb.max.getComponent(a)-bb.min.getComponent(a))*0.94;
-    renderer.clippingPlanes = [clipPlane];
+    renderer.clippingPlanes = [clipPlane]; poke(); queueUrl();
   };
   const home = new THREE.Vector3(ctr.x, ctr.y, ctr.z + rad*2.3);
   camera.position.copy(home); camera.near = rad/300; camera.far = rad*20; camera.updateProjectionMatrix();
@@ -19319,6 +19362,7 @@ function buildScene(gltf, selId){
     const dist = Math.max(sphR*3.4, rad*0.06);
     fly = { p0:camera.position.clone(), t0:controls.target.clone(),
             p1:tgt.clone().addScaledVector(dir,dist), t1:tgt.clone(), k:0 };
+    poke();
   };
   const _sph = new THREE.Sphere(), _pcBox = new THREE.Box3();
   const partCenter = id => { _pcBox.makeEmpty(); let r = 0;
@@ -19355,7 +19399,63 @@ function buildScene(gltf, selId){
         m.userData.glowMat = base.clone(); m.userData.glowMat.userData.src = base; }
       m.userData.glowMat.emissive.setHex(hex);
       if(!m.userData.ghost) m.material = m.userData.glowMat; }
-    else if(m.userData.glowMat){ m.userData.glowMat.emissive.setHex(0); } };
+    else if(m.userData.glowMat){ m.userData.glowMat.emissive.setHex(0); } poke(); };
+
+  /* ---- undo: snapshot {hidden,isolated} before each mutating action ---- */
+  const undoBtn = $("#b3dundo");
+  const syncUndo = () => { if(undoBtn) undoBtn.disabled = !undoStack.length; };
+  const pushHist = () => { undoStack.push({h:[...hidden], iso:isolated});
+    if(undoStack.length>30) undoStack.shift(); syncUndo(); };
+  const undo = () => { const s = undoStack.pop(); if(!s) return;
+    hidden.clear(); s.h.forEach(id=>hidden.add(id)); isolated = s.iso;
+    applyVis(); syncHiddenBar(); syncUndo(); };
+  if(undoBtn) undoBtn.addEventListener("click",undo);
+  const onKey = e => { if(!document.body.contains(cv)){ removeEventListener("keydown",onKey); return; }
+    if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==="z" && !e.target.matches("input,textarea")){
+      e.preventDefault(); undo(); } };
+  addEventListener("keydown",onKey);
+
+  /* ---- tap-the-structure quiz ---- */
+  const quizPool = () => Object.keys(meshes).filter(id=>byId[id] && anyVis(id) && !id.startsWith("z:"));
+  const quizPaint = note => { if(!quizEl) return;
+    quizEl.innerHTML =
+      (note ? `<span class="${note[0]}">${note[1]}</span>`
+           : `<span class="q-s">Find:</span><span class="q-t">${esc(nameOf(quiz.target))}</span>`)
+      + `<span class="q-s">✔ ${quiz.score} · ✖ ${quiz.tries}</span>`
+      + (quiz.streak>1 ? `<span class="q-streak">🔥${quiz.streak}</span>` : "")
+      + `<button data-q="skip">skip ⏭</button><button data-q="quit">✕ quit</button>`;
+    quizEl.querySelectorAll("[data-q]").forEach(b=>b.addEventListener("click",ev=>{
+      ev.stopPropagation();
+      b.dataset.q==="quit" ? quizStop() : quizNext(); })); };
+  const quizNext = () => { const pool = quizPool();
+    let t = pool[Math.floor(Math.random()*pool.length)], guard = 40;
+    while(pool.length>1 && t===quiz.target && --guard) t = pool[Math.floor(Math.random()*pool.length)];
+    quiz.target = t; quizPaint(); };
+  const quizStop = () => { quiz.on=false; quiz.target=null; cv.classList.remove("quizmode");
+    if(quizEl){ quizEl.remove(); quizEl=null; }
+    const qb=$("#b3dquiz"); if(qb) qb.classList.remove("on"); };
+  const quizStart = () => { if(quiz.on) return;
+    quiz.on=true; cv.classList.add("quizmode");
+    tip.style.display="none"; if(hover){ glow(hover,0); hover=null; }
+    select(null);
+    quizEl = document.createElement("div"); quizEl.className="b3d-quiz"; stage.appendChild(quizEl);
+    quiz.score=0; quiz.tries=0; quiz.streak=0;
+    const qb=$("#b3dquiz"); if(qb) qb.classList.add("on");
+    if(!quizPool().length){ quizPaint(["q-flash-bad","No visible named structures — enable more systems"]);
+      quiz.target=null; return; }
+    quizNext(); };
+  const quizAnswer = m => { const id = m && m.userData.partId;
+    if(!quiz.target) return;
+    if(id===quiz.target){ quiz.score++; quiz.streak++;
+      each(id,mm=>glow(mm,0x0f7a3d));
+      quizPaint(["q-flash-good","✓ "+esc(nameOf(id))]);
+      const done = quiz.target; quiz.target = null;
+      setTimeout(()=>{ if(!quiz.on) return; each(done,mm=>glow(mm,0)); quizNext(); },700); }
+    else { quiz.tries++; quiz.streak=0;
+      if(id){ each(id,mm=>glow(mm,0x7a1020));
+        setTimeout(()=>each(id,mm=>glow(mm,0)),420); }
+      quizPaint(["q-flash-bad","✖ "+(id?esc(nameOf(id)):"missed")+" — try again"]); } };
+
   const showInfo = id => {
     const d = byId[id];
     const s = sysOf(id), c = SYSTEMS[s] || SYSTEMS.general;
@@ -19373,6 +19473,7 @@ function buildScene(gltf, selId){
       <div class="b3d-actions">
         <button data-a="hide">Hide this</button>
         <button data-a="isolate">Isolate</button>
+        <button data-a="say" title="Pronounce it">🔊</button>
         ${hidden.size||isolated!==null?`<button data-a="showall">Show all</button>`:""}
       </div>
       ${im?`<img class="b3d-plate" src="${esc(im.thumb||im.url)}" alt="" loading="lazy">`:""}
@@ -19382,6 +19483,10 @@ function buildScene(gltf, selId){
         : `<p class="hint">Sub-structure from the original Z-Anatomy model (CC BY-SA 4.0) — no separate atlas article yet.</p>`}`);
     info.querySelectorAll("[data-a]").forEach(b=>b.addEventListener("click",()=>{
       const a=b.dataset.a;
+      if(a==="say"){ try{ speechSynthesis.cancel();
+          const u=new SpeechSynthesisUtterance(nm); u.rate=0.95; speechSynthesis.speak(u); }catch(e){}
+        return; }
+      pushHist();
       if(a==="hide"){ hidden.add(id); applyVis(); select(null); }
       else if(a==="isolate"){ isolated=id; applyVis(); focusOn(id); }
       else { hidden.clear(); isolated=null; applyVis(); select(null); }
@@ -19395,6 +19500,7 @@ function buildScene(gltf, selId){
     if(id){ each(id, m=>glow(m,0x8a6d00)); showInfo(id); }
     else setInfo(defInfo);
     info.classList.toggle("has-sel", !!id);
+    queueUrl();
   };
 
   /* hidden/isolated status bar */
@@ -19404,7 +19510,8 @@ function buildScene(gltf, selId){
     else if(hidden.size) hbar.innerHTML = `<span>${hidden.size} structure${hidden.size>1?"s":""} hidden</span><button id="b3dall">Show all</button>`;
     else hbar.innerHTML = "";
     const b = hbar.querySelector("#b3dall");
-    if(b) b.addEventListener("click",()=>{ hidden.clear(); isolated=null; applyVis(); syncHiddenBar(); });
+    if(b) b.addEventListener("click",()=>{ pushHist(); hidden.clear(); isolated=null; applyVis(); syncHiddenBar(); });
+    queueUrl();
   };
 
   /* collapse/expand the controls panel while it floats (fullscreen / small screens) */
@@ -19467,6 +19574,20 @@ function buildScene(gltf, selId){
     if(lnSVG) lnSVG.style.display = labelsOn?"block":"none";
     if(labelsOn) updLabels(); });
 
+  /* quiz + screenshot stage buttons */
+  const qb = $("#b3dquiz");
+  if(qb) qb.addEventListener("click",()=>{ quiz.on ? quizStop() : quizStart(); });
+  const shotBtn = $("#b3dshot");
+  if(shotBtn) shotBtn.addEventListener("click",()=>{
+    try{
+      if(aoOn && composer) composer.render(); else renderer.render(scene,camera);
+      cv.toBlob(b=>{ if(!b) return;
+        const a=document.createElement("a"); a.href=URL.createObjectURL(b);
+        a.download="anatomy-3d.png"; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+        shotBtn.textContent="📷 ✓"; setTimeout(()=>shotBtn.textContent="📷",1200); });
+    }catch(e){}
+  });
+
   /* color mode: by system / by region */
   const REG_COLOR = { head:0xe3a94e, neck:0xd98e8e, thorax:0xc25b52, abdomen:0xc7864e, pelvis:0x9b68ae,
     back:0x6fa3a0, "upper-limb":0x5f95c8, "lower-limb":0x4f9a6b, "whole-body":0x8d99a6 };
@@ -19491,12 +19612,18 @@ function buildScene(gltf, selId){
   if(peelIn) peelIn.addEventListener("input",()=>{ peelN = Math.round(peelIn.value/100*PEEL.length);
     applyVis(); if(selected && !anyVis(selected)) select(null);
     peelV.textContent = peelN ? PEEL.slice(0,peelN).map(s=>SYSTEMS[s].icon).join("") : ""; });
+  if(peelN && peelIn){ peelIn.value = peelN/PEEL.length*100;
+    peelV.textContent = PEEL.slice(0,peelN).map(s=>SYSTEMS[s].icon).join(""); }
 
   /* slice plane controls */
   const slIn = $("#b3dsl"), axBs = view.querySelectorAll("#b3dax button");
   if(slIn) slIn.addEventListener("input",()=>{ clipPos = slIn.value/100; clipOn = clipPos>0.001; applyClip(); });
   axBs.forEach(b=>b.addEventListener("click",()=>{ clipAxis=b.dataset.a;
     axBs.forEach(x=>x.classList.toggle("on",x===b)); if(clipOn) applyClip(); }));
+  if(clipSt){ clipAxis = clipSt.a; clipPos = clipSt.p; clipOn = clipPos>0.001;
+    if(slIn) slIn.value = clipPos*100;
+    axBs.forEach(x=>x.classList.toggle("on",x.dataset.a===clipAxis));
+    applyClip(); }
 
   let downAt = null, lastTapT = 0, lastTapX = 0, lastTapY = 0;
   cv.addEventListener("pointerdown", e=>{ downAt = [e.clientX, e.clientY, performance.now()]; fly=null; controls.autoRotate = false; });
@@ -19506,6 +19633,7 @@ function buildScene(gltf, selId){
     downAt=null;
     if(dx*dx+dy*dy<49 && dt<600){
       const m = pick(e);
+      if(quiz.on){ quizAnswer(m); return; }
       /* double-tap / double-click zooms into the tapped part */
       const nowT = performance.now();
       if(m && nowT-lastTapT<380 && (e.clientX-lastTapX)**2+(e.clientY-lastTapY)**2<625){
@@ -19516,6 +19644,7 @@ function buildScene(gltf, selId){
   });
   cv.addEventListener("pointermove", e=>{
     if(e.pointerType==="touch") return;
+    if(quiz.on){ tip.style.display="none"; if(hover){ glow(hover,0); hover=null; } return; }
     const m = pick(e);
     if(m!==hover){ if(hover&&hover.userData.partId!==selected) glow(hover,0); hover=m; if(hover&&hover.userData.partId!==selected) glow(hover,0x1c3d5a); }
     if(hover && !tip.dataset.lock){ const r=stage.getBoundingClientRect();
@@ -19547,6 +19676,7 @@ function buildScene(gltf, selId){
   const f = $("#b3df");
   const syss = Object.keys(bySysM).sort((a,b)=>SYSTEMS[a].name.localeCompare(SYSTEMS[b].name));
   f.innerHTML = syss.map(s=>`<button class="fchip${s==="integumentary"?"":" on"}" data-s="${s}" style="--fc:#${(SYS_COLOR[s]||0x8d99a6).toString(16).padStart(6,"0")}">${SYSTEMS[s].icon} ${SYSTEMS[s].name}</button>`).join("");
+  f.querySelectorAll(".fchip[data-s]").forEach(ch=>ch.classList.toggle("on",!!chipOn[ch.dataset.s]));
   f.querySelectorAll(".fchip").forEach(ch=>ch.addEventListener("click",()=>{
     const s = ch.dataset.s; const on = ch.classList.toggle("on");
     chipOn[s] = on; applyVis();
@@ -19568,6 +19698,7 @@ function buildScene(gltf, selId){
     ["🧠 Brain", ["nervous"], "midbrain", 1.4], ["👁 Eye", ["sensory","muscular"], "eye"],
     ["✋ Hand", ["skeletal","muscular","nervous"], "metacarpals"], ["💀 Skull", ["skeletal"], "mandible"] ];
   const setLayers = sel => {
+    pushHist();
     for(const s in chipOn) chipOn[s] = sel===null ? s!=="integumentary" : sel.includes(s);
     hidden.clear(); isolated = null; peelN = 0;
     if(peelIn){ peelIn.value = 0; peelV.textContent = ""; }
@@ -19600,8 +19731,8 @@ function buildScene(gltf, selId){
           composer.addPass(ssaoPass);
           const gam = new THREE.ShaderPass(THREE.GammaCorrectionShader);
           gam.renderToScreen = true; composer.addPass(gam);
-          aoOn = true; aob.classList.add("on"); }); }
-      else { aoOn = !aoOn; aob.classList.toggle("on", aoOn); } }); }
+          aoOn = true; aob.classList.add("on"); poke(); }); }
+      else { aoOn = !aoOn; aob.classList.toggle("on", aoOn); poke(); } }); }
 
   $("#b3dreset").addEventListener("click",()=>{ fly=null; camera.position.copy(home); controls.target.copy(home2); controls.update(); });
   const fsbtn = $("#b3dfs");
@@ -19646,7 +19777,7 @@ function buildScene(gltf, selId){
   if(selId && meshes[selId]) focusOn(selId);
 
   let raf;
-  const tick = ()=>{ if(!document.body.contains(cv)){ cancelAnimationFrame(raf); return; }
+  const tick = ()=>{ if(!document.body.contains(cv)){ cancelAnimationFrame(raf); quizStop(); return; }
     if(fly){ fly.k=Math.min(1,fly.k+0.028); const k=fly.k, e=k<.5?4*k*k*k:1-((-2*k+2)**3)/2;
       camera.position.lerpVectors(fly.p0,fly.p1,e); controls.target.lerpVectors(fly.t0,fly.t1,e);
       if(k>=1) fly=null; }
@@ -19655,19 +19786,32 @@ function buildScene(gltf, selId){
         L.m.scale.setScalar(s); L.m.position.copy(L.p0).addScaledVector(L.c, 1-s); } }
     if(selected && meshes[selected]) each(selected, m=>{ if(m.material.emissive)
       m.material.emissiveIntensity = 0.55 + 0.3*Math.sin(performance.now()*0.006); });
-    if(labelsOn) updLabels();
-    controls.update();
-    try{ if(aoOn && composer) composer.render(); else renderer.render(scene,camera); }
-    catch(err){ composer = null; aoOn = false; if(aob) aob.classList.remove("on");
-      renderer.render(scene,camera); }
+    const moved = controls.update();
+    const lifeVis = life.some(L=>effVis(L.m));
+    const animated = !!fly || controls.autoRotate || selected!==null || lifeVis || quiz.on;
+    if(labelsOn && (animated||moved||dirty)) updLabels();
+    if(animated || moved || dirty){
+      dirty = false;
+      try{ if(aoOn && composer) composer.render(); else renderer.render(scene,camera); }
+      catch(err){ composer = null; aoOn = false; if(aob) aob.classList.remove("on");
+        renderer.render(scene,camera); } }
     raf=requestAnimationFrame(tick); };
   tick();
-  const onRs = ()=>{ if(!document.body.contains(cv)) return removeEventListener("resize",onRs); camera.aspect=W()/H(); camera.updateProjectionMatrix(); renderer.setSize(W(),H()); if(composer) composer.setSize(W(),H()); applyInfoFloat(); };
+  const onRs = ()=>{ if(!document.body.contains(cv)) return removeEventListener("resize",onRs); camera.aspect=W()/H(); camera.updateProjectionMatrix(); renderer.setSize(W(),H()); if(composer) composer.setSize(W(),H()); applyInfoFloat(); poke(); };
   addEventListener("resize",onRs);
 }
 
 function v3D(sel){
   crumbs([{t:"Home",href:"#/"},{t:"3D explorer"}]);
+  /* deep-link: #/3d/<sel>?iso=&hid=&sys=&peel=&clip= */
+  const qm = (sel||"").indexOf("?"), q = new URLSearchParams(qm<0?"":sel.slice(qm+1));
+  const selId = qm<0 ? (sel||null) : (sel.slice(0,qm)||null);
+  const st = { sel: selId || q.get("sel") || null,
+    hid: (q.get("hid")||"").split(",").filter(Boolean).slice(0,60),
+    iso: q.get("iso") || null,
+    sys: q.get("sys") ? q.get("sys").split(",").filter(Boolean) : null,
+    peel: Math.max(0, Math.min(13, +q.get("peel")||0)),
+    clip: q.get("clip") || null };
   const ids = Object.keys(MODELS).filter(id=>byId[id]);
   view.innerHTML = `<div class="list-head"><h1>🧊 Interactive 3D body</h1><p>A real anatomical model of the whole body — drag to rotate, scroll to zoom, and <b>tap any structure</b> to highlight it and read its details. Toggle systems on the right.</p></div>
   <div class="b3d">
@@ -19678,8 +19822,11 @@ function v3D(sel){
       <div class="b3d-lbls" id="b3dlbls" style="display:none"></div>
       <div class="b3d-stagebtns">
         <button id="b3dlbl" title="Show structure labels">🏷</button>
+        <button id="b3dquiz" title="Quiz: tap the named structure">🎯</button>
+        <button id="b3dshot" title="Save a screenshot (PNG)">📷</button>
         <button id="b3dao" title="Depth shading (ambient occlusion)">🕳 AO</button>
         <button id="b3dxr" title="X-ray: fade the outer layers">👻</button>
+        <button id="b3dundo" title="Undo hide/isolate (Ctrl+Z)" disabled>⎌ undo</button>
         <button id="b3dpanel" title="Show/hide the controls panel">☰ panel</button>
         <button id="b3dfs" title="Fullscreen">⤢</button>
         <button id="b3dreset" title="Reset view">⟲ reset</button>
@@ -19702,7 +19849,7 @@ function v3D(sel){
   <div class="grid">${ids.map(id=>cardHTML(byId[id])).join("")}</div>`;
   loadThree().then(loadBodyGlb).then(gltf=>{
     const el = $("#b3dload"); if(el) el.remove();
-    buildScene(gltf, sel);
+    buildScene(gltf, st);
   }).catch(e=>{ const el=$("#b3dload"); if(el) el.innerHTML = "Couldn't load the 3D body — check your connection and reload."; console.error(e); });
 }
 
@@ -19942,7 +20089,7 @@ route();
     try{
       const r = await fetch("model.bin");          // service worker caches it en route
       if(!r.ok) throw new Error("http " + r.status);
-      const total = +r.headers.get("content-length") || 22221082;
+      const total = +r.headers.get("content-length") || 20565892;
       const rd = r.body.getReader(); let got = 0;
       for(;;){ const {done, value} = await rd.read(); if(done) break; got += value.length;
         paintOff(Math.min(99, Math.round(got / total * 100))); }
