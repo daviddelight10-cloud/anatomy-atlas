@@ -129,6 +129,84 @@ img{max-width:100%}
 .sys-card .bar i{display:block;height:100%;background:var(--c,#4cc9f0)}
 .sys-card::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--c,#4cc9f0) 9%,transparent),transparent 55%);pointer-events:none}
 
+/* ---------- home (overview) ---------- */
+.home-hero{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;border-radius:20px;padding:34px 36px;margin-bottom:22px;box-shadow:var(--shadow);border:1px solid var(--border);background:radial-gradient(120% 120% at 100% 0%,var(--accent-soft),transparent 60%),var(--panel)}
+.home-hero h1{font-size:34px;line-height:1.12;letter-spacing:-.02em;margin-bottom:8px}
+.home-hero p{color:var(--text2);max-width:520px}
+.home-hero .hero-actions{margin-top:16px}
+.home-hero .btn{background:var(--panel2);border-color:var(--border);color:var(--text)}
+.home-hero .btn:hover{border-color:var(--accent);color:var(--accent);background:var(--panel2)}
+.home-hero .btn.primary{background:var(--accent);border-color:var(--accent);color:#141414}
+.home-hero .btn.primary:hover{color:#141414;filter:brightness(1.1)}
+.hh-meta{margin-top:14px;font-size:12.5px;color:var(--text3)}
+.hh-search{position:relative;margin-top:18px;max-width:540px}
+.hh-search input{width:100%;padding:14px 16px 14px 44px;border-radius:13px;border:1px solid var(--border2);background:var(--bg2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") 14px center/20px no-repeat;color:var(--text);font-size:15.5px;outline:none}
+.hh-search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.hh-search .search-drop{left:0;right:0;top:calc(100% + 6px)}
+.hh-3d{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:var(--text);background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:16px 26px 12px;transition:border-color .15s,transform .15s}
+.hh-3d:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.hh-3d .scan{position:relative;overflow:hidden;border-radius:10px;animation:hhfloat 6s ease-in-out infinite}
+.hh-3d .scan svg{display:block;height:230px;width:auto}
+.hh-3d .figfill{fill:color-mix(in srgb,var(--accent) 18%,var(--panel2));stroke:var(--accent);stroke-width:1.5}
+.hh-3d .hotspot{pointer-events:none}
+.scanline{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);box-shadow:0 0 14px var(--accent);animation:hhscan 3.2s ease-in-out infinite;z-index:2}
+.hh-3d-cap{font-size:12.5px;font-weight:600;color:var(--accent)}
+@keyframes hhscan{0%{top:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:calc(100% - 3px);opacity:0}}
+@keyframes hhfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media(prefers-reduced-motion:reduce){.scanline,.hh-3d .scan{animation:none}.scanline{display:none}}
+.cont-strip{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card);border:1px solid var(--accent);border-radius:14px;padding:12px 16px;margin-bottom:6px}
+.cont-strip .btn.primary{color:#141414}
+.cont-strip .xp{margin-left:auto;display:flex;gap:8px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.step{position:relative;display:flex;flex-direction:column;gap:3px;background:var(--card);border:1px solid var(--border);border-radius:15px;padding:18px;color:var(--text);transition:border-color .12s,transform .12s}
+.step:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.step .n{position:absolute;top:14px;right:16px;width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.step .ic{font-size:28px;margin-bottom:4px}
+.step b{font-size:16px}
+.step small{font-size:13px;color:var(--text2)}
+.today-row{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-top:14px}
+.sod{display:flex;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:15px;padding:16px;color:var(--text);transition:border-color .12s}
+.sod:hover{border-color:var(--accent);text-decoration:none}
+.sod-img{flex:none;width:120px;height:120px;border-radius:12px;overflow:hidden;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.sod-img .sod-thumb{width:100%;height:100%;object-fit:cover}
+.sod-img .ph{font-size:40px}
+.sod-body{min-width:0}
+.sod .kick{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.sod h3{font-size:19px;margin:3px 0 4px}
+.sod p{font-size:13.5px;color:var(--text2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:8px}
+.quick{display:flex;flex-direction:column;gap:14px}
+.tile{flex:1;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:15px;padding:14px 16px;color:var(--text);transition:border-color .12s}
+.tile:hover{border-color:var(--accent);text-decoration:none}
+.tile .ic{font-size:26px}
+.tile b{display:block;font-size:15px}
+.tile small{color:var(--text2);font-size:12.5px}
+.tile i{margin-left:auto;font-style:normal;color:var(--text3);font-size:20px}
+.sys-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.sys-tile{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:13px;padding:11px 13px;color:var(--text);transition:border-color .12s,background .12s}
+.sys-tile:hover{border-color:var(--c);background:var(--card-h);text-decoration:none}
+.sys-tile .ico{width:36px;height:36px;flex:none;display:flex;align-items:center;justify-content:center;font-size:19px;border-radius:10px;background:color-mix(in srgb,var(--c) 16%,transparent)}
+.sys-tile .nm{font-weight:600;font-size:13.5px;line-height:1.2}
+.sys-tile .ct{margin-left:auto;font-size:11.5px;color:var(--text3)}
+.region-split{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+.region-split .region-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.hscroll{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px}
+.mini-card{flex:none;scroll-snap-align:start;display:flex;align-items:center;gap:10px;width:230px;background:var(--card);border:1px solid var(--border);border-radius:13px;padding:10px 12px;color:var(--text);transition:border-color .12s}
+.mini-card:hover{border-color:var(--accent);text-decoration:none}
+.mini-card .thumb{width:44px;height:44px;flex:none;border-radius:9px;background:var(--panel2);border:1px solid var(--border);object-fit:cover;display:flex;align-items:center;justify-content:center}
+.mc-t b{display:block;font-size:14px}
+.mc-t small{font-size:11.5px}
+.home-hero a:focus-visible,.step:focus-visible,.tile:focus-visible,.sys-tile:focus-visible,.mini-card:focus-visible,.sod:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media(max-width:960px){
+  .home-hero{grid-template-columns:1fr;padding:24px 20px}
+  .home-hero h1{font-size:27px}
+  .hh-3d{display:none}
+  .steps,.today-row,.region-split{grid-template-columns:1fr}
+  .quick{flex-direction:row}
+  .quick .tile{flex:1}
+  .region-split .map-stage{justify-self:center}
+}
+@media(max-width:520px){.sod{flex-direction:column}.sod-img{width:100%;height:150px}.quick{flex-direction:column}}
+
 /* ---------- list view ---------- */
 .list-head{margin-bottom:20px}
 .list-head h1{font-size:27px;letter-spacing:-.02em;display:flex;align-items:center;gap:12px}
@@ -260,6 +338,18 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3d-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}
 .b3d-lines line{stroke:rgba(255,214,10,.55);stroke-width:1}
 .b3d-lines circle{fill:#ffd60a}
+/* bone landmarks — cyan pins for tubercles, grooves, epicondyles and other named
+   surface features that aren't separate model meshes */
+.b3d-lms{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}
+.b3dlm{position:absolute;transform:translate(-50%,-160%);font:600 10px var(--font);color:#d9f6ff;background:rgba(8,24,34,.9);border:1px solid rgba(64,224,255,.5);border-radius:5px;padding:1px 6px;white-space:nowrap;pointer-events:auto;cursor:pointer}
+.b3dlm:hover{border-color:#40e0ff;color:#7ef9ff}
+.b3dlm.hot{animation:lmhot 1.1s ease infinite}
+@keyframes lmhot{50%{border-color:#9ffbff;color:#fff;box-shadow:0 0 14px rgba(64,224,255,.75)}}
+.b3dlmd{position:absolute;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#40e0ff;box-shadow:0 0 5px rgba(64,224,255,.9);pointer-events:none}
+.lm-row{display:flex;flex-wrap:wrap;gap:8px}
+.lm-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(64,224,255,.08);border:1px solid rgba(64,224,255,.35);color:var(--text1);border-radius:8px;padding:5px 9px;font:600 12px var(--font);text-decoration:none}
+.lm-chip:hover{border-color:#40e0ff;background:rgba(64,224,255,.16)}
+.lm-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:#40e0ff;box-shadow:0 0 5px rgba(64,224,255,.8)}
 /* anchored pins — dot glued to the part, label offset with a leader line */
 .b3d-pl{position:absolute;inset:0;z-index:5;pointer-events:none;overflow:hidden}
 .b3dpin{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;display:flex;align-items:center;gap:4px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
@@ -17603,6 +17693,104 @@ window.ATLAS_GLB_SYS = {"z:iliolumbar-ligament":"skeletal","parietal-bone":"skel
 window.ATLAS_GLB_PARENT = {"z:iliolumbar-ligament":"ligament","z:acromial-head-of-deltoid-muscle-scapular-insertion":"deltoid","z:ascending-part-of-trapezius-muscle-acromial-insertion":"trapezius","z:ascending-part-of-trapezius-muscle-spinal-insertion":"trapezius","z:infraspinatus-muscle-scapular-insertion":"infraspinatus","z:rhomboid-major-muscle-scapular-insertion":"rhomboid-major","z:rhomboid-minor-muscle-scapular-insertion":"rhomboid-minor","z:scapular-head-of-deltoid-muscle-scapular-insertion":"deltoid","z:serratus-anterior-muscle-scapular-insertion":"serratus-anterior","z:subscapularis-muscle-scapular-insertion":"subscapularis","z:supraspinatus-muscle-scapular-insertion":"supraspinatus","z:teres-major-muscle-scapular-insertion":"teres-major","z:teres-minor-muscle-scapular-insertion":"teres-minor","z:articular-surface-of-scapula":"scapula","z:ascending-part-of-trapezius-muscle-clavicular-insertion":"trapezius","z:clavicular-part-of-deltoid-muscle-clavicular-insertion":"deltoid","z:pectoralis-major-muscle-clavicular-insertion":"pectoralis-major","z:sternocleidomastoid-muscle-clavicular-insertion":"sternocleidomastoid","z:subclavius-muscle-clavicular-insertion":"subclavius","z:anconeus-muscle-humeral-insertion":"anconeus","z:brachialis-anterior-muscle-humeral-insertion":"brachialis","z:bracioradialis-muscle-humeral-insertion":"brachioradialis","z:common-extensor-tendon":"tendon","z:common-flexor-tendon":"tendon","z:deltoid-muscle-humeral-insertion":"deltoid","z:extensor-carpi-radialis-longus-muscle-humeral-insertion":"extensor-carpi-radialis-longus","z:articular-cartilages-of-humerus":"humerus","z:infraspinatus-muscle-humeral-insertion":"infraspinatus","z:lateral-head-of-triceps-brachii-humeral-insertion":"triceps-brachii","z:medial-head-of-triceps-brachii-humeral-insertion":"triceps-brachii","z:pectoralis-major-muscle-humeral-insertion":"pectoralis-major","z:pronator-teres-muscle-humeral-insertion":"pronator-teres","z:subscapularis-muscle-humeral-insertion":"subscapularis","z:supraspinatus-muscle-humeral-insertion":"supraspinatus","z:teres-major-muscle-humeral-insertion":"teres-major","z:teres-minor-muscle-humeral-insertion":"teres-minor","z:biceps-brachii-muscle-radial-insertion":"biceps-brachii","z:anconeus-muscle-ulnar-insertion":"anconeus","z:brachialis-muscle-ulnar-insertion":"brachialis","z:triceps-brachii-ulnar-insertion":"triceps-brachii","z:opponens-digiti-minimi-on-tubercle-of-hamate-bone":"hamate","z:erector-spinae-muscles-iliac-insertions":"erector-spinae","z:external-abdominal-oblique-muscle-iliac-insertion":"external-oblique","z:gluteus-maximus-muscle-iliac-insertion":"gluteus-maximus","z:gluteus-medius-muscle-iliac-insertion":"gluteus-medius","z:gluteus-minimus-muscle-iliac-insertion":"gluteus-minimus","z:gracilis-muscle-pubic-insertion":"gracilis","z:internal-abdominal-oblique-muscle-iliac-insertion":"internal-oblique","z:long-head-of-biceps-femoris-muscle-ischiatic-insertion":"biceps-femoris","z:rectus-femoris-muscle-iliac-insertion":"rectus-femoris","z:sartorius-muscle-on-upper-anterior-iliac-spine":"sartorius","z:semimembranosus-muscle-ischiatic-insertion":"semimembranosus","z:semitendinosus-muscle-isciatic-insertion":"semitendinosus","z:tensor-fasciae-latae-on-upper-anterior-iliac-spine":"tensor-fasciae-latae","z:adductor-longus-on-medial-surface-of-femur":"adductor-longus","z:adductor-magnus-on-medial-lip-of-linea-aspera":"adductor-magnus","z:gluteus-maximus-ending-on-gluteal-surface":"gluteus-maximus","z:gluteus-medius-on-greater-trochanter":"gluteus-medius","z:iliopsoas-ending-on-the-lesser-trochanter":"iliopsoas","z:lateral-head-of-gastrocnemius-on-lat-supracondylar-tubercle":"gastrocnemius","z:medial-head-of-gastrocnemius-on-med-supracondylar-tubercle":"gastrocnemius","z:origin-of-vastus-intermedius":"vastus-intermedius","z:origin-of-vastus-lateralis":"vastus-lateralis","z:origin-of-vastus-medialis":"vastus-medialis","z:pectineus-muscle-on-medial-surface-od-femur":"femur","z:short-head-of-biceps-femoris-on-lateral-lip-of-linea-aspera":"biceps-femoris","z:lateral-head-of-gastrocnemius-on-lat-supracondylar-tubercl":"gastrocnemius","z:patellar-tendon-on-apex-of-patella":"patella","z:quadriceps-femoris-on-base-of-patella":"quadriceps","z:extensor-digitorum-longus-on-lat-surf-of-lat-condyle":"extensor-digitorum-longus","z:flexor-digitorum-longus-on-medial-third-of-post-tibial-surf":"flexor-digitorum-longus","z:gracilis-on-patte-doie":"gracilis","z:popliteus-above-oblique-line-of-tibia":"tibia","z:sartorius-on-patte-doie":"sartorius","z:semimembranosus-on-posterior-surf-of-med-condyle":"semimembranosus","z:semitendinosus-on-patte-doie":"semitendinosus","z:tibialis-anterior-on-lateral-surface-of-tibia":"tibialis-anterior","z:tibialis-posterior-on-post-surface-of-interosseus-membrane":"tibialis-posterior","z:flexor-digitorum-longus-on-medial-third-of-post-tibial-sur":"flexor-digitorum-longus","z:extensor-digitorum-longus-on-fibula-and-interosseus-membrane":"extensor-digitorum-longus","z:extensor-hallucis-longus-on-fibula-and-interosseus-membrane":"extensor-hallucis-longus","z:fibularis-brevis-on-lateral-side-of-fibula":"fibularis-brevis","z:fibularis-longus-on-lateral-side-of-fibula":"fibularis-longus","z:flexor-hallucis-longus-on-post-fibular-surf":"flexor-hallucis-longus","z:long-head-of-biceps-femoris-on-fibular-head":"biceps-femoris","z:extensor-digitorum-longus-on-fibula-and-interosseus-membran":"extensor-digitorum-longus","z:intermediate-cuneiform-bone":"bone-tissue","z:lateral-cuneiform-bone":"cuneiform-bones","z:lateral-head-of-flexor-hallucis-brevis-on-medial-cuneiform":"cuneiform-bones","z:medial-cuneiform-bone":"cuneiform-bones","z:extensor-hallucis-brevis-on-dorsal-surface-of-calcaneus":"calcaneus","z:quadratus-plantae-muscle-on-plantar-surface-of-calcaneus":"calcaneus","z:triceps-surae-on-calcaneal-tuberosity":"triceps-brachii","z:oblique-head-of-adductor-hallucis-on-cuboid-bone":"cuboid-bone","z:fibrous-loop-for-intermediate-digastric-tendon":"tendon","z:coraco-acromial-ligament":"ligament","z:superior-transverse-scapular-ligament":"ligament","z:inferior-transverse-scapular-ligament":"ligament","z:acromioclavicular-ligament":"ligament","z:articular-disc-of-acromioclavicular-joint":"acromioclavicular-joint","z:trapezoid-ligament":"ligament","z:conoid-ligament":"ligament","z:anterior-sternoclavicular-ligament":"ligament","z:costoclavicular-ligament":"ligament","z:interclavicular-ligament":"ligament","z:posterior-sternoclavicular-ligament":"ligament","z:articular-capsule-of-glenohumeral-joint":"shoulder-joint","z:coracohumeral-ligament":"ligament","z:transverse-humeral-ligament":"ligament","z:superior-glenohumeral-ligament":"ligament","z:middle-glenohumeral-ligament":"ligament","z:inferior-glenohumeral-ligament":"ligament","z:radial-collateral-ligament":"ligament","z:ulnar-collateral-ligament":"ligament","z:annular-ligament-of-radius":"radius","z:quadrate-ligament":"ligament","z:palmar-radio-ulnar-ligament":"ligament","z:dorsal-radio-ulnar-ligament":"ligament","z:dorsal-radiocarpal-ligament":"ligament","z:ulnar-collateral-ligament-of-wrist-joint":"wrist-joint","z:radial-collateral-ligament-of-wrist-joint":"wrist-joint","z:dorsal-ulnocarpal-ligament":"ligament","z:radiocapitate-ligament":"ligament","z:radioscaphocapitate-ligament":"ligament","z:ulnocapitate-ligament":"ligament","z:ulnopisiform-ligament":"ligament","z:ulnotriquetral-ligament":"ligament","z:ulnolunate-ligament":"ligament","z:radiate-carpal-ligament":"ligament","z:dorsal-scaphotriquetral-ligament":"ligament","z:scaphotrapeziotrapezoidal-ligament":"ligament","z:scaphocapitate-ligament":"ligament","z:palmar-scaphotriquetral-ligament":"ligament","z:triquetrocapitate-ligament":"ligament","z:triquetrohamate-ligament":"ligament","z:pisotriquetral-ligament":"ligament","z:palmar-capitohamate-ligament":"ligament","z:palmar-trapezoideocapitate-ligament":"ligament","z:palmar-lunotriquetral-ligament":"ligament","z:scapholunate-interosseus-ligament":"ligament","z:trapeziotrapezoidal-interosseus-ligament":"ligament","z:capitohamate-interosseus-ligament":"ligament","z:trapezoideocapitate-interosseus-ligament":"ligament","z:lunotriquetral-interosseus-ligament":"ligament","z:pisohamate-ligament":"ligament","z:sacrospinous-ligament":"ligament","z:inferior-pubic-ligament":"ligament","z:superior-pubic-ligament":"ligament","z:sacrotuberous-ligament":"ligament","z:latissimus-dorsi-on-apex-of-the-scapula":"scapula","z:zygomaticus-minor-muscle":"zygomaticus","z:palpebral-part-of-orbicularis-oculi":"orbicularis-oculi","z:anterior-belly-of-digastric-muscle":"digastric","z:posterior-belly-of-digastric-muscle":"digastric","z:innermost-intercostal-muscles":"intercostals","z:lumbricals-muscles-of-hand":"lumbricals","z:fascia-lata":"fascia","z:extensor-digitorum-brevis":"extensor-digitorum","z:long-plantar-ligament":"ligament","z:anterior-tibial-veins":"anterior-tibial","z:calcaneal-branches-of-fibular-artery":"fibular-artery","z:calcaneal-branches-of-posterior-tibial-artery":"posterior-tibial-artery","z:circumflex-artery-of-heart":"coronary-arteries","z:circumflex-fibular-branch-of-posterior-tibial-artery":"posterior-tibial-artery","z:deep-artery-of-penis":"penis","z:deep-dorsal-vein-of-penis":"penis","z:deep-venous-palmar-arch":"palmar-arch","z:deltoid-branch-of-thoraco-acromial-artery":"deltoid","z:dorsal-artery-of-penis":"penis","z:dorsal-carpal-branch-of-radial-artery":"radial-artery","z:dorsal-carpal-branch-of-ulnar-artery":"ulnar-artery","z:fibular-veins":"fibula","z:inferior-suprarenal-artery":"kidney","z:intrarenal-veins-of-right-kidney":"kidney","z:lateral-circumflex-femoral-artery":"femoral-artery","z:lateral-pontine-branches-of-basilar-artery":"basilar-artery","z:medial-circumflex-femoral-artery":"femoral-artery","z:medial-pontine-branches-of-basilar-artery":"basilar-artery","z:middle-cardiac-vein":"cardiac-muscle","z:posterior-branch-of-renal-artery":"kidney","z:posterior-tibial-veins":"posterior-tibial","z:subscapular-artery":"subscapularis","z:superficial-dorsal-veins-of-penis":"penis","z:superficial-venous-palmar-arch":"palmar-arch","z:anterior-branch-of-renal-artery":"kidney","z:potserior-branch-of-renal-artery":"kidney","z:intrarenal-veins-of-left-kidney":"kidney","z:inferior-lateral-brachial-cutaneous-nerve":"nerve","z:superior-lateral-brachial-cutaneous-nerve":"nerve","z:muscular-branches-of-axillary-nerve":"axillary-nerve","z:lateral-antebrachial-cutaneous-nerve":"nerve","z:muscular-branches-of-radial-nerve":"radial-nerve","z:superior-trunk-of-brachial-plexus":"brachial-plexus","z:middle-trunk-of-brachial-plexus":"brachial-plexus","z:inferior-trunk-of-brachial-plexus":"brachial-plexus","z:lateral-cord-of-brachial-plexus":"brachial-plexus","z:posterior-cord-of-brachial-plexus":"brachial-plexus","z:anterior-cord-of-brachial-plexus":"brachial-plexus","z:aqueduct-of-midbrain-cerebral-aqueduct":"midbrain","z:white-matter-of-telencephalon":"white-matter","z:dorsal-scapular-nerve":"nerve","z:long-thoracic-nerve":"nerve","z:suprascapular-nerve":"nerve","z:subclavian-nerve":"nerve","z:lateral-pectoral-nerve":"nerve","z:posterior-antebrachial-cutaneous-nerve":"nerve","z:deep-branch-of-radial-nerve":"radial-nerve","z:superficial-branch-of-radial-nerve":"radial-nerve","z:dorsal-digital-branches-of-ulnar-nerve":"ulnar-nerve","z:medial-brachial-cutaneous-nerve":"nerve","z:anterior-branch-of-medial-antebrachial-cutaneous-nerve":"nerve","z:posterior-branch-of-medial-antebrachial-cutaneous-nerve":"nerve","z:medial-antebrachial-cutaneous-nerve":"nerve","z:palmar-branch-of-ulnar-nerve":"ulnar-nerve","z:deep-branch-of-ulnar-nerve":"ulnar-nerve","z:muscular-branches-of-ulnar-nerve":"ulnar-nerve","z:dorsal-branch-of-ulnar-nerve":"ulnar-nerve","z:common-palmar-digital-branches-of-ulnar-nerve":"ulnar-nerve","z:superficial-branch-of-ulnar-nerve":"ulnar-nerve","z:proper-palmar-digital-branches-of-ulnar-nerve":"ulnar-nerve","z:common-palmar-digital-branches-of-median-nerve":"median-nerve","z:communicating-branch-of-median-nerve-with-ulnar-nerve":"ulnar-nerve","z:palmar-branch-of-median-nerve":"median-nerve","z:muscular-branches-of-median-nerve":"median-nerve","z:proper-palmar-digital-branches-of-median-nerve":"median-nerve","z:uvula-of-palate":"palate","z:gingiva-of-lower-jaw":"mandible","z:gingiva-of-upper-jaw":"maxilla","z:angle-of-mouth":"oral-cavity","z:sternocleidomastoid-region":"sternocleidomastoid","z:hypogastric-region":"internal-iliac-artery","z:deltoid-region":"deltoid","z:tendinous-arch-of-levator-ani":"levator-ani"};
 window.ATLAS_GLB_SKIP = ["Plane"];
 
+/* Bone landmarks — named surface features (tubercles, grooves, epicondyles,
+   processes) that are part of a larger mesh, not separate model objects.
+   Anchoring: a = an existing z: sub-mesh whose center sits on that landmark
+   (insertion/cartilage patches); o = offset [x,y,z] from the dominant parent
+   mesh's sphere center, measured on the actual geometry. Runtime attaches
+   each landmark to its nearest parent mesh, so dots follow explode/isolate. */
+window.ATLAS_LM = {
+  "humerus": [
+    {id:"head-of-humerus",n:"Head of humerus",o:[0.026,0.154,0.015],d:"The smooth, rounded ball at the top of the humerus that fits into the shallow glenoid cavity of the scapula — the ball of the shoulder's ball-and-socket joint.",c:"Because the socket is shallow, the shoulder is the body's most mobile — and most dislocated — joint."},
+    {id:"anatomical-neck",n:"Anatomical neck",a:"z:articular-capsule-of-glenohumeral-joint",d:"The slight constriction where the head meets the shaft, marking the attachment line of the shoulder joint capsule."},
+    {id:"greater-tubercle",n:"Greater tubercle",a:"z:supraspinatus-muscle-humeral-insertion",d:"The bony prominence on the lateral side of the proximal humerus. Its three facets take the supraspinatus, infraspinatus and teres minor — the posterior rotator cuff.",c:"Rotator cuff tears commonly involve the supraspinatus tendon here."},
+    {id:"lesser-tubercle",n:"Lesser tubercle",a:"z:subscapularis-muscle-humeral-insertion",d:"The smaller prominence pointing forward, where subscapularis — the only rotator cuff muscle on the front of the joint — inserts."},
+    {id:"bicipital-groove",n:"Intertubercular (bicipital) groove",aka:"Bicipital groove",a:"z:transverse-humeral-ligament",d:"The vertical groove between the two tubercles. The long head of the biceps tendon rides through it from inside the joint down the arm, roofed by the transverse humeral ligament.",c:"Inflammation here (biceps tenosynovitis) causes anterior shoulder pain."},
+    {id:"surgical-neck",n:"Surgical neck",o:[0.025,0.104,-0.006],d:"The tapering junction just below the tubercles — the narrowest part of the proximal humerus and its most common fracture site.",c:"Fractures here can injure the axillary nerve: deltoid weakness and numbness over the 'regimental badge' patch of the shoulder."},
+    {id:"deltoid-tuberosity",n:"Deltoid tuberosity",a:"z:deltoid-muscle-humeral-insertion",d:"A rough, V-shaped patch halfway down the lateral shaft where the deltoid muscle grips the bone."},
+    {id:"radial-groove",n:"Radial (spiral) groove",o:[-0.004,0.004,0.005],d:"The shallow groove spiralling down the posterior shaft, carrying the radial nerve with the profunda brachii artery.",c:"Mid-shaft humeral fractures can trap the radial nerve here, causing wrist drop."},
+    {id:"medial-epicondyle",n:"Medial epicondyle",a:"z:common-flexor-tendon",d:"The bony knob on the inner side of the elbow — the common origin of the forearm flexor muscles.",c:"Overuse here is 'golfer's elbow' (medial epicondylitis). The ulnar nerve passes just behind it — hitting your 'funny bone'."},
+    {id:"lateral-epicondyle",n:"Lateral epicondyle",a:"z:common-extensor-tendon",d:"The knob on the outer side of the elbow — the common origin of the forearm extensor muscles.",c:"Overuse here is 'tennis elbow' (lateral epicondylitis)."},
+    {id:"capitulum",n:"Capitulum",o:[-0.039,-0.146,0.001],d:"The rounded lateral condyle of the distal humerus. It articulates with the head of the radius, allowing the forearm both to bend and to rotate."},
+    {id:"trochlea",n:"Trochlea",o:[0.021,-0.156,0.001],d:"The pulley-shaped medial condyle that grips the trochlear notch of the ulna — the true hinge of the elbow."}
+  ],
+  "scapula": [
+    {id:"glenoid-cavity",n:"Glenoid cavity",a:"z:articular-surface-of-scapula",d:"The shallow, pear-shaped socket of the shoulder joint. Its rim is deepened by a ring of cartilage — the labrum — to cradle the humeral head.",c:"A torn labrum (SLAP lesion) causes clicking and instability in throwing athletes."},
+    {id:"acromion",n:"Acromion",a:"z:acromial-head-of-deltoid-muscle-scapular-insertion",d:"The flat 'point of the shoulder' — the roof over the glenohumeral joint and the lever arm for the deltoid.",c:"The supraspinatus tendon passes beneath it; impingement under the acromion is a classic cause of shoulder pain."},
+    {id:"coracoid-process",n:"Coracoid process",o:[-0.018,0.061,0.054],d:"The beak-like hook projecting forward at the front of the shoulder, where the short head of biceps, coracobrachialis and pectoralis minor attach."},
+    {id:"spine-of-scapula",n:"Spine of scapula",a:"z:ascending-part-of-trapezius-muscle-spinal-insertion",d:"The ridge running across the back of the scapula, dividing the supraspinous from the infraspinous fossa and carrying the trapezius above and deltoid below."},
+    {id:"superior-angle",n:"Superior angle",a:"z:levator-scapulae-scapular-insertion",d:"The upper corner of the scapula at the level of the second rib — the attachment of levator scapulae."},
+    {id:"medial-border",n:"Medial border",a:"z:rhomboid-major-muscle-scapular-insertion",d:"The long straight border running parallel to the spine, gripped by the rhomboid muscles that retract the scapula.",c:"Winging of the medial border suggests a long thoracic nerve injury (serratus anterior palsy)."},
+    {id:"inferior-angle",n:"Inferior angle",a:"z:latissimus-dorsi-on-apex-of-the-scapula",d:"The lowest corner of the scapula — an easy surface landmark, level with the seventh rib, and the pivot point for scapular rotation."},
+    {id:"subscapular-fossa",n:"Subscapular fossa",a:"z:subscapularis-muscle-scapular-insertion",d:"The concave front surface of the scapula, filled by the subscapularis muscle — the anterior wall of the rotator cuff."},
+    {id:"infraspinous-fossa",n:"Infraspinous fossa",a:"z:infraspinatus-muscle-scapular-insertion",d:"The hollow below the spine of the scapula, filled by the infraspinatus — one of the cuff muscles that externally rotates the shoulder."},
+    {id:"suprascapular-notch",n:"Suprascapular notch",a:"z:superior-transverse-scapular-ligament",d:"A small gap near the superior border, bridged by the superior transverse scapular ligament. The suprascapular nerve passes beneath it to supply the cuff."}
+  ],
+  "clavicle": [
+    {id:"sternal-end",n:"Sternal end",a:"z:articular-disc-of-sternoclavicular-joint",d:"The bulky rounded medial end of the clavicle, anchoring into the manubrium — the only bony link between the arm and the trunk's midline.",c:"A dislocated sternoclavicular joint can threaten the great vessels behind it."},
+    {id:"acromial-end",n:"Acromial end",a:"z:acromioclavicular-ligament",d:"The flattened lateral end of the clavicle that meets the acromion of the scapula, forming the small acromioclavicular joint.",c:"Falling on the shoulder can sprain or dislocate this joint — the 'separated shoulder'."},
+    {id:"conoid-tubercle",n:"Conoid tubercle",a:"z:conoid-ligament",d:"A small rough bump on the underside of the clavicle where the conoid ligament ties it down to the coracoid process."},
+    {id:"subclavian-groove",n:"Subclavian groove",a:"z:subclavius-muscle-clavicular-insertion",d:"The groove along the underside of the shaft that holds the small subclavius muscle and cushions the underlying subclavian vessels."}
+  ],
+  "radius": [
+    {id:"radial-head",n:"Head of radius",a:"z:annular-ligament-of-radius",d:"The disc-shaped top of the radius that spins within the ring of the annular ligament — the pivot that lets the palm turn up and down.",c:"A sudden pull in a child can slip the head partly out of the ligament — 'nursemaid's elbow'."},
+    {id:"radial-tuberosity",n:"Radial tuberosity",a:"z:biceps-brachii-muscle-radial-insertion",d:"The rough bump just below the radial neck where the biceps tendon inserts — the insertion that powers forearm flexion and supination (turning a screwdriver)."},
+    {id:"radial-styloid",n:"Radial styloid process",o:[-0.014,-0.109,0.025],d:"The pointed flare at the outer wrist, palpable in the floor of the 'anatomical snuffbox'.",c:"Falling on an outstretched hand can fracture it (Hutchinson fracture)."}
+  ],
+  "ulna": [
+    {id:"olecranon",n:"Olecranon",a:"z:triceps-brachii-ulnar-insertion",d:"The point of the elbow — where the triceps tendon inserts, forming the lever that straightens the arm.",c:"A direct blow can fracture it; the ulnar nerve grooves behind it."},
+    {id:"coronoid-process",n:"Coronoid process",o:[0.007,0.077,-0.01],d:"The forward projection of the proximal ulna that locks into the humeral trochlea and anchors the brachialis muscle.",c:"Small anterior elbow fragments indicate a dislocation injury."},
+    {id:"ulnar-styloid",n:"Ulnar styloid process",o:[-0.008,-0.123,0.011],d:"The small spike at the inner wrist, easily palpated on the little-finger side — the posterior anchor of the wrist's triangular disc.",c:"Avulsion here accompanies many distal radius (Colles) fractures."}
+  ],
+  "femur": [
+    {id:"femoral-head",n:"Head of femur",o:[0.014,0.203,0.02],d:"The ball of the hip joint, fitting deep into the acetabulum. Its blood supply travels up the neck, which makes it vulnerable.",c:"A fractured femoral neck can cut that supply, causing the head to die (avascular necrosis) — the reason many hip fractures need replacement."},
+    {id:"greater-trochanter",n:"Greater trochanter",a:"z:gluteus-medius-on-greater-trochanter",d:"The broad lateral knob at the hip — the insertion of the abductor muscles (gluteus medius and minimus) that keep you level when standing on one leg.",c:"A fractured greater trochanter or weak abductors produce a Trendelenburg waddle."},
+    {id:"lesser-trochanter",n:"Lesser trochanter",a:"z:iliopsoas-ending-on-the-lesser-trochanter",d:"The cone of bone on the posterior-medial proximal femur where the iliopsoas tendon inserts — the main hip flexor."},
+    {id:"linea-aspera",n:"Linea aspera",a:"z:adductor-magnus-on-medial-lip-of-linea-aspera",d:"The rough longitudinal ridge on the back of the femoral shaft — the anchor line of the adductor muscles and the intermuscular septa.",c:"It is a muscle-attachment crest, and its lips mark where the perforating arteries cross the bone."},
+    {id:"gluteal-tuberosity",n:"Gluteal tuberosity",a:"z:gluteus-maximus-ending-on-gluteal-surface",d:"The rough track running from the greater trochanter down the posterior shaft, where gluteus maximus grips the femur."},
+    {id:"adductor-tubercle",n:"Adductor tubercle",o:[0.035,-0.197,0.005],d:"The small bump just above the medial epicondyle — the tendon mark of adductor magnus's hamstring part."},
+    {id:"lateral-epicondyle-femur",n:"Lateral epicondyle",a:"z:lateral-head-of-gastrocnemius-on-lat-supracondylar-tubercle",d:"The outer flare above the lateral condyle of the knee — the line of the lateral collateral ligament."},
+    {id:"medial-epicondyle-femur",n:"Medial epicondyle",a:"z:medial-head-of-gastrocnemius-on-med-supracondylar-tubercle",d:"The inner flare above the medial condyle — the origin of the medial collateral ligament of the knee.",c:"Tenderness here after a knee blow suggests a medial collateral ligament sprain."},
+    {id:"patellar-surface",n:"Patellar surface",o:[-0.001,-0.197,0.02],d:"The smooth anterior groove between the femoral condyles where the kneecap glides as the knee bends and straightens."}
+  ],
+  "tibia": [
+    {id:"medial-condyle-tibia",n:"Medial condyle",o:[0.025,0.171,0.017],d:"The larger, inner plateau of the tibia's knee surface — its cartilage and medial meniscus carry most of the body's weight."},
+    {id:"lateral-condyle-tibia",n:"Lateral condyle",o:[-0.03,0.166,0.016],d:"The smaller outer plateau of the tibial knee surface, carrying the lateral meniscus and the attachment of the iliotibial band and popliteus."},
+    {id:"tibial-tuberosity",n:"Tibial tuberosity",a:"z:patellar-tendon-on-anterior-tibial-tuberosity",d:"The bump at the top of the shin where the patellar tendon attaches — the quadriceps' final grip on the tibia across the kneecap.",c:"In adolescents, overuse can inflame its growth plate (Osgood-Schlatter disease)."},
+    {id:"pes-anserinus",n:"Pes anserinus",a:"z:sartorius-on-patte-doie",d:"The 'goose's foot' — the three tendons of sartorius, gracilis and semitendinosus converging on the inner upper tibia.",c:"Inflammation of the bursa beneath it mimics knee-joint pain."},
+    {id:"soleal-line",n:"Soleal line",a:"z:popliteus-above-oblique-line-of-tibia",d:"The oblique ridge across the back of the proximal tibia where the soleus muscle originates."},
+    {id:"medial-malleolus",n:"Medial malleolus",o:[0.03,-0.164,-0.005],d:"The inner ankle bone — the downward grip of the tibia that holds the talus from the medial side of the ankle mortise."}
+  ],
+  "fibula": [
+    {id:"fibular-head",n:"Head of fibula",a:"z:long-head-of-biceps-femoris-on-fibular-head",d:"The knob at the top of the outer calf, just below the knee — the tendon anchor of biceps femoris. The common fibular nerve wraps around its neck.",c:"A blow here can cause foot drop by injuring that nerve."},
+    {id:"lateral-malleolus",n:"Lateral malleolus",o:[0.006,-0.174,0.003],d:"The outer ankle bone. It descends lower than the medial one and grips the talus from the lateral side of the mortise.",c:"Ankle sprains most often injure the ligaments running from its tip."}
+  ],
+  "patella": [
+    {id:"apex-of-patella",n:"Apex of patella",a:"z:patellar-tendon-on-apex-of-patella",d:"The pointed lower end of the kneecap, where the patellar tendon leaves for the tibial tuberosity."},
+    {id:"base-of-patella",n:"Base of patella",a:"z:quadriceps-femoris-on-base-of-patella",d:"The thick upper border of the kneecap, where the quadriceps tendon inserts."}
+  ],
+  "calcaneus": [
+    {id:"calcaneal-tuberosity",n:"Calcaneal tuberosity",a:"z:triceps-surae-on-calcaneal-tuberosity",d:"The heel — the back of the largest tarsal bone, where the Achilles tendon inserts.",c:"The calcaneus is the most commonly fractured tarsal bone; jump-landings drive the talus down into it."}
+  ],
+  "hip-bone": [
+    {id:"iliac-crest",n:"Iliac crest",o:[-0.031,0.075,-0.005],d:"The top rim of the pelvis, felt at the waist between the hip and the flank — the anchor of the abdominal wall muscles.",c:"Its posterior end is the standard bone-marrow biopsy site."},
+    {id:"asis",n:"Anterior superior iliac spine",aka:"ASIS",o:[-0.016,0.08,-0.011],d:"The bony point at the front of the hip where sartorius and the tensor fasciae latae start — a key surgical and examination landmark. The inguinal ligament runs from it to the pubic tubercle."},
+    {id:"aiis",n:"Anterior inferior iliac spine",aka:"AIIS",o:[-0.021,0.025,0.016],d:"The less obvious spine just below and medial to the ASIS — the origin of the rectus femoris, the only quadriceps head that crosses the hip."},
+    {id:"ischial-tuberosity",n:"Ischial tuberosity",o:[0.009,-0.095,-0.036],d:"The 'sitting bone' — the rough posterior-inferior prominence you sit on, and the common origin of the hamstring muscles.",c:"Avulsions occur in sprinting adolescents; bursitis here affects cyclists."},
+    {id:"pubic-tubercle",n:"Pubic tubercle",o:[0.044,-0.065,0.059],d:"The small bump beside the pubic symphysis — the medial anchor of the inguinal ligament, felt above the groin crease."},
+    {id:"acetabulum",n:"Acetabulum",o:[0.019,-0.055,-0.005],d:"The deep hip socket, formed where the ilium, ischium and pubis fuse in childhood. Its labrum-lipped rim cradles the femoral head."},
+    {id:"psis",n:"Posterior superior iliac spine",aka:"PSIS",o:[0.014,0.055,-0.068],d:"The bony prominence behind the hip — the visible 'dimples' of the lower back sit on it, marking the sacroiliac joint."}
+  ],
+  "sternum": [
+    {id:"jugular-notch",n:"Jugular (suprasternal) notch",o:[-0.008,0.091,-0.03],d:"The U-shaped dip at the top of the chest, easily felt between the heads of the two clavicles — the level of the lower cervical trachea."},
+    {id:"sternal-angle",n:"Sternal angle",aka:"Angle of Louis",o:[0,0.031,-0.016],d:"The transverse ridge where the manubrium meets the body of the sternum. Count ribs from here: the second rib attaches at this line.",c:"It marks the level where the trachea divides, and the aortic arch begins and ends."},
+    {id:"xiphoid-process",n:"Xiphoid process",o:[0,-0.067,0.013],d:"The small, cartilaginous tip at the bottom of the breastbone — the landmark for hand position in CPR chest compressions.",c:"The liver lies just beneath it; a fractured xiphoid can injure it."}
+  ],
+  "mandible": [
+    {id:"mental-protuberance",n:"Mental protuberance",o:[0,-0.037,0.038],d:"The chin — the triangular elevation at the front of the lower jaw and the only bony prominence of the human face's midline.",c:"Its two mental tubercles give the human chin its shape."}
+  ]
+};
+
 /* Authored teaching notes — richer lesson detail for the most-studied
    structures. Fields: where (location narrative), look (what to find),
    rel (how named neighbours relate), supply (blood/nerve supply),
@@ -17978,6 +18166,26 @@ const esc = s => (s||"").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'
 
 const byId = {};
 DATA.forEach(d => byId[d.id] = d);
+/* bone landmarks become first-class inventory records: searchable, browsable,
+   quizzable, with their own part pages. `of` = parent mesh id (3D deep links);
+   `ofRec` = parent DATA record id (part-page links) — they differ for the
+   pelvis (mesh "hip-bone", article "pelvic-girdle"). */
+const LM_PID2REC = { "hip-bone": "pelvic-girdle" };
+const LM_BY = {};
+if (window.ATLAS_LM) for (const pid in window.ATLAS_LM) {
+  const recId = LM_PID2REC[pid] || pid;
+  const p = byId[recId]; if (!p) continue;
+  LM_BY[recId] = window.ATLAS_LM[pid].map(L => {
+    let rec = byId[L.id];
+    if (!rec) {
+      rec = { id: L.id, name: L.n, aka: L.aka || "", system: p.system, region: p.region,
+        tags: ["landmark", "bone feature", p.name.toLowerCase()],
+        summary: L.d, structure: "", fn: "", clinical: L.c || "", related: [recId], of: pid, ofRec: recId };
+      DATA.push(rec); byId[L.id] = rec;
+    } else { rec.of = pid; rec.ofRec = recId; if (!rec.clinical && L.c) rec.clinical = L.c; }
+    return rec;
+  });
+}
 const SYSTEMS = META.systems, REGIONS = META.regions;
 const sysCount = {}, regCount = {};
 DATA.forEach(d => { sysCount[d.system]=(sysCount[d.system]||0)+1; regCount[d.region]=(regCount[d.region]||0)+1; });
@@ -18080,45 +18288,166 @@ function bodySVG(view, litRegion){
   return `<svg viewBox="0 0 360 770" width="${view==='mini'?150:290}" xmlns="http://www.w3.org/2000/svg">${fig}${spots}</svg>`;
 }
 
+/* ---------- body map figure: Gray's muscle plates (Wikimedia Commons) + hotspot overlay ---------- */
+const BODY_IMG = {
+  anterior: { src:"https://upload.wikimedia.org/wikipedia/commons/9/92/Muscles_anterior.png", w:964, h:1632 },
+  posterior:{ src:"https://upload.wikimedia.org/wikipedia/commons/c/ca/Muscle_posterior.png", w:1063, h:1297 }
+};
+/* hotspots live in a 0-100 coordinate space stretched over the figure (preserveAspectRatio="none") */
+const HSPOTS = {
+  anterior: [
+    ["head","ellipse",{cx:50,cy:4.6,rx:7.6,ry:4.6}],
+    ["neck","rect",{x:44,y:8.6,width:12,height:3.4,rx:1.6}],
+    ["thorax","ellipse",{cx:50,cy:20,rx:18,ry:9}],
+    ["abdomen","ellipse",{cx:50,cy:35.5,rx:13.5,ry:6.8}],
+    ["pelvis","ellipse",{cx:50,cy:45.5,rx:14.5,ry:4.8}],
+    ["upper-limb","ellipse",{cx:29,cy:14,rx:5.5,ry:4.5}],
+    ["upper-limb","ellipse",{cx:19.5,cy:29,rx:5.5,ry:13,transform:"rotate(13 19.5 29)"}],
+    ["upper-limb","ellipse",{cx:11,cy:46,rx:6,ry:5.5}],
+    ["upper-limb","ellipse",{cx:71,cy:14,rx:5.5,ry:4.5}],
+    ["upper-limb","ellipse",{cx:80,cy:29,rx:5.5,ry:13,transform:"rotate(-13 80 29)"}],
+    ["upper-limb","ellipse",{cx:89,cy:46,rx:6,ry:5.5}],
+    ["lower-limb","ellipse",{cx:40,cy:57.5,rx:9.5,ry:10}],
+    ["lower-limb","ellipse",{cx:60,cy:57.5,rx:9.5,ry:10}],
+    ["lower-limb","ellipse",{cx:41,cy:78.5,rx:6.5,ry:12}],
+    ["lower-limb","ellipse",{cx:59,cy:78.5,rx:6.5,ry:12}],
+    ["lower-limb","ellipse",{cx:40,cy:93.5,rx:7.5,ry:4.2}],
+    ["lower-limb","ellipse",{cx:60,cy:93.5,rx:7.5,ry:4.2}]
+  ],
+  posterior: [
+    ["head","ellipse",{cx:50,cy:5,rx:8,ry:5}],
+    ["neck","rect",{x:44,y:9.5,width:12,height:3.6,rx:1.6}],
+    ["back","ellipse",{cx:50,cy:29,rx:17.5,ry:18}],
+    ["upper-limb","ellipse",{cx:28,cy:14,rx:6,ry:4.5}],
+    ["upper-limb","ellipse",{cx:21,cy:29,rx:5.5,ry:13,transform:"rotate(13 21 29)"}],
+    ["upper-limb","ellipse",{cx:12,cy:46,rx:6,ry:5.5}],
+    ["upper-limb","ellipse",{cx:72,cy:14,rx:6,ry:4.5}],
+    ["upper-limb","ellipse",{cx:79,cy:29,rx:5.5,ry:13,transform:"rotate(-13 79 29)"}],
+    ["upper-limb","ellipse",{cx:88,cy:46,rx:6,ry:5.5}],
+    ["lower-limb","ellipse",{cx:40,cy:57.5,rx:9.5,ry:10}],
+    ["lower-limb","ellipse",{cx:60,cy:57.5,rx:9.5,ry:10}],
+    ["lower-limb","ellipse",{cx:41,cy:78,rx:6.5,ry:12}],
+    ["lower-limb","ellipse",{cx:59,cy:78,rx:6.5,ry:12}],
+    ["lower-limb","ellipse",{cx:41,cy:93,rx:7.5,ry:4.2}],
+    ["lower-limb","ellipse",{cx:59,cy:93,rx:7.5,ry:4.2}]
+  ]
+};
+function bodyFig(vw, litRegion){
+  const side = vw==="posterior" ? "posterior" : "anterior";
+  const im = BODY_IMG[side];
+  const spots = HSPOTS[side].map(([r,tag,a])=>{
+    const attrs = Object.entries(a).map(([k,v])=>`${k}="${v}"`).join(" ");
+    return `<${tag} class="hotspot${litRegion===r?" lit":""}" data-region="${r}" ${attrs}/>`;
+  }).join("");
+  return `<div class="bmap-fig">
+    <img src="${im.src}" width="${im.w}" height="${im.h}" alt="Muscle figure, ${side} view" loading="lazy"
+      onload="if(this.naturalWidth<10)this.closest('.bmap-fig').classList.add('noimg')"
+      onerror="this.closest('.bmap-fig').classList.add('noimg')">
+    ${bodySVG(side,litRegion).replace("<svg ",'<svg class="bmap-fallback" ')}
+    <svg class="bmap-hot" viewBox="0 0 100 100" preserveAspectRatio="none">${spots}</svg>
+  </div>`;
+}
+
 /* ---------- views ---------- */
 const view = $("#view");
 
 function vHome(){
   crumbs([{t:"Overview"}]);
   const total = DATA.length, imgs = Object.keys(IMAGES).length;
-  const cards = META.systemOrder.map(s=>{
-    const c = SYSTEMS[s], n = sysCount[s]||0;
-    if(!n) return "";
-    return `<a class="card sys-card" href="#/system/${s}" style="--c:${c.color}">
-      <div class="ch"><span class="ic">${c.icon}</span><h3>${c.name}</h3></div>
-      <p>${c.blurb}</p>
-      <div class="bar"><i style="width:${Math.min(100,n*2.5)}%"></i></div>
-      <div class="tags"><span class="badge">${n} entries</span></div></a>`;
+  const nSys = Object.keys(sysCount).length, nReg = Object.keys(regCount).length;
+  const sysTiles = META.systemOrder.filter(s=>sysCount[s]).map(s=>{
+    const c = SYSTEMS[s];
+    return `<a class="sys-tile" href="#/system/${s}" style="--c:${c.color}"><span class="ico">${c.icon}</span><span class="nm">${c.name}</span><span class="ct">${sysCount[s]}</span></a>`;
   }).join("");
-  const featured = pick(["brain","heart","femur","lungs","sciatic-nerve","liver"]).map(id=>cardHTML(byId[id])).join("");
+  const featured = pick(["brain","heart","femur","lungs","sciatic-nerve","liver"]).map(id=>{
+    const d = byId[id], c = SYSTEMS[d.system];
+    return `<a class="mini-card" href="#/part/${id}">${imgTag(id,"thumb")}<span class="mc-t"><b>${d.name}</b><small style="color:${c.color}">${c.icon} ${c.name}</small></span></a>`;
+  }).join("");
+  const pool = DATA.filter(d=>d.summary && IMAGES[d.id]);
+  const sod = pool.length ? pool[today() % pool.length] : null;
+  const sodC = sod ? SYSTEMS[sod.system] : null;
+  const sodHTML = sod ? `<a class="sod" href="#/part/${sod.id}">
+      <div class="sod-img">${imgTag(sod.id,"sod-thumb")}</div>
+      <div class="sod-body"><span class="kick">✨ Structure of the day</span><h3>${sod.name}</h3>
+      <p>${esc(sod.summary)}</p>
+      <span class="badge sys" style="--badge-c:${sodC.color}">${sodC.icon} ${sodC.name}</span> <span class="badge">${REGIONS[sod.region].name}</span></div></a>` : "";
+  const hasProg = (PROG.xp|0)>0 || Object.keys(PROG.lessons||{}).length>0 || srDue().length>0;
+  const due = srDue().length;
+  const nx = LEARN_ORDER.filter(s=>sysCount[s]).map(s=>({s,d:nextLesson(s)})).find(x=>x.d && !lessonDone(x.d.id));
+  const cont = hasProg ? `<div class="cont-strip">
+      ${nx?`<a class="btn primary" href="#/3d/${nx.d.id}?lesson=${nx.s}">▶ Continue: ${esc(nx.d.name)}</a>`:`<span class="badge">🎉 All lessons complete!</span>`}
+      ${due?`<a class="btn plain" href="#/learn/review">🧠 Review (${due} due)</a>`:""}
+      <span class="xp"><span class="xpbadge">⭐ <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">🔥 ${PROG.streak} days</span>`:""}</span></div>` : "";
+  const figImg = BODY_IMG.anterior;
   view.innerHTML = `
-  <div class="hero">
-    <svg class="fig" width="120" height="300" viewBox="0 0 360 770" style="opacity:.35">${bodySVG("anterior").replace(/<\/?svg[^>]*>/g,"")}</svg>
-    <h1>The complete human atlas</h1>
-    <p>Every major bone, muscle, organ, nerve and vessel — ${total} structures across ${Object.keys(sysCount).length} systems and ${Object.keys(regCount).length} regions, each illustrated with a real anatomical plate.</p>
-    <div class="hero-actions">
-      <a class="btn primary" href="#/learn">🎓 Learn anatomy</a>
-      <a class="btn" href="#/map">🗺️ Open the body map</a>
-      <a class="btn" href="#/quiz">🎯 Test yourself</a>
-      <a class="btn" href="#/system/skeletal">🦴 Browse skeleton</a>
-      <a class="btn hero-install" href="#" onclick="atlasInstall();return false">⬇️ Install the app</a>
+  <section class="home-hero">
+    <div class="hh-main">
+      <h1>Explore the human body</h1>
+      <p>Search any structure, or open the 3D body and tap to learn.</p>
+      <div class="hh-search" role="search">
+        <input id="hsearch" type="search" placeholder="Search bones, muscles, organs, nerves…" autocomplete="off" spellcheck="false" aria-label="Search anatomy">
+        <div id="hsearch-drop" class="search-drop hidden"></div>
+      </div>
+      <div class="hero-actions">
+        <a class="btn primary" href="#/3d">🧊 Open 3D explorer</a>
+        <a class="btn" href="#/map">🗺️ Body map</a>
+        <a class="btn hero-install" href="#" onclick="atlasInstall();return false">⬇️ Install app</a>
+      </div>
+      <div class="hh-meta">${total} structures · ${nSys} systems · ${nReg} regions · ${imgs} plates · works offline</div>
+    </div>
+    <a class="hh-3d" href="#/3d" aria-label="Open the 3D explorer">
+      <div class="scan"><span class="scanline"></span><img src="${figImg.src}" width="${figImg.w}" height="${figImg.h}" alt="" onerror="this.closest('.hh-3d').style.display='none'"></div>
+      <span class="hh-3d-cap">🧊 Tap to explore in 3D</span>
+    </a>
+  </section>
+  ${cont}
+  <h2 class="sec-title">Start here</h2>
+  <div class="steps">
+    <a class="step" href="#/3d"><span class="n">1</span><span class="ic">🧊</span><b>Look</b><small>Rotate the 3D body and tap any part</small></a>
+    <a class="step" href="#/learn"><span class="n">2</span><span class="ic">🎓</span><b>Learn</b><small>Guided lessons, one system at a time</small></a>
+    <a class="step" href="#/quiz"><span class="n">3</span><span class="ic">🎯</span><b>Test yourself</b><small>Quick quizzes to lock it in</small></a>
+  </div>
+  <div class="today-row">${sodHTML}
+    <div class="quick">
+      <a class="tile" href="#/map"><span class="ic">🗺️</span><span><b>Body map</b><small>Click a body region</small></span><i>›</i></a>
+      <a class="tile" href="#/gallery"><span class="ic">🖼️</span><span><b>Plates</b><small>${imgs} labeled diagrams</small></span><i>›</i></a>
     </div>
   </div>
-  <div class="stats">
-    <div class="stat"><div class="v">${total}</div><div class="k">Structures</div></div>
-    <div class="stat"><div class="v">${Object.keys(sysCount).length}</div><div class="k">Systems</div></div>
-    <div class="stat"><div class="v">${Object.keys(regCount).length}</div><div class="k">Regions</div></div>
-    <div class="stat"><div class="v">${imgs}</div><div class="k">Anatomical plates</div></div>
-  </div>
   <h2 class="sec-title">Browse by body system</h2>
-  <div class="grid">${cards}</div>
-  <h2 class="sec-title">Featured structures</h2>
-  <div class="grid tight">${featured}</div>`;
+  <div class="sys-tiles">${sysTiles}</div>
+  <h2 class="sec-title">Browse by body region</h2>
+  <div class="region-split">
+    <div class="map-stage" style="position:static"><div>
+      <div class="view-toggle" id="hvt" role="group" aria-label="Body view"><button class="on" data-v="anterior">Front</button><button data-v="posterior">Back</button></div>
+      <div id="hmap">${bodyFig("anterior")}</div>
+      <div class="fig-cap">Muscle figure: Gray's Anatomy (1918) · Wikimedia Commons</div></div></div>
+    <div class="region-list">${META.regionOrder.filter(r=>regCount[r]).map(r=>`<a class="region-item" href="#/region/${r}"><span class="nm">${REGIONS[r].name}</span><span class="ct">${regCount[r]} structures</span></a>`).join("")}</div>
+  </div>
+  <h2 class="sec-title">Popular structures</h2>
+  <div class="hscroll">${featured}</div>`;
+  const bind = () => view.querySelectorAll("#hmap .hotspot").forEach(h=>h.addEventListener("click",()=>{ location.hash = "/region/"+h.dataset.region; }));
+  bind();
+  view.querySelectorAll("#hvt button").forEach(b=>b.addEventListener("click",()=>{
+    view.querySelectorAll("#hvt button").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    $("#hmap").innerHTML = bodyFig(b.dataset.v);
+    bind();
+  }));
+  const hs = $("#hsearch"), hd = $("#hsearch-drop");
+  hs.addEventListener("input",()=>{
+    const q = hs.value, res = search(q).slice(0,8);
+    if(!q || !res.length){ hd.classList.add("hidden"); return; }
+    hd.innerHTML = res.map(d=>`<div class="sd-item" data-id="${d.id}"><span class="n">${d.name}</span><span class="s">${SYSTEMS[d.system].name}</span></div>`).join("")
+      + `<span class="sd-all" id="hsdall">All results for “${esc(q)}” →</span>`;
+    hd.classList.remove("hidden");
+    hd.querySelectorAll(".sd-item").forEach(i=>i.addEventListener("click",()=>{ location.hash="/part/"+i.dataset.id; }));
+    $("#hsdall").addEventListener("click",()=>{ location.hash="/search/"+encodeURIComponent(q); });
+  });
+  hs.addEventListener("keydown",e=>{
+    if(e.key==="Enter" && hs.value){ location.hash="/search/"+encodeURIComponent(hs.value); }
+    if(e.key==="Escape"){ hd.classList.add("hidden"); hs.blur(); }
+  });
+  hs.addEventListener("blur",()=>setTimeout(()=>hd.classList.add("hidden"),180));
 }
 
 function pick(ids){ return ids.filter(id=>byId[id]); }
@@ -18156,7 +18485,7 @@ function vRegion(r){
   view.innerHTML = `
   <div class="list-head"><h1>${c.name}</h1><p>${c.blurb}</p>
   <div class="subchips">${META.systemOrder.filter(s=>bySys[s]).map(s=>`<span class="subchip" data-s="${s}">${SYSTEMS[s].icon} ${SYSTEMS[s].name} · ${bySys[s].length}</span>`).join("")}</div></div>
-  <div class="map-wrap"><div class="map-stage">${bodySVG(regionSide(r),r)}</div>
+  <div class="map-wrap"><div class="map-stage">${bodyFig(regionSide(r),r)}</div>
   <div class="grid" id="reggrid">${items.map(cardHTML).join("")}</div></div>`;
   view.querySelectorAll(".hotspot").forEach(h=>h.addEventListener("click",()=>{ location.hash = "/region/"+h.dataset.region; }));
   view.querySelectorAll(".subchip").forEach(ch=>ch.addEventListener("click",()=>{
@@ -18191,17 +18520,19 @@ function vDetail(id){
       <h1>${d.name}</h1>${d.aka?`<div class="aka">Also: ${esc(d.aka)}</div>`:""}
       <div class="badges"><a class="badge sys" style="--badge-c:${c.color}" href="#/system/${d.system}">${c.icon} ${c.name}</a>
       <a class="badge" href="#/region/${d.region}">📍 ${REGIONS[d.region].name}</a>
-      ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}">🧊 View in 3D body</a>`:""}</div>
+      ${d.of?`<a class="badge" href="#/part/${d.ofRec||d.of}">🦴 Landmark of: ${esc(byId[d.ofRec||d.of] ? byId[d.ofRec||d.of].name : d.of)}</a>`:""}
+      ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}">🧊 View in 3D body</a>`:d.of?`<a class="badge" href="#/3d/${d.of}?lm=${id}">🧊 Show on 3D model</a>`:""}</div>
     </div>${plate}
   </div>
   <div class="section"><h2>Overview</h2><p>${esc(d.summary)}</p></div>
   ${d.structure?`<div class="section"><h2>Structure</h2><p>${esc(d.structure)}</p></div>`:""}
   ${d.fn?`<div class="section"><h2>Function</h2><p>${esc(d.fn)}</p></div>`:""}
   ${model3d}
-  <div class="minimap section"><div>${bodySVG(regionSide(d.region),d.region).replace('width="290"','width="170"')}</div>
+  <div class="minimap section"><div>${bodyFig(regionSide(d.region),d.region)}</div>
     <div><h2 style="color:var(--accent)">Location</h2><p style="color:var(--text2)">Located in <b>${REGIONS[d.region].name}</b>${d.aka?` — also known as ${esc(d.aka)}`:""}.</p></div></div>
   ${d.clinical?`<div class="section"><h2>Clinical relevance</h2><p>${esc(d.clinical)}</p></div>`:""}
   ${rel?`<div class="section"><h2>Related structures</h2><div class="rel-row">${rel}</div></div>`:""}
+  ${LM_BY[id]?`<div class="section"><h2>Landmarks</h2><p class="hint" style="margin:0 0 10px">Named surface features of the ${esc(d.name)} — each opens its own entry, and all are pinned in the 3D view when you select this bone.</p><div class="lm-row">${LM_BY[id].map(x=>`<a class="lm-chip" href="#/part/${x.id}">${esc(x.name)}</a>`).join("")}</div></div>`:""}
   <div class="section"><h2>Also in ${REGIONS[d.region].name}</h2><div class="rel-row">${inRegion}</div></div>
   <div class="pn"><a href="#/part/${prev.id}"><div class="dir">← ${c.name}</div><div class="nm">${prev.name}</div></a>
   <a class="next" href="#/part/${next.id}"><div class="dir">${c.name} →</div><div class="nm">${next.name}</div></a></div>`;
@@ -18402,6 +18733,7 @@ function buildScene(gltf, st){
       const pk = Object.keys(pinsV2);
       if(pk.length && pk.length<=24) q.set("pins",pk.join(","));
       if(lesson.on && lesson.sys) q.set("lesson",lesson.sys);
+      if(lmOn) q.set("lmon","1");
       if(peelN) q.set("peel",peelN);
       if(expVal) q.set("exp",expVal);
       if(clipOn) q.set("clip",clipAxis+":"+Math.round(clipPos*100));
@@ -18853,7 +19185,7 @@ function buildScene(gltf, st){
   if(stB) stB.addEventListener("click",()=>{ stOn=!stOn; revSet.clear();
     if(stOn && !labelsOn && lblb) lblb.click(); /* one tap turns labels on, masked */
     lblLayer.querySelectorAll(".b3dlbl").forEach(el=>{ el.classList.remove("mask"); });
-    stSync(); updLabels(); });
+    stSync(); updLabels(); updLms(); });
   /* labels are tappable — a masked one reveals its name, a named one selects
      its structure (and clicks can no longer shoot through to the canvas) */
   lblLayer.addEventListener("click",e=>{ const el=e.target.closest(".b3dlbl");
@@ -18906,6 +19238,148 @@ function buildScene(gltf, st){
     if(lnSVG) lnSVG.style.display = labelsOn?"block":"none";
     if(!labelsOn){ stOn=false; revSet.clear(); }
     stSync(); if(labelsOn) updLabels(); });
+
+  /* ---- bone-landmark layer: cyan pins for named surface features (tubercles,
+     grooves, epicondyles…) that are part of a bigger mesh. Anchors come from
+     ATLAS_LM — either a z: sub-mesh whose centre sits on the feature, or an
+     offset measured on the real geometry. Each landmark is re-anchored to its
+     nearest parent mesh so the dot follows explode/isolate transforms. ---- */
+  const lmLayer = $("#b3dlms");
+  let lmOn = false, lmFlash = null;
+  const LMS = [], LM_HAS = {};
+  if (lmLayer && window.ATLAS_LM) {
+    const _lmc = new THREE.Vector3();
+    const sphC = (m) => { if(!m.geometry.boundingSphere) m.geometry.computeBoundingSphere();
+      return _lmc.copy(m.geometry.boundingSphere.center).applyMatrix4(m.matrixWorld).clone(); };
+    for (const pid in window.ATLAS_LM) {
+      if (!meshes[pid]) continue;
+      const domC = partMain(pid);
+      for (const L of window.ATLAS_LM[pid]) {
+        let pt = null;
+        if (L.a) {
+          const zl = meshes[L.a];
+          if (zl && zl.length) {
+            let zm = zl[0], bd = Infinity;
+            for (const m of zl) { const c = sphC(m);
+              const dd = domC ? c.distanceToSquared(domC) : 0;
+              if (dd < bd) { bd = dd; zm = m; } }
+            pt = sphC(zm);
+          }
+        } else if (L.o && domC) pt = domC.clone().add(new THREE.Vector3(L.o[0], L.o[1], L.o[2]));
+        if (!pt) continue;
+        /* nearest parent mesh keeps the dot glued to the right side and lets
+           explode translations carry it */
+        let bm = null, bc = null, bdd = Infinity;
+        for (const m of meshes[pid]) { const c = sphC(m);
+          const dd = c.distanceToSquared(pt);
+          if (dd < bdd) { bdd = dd; bm = m; bc = c; } }
+        if (!bm) continue;
+        LMS.push({ L, pid, m: bm, o: pt.clone().sub(bc) });
+        LM_HAS[pid] = (LM_HAS[pid] || 0) + 1;
+      }
+    }
+  }
+  const lmById = lid => LMS.find(x => x.L.id === lid) || null;
+  const lmPool = {}, lmDot = {};
+  const hideLm = lid => { if(lmPool[lid]) lmPool[lid].style.display="none";
+    if(lmDot[lid]) lmDot[lid].style.display="none"; };
+  const lmPt = it => { if(!it.m.geometry.boundingSphere) it.m.geometry.computeBoundingSphere();
+    return _v.copy(it.m.geometry.boundingSphere.center).applyMatrix4(it.m.matrixWorld).add(it.o); };
+  /* occlusion with a short cache: the first solid thing the camera→point ray
+     meets must be the parent bone (or one of its z: sub-patches) */
+  const lmVT = {};
+  const lmVis = (it, pt) => {
+    const now = performance.now(), rec = lmVT[it.L.id];
+    if (rec && now - rec.t < (lowPower ? 300 : 150)) return rec.v;
+    ray.set(camera.position, _v.copy(pt).sub(camera.position).normalize());
+    const hits = ray.intersectObjects(rayMeshes(), false);
+    let v = true;
+    for (const h of hits) { const o = h.object;
+      if (!effVis(o) || o.userData.ghost) continue;
+      if (o.material && o.material.transparent && o.material.opacity < 0.5) continue;
+      const pid = o.userData.partId;
+      v = pid === it.pid || (window.ATLAS_GLB_PARENT || {})[pid] === it.pid;
+      break; }
+    lmVT[it.L.id] = { v, t: now }; return v;
+  };
+  const lmInfo = it => {
+    const p = byId[(LM_PID2REC || {})[it.pid] || it.pid], c = p ? SYSTEMS[p.system] : null;
+    setInfo(`<h3>📍 ${esc(it.L.n)}</h3>
+      <div class="badges" style="margin:6px 0 8px"><span class="badge">Bone landmark</span>${c?`<span class="badge sys" style="--badge-c:${c.color}">${c.icon} On the ${esc(p.name)}</span>`:""}</div>
+      <p class="b3d-sum">${esc(it.L.d)}</p>
+      ${it.L.c?`<div class="b3d-sec"><b>Clinical note</b><p>${esc(it.L.c)}</p></div>`:""}
+      <div class="b3d-actions">
+        ${p?`<button data-la="parent">About the ${esc(p.name)}</button>`:""}
+        <button data-la="focus">Fly to bone</button>
+      </div>
+      <a class="b3d-open" href="#/part/${it.L.id}">Open full entry →</a>`);
+    info.querySelectorAll("[data-la]").forEach(b=>b.addEventListener("click",()=>{
+      if (b.dataset.la === "parent" && p) showInfo((LM_PID2REC || {})[it.pid] || it.pid);
+      else if (b.dataset.la === "focus") focusOn(it.pid);
+    }));
+  };
+  if (lmLayer) lmLayer.addEventListener("click",e=>{
+    const el = e.target.closest(".b3dlm");
+    if (!el || !el.dataset.lid) return;
+    const it = lmById(el.dataset.lid); if (!it) return;
+    select(it.pid);           /* glow the bone + sync the deep link */
+    lmInfo(it);                /* …then show the landmark's own card */
+  });
+  const updLms = () => {
+    if (!lmLayer) return;
+    const auto = (isolated !== null && LM_HAS[isolated]) || (selected !== null && LM_HAS[selected]);
+    if (quiz.on || stOn || (!lmOn && !auto)) {
+      for (const k in lmPool) hideLm(k); return;
+    }
+    let list = null;
+    const focusPid = isolated !== null && LM_HAS[isolated] ? isolated
+      : (selected !== null && LM_HAS[selected] ? selected : null);
+    if (focusPid) list = LMS.filter(x => x.pid === focusPid);
+    else if (lmOn) {
+      /* with the toggle on, pin the landmarks of the largest visible bones —
+         same size ranking the label layer uses, capped so it never clutters */
+      const cands = Object.keys(LM_HAS).filter(id => anyVis(id));
+      cands.sort((a,b) => { const ra = _pcCache[a] || partCenter(a), rb = _pcCache[b] || partCenter(b);
+        return (rb ? rb.r : 0) - (ra ? ra.r : 0); });
+      let budget = lowPower ? 12 : 24;
+      const keep = new Set();
+      for (const id of cands) { if (budget <= 0) break;
+        budget -= LM_HAS[id]; keep.add(id); }
+      list = LMS.filter(x => keep.has(x.pid) && anyVis(x.pid));
+    } else list = [];
+    const sw = W(), sh = H(), seen = {};
+    for (const it of list) {
+      const pt = lmPt(it);
+      if (!lmVis(it, pt)) continue;
+      _v.copy(pt).project(camera);
+      if (_v.z > 1) continue;
+      const lx = (_v.x + 1) / 2 * sw, ly = (1 - _v.y) / 2 * sh;
+      if (lx < -40 || ly < -20 || lx > sw + 40 || ly > sh + 20) continue;
+      seen[it.L.id] = 1;
+      let d = lmDot[it.L.id];
+      if (!d) { d = document.createElement("div"); d.className = "b3dlmd";
+        lmDot[it.L.id] = d; lmLayer.appendChild(d); }
+      d.style.display = "block"; d.style.left = lx + "px"; d.style.top = ly + "px";
+      let el = lmPool[it.L.id];
+      if (!el) { el = document.createElement("div"); el.className = "b3dlm";
+        lmPool[it.L.id] = el; lmLayer.appendChild(el); }
+      el.dataset.lid = it.L.id;
+      el.style.display = "block";
+      el.style.left = lx + "px"; el.style.top = ly + "px";
+      el.classList.toggle("hot", lmFlash === it.L.id);
+      el.textContent = it.L.n;
+    }
+    for (const k in lmPool) if (!seen[k]) hideLm(k);
+  };
+  const lmB = $("#b3dlmB");
+  if (lmB) lmB.addEventListener("click",()=>{
+    lmOn = !lmOn; lmB.classList.toggle("on",lmOn);
+    if (lmOn && stOn) stB.click(); /* landmarks give self-test answers away */
+    updLms(); queueUrl();
+  });
+  window.__b3d.lmstate = () => ({ flash: lmFlash, on: lmOn, n: LMS.length,
+    has: Object.keys(LM_HAS).length });
+  if (lmFlash) setTimeout(()=>{ lmFlash = null; }, 5000);
 
   /* ---- anchored pin layer: dot glued to the part, draggable label, leader line ---- */
   const plLayer = $("#b3dpl"), pnSVG = $("#b3dlnp"), pnPool = {};
@@ -19140,13 +19614,25 @@ function buildScene(gltf, st){
     const q = qin.value.trim().toLowerCase();
     if(q.length<2){ qres.innerHTML=""; qres.style.display="none"; return; }
     const hits = Object.keys(meshes).filter(id=>nameOf(id).toLowerCase().includes(q)).slice(0,8);
-    qres.innerHTML = hits.map(id=>`<div class="qhit" data-id="${id}">${esc(nameOf(id))}</div>`).join("") || `<div class="qhit dim">No match</div>`;
+    /* landmarks are searchable too — they fly to their parent bone and pulse */
+    const lmHits = LMS.filter(x=>x.L.n.toLowerCase().includes(q) || x.L.id.includes(q)).slice(0, Math.max(0, 8-hits.length));
+    qres.innerHTML = hits.map(id=>`<div class="qhit" data-id="${id}">${esc(nameOf(id))}</div>`).join("")
+      + lmHits.map(x=>`<div class="qhit" data-lid="${x.L.id}">📍 ${esc(x.L.n)}</div>`).join("")
+      || `<div class="qhit dim">No match</div>`;
     qres.style.display="block";
     qres.querySelectorAll(".qhit[data-id]").forEach(h=>h.addEventListener("pointerdown",ev=>{
       ev.preventDefault(); ev.stopPropagation();
       const id=h.dataset.id; qres.style.display="none"; qin.value=nameOf(id);
       if(!anyVis(id)){ isolated=id; applyVis(); syncHiddenBar(); }
       focusOn(id);
+    }));
+    qres.querySelectorAll(".qhit[data-lid]").forEach(h=>h.addEventListener("pointerdown",ev=>{
+      ev.preventDefault(); ev.stopPropagation();
+      const it = lmById(h.dataset.lid); if(!it) return;
+      qres.style.display="none"; qin.value=it.L.n;
+      if(!anyVis(it.pid)){ isolated=it.pid; applyVis(); syncHiddenBar(); }
+      select(it.pid); focusOn(it.pid); lmFlash=it.L.id; lmInfo(it);
+      setTimeout(()=>{ lmFlash=null; }, 8000);
     }));
   });
   qin.addEventListener("blur",()=>{ qres.style.display="none"; });
@@ -19403,6 +19889,16 @@ function buildScene(gltf, st){
   select(selId && meshes[selId] ? selId : null);
   if(selId && meshes[selId]) focusOn(selId);
   if(st.lesson && selId) lessonStart(selId, st.lesson);
+  /* landmark deep link: #/3d/<bone>?lm=<landmark-id> — reveal the layer, select
+     the parent bone, fly to it and pulse that landmark's pill */
+  if(st.lm){
+    const it = lmById(st.lm);
+    if (it) { lmOn = true; const b = $("#b3dlmB"); if (b) b.classList.add("on");
+      select(it.pid); focusOn(it.pid); lmFlash = st.lm; lmInfo(it);
+      setTimeout(()=>{ lmFlash = null; }, 8000); }
+  } else if (st.lmon) {
+    lmOn = true; const b = $("#b3dlmB"); if (b) b.classList.add("on");
+  }
 
   let raf;
   const tick = ()=>{ if(!document.body.contains(cv)){ cancelAnimationFrame(raf); quizStop(); return; }
@@ -19419,7 +19915,7 @@ function buildScene(gltf, st){
     const lifeVis = life.some(L=>effVis(L.m));
     const animated = !!fly || controls.autoRotate || selected!==null || lifeVis || quiz.on;
     if(labelsOn && (animated||moved||dirty)) updLabels();
-    if(animated||moved||dirty) updPins();
+    if(animated||moved||dirty){ updLms(); updPins(); }
     if(animated || moved || dirty){
       dirty = false;
       try{ if(aoOn && composer) composer.render(); else renderer.render(scene,camera); }
@@ -19444,7 +19940,9 @@ function v3D(sel){
     peel: Math.max(0, Math.min(13, +q.get("peel")||0)),
     exp: Math.max(0, Math.min(100, +q.get("exp")||0)),
     clip: q.get("clip") || null,
-    lesson: q.get("lesson") || null };
+    lesson: q.get("lesson") || null,
+    lm: q.get("lm") || null,
+    lmon: q.get("lmon") === "1" };
   const ids = Object.keys(MODELS).filter(id=>byId[id]);
   document.body.classList.add("b3d-open");
   view.innerHTML = `<div class="b3d-app loading" id="b3dapp">
@@ -19455,6 +19953,7 @@ function v3D(sel){
       <svg class="b3d-lines" id="b3dlnp" style="display:none"></svg>
       <div class="b3d-pl" id="b3dpl" style="display:none"></div>
       <div class="b3d-lbls" id="b3dlbls" style="display:none"></div>
+      <div class="b3d-lms" id="b3dlms"></div>
     </div>
 
     <header class="b3d-top">
@@ -19492,6 +19991,7 @@ function v3D(sel){
 
     <nav class="b3d-dock" aria-label="3D tools"><div class="dock-in">
       <button class="dock-b" id="b3dlbl" title="Show structure labels"><i>🏷</i><b>Labels</b></button>
+      <button class="dock-b" id="b3dlmB" title="Bone landmarks — pin the named tubercles, grooves and processes on the bones"><i>📍</i><b>Landmarks</b></button>
       <button class="dock-b" id="b3dst" title="Hide the names — tap a ? to reveal it (self-test)"><i>🙈</i><b>Test</b></button>
       <button class="dock-b" id="b3dpinT" title="Show/hide your pinned markers"><i>📌</i><b>Pins</b></button>
       <button class="dock-b" id="b3dxr" title="X-ray: fade the outer layers"><i>👻</i><b>X-ray</b></button>
@@ -19554,7 +20054,8 @@ function vMap(){
   <div class="map-wrap">
     <div class="map-stage">
       <div><div class="view-toggle" id="vt"><button class="on" data-v="anterior">Anterior</button><button data-v="posterior">Posterior</button></div>
-      <div id="mapbox">${bodySVG("anterior")}</div></div>
+      <div id="mapbox">${bodyFig("anterior")}</div>
+      <div class="fig-cap">Muscle figure: Gray's Anatomy (1918) · Wikimedia Commons</div></div>
     </div>
     <div class="map-side"><h1>Interactive body map</h1><p class="hint">Click a region on the figure — or from the list — to explore its structures.</p>
       <div class="region-list">${META.regionOrder.filter(r=>r!=="whole-body").map(r=>`<a class="region-item" href="#/region/${r}"><span class="nm">${REGIONS[r].name}</span><span class="ct">${regCount[r]||0} structures</span></a>`).join("")}</div>
@@ -19565,7 +20066,7 @@ function vMap(){
   view.querySelectorAll("#vt button").forEach(b=>b.addEventListener("click",()=>{
     view.querySelectorAll("#vt button").forEach(x=>x.classList.remove("on"));
     b.classList.add("on");
-    $("#mapbox").innerHTML = bodySVG(b.dataset.v);
+    $("#mapbox").innerHTML = bodyFig(b.dataset.v);
     bind();
   }));
 }
@@ -19697,7 +20198,7 @@ const checkBadges = () => {
 /* ---------- learn mode: guided paths through the systems ---------- */
 const LEARN_ORDER = ["skeletal","muscular","cardiovascular","nervous","respiratory",
   "digestive","urinary","reproductive","endocrine","lymphatic","integumentary","sensory"];
-const lessonsOf = sys => DATA.filter(d=>d.system===sys && d.summary);
+const lessonsOf = sys => DATA.filter(d=>d.system===sys && d.summary && !d.of);
 const nextLesson = sys => { const l = lessonsOf(sys).find(d=>!lessonDone(d.id));
   return l || lessonsOf(sys)[0]; };
 
