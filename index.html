@@ -297,19 +297,23 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3d-quiz .q-flash-good{color:#3ddc84;font-weight:700}
 .b3d-quiz .q-flash-bad{color:#ff5d6c;font-weight:700}
 .b3d-lbls{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}
-.b3dlbl{position:absolute;transform:translate(-50%,-140%);font:600 10.5px var(--font);color:#e8e8e8;background:rgba(18,18,18,.85);border:1px solid rgba(255,214,10,.4);border-radius:5px;padding:1px 6px;white-space:nowrap;pointer-events:auto;cursor:pointer}
+.b3dlbl{position:absolute;transform:translate(-50%,-100%);font:600 10.5px var(--font);color:#e8e8e8;background:rgba(18,18,18,.88);border:1px solid rgba(255,214,10,.45);border-radius:5px;padding:2px 7px;white-space:nowrap;pointer-events:auto;cursor:pointer}
 .b3dlbl:hover{border-color:#ffd60a;color:#ffd60a}
 .b3dlbl.mask{color:#8d887a;min-width:24px;text-align:center}
 .b3dlbl.mask:hover{color:#ffd60a}
 .b3d-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}
-.b3d-lines line{stroke:rgba(255,214,10,.55);stroke-width:1}
+.b3d-lines line{stroke:rgba(255,214,10,.7);stroke-width:1.2}
 .b3d-lines circle{fill:#ffd60a}
+.b3d-lines circle.lb-ring{fill:none;stroke:#ffd60a;stroke-width:1.5}
+.b3d-lines circle.lb-dot{fill:#ffd60a;stroke:#0a0a0a;stroke-width:1}
+.b3d-lines circle.pring{fill:none;stroke:#ffd60a;stroke-width:1.5}
 /* bone landmarks — cyan pins for tubercles, grooves, epicondyles and other named
    surface features that aren't separate model meshes */
 .b3d-lms{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}
-.b3dlm{position:absolute;transform:translate(-50%,-160%);font:600 10px var(--font);color:#d9f6ff;background:rgba(8,24,34,.9);border:1px solid rgba(64,224,255,.5);border-radius:5px;padding:1px 6px;white-space:nowrap;pointer-events:auto;cursor:pointer}
+.b3dlm{position:absolute;transform:translate(-50%,-160%);font:600 10px var(--font);color:#d9f6ff;background:rgba(8,24,34,.82);border:1px solid rgba(64,224,255,.45);border-radius:5px;padding:1px 5px;white-space:nowrap;pointer-events:auto;cursor:pointer}
 .b3dlm:hover{border-color:#40e0ff;color:#7ef9ff}
 .b3dlm.hot{animation:lmhot 1.1s ease infinite}
+.b3d-lines polyline.lmline{fill:none;stroke:rgba(64,224,255,.55);stroke-width:1;stroke-linejoin:round}
 @keyframes lmhot{50%{border-color:#9ffbff;color:#fff;box-shadow:0 0 14px rgba(64,224,255,.75)}}
 .b3dlmd{position:absolute;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#40e0ff;box-shadow:0 0 5px rgba(64,224,255,.9);pointer-events:none}
 .lm-row{display:flex;flex-wrap:wrap;gap:8px}
@@ -363,7 +367,15 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .fchip.on{opacity:1;color:var(--text);border-color:color-mix(in srgb,var(--fc,#ffd60a) 65%,transparent);background:color-mix(in srgb,var(--fc,#ffd60a) 14%,var(--panel))}
 .b3d-info{position:relative;flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;overflow:auto}
 .b3d-iclose{display:none;position:absolute;top:8px;right:8px;width:28px;height:28px;background:#242424;color:#e8e8e8;border:1px solid #3d3d3d;border-radius:7px;font:700 13px var(--font);cursor:pointer;z-index:2}
+.b3d-grab{display:none}
+.b3d-actions button i{font-style:normal}
+.b3d-actions button b{font-weight:inherit}
 .b3d-aka{font-size:12px;color:var(--text3);margin:-2px 0 4px}
+.b3d-crumb{font-size:11.5px;color:var(--text3);margin:0 0 3px;display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.b3d-crumb a{color:var(--text2);text-decoration:none}
+.b3d-crumb a:hover{color:var(--accent)}
+.b3d-crumb .csep{color:var(--text3);opacity:.55}
+.b3d-crumb b{color:var(--text);font-weight:600}
 .b3d-sec{margin-top:8px}
 .b3d-sec>b{display:block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);margin-bottom:2px}
 .b3d-sec p{margin:0}
@@ -429,6 +441,10 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-app .b3d-info p,.b3d-app .b3d-sec p{color:#c9c2b0}
 .b3d-app .b3d-info .hint{color:#a3a3a3}
 .b3d-app .b3d-aka,.b3d-app .b3d-sec>b,.b3d-app .b3d-rel>b{color:#8d887a}
+.b3d-app .b3d-crumb{color:#8d887a}
+.b3d-app .b3d-crumb a{color:#cfcabc}
+.b3d-app .b3d-crumb a:hover{color:#ffd60a}
+.b3d-app .b3d-crumb b{color:#e8e8e8}
 .b3d-app .b3d-actions button{background:#242424;color:#e8e8e8;border-color:#3d3d3d;padding:7px 11px}
 .b3d-app .b3d-actions button:hover{border-color:#ffd60a}
 .b3d-app a.b3d-rel{color:#ffd60a;background:rgba(255,214,10,.12);border-color:rgba(255,214,10,.35)}
@@ -453,6 +469,21 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-pop .b3d-peel em{min-width:34px;text-align:right;color:#ffd60a}
 .b3d-pop .b3d-ax button{padding:5px 12px;font-size:12px;background:#1c1c1c;color:#bdb8aa;border-color:#3d3d3d}
 .b3d-pop .b3d-ax button.on{background:rgba(255,214,10,.18);color:#ffd60a;border-color:rgba(255,214,10,.55)}
+.b3d-pop .pop-tools{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.b3d-pop .pop-tools .dock-b{min-width:0;height:48px}
+.sysrow{display:flex;align-items:center;gap:3px}
+.sysrow .stp{display:flex;gap:2px}
+.sysrow .stp button{width:19px;height:19px;border-radius:50%;border:1px solid #3d3d3d;background:#1c1c1c;color:#bdb8aa;font:700 12px/1 var(--font);padding:0;cursor:pointer}
+.sysrow .stp button:hover{border-color:#ffd60a;color:#ffd60a}
+.fchip.peeled{opacity:.35}
+.fchip.warn::after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#ff9d0a;margin-left:5px;box-shadow:0 0 4px #ff9d0a}
+.b3d-idx .idx-g h5{font:700 10px var(--font);letter-spacing:.08em;text-transform:uppercase;color:#8d887a;margin:12px 0 4px}
+.b3d-idx .idx-g:first-child h5{margin-top:2px}
+.b3d-idx .idx-r{display:flex;align-items:center;gap:6px;padding:4px 8px;border-radius:8px;cursor:pointer;font:500 12.5px var(--font);color:#d8d2c2}
+.b3d-idx .idx-r:hover{background:#222}
+.b3d-idx .idx-r.on{color:#ffd60a}
+.b3d-idx .idx-r [data-x]{margin-left:auto;border:0;background:none;color:#8d887a;cursor:pointer;padding:2px 4px;font-size:12px}
+.b3d-idx .idx-r [data-x]:hover{color:#fff}
 .b3d-app .b3d-hbar{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--above) + var(--rail-h));z-index:17;background:var(--g);border:1px solid var(--gb);border-radius:14px;padding:6px 8px 6px 12px;color:#e8e8e8;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);white-space:nowrap;max-width:calc(100% - 24px)}
 .b3d-app .b3d-hbar button{background:#242424;color:#ffd60a;border-color:#3d3d3d;padding:5px 11px}
 .b3d-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--above) + var(--rail-h) + 6px);z-index:12;max-width:calc(100% - 32px);text-align:center;padding:7px 14px;border-radius:20px;background:rgba(16,16,16,.78);border:1px solid #333;color:#cfcabc;font:500 12.5px var(--font);pointer-events:none;transition:opacity .35s}
@@ -501,6 +532,7 @@ body.b3d-open .pwa-toast{bottom:112px}
 .les-nav button.dim{margin-left:auto}
 .les-prog{flex:1;text-align:center;font:600 11.5px var(--font);color:#8d887a}
 .les-hint{font-size:11.5px;color:#8d887a;margin-top:8px;text-align:center}
+.b3d-app.lesson .b3d-hbar{display:none}
 @media(max-width:760px){
   .b3d-app{--dock-h:62px;--rail-h:56px}
   .b3d-title{display:none}
@@ -512,7 +544,14 @@ body.b3d-open .pwa-toast{bottom:112px}
   .b3d-rail .b3d-views{padding-left:8px;border-left:1px solid #3a3a3a}
   .b3d-rail .pchip{flex-direction:row;gap:6px;width:auto;flex:none;padding:8px 13px;font-size:12.5px;white-space:nowrap;border-radius:20px;border-color:#363636;background:var(--g);scroll-snap-align:start}
   .b3d-rail .pchip .ic{font-size:15px}
-  .b3d-app .b3d-info{left:8px;right:8px;top:auto;width:auto;bottom:var(--above);max-height:48dvh;animation-name:b3dUp}
+  .b3d-app .b3d-info{left:0;right:0;top:auto;width:auto;bottom:var(--above);max-height:46dvh;animation-name:b3dUp;border-radius:20px 20px 0 0;border-bottom:0;padding-top:8px;transition:max-height .22s ease;overscroll-behavior:contain}
+  .b3d-app .b3d-info.full{max-height:74dvh}
+  .b3d-app .b3d-info .badges{display:none}
+  .b3d-app .b3d-grab{display:block;width:38px;height:4.5px;border-radius:3px;background:#4d4d4d;margin:0 auto 8px;touch-action:none;cursor:grab}
+  .b3d-app .b3d-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:2px 0 8px;padding:0}
+  .b3d-app .b3d-actions button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;padding:8px 4px;border-radius:10px}
+  .b3d-app .b3d-actions button i{font-size:16px;line-height:1.1}
+  .b3d-app .b3d-actions button b{font-size:10px;font-weight:600;text-align:center}
   .b3d-app.lesson .b3d-info{display:none}
   .b3d-app .b3d-info.has-sel{animation-name:b3dUp}
   .b3d-app .b3d-hbar{bottom:calc(var(--above) + var(--rail-h) + 4px)}
@@ -18469,10 +18508,12 @@ function buildScene(gltf, st){
   const l2=new THREE.DirectionalLight(0xbcd2ff,0.4); l2.position.set(-1.2,0.4,0.6); scene.add(l2);
   const l3=new THREE.DirectionalLight(0xffd9b3,0.55); l3.position.set(0.3,0.8,-1.4); scene.add(l3);
   const group = new THREE.Group(); scene.add(group);
-  const chipOn = {}, hidden = new Set(); let isolated = null, aidsOn = false, focusSet = null;
+  const chipOn = {}, hidden = new Set(), faded = new Set(); let isolated = null, aidsOn = false, focusSet = null, skinOp = 1;
   let hover = null, selected = null, xr = false;
   /* render-on-demand: only draw frames when something actually changed */
   let dirty = true; const poke = () => { dirty = true; };
+  /* overlay caches — rebuilt whenever the scene changes (applyVis / explode) */
+  let visParts = null, anchorPool = {}, _pcCache = {}, _pmCache = {};
   /* undo stack for hide / isolate / layer-reset actions */
   const undoStack = [];
   /* tap-the-structure quiz state */
@@ -18529,7 +18570,7 @@ function buildScene(gltf, st){
       const pk = Object.keys(pinsV2);
       if(pk.length && pk.length<=24) q.set("pins",pk.join(","));
       if(lesson.on && lesson.sys) q.set("lesson",lesson.sys);
-      if(lmOn) q.set("lmon","1");
+      if(faded.size && faded.size<=24) q.set("fad",[...faded].join(","));
       if(peelN) q.set("peel",peelN);
       if(expVal) q.set("exp",expVal);
       if(clipOn) q.set("clip",clipAxis+":"+Math.round(clipPos*100));
@@ -18654,6 +18695,7 @@ function buildScene(gltf, st){
   /* restore deep-linked state (?sys=&hid=&iso=&peel=&clip=) */
   if(st.sys) for(const s in chipOn) chipOn[s] = st.sys.includes(s);
   if(st.hid) st.hid.forEach(id=>hidden.add(id));
+  if(st.fad) st.fad.forEach(id=>{ if(meshes[id]) faded.add(id); });
   if(st.iso && meshes[st.iso]) isolated = st.iso;
   if(st.pins){ st.pins.forEach(id=>{ if(meshes[id] && !pinsV2[id]) pinsV2[id] = {o:[0,0,0]}; }); savePins(); }
 
@@ -18669,27 +18711,35 @@ function buildScene(gltf, st){
   const ghostOf = bm => { if(!bm.userData.__g){ const g = bm.clone();
       g.transparent = true; g.opacity = 0.09; g.depthWrite = false; bm.userData.__g = g; }
     return bm.userData.__g; };
+  /* fade material — "Fade" keeps the part visible but translucent, like CA */
+  const fadeOf = bm => { if(!bm.userData.__f){ const g = bm.clone();
+      g.transparent = true; g.opacity = 0.22; g.depthWrite = false; bm.userData.__f = g; }
+    return bm.userData.__f; };
   /* raycasts run only against the currently visible meshes */
   const visList = [];
   const applyVis = () => {
     visList.length = 0;
     for(const id in meshes) for(const m of meshes[id]){
       m.visible = chipOn[m.userData.sys] && !hidden.has(id)
-        && peelOf(m.userData.sys) >= peelN && (!m.userData.aid || aidsOn);
-      m.userData.ghost = isolated!==null ? id!==isolated : (focusSet ? !focusSet.has(id) : false);
+        && peelOf(m.userData.sys) >= peelN && (!m.userData.aid || aidsOn)
+        && (isolated===null || id===isolated);
+      m.userData.ghost = focusSet ? !focusSet.has(id) : false;
       const base = m.userData.baseMat || m.material;
       m.material = m.userData.ghost ? ghostOf(base)
-        : (id===selected && m.userData.glowMat) ? m.userData.glowMat : base;
+        : (id===selected && m.userData.glowMat) ? m.userData.glowMat
+        : faded.has(id) ? fadeOf(base) : base;
       if(m.visible && !m.userData.ghost) visList.push(m);
     }
     for(const m of loose){
       m.visible = chipOn[m.userData.sys] && isolated===null
         && peelOf(m.userData.sys) >= peelN && (!m.userData.aid || aidsOn);
-      m.userData.ghost = isolated!==null || !!focusSet;
+      m.userData.ghost = !!focusSet;
       m.material = m.userData.ghost ? ghostOf(m.userData.baseMat||m.material)
         : (m.userData.baseMat||m.material);
     }
-    applyXr(); poke(); queueUrl();
+    applyXr(); visParts = null; anchorPool = {}; _pcCache = {}; _pmCache = {};
+    syncSys(); updIdx();
+    poke(); queueUrl();
     if(quiz.on && quiz.target && !anyVis(quiz.target)) quizNext();
   };
   applyVis();
@@ -18748,9 +18798,20 @@ function buildScene(gltf, st){
   const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
   const tip = $("#b3dtip"), info = $("#b3di");
   /* panel renders through setInfo so the floating card gets a close button */
-  const setInfo = html => { info.innerHTML = `<button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button>${html}`;
+  const setInfo = html => { info.innerHTML = `<div class="b3d-grab"></div><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button>${html}`;
     const c = info.querySelector("#b3dic"); if(c) c.addEventListener("click",()=>select(null)); };
   { const ic0 = info.querySelector("#b3dic"); if(ic0) ic0.addEventListener("click",()=>select(null)); }
+  /* mobile sheet: drag or tap the grab handle to expand/collapse (delegated —
+     survives setInfo rewrites) */
+  { let gY = null, gMoved = false;
+    info.addEventListener("pointerdown",e=>{ if(!e.target.closest(".b3d-grab")) return;
+      gY = e.clientY; gMoved = false; });
+    info.addEventListener("pointermove",e=>{ if(gY===null) return;
+      const dy = gY - e.clientY;
+      if(Math.abs(dy) > 24){ info.classList.toggle("full",dy>0); gMoved = true; gY = null; dockSync(); } });
+    const gEnd = () => { if(gY!==null && !gMoved){ info.classList.toggle("full"); dockSync(); } gY = null; };
+    info.addEventListener("pointerup",gEnd); info.addEventListener("pointercancel",()=>{ gY = null; });
+    info.addEventListener("transitionend",()=>{ if(selected) dockSync(); }); }
   /* fast raycast: test only the few visible meshes whose bounding sphere the
      ray actually hits — a whole-scene raycast stalls for a beat when it
      triangle-tests dense meshes like the 300k-vert scapula */
@@ -18792,10 +18853,12 @@ function buildScene(gltf, st){
   /* ---- undo: snapshot {hidden,isolated} before each mutating action ---- */
   const undoBtn = $("#b3dundo");
   const syncUndo = () => { if(undoBtn) undoBtn.disabled = !undoStack.length; };
-  const pushHist = () => { undoStack.push({h:[...hidden], iso:isolated});
+  const pushHist = () => { undoStack.push({h:[...hidden], f:[...faded], iso:isolated, fs:focusSet?[...focusSet]:null});
     if(undoStack.length>30) undoStack.shift(); syncUndo(); };
   const undo = () => { const s = undoStack.pop(); if(!s) return;
-    hidden.clear(); s.h.forEach(id=>hidden.add(id)); isolated = s.iso;
+    hidden.clear(); s.h.forEach(id=>hidden.add(id));
+    faded.clear(); (s.f||[]).forEach(id=>faded.add(id));
+    isolated = s.iso; focusSet = s.fs ? new Set(s.fs) : null;
     applyVis(); syncHiddenBar(); syncUndo(); };
   if(undoBtn) undoBtn.addEventListener("click",undo);
   const onKey = e => { if(!document.body.contains(cv)){ removeEventListener("keydown",onKey); return; }
@@ -18868,16 +18931,29 @@ function buildScene(gltf, st){
     const md = MISC_META[id];
     const sec = (t,v) => v ? `<div class="b3d-sec"><b>${t}</b><p>${esc(v)}</p></div>` : "";
     const rel = d && d.related ? d.related.filter(r=>byId[r]).map(r=>`<a class="b3d-rel" href="#/part/${r}">${esc(byId[r].name)}</a>`).join("") : "";
-    setInfo(`<h3>${esc(nm)}</h3>
+    /* CA-style sections: bone landmarks and sub-parts, both tappable */
+    const GP0 = window.ATLAS_GLB_PARENT || {}, base = GP0[id] || id;
+    const lms = LM_HAS[base] ? LMS.filter(x=>x.pid===base) : [];
+    const lmHtml = lms.length ? `<div class="b3d-rel"><b>📍 Landmarks (${lms.length})</b><div class="b3d-relch">${lms.map(x=>`<a class="b3d-rel" href="#" data-lm="${x.L.id}">${esc(x.L.n)}</a>`).join("")}</div></div>` : "";
+    const parts = [];
+    for(const k in meshes) if(GP0[k]===id) parts.push(k);
+    const partsHtml = parts.length ? `<div class="b3d-rel"><b>Parts</b><div class="b3d-relch">${parts.slice(0,14).map(k=>`<a class="b3d-rel" href="#/part/${k}">${esc(nameOf(k))}</a>`).join("")}</div></div>` : "";
+    const rg = d ? d.region : pd ? pd.region : null;
+    const crumb = `<div class="b3d-crumb"><a href="#" data-sys="${s}">${c.icon} ${esc(c.name)}</a><span class="csep">›</span>${rg && REGIONS[rg] ? `<a href="#/region/${rg}">${esc(REGIONS[rg].name)}</a><span class="csep">›</span>` : (md ? `<span>${esc(md.regName)} region</span><span class="csep">›</span>` : "")}<b>${esc(nm)}</b></div>`;
+    setInfo(`${crumb}<h3>${esc(nm)}</h3>
       ${d&&d.aka?`<div class="b3d-aka">${esc(d.aka)}</div>`:""}
       <div class="badges" style="margin:6px 0 8px"><span class="badge sys" style="--badge-c:${c.color}">${c.icon} ${c.name}</span>${d?`<span class="badge">📍 ${REGIONS[d.region].name}</span>`:md?`<span class="badge">📍 ${md.regName} region</span><span class="badge">Unnamed detail</span>`:`<span class="badge">🧩 Z-Anatomy structure</span>`}</div>
       <div class="b3d-actions">
-        <button data-a="hide">Hide this</button>
-        <button data-a="isolate">Isolate</button>
-        <button data-a="say" title="Pronounce it">🔊</button>
-        <button data-a="pin">${pinHas(id)?"📌 Pinned":"📌 Pin"}</button>
-        ${hidden.size||isolated!==null?`<button data-a="showall">Show all</button>`:""}
+        <button data-a="isolate" title="Hide everything else"><i>◎</i><b>Isolate</b></button>
+        <button data-a="hide" title="Hide this structure"><i>⊘</i><b>Hide</b></button>
+        <button data-a="fade" title="See through this structure"><i>◑</i><b>${faded.has(id)?"Unfade":"Fade"}</b></button>
+        <button data-a="hideo" title="Hide everything except this"><i>⧉</i><b>Hide others</b></button>
+        <button data-a="fadeo" title="Ghost everything around it"><i>◐</i><b>${(focusSet&&focusSet.has(id))?"Unfade others":"Fade others"}</b></button>
+        <button data-a="say" title="Pronounce it"><i>🔊</i><b>Say</b></button>
+        <button data-a="pin"><i>📌</i><b>${pinHas(id)?"Pinned":"Pin"}</b></button>
+        ${hidden.size||faded.size||isolated!==null||focusSet?`<button data-a="showall"><i>↺</i><b>Show all</b></button>`:""}
       </div>
+      ${lmHtml}${partsHtml}
       ${im?`<img class="b3d-plate" src="${esc(im.thumb||im.url)}" alt="" loading="lazy">`:""}
       ${d?`<p class="b3d-sum">${esc(d.summary)}</p>${sec("Structure",d.structure)}${sec("Function",d.fn)}${sec("Clinical relevance",d.clinical)}${rel?`<div class="b3d-rel"><b>Related structures</b><div class="b3d-relch">${rel}</div></div>`:""}<a class="b3d-open" href="#/part/${id}">Open full entry →</a>`
         : pd?`<p class="b3d-sum">Part of the <b>${esc(pd.name)}</b>.</p><p>${esc(pd.summary)}</p><a class="b3d-open" href="#/part/${parent}">Open ${esc(pd.name)} entry →</a>`
@@ -18891,9 +18967,21 @@ function buildScene(gltf, st){
       if(a==="pin"){ pinToggle(id, pick.pid===id ? pick.pt : null); showInfo(id); return; }
       pushHist();
       if(a==="hide"){ hidden.add(id); applyVis(); select(null); }
-      else if(a==="isolate"){ isolated=id; applyVis(); focusOn(id); }
-      else { hidden.clear(); isolated=null; applyVis(); select(null); }
+      else if(a==="hideo"){ isolated=id; focusSet=null; applyVis(); showInfo(id); }
+      else if(a==="isolate"){ isolated=id; focusSet=null; applyVis(); focusOn(id); }
+      else if(a==="fade"){ faded.has(id) ? faded.delete(id) : faded.add(id); applyVis(); showInfo(id); }
+      else if(a==="fadeo"){ focusSet = (focusSet && focusSet.has(id)) ? null : new Set([id]); applyVis(); showInfo(id); }
+      else { hidden.clear(); faded.clear(); isolated=null; focusSet=null; applyVis(); select(null); }
       syncHiddenBar();
+    }));
+    /* breadcrumb system link: switch to that system's layer in place */
+    info.querySelectorAll("[data-sys]").forEach(a=>a.addEventListener("click",e=>{
+      e.preventDefault(); setLayers([a.dataset.sys]); }));
+    /* landmark chips: select the bone, flash the landmark, open its card */
+    info.querySelectorAll("[data-lm]").forEach(a=>a.addEventListener("click",e=>{
+      e.preventDefault(); const it = lmById(a.dataset.lm); if(!it) return;
+      select(it.pid); focusOn(it.pid); lmFlash = it.L.id; lmInfo(it);
+      setTimeout(()=>{ lmFlash = null; }, 8000);
     }));
     /* related-structure chips: fly to the part in-place when it's in the model */
     info.querySelectorAll(".b3d-rel").forEach(a=>a.addEventListener("click",e=>{
@@ -18904,34 +18992,51 @@ function buildScene(gltf, st){
     }));
   };
   const defInfo = `<h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p>`;
+  /* selection glow tinted to the part's system colour, dimmed like CA's highlight */
+  const selHex = id => new THREE.Color(SYS_COLOR[sysOf(id)]||0x8a6d00).multiplyScalar(0.45).getHex();
+  /* docked-panel feel: shift the projection left so the card doesn't cover the model */
+  const dockSync = () => { const w = W(), h = H();
+    const mobile = matchMedia("(max-width:760px)").matches;
+    /* covered pixels the panel takes: height of the bottom sheet on mobile,
+       width of the side card on desktop — measured, not assumed */
+    let s = 0;
+    if(selected && info.offsetHeight) s = mobile ? h - info.offsetTop : w - info.offsetLeft;
+    if(s > 40){
+      if(mobile){ camera.aspect = w / (h + s); camera.setViewOffset(w, h + s, 0, s, w, h); }
+      else { camera.aspect = (w + s) / h; camera.setViewOffset(w + s, h, s, 0, w, h); } }
+    else { camera.aspect = w / h; camera.clearViewOffset(); }
+    camera.updateProjectionMatrix(); poke(); };
   const select = id => {
     if(selected) each(selected, m=>glow(m,0));
     selected = id;
-    if(id){ each(id, m=>glow(m,0x8a6d00)); showInfo(id); }
+    if(id){ each(id, m=>glow(m,selHex(id))); showInfo(id); }
     else setInfo(defInfo);
     info.classList.toggle("has-sel", !!id);
-    queueUrl();
+    updLabels(); updIdx(); dockSync(); queueUrl();
   };
 
   /* hidden/isolated status bar */
   const hbar = $("#b3dhbar");
   const syncHiddenBar = () => {
     if(isolated!==null) hbar.innerHTML = `<span>Showing only <b>${esc(nameOf(isolated))}</b></span><button id="b3dall">Show all</button>`;
-    else if(hidden.size) hbar.innerHTML = `<span>${hidden.size} structure${hidden.size>1?"s":""} hidden</span><button id="b3dall">Show all</button>`;
+    else if(focusSet && !lesson.on) hbar.innerHTML = `<span>Fading other structures</span><button id="b3dall">Show all</button>`;
+    else if(hidden.size||faded.size) hbar.innerHTML = `<span>${hidden.size?`${hidden.size} hidden`:""}${hidden.size&&faded.size?" · ":""}${faded.size?`${faded.size} faded`:""}</span><button id="b3dall">Show all</button>`;
     else hbar.innerHTML = "";
     const b = hbar.querySelector("#b3dall");
-    if(b) b.addEventListener("click",()=>{ pushHist(); hidden.clear(); isolated=null; applyVis(); syncHiddenBar(); });
+    if(b) b.addEventListener("click",()=>{ pushHist(); hidden.clear(); faded.clear(); isolated=null; focusSet=null; applyVis(); syncHiddenBar(); });
     queueUrl();
   };
 
   /* x-ray: ghost the outer (muscle/skin) layers — but never rewrite ghost clones */
-  function applyXr(){ for(const id in meshes) for(const m of meshes[id]){ if(m.userData.ghost) continue;
+  function applyXr(){ for(const id in meshes) for(const m of meshes[id]){ if(m.userData.ghost || faded.has(id)) continue;
     const s=m.userData.sys;
     const g = xr && (s==="muscular"||s==="integumentary") && m.visible && id!==isolated;
-    m.material.transparent = g; m.material.opacity = g?0.14:1; m.material.depthWrite = !g; }
+    const skin = s==="integumentary" && skinOp<1;
+    m.material.transparent = g||skin; m.material.opacity = g?0.14:(skin?skinOp:1); m.material.depthWrite = !g&&!skin; }
     for(const m of loose){ if(m.userData.ghost) continue; const s=m.userData.sys;
       const g = xr && (s==="muscular"||s==="integumentary") && m.visible;
-      m.material.transparent = g; m.material.opacity = g?0.14:1; m.material.depthWrite = !g; } }
+      const skin = s==="integumentary" && skinOp<1;
+      m.material.transparent = g||skin; m.material.opacity = g?0.14:(skin?skinOp:1); m.material.depthWrite = !g&&!skin; } }
   const xrb = $("#b3dxr");
   if(xrb) xrb.addEventListener("click",()=>{ xr=!xr; xrb.classList.toggle("on",xr); applyXr(); });
 
@@ -18941,34 +19046,35 @@ function buildScene(gltf, st){
   /* surface anchor: ray from the camera toward a point on/near the part —
      the first solid hit ON that part is where the marker lands, so dots sit
      on the structure instead of floating at its bbox center. A first hit on
-     a DIFFERENT part means this one is occluded. Throttled per key. */
-  const anchT = {};
+     a DIFFERENT part means this one is occluded. Cached per part and cleared
+     when the scene changes, so the dot stays glued to the surface as the
+     camera orbits instead of sliding with each re-ray. */
   /* dominant-mesh center: where the part actually reads on screen — union
      centers of multi-mesh parts can land between the meshes (e.g. radius
      centering on the pelvis) */
-  const _pmCache = {};
   const partMain = id => { if(_pmCache[id]) return _pmCache[id];
     let best = null, br = -1;
     each(id, m => { m.geometry.computeBoundingSphere(); m.updateWorldMatrix(true,false);
       _sph.copy(m.geometry.boundingSphere).applyMatrix4(m.matrixWorld);
       if(_sph.radius > br){ br = _sph.radius; best = _sph.center.clone(); } });
     return _pmCache[id] = best; };
-  const surfPt = (key, id, target) => {
-    const ot = performance.now(), rec = anchT[key];
-    if(rec && ot - rec.t < (lowPower ? 380 : 200)) return rec;
+  const surfPt = (id, target) => {
     ray.set(camera.position, _v.copy(target).sub(camera.position).normalize());
     const hits = ray.intersectObjects(rayMeshes(), false);
-    const r = { pt: null, occ: false, t: ot };
+    const r = { pt: null, occ: false, n: null };
     for(const h of hits){
       const o = h.object;
       if(!effVis(o) || o.userData.ghost) continue;
       if(o.material && o.material.transparent && o.material.opacity < 0.5) continue;
-      if(o.userData.partId === id) r.pt = h.point.clone(); else r.occ = true;
+      if(o.userData.partId === id){
+        r.pt = h.point.clone();
+        o.updateWorldMatrix(true,false);
+        if(h.face && h.face.normal) r.n = h.face.normal.clone().transformDirection(o.matrixWorld);
+      } else r.occ = true;
       break; }
-    anchT[key] = r; return r;
+    return r;
   };
-  const _v = new THREE.Vector3();
-  const _pcCache = {};
+  const _v = new THREE.Vector3(), _nd = new THREE.Vector3();
   const SVGNS = "http://www.w3.org/2000/svg";
   const hideLbl = id => { if(lblPool[id]) lblPool[id].style.display="none";
     if(lnPool[id]) lnPool[id].style.display="none"; };
@@ -18979,7 +19085,6 @@ function buildScene(gltf, st){
     stB.classList.toggle("on",stOn);
     stB.querySelector("b").textContent = stOn ? `${revSet.size}/${lblCount||"…"}` : "Test"; };
   if(stB) stB.addEventListener("click",()=>{ stOn=!stOn; revSet.clear();
-    if(stOn && !labelsOn && lblb) lblb.click(); /* one tap turns labels on, masked */
     lblLayer.querySelectorAll(".b3dlbl").forEach(el=>{ el.classList.remove("mask"); });
     stSync(); updLabels(); updLms(); });
   /* labels are tappable — a masked one reveals its name, a named one selects
@@ -18991,26 +19096,51 @@ function buildScene(gltf, st){
       el.textContent = nameOf(el.dataset.id); el.classList.remove("mask");
       stSync(); return; }
     select(el.dataset.id); });
-  const updLabels = () => { if(!labelsOn || quiz.on){ for(const id in lblPool) hideLbl(id); return; }
-    const vis = Object.keys(meshes).filter(id=>anyVis(id) && !id.startsWith("z:misc"));
-    vis.sort((a,b)=>{ if(!_pcCache[a]) _pcCache[a]=partCenter(a); if(!_pcCache[b]) _pcCache[b]=partCenter(b);
-      return (_pcCache[b]?_pcCache[b].r:0) - (_pcCache[a]?_pcCache[a].r:0); });
-    const shown = vis.slice(0, lowPower?18:30), seen = {}, placed=[];
-    const sw=W(), sh=H(), cx=sw/2, cy=sh/2;
-    for(const id of shown){ if(!_pcCache[id]) _pcCache[id]=partCenter(id); if(!_pcCache[id]) continue;
-      /* anchor on the part's visible surface — occluded parts get no label */
-      const anch = surfPt("l:"+id, id, partMain(id) || _pcCache[id].c);
-      if(!anch.pt){ hideLbl(id); continue; }
-      _v.copy(anch.pt).project(camera);
-      let el = lblPool[id];
+  const updLabels = () => { if(quiz.on){ for(const id in lblPool) hideLbl(id); return; }
+    let shown;
+    if(labelsOn || stOn){
+      /* full label mode — self-test (masked) and lesson "all"/"mask" steps */
+      if(!visParts){
+        visParts = Object.keys(meshes).filter(id=>anyVis(id) && !id.startsWith("z:misc"));
+        visParts.sort((a,b)=>{ if(!_pcCache[a]) _pcCache[a]=partCenter(a); if(!_pcCache[b]) _pcCache[b]=partCenter(b);
+          return (_pcCache[b]?_pcCache[b].r:0) - (_pcCache[a]?_pcCache[a].r:0); });
+      }
+      shown = visParts.slice(0, lowPower?18:30);
+    } else {
+      /* contextual — callout only on the structure the user tapped, isolated
+         or is focused on, like a dedicated anatomy viewer. Cheap to draw. */
+      shown = [];
+      const add = id => { if(id && meshes[id] && anyVis(id) && !shown.includes(id)) shown.push(id); };
+      add(isolated);
+      if(focusSet) for(const id of focusSet) add(id);
+      add(selected);
+    }
+    const seen = {}, placed=[];
+    const sw=W(), sh=H(), gap=12;
+    for(const id of shown){
+      /* surface anchor — cached, so the dot rides the geometry instead of
+         re-snapping to a fresh surface point every frame */
+      let a = anchorPool[id];
+      if(a === undefined){
+        if(!_pcCache[id]) _pcCache[id]=partCenter(id);
+        const tgt = partMain(id) || (_pcCache[id] && _pcCache[id].c);
+        if(!tgt){ anchorPool[id] = a = null; }
+        else { const s = surfPt(id, tgt); anchorPool[id] = a = (s && s.pt) ? {pt:s.pt, n:s.n, occ:s.occ} : null; }
+      }
+      if(!a){ hideLbl(id); continue; }
+      _v.copy(a.pt).project(camera);
       if(_v.z>1){ hideLbl(id); continue; }
+      /* hide once the anchor's surface normal turns away (its far side) */
+      const ctx = !(labelsOn || stOn); /* contextual callouts always show */
+      if(a.n && !ctx){ _nd.copy(camera.position).sub(a.pt); const dn=_nd.length();
+        if(dn>0 && a.n.dot(_nd.multiplyScalar(1/dn))<=0){ hideLbl(id); continue; } }
       const lx=(_v.x+1)/2*sw, ly=(1-_v.y)/2*sh;
-      const dx=lx-cx, dy=ly-cy, dl=Math.hypot(dx,dy)||1;
-      const px=lx+dx/dl*40, py=ly+dy/dl*30;
+      const px=Math.max(40,Math.min(sw-40,lx)), py=ly-gap;
       let clash=false;
-      for(const q of placed){ if(Math.abs(q[0]-px)<60 && Math.abs(q[1]-py)<16){ clash=true; break; } }
+      if(!ctx) for(const q of placed){ if(Math.abs(q[0]-px)<60 && Math.abs(q[1]-py)<18){ clash=true; break; } }
       if(clash){ hideLbl(id); continue; }
       seen[id]=1; placed.push([px,py]);
+      let el = lblPool[id];
       if(!el){ el=document.createElement("div"); el.className="b3dlbl"; lblPool[id]=el; lblLayer.appendChild(el); }
       el.dataset.id = id;
       el.style.display="block";
@@ -19020,28 +19150,24 @@ function buildScene(gltf, st){
       el.textContent = masked ? "?" : nameOf(id);
       let g = lnPool[id];
       if(!g){ g=document.createElementNS(SVGNS,"g");
-        g.innerHTML = '<line/><circle r="2.2"/>'; lnSVG.appendChild(g); lnPool[id]=g; }
+        g.innerHTML = '<line/><circle class="lb-ring" r="4.5"/><circle class="lb-dot" r="1.6"/>'; lnSVG.appendChild(g); lnPool[id]=g; }
       g.style.display="";
-      const ln=g.children[0], cd=g.children[1];
+      const ln=g.children[0], ring=g.children[1], dot=g.children[2];
       ln.setAttribute("x1",lx); ln.setAttribute("y1",ly);
       ln.setAttribute("x2",px); ln.setAttribute("y2",py);
-      cd.setAttribute("cx",lx); cd.setAttribute("cy",ly); }
+      ring.setAttribute("cx",lx); ring.setAttribute("cy",ly);
+      dot.setAttribute("cx",lx); dot.setAttribute("cy",ly); }
     for(const id in lblPool) if(!seen[id]) hideLbl(id);
     lblCount = placed.length; stSync(); };
-  const lblb = $("#b3dlbl");
-  if(lblb) lblb.addEventListener("click",()=>{ labelsOn=!labelsOn; lblb.classList.toggle("on",labelsOn);
-    lblLayer.style.display = labelsOn?"block":"none";
-    if(lnSVG) lnSVG.style.display = labelsOn?"block":"none";
-    if(!labelsOn){ stOn=false; revSet.clear(); }
-    stSync(); if(labelsOn) updLabels(); });
+  const lblb = $("#b3dlbl"); /* dock toggle removed — labels are contextual now */
 
   /* ---- bone-landmark layer: cyan pins for named surface features (tubercles,
      grooves, epicondyles…) that are part of a bigger mesh. Anchors come from
      ATLAS_LM — either a z: sub-mesh whose centre sits on the feature, or an
      offset measured on the real geometry. Each landmark is re-anchored to its
      nearest parent mesh so the dot follows explode/isolate transforms. ---- */
-  const lmLayer = $("#b3dlms");
-  let lmOn = false, lmFlash = null;
+  const lmLayer = $("#b3dlms"), lmSVG = $("#b3dlnl");
+  let lmFlash = null;
   const LMS = [], LM_HAS = {};
   if (lmLayer && window.ATLAS_LM) {
     const _lmc = new THREE.Vector3();
@@ -19076,9 +19202,10 @@ function buildScene(gltf, st){
     }
   }
   const lmById = lid => LMS.find(x => x.L.id === lid) || null;
-  const lmPool = {}, lmDot = {};
+  const lmPool = {}, lmDot = {}, lmLn = {};
   const hideLm = lid => { if(lmPool[lid]) lmPool[lid].style.display="none";
-    if(lmDot[lid]) lmDot[lid].style.display="none"; };
+    if(lmDot[lid]) lmDot[lid].style.display="none";
+    if(lmLn[lid]) lmLn[lid].style.display="none"; };
   const lmPt = it => { if(!it.m.geometry.boundingSphere) it.m.geometry.computeBoundingSphere();
     return _v.copy(it.m.geometry.boundingSphere.center).applyMatrix4(it.m.matrixWorld).add(it.o); };
   /* occlusion with a short cache: the first solid thing the camera→point ray
@@ -19087,7 +19214,7 @@ function buildScene(gltf, st){
   const lmVis = (it, pt) => {
     const now = performance.now(), rec = lmVT[it.L.id];
     if (rec && now - rec.t < (lowPower ? 300 : 150)) return rec.v;
-    ray.set(camera.position, _v.copy(pt).sub(camera.position).normalize());
+    ray.set(camera.position, _nd.copy(pt).sub(camera.position).normalize());
     const hits = ray.intersectObjects(rayMeshes(), false);
     let v = true;
     for (const h of hits) { const o = h.object;
@@ -19124,26 +19251,13 @@ function buildScene(gltf, st){
   const updLms = () => {
     if (!lmLayer) return;
     const auto = (isolated !== null && LM_HAS[isolated]) || (selected !== null && LM_HAS[selected]);
-    if (quiz.on || stOn || (!lmOn && !auto)) {
+    if (quiz.on || stOn || !auto) {
       for (const k in lmPool) hideLm(k); return;
     }
-    let list = null;
-    const focusPid = isolated !== null && LM_HAS[isolated] ? isolated
-      : (selected !== null && LM_HAS[selected] ? selected : null);
-    if (focusPid) list = LMS.filter(x => x.pid === focusPid);
-    else if (lmOn) {
-      /* with the toggle on, pin the landmarks of the largest visible bones —
-         same size ranking the label layer uses, capped so it never clutters */
-      const cands = Object.keys(LM_HAS).filter(id => anyVis(id));
-      cands.sort((a,b) => { const ra = _pcCache[a] || partCenter(a), rb = _pcCache[b] || partCenter(b);
-        return (rb ? rb.r : 0) - (ra ? ra.r : 0); });
-      let budget = lowPower ? 12 : 24;
-      const keep = new Set();
-      for (const id of cands) { if (budget <= 0) break;
-        budget -= LM_HAS[id]; keep.add(id); }
-      list = LMS.filter(x => keep.has(x.pid) && anyVis(x.pid));
-    } else list = [];
-    const sw = W(), sh = H(), seen = {};
+    /* contextual only — landmarks on the selected/isolated bone, never global */
+    const focusPid = isolated !== null && LM_HAS[isolated] ? isolated : selected;
+    const list = LMS.filter(x => x.pid === focusPid);
+    const sw = W(), sh = H(), seen = {}, items = [];
     for (const it of list) {
       const pt = lmPt(it);
       if (!lmVis(it, pt)) continue;
@@ -19151,29 +19265,62 @@ function buildScene(gltf, st){
       if (_v.z > 1) continue;
       const lx = (_v.x + 1) / 2 * sw, ly = (1 - _v.y) / 2 * sh;
       if (lx < -40 || ly < -20 || lx > sw + 40 || ly > sh + 20) continue;
-      seen[it.L.id] = 1;
-      let d = lmDot[it.L.id];
-      if (!d) { d = document.createElement("div"); d.className = "b3dlmd";
-        lmDot[it.L.id] = d; lmLayer.appendChild(d); }
-      d.style.display = "block"; d.style.left = lx + "px"; d.style.top = ly + "px";
-      let el = lmPool[it.L.id];
+      items.push({ it, lx, ly });
+    }
+    /* anatomy-plate layout: dots stay glued on the bone, name pills fan out to
+       the side in a spaced column, each tied back to its dot by a leader line */
+    const TOP = 12, BOT = sh - 12, GAP = 5, RUN = 26;
+    for (const q of items) {
+      let el = lmPool[q.it.L.id];
       if (!el) { el = document.createElement("div"); el.className = "b3dlm";
-        lmPool[it.L.id] = el; lmLayer.appendChild(el); }
-      el.dataset.lid = it.L.id;
+        lmPool[q.it.L.id] = el; lmLayer.appendChild(el); }
+      el.dataset.lid = q.it.L.id;
       el.style.display = "block";
-      el.style.left = lx + "px"; el.style.top = ly + "px";
-      el.classList.toggle("hot", lmFlash === it.L.id);
-      el.textContent = it.L.n;
+      el.classList.toggle("hot", lmFlash === q.it.L.id);
+      el.textContent = q.it.L.n;
+    }
+    for (const q of items) { const el = lmPool[q.it.L.id];
+      q.w = el.offsetWidth; q.h = el.offsetHeight; }
+    /* split about the bone's own centre so both gutters stay balanced */
+    const mx = items.length ? items.reduce((s, q) => s + q.lx, 0) / items.length : sw / 2;
+    for (const q of items) q.side = q.lx < mx ? -1 : 1;
+    for (const side of [-1, 1]) {
+      const g = items.filter(q => q.side === side).sort((a, b) => a.ly - b.ly);
+      if (!g.length) continue;
+      const maxW = Math.max(...g.map(q => q.w));
+      /* one aligned column just outside the bone's outermost dot on that side */
+      let gx = side === -1 ? Math.min(...g.map(q => q.lx)) - RUN : Math.max(...g.map(q => q.lx)) + RUN;
+      gx = side === -1 ? Math.max(6 + maxW, Math.min(gx, sw - 6)) : Math.min(sw - 6 - maxW, Math.max(gx, 6));
+      for (const q of g) { q.py = Math.max(TOP, Math.min(BOT, q.ly)); q.gx = gx; }
+      for (let i = 1; i < g.length; i++) { const p = g[i - 1], q = g[i], need = (p.h + q.h) / 2 + GAP;
+        if (q.py < p.py + need) q.py = p.py + need; }
+      const over = g[g.length - 1].py - BOT;
+      if (over > 0) { g[g.length - 1].py = BOT;
+        for (let i = g.length - 2; i >= 0; i--) { const n = g[i + 1], q = g[i], need = (q.h + n.h) / 2 + GAP;
+          if (q.py > n.py - need) q.py = n.py - need; } }
+      if (g[0].py < TOP) { const s = TOP - g[0].py; for (const q of g) q.py += s; }
+    }
+    for (const q of items) {
+      const { lx, ly, side } = q, ex = q.gx, id = q.it.L.id;
+      seen[id] = 1;
+      let d = lmDot[id];
+      if (!d) { d = document.createElement("div"); d.className = "b3dlmd";
+        lmDot[id] = d; lmLayer.appendChild(d); }
+      d.style.display = "block"; d.style.left = lx + "px"; d.style.top = ly + "px";
+      const el = lmPool[id];
+      el.style.left = ex + "px"; el.style.top = q.py + "px";
+      el.style.transform = side === 1 ? "translate(0,-50%)" : "translate(-100%,-50%)";
+      let ln = lmLn[id];
+      if (!ln && lmSVG) { ln = document.createElementNS(SVGNS, "polyline");
+        ln.setAttribute("class", "lmline"); lmLn[id] = ln; lmSVG.appendChild(ln); }
+      if (ln) { ln.style.display = "";
+        /* elbow: short diagonal off the dot, then a level run into the pill */
+        const kx = ex - side * Math.min(10, Math.abs(ex - lx) / 2);
+        ln.setAttribute("points", lx + "," + ly + " " + kx + "," + q.py + " " + ex + "," + q.py); }
     }
     for (const k in lmPool) if (!seen[k]) hideLm(k);
   };
-  const lmB = $("#b3dlmB");
-  if (lmB) lmB.addEventListener("click",()=>{
-    lmOn = !lmOn; lmB.classList.toggle("on",lmOn);
-    if (lmOn && stOn) stB.click(); /* landmarks give self-test answers away */
-    updLms(); queueUrl();
-  });
-  window.__b3d.lmstate = () => ({ flash: lmFlash, on: lmOn, n: LMS.length,
+  window.__b3d.lmstate = () => ({ flash: lmFlash, n: LMS.length,
     has: Object.keys(LM_HAS).length });
   if (lmFlash) setTimeout(()=>{ lmFlash = null; }, 5000);
 
@@ -19194,7 +19341,7 @@ function buildScene(gltf, st){
     el.title = (pinsV2[id] && pinsV2[id].n) || nameOf(id);
     plLayer.appendChild(el);
     const g = document.createElementNS(SVGNS,"g");
-    g.innerHTML = '<line class="pline"/><circle class="pdot" r="3.4"/>';
+    g.innerHTML = '<line class="pline"/><circle class="pring" r="6"/><circle class="pdot" r="2.6"/>';
     pnSVG.appendChild(g);
     const p = pnPool[id] = {el,g};
     el.querySelector(".px").addEventListener("click",e=>{ e.stopPropagation(); pinDel(id); if(selected===id) showInfo(id); });
@@ -19240,13 +19387,17 @@ function buildScene(gltf, st){
       const gone = hidden.has(id) || !chipOn[ps] || peelOf(ps) < peelN
         || (isolated!==null && isolated!==id) || (focusSet && !focusSet.has(id));
       if(!meshes[id] || gone){ hidePn(id); continue; }
-      const a = pinAnchor(id); if(!a){ hidePn(id); continue; }
-      /* snap the dot onto the part's visible surface; dim the pin when the
-         anchor is buried behind other parts */
-      const anch = surfPt("p:"+id, id, a);
-      const dot = anch.pt || a;
-      _v.copy(dot).project(camera);
+      const tgt = pinAnchor(id); if(!tgt){ hidePn(id); continue; }
+      /* surface anchor — cached, so the dot stays glued to the geometry */
+      let a = anchorPool["p:"+id];
+      if(a === undefined){
+        const s = surfPt(id, tgt);
+        anchorPool["p:"+id] = a = { pt: s.pt || tgt, n: s.pt ? s.n : null, occ: s.occ };
+      }
+      _v.copy(a.pt).project(camera);
       if(_v.z>1){ hidePn(id); continue; }
+      if(a.n){ _nd.copy(camera.position).sub(a.pt); const dn=_nd.length();
+        if(dn>0 && a.n.dot(_nd.multiplyScalar(1/dn))<=0){ hidePn(id); continue; } }
       const ax=(_v.x+1)/2*sw, ay=(1-_v.y)/2*sh;
       const pin = pinsV2[id], lo = pin.lo || [16,-40];
       const px = Math.max(64,Math.min(sw-64, ax+lo[0]));
@@ -19255,17 +19406,16 @@ function buildScene(gltf, st){
       const p = pnPool[id] || mkPin(id);
       p.el.style.display="flex"; p.el.style.left=px+"px"; p.el.style.top=py+"px";
       p.g.style.display="";
-      const ln=p.g.children[0], cd=p.g.children[1];
+      const ln=p.g.querySelector(".pline"), ring=p.g.querySelector(".pring"), cd=p.g.querySelector(".pdot");
       ln.setAttribute("x1",ax); ln.setAttribute("y1",ay);
       ln.setAttribute("x2",px); ln.setAttribute("y2",py);
+      ring.setAttribute("cx",ax); ring.setAttribute("cy",ay);
       cd.setAttribute("cx",ax); cd.setAttribute("cy",ay);
-      p.el.style.opacity = anch.occ ? ".38" : "";
-      p.g.style.opacity  = anch.occ ? ".35" : ""; }
+      p.el.style.opacity = a.occ ? ".38" : "";
+      p.g.style.opacity  = a.occ ? ".35" : ""; }
     for(const id in pnPool) if(!seen[id]) hidePn(id);
   };
-  const pinB = $("#b3dpinT");
-  if(pinB){ pinB.classList.add("on");
-    pinB.addEventListener("click",()=>{ pinsOn=!pinsOn; pinB.classList.toggle("on",pinsOn); updPins(); }); }
+  /* pins are persistent user markers — always rendered while visible */
 
   /* quiz + screenshot stage buttons */
   const qb = $("#b3dquiz");
@@ -19308,7 +19458,7 @@ function buildScene(gltf, st){
       for(const m of loose){ m.userData.baseMat = nx==="z" ? m.userData.origMat
         : tintMat(nx==="reg" ? 0x8d99a6 : (SYS_COLOR[m.userData.sys]||0x8d99a6));
         m.userData.glowMat = null; }
-      applyVis(); if(selected) each(selected,m=>glow(m,0x8a6d00));
+      applyVis(); if(selected) each(selected,m=>glow(m,selHex(selected)));
       }); }
 
   /* layer peel slider */
@@ -19330,7 +19480,8 @@ function buildScene(gltf, st){
         m.position.copy(m.userData.p0).addScaledVector(d, explodeAmt); } }
     for(const m of loose){ const d = m.userData.expD || _zeroV;
       m.position.copy(m.userData.p0).addScaledVector(d, explodeAmt); }
-    group.updateMatrixWorld(true); poke(); queueUrl();
+    group.updateMatrixWorld(true); anchorPool = {}; _pcCache = {}; _pmCache = {};
+    poke(); queueUrl();
     if(expV) expV.textContent = v ? v+"%" : ""; };
   if(expIn) expIn.addEventListener("input",()=>setExplode(+expIn.value));
   if(st.exp && expIn){ expIn.value = st.exp; setExplode(st.exp); }
@@ -19434,15 +19585,68 @@ function buildScene(gltf, st){
   qin.addEventListener("blur",()=>{ qres.style.display="none"; });
   qin.addEventListener("keydown",e=>{ if(e.key==="Enter"){ const h=qres.querySelector(".qhit[data-id]"); if(h) h.dispatchEvent(new Event("pointerdown")); } });
 
-  /* system filter chips */
+  /* system filter chips — each with CA-style −/+ depth steppers:
+     − peels that layer and everything shallower; + reveals down to that layer */
   const f = $("#b3df");
   const syss = Object.keys(bySysM).sort((a,b)=>SYSTEMS[a].name.localeCompare(SYSTEMS[b].name));
-  f.innerHTML = syss.map(s=>`<button class="fchip${s==="integumentary"?"":" on"}" data-s="${s}" style="--fc:#${(SYS_COLOR[s]||0x8d99a6).toString(16).padStart(6,"0")}">${SYSTEMS[s].icon} ${SYSTEMS[s].name}</button>`).join("");
+  f.innerHTML = syss.map(s=>`<div class="sysrow"><button class="fchip${s==="integumentary"?"":" on"}" data-s="${s}" style="--fc:#${(SYS_COLOR[s]||0x8d99a6).toString(16).padStart(6,"0")}">${SYSTEMS[s].icon} ${SYSTEMS[s].name}</button><span class="stp"><button data-d="-1" title="Peel — remove ${esc(SYSTEMS[s].name)} and everything shallower">−</button><button data-d="1" title="Reveal down to the ${esc(SYSTEMS[s].name)} layer">+</button></span></div>`).join("");
   f.querySelectorAll(".fchip[data-s]").forEach(ch=>ch.classList.toggle("on",!!chipOn[ch.dataset.s]));
   f.querySelectorAll(".fchip").forEach(ch=>ch.addEventListener("click",()=>{
     const s = ch.dataset.s; const on = ch.classList.toggle("on");
     chipOn[s] = on; applyVis();
   }));
+  f.querySelectorAll(".stp [data-d]").forEach(b=>b.addEventListener("click",e=>{
+    e.stopPropagation();
+    const s = b.closest(".sysrow").querySelector(".fchip").dataset.s, r = peelOf(s);
+    if(r < 0) return;
+    pushHist();
+    if(b.dataset.d === "-1") peelN = Math.min(PEEL.length, Math.max(peelN, r + 1));
+    else { peelN = Math.max(0, Math.min(peelN, r)); chipOn[s] = true; }
+    if(peelIn){ peelIn.value = peelN/PEEL.length*100;
+      peelV.textContent = peelN ? PEEL.slice(0,peelN).map(x=>SYSTEMS[x].icon).join("") : ""; }
+    applyVis(); if(selected && !anyVis(selected)) select(null);
+  }));
+  /* chip state: on/off, dimmed-when-peeled, warn dot when it hides hidden parts */
+  function syncSys(){ const ff = $("#b3df"); if(!ff) return;
+    ff.querySelectorAll(".fchip[data-s]").forEach(ch=>{ const s = ch.dataset.s;
+      ch.classList.toggle("on",!!chipOn[s]);
+      ch.classList.toggle("peeled", !!chipOn[s] && peelOf(s)<peelN);
+      let n=0; for(const id of hidden) if(sysOf(id)===s) n++;
+      for(const id of faded) if(sysOf(id)===s) n++;
+      ch.classList.toggle("warn",n>0);
+      ch.title = n ? `${n} structure${n>1?"s":""} hidden/faded — ↺ below restores` : ""; });
+    const rb = $("#b3dreshid"); if(rb){ const n = hidden.size + faded.size;
+      rb.style.display = n ? "" : "none";
+      rb.textContent = `↺ Show ${n} hidden/faded`; } }
+  /* browsable structure index — visible named parts grouped by system */
+  function updIdx(){ const dr = $("#b3ddrawer"), idxEl = $("#b3didx");
+    if(!dr || !dr.classList.contains("on") || !idxEl) return;
+    const bySysL = {};
+    for(const id in meshes){ if(!byId[id] || id.startsWith("z:") || !anyVis(id)) continue;
+      const s = sysOf(id); (bySysL[s] = bySysL[s] || []).push(id); }
+    idxEl.innerHTML = Object.keys(bySysL).sort((a,b)=>SYSTEMS[a].name.localeCompare(SYSTEMS[b].name))
+      .map(s=>`<div class="idx-g"><h5>${SYSTEMS[s].icon} ${esc(SYSTEMS[s].name)}</h5>${
+        bySysL[s].sort((a,b)=>nameOf(a).localeCompare(nameOf(b))).map(id=>
+          `<div class="idx-r${id===selected?" on":""}" data-id="${id}"><span>${esc(nameOf(id))}</span><button data-x="${id}" title="Hide">👁</button></div>`).join("")
+      }</div>`).join("");
+    idxEl.querySelectorAll(".idx-r").forEach(r=>r.addEventListener("click",e=>{
+      const id = r.dataset.id;
+      if(e.target.closest("[data-x]")){ pushHist(); hidden.add(id); applyVis(); syncHiddenBar(); }
+      else focusOn(id); }));
+  }
+  const rbBtn = $("#b3dreshid");
+  if(rbBtn) rbBtn.addEventListener("click",()=>{ pushHist();
+    hidden.clear(); faded.clear(); isolated=null; focusSet=null; applyVis(); syncHiddenBar(); });
+  /* skin opacity — BioDigital-style translucency on the integumentary layer */
+  const applySkinOp = () => { const seen = new Set();
+    const apply = m => { const t = m.userData.baseMat||m.material; if(seen.has(t)) return; seen.add(t);
+      t.transparent = skinOp<1; t.opacity = skinOp; t.depthWrite = skinOp>=1; };
+    for(const id in meshes) for(const m of meshes[id]) if(m.userData.sys==="integumentary") apply(m);
+    for(const m of loose) if(m.userData.sys==="integumentary") apply(m);
+    poke(); };
+  const skinIn = $("#b3dskin"), skinV = $("#b3dskinv");
+  if(skinIn) skinIn.addEventListener("input",()=>{ skinOp = skinIn.value/100;
+    skinV.textContent = +skinIn.value<100 ? skinIn.value+"%" : ""; applySkinOp(); });
   /* study aids: Z-Anatomy's annotation layers (insertions, regions, lines) */
   const aidb = document.createElement("button");
   aidb.className = "fchip on"; aidb.textContent = "🗺 study aids"; aidb.style.setProperty("--fc","#8d99a6");
@@ -19462,7 +19666,7 @@ function buildScene(gltf, st){
   const setLayers = sel => {
     pushHist();
     for(const s in chipOn) chipOn[s] = sel===null ? s!=="integumentary" : sel.includes(s);
-    hidden.clear(); isolated = null; peelN = 0;
+    hidden.clear(); faded.clear(); isolated = null; focusSet = null; peelN = 0;
     if(peelIn){ peelIn.value = 0; peelV.textContent = ""; }
     f.querySelectorAll(".fchip[data-s]").forEach(ch=>ch.classList.toggle("on",!!chipOn[ch.dataset.s]));
     applyVis(); syncHiddenBar(); };
@@ -19509,7 +19713,7 @@ function buildScene(gltf, st){
       if(document.fullscreenElement) document.exitFullscreen(); else reqFs.call(appEl); });
   }
   document.addEventListener("fullscreenchange",()=>{ if(document.body.contains(cv)){
-    camera.aspect = W()/H(); camera.updateProjectionMatrix(); renderer.setSize(W(),H()); poke(); } });
+    dockSync(); renderer.setSize(W(),H()); poke(); } });
 
   /* chrome: dock popovers (slice / explode / peel), layers drawer, first-run hint */
   const pops = [...appEl.querySelectorAll(".b3d-pop")], popBs = [...appEl.querySelectorAll("[data-pop]")];
@@ -19522,6 +19726,7 @@ function buildScene(gltf, st){
   const drawer = $("#b3ddrawer"), dscrim = $("#b3dscrim"), layersB = $("#b3dlayers");
   function closeDrawer(){ drawer.classList.remove("on"); dscrim.classList.remove("on"); layersB.classList.remove("on"); }
   const openDrawer = sec => { closePops(); drawer.classList.add("on"); dscrim.classList.add("on"); layersB.classList.add("on");
+    updIdx();
     if(sec){ const t = $(sec); if(t) t.scrollIntoView({block:"start"}); } else $(".dr-body").scrollTop = 0; };
   layersB.addEventListener("click",()=>drawer.classList.contains("on") ? closeDrawer() : openDrawer());
   $("#b3dhelpbtn").addEventListener("click",()=>openDrawer("#b3dhelp"));
@@ -19547,16 +19752,16 @@ function buildScene(gltf, st){
   /* label fading inside lessons: all → masked → off as the lesson progresses */
   const setLbl = mode => { labelsOn = mode!=="off"; stOn = mode==="mask"; revSet.clear();
     if(stB) stSync(); if(lblb) lblb.classList.toggle("on",labelsOn);
-    lblLayer.style.display = labelsOn?"block":"none";
-    if(lnSVG) lnSVG.style.display = labelsOn?"block":"none";
+    lblLayer.style.display = "block";
+    if(lnSVG) lnSVG.style.display = "block";
     updLabels(); };
   const lesClose = () => { lesson.on=false; lesson.sys=null; lesson.q=null;
     if(lesEl) lesEl.style.display="none";
     appEl.classList.remove("lesson");
     if(lesson.lblSaved){ const m = lesson.lblSaved[0] ? (lesson.lblSaved[1]?"mask":"all") : "off";
       lesson.lblSaved=null; setLbl(m); }
-    focusSet=null; if(isolated===lesson.id) isolated=null;
-    applyVis(); if(selected===lesson.id) select(null); queueUrl(); };
+    focusSet=null; setLayers(null);
+    if(selected===lesson.id) select(null); queueUrl(); };
   const buildLesson = (id,sys) => {
     const d = byId[id]; if(!d) return null;
     const steps = [];
@@ -19565,6 +19770,11 @@ function buildScene(gltf, st){
     const sysMeta = META.systems[d.system];
     const flyK = k => { const p = partCenter(id); if(p) flyTo(p.c, p.r*k); };
     const focusIt = ()=>{ focusSet=new Set([id]); applyVis(); };
+    const msys = meshes[id] ? [...new Set(meshes[id].map(m=>m.userData.sys))] : null;
+    const onlyIds = ids => { const keep = new Set(ids.filter(i=>meshes[i])); if(!keep.size) return;
+      for(const k of keep) chipOn[meshes[k][0].userData.sys] = true;
+      hidden.clear(); for(const k in meshes) if(!keep.has(k)) hidden.add(k);
+      focusSet=null; isolated=null; applyVis(); };
     const rel = (d.related||[]).filter(r=>meshes[r]);
     /* 1 · Location — anchor it on the body map first */
     steps.push({ t:"📍 Location", lbl:"all",
@@ -19572,11 +19782,11 @@ function buildScene(gltf, st){
       x:`The <b>${esc(d.name)}</b>${reg?` sits in the <b>${esc(reg)}</b>`:""}${d.aka?` — also called the <b>${esc(d.aka)}</b>`:""}.<br><br>
         ${esc(d.summary||"")}${t.where?`<br><br>${esc(t.where)}`:""}
         ${sysMeta?`<br><br><span class="dim">It belongs to the <b>${esc(sysMeta.name)}</b> — ${esc((sysMeta.blurb||"").split(".")[0].toLowerCase())}.</span>`:""}`,
-      act:()=>{ setLayers(null); focusIt(); select(id); flyK(3.0); } });
+      act:()=>{ setLayers(msys); focusIt(); select(id); flyK(3.0); } });
     /* 2 · Form — what it actually looks like */
     if(d.structure || t.look) steps.push({ t:"🔍 Form & structure", lbl:"all",
       x:`${d.structure?esc(d.structure):""}${t.look?`<br><br><b class="les-kw">What to look for:</b> ${esc(t.look)}`:""}`,
-      act:()=>{ focusIt(); flyK(1.4); } });
+      act:()=>{ onlyIds([id]); flyK(1.4); } });
     /* 3 · Neighbours — one guided step per key neighbour, each ending in a tap-it check */
     for(const r of rel.slice(0,3)){
       const rd = byId[r];
@@ -19586,30 +19796,30 @@ function buildScene(gltf, st){
       steps.push({ t:`🔗 ${nameOf(r)}`, lbl:"off",
         x:`<b>${esc(nameOf(r))}</b><br><br>${phrase}<br><br><span class="dim">Everything else is ghosted — look at where it sits next to the ${esc(d.name)}.</span>`,
         q:{id:r, t:`Now tap the <b>${esc(nameOf(r))}</b> on the body`},
-        act:()=>{ focusSet=new Set([id,r]); applyVis();
+        act:()=>{ onlyIds([id,r]);
           const box=new THREE.Box3(); [id,r].forEach(rr=>{ const p=partCenter(rr); if(p) box.expandByPoint(p.c); });
           if(!box.isEmpty()){ const c=box.getCenter(new THREE.Vector3());
             flyTo(c, Math.max(box.getSize(new THREE.Vector3()).length()/1.8, rad*0.02)); } } }); }
     /* 4 · Blood & nerve supply — when we have the detail */
     if(t.supply) steps.push({ t:"🩸 Supply & nerves", lbl:"mask",
-      x:esc(t.supply), act:()=>{ focusIt(); flyK(1.7); } });
+      x:esc(t.supply), act:()=>{ onlyIds([id]); flyK(1.7); } });
     /* 5 · Function — the job it does */
     if(d.fn) steps.push({ t:"⚙️ What it does", lbl:"mask",
-      x:esc(d.fn), act:()=>{ focusIt(); } });
+      x:esc(d.fn), act:()=>{ onlyIds([id]); } });
     /* 6 · Clinical — why it matters in real life */
     if(d.clinical || t.case) steps.push({ t:"🏥 Why it matters", lbl:"mask",
       x:`${d.clinical?esc(d.clinical):""}${t.case?`<br><br><b class="les-kw">Classic case:</b> ${esc(t.case)}`:""}
         <br><br><a href="#/part/${id}" style="color:#ffd60a">Read the full atlas entry →</a>`,
-      act:()=>{ focusIt(); flyK(1.6); } });
+      act:()=>{ onlyIds([id]); flyK(1.6); } });
     /* 7 · Memory hook */
     if(t.mnemonic) steps.push({ t:"🧠 Memory hook", lbl:"mask",
       x:`<span class="les-kw">📌</span> ${esc(t.mnemonic)}`,
-      act:()=>{ focusIt(); } });
+      act:()=>{ onlyIds([id]); } });
     /* finish — find it yourself, then a quiz */
     steps.push({ t:"🎉 You've got it", finish:true, lbl:"off",
       x:`That's the <b>${esc(d.name)}</b>. Find it on the body one more time, then tap <b>Test me</b> — or mark the lesson done.`,
       q:{id},
-      act:()=>{ focusSet=null; isolated=null; hidden.clear(); applyVis(); flyK(2.4); } });
+      act:()=>{ focusSet=null; setLayers(null); flyK(2.4); } });
     return steps;
   };
   /* retrieval check — the tap-it questions inside lessons feed spaced repetition */
@@ -19689,11 +19899,8 @@ function buildScene(gltf, st){
      the parent bone, fly to it and pulse that landmark's pill */
   if(st.lm){
     const it = lmById(st.lm);
-    if (it) { lmOn = true; const b = $("#b3dlmB"); if (b) b.classList.add("on");
-      select(it.pid); focusOn(it.pid); lmFlash = st.lm; lmInfo(it);
+    if (it) { select(it.pid); focusOn(it.pid); lmFlash = st.lm; lmInfo(it);
       setTimeout(()=>{ lmFlash = null; }, 8000); }
-  } else if (st.lmon) {
-    lmOn = true; const b = $("#b3dlmB"); if (b) b.classList.add("on");
   }
 
   let raf;
@@ -19705,13 +19912,10 @@ function buildScene(gltf, st){
       for(const L of life){ const s = 1 + L.amp*Math.sin(t*6.283*L.freq);
         L.m.scale.setScalar(s);
         L.m.position.copy(L.p0).addScaledVector(L.m.userData.expD||_zeroV,explodeAmt).addScaledVector(L.c, 1-s); } }
-    if(selected && meshes[selected]) each(selected, m=>{ if(m.material.emissive)
-      m.material.emissiveIntensity = 0.55 + 0.3*Math.sin(performance.now()*0.006); });
     const moved = controls.update();
     const lifeVis = life.some(L=>effVis(L.m));
-    const animated = !!fly || controls.autoRotate || selected!==null || lifeVis || quiz.on;
-    if(labelsOn && (animated||moved||dirty)) updLabels();
-    if(animated||moved||dirty){ updLms(); updPins(); }
+    const animated = !!fly || controls.autoRotate || lifeVis || quiz.on;
+    if(animated||moved||dirty){ updLabels(); updLms(); updPins(); }
     if(animated || moved || dirty){
       dirty = false;
       try{ if(aoOn && composer) composer.render(); else renderer.render(scene,camera); }
@@ -19719,7 +19923,7 @@ function buildScene(gltf, st){
         renderer.render(scene,camera); } }
     raf=requestAnimationFrame(tick); };
   tick();
-  const onRs = ()=>{ if(!document.body.contains(cv)) return removeEventListener("resize",onRs); camera.aspect=W()/H(); camera.updateProjectionMatrix(); renderer.setSize(W(),H()); if(composer) composer.setSize(W(),H()); poke(); };
+  const onRs = ()=>{ if(!document.body.contains(cv)) return removeEventListener("resize",onRs); dockSync(); renderer.setSize(W(),H()); if(composer) composer.setSize(W(),H()); poke(); };
   addEventListener("resize",onRs);
 }
 
@@ -19730,6 +19934,7 @@ function v3D(sel){
   const selId = qm<0 ? (sel||null) : (sel.slice(0,qm)||null);
   const st = { sel: selId || q.get("sel") || null,
     hid: (q.get("hid")||"").split(",").filter(Boolean).slice(0,60),
+    fad: (q.get("fad")||"").split(",").filter(Boolean).slice(0,60),
     iso: q.get("iso") || null,
     pins: (q.get("pins")||"").split(",").filter(Boolean).slice(0,30),
     sys: q.get("sys") ? q.get("sys").split(",").filter(Boolean) : null,
@@ -19737,8 +19942,7 @@ function v3D(sel){
     exp: Math.max(0, Math.min(100, +q.get("exp")||0)),
     clip: q.get("clip") || null,
     lesson: q.get("lesson") || null,
-    lm: q.get("lm") || null,
-    lmon: q.get("lmon") === "1" };
+    lm: q.get("lm") || null };
   const ids = Object.keys(MODELS).filter(id=>byId[id]);
   document.body.classList.add("b3d-open");
   view.innerHTML = `<div class="b3d-app loading" id="b3dapp">
@@ -19747,8 +19951,9 @@ function v3D(sel){
       <div class="b3d-tip" id="b3dtip"></div>
       <svg class="b3d-lines" id="b3dln"></svg>
       <svg class="b3d-lines" id="b3dlnp" style="display:none"></svg>
+      <svg class="b3d-lines" id="b3dlnl"></svg>
       <div class="b3d-pl" id="b3dpl" style="display:none"></div>
-      <div class="b3d-lbls" id="b3dlbls" style="display:none"></div>
+      <div class="b3d-lbls" id="b3dlbls"></div>
       <div class="b3d-lms" id="b3dlms"></div>
     </div>
 
@@ -19766,7 +19971,7 @@ function v3D(sel){
       <div class="b3d-presets b3d-views" id="b3dvw"></div>
     </nav>
 
-    <div class="b3d-info" id="b3di"><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button><h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p></div>
+    <div class="b3d-info" id="b3di"><div class="b3d-grab"></div><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button><h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p></div>
     <div class="b3d-hbar" id="b3dhbar"></div>
     <div class="b3d-lesson" id="b3dles" style="display:none">
       <div class="les-top"><b class="les-step" id="lest"></b><span class="les-dots" id="lesdots"></span>
@@ -19784,25 +19989,25 @@ function v3D(sel){
       <div class="b3d-peel"><input id="b3dexp" type="range" min="0" max="100" value="0" aria-label="Explode view"><em id="b3dexpv"></em></div></div>
     <div class="b3d-pop" id="pop-peel"><div class="pop-h">🧅 Peel layers <small>skin → muscle → … → bone</small></div>
       <div class="b3d-peel"><input id="b3dpeel" type="range" min="0" max="100" value="0" aria-label="Peel anatomical layers"><em id="b3dpeelv"></em></div></div>
+    <div class="b3d-pop" id="pop-more"><div class="pop-h">⋯ More <small>display &amp; actions</small></div>
+      <div class="pop-tools">
+        <button class="dock-b" id="b3dwire" title="Wireframe on/off"><i>🕸</i><b>Wire</b></button>
+        <button class="dock-b" id="b3dao" title="Depth shading (ambient occlusion)"><i>🕳</i><b>AO</b></button>
+        <button class="dock-b" id="b3dundo" title="Undo hide/isolate (Ctrl+Z)" disabled><i>⎌</i><b>Undo</b></button>
+        <button class="dock-b" id="b3dshot" title="Save a screenshot (PNG)"><i>📷</i><b>Photo</b></button>
+        <button class="dock-b" id="b3dreset" title="Reset view"><i>⟲</i><b>Reset</b></button>
+      </div></div>
 
     <nav class="b3d-dock" aria-label="3D tools"><div class="dock-in">
-      <button class="dock-b" id="b3dlbl" title="Show structure labels"><i>🏷</i><b>Labels</b></button>
-      <button class="dock-b" id="b3dlmB" title="Bone landmarks — pin the named tubercles, grooves and processes on the bones"><i>📍</i><b>Landmarks</b></button>
       <button class="dock-b" id="b3dst" title="Hide the names — tap a ? to reveal it (self-test)"><i>🙈</i><b>Test</b></button>
-      <button class="dock-b" id="b3dpinT" title="Show/hide your pinned markers"><i>📌</i><b>Pins</b></button>
       <button class="dock-b" id="b3dxr" title="X-ray: fade the outer layers"><i>👻</i><b>X-ray</b></button>
-      <button class="dock-b" id="b3dwire" title="Wireframe on/off"><i>🕸</i><b>Wire</b></button>
-      <button class="dock-b" id="b3dao" title="Depth shading (ambient occlusion)"><i>🕳</i><b>AO</b></button>
       <span class="dock-sep"></span>
       <button class="dock-b" data-pop="slice" title="Slice through the body"><i>✂</i><b>Slice</b></button>
       <button class="dock-b" data-pop="exp" title="Exploded view"><i>💥</i><b>Explode</b></button>
       <button class="dock-b" data-pop="peel" title="Peel layers"><i>🧅</i><b>Peel</b></button>
       <span class="dock-sep"></span>
       <button class="dock-b" id="b3dquiz" title="Quiz: tap the named structure"><i>🎯</i><b>Quiz</b></button>
-      <button class="dock-b" id="b3dundo" title="Undo hide/isolate (Ctrl+Z)" disabled><i>⎌</i><b>Undo</b></button>
-      <button class="dock-b" id="b3dshot" title="Save a screenshot (PNG)"><i>📷</i><b>Photo</b></button>
-      <button class="dock-b" id="b3dreset" title="Reset view"><i>⟲</i><b>Reset</b></button>
-      <span class="dock-sep"></span>
+      <button class="dock-b" data-pop="more" title="Wireframe, depth shading, undo, screenshot, reset"><i>⋯</i><b>More</b></button>
       <button class="dock-b" id="b3dlayers" title="Body systems, colors &amp; more"><i>☰</i><b>Layers</b></button>
     </div></nav>
 
@@ -19810,9 +20015,12 @@ function v3D(sel){
     <aside class="b3d-drawer" id="b3ddrawer" aria-label="Layers and options">
       <div class="dr-head"><span>Layers &amp; options</span><button class="b3d-iconbtn" id="b3ddrclose" aria-label="Close">✕</button></div>
       <div class="dr-body">
-        <div class="dr-sec"><h4>Body systems</h4><div class="b3d-filters" id="b3df"></div></div>
-        <div class="dr-sec"><h4>Colors</h4><button class="fchip on b3d-cmode" id="b3dcmode" data-m="sys">🎨 colors: by system</button></div>
+        <div class="dr-sec"><h4>Body systems</h4><div class="b3d-filters" id="b3df"></div>
+          <button class="fchip" id="b3dreshid" style="display:none;margin-top:8px">↺ Show hidden</button></div>
+        <div class="dr-sec"><h4>Colors</h4><button class="fchip on b3d-cmode" id="b3dcmode" data-m="sys">🎨 colors: by system</button>
+          <div class="b3d-peel" style="margin-top:10px"><span style="min-width:88px;font-size:11.5px">🧴 Skin opacity</span><input id="b3dskin" type="range" min="15" max="100" value="100" aria-label="Skin opacity"><em id="b3dskinv"></em></div></div>
         <div class="dr-sec"><h4>📌 Pinned structures</h4><div class="b3d-presets b3d-pins" id="b3dpins"></div></div>
+        <div class="dr-sec"><h4>Structure index</h4><div class="b3d-idx" id="b3didx"></div></div>
         <div class="dr-sec" id="b3dhelp"><h4>How to use</h4>
           <ul class="dr-help">
             <li><b>Rotate</b> — drag · <b>Pan</b> — right-drag or two fingers · <b>Zoom</b> — scroll or pinch</li>
