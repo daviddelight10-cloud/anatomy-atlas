@@ -19385,7 +19385,17 @@ function buildScene(gltf, st){
     const nm = o.name || "";
     if(B3D_SKIP.has(nm)) return;
     /* multi-primitive glTF meshes spawn children named <node>_<i> — strip it */
-    const key = nm in B3D_MAP ? nm : nm.replace(/_\d+$/,"");
+    let key = nm in B3D_MAP ? nm : nm.replace(/_\d+$/,"");
+    /* anatomical names live on the glTF NODES — mesh defs carry generated
+       names (Generated_Mesh_*, left/right *_instance_ clones), so fall back
+       up the node chain to the first mapped name: every mesh then belongs
+       to its own structure instead of a fused "Bone tissue — <region>" bucket */
+    if(!B3D_MAP[key])
+      for(let p = o.parent; p; p = p.parent){
+        if(!p.name) continue;
+        const pk = p.name in B3D_MAP ? p.name : p.name.replace(/_\d+$/,"");
+        if(B3D_MAP[pk]){ key = pk; break; }
+      }
     const mn = (o.material && o.material.name) || "";
     /* Z-Anatomy's skin layer is hundreds of region patches sharing the skin
        materials — treat them all as integumentary so the layer chip rules them */
