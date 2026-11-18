@@ -19725,7 +19725,35 @@ function buildScene(gltf, st){
   /* label overlay with leader lines — pills sit offset, a line points to the part */
   const lblLayer = $("#b3dlbls"), lnSVG = $("#b3dln");
   const lblPool = {}, lnPool = {}; let labelsOn = false;
-  const occT = {}, occOn = !lowPower; /* throttled raycast occlusion for labels */
+  /* surface anchor: ray from the camera toward a point on/near the part —
+     the first solid hit ON that part is where the marker lands, so dots sit
+     on the structure instead of floating at its bbox center. A first hit on
+     a DIFFERENT part means this one is occluded. Throttled per key. */
+  const anchT = {};
+  /* dominant-mesh center: where the part actually reads on screen — union
+     centers of multi-mesh parts can land between the meshes (e.g. radius
+     centering on the pelvis) */
+  const _pmCache = {};
+  const partMain = id => { if(_pmCache[id]) return _pmCache[id];
+    let best = null, br = -1;
+    each(id, m => { m.geometry.computeBoundingSphere(); m.updateWorldMatrix(true,false);
+      _sph.copy(m.geometry.boundingSphere).applyMatrix4(m.matrixWorld);
+      if(_sph.radius > br){ br = _sph.radius; best = _sph.center.clone(); } });
+    return _pmCache[id] = best; };
+  const surfPt = (key, id, target) => {
+    const ot = performance.now(), rec = anchT[key];
+    if(rec && ot - rec.t < (lowPower ? 380 : 200)) return rec;
+    ray.set(camera.position, _v.copy(target).sub(camera.position).normalize());
+    const hits = ray.intersectObjects(group.children, true);
+    const r = { pt: null, occ: false, t: ot };
+    for(const h of hits){
+      const o = h.object;
+      if(!effVis(o) || o.userData.ghost) continue;
+      if(o.material && o.material.transparent && o.material.opacity < 0.5) continue;
+      if(o.userData.partId === id) r.pt = h.point.clone(); else r.occ = true;
+      break; }
+    anchT[key] = r; return r;
+  };
   const _v = new THREE.Vector3();
   const _pcCache = {};
   const SVGNS = "http://www.w3.org/2000/svg";
@@ -19753,29 +19781,18 @@ function buildScene(gltf, st){
     const shown = vis.slice(0, lowPower?18:30), seen = {}, placed=[];
     const sw=W(), sh=H(), cx=sw/2, cy=sh/2;
     for(const id of shown){ if(!_pcCache[id]) _pcCache[id]=partCenter(id); if(!_pcCache[id]) continue;
-      _v.copy(_pcCache[id].c).project(camera);
+      /* anchor on the part's visible surface — occluded parts get no label */
+      const anch = surfPt("l:"+id, id, partMain(id) || _pcCache[id].c);
+      if(!anch.pt){ hideLbl(id); continue; }
+      _v.copy(anch.pt).project(camera);
       let el = lblPool[id];
       if(_v.z>1){ hideLbl(id); continue; }
       const lx=(_v.x+1)/2*sw, ly=(1-_v.y)/2*sh;
       const dx=lx-cx, dy=ly-cy, dl=Math.hypot(dx,dy)||1;
-      const px=lx+dx/dl*46, py=ly+dy/dl*34;
+      const px=lx+dx/dl*40, py=ly+dy/dl*30;
       let clash=false;
       for(const q of placed){ if(Math.abs(q[0]-px)<60 && Math.abs(q[1]-py)<16){ clash=true; break; } }
       if(clash){ hideLbl(id); continue; }
-      /* occlusion: skip labels whose part is hidden behind other visible meshes */
-      if(occOn){
-        const ot = performance.now();
-        if(!occT[id] || ot-occT[id].t>160){
-          ray.set(camera.position,_v.copy(_pcCache[id].c).sub(camera.position).normalize());
-          const hits=ray.intersectObjects(group.children,true);
-          const dC=camera.position.distanceTo(_pcCache[id].c);
-          let occ=false;
-          for(const h of hits){ if(h.distance>=dC-1e-3) break;
-            const o=h.object; if(!effVis(o)||o.userData.ghost) continue;
-            if(o.material && o.material.transparent && o.material.opacity<0.5) continue;
-            if(o.userData.partId!==id){ occ=true; break; } }
-          occT[id]={o:occ,t:ot}; }
-        if(occT[id] && occT[id].o){ hideLbl(id); continue; } }
       seen[id]=1; placed.push([px,py]);
       if(!el){ el=document.createElement("div"); el.className="b3dlbl"; lblPool[id]=el; lblLayer.appendChild(el); }
       el.dataset.id = id;
@@ -19807,9 +19824,11 @@ function buildScene(gltf, st){
   let pinsOn = true;
   const hidePn = id => { const p = pnPool[id];
     if(p){ p.el.style.display="none"; p.g.style.display="none"; } };
-  const pinAnchor = id => { const p = partCenter(id); if(!p) return null;
+  const pinAnchor = id => {
     const o = pinsV2[id] && pinsV2[id].o;
-    return o ? p.c.clone().add(new THREE.Vector3(o[0],o[1],o[2])) : p.c; };
+    if(o && (o[0]||o[1]||o[2])){ const p = partCenter(id);
+      return p ? p.c.clone().add(new THREE.Vector3(o[0],o[1],o[2])) : null; }
+    return partMain(id); /* centerless pins sit on the part's dominant mesh */ };
   const mkPin = id => {
     const el = document.createElement("div");
     el.className = "b3dpin" + (pinsV2[id] && pinsV2[id].n ? " noted" : "");
@@ -19864,7 +19883,11 @@ function buildScene(gltf, st){
         || (isolated!==null && isolated!==id) || (focusSet && !focusSet.has(id));
       if(!meshes[id] || gone){ hidePn(id); continue; }
       const a = pinAnchor(id); if(!a){ hidePn(id); continue; }
-      _v.copy(a).project(camera);
+      /* snap the dot onto the part's visible surface; dim the pin when the
+         anchor is buried behind other parts */
+      const anch = surfPt("p:"+id, id, a);
+      const dot = anch.pt || a;
+      _v.copy(dot).project(camera);
       if(_v.z>1){ hidePn(id); continue; }
       const ax=(_v.x+1)/2*sw, ay=(1-_v.y)/2*sh;
       const pin = pinsV2[id], lo = pin.lo || [16,-40];
@@ -19878,21 +19901,8 @@ function buildScene(gltf, st){
       ln.setAttribute("x1",ax); ln.setAttribute("y1",ay);
       ln.setAttribute("x2",px); ln.setAttribute("y2",py);
       cd.setAttribute("cx",ax); cd.setAttribute("cy",ay);
-      /* dim the pin when its anchor is occluded by other visible parts */
-      if(occOn){
-        const ot = performance.now(), k = "p:"+id;
-        if(!occT[k] || ot-occT[k].t>200){
-          ray.set(camera.position,_v.copy(a).sub(camera.position).normalize());
-          const hits=ray.intersectObjects(group.children,true);
-          const dC=camera.position.distanceTo(a);
-          let occ=false;
-          for(const h of hits){ if(h.distance>=dC-1e-3) break;
-            const o=h.object; if(!effVis(o)||o.userData.ghost) continue;
-            if(o.material && o.material.transparent && o.material.opacity<0.5) continue;
-            if(o.userData.partId!==id){ occ=true; break; } }
-          occT[k]={o:occ,t:ot}; }
-        p.el.style.opacity = (occT[k] && occT[k].o) ? ".38" : "";
-        p.g.style.opacity  = (occT[k] && occT[k].o) ? ".35" : ""; } }
+      p.el.style.opacity = anch.occ ? ".38" : "";
+      p.g.style.opacity  = anch.occ ? ".35" : ""; }
     for(const id in pnPool) if(!seen[id]) hidePn(id);
   };
   const pinB = $("#b3dpinT");
@@ -20506,7 +20516,6 @@ const srDue = () => { const t=today(), boxes=PROG.boxes||{};
 const BADGES = [
   ["first-lesson","🎓 First steps","Finish your first guided lesson"],
   ["five-lessons","📚 Scholar","Finish 5 lessons"],
-  ["ten-pins","📌 Cartographer","Pin 10 structures in 3D"],
   ["quiz-25","🎯 Sharp eye","Answer 25 quiz questions correctly"],
   ["streak-3","🔥 On a roll","Learn 3 days in a row"],
   ["review-10","🧠 Long-term memory","Clear 10 spaced-repetition reviews"] ];
@@ -20520,9 +20529,7 @@ const checkBadges = () => {
   if(nl>=1) giveBadge("first-lesson");
   if(nl>=5) giveBadge("five-lessons");
   if((PROG.quizRight|0)>=25) giveBadge("quiz-25");
-  if((PROG.streak|0)>=3) giveBadge("streak-3");
-  try{ const p = JSON.parse(localStorage.getItem("atlas-pins2")||"{}");
-    if(Object.keys(p).length>=10) giveBadge("ten-pins"); }catch(e){} };
+  if((PROG.streak|0)>=3) giveBadge("streak-3"); };
 
 /* ---------- learn mode: guided paths through the systems ---------- */
 const LEARN_ORDER = ["skeletal","muscular","cardiovascular","nervous","respiratory",
@@ -20558,7 +20565,7 @@ function vLearn(arg){
       <a class="btn" href="#/learn/review">🧠 Review${due?` (${due} due)`:""}</a>
       <span class="xp"><span class="xpbadge">⭐ <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">🔥 ${PROG.streak} days</span>`:""}</span>
     </div>
-    ${(PROG.badges||[]).length?`<p class="hint" style="margin:-4px 0 14px">Badges: ${PROG.badges.map(b=>{const x=BADGES.find(y=>y[0]===b);return x?x[1].split(" ")[0]+" "+x[1].split(" ").slice(1).join(" "):"";}).join(" · ")}</p>`:""}
+    ${(PROG.badges||[]).length?`<p class="hint" style="margin:-4px 0 14px">Badges: ${PROG.badges.map(b=>{const x=BADGES.find(y=>y[0]===b);return x?x[1]:"";}).filter(Boolean).join(" · ")}</p>`:""}
     <div class="grid tight" style="grid-template-columns:1fr">${LEARN_ORDER.filter(s=>sysCount[s]).map(s=>{
       const items = lessonsOf(s), done = items.filter(d=>lessonDone(d.id)).length;
       const pct = items.length ? Math.round(done/items.length*100) : 0;
