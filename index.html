@@ -253,8 +253,10 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3d-quiz .q-flash-good{color:#3ddc84;font-weight:700}
 .b3d-quiz .q-flash-bad{color:#ff5d6c;font-weight:700}
 .b3d-lbls{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}
-.b3dlbl{position:absolute;transform:translate(-50%,-140%);font:600 10.5px var(--font);color:#e8e8e8;background:rgba(18,18,18,.85);border:1px solid rgba(255,214,10,.4);border-radius:5px;padding:1px 6px;white-space:nowrap}
-.b3dlbl.mask{color:#8d887a;cursor:pointer;min-width:24px;text-align:center}
+.b3dlbl{position:absolute;transform:translate(-50%,-140%);font:600 10.5px var(--font);color:#e8e8e8;background:rgba(18,18,18,.85);border:1px solid rgba(255,214,10,.4);border-radius:5px;padding:1px 6px;white-space:nowrap;pointer-events:auto;cursor:pointer}
+.b3dlbl:hover{border-color:#ffd60a;color:#ffd60a}
+.b3dlbl.mask{color:#8d887a;min-width:24px;text-align:center}
+.b3dlbl.mask:hover{color:#ffd60a}
 .b3d-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}
 .b3d-lines line{stroke:rgba(255,214,10,.55);stroke-width:1}
 .b3d-lines circle{fill:#ffd60a}
@@ -426,8 +428,15 @@ body.b3d-open .pwa-toast{bottom:112px}
 .les-dots i.on{background:#ffd60a}
 .les-x{flex:none;width:26px;height:26px;background:#242424;color:#a3a3a3;border:1px solid #3d3d3d;border-radius:8px;font:700 12px var(--font);cursor:pointer}
 .les-x:hover{border-color:#ffd60a;color:#ffd60a}
-.les-body{font-size:13.5px;color:#c9c2b0;line-height:1.55;max-height:30dvh;overflow:auto}
+.les-body{font-size:13.5px;color:#c9c2b0;line-height:1.55;max-height:34dvh;overflow:auto;scrollbar-width:thin}
 .les-body b{color:#e8e8e8}
+.les-smp{flex:none;width:26px;height:26px;background:#242424;color:#8d887a;border:1px solid #3d3d3d;border-radius:8px;font-size:13px;cursor:pointer}
+.les-smp.on{color:#0a0a0a;background:#ffd60a;border-color:#ffd60a}
+.les-q{margin-top:8px;padding:7px 10px;border:1px solid rgba(255,214,10,.45);border-radius:9px;background:rgba(255,214,10,.07);font:600 12.5px var(--font);color:#ffd60a}
+.les-qst{margin-top:5px;font-size:12px;min-height:15px}
+.les-qst.ok{color:#4ade80;font-weight:600}
+.les-qst.bad{color:#f87171}
+.les-kw{color:#ffd60a}
 .les-nav{display:flex;align-items:center;gap:8px;margin-top:10px}
 .les-nav button{background:#242424;color:#e8e8e8;border:1px solid #3d3d3d;border-radius:9px;padding:7px 14px;font:600 12.5px var(--font);cursor:pointer}
 .les-nav button:hover{border-color:#ffd60a}
@@ -18912,6 +18921,367 @@ window.ATLAS_GLB_SYS = {"z:iliolumbar-ligament":"skeletal","parietal-bone":"skel
 window.ATLAS_GLB_PARENT = {"z:iliolumbar-ligament":"ligament","z:acromial-head-of-deltoid-muscle-scapular-insertion":"deltoid","z:ascending-part-of-trapezius-muscle-acromial-insertion":"trapezius","z:ascending-part-of-trapezius-muscle-spinal-insertion":"trapezius","z:infraspinatus-muscle-scapular-insertion":"infraspinatus","z:rhomboid-major-muscle-scapular-insertion":"rhomboid-major","z:rhomboid-minor-muscle-scapular-insertion":"rhomboid-minor","z:scapular-head-of-deltoid-muscle-scapular-insertion":"deltoid","z:serratus-anterior-muscle-scapular-insertion":"serratus-anterior","z:subscapularis-muscle-scapular-insertion":"subscapularis","z:supraspinatus-muscle-scapular-insertion":"supraspinatus","z:teres-major-muscle-scapular-insertion":"teres-major","z:teres-minor-muscle-scapular-insertion":"teres-minor","z:articular-surface-of-scapula":"scapula","z:ascending-part-of-trapezius-muscle-clavicular-insertion":"trapezius","z:clavicular-part-of-deltoid-muscle-clavicular-insertion":"deltoid","z:pectoralis-major-muscle-clavicular-insertion":"pectoralis-major","z:sternocleidomastoid-muscle-clavicular-insertion":"sternocleidomastoid","z:subclavius-muscle-clavicular-insertion":"subclavius","z:anconeus-muscle-humeral-insertion":"anconeus","z:brachialis-anterior-muscle-humeral-insertion":"brachialis","z:bracioradialis-muscle-humeral-insertion":"brachioradialis","z:common-extensor-tendon":"tendon","z:common-flexor-tendon":"tendon","z:deltoid-muscle-humeral-insertion":"deltoid","z:extensor-carpi-radialis-longus-muscle-humeral-insertion":"extensor-carpi-radialis-longus","z:articular-cartilages-of-humerus":"humerus","z:infraspinatus-muscle-humeral-insertion":"infraspinatus","z:lateral-head-of-triceps-brachii-humeral-insertion":"triceps-brachii","z:medial-head-of-triceps-brachii-humeral-insertion":"triceps-brachii","z:pectoralis-major-muscle-humeral-insertion":"pectoralis-major","z:pronator-teres-muscle-humeral-insertion":"pronator-teres","z:subscapularis-muscle-humeral-insertion":"subscapularis","z:supraspinatus-muscle-humeral-insertion":"supraspinatus","z:teres-major-muscle-humeral-insertion":"teres-major","z:teres-minor-muscle-humeral-insertion":"teres-minor","z:biceps-brachii-muscle-radial-insertion":"biceps-brachii","z:anconeus-muscle-ulnar-insertion":"anconeus","z:brachialis-muscle-ulnar-insertion":"brachialis","z:triceps-brachii-ulnar-insertion":"triceps-brachii","z:opponens-digiti-minimi-on-tubercle-of-hamate-bone":"hamate","z:erector-spinae-muscles-iliac-insertions":"erector-spinae","z:external-abdominal-oblique-muscle-iliac-insertion":"external-oblique","z:gluteus-maximus-muscle-iliac-insertion":"gluteus-maximus","z:gluteus-medius-muscle-iliac-insertion":"gluteus-medius","z:gluteus-minimus-muscle-iliac-insertion":"gluteus-minimus","z:gracilis-muscle-pubic-insertion":"gracilis","z:internal-abdominal-oblique-muscle-iliac-insertion":"internal-oblique","z:long-head-of-biceps-femoris-muscle-ischiatic-insertion":"biceps-femoris","z:rectus-femoris-muscle-iliac-insertion":"rectus-femoris","z:sartorius-muscle-on-upper-anterior-iliac-spine":"sartorius","z:semimembranosus-muscle-ischiatic-insertion":"semimembranosus","z:semitendinosus-muscle-isciatic-insertion":"semitendinosus","z:tensor-fasciae-latae-on-upper-anterior-iliac-spine":"tensor-fasciae-latae","z:adductor-longus-on-medial-surface-of-femur":"adductor-longus","z:adductor-magnus-on-medial-lip-of-linea-aspera":"adductor-magnus","z:gluteus-maximus-ending-on-gluteal-surface":"gluteus-maximus","z:gluteus-medius-on-greater-trochanter":"gluteus-medius","z:iliopsoas-ending-on-the-lesser-trochanter":"iliopsoas","z:lateral-head-of-gastrocnemius-on-lat-supracondylar-tubercle":"gastrocnemius","z:medial-head-of-gastrocnemius-on-med-supracondylar-tubercle":"gastrocnemius","z:origin-of-vastus-intermedius":"vastus-intermedius","z:origin-of-vastus-lateralis":"vastus-lateralis","z:origin-of-vastus-medialis":"vastus-medialis","z:pectineus-muscle-on-medial-surface-od-femur":"femur","z:short-head-of-biceps-femoris-on-lateral-lip-of-linea-aspera":"biceps-femoris","z:lateral-head-of-gastrocnemius-on-lat-supracondylar-tubercl":"gastrocnemius","z:patellar-tendon-on-apex-of-patella":"patella","z:quadriceps-femoris-on-base-of-patella":"quadriceps","z:extensor-digitorum-longus-on-lat-surf-of-lat-condyle":"extensor-digitorum-longus","z:flexor-digitorum-longus-on-medial-third-of-post-tibial-surf":"flexor-digitorum-longus","z:gracilis-on-patte-doie":"gracilis","z:popliteus-above-oblique-line-of-tibia":"tibia","z:sartorius-on-patte-doie":"sartorius","z:semimembranosus-on-posterior-surf-of-med-condyle":"semimembranosus","z:semitendinosus-on-patte-doie":"semitendinosus","z:tibialis-anterior-on-lateral-surface-of-tibia":"tibialis-anterior","z:tibialis-posterior-on-post-surface-of-interosseus-membrane":"tibialis-posterior","z:flexor-digitorum-longus-on-medial-third-of-post-tibial-sur":"flexor-digitorum-longus","z:extensor-digitorum-longus-on-fibula-and-interosseus-membrane":"extensor-digitorum-longus","z:extensor-hallucis-longus-on-fibula-and-interosseus-membrane":"extensor-hallucis-longus","z:fibularis-brevis-on-lateral-side-of-fibula":"fibularis-brevis","z:fibularis-longus-on-lateral-side-of-fibula":"fibularis-longus","z:flexor-hallucis-longus-on-post-fibular-surf":"flexor-hallucis-longus","z:long-head-of-biceps-femoris-on-fibular-head":"biceps-femoris","z:extensor-digitorum-longus-on-fibula-and-interosseus-membran":"extensor-digitorum-longus","z:intermediate-cuneiform-bone":"bone-tissue","z:lateral-cuneiform-bone":"cuneiform-bones","z:lateral-head-of-flexor-hallucis-brevis-on-medial-cuneiform":"cuneiform-bones","z:medial-cuneiform-bone":"cuneiform-bones","z:extensor-hallucis-brevis-on-dorsal-surface-of-calcaneus":"calcaneus","z:quadratus-plantae-muscle-on-plantar-surface-of-calcaneus":"calcaneus","z:triceps-surae-on-calcaneal-tuberosity":"triceps-brachii","z:oblique-head-of-adductor-hallucis-on-cuboid-bone":"cuboid-bone","z:fibrous-loop-for-intermediate-digastric-tendon":"tendon","z:coraco-acromial-ligament":"ligament","z:superior-transverse-scapular-ligament":"ligament","z:inferior-transverse-scapular-ligament":"ligament","z:acromioclavicular-ligament":"ligament","z:articular-disc-of-acromioclavicular-joint":"acromioclavicular-joint","z:trapezoid-ligament":"ligament","z:conoid-ligament":"ligament","z:anterior-sternoclavicular-ligament":"ligament","z:costoclavicular-ligament":"ligament","z:interclavicular-ligament":"ligament","z:posterior-sternoclavicular-ligament":"ligament","z:articular-capsule-of-glenohumeral-joint":"shoulder-joint","z:coracohumeral-ligament":"ligament","z:transverse-humeral-ligament":"ligament","z:superior-glenohumeral-ligament":"ligament","z:middle-glenohumeral-ligament":"ligament","z:inferior-glenohumeral-ligament":"ligament","z:radial-collateral-ligament":"ligament","z:ulnar-collateral-ligament":"ligament","z:annular-ligament-of-radius":"radius","z:quadrate-ligament":"ligament","z:palmar-radio-ulnar-ligament":"ligament","z:dorsal-radio-ulnar-ligament":"ligament","z:dorsal-radiocarpal-ligament":"ligament","z:ulnar-collateral-ligament-of-wrist-joint":"wrist-joint","z:radial-collateral-ligament-of-wrist-joint":"wrist-joint","z:dorsal-ulnocarpal-ligament":"ligament","z:radiocapitate-ligament":"ligament","z:radioscaphocapitate-ligament":"ligament","z:ulnocapitate-ligament":"ligament","z:ulnopisiform-ligament":"ligament","z:ulnotriquetral-ligament":"ligament","z:ulnolunate-ligament":"ligament","z:radiate-carpal-ligament":"ligament","z:dorsal-scaphotriquetral-ligament":"ligament","z:scaphotrapeziotrapezoidal-ligament":"ligament","z:scaphocapitate-ligament":"ligament","z:palmar-scaphotriquetral-ligament":"ligament","z:triquetrocapitate-ligament":"ligament","z:triquetrohamate-ligament":"ligament","z:pisotriquetral-ligament":"ligament","z:palmar-capitohamate-ligament":"ligament","z:palmar-trapezoideocapitate-ligament":"ligament","z:palmar-lunotriquetral-ligament":"ligament","z:scapholunate-interosseus-ligament":"ligament","z:trapeziotrapezoidal-interosseus-ligament":"ligament","z:capitohamate-interosseus-ligament":"ligament","z:trapezoideocapitate-interosseus-ligament":"ligament","z:lunotriquetral-interosseus-ligament":"ligament","z:pisohamate-ligament":"ligament","z:sacrospinous-ligament":"ligament","z:inferior-pubic-ligament":"ligament","z:superior-pubic-ligament":"ligament","z:sacrotuberous-ligament":"ligament","z:latissimus-dorsi-on-apex-of-the-scapula":"scapula","z:zygomaticus-minor-muscle":"zygomaticus","z:palpebral-part-of-orbicularis-oculi":"orbicularis-oculi","z:anterior-belly-of-digastric-muscle":"digastric","z:posterior-belly-of-digastric-muscle":"digastric","z:innermost-intercostal-muscles":"intercostals","z:lumbricals-muscles-of-hand":"lumbricals","z:fascia-lata":"fascia","z:extensor-digitorum-brevis":"extensor-digitorum","z:long-plantar-ligament":"ligament","z:anterior-tibial-veins":"anterior-tibial","z:calcaneal-branches-of-fibular-artery":"fibular-artery","z:calcaneal-branches-of-posterior-tibial-artery":"posterior-tibial-artery","z:circumflex-artery-of-heart":"coronary-arteries","z:circumflex-fibular-branch-of-posterior-tibial-artery":"posterior-tibial-artery","z:deep-artery-of-penis":"penis","z:deep-dorsal-vein-of-penis":"penis","z:deep-venous-palmar-arch":"palmar-arch","z:deltoid-branch-of-thoraco-acromial-artery":"deltoid","z:dorsal-artery-of-penis":"penis","z:dorsal-carpal-branch-of-radial-artery":"radial-artery","z:dorsal-carpal-branch-of-ulnar-artery":"ulnar-artery","z:fibular-veins":"fibula","z:inferior-suprarenal-artery":"kidney","z:intrarenal-veins-of-right-kidney":"kidney","z:lateral-circumflex-femoral-artery":"femoral-artery","z:lateral-pontine-branches-of-basilar-artery":"basilar-artery","z:medial-circumflex-femoral-artery":"femoral-artery","z:medial-pontine-branches-of-basilar-artery":"basilar-artery","z:middle-cardiac-vein":"cardiac-muscle","z:posterior-branch-of-renal-artery":"kidney","z:posterior-tibial-veins":"posterior-tibial","z:subscapular-artery":"subscapularis","z:superficial-dorsal-veins-of-penis":"penis","z:superficial-venous-palmar-arch":"palmar-arch","z:anterior-branch-of-renal-artery":"kidney","z:potserior-branch-of-renal-artery":"kidney","z:intrarenal-veins-of-left-kidney":"kidney","z:inferior-lateral-brachial-cutaneous-nerve":"nerve","z:superior-lateral-brachial-cutaneous-nerve":"nerve","z:muscular-branches-of-axillary-nerve":"axillary-nerve","z:lateral-antebrachial-cutaneous-nerve":"nerve","z:muscular-branches-of-radial-nerve":"radial-nerve","z:superior-trunk-of-brachial-plexus":"brachial-plexus","z:middle-trunk-of-brachial-plexus":"brachial-plexus","z:inferior-trunk-of-brachial-plexus":"brachial-plexus","z:lateral-cord-of-brachial-plexus":"brachial-plexus","z:posterior-cord-of-brachial-plexus":"brachial-plexus","z:anterior-cord-of-brachial-plexus":"brachial-plexus","z:aqueduct-of-midbrain-cerebral-aqueduct":"midbrain","z:white-matter-of-telencephalon":"white-matter","z:dorsal-scapular-nerve":"nerve","z:long-thoracic-nerve":"nerve","z:suprascapular-nerve":"nerve","z:subclavian-nerve":"nerve","z:lateral-pectoral-nerve":"nerve","z:posterior-antebrachial-cutaneous-nerve":"nerve","z:deep-branch-of-radial-nerve":"radial-nerve","z:superficial-branch-of-radial-nerve":"radial-nerve","z:dorsal-digital-branches-of-ulnar-nerve":"ulnar-nerve","z:medial-brachial-cutaneous-nerve":"nerve","z:anterior-branch-of-medial-antebrachial-cutaneous-nerve":"nerve","z:posterior-branch-of-medial-antebrachial-cutaneous-nerve":"nerve","z:medial-antebrachial-cutaneous-nerve":"nerve","z:palmar-branch-of-ulnar-nerve":"ulnar-nerve","z:deep-branch-of-ulnar-nerve":"ulnar-nerve","z:muscular-branches-of-ulnar-nerve":"ulnar-nerve","z:dorsal-branch-of-ulnar-nerve":"ulnar-nerve","z:common-palmar-digital-branches-of-ulnar-nerve":"ulnar-nerve","z:superficial-branch-of-ulnar-nerve":"ulnar-nerve","z:proper-palmar-digital-branches-of-ulnar-nerve":"ulnar-nerve","z:common-palmar-digital-branches-of-median-nerve":"median-nerve","z:communicating-branch-of-median-nerve-with-ulnar-nerve":"ulnar-nerve","z:palmar-branch-of-median-nerve":"median-nerve","z:muscular-branches-of-median-nerve":"median-nerve","z:proper-palmar-digital-branches-of-median-nerve":"median-nerve","z:uvula-of-palate":"palate","z:gingiva-of-lower-jaw":"mandible","z:gingiva-of-upper-jaw":"maxilla","z:angle-of-mouth":"oral-cavity","z:sternocleidomastoid-region":"sternocleidomastoid","z:hypogastric-region":"internal-iliac-artery","z:deltoid-region":"deltoid","z:tendinous-arch-of-levator-ani":"levator-ani"};
 window.ATLAS_GLB_SKIP = ["Plane"];
 
+/* Authored teaching notes — richer lesson detail for the most-studied
+   structures. Fields: where (location narrative), look (what to find),
+   rel (how named neighbours relate), supply (blood/nerve supply),
+   mnemonic (memory hook), simple (plain-English version), case (vignette) */
+window.ATLAS_TEACH = {
+"skull":{where:"The skull is the skeleton of the head — 22 bones: 8 forming the brain case (neurocranium) and 14 forming the face. Almost all are locked together by sutures; the mandible is the only bone that moves.",
+  look:"Find the dome of the cranium, the orbital sockets, the nasal opening and the jaw. Zoom in on the zigzag suture lines — coronal across the top, sagittal along the midline, lambdoid at the back.",
+  rel:{mandible:"the only movable bone of the skull — swings on the two TMJs","frontal-bone":"forms the forehead and the roof of the eye sockets","foramen-magnum":"the great opening in the base — the spinal cord passes through it"},
+  supply:"The brain inside takes ~20% of the heart's output via the two internal carotid and two vertebral arteries.",
+  simple:"The skull is the helmet of the body — it protects the brain, holds the eyes, and its only moving part is the jaw.",
+  case:"A basal skull fracture can leak CSF from the nose or ear and bruise behind the ear (Battle's sign)."},
+"mandible":{where:"The mandible is the lower jaw — the largest and strongest facial bone. It hangs from the skull at the two temporomandibular joints, just in front of the ears.",
+  look:"Find the U-shaped body carrying the lower teeth, the ascending rami, and the two processes on each side — the condylar (joint) process in front and the coronoid process for the temporalis tendon.",
+  rel:{skull:"it hinges against the skull at the TMJ",teeth:"the lower teeth sit in its alveolar sockets",maxilla:"the upper jaw — the mandible closes up against it"},
+  supply:"Facial artery supplies the bone; the inferior alveolar nerve (branch of V3) runs inside it to the lower teeth — the reason lower dental work is anaesthetized at the lingula.",
+  simple:"The mandible is your lower jaw — the only skull bone that moves, and it carries your bottom teeth.",
+  case:"A blow to the chin transmits force to the condyles — angle and condyle fractures are the classic mandible breaks."},
+"teeth":{where:"The teeth sit in the sockets of the maxilla above and the mandible below — 20 primary teeth in children, 32 permanent teeth in adults.",
+  look:"From front to back: incisors (cutting), canines (tearing), premolars then molars (grinding). Every tooth has a crown above the gum, a neck at the gum line and a root anchored in bone.",
+  rel:{mandible:"holds the 16 lower teeth",maxilla:"holds the 16 upper teeth"},
+  supply:"Superior and inferior alveolar arteries (branches of the maxillary artery) feed upper and lower teeth; the alveolar nerves make teeth intensely pain-sensitive.",
+  mnemonic:"The permanent formula per quadrant: 2 incisors, 1 canine, 2 premolars, 3 molars — 2123.",
+  simple:"Teeth are the body's grinding tools — each is a living peg rooted in the jaw, fed by its own little nerve and vessel bundle.",
+  case:"The maxillary molars' roots often touch the floor of the maxillary sinus — a dental abscess can present as sinus pain."},
+"vertebral-column":{where:"The spine runs from the skull to the pelvis: 7 cervical, 12 thoracic and 5 lumbar vertebrae, then the fused sacrum and coccyx — 33 segments in all.",
+  look:"Notice the alternating curves: neck and lower back curve forward (lordotic), chest and sacrum curve back (kyphotic). Each vertebra stacks a weight-bearing body in front and an arch behind, guarding the cord.",
+  rel:{vertebra:"the repeating unit — body plus bony arch","intervertebral-disc":"the cushions between the vertebral bodies","spinal-cord":"the cord runs inside the canal formed by the arches","sacrum":"the fused base that locks the column into the pelvis"},
+  supply:"Segmental arteries (vertebral, intercostal, lumbar) feed each level; veins drain into the internal vertebral plexus.",
+  simple:"The spine is your body's mast and shock absorber — a stack of bones with squashy discs between them, carrying the spinal cord like a cable inside.",
+  case:"Scoliosis is a sideways curve; a herniated disc pressing a nerve root produces pain down the limb (sciatica at L5–S1)."},
+"cervical-vertebrae":{where:"The seven cervical vertebrae (C1–C7) form the neck — the most mobile and most delicate part of the column.",
+  look:"Each has a small body and a forked (bifid) spinous process — except C1 and C7. Uniquely, each transverse process is pierced for the vertebral artery.",
+  rel:{atlas:"C1 — the ring that carries the head",axis:"C2 — the pivot for head rotation","vertebral-column":"they are its top segment"},
+  supply:"The vertebral arteries thread through the transverse foramina of C6 upward to supply the brainstem.",
+  simple:"The neck bones are small and light because they only carry the head — and each one has a tunnel for the artery feeding your brain.",
+  case:"Whiplash sprains the cervical joints; a Jefferson fracture bursts the C1 ring from axial loads such as diving into shallow water."},
+"thoracic-vertebrae":{where:"The twelve thoracic vertebrae form the mid-back — the segment stiffened by the rib cage.",
+  look:"Heart-shaped bodies, long overlapping spinous processes, and small costal facets on the bodies and transverse processes where the ribs joint on.",
+  rel:{ribs:"each rib head articulates with a vertebral body and its disc","vertebral-column":"the stiff middle segment","thoracic-cage":"they are the cage's back wall"},
+  simple:"The mid-back vertebrae are stout and stiff — they carry the ribs, so they trade flexibility for stability.",
+  case:"Thoracic wedge compression fractures are the commonest osteoporotic fracture — producing the dowager's hump."},
+"lumbar-vertebrae":{where:"The five lumbar vertebrae (L1–L5) are the lower back — they bear the entire weight of the upper body.",
+  look:"The largest bodies in the spine — thick kidney-bean shapes with short hatchet-like spines that leave gaps, a space exploited by lumbar puncture.",
+  rel:{vertebra:"the biggest examples of the standard form","intervertebral-disc":"disc herniations at L4–5 and L5–S1 compress the sciatic roots","spinal-cord":"the cord ends at L1–L2 — below that only the cauda equina floats"},
+  supply:"Lumbar segmental arteries supply the bodies; the cord's main feeder (artery of Adamkiewicz) often enters low on the left.",
+  simple:"The lower-back bones are the spine's powerlifters — huge and strong, carrying everything above them.",
+  case:"L4–L5 and L5–S1 disc herniations are the classic cause of sciatica — pain shooting down the leg."},
+"atlas":{where:"The atlas (C1) is the top cervical vertebra — a bony ring that sits under the skull and lets it nod.",
+  look:"Unlike every other vertebra it has no body and no spinous process — just an anterior and a posterior arch joined by thick lateral masses with large facets matching the skull's occipital condyles.",
+  rel:{axis:"its dens pokes up into the atlas to form the rotation pivot","occipital-bone":"its condyles rock on the atlas for nodding","vertebral-column":"the atlas is its first vertebra"},
+  simple:"The atlas is the ring that holds your head up — named after the titan who carried the sky.",
+  case:"A burst (Jefferson) fracture of the C1 ring results from axial loads like diving into shallow water."},
+"axis":{where:"The axis (C2) is the second vertebra — its upward peg (the dens) is the pivot around which the atlas and head rotate.",
+  look:"Find the dens (odontoid process) projecting up behind the atlas's front arch, and the strong bifid spine below for muscle attachment.",
+  rel:{atlas:"rotates around this dens — ~50% of all head rotation","cervical-vertebrae":"the axis is C2","vertebral-column":"the pivot of the column"},
+  supply:"The dens is held by the transverse ligament of the atlas; its blood supply is fragile at the tip.",
+  simple:"The axis is the hinge your head shakes 'no' on — its peg lets the head swivel left and right.",
+  case:"In the elderly a simple fall can fracture the dens; hangman's fracture splits the C2 pedicles."},
+"sacrum":{where:"The sacrum is the wedge of five fused vertebrae forming the back wall of the pelvis — it locks the spine to the hip bones.",
+  look:"Look for the curved triangular bone wedged between the ilia. Transverse lines mark the old fusion planes; two rows of foramina let the sacral nerves out, and the canal ends at the sacral hiatus.",
+  rel:{ilium:"it meets each ilium at the sacroiliac joint","vertebral-column":"its fused base",coccyx:"the tailbone dangling from its tip","sacroiliac-joint":"the slightly mobile joint transmitting spine load to the pelvis"},
+  supply:"Lateral sacral arteries feed the foramina; the sacral plexus inside supplies the leg.",
+  simple:"The sacrum is the body's keystone — five vertebrae fused into one wedge that hands your weight from spine to hips.",
+  case:"The sacral hiatus is the route for caudal epidural anaesthesia in childbirth."},
+"ribs":{where:"The 24 ribs (12 pairs) wrap around the chest — pairs 1–7 (true) reach the sternum directly, 8–10 (false) share cartilage, 11–12 (floating) end free in the flank.",
+  look:"Each rib has a head that joints to vertebrae, a tubercle, then a curved shaft. Along the lower inner edge runs the costal groove sheltering the intercostal nerve and vessels — vein above, artery, nerve below.",
+  rel:{sternum:"the front anchor for the true ribs","thoracic-cage":"they form its curved walls","intercostal-muscles":"three muscle layers fill the gaps between ribs","costal-cartilage":"the flexible bars connecting rib ends to the sternum"},
+  supply:"Intercostal arteries (from the aorta behind, internal thoracic in front) run in the costal groove with the nerve.",
+  mnemonic:"The groove carries VAN — vein, artery, nerve — top to bottom. Chest drains go above a rib to avoid it.",
+  simple:"The ribs are the rib cage's springs — curved bars that protect heart and lungs while swinging with every breath.",
+  case:"Ribs 4–9 fracture most; a flail chest with a free-floating segment impairs breathing badly."},
+"sternum":{where:"The sternum is the flat breastbone on the front midline — the anchor where the ribs meet.",
+  look:"Three parts: the broad manubrium up top (notching the clavicles and first ribs), the long body below, and the small xiphoid tip. The joint between manubrium and body — the sternal angle — is palpable as a ridge.",
+  rel:{ribs:"ribs 2–7 join it directly through cartilage","clavicle":"the collarbones slot into notches on the manubrium","xiphoid":"its small cartilaginous tail","thoracic-cage":"it completes the cage's front"},
+  supply:"Internal thoracic arteries and their perforating branches feed it; bone marrow inside is easily sampled for biopsies.",
+  mnemonic:"The sternal angle (of Louis) marks rib 2 and the T4–5 level — the level where the aorta arches and the trachea splits.",
+  simple:"The sternum is the rib cage's anchor plate — feel the ridge at the top of your chest and you have found the second rib.",
+  case:"It is the landmark for chest compressions — pushing too low breaks the xiphoid into the liver."},
+"clavicle":{where:"The clavicle is the S-shaped strut across the top-front of the chest — the only bony link between your arm and your body wall.",
+  look:"Follow the S-curve from the sternal end to the shoulder tip. The inner two-thirds bow forward; the outer third flattens backward toward the acromion.",
+  rel:{scapula:"its outer end meets the acromion at the AC joint","sternum":"its inner end forms the only joint joining arm to trunk","acromioclavicular-joint":"the small joint separating on shoulder falls"},
+  supply:"Branch of the thoracoacromial artery feeds it; the brachial plexus and subclavian vessels pass protected underneath.",
+  mnemonic:"First bone to ossify (week 5) but last to fully fuse (mid-20s).",
+  simple:"The clavicle is the shoulder's push-rod — it holds your arm out away from your chest so it can swing freely.",
+  case:"The commonest broken bone — classically mid-shaft from a fall onto the outstretched hand."},
+"scapula":{where:"The scapula is the flat triangular shoulder blade that floats over the back ribs 2–7 — the socket of the shoulder joint.",
+  look:"On its back, find the spine ending in the acromion (the bony roof you can feel), the coracoid beak pointing forward, and the shallow glenoid cavity where the humerus sits.",
+  rel:{clavicle:"braces it forward via the AC joint and ligaments","humerus":"its head seats into the shallow glenoid","shoulder-joint":"the glenoid is the socket half","rotator-cuff":"four muscles wrap around it holding the joint"},
+  supply:"Suprascapular and subscapular arteries; 17 muscles attach to it — it is the arm's mobile foundation.",
+  mnemonic:"Winging of the scapula = serratus anterior paralysis — the long thoracic nerve is cut in mastectomy or damaged carrying heavy loads.",
+  simple:"The shoulder blade is a floating foundation — no real joint to the body, just muscles, so it can slide and rotate to aim your arm.",
+  case:"A 'winged' scapula sticking out of the back signals long thoracic nerve injury — serratus anterior is paralysed."},
+"humerus":{where:"The humerus is the single bone of the upper arm — running from the shoulder ball to the elbow hinge.",
+  look:"Find the round head at the top, the surgical neck just below it, and the deltoid tuberosity on the mid-shaft. Behind the shaft spirals the radial groove; at the bottom, the spool-shaped trochlea and capitulum joint to the forearm.",
+  rel:{scapula:"its head seats into the glenoid socket","radius":"the capitulum articulates with the radius head for pivoting","ulna":"the trochlea grips the ulna's notch for the elbow hinge","deltoid":"inserts on the rough tuberosity halfway down","elbow-joint":"its distal end forms the joint","shoulder-joint":"its head is the ball of the ball-and-socket"},
+  supply:"Nutrient artery from the profunda brachii; three nerves run dangerously close — axillary at the surgical neck, radial in the spiral groove, ulnar behind the medial epicondyle.",
+  mnemonic:"Three nerves, three fractures: surgical neck → axillary; mid-shaft (spiral groove) → radial; medial epicondyle → ulnar.",
+  simple:"The humerus is your upper-arm bone — a lever for the big arm muscles, with three nerves wrapped around it waiting to be hurt by breaks.",
+  case:"A midshaft break injures the radial nerve in the spiral groove — the patient presents with wrist drop."},
+"radius":{where:"The radius is the lateral forearm bone — on the thumb side — that pivots around the ulna so the hand can turn over.",
+  look:"Find the disc-shaped head at the elbow (it rotates for pronation/supination), the radial tuberosity where the biceps attaches, and the broad distal end that forms the wrist joint.",
+  rel:{ulna:"it pivots around the ulna — the two are tied by the interosseous membrane","humerus":"its head spins against the capitulum",carpals:"its broad distal end forms the wrist joint","elbow-joint":"its head is part of the hinge","wrist-joint":"the big distal end takes the wrist load"},
+  supply:"Radial recurrent and nutrient branches; the deep branch of the radial nerve spirals around its neck.",
+  mnemonic:"The radius is the bone you land on when you 'FOOSH' — distal radial (Colles) fracture is the classic dinner-fork deformity.",
+  simple:"The radius is the forearm bone that turns your palm up and down — its head spins like a wheel at the elbow.",
+  case:"Colles fracture — a dorsally displaced distal-radius break from falling on an outstretched hand — is the commonest adult wrist break."},
+"ulna":{where:"The ulna is the medial forearm bone — on the little-finger side — forming the main hinge of the elbow.",
+  look:"Find the hooked olecranon at the top (the bony point of your elbow) and the deep trochlear notch it creates to grip the humerus. Its shaft narrows to a small head at the wrist.",
+  rel:{radius:"it is the stable partner the radius pivots around","humerus":"its trochlear notch locks onto the trochlea","elbow-joint":"it is the hinge","carpals":"its head nearly reaches the wrist, separated by a disc"},
+  supply:"Posterior interosseous artery; the ulnar nerve runs behind its medial epicondyle — the 'funny bone' spot.",
+  mnemonic:"You feel your ulnar nerve — not the bone — when you whack the inside of your elbow.",
+  simple:"The ulna is the elbow's hinge-pin — its hooked top is what you knock when you hit your 'funny bone'.",
+  case:"A nightstick fracture is an isolated ulnar shaft break — classically from holding an arm up to block a blow."},
+"ilium":{where:"The ilium is the broad upper blade of the hip bone — the wing you feel as your hip crest.",
+  look:"Trace the curved iliac crest on top — from the front point (ASIS) to the back — and find the wide flat fossa on its inner face and the ear-shaped surface joining the sacrum behind.",
+  rel:{"sacroiliac-joint":"it locks to the sacrum there","ischium":"fused with it and the pubis into the hip bone","iliopsoas":"fills its inner fossa","pelvic-girdle":"it is the girdle's upper third"},
+  supply:"Branches of the iliolumbar and superior gluteal arteries; the lateral femoral cutaneous nerve slides past its front point (meralgia paraesthetica when pinched).",
+  simple:"The ilium is the hip's wing — the part of your pelvis you put your hands on.",
+  case:"The iliac crest is the standard site for bone marrow biopsy and bone graft harvest."},
+"ischium":{where:"The ischium is the postero-inferior third of the hip bone — the part you sit on.",
+  look:"Find the rough ischial tuberosity (the 'sit bone') at its base and the spine above it guarding the sciatic notches — the greater notch is where the sciatic nerve exits.",
+  rel:{ilium:"fused above in the acetabulum","pubis":"fused in front","hamstrings":"all three hamstrings originate on its tuberosity","pelvic-girdle":"its lower third"},
+  simple:"The ischium is the sitting bone — every sit presses weight onto its rough tuberosity.",
+  case:"Hamstring avulsions tear the ischial tuberosity — sprinters' classic injury."},
+"pubis":{where:"The pubis is the front third of the hip bone — the two pubic bones meet at the pubic symphysis in the midline.",
+  look:"Find the superior and inferior rami framing the obturator foramen — the large hole in the lower hip bone — and the symphysis joint in front.",
+  rel:{ischium:"fused below","pubic-symphysis":"the midline joint","pelvic-girdle":"its front third","ilium":"the three bones fuse into the hip"},
+  supply:"Obturator vessels and nerve pass through the obturator canal at the foramen's top edge.",
+  simple:"The pubis is the front of the pelvis — the bone over your bladder, joining its twin at the pubic symphysis.",
+  case:"Osteitis pubis is a painful inflammation of the symphysis in athletes; in pregnancy the joint loosens for childbirth."},
+"femur":{where:"The femur is the thigh bone — the longest, strongest bone in the body — running from the hip ball to the knee.",
+  look:"Find the round head on its angled neck (the fracture-prone spot), the rough shaft with the linea aspera ridge for muscles, and the two condyles at the bottom forming the knee surface.",
+  rel:{patella:"slides in its trochlear groove","knee-joint":"its condyles form the top half","acetabulum":"its head sits deep in this hip socket","hip-joint":"the ball-and-socket above"},
+  supply:"Medial and lateral femoral circumflex arteries wrap the neck — retinacular vessels run up it to feed the head; a neck fracture can starve the head of blood.",
+  mnemonic:"Neck of femur fracture → the leg lies short, externally rotated, and the head may die (avascular necrosis).",
+  simple:"The femur is the biggest bone in your body — the thigh lever and a common site of serious breaks.",
+  case:"A hip fracture in the elderly shortens the leg and threatens the head's blood supply — often needing replacement."},
+"patella":{where:"The patella is the kneecap — a small sesamoid bone embedded in the quadriceps tendon, gliding in the femur's trochlear groove.",
+  look:"Find the flat triangle on the front of the knee — point down — tracking up and down the femur's groove as you bend.",
+  rel:{femur:"it slides in the femur's trochlear groove","knee-joint":"part of the knee mechanism","quadriceps-femoris":"embedded in its tendon — the lever that boosts its pull","tibia":"the patellar ligament links it to the tibial tuberosity"},
+  supply:"Peri-patellar anastomosis vessels; the tendon below becomes the patellar ligament — the target of the knee-jerk reflex.",
+  simple:"The kneecap is the knee's pulley — it boosts the quadriceps' leverage and shields the joint.",
+  case:"A direct blow or resisted quadriceps pull can shatter it; patellar dislocation tracks it out to the side."},
+"tibia":{where:"The tibia is the shin bone — the main weight-bearer of the lower leg, second only to the femur in size.",
+  look:"Find the broad condyles at the knee (the plateau), the sharp anterior crest you can feel along your shin, and the medial malleolus — the inner ankle bump — at the bottom.",
+  rel:{femur:"its plateau takes the femur's load","fibula":"the slender partner braced alongside","knee-joint":"its plateau is the joint's floor","ankle-joint":"its lower end forms the ankle mortise","patella":"the patellar ligament lands on its tuberosity"},
+  supply:"Its nutrient artery (off the posterior tibial) is the largest in the body — a midshaft break can threaten healing because the thin shin has poor soft-tissue cover.",
+  simple:"The shin bone is your leg's main pillar — straight up the front and supporting your weight at the knee and ankle.",
+  case:"Tibial plateau fractures follow side-impact (car-bumper) trauma; a march fracture is the classic stress break."},
+"fibula":{where:"The fibula is the slender bone on the outer side of the leg — non-weight-bearing, but essential for the ankle joint and muscle attachment.",
+  look:"Find the small head just below the outer knee (feel it on the outer calf), the long thin shaft, and the lateral malleolus — the outer ankle bump — at the bottom.",
+  rel:{tibia:"braced to it by the interosseous membrane","knee-joint":"its head sits just below the joint line","ankle-joint":"its malleolus forms the outer wall","common-fibular-nerve":"the nerve wraps around its neck"},
+  supply:"Fibular artery runs beside it; the common fibular nerve winds around its neck — a fracture there causes foot drop.",
+  mnemonic:"Fibular neck + common fibular nerve = foot drop. The nerve is the reason a tight plaster cast can paralyse the ankle.",
+  simple:"The fibula is the thin brace on the outside of your shin — it doesn't carry weight, but it makes the outside of your ankle.",
+  case:"A break at the fibular neck injures the common fibular nerve — the foot drops and drags."},
+"deltoid":{where:"The deltoid caps the shoulder like a shoulder pad — the muscle that gives the shoulder its rounded contour.",
+  look:"Find the three fiber sets: anterior from the clavicle, middle from the acromion, posterior from the scapular spine — all converging on the deltoid tuberosity of the humerus.",
+  rel:{humerus:"inserts on the deltoid tuberosity","supraspinatus":"initiates abduction — the deltoid takes over past 15°","axillary-nerve":"its nerve, winding around the surgical neck of the humerus","rotator-cuff":"the cuff underneath keeps the head centered while the deltoid lifts"},
+  supply:"Posterior circumflex humeral artery and the axillary nerve (C5–C6) — the nerve travels just deep to the muscle.",
+  mnemonic:"Deltoid = C5–6 abduction; axillary nerve damage flattens the shoulder contour and weakens lift-off.",
+  simple:"The deltoid is the shoulder's lifting pad — the muscle that raises your arm out to the side.",
+  case:"Axillary nerve injury after shoulder dislocation flattens the shoulder and weakens abduction — it's also the standard IM injection site."},
+"trapezius":{where:"The trapezius is the broad kite-shaped sheet covering the neck and upper-mid back — from skull base to T12.",
+  look:"Notice the upper fibers running down from skull to clavicle (shrug), the middle fibers pulling the scapula back, and the lower fibers sweeping down the back (depress).",
+  rel:{scapula:"inserts on its spine and acromion","sternocleidomastoid":"shares its spinal accessory nerve","levator-scapulae":"elevates the scapula alongside it","latissimus-dorsi":"its partner in back movement"},
+  supply:"Transverse cervical artery; spinal accessory nerve (CN XI) — the only cranial nerve supplying a limb-girdle muscle.",
+  mnemonic:"CN XI palsy → can't shrug against resistance, and the shoulder droops.",
+  simple:"The trapezius is your posture muscle — it shrugs, pulls your shoulders back, and holds your head up all day.",
+  case:"CN XI injury after neck surgery (lymph node biopsy) drops the shoulder — a classic iatrogenic injury."},
+"latissimus-dorsi":{where:"The latissimus dorsi is the widest back muscle — a broad sheet from the lower spine sweeping up to the front of the humerus.",
+  look:"Find its fans of fibers from the thoracolumbar fascia converging into a tendon that inserts on the humerus's bicipital groove — it wraps the body's side like a wing.",
+  rel:{humerus:"inserts on the bicipital groove","trapezius":"the partner for back power","teres-major":"its helper in adduction"},
+  supply:"Thoracodorsal nerve (C6–8) and artery; the muscle's blood supply makes it a workhorse flap for reconstruction.",
+  simple:"The lats are the climbing muscles — they pull your arm down and back, powering pull-ups and swimming strokes.",
+  case:"The 'swimmer's muscle' — overuse strains it; it's also the most-used flap for breast reconstruction."},
+"pectoralis-major":{where:"The pectoralis major is the big fan of the chest — spanning from clavicle and sternum to the humerus.",
+  look:"Find the clavicular head from the inner clavicle and the sternocostal head from the sternum, both converging on a tendon inserting on the humerus's bicipital groove lip.",
+  rel:{humerus:"inserts on the lateral lip of the bicipital groove","latissimus-dorsi":"its partner in adduction","pectoralis-minor":"the small muscle deep to it"},
+  supply:"Pectoral branches of the thoracoacromial trunk; medial and lateral pectoral nerves.",
+  simple:"The pec is your pushing muscle — it pulls your arm across your chest (bench press, push-ups).",
+  case:"A bench-press tear of the humeral insertion is the classic 'black bruise' injury in powerlifters."},
+"biceps-brachii":{where:"The biceps sits on the front of the upper arm — two heads from the scapula joining into the elbow flexor.",
+  look:"Find the short head from the coracoid process and the long head's tendon running through the shoulder joint — the tendon famous for dislocating — down to the radial tuberosity.",
+  rel:{radius:"inserts on the radial tuberosity","brachialis":"the deep pure-elbow flexor underneath","triceps-brachii":"its antagonist at the back","musculocutaneous-nerve":"its nerve"},
+  supply:"Brachial artery; musculocutaneous nerve (C5–7). The tendon also sends the bicipital aponeurosis into the forearm fascia.",
+  mnemonic:"Biceps flexes the elbow AND supinates — 'the supinating flexor'.",
+  simple:"The biceps is the arm-flexor — it bends your elbow and twists your palm upward.",
+  case:"A 'Popeye' deformity is a ruptured long-head tendon — the muscle belly bunches up in the arm."},
+"triceps-brachii":{where:"The triceps fills the back of the upper arm — three heads converging on the olecranon of the ulna to straighten the elbow.",
+  look:"Find the long head crossing the shoulder, plus the lateral and medial heads on the humerus — all inserting into the elbow's pointed olecranon.",
+  rel:{ulna:"inserts on its olecranon","radial-nerve":"its nerve, running in the humerus's spiral groove","biceps-brachii":"its antagonist in front","olecranon-region":"the bony point it acts on"},
+  supply:"Deep brachial artery; radial nerve (C6–8) — the nerve spirals the humerus, making midshaft breaks threaten extension.",
+  simple:"The triceps is the arm's straightener — pushing your forearm straight from a bent elbow.",
+  case:"Radial nerve damage in the spiral groove spares triceps function — the branches leave above the groove — but drops the wrist."},
+"quadriceps-femoris":{where:"The quadriceps is the four-headed muscle group filling the front of the thigh — the body's most powerful knee extensor.",
+  look:"Find the rectus femoris on the midline plus the three vastus muscles wrapping the femur — all merging into the quadriceps tendon, which holds the patella before becoming the patellar ligament.",
+  rel:{patella:"embedded in its tendon","tibia":"the patellar ligament lands on the tibial tuberosity","femoral-nerve":"its nerve (L2–4)","femur":"the three vastus heads wrap it"},
+  supply:"Femoral artery branches; femoral nerve — the knee-jerk reflex tests its L3–4 arc.",
+  mnemonic:"The knee jerk tests L3–L4 — tap the patellar tendon and the quadriceps contracts.",
+  simple:"The quads are your thigh's power pack — they straighten the knee for walking, stairs and kicking.",
+  case:"Femoral nerve damage (femoral artery catheter bleed, hip surgery) weakens the knee and extinguishes the jerk."},
+"hamstrings":{where:"The hamstrings fill the back of the thigh — three muscles running from the ischial tuberosity to behind the knee.",
+  look:"Find the semitendinosus and semimembranosus medially and the biceps femoris laterally — the tendons forming the palpable borders of the popliteal fossa.",
+  rel:{ischium:"all originate on the ischial tuberosity","tibia":"the medial pair insert on it","sciatic-nerve":"supplied by its tibial division","biceps-femoris":"the lateral member"},
+  supply:"Branches of the profunda femoris; tibial division of the sciatic nerve (L5–S2).",
+  mnemonic:"Hamstring strains strike at sprinting speed — the muscle stretched over two joints tears most easily.",
+  simple:"The hamstrings are the thigh's rear muscles — they bend the knee and extend the hip.",
+  case:"Hamstring avulsion or strain is the classic sprinter's injury — a sudden pull leaving a tender mass on the sit bone."},
+"gluteus-maximus":{where:"The gluteus maximus is the largest muscle of the buttock — the hip's powerful extensor.",
+  look:"Find the big superficial mass from the ilium and sacrum converging on the iliotibial tract and gluteal tuberosity of the femur.",
+  rel:{femur:"inserts on the gluteal tuberosity and IT band","gluteus-medius":"the deeper abductor above","hamstrings":"the assistants in hip extension","sciatic-nerve":"it exits under piriformis, deep in the buttock"},
+  supply:"Inferior gluteal artery and nerve (L5–S2); the upper-outer quadrant is safe for IM injection — below it runs the sciatic nerve.",
+  simple:"The gluteus maximus is the body's biggest muscle — it extends the hip for climbing and rising.",
+  case:"Inferior gluteal nerve palsy makes climbing stairs hard — the hip can't extend under load."},
+"gastrocnemius":{where:"The gastrocnemius is the visible calf muscle — two heads forming the bulge at the back of the leg.",
+  look:"Find the medial and lateral heads rising from the femoral condyles, merging mid-calf into the Achilles tendon on the calcaneus.",
+  rel:{soleus:"the flat muscle deep to it","achilles-tendon":"the shared tendon of calf muscles","tibial-nerve":"its nerve","calcaneus":"its insertion via the Achilles tendon"},
+  supply:"Sural arteries; tibial nerve. The calf muscles act as the 'second heart' — pumping venous blood back up.",
+  mnemonic:"The calf pump — squeezing veins with every step — is why standing still makes ankles swell.",
+  simple:"The gastrocnemius is the calf's power muscle — it points your toes and springs each step.",
+  case:"Achilles tendon rupture follows a 'snap' at push-off — a positive Simmonds test means surgery."},
+"diaphragm":{where:"The diaphragm is the dome-shaped sheet between chest and abdomen — the body's main breathing muscle.",
+  look:"Find the double dome rising into the thorax, attached to the lower ribs and converging on the central tendon. Three openings pass structures through at three levels.",
+  rel:{lungs:"it drops to inflate them","thoracic-cage":"attached around its rim","phrenic-nerve":"its nerve","intercostal-muscles":"the rib muscles that help"},
+  supply:"Phrenic nerve (C3–5) — 'C3, 4, 5 keep the diaphragm alive.'",
+  mnemonic:"The three openings at T8, T10, T12: 'I ate ten eggs at twelve' — IVC at T8, esophagus at T10, aorta at T12.",
+  simple:"The diaphragm is the bellows of breathing — pull it down and air rushes into your lungs.",
+  case:"Phrenic nerve damage paralyses one hemidiaphragm — it rises paradoxically on sniffing."},
+"heart":{where:"The heart sits in the mediastinum behind the sternum — tilted so the apex points down and left, beating in the 5th intercostal space at the mid-clavicular line.",
+  look:"Find the four chambers: right atrium and ventricle receiving venous blood, left side pumping to the body. The coronary arteries wrap the outside in grooves between chambers.",
+  rel:{"coronary-arteries":"its own supply — right and left off the aortic root","heart-valves":"the four one-way valves inside","pericardium":"the enclosing sac","aorta":"the great artery leaving the left ventricle"},
+  supply:"Right and left coronary arteries off the aorta; the cardiac veins drain to the coronary sinus; the SA node sets the rate itself.",
+  mnemonic:"Apex beat at the 5th ICS mid-clavicular line — and the left anterior descending artery is the 'widow-maker'.",
+  simple:"The heart is your body's pump — two pumps in one, pushing blood to the lungs and around the body.",
+  case:"Anterior STEMI is the classic blocked LAD — left chest pain radiating to the arm and jaw."},
+"lungs":{where:"The lungs fill the thorax around the heart — the right in three lobes, the left in two with a notch where the heart sits.",
+  look:"Find the apex poking above the clavicle, the cardiac notch on the left, and the bronchial tree branching down through each hilum.",
+  rel:{bronchi:"the airway entering at the hilum","pleura":"the slippery double membrane around them","diaphragm":"the floor pushing them empty and full","pulmonary-trunk":"the vessel bringing venous blood to oxygenate","alveolus":"the tiny air sacs where gas exchange happens"},
+  supply:"Pulmonary arteries carry deoxygenated blood in for gas exchange; small bronchial arteries supply the lung tissue itself.",
+  simple:"The lungs are the gas-exchange organs — oxygen in, carbon dioxide out, in a pair of elastic sponges.",
+  case:"Pneumothorax is air in the pleural space collapsing the lung — a sharp chest pain with breathlessness."},
+"aorta":{where:"The aorta is the body's main artery — arching from the left ventricle, through the chest, down behind the diaphragm to split at the navel level.",
+  look:"Follow the arch's three great branches (brachiocephalic, carotid, subclavian), the descending thoracic part, and the abdominal segment giving paired and visceral branches.",
+  rel:{heart:"leaves its left ventricle","aortic-arch":"the arch giving the three head-and-arm vessels","coronary-arteries":"the first two branches — its own supply","common-iliac-artery":"it ends by splitting into these at L4"},
+  supply:"Vasa vasorum — tiny vessels feeding its own wall; it ends by bifurcating at L4 (the umbilicus level).",
+  mnemonic:"Aortic dissection = tearing chest pain radiating to the back — the inner wall splits and blood tunnels between layers.",
+  simple:"The aorta is the body's main pipeline — the biggest artery carrying all the heart's output.",
+  case:"Aortic aneurysm rupture is a surgical emergency — a pulsatile abdominal mass with back pain."},
+"liver":{where:"The liver is the largest internal organ — filling the right upper quadrant under the right dome of the diaphragm.",
+  look:"Find the right and left lobes divided by the falciform ligament, the gallbladder tucked beneath, and the porta hepatis where the bile duct, hepatic artery and portal vein enter.",
+  rel:{gallbladder:"tucked on its under-surface","hepatic-portal-vein":"carries gut blood to it","bile-duct":"drains its bile","pancreas":"its neighbour behind the stomach","hepatic-veins":"drain it into the IVC"},
+  supply:"Dual blood supply — hepatic artery (oxygenated) and portal vein (nutrient-rich gut blood); it regenerates after partial resection.",
+  simple:"The liver is the body's chemical factory — it processes food, detoxifies blood, and makes bile.",
+  case:"Hepatitis B/C and cirrhosis scar it; a porta-hepatis node metastasis can obstruct the bile duct."},
+"kidney":{where:"The kidneys sit retroperitoneally on the back wall — against T12 to L3, the right a touch lower under the liver.",
+  look:"Find the bean shape, the hilum on the medial side where artery, vein and ureter pass, and the cortex/medulla pyramids inside.",
+  rel:{nephron:"the million filtering units inside each","renal-arteries":"the pair supplying them off the aorta","ureter":"the tube carrying urine to the bladder","renal-pelvis":"the funnel collecting urine","renal-cortex":"the outer filtering layer"},
+  supply:"Renal arteries direct from the aorta — each kidney gets ~20% of cardiac output for filtration.",
+  simple:"The kidneys are your blood filters — each day they sieve out waste and balance your water and salts.",
+  case:"A kidney stone presents as colicky loin-to-groin pain; the kidneys' retroperitoneal position means trauma bleeds into the flank."},
+"stomach":{where:"The stomach sits in the left upper quadrant — a J-shaped sac between the esophagus and the duodenum.",
+  look:"Find the cardia where the esophagus enters, the dome-shaped fundus above, the body, and the pylorus — the muscular valve controlling emptying into the duodenum.",
+  rel:{esophagus:"feeds it food","duodenum":"its outflow","celiac-trunk":"its arterial supply","pylorus":"its outlet valve","peristalsis":"the muscle waves that churn food"},
+  supply:"Celiac trunk branches along both curvatures; the vagus nerve (X) controls its motility and acid output.",
+  simple:"The stomach is the body's churning tank — it bathes food in acid and enzymes and meters it out to the gut.",
+  case:"Peptic ulcer gnaws through its lining — pain after eating or at night; a perforated ulcer causes sudden rigid abdomen."},
+"spleen":{where:"The spleen is tucked deep in the left upper quadrant under ribs 9–11 — protected, but the most commonly injured abdominal organ in blunt trauma.",
+  look:"Find the dark purple ovoid on the left under the diaphragm — it has no lobe landmarks, just a hilum where vessels enter.",
+  rel:{stomach:"lies in front of it","pancreas":"its tail reaches the splenic hilum","lymphatic-system":"it's a giant lymph node filtering blood","lymph-nodes":"the white pulp inside is lymph tissue"},
+  supply:"Splenic artery (the most tortuous in the body) and vein; the organ filters blood and removes old red cells.",
+  mnemonic:"Spleen sits under ribs 9-11 — a left lower-rib fracture can rupture it silently.",
+  simple:"The spleen is your blood's quality-control organ — it removes worn-out red cells and fights infection.",
+  case:"Splenic rupture after a bike or punch injury bleeds into the abdomen — a Kehr's sign pain radiates to the left shoulder."},
+"pancreas":{where:"The pancreas lies retroperitoneally across the midline — its head cupped in the duodenal curve, tail reaching the spleen.",
+  look:"Find the head by the duodenum, the neck crossing the spine, and the tail pointing left toward the spleen; the main duct drains into the bile duct's ampulla.",
+  rel:{duodenum:"its head nests in the C-curve","bile-duct":"shares its outlet at the ampulla of Vater","islets-of-langerhans":"the endocrine cell clusters inside","spleen":"its tail points to it","insulin":"the hormone its beta cells make"},
+  supply:"SMA and celiac branches; it is both an exocrine gland (digestive enzymes) and an endocrine gland (insulin, glucagon).",
+  simple:"The pancreas is the sugar-control organ — it makes insulin and the enzymes that digest your food.",
+  case:"Acute pancreatitis gives severe epigastric pain radiating to the back — classically from gallstones or alcohol."},
+"bladder":{where:"The bladder sits in the pelvis behind the pubic symphysis — a muscular sac that stores urine until release.",
+  look:"Find the rounded dome rising when full, the two ureter openings and the urethra's start forming the trigone — the smooth triangle that doesn't stretch.",
+  rel:{ureter:"the two tubes feeding it","urethra":"the single tube draining it","pelvic-floor":"the muscles supporting it","urinary-system":"its storage organ"},
+  supply:"Superior and inferior vesical arteries; the detrusor muscle squeezes to empty, controlled by S2–4 parasympathetic nerves.",
+  simple:"The bladder is your reservoir — it stretches to store urine and squeezes to empty it.",
+  case:"A palpable suprapubic mass is a full bladder in retention; blood in the urine prompts a check for stones or cancer."},
+"small-intestine":{where:"The small intestine fills the central abdomen — about six metres of coiled tube between the stomach and the cecum.",
+  look:"Find the duodenum's C-loop hugging the pancreas, then the jejunum (upper-left, thicker walls) and the ileum (lower-right, ending at the ileocecal valve).",
+  rel:{duodenum:"the first 25cm receiving stomach contents",jejunum:"the upper-middle coil — most absorption",ileum:"the lower coil ending at the cecum",mesentery:"the fan anchoring it to the back wall",villi:"the finger-like folds that absorb food"},
+  supply:"Superior mesenteric artery and vein in the mesentery; the villi increase surface area to roughly the size of a tennis court.",
+  mnemonic:"D-J-I: duodenum, jejunum, ileum — in order.",
+  simple:"The small intestine is the body's absorption tube — it finishes digesting food and takes up the nutrients.",
+  case:"A small-bowel obstruction gives colicky central pain, vomiting and no wind — visible as distended loops on X-ray."},
+"large-intestine":{where:"The large intestine frames the small gut like a picture frame — ascending on the right, transverse across, descending on the left to the rectum.",
+  look:"Find the cecum in the right lower quadrant (with the appendix), the haustra (pouches) along its length, and the sigmoid S-bend descending to the rectum.",
+  rel:{cecum:"the pouch where the ileum enters","colon":"the longest part","appendix":"the small worm hanging off the cecum","rectum":"the last part before the anus","anal-canal":"the exit canal"},
+  supply:"Superior and inferior mesenteric arteries in two zones meeting at the splenic flexure — a watershed vulnerable to ischemia.",
+  mnemonic:"Water and electrolytes are absorbed here — and the appendix hangs off the start.",
+  simple:"The large intestine is the body's water-reclaimer — it dries the residue and stores it for release.",
+  case:"Appendicitis starts as central pain moving to the right iliac fossa — tenderness at McBurney's point."},
+"uterus":{where:"The uterus sits in the pelvis between the bladder and the rectum — a pear-shaped muscular organ tilted forward.",
+  look:"Find the fundus (domed top), the body, and the narrow cervix projecting into the vagina; the broad ligament drapes from its sides.",
+  rel:{cervix:"its narrow lower end","fallopian-tube":"the tube carrying the egg from the ovary",vagina:"its outlet",ovary:"the paired egg-producing organs","pelvic-floor":"the muscles supporting it"},
+  supply:"Uterine artery (a branch of the internal iliac) — it crosses the ureter where ureteric injury can occur in hysterectomy.",
+  mnemonic:"'Water under the bridge' — the ureter runs under the uterine artery at the cervix.",
+  simple:"The uterus is the organ where a baby grows — a muscular pear that expands enormously in pregnancy.",
+  case:"Fibroids are benign growths of its muscle — the commonest pelvic tumour, causing heavy periods."},
+"eye":{where:"The eye sits in the bony orbit — only its front quarter exposed, the rest protected by bone.",
+  look:"Find the clear cornea at the front, the coloured iris with the pupil, then the lens; behind them the retina lines the back wall and the optic nerve exits.",
+  rel:{cornea:"the clear front window",lens:"the focusing lens behind the pupil",retina:"the light-sensing layer",iris:"the coloured aperture","optic-nerve":"the cable carrying the signal",orbit:"the bony socket"},
+  supply:"Ophthalmic artery (branch of the internal carotid); rods and cones in the retina detect light — the fovea gives sharp central vision.",
+  simple:"The eye is your camera — cornea and lens focus light onto the retina, which sends the picture to the brain.",
+  case:"Acute glaucoma is a painful red eye with halos — pressure inside rises and threatens the optic nerve."},
+"tongue":{where:"The tongue fills the mouth floor — a muscular organ anchored to the hyoid, mandible and skull.",
+  look:"Find the papillae (the bumps carrying taste buds) on the dorsum and the sulcus terminalis — the V-shaped groove separating the front two-thirds from the back third.",
+  rel:{"oral-cavity":"its cavity","taste-buds":"the taste receptors in its papillae","hypoglossal-nerve":"CN XII — its motor nerve","tongue-muscles":"its intrinsic and extrinsic muscles"},
+  supply:"Lingual artery; general sensation by the lingual nerve (V3) and taste by the chorda tympani (VII) in front, CN IX behind.",
+  simple:"The tongue is your tongue — a muscular organ for tasting, chewing, speaking and swallowing.",
+  case:"A deviating tongue on protrusion signals hypoglossal (CN XII) damage on that side."},
+"brain":{where:"The brain fills the cranial cavity — the cerebrum on top, the cerebellum under the back, and the brainstem connecting down to the cord.",
+  look:"Find the two cerebral hemispheres and their lobes (frontal, parietal, temporal, occipital), the folded cerebellum, and the brainstem — midbrain, pons, medulla — linking to the cord.",
+  rel:{cerebrum:"the two hemispheres — thought, sense and movement",cerebellum:"the coordination center at the back",brainstem:"the stalk controlling breathing and consciousness",ventricles:"the fluid spaces inside",meninges:"the three protective membranes"},
+  supply:"Two internal carotid and two vertebral arteries form the circle of Willis — ~20% of cardiac output; the blood-brain barrier shields the tissue.",
+  simple:"The brain is the control center — it thinks, feels, remembers and commands every other organ.",
+  case:"A stroke is a blocked or burst vessel starving brain tissue — facial droop, arm weakness, slurred speech."},
+"spinal-cord":{where:"The spinal cord runs inside the vertebral canal from the foramen magnum to about L1–L2 — 31 segments serving the body below the head.",
+  look:"Find the cervical and lumbar enlargements (serving the limbs), the cone-shaped conus medullaris ending it, and the cauda equina — the roots dangling below like a horse's tail.",
+  rel:{"vertebral-column":"protected inside its canal","spinal-nerve":"the 31 pairs leaving between vertebrae","cauda-equina":"the loose roots below the cord end","meninges":"the membranes wrapping it","dermatome":"the skin strips each segment serves"},
+  supply:"One anterior and two posterior spinal arteries; below L1–L2 the canal holds only floating roots — lumbar puncture is done at L3–4 to be safe.",
+  simple:"The spinal cord is the body's main cable — it carries commands down and sensations up.",
+  case:"Cauda equina syndrome — compression below the cord end — is a surgical emergency with saddle anaesthesia."},
+"median-nerve":{where:"The median nerve runs down the middle of the arm and forearm, then through the carpal tunnel at the wrist to supply the front of the hand.",
+  look:"Trace it from the brachial plexus down the arm to the cubital fossa, down the forearm's middle, and through the wrist's carpal tunnel.",
+  rel:{"carpal-tunnel":"the wrist tunnel where it gets trapped","thenar-muscles":"the thumb muscles it supplies","brachial-plexus":"the network it leaves","ulnar-nerve":"its partner in the hand"},
+  supply:"It supplies the forearm flexors and the hand's thenar muscles plus sensation of the radial three-and-a-half fingers.",
+  mnemonic:"Carpal tunnel = median nerve trapped — waking numbness in the thumb-to-ring fingers.",
+  simple:"The median nerve feeds the thumb side of your hand — it's the one compressed in carpal tunnel syndrome.",
+  case:"Carpal tunnel syndrome causes night-time numbness in the thumb, index and middle fingers — worse with wrist flexion."},
+"ulnar-nerve":{where:"The ulnar nerve runs behind the medial epicondyle of the humerus — the 'funny bone' spot — then down to the little-finger side of the hand.",
+  look:"Find it exposed behind the elbow's inner bump, then trace it along the medial forearm into the hand's ulnar side.",
+  rel:{"median-nerve":"its partner in hand function","brachial-plexus":"its origin","interossei-hand":"the small hand muscles it supplies","hypothenar-muscles":"the little-finger mound it feeds"},
+  supply:"Ulnar nerve C8–T1; supplies most intrinsic hand muscles and the little and half the ring finger.",
+  mnemonic:"Ulnar nerve damage = claw hand — the ring and little fingers claw because the lumbricals fail.",
+  simple:"The ulnar nerve is the 'funny bone' nerve — a hit at the elbow shocks your little finger.",
+  case:"A tardy ulnar palsy follows an old elbow fracture — the nerve stretched over years finally fails."},
+"radial-nerve":{where:"The radial nerve winds around the back of the humerus in the spiral groove, then supplies the extensor compartment of the forearm.",
+  look:"Find it leaving the axilla to spiral the humerus midshaft, then descending in front of the lateral epicondyle — its deep branch piercing the supinator.",
+  rel:{"triceps-brachii":"it supplies it (and the other extensors)","extensor-compartment-forearm":"the muscles it feeds","brachial-plexus":"its origin","supinator":"the muscle its deep branch pierces","humerus":"it winds around the shaft"},
+  supply:"Radial nerve C5–T1; a midshaft humerus fracture injures it — wrist drop is the classic presentation.",
+  mnemonic:"Radial nerve = wrist drop. The nerve in the spiral groove is why a 'Saturday night palsy' (arm draped over a chair) drops the wrist.",
+  simple:"The radial nerve straightens your wrist and fingers — damage it and your hand droops.",
+  case:"Saturday-night palsy from sleeping on the arm compresses it; a humeral shaft fracture can sever it."},
+"sciatic-nerve":{where:"The sciatic nerve is the body's largest nerve — exiting the pelvis through the greater sciatic foramen, running down the back of the thigh to split at the knee.",
+  look:"Find it emerging below the piriformis muscle, running deep under the gluteus, then down the back of the thigh before splitting into tibial and common fibular branches.",
+  rel:{"tibial-nerve":"its medial branch down the leg","common-fibular-nerve":"its lateral branch to the fibular neck",piriformis:"the muscle it exits beneath — a trap for entrapment",hamstrings:"its tibial division supplies them","lumbar-vertebrae":"its roots are L4–S3"},
+  supply:"L4–S3 roots; supplies the posterior thigh and everything below the knee.",
+  mnemonic:"Sciatica = shooting pain down the leg — the nerve compressed by a herniated L4–5 or L5–S1 disc.",
+  simple:"The sciatic nerve is the leg's main cable — the biggest nerve in your body, running from your lower back to your foot.",
+  case:"A slipped disc pressing the L5 or S1 root gives sciatica — pain and pins-and-needles down the leg."},
+};
+
 </script>
 <script>
 /* ============ Anatomy Atlas — app ============ */
@@ -19489,7 +19859,10 @@ function buildScene(gltf, st){
   const ghostOf = bm => { if(!bm.userData.__g){ const g = bm.clone();
       g.transparent = true; g.opacity = 0.09; g.depthWrite = false; bm.userData.__g = g; }
     return bm.userData.__g; };
+  /* raycasts run only against the currently visible meshes */
+  const visList = [];
   const applyVis = () => {
+    visList.length = 0;
     for(const id in meshes) for(const m of meshes[id]){
       m.visible = chipOn[m.userData.sys] && !hidden.has(id)
         && peelOf(m.userData.sys) >= peelN && (!m.userData.aid || aidsOn);
@@ -19497,6 +19870,7 @@ function buildScene(gltf, st){
       const base = m.userData.baseMat || m.material;
       m.material = m.userData.ghost ? ghostOf(base)
         : (id===selected && m.userData.glowMat) ? m.userData.glowMat : base;
+      if(m.visible && !m.userData.ghost) visList.push(m);
     }
     for(const m of loose){
       m.visible = chipOn[m.userData.sys] && isolated===null
@@ -19509,7 +19883,7 @@ function buildScene(gltf, st){
     if(quiz.on && quiz.target && !anyVis(quiz.target)) quizNext();
   };
   applyVis();
-  window.__b3d = {group, meshes};
+  window.__b3d = {group, meshes, camera, THREE};
   const ctr = bb.getCenter(new THREE.Vector3());
   const rad = bb.getSize(new THREE.Vector3()).length()/2;
   /* slice plane — the ✂ slider cuts the body along the chosen axis */
@@ -19567,11 +19941,30 @@ function buildScene(gltf, st){
   const setInfo = html => { info.innerHTML = `<button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button>${html}`;
     const c = info.querySelector("#b3dic"); if(c) c.addEventListener("click",()=>select(null)); };
   { const ic0 = info.querySelector("#b3dic"); if(ic0) ic0.addEventListener("click",()=>select(null)); }
+  /* fast raycast: test only the few visible meshes whose bounding sphere the
+     ray actually hits — a whole-scene raycast stalls for a beat when it
+     triangle-tests dense meshes like the 300k-vert scapula */
+  const _rsph = new THREE.Sphere(), _rdir = new THREE.Vector3();
+  const rayMeshes = () => {
+    const cand = [];
+    for(const m of visList){
+      const g = m.geometry; if(!g) continue;
+      if(!g.boundingSphere) g.computeBoundingSphere();
+      _rsph.copy(g.boundingSphere).applyMatrix4(m.matrixWorld);
+      if(ray.ray.intersectsSphere(_rsph)){
+        _rdir.copy(_rsph.center).sub(ray.ray.origin).dot(ray.ray.direction);
+        cand.push([_rdir.lengthSq(), m]); } }
+    cand.sort((a,b)=>a[0]-b[0]);
+    /* cap high enough that a ray threading many ghost meshes still reaches
+       the visible target behind them — sphere tests are cheap, triangle
+       tests on this many are still fast */
+    return cand.slice(0,48).map(c=>c[1]);
+  };
   const pick = e => {
     const r = cv.getBoundingClientRect();
     ptr.x = ((e.clientX-r.left)/r.width)*2-1; ptr.y = -((e.clientY-r.top)/r.height)*2+1;
     ray.setFromCamera(ptr,camera);
-    const hits = ray.intersectObjects(group.children, true);
+    const hits = ray.intersectObjects(rayMeshes(), false);
     const h = hits.find(x => x.object.userData.partId && !x.object.userData.ghost && effVis(x.object));
     if(h){ pick.pt = h.point.clone(); pick.pid = h.object.userData.partId; }
     else pick.pid = null;
@@ -19754,7 +20147,7 @@ function buildScene(gltf, st){
     const ot = performance.now(), rec = anchT[key];
     if(rec && ot - rec.t < (lowPower ? 380 : 200)) return rec;
     ray.set(camera.position, _v.copy(target).sub(camera.position).normalize());
-    const hits = ray.intersectObjects(group.children, true);
+    const hits = ray.intersectObjects(rayMeshes(), false);
     const r = { pt: null, occ: false, t: ot };
     for(const h of hits){
       const o = h.object;
@@ -19779,11 +20172,15 @@ function buildScene(gltf, st){
     if(stOn && !labelsOn && lblb) lblb.click(); /* one tap turns labels on, masked */
     lblLayer.querySelectorAll(".b3dlbl").forEach(el=>{ el.classList.remove("mask"); });
     stSync(); updLabels(); });
+  /* labels are tappable — a masked one reveals its name, a named one selects
+     its structure (and clicks can no longer shoot through to the canvas) */
   lblLayer.addEventListener("click",e=>{ const el=e.target.closest(".b3dlbl");
-    if(!el || !stOn || !el.dataset.id || revSet.has(el.dataset.id)) return;
-    revSet.add(el.dataset.id);
-    el.textContent = nameOf(el.dataset.id); el.classList.remove("mask"); el.style.pointerEvents="";
-    stSync(); });
+    if(!el || !el.dataset.id) return;
+    if(stOn && !revSet.has(el.dataset.id)){
+      revSet.add(el.dataset.id);
+      el.textContent = nameOf(el.dataset.id); el.classList.remove("mask");
+      stSync(); return; }
+    select(el.dataset.id); });
   const updLabels = () => { if(!labelsOn || quiz.on){ for(const id in lblPool) hideLbl(id); return; }
     const vis = Object.keys(meshes).filter(id=>anyVis(id) && !id.startsWith("z:misc"));
     vis.sort((a,b)=>{ if(!_pcCache[a]) _pcCache[a]=partCenter(a); if(!_pcCache[b]) _pcCache[b]=partCenter(b);
@@ -19810,7 +20207,6 @@ function buildScene(gltf, st){
       el.style.left=px+"px"; el.style.top=py+"px";
       const masked = stOn && !revSet.has(id);
       el.classList.toggle("mask",masked);
-      el.style.pointerEvents = masked ? "auto" : "";
       el.textContent = masked ? "?" : nameOf(id);
       let g = lnPool[id];
       if(!g){ g=document.createElementNS(SVGNS,"g");
@@ -20006,6 +20402,7 @@ function buildScene(gltf, st){
     if(dx*dx+dy*dy<49 && dt<600){
       const m = pick(e);
       if(quiz.on){ quizAnswer(m); return; }
+      if(lesson.on && lesson.q){ lesAnswer(m); return; }
       /* double-tap / double-click zooms into the tapped part */
       const nowT = performance.now();
       if(m && nowT-lastTapT<380 && (e.clientX-lastTapX)**2+(e.clientY-lastTapY)**2<625){
@@ -20014,15 +20411,24 @@ function buildScene(gltf, st){
       select(m ? m.userData.partId : null);
     }
   });
-  cv.addEventListener("pointermove", e=>{
-    if(e.pointerType==="touch") return;
-    if(quiz.on){ tip.style.display="none"; if(hover){ glow(hover,0); hover=null; } return; }
+  /* hover highlight is throttled — a pick every pointermove stalled on dense meshes */
+  let hovT = 0, hovTo = 0, hovLast = null;
+  const doHover = e => {
     const m = pick(e);
     if(m!==hover){ if(hover&&hover.userData.partId!==selected) glow(hover,0); hover=m; if(hover&&hover.userData.partId!==selected) glow(hover,0x1c3d5a); }
     if(hover && !tip.dataset.lock){ const r=stage.getBoundingClientRect();
       tip.style.left=(e.clientX-r.left+14)+"px"; tip.style.top=(e.clientY-r.top+10)+"px";
       tip.style.display="block"; tip.textContent = nameOf(hover.userData.partId);
     } else if(!hover) tip.style.display="none";
+  };
+  cv.addEventListener("pointermove", e=>{
+    if(e.pointerType==="touch") return;
+    if(quiz.on || (lesson.on && lesson.q)){ tip.style.display="none"; if(hover){ glow(hover,0); hover=null; } hovLast=null; return; }
+    hovLast = e;
+    const now = performance.now();
+    if(now - hovT >= 70){ hovT = now; doHover(e); }
+    else if(!hovTo) hovTo = setTimeout(()=>{ hovTo=0;
+      if(hovLast){ hovT = performance.now(); const ev = hovLast; hovLast=null; doHover(ev); } }, 80);
   });
   cv.addEventListener("pointerleave", ()=>{ if(hover&&hover!==meshes[selected]) glow(hover,0); hover=null; tip.style.display="none"; });
 
@@ -20169,51 +20575,105 @@ function buildScene(gltf, st){
 
   /* ---- guided lesson: step-by-step tour through one structure ---- */
   const lesEl = $("#b3dles");
-  const lesson = { on:false, id:null, sys:null, steps:[], i:0 };
-  const lesClose = () => { lesson.on=false; lesson.sys=null; if(lesEl) lesEl.style.display="none";
+  const lesson = { on:false, id:null, sys:null, steps:[], i:0, q:null, smp:false, lblSaved:null };
+  const TEACH = window.ATLAS_TEACH || {};
+  /* plain-language variant: authored `s` or the step's first sentence */
+  const firstSent = html => { const t = html.replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+    const m = t.match(/^[^.!?]*[.!?]/); return esc(m ? m[0] : t.slice(0,150)); };
+  /* label fading inside lessons: all → masked → off as the lesson progresses */
+  const setLbl = mode => { labelsOn = mode!=="off"; stOn = mode==="mask"; revSet.clear();
+    if(stB) stSync(); if(lblb) lblb.classList.toggle("on",labelsOn);
+    lblLayer.style.display = labelsOn?"block":"none";
+    if(lnSVG) lnSVG.style.display = labelsOn?"block":"none";
+    updLabels(); };
+  const lesClose = () => { lesson.on=false; lesson.sys=null; lesson.q=null;
+    if(lesEl) lesEl.style.display="none";
     appEl.classList.remove("lesson");
+    if(lesson.lblSaved){ const m = lesson.lblSaved[0] ? (lesson.lblSaved[1]?"mask":"all") : "off";
+      lesson.lblSaved=null; setLbl(m); }
     focusSet=null; if(isolated===lesson.id) isolated=null;
     applyVis(); if(selected===lesson.id) select(null); queueUrl(); };
   const buildLesson = (id,sys) => {
     const d = byId[id]; if(!d) return null;
     const steps = [];
+    const t = TEACH[id] || {};
     const reg = REGIONS[d.region] ? REGIONS[d.region].name : null;
+    const sysMeta = META.systems[d.system];
     const flyK = k => { const p = partCenter(id); if(p) flyTo(p.c, p.r*k); };
-    /* 1 · Location — anchor it on the body map first */
-    steps.push({ t:"📍 Location",
-      x:`The <b>${esc(d.name)}</b>${reg?` sits in the <b>${esc(reg)}</b>`:""}${d.aka?` — also called the <b>${esc(d.aka)}</b>`:""}.
-        <br><br>${esc(d.summary)}`,
-      act:()=>{ setLayers(null); focusSet=new Set([id]); applyVis(); select(id); flyK(3.0); } });
-    /* 2 · Form — what it actually looks like */
-    if(d.structure) steps.push({ t:"🔍 Form & structure", x:esc(d.structure),
-      act:()=>{ focusSet=new Set([id]); applyVis(); flyK(1.4); } });
-    /* 3 · Function — the job it does */
-    if(d.fn) steps.push({ t:"⚙️ What it does", x:esc(d.fn),
-      act:()=>{ focusSet=new Set([id]); applyVis(); } });
-    /* 4 · Neighbours — how it connects to the parts around it */
+    const focusIt = ()=>{ focusSet=new Set([id]); applyVis(); };
     const rel = (d.related||[]).filter(r=>meshes[r]);
-    if(rel.length) steps.push({ t:"🔗 Neighbours",
-      x:`Now look at how it relates to its neighbours — everything else is ghosted:<br><br>` +
-        rel.slice(0,7).map(r=>`<b>${esc(nameOf(r))}</b>`).join(" · "),
-      act:()=>{ focusSet=new Set([id,...rel]); applyVis();
-        const box=new THREE.Box3(); [id,...rel].forEach(r=>{ const p=partCenter(r); if(p) box.expandByPoint(p.c); });
-        if(!box.isEmpty()){ const c=box.getCenter(new THREE.Vector3());
-          flyTo(c, Math.max(box.getSize(new THREE.Vector3()).length()/2, rad*0.02)); } } });
-    /* 5 · Clinical — why it matters in real life */
-    if(d.clinical) steps.push({ t:"🏥 Why it matters",
-      x:esc(d.clinical)+`<br><br><a href="#/part/${id}" style="color:#ffd60a">Read the full atlas entry →</a>`,
-      act:()=>{ focusSet=new Set([id]); applyVis(); flyK(1.6); } });
-    /* finish — offer a self-test */
-    steps.push({ t:"🎉 You've got it", finish:true,
-      x:`That's the ${esc(d.name)}. Tap <b>Test me</b> and find it on the body — or mark the lesson done.`,
+    /* 1 · Location — anchor it on the body map first */
+    steps.push({ t:"📍 Location", lbl:"all",
+      s: t.simple ? esc(t.simple) : null,
+      x:`The <b>${esc(d.name)}</b>${reg?` sits in the <b>${esc(reg)}</b>`:""}${d.aka?` — also called the <b>${esc(d.aka)}</b>`:""}.<br><br>
+        ${esc(d.summary||"")}${t.where?`<br><br>${esc(t.where)}`:""}
+        ${sysMeta?`<br><br><span class="dim">It belongs to the <b>${esc(sysMeta.name)}</b> — ${esc((sysMeta.blurb||"").split(".")[0].toLowerCase())}.</span>`:""}`,
+      act:()=>{ setLayers(null); focusIt(); select(id); flyK(3.0); } });
+    /* 2 · Form — what it actually looks like */
+    if(d.structure || t.look) steps.push({ t:"🔍 Form & structure", lbl:"all",
+      x:`${d.structure?esc(d.structure):""}${t.look?`<br><br><b class="les-kw">What to look for:</b> ${esc(t.look)}`:""}`,
+      act:()=>{ focusIt(); flyK(1.4); } });
+    /* 3 · Neighbours — one guided step per key neighbour, each ending in a tap-it check */
+    for(const r of rel.slice(0,3)){
+      const rd = byId[r];
+      const phrase = (t.rel && t.rel[r]) ? esc(t.rel[r])
+        : rd && rd.summary ? esc(rd.summary)
+        : `It sits close to the ${esc(d.name)}.`;
+      steps.push({ t:`🔗 ${nameOf(r)}`, lbl:"off",
+        x:`<b>${esc(nameOf(r))}</b><br><br>${phrase}<br><br><span class="dim">Everything else is ghosted — look at where it sits next to the ${esc(d.name)}.</span>`,
+        q:{id:r, t:`Now tap the <b>${esc(nameOf(r))}</b> on the body`},
+        act:()=>{ focusSet=new Set([id,r]); applyVis();
+          const box=new THREE.Box3(); [id,r].forEach(rr=>{ const p=partCenter(rr); if(p) box.expandByPoint(p.c); });
+          if(!box.isEmpty()){ const c=box.getCenter(new THREE.Vector3());
+            flyTo(c, Math.max(box.getSize(new THREE.Vector3()).length()/1.8, rad*0.02)); } } }); }
+    /* 4 · Blood & nerve supply — when we have the detail */
+    if(t.supply) steps.push({ t:"🩸 Supply & nerves", lbl:"mask",
+      x:esc(t.supply), act:()=>{ focusIt(); flyK(1.7); } });
+    /* 5 · Function — the job it does */
+    if(d.fn) steps.push({ t:"⚙️ What it does", lbl:"mask",
+      x:esc(d.fn), act:()=>{ focusIt(); } });
+    /* 6 · Clinical — why it matters in real life */
+    if(d.clinical || t.case) steps.push({ t:"🏥 Why it matters", lbl:"mask",
+      x:`${d.clinical?esc(d.clinical):""}${t.case?`<br><br><b class="les-kw">Classic case:</b> ${esc(t.case)}`:""}
+        <br><br><a href="#/part/${id}" style="color:#ffd60a">Read the full atlas entry →</a>`,
+      act:()=>{ focusIt(); flyK(1.6); } });
+    /* 7 · Memory hook */
+    if(t.mnemonic) steps.push({ t:"🧠 Memory hook", lbl:"mask",
+      x:`<span class="les-kw">📌</span> ${esc(t.mnemonic)}`,
+      act:()=>{ focusIt(); } });
+    /* finish — find it yourself, then a quiz */
+    steps.push({ t:"🎉 You've got it", finish:true, lbl:"off",
+      x:`That's the <b>${esc(d.name)}</b>. Find it on the body one more time, then tap <b>Test me</b> — or mark the lesson done.`,
+      q:{id},
       act:()=>{ focusSet=null; isolated=null; hidden.clear(); applyVis(); flyK(2.4); } });
     return steps;
+  };
+  /* retrieval check — the tap-it questions inside lessons feed spaced repetition */
+  const lesAnswer = m => {
+    const q = lesson.q, qEl = $("#lesq"), qst = $("#lesqst");
+    if(!q) return;
+    if(m && m.userData.partId===q.id){
+      lesson.q = null; qEl.style.display = "none";
+      srRecord(q.id,true); addXP(5,"recall"); checkBadges();
+      qst.className = "les-qst ok"; qst.textContent = `✓ Correct — that's the ${nameOf(q.id)}`;
+      select(q.id);
+    } else {
+      qst.className = "les-qst bad";
+      qst.textContent = m ? `That's the ${nameOf(m.userData.partId)} — try again.` : "Missed it — tap on the structure itself.";
+      if(m) srRecord(q.id,false);
+    }
   };
   const lesGo = i => {
     lesson.i = Math.max(0, Math.min(lesson.steps.length-1, i));
     const s = lesson.steps[lesson.i];
     $("#lest").textContent = s.t;
-    $("#lesbody").innerHTML = s.x;
+    $("#lesbody").innerHTML = lesson.smp ? (s.s || firstSent(s.x)) : s.x;
+    /* retrieval question prompt for this step */
+    lesson.q = s.q || null;
+    const qEl = $("#lesq"), qst = $("#lesqst");
+    if(s.q){ qEl.innerHTML = `🎯 ${s.q.t || `Tap the <b>${esc(nameOf(s.q.id))}</b> on the body`}`; qEl.style.display=""; }
+    else qEl.style.display="none";
+    qst.textContent=""; qst.className="les-qst";
     $("#lesdots").innerHTML = lesson.steps.map((_,k)=>`<i class="${k===lesson.i?"on":k<lesson.i?"done":""}"></i>`).join("");
     $("#lesnav").innerHTML =
       `${lesson.i>0?`<button id="lespv">← Back</button>`:""}<span class="les-prog">${lesson.i+1} / ${lesson.steps.length}</span>` +
@@ -20232,14 +20692,22 @@ function buildScene(gltf, st){
       $("#lesout").addEventListener("click",lesClose);
       $("#lest").textContent = "🎉 Lesson complete"; });
     if(s.act) s.act();
+    setLbl(s.lbl||"off");
     queueUrl();
   };
   const lessonStart = (id,sys) => {
     const steps = buildLesson(id,sys);
     if(!steps || !lesEl) return;
     lesson.on=true; lesson.id=id; lesson.sys=sys; lesson.steps=steps;
+    lesson.lblSaved = [labelsOn,stOn];
     appEl.classList.add("lesson");
     lesEl.style.display="block"; lesGo(0); };
+  /* 🧠 explain-it-simply toggle — swaps step text for the plain version */
+  const smpB = $("#lessmp");
+  if(smpB) smpB.addEventListener("click",()=>{ lesson.smp=!lesson.smp;
+    smpB.classList.toggle("on",lesson.smp);
+    const s = lesson.steps[lesson.i];
+    if(s) $("#lesbody").innerHTML = lesson.smp ? (s.s||firstSent(s.x)) : s.x; });
   if(lesEl) $("#lesx").addEventListener("click",lesClose);
 
   /* subtle life motion — heartbeat on the heart, breathing on the lungs */
@@ -20325,8 +20793,11 @@ function v3D(sel){
     <div class="b3d-hbar" id="b3dhbar"></div>
     <div class="b3d-lesson" id="b3dles" style="display:none">
       <div class="les-top"><b class="les-step" id="lest"></b><span class="les-dots" id="lesdots"></span>
+        <button class="les-smp" id="lessmp" title="Explain it simply" aria-label="Explain it simply">🧠</button>
         <button class="les-x" id="lesx" title="Exit lesson" aria-label="Exit lesson">✕</button></div>
       <div class="les-body" id="lesbody"></div>
+      <div class="les-q" id="lesq" style="display:none"></div>
+      <div class="les-qst" id="lesqst"></div>
       <div class="les-nav" id="lesnav"></div>
     </div>
 
