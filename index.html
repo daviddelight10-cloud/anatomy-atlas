@@ -130,82 +130,65 @@ img{max-width:100%}
 .sys-card::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--c,#4cc9f0) 9%,transparent),transparent 55%);pointer-events:none}
 
 /* ---------- home (overview) ---------- */
-.home-hero{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;border-radius:20px;padding:34px 36px;margin-bottom:22px;box-shadow:var(--shadow);border:1px solid var(--border);background:radial-gradient(120% 120% at 100% 0%,var(--accent-soft),transparent 60%),var(--panel)}
-.home-hero h1{font-size:34px;line-height:1.12;letter-spacing:-.02em;margin-bottom:8px}
-.home-hero p{color:var(--text2);max-width:520px}
-.home-hero .hero-actions{margin-top:16px}
-.home-hero .btn{background:var(--panel2);border-color:var(--border);color:var(--text)}
-.home-hero .btn:hover{border-color:var(--accent);color:var(--accent);background:var(--panel2)}
-.home-hero .btn.primary{background:var(--accent);border-color:var(--accent);color:#141414}
-.home-hero .btn.primary:hover{color:#141414;filter:brightness(1.1)}
-.hh-meta{margin-top:14px;font-size:12.5px;color:var(--text3)}
-.hh-search{position:relative;margin-top:18px;max-width:540px}
-.hh-search input{width:100%;padding:14px 16px 14px 44px;border-radius:13px;border:1px solid var(--border2);background:var(--bg2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") 14px center/20px no-repeat;color:var(--text);font-size:15.5px;outline:none}
-.hh-search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.hh-search .search-drop{left:0;right:0;top:calc(100% + 6px)}
-.hh-3d{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:var(--text);background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:16px 26px 12px;transition:border-color .15s,transform .15s}
-.hh-3d:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
-.hh-3d .scan{position:relative;overflow:hidden;border-radius:10px;animation:hhfloat 6s ease-in-out infinite}
-.hh-3d .scan svg{display:block;height:230px;width:auto}
-.hh-3d .figfill{fill:color-mix(in srgb,var(--accent) 18%,var(--panel2));stroke:var(--accent);stroke-width:1.5}
-.hh-3d .hotspot{pointer-events:none}
-.scanline{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);box-shadow:0 0 14px var(--accent);animation:hhscan 3.2s ease-in-out infinite;z-index:2}
-.hh-3d-cap{font-size:12.5px;font-weight:600;color:var(--accent)}
-@keyframes hhscan{0%{top:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:calc(100% - 3px);opacity:0}}
-@keyframes hhfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@media(prefers-reduced-motion:reduce){.scanline,.hh-3d .scan{animation:none}.scanline{display:none}}
-.cont-strip{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card);border:1px solid var(--accent);border-radius:14px;padding:12px 16px;margin-bottom:6px}
-.cont-strip .btn.primary{color:#141414}
-.cont-strip .xp{margin-left:auto;display:flex;gap:8px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.step{position:relative;display:flex;flex-direction:column;gap:3px;background:var(--card);border:1px solid var(--border);border-radius:15px;padding:18px;color:var(--text);transition:border-color .12s,transform .12s}
-.step:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
-.step .n{position:absolute;top:14px;right:16px;width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
-.step .ic{font-size:28px;margin-bottom:4px}
-.step b{font-size:16px}
-.step small{font-size:13px;color:var(--text2)}
-.today-row{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-top:14px}
-.sod{display:flex;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:15px;padding:16px;color:var(--text);transition:border-color .12s}
-.sod:hover{border-color:var(--accent);text-decoration:none}
+.home-head{margin-bottom:18px}
+.home-head h1{font-size:32px;line-height:1.12;letter-spacing:-.02em;margin-bottom:6px}
+.home-head p{color:var(--text2);max-width:560px}
+.home-head .btn{margin-top:12px;background:var(--panel2);border:1px solid var(--border);color:var(--text)}
+.home-head .btn:hover{border-color:var(--accent);color:var(--accent)}
+.menu-hint{display:none;margin-top:12px;background:var(--panel2);border:1px solid var(--border);color:var(--text2);border-radius:11px;padding:9px 14px;font:600 13px var(--font);cursor:pointer}
+.menu-hint:hover{border-color:var(--accent);color:var(--accent)}
+.main3d{display:grid;grid-template-columns:minmax(200px,300px) 1fr;gap:28px;align-items:center;border-radius:22px;padding:28px 32px;border:1px solid var(--accent);box-shadow:var(--shadow);background:radial-gradient(110% 130% at 0% 0%,var(--accent-soft),transparent 60%),var(--panel)}
+.m3d-poster{display:flex;align-items:center;justify-content:center;border-radius:16px;background:var(--bg2);border:1px solid var(--border);padding:14px;transition:border-color .15s}
+.m3d-poster:hover{border-color:var(--accent);text-decoration:none}
+.m3d-poster img{display:block;height:260px;width:auto;max-width:100%;border-radius:8px}
+.main3d.noimg{grid-template-columns:1fr}
+.main3d.noimg .m3d-poster{display:none}
+.m3d-body .kick{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.m3d-body h2{font-size:30px;line-height:1.12;letter-spacing:-.02em;margin:4px 0 8px}
+.m3d-body p{color:var(--text2);max-width:460px}
+.m3d-body .btn.big{margin-top:16px;padding:14px 24px;font-size:16px;border-radius:13px;background:var(--accent);border-color:var(--accent);color:#141414}
+.m3d-body .btn.big:hover{filter:brightness(1.1);color:#141414}
+.m3d-chips{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px}
+.m3d-chips .lbl{font-size:12.5px;color:var(--text3);margin-right:2px}
+.m3d-chips a{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:20px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:13px;font-weight:600}
+.m3d-chips a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.path2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.pcard{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;color:var(--text);transition:border-color .12s,transform .12s}
+.pcard:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.pcard .ic{font-size:32px;flex:none}
+.pcard .tx{min-width:0;flex:1}
+.pcard b{display:block;font-size:18px}
+.pcard small{display:block;font-size:13.5px;color:var(--text2);margin-top:2px}
+.pcard .go{flex:none;font-size:22px;color:var(--text3)}
+.pcard .meta{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.s3d-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.mini-card{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:13px;padding:10px 12px;color:var(--text);transition:border-color .12s}
+.mini-card:hover{border-color:var(--accent);text-decoration:none}
+.mini-card .thumb{width:44px;height:44px;flex:none;border-radius:9px;background:var(--panel2);border:1px solid var(--border);object-fit:cover;display:flex;align-items:center;justify-content:center}
+.mc-t b{display:block;font-size:14px}
+.mc-t small{font-size:11.5px;color:var(--accent)}
+.sod{display:flex;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
 .sod-img{flex:none;width:120px;height:120px;border-radius:12px;overflow:hidden;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
 .sod-img .sod-thumb{width:100%;height:100%;object-fit:cover}
 .sod-img .ph{font-size:40px}
 .sod-body{min-width:0}
 .sod .kick{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 .sod h3{font-size:19px;margin:3px 0 4px}
-.sod p{font-size:13.5px;color:var(--text2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:8px}
-.quick{display:flex;flex-direction:column;gap:14px}
-.tile{flex:1;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:15px;padding:14px 16px;color:var(--text);transition:border-color .12s}
-.tile:hover{border-color:var(--accent);text-decoration:none}
-.tile .ic{font-size:26px}
-.tile b{display:block;font-size:15px}
-.tile small{color:var(--text2);font-size:12.5px}
-.tile i{margin-left:auto;font-style:normal;color:var(--text3);font-size:20px}
-.sys-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
-.sys-tile{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:13px;padding:11px 13px;color:var(--text);transition:border-color .12s,background .12s}
-.sys-tile:hover{border-color:var(--c);background:var(--card-h);text-decoration:none}
-.sys-tile .ico{width:36px;height:36px;flex:none;display:flex;align-items:center;justify-content:center;font-size:19px;border-radius:10px;background:color-mix(in srgb,var(--c) 16%,transparent)}
-.sys-tile .nm{font-weight:600;font-size:13.5px;line-height:1.2}
-.sys-tile .ct{margin-left:auto;font-size:11.5px;color:var(--text3)}
-.region-split{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
-.region-split .region-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
-.hscroll{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px}
-.mini-card{flex:none;scroll-snap-align:start;display:flex;align-items:center;gap:10px;width:230px;background:var(--card);border:1px solid var(--border);border-radius:13px;padding:10px 12px;color:var(--text);transition:border-color .12s}
-.mini-card:hover{border-color:var(--accent);text-decoration:none}
-.mini-card .thumb{width:44px;height:44px;flex:none;border-radius:9px;background:var(--panel2);border:1px solid var(--border);object-fit:cover;display:flex;align-items:center;justify-content:center}
-.mc-t b{display:block;font-size:14px}
-.mc-t small{font-size:11.5px}
-.home-hero a:focus-visible,.step:focus-visible,.tile:focus-visible,.sys-tile:focus-visible,.mini-card:focus-visible,.sod:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sod h3 a{color:var(--text)}
+.sod h3 a:hover{color:var(--accent);text-decoration:none}
+.sod p{font-size:13.5px;color:var(--text2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:10px}
+.sod-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn.sm{padding:6px 12px;font-size:12.5px;border-radius:9px}
+.home-head a:focus-visible,.main3d a:focus-visible,.pcard:focus-visible,.mini-card:focus-visible,.sod a:focus-visible,.menu-hint:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media(max-width:960px){
-  .home-hero{grid-template-columns:1fr;padding:24px 20px}
-  .home-hero h1{font-size:27px}
-  .hh-3d{display:none}
-  .steps,.today-row,.region-split{grid-template-columns:1fr}
-  .quick{flex-direction:row}
-  .quick .tile{flex:1}
-  .region-split .map-stage{justify-self:center}
+  .home-head h1{font-size:26px}
+  .menu-hint{display:inline-block}
+  .main3d{grid-template-columns:1fr;padding:20px;gap:18px}
+  .m3d-poster img{height:200px}
+  .m3d-body h2{font-size:25px}
+  .path2{grid-template-columns:1fr}
 }
-@media(max-width:520px){.sod{flex-direction:column}.sod-img{width:100%;height:150px}.quick{flex-direction:column}}
+@media(max-width:520px){.sod{flex-direction:column}.sod-img{width:100%;height:150px}.m3d-body .btn.big{width:100%;justify-content:center}}
 
 /* ---------- list view ---------- */
 .list-head{margin-bottom:20px}
@@ -260,29 +243,12 @@ img{max-width:100%}
 .pn .dir{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3)}
 .pn .nm{font-weight:650;font-size:15px}
 .pn a.next{text-align:right}
-.minimap{display:flex;gap:18px;align-items:center}
-.minimap svg{flex:none}
-
 /* ---------- map view ---------- */
-.map-wrap{display:flex;gap:30px;flex-wrap:wrap;align-items:flex-start}
-.map-stage{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:22px;display:flex;gap:10px;justify-content:center;position:sticky;top:70px}
-.map-side{flex:1;min-width:280px}
-.map-side h1{font-size:24px;margin-bottom:6px}
-.map-side .hint{color:var(--text2);margin-bottom:16px}
 .region-list{display:flex;flex-direction:column;gap:8px}
 .region-item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:13px;padding:11px 14px;cursor:pointer}
 .region-item:hover{border-color:var(--accent);text-decoration:none}
 .region-item .nm{font-weight:600}
 .region-item .ct{margin-left:auto;font-size:12px;color:var(--text3)}
-.view-toggle{display:inline-flex;background:var(--panel2);border:1px solid var(--border);border-radius:11px;padding:3px;gap:3px;margin-bottom:16px}
-.view-toggle button{border:none;background:none;color:var(--text2);padding:7px 16px;border-radius:9px;cursor:pointer;font-size:13.5px;font-weight:600}
-.view-toggle button.on{background:var(--accent);color:#141414}
-svg .hotspot{fill:transparent;stroke:transparent;cursor:pointer;transition:fill .15s}
-svg .hotspot:hover{fill:var(--hl)}
-svg .hotspot.lit{fill:var(--hl);stroke:var(--accent);stroke-width:1}
-svg .figline{stroke:var(--text3);fill:none;stroke-width:1.4;opacity:.55}
-svg .figfill{fill:var(--panel2);stroke:var(--border2);stroke-width:1.5}
-svg .figlabel{fill:var(--text3);font-size:11px;font-family:var(--font);text-anchor:middle}
 
 /* ---------- quiz ---------- */
 .quiz-box{max-width:680px;margin:0 auto}
@@ -420,7 +386,7 @@ a.b3d-rel{font:600 11.5px var(--font);color:var(--accent);background:color-mix(i
   #scrim{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:35}
   #view{padding:18px 16px 50px}
   .plate{width:100%}
-  .map-stage{position:static}
+
   .fchip{padding:7px 13px;font-size:12.5px}
   .b3d-actions button{padding:8px 12px}
 }
@@ -18233,221 +18199,56 @@ function crumbs(parts){
   $("#crumbs").innerHTML = parts.map((p,i)=> i<parts.length-1 ? `<a href="${p.href}">${esc(p.t)}</a> <span>›</span>` : `<b>${esc(p.t)}</b>`).join(" ");
 }
 
-/* ---------- body map SVG ---------- */
-function bodySVG(view, litRegion){
-  const lit = litRegion || "";
-  const spot = (region, shape) => `<${shape.replace(/^(\w+) /,'$1 class="hotspot'+(lit===region?' lit':'')+'" data-region="'+region+'" ')}>`;
-  const fig = `
-    <ellipse cx="180" cy="62" rx="44" ry="54" class="figfill"/>
-    <path d="M162 108 h36 v36 h-36 z" class="figfill"/>
-    <path d="M120 148 C118 138 142 130 180 130 C218 130 242 138 240 148 C252 226 246 300 234 384 C240 424 244 444 240 468 L120 468 C116 444 120 424 126 384 C114 300 108 226 120 148 Z" class="figfill"/>
-    <path d="M122 152 C96 162 82 208 74 258 C68 302 62 352 58 396" class="figfill" stroke-width="30" stroke-linecap="round" style="fill:none"/>
-    <ellipse cx="56" cy="426" rx="15" ry="27" class="figfill"/>
-    <path d="M238 152 C264 162 278 208 286 258 C292 302 298 352 302 396" class="figfill" stroke-width="30" stroke-linecap="round" style="fill:none"/>
-    <ellipse cx="304" cy="426" rx="15" ry="27" class="figfill"/>
-    <path d="M160 470 C154 524 150 560 152 604" class="figfill" stroke-width="46" stroke-linecap="round" style="fill:none"/>
-    <path d="M200 470 C206 524 210 560 208 604" class="figfill" stroke-width="46" stroke-linecap="round" style="fill:none"/>
-    <path d="M152 606 C152 656 150 698 150 732" class="figfill" stroke-width="30" stroke-linecap="round" style="fill:none"/>
-    <path d="M208 606 C208 656 210 698 210 732" class="figfill" stroke-width="30" stroke-linecap="round" style="fill:none"/>
-    <path d="M132 736 C132 752 146 760 168 758 C182 756 184 744 176 736 Z" class="figfill"/>
-    <path d="M228 736 C228 752 214 760 192 758 C178 756 176 744 184 736 Z" class="figfill"/>`;
-  let spots = "";
-  if(view==="anterior"){
-    spots =
-      spot("head","ellipse cx='180' cy='62' rx='46' ry='56'")+
-      spot("neck","rect x='156' y='106' width='48' height='42'")+
-      spot("thorax","path d='M120 146 C118 138 142 130 180 130 C218 130 242 138 240 146 C250 220 246 280 236 316 L124 316 C114 280 110 220 120 146 Z'")+
-      spot("abdomen","path d='M124 316 L236 316 C238 350 236 380 234 388 L126 388 C124 380 122 350 124 316 Z'")+
-      spot("pelvis","path d='M126 388 L234 388 C240 424 244 444 240 468 L120 468 C116 444 120 424 126 388 Z'")+
-      spot("upper-limb","path d='M122 152 C96 162 82 208 74 258 C68 302 62 352 58 400 L80 400 C86 356 92 304 98 260 C106 212 118 172 140 158 Z'")+
-      spot("upper-limb","path d='M238 152 C264 162 278 208 286 258 C292 302 298 352 302 400 L280 400 C274 356 268 304 262 260 C254 212 242 172 220 158 Z'")+
-      spot("upper-limb","ellipse cx='56' cy='428' rx='20' ry='30'")+
-      spot("upper-limb","ellipse cx='304' cy='428' rx='20' ry='30'")+
-      spot("lower-limb","path d='M122 468 L180 468 L180 610 C176 610 150 610 150 610 C148 560 150 520 122 468 Z'")+
-      spot("lower-limb","path d='M238 468 L180 468 L180 610 C184 610 210 610 210 610 C212 560 210 520 238 468 Z'")+
-      spot("lower-limb","path d='M138 610 L166 610 C166 660 164 700 162 736 L140 736 C138 700 136 660 138 610 Z'")+
-      spot("lower-limb","path d='M222 610 L194 610 C194 660 196 700 198 736 L220 736 C222 700 224 660 222 610 Z'")+
-      spot("lower-limb","ellipse cx='155' cy='748' rx='26' ry='16'")+
-      spot("lower-limb","ellipse cx='205' cy='748' rx='26' ry='16'");
-  } else {
-    spots =
-      spot("head","ellipse cx='180' cy='62' rx='46' ry='56'")+
-      spot("neck","rect x='156' y='106' width='48' height='42'")+
-      spot("back","path d='M120 146 C118 138 142 130 180 130 C218 130 242 138 240 146 C250 220 246 300 234 384 C240 424 244 444 240 468 L120 468 C116 444 120 424 126 384 C114 300 110 220 120 146 Z'")+
-      spot("upper-limb","path d='M122 152 C96 162 82 208 74 258 C68 302 62 352 58 400 L80 400 C86 356 92 304 98 260 C106 212 118 172 140 158 Z'")+
-      spot("upper-limb","path d='M238 152 C264 162 278 208 286 258 C292 302 298 352 302 400 L280 400 C274 356 268 304 262 260 C254 212 242 172 220 158 Z'")+
-      spot("upper-limb","ellipse cx='56' cy='428' rx='20' ry='30'")+
-      spot("upper-limb","ellipse cx='304' cy='428' rx='20' ry='30'")+
-      spot("lower-limb","path d='M122 468 L180 468 L180 610 C176 610 150 610 150 610 C148 560 150 520 122 468 Z'")+
-      spot("lower-limb","path d='M238 468 L180 468 L180 610 C184 610 210 610 210 610 C212 560 210 520 238 468 Z'")+
-      spot("lower-limb","path d='M138 610 L166 610 C166 660 164 700 162 736 L140 736 C138 700 136 660 138 610 Z'")+
-      spot("lower-limb","path d='M222 610 L194 610 C194 660 196 700 198 736 L220 736 C222 700 224 660 222 610 Z'")+
-      spot("lower-limb","ellipse cx='155' cy='748' rx='26' ry='16'")+
-      spot("lower-limb","ellipse cx='205' cy='748' rx='26' ry='16'");
-  }
-  return `<svg viewBox="0 0 360 770" width="${view==='mini'?150:290}" xmlns="http://www.w3.org/2000/svg">${fig}${spots}</svg>`;
-}
-
-/* ---------- body map figure: Gray's muscle plates (Wikimedia Commons) + hotspot overlay ---------- */
-const BODY_IMG = {
-  anterior: { src:"https://upload.wikimedia.org/wikipedia/commons/9/92/Muscles_anterior.png", w:964, h:1632 },
-  posterior:{ src:"https://upload.wikimedia.org/wikipedia/commons/c/ca/Muscle_posterior.png", w:1063, h:1297 }
-};
-/* hotspots live in a 0-100 coordinate space stretched over the figure (preserveAspectRatio="none") */
-const HSPOTS = {
-  anterior: [
-    ["head","ellipse",{cx:50,cy:4.6,rx:7.6,ry:4.6}],
-    ["neck","rect",{x:44,y:8.6,width:12,height:3.4,rx:1.6}],
-    ["thorax","ellipse",{cx:50,cy:20,rx:18,ry:9}],
-    ["abdomen","ellipse",{cx:50,cy:35.5,rx:13.5,ry:6.8}],
-    ["pelvis","ellipse",{cx:50,cy:45.5,rx:14.5,ry:4.8}],
-    ["upper-limb","ellipse",{cx:29,cy:14,rx:5.5,ry:4.5}],
-    ["upper-limb","ellipse",{cx:19.5,cy:29,rx:5.5,ry:13,transform:"rotate(13 19.5 29)"}],
-    ["upper-limb","ellipse",{cx:11,cy:46,rx:6,ry:5.5}],
-    ["upper-limb","ellipse",{cx:71,cy:14,rx:5.5,ry:4.5}],
-    ["upper-limb","ellipse",{cx:80,cy:29,rx:5.5,ry:13,transform:"rotate(-13 80 29)"}],
-    ["upper-limb","ellipse",{cx:89,cy:46,rx:6,ry:5.5}],
-    ["lower-limb","ellipse",{cx:40,cy:57.5,rx:9.5,ry:10}],
-    ["lower-limb","ellipse",{cx:60,cy:57.5,rx:9.5,ry:10}],
-    ["lower-limb","ellipse",{cx:41,cy:78.5,rx:6.5,ry:12}],
-    ["lower-limb","ellipse",{cx:59,cy:78.5,rx:6.5,ry:12}],
-    ["lower-limb","ellipse",{cx:40,cy:93.5,rx:7.5,ry:4.2}],
-    ["lower-limb","ellipse",{cx:60,cy:93.5,rx:7.5,ry:4.2}]
-  ],
-  posterior: [
-    ["head","ellipse",{cx:50,cy:5,rx:8,ry:5}],
-    ["neck","rect",{x:44,y:9.5,width:12,height:3.6,rx:1.6}],
-    ["back","ellipse",{cx:50,cy:29,rx:17.5,ry:18}],
-    ["upper-limb","ellipse",{cx:28,cy:14,rx:6,ry:4.5}],
-    ["upper-limb","ellipse",{cx:21,cy:29,rx:5.5,ry:13,transform:"rotate(13 21 29)"}],
-    ["upper-limb","ellipse",{cx:12,cy:46,rx:6,ry:5.5}],
-    ["upper-limb","ellipse",{cx:72,cy:14,rx:6,ry:4.5}],
-    ["upper-limb","ellipse",{cx:79,cy:29,rx:5.5,ry:13,transform:"rotate(-13 79 29)"}],
-    ["upper-limb","ellipse",{cx:88,cy:46,rx:6,ry:5.5}],
-    ["lower-limb","ellipse",{cx:40,cy:57.5,rx:9.5,ry:10}],
-    ["lower-limb","ellipse",{cx:60,cy:57.5,rx:9.5,ry:10}],
-    ["lower-limb","ellipse",{cx:41,cy:78,rx:6.5,ry:12}],
-    ["lower-limb","ellipse",{cx:59,cy:78,rx:6.5,ry:12}],
-    ["lower-limb","ellipse",{cx:41,cy:93,rx:7.5,ry:4.2}],
-    ["lower-limb","ellipse",{cx:59,cy:93,rx:7.5,ry:4.2}]
-  ]
-};
-function bodyFig(vw, litRegion){
-  const side = vw==="posterior" ? "posterior" : "anterior";
-  const im = BODY_IMG[side];
-  const spots = HSPOTS[side].map(([r,tag,a])=>{
-    const attrs = Object.entries(a).map(([k,v])=>`${k}="${v}"`).join(" ");
-    return `<${tag} class="hotspot${litRegion===r?" lit":""}" data-region="${r}" ${attrs}/>`;
-  }).join("");
-  return `<div class="bmap-fig">
-    <img src="${im.src}" width="${im.w}" height="${im.h}" alt="Muscle figure, ${side} view" loading="lazy"
-      onload="if(this.naturalWidth<10)this.closest('.bmap-fig').classList.add('noimg')"
-      onerror="this.closest('.bmap-fig').classList.add('noimg')">
-    ${bodySVG(side,litRegion).replace("<svg ",'<svg class="bmap-fallback" ')}
-    <svg class="bmap-hot" viewBox="0 0 100 100" preserveAspectRatio="none">${spots}</svg>
-  </div>`;
-}
-
 /* ---------- views ---------- */
 const view = $("#view");
 
 function vHome(){
   crumbs([{t:"Overview"}]);
-  const total = DATA.length, imgs = Object.keys(IMAGES).length;
-  const nSys = Object.keys(sysCount).length, nReg = Object.keys(regCount).length;
-  const sysTiles = META.systemOrder.filter(s=>sysCount[s]).map(s=>{
-    const c = SYSTEMS[s];
-    return `<a class="sys-tile" href="#/system/${s}" style="--c:${c.color}"><span class="ico">${c.icon}</span><span class="nm">${c.name}</span><span class="ct">${sysCount[s]}</span></a>`;
-  }).join("");
-  const featured = pick(["brain","heart","femur","lungs","sciatic-nerve","liver"]).map(id=>{
-    const d = byId[id], c = SYSTEMS[d.system];
-    return `<a class="mini-card" href="#/part/${id}">${imgTag(id,"thumb")}<span class="mc-t"><b>${d.name}</b><small style="color:${c.color}">${c.icon} ${c.name}</small></span></a>`;
-  }).join("");
+  const due = srDue().length;
+  const hasProg = (PROG.xp|0)>0 || Object.keys(PROG.lessons||{}).length>0 || due>0;
+  const nx = LEARN_ORDER.filter(s=>sysCount[s]).map(s=>({s,d:nextLesson(s)})).find(x=>x.d && !lessonDone(x.d.id));
+  const learnHref = hasProg && nx ? `#/3d/${nx.d.id}?lesson=${nx.s}` : "#/learn";
+  const learnSub = hasProg && nx ? `Continue: ${esc(nx.d.name)}` : "Guided lessons, one system at a time";
+  const learnMeta = (PROG.xp|0)>0 ? `<span class="meta"><span class="xpbadge">⭐ <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">🔥 ${PROG.streak} days</span>`:""}</span>` : "";
+  const testHref = due ? "#/learn/review" : "#/quiz";
+  const testSub = due ? `🧠 ${due} review${due>1?"s":""} due` : "Quick quizzes to lock it in";
+  const shortcuts = [["💀","Skeleton","skeletal"],["💪","Muscles","muscular"],["🧠","Nerves","nervous"],["🫀","Blood","cardiovascular,lymphatic"],["🫁","Organs","digestive,respiratory,urinary,reproductive,endocrine,sensory"]]
+    .map(([i,n,s])=>`<a href="#/3d/?sys=${s}">${i} ${n}</a>`).join("");
+  let ids3 = ["skeleton-overview","heart","brain","lungs","kidney","femur","eye","deltoid"].filter(id=>byId[id] && MODELS[id]);
+  if(ids3.length<4) ids3 = [...new Set([...ids3,...Object.keys(MODELS).filter(id=>byId[id])])].slice(0,8);
+  const struct3d = ids3.map(id=>{ const d = byId[id];
+    return `<a class="mini-card" href="#/part/${id}">${imgTag(id,"thumb")}<span class="mc-t"><b>${d.name}</b><small>🧊 Interactive 3D model</small></span></a>`; }).join("");
   const pool = DATA.filter(d=>d.summary && IMAGES[d.id]);
   const sod = pool.length ? pool[today() % pool.length] : null;
   const sodC = sod ? SYSTEMS[sod.system] : null;
-  const sodHTML = sod ? `<a class="sod" href="#/part/${sod.id}">
-      <div class="sod-img">${imgTag(sod.id,"sod-thumb")}</div>
-      <div class="sod-body"><span class="kick">✨ Structure of the day</span><h3>${sod.name}</h3>
+  const sodHTML = sod ? `<div class="sod">
+      <a class="sod-img" href="#/part/${sod.id}" aria-label="${esc(sod.name)}">${imgTag(sod.id,"sod-thumb")}</a>
+      <div class="sod-body"><span class="kick">✨ Structure of the day</span><h3><a href="#/part/${sod.id}">${sod.name}</a></h3>
       <p>${esc(sod.summary)}</p>
-      <span class="badge sys" style="--badge-c:${sodC.color}">${sodC.icon} ${sodC.name}</span> <span class="badge">${REGIONS[sod.region].name}</span></div></a>` : "";
-  const hasProg = (PROG.xp|0)>0 || Object.keys(PROG.lessons||{}).length>0 || srDue().length>0;
-  const due = srDue().length;
-  const nx = LEARN_ORDER.filter(s=>sysCount[s]).map(s=>({s,d:nextLesson(s)})).find(x=>x.d && !lessonDone(x.d.id));
-  const cont = hasProg ? `<div class="cont-strip">
-      ${nx?`<a class="btn primary" href="#/3d/${nx.d.id}?lesson=${nx.s}">▶ Continue: ${esc(nx.d.name)}</a>`:`<span class="badge">🎉 All lessons complete!</span>`}
-      ${due?`<a class="btn plain" href="#/learn/review">🧠 Review (${due} due)</a>`:""}
-      <span class="xp"><span class="xpbadge">⭐ <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">🔥 ${PROG.streak} days</span>`:""}</span></div>` : "";
-  const figImg = BODY_IMG.anterior;
+      <div class="sod-actions"><span class="badge sys" style="--badge-c:${sodC.color}">${sodC.icon} ${sodC.name}</span>
+      <a class="btn plain sm" href="#/part/${sod.id}">Read more</a>
+      ${B3D_IDS.has(sod.id)?`<a class="btn plain sm" href="#/3d/${sod.id}">🧊 View in 3D</a>`:""}</div></div></div>` : "";
   view.innerHTML = `
-  <section class="home-hero">
-    <div class="hh-main">
-      <h1>Explore the human body</h1>
-      <p>Search any structure, or open the 3D body and tap to learn.</p>
-      <div class="hh-search" role="search">
-        <input id="hsearch" type="search" placeholder="Search bones, muscles, organs, nerves…" autocomplete="off" spellcheck="false" aria-label="Search anatomy">
-        <div id="hsearch-drop" class="search-drop hidden"></div>
-      </div>
-      <div class="hero-actions">
-        <a class="btn primary" href="#/3d">🧊 Open 3D explorer</a>
-        <a class="btn" href="#/map">🗺️ Body map</a>
-        <a class="btn hero-install" href="#" onclick="atlasInstall();return false">⬇️ Install app</a>
-      </div>
-      <div class="hh-meta">${total} structures · ${nSys} systems · ${nReg} regions · ${imgs} plates · works offline</div>
-    </div>
-    <a class="hh-3d" href="#/3d" aria-label="Open the 3D explorer">
-      <div class="scan"><span class="scanline"></span><img src="${figImg.src}" width="${figImg.w}" height="${figImg.h}" alt="" onerror="this.closest('.hh-3d').style.display='none'"></div>
-      <span class="hh-3d-cap">🧊 Tap to explore in 3D</span>
-    </a>
+  <header class="home-head">
+    <h1>Explore the human body</h1>
+    <p>Open the 3D body, follow a guided lesson, or test what you know.</p>
+    <button class="menu-hint" id="menuhint" type="button">☰ Menu: search, systems, regions</button>
+    <a class="btn hero-install" href="#" onclick="atlasInstall();return false">⬇️ Install app</a>
+  </header>
+  <section class="main3d">
+    <a class="m3d-poster" href="#/3d" aria-label="Open the 3D body"><img src="img/skeleton.svg" width="436" height="842" alt="Human skeleton" onerror="this.closest('.main3d').classList.add('noimg')"></a>
+    <div class="m3d-body"><span class="kick">Interactive</span><h2>3D interactive body</h2>
+      <p>Rotate, peel away layers and tap any structure to learn what it is.</p>
+      <a class="btn big" href="#/3d">🧊 Open 3D body</a>
+      <div class="m3d-chips"><span class="lbl">Jump to:</span>${shortcuts}</div></div>
   </section>
-  ${cont}
-  <h2 class="sec-title">Start here</h2>
-  <div class="steps">
-    <a class="step" href="#/3d"><span class="n">1</span><span class="ic">🧊</span><b>Look</b><small>Rotate the 3D body and tap any part</small></a>
-    <a class="step" href="#/learn"><span class="n">2</span><span class="ic">🎓</span><b>Learn</b><small>Guided lessons, one system at a time</small></a>
-    <a class="step" href="#/quiz"><span class="n">3</span><span class="ic">🎯</span><b>Test yourself</b><small>Quick quizzes to lock it in</small></a>
+  <div class="path2">
+    <a class="pcard" href="${learnHref}"><span class="ic">🎓</span><span class="tx"><b>Learn</b><small>${learnSub}</small>${learnMeta}</span><span class="go">›</span></a>
+    <a class="pcard" href="${testHref}"><span class="ic">🎯</span><span class="tx"><b>Test yourself</b><small>${testSub}</small></span><span class="go">›</span></a>
   </div>
-  <div class="today-row">${sodHTML}
-    <div class="quick">
-      <a class="tile" href="#/map"><span class="ic">🗺️</span><span><b>Body map</b><small>Click a body region</small></span><i>›</i></a>
-      <a class="tile" href="#/gallery"><span class="ic">🖼️</span><span><b>Plates</b><small>${imgs} labeled diagrams</small></span><i>›</i></a>
-    </div>
-  </div>
-  <h2 class="sec-title">Browse by body system</h2>
-  <div class="sys-tiles">${sysTiles}</div>
-  <h2 class="sec-title">Browse by body region</h2>
-  <div class="region-split">
-    <div class="map-stage" style="position:static"><div>
-      <div class="view-toggle" id="hvt" role="group" aria-label="Body view"><button class="on" data-v="anterior">Front</button><button data-v="posterior">Back</button></div>
-      <div id="hmap">${bodyFig("anterior")}</div>
-      <div class="fig-cap">Muscle figure: Gray's Anatomy (1918) · Wikimedia Commons</div></div></div>
-    <div class="region-list">${META.regionOrder.filter(r=>regCount[r]).map(r=>`<a class="region-item" href="#/region/${r}"><span class="nm">${REGIONS[r].name}</span><span class="ct">${regCount[r]} structures</span></a>`).join("")}</div>
-  </div>
-  <h2 class="sec-title">Popular structures</h2>
-  <div class="hscroll">${featured}</div>`;
-  const bind = () => view.querySelectorAll("#hmap .hotspot").forEach(h=>h.addEventListener("click",()=>{ location.hash = "/region/"+h.dataset.region; }));
-  bind();
-  view.querySelectorAll("#hvt button").forEach(b=>b.addEventListener("click",()=>{
-    view.querySelectorAll("#hvt button").forEach(x=>x.classList.remove("on"));
-    b.classList.add("on");
-    $("#hmap").innerHTML = bodyFig(b.dataset.v);
-    bind();
-  }));
-  const hs = $("#hsearch"), hd = $("#hsearch-drop");
-  hs.addEventListener("input",()=>{
-    const q = hs.value, res = search(q).slice(0,8);
-    if(!q || !res.length){ hd.classList.add("hidden"); return; }
-    hd.innerHTML = res.map(d=>`<div class="sd-item" data-id="${d.id}"><span class="n">${d.name}</span><span class="s">${SYSTEMS[d.system].name}</span></div>`).join("")
-      + `<span class="sd-all" id="hsdall">All results for “${esc(q)}” →</span>`;
-    hd.classList.remove("hidden");
-    hd.querySelectorAll(".sd-item").forEach(i=>i.addEventListener("click",()=>{ location.hash="/part/"+i.dataset.id; }));
-    $("#hsdall").addEventListener("click",()=>{ location.hash="/search/"+encodeURIComponent(q); });
-  });
-  hs.addEventListener("keydown",e=>{
-    if(e.key==="Enter" && hs.value){ location.hash="/search/"+encodeURIComponent(hs.value); }
-    if(e.key==="Escape"){ hd.classList.add("hidden"); hs.blur(); }
-  });
-  hs.addEventListener("blur",()=>setTimeout(()=>hd.classList.add("hidden"),180));
+  ${struct3d?`<h2 class="sec-title">Interactive 3D models</h2><div class="s3d-row">${struct3d}</div>`:""}
+  ${sodHTML?`<h2 class="sec-title">Structure of the day</h2>${sodHTML}`:""}`;
+  const mh = $("#menuhint"); if(mh) mh.addEventListener("click",()=>$("#menu-btn").click());
 }
 
 function pick(ids){ return ids.filter(id=>byId[id]); }
@@ -18485,9 +18286,7 @@ function vRegion(r){
   view.innerHTML = `
   <div class="list-head"><h1>${c.name}</h1><p>${c.blurb}</p>
   <div class="subchips">${META.systemOrder.filter(s=>bySys[s]).map(s=>`<span class="subchip" data-s="${s}">${SYSTEMS[s].icon} ${SYSTEMS[s].name} · ${bySys[s].length}</span>`).join("")}</div></div>
-  <div class="map-wrap"><div class="map-stage">${bodyFig(regionSide(r),r)}</div>
-  <div class="grid" id="reggrid">${items.map(cardHTML).join("")}</div></div>`;
-  view.querySelectorAll(".hotspot").forEach(h=>h.addEventListener("click",()=>{ location.hash = "/region/"+h.dataset.region; }));
+  <div class="grid" id="reggrid">${items.map(cardHTML).join("")}</div>`;
   view.querySelectorAll(".subchip").forEach(ch=>ch.addEventListener("click",()=>{
     const s = ch.dataset.s; const on = ch.classList.toggle("on");
     view.querySelectorAll(".subchip").forEach(x=>{ if(x!==ch) x.classList.remove("on"); });
@@ -18495,7 +18294,6 @@ function vRegion(r){
     $("#reggrid").innerHTML = items2.map(cardHTML).join("");
   }));
 }
-function regionSide(r){ return r==="back" ? "posterior" : "anterior"; }
 
 function vDetail(id){
   const d = byId[id]; if(!d){ view.innerHTML = `<div class="empty"><div class="big">🤔</div>Not found.</div>`; return; }
@@ -18528,8 +18326,7 @@ function vDetail(id){
   ${d.structure?`<div class="section"><h2>Structure</h2><p>${esc(d.structure)}</p></div>`:""}
   ${d.fn?`<div class="section"><h2>Function</h2><p>${esc(d.fn)}</p></div>`:""}
   ${model3d}
-  <div class="minimap section"><div>${bodyFig(regionSide(d.region),d.region)}</div>
-    <div><h2 style="color:var(--accent)">Location</h2><p style="color:var(--text2)">Located in <b>${REGIONS[d.region].name}</b>${d.aka?` — also known as ${esc(d.aka)}`:""}.</p></div></div>
+  <div class="section"><h2>Location</h2><p>Located in <b>${REGIONS[d.region].name}</b>${d.aka?` — also known as ${esc(d.aka)}`:""} — <a href="#/region/${d.region}">browse this region →</a></p></div>
   ${d.clinical?`<div class="section"><h2>Clinical relevance</h2><p>${esc(d.clinical)}</p></div>`:""}
   ${rel?`<div class="section"><h2>Related structures</h2><div class="rel-row">${rel}</div></div>`:""}
   ${LM_BY[id]?`<div class="section"><h2>Landmarks</h2><p class="hint" style="margin:0 0 10px">Named surface features of the ${esc(d.name)} — each opens its own entry, and all are pinned in the 3D view when you select this bone.</p><div class="lm-row">${LM_BY[id].map(x=>`<a class="lm-chip" href="#/part/${x.id}">${esc(x.name)}</a>`).join("")}</div></div>`:""}
@@ -18547,7 +18344,6 @@ function vDetail(id){
     ths.forEach(u=>u.classList.remove("on")); t.classList.add("on");
   }));
   wire3D(view);
-  view.querySelectorAll(".hotspot").forEach(h=>h.addEventListener("click",()=>{ location.hash = "/region/"+h.dataset.region; }));
 }
 
 /* ---------- 3D models (Sketchfab embeds) ---------- */
@@ -20050,25 +19846,8 @@ function lightbox(im){
 
 function vMap(){
   crumbs([{t:"Home",href:"#/"},{t:"Body map"}]);
-  view.innerHTML = `
-  <div class="map-wrap">
-    <div class="map-stage">
-      <div><div class="view-toggle" id="vt"><button class="on" data-v="anterior">Anterior</button><button data-v="posterior">Posterior</button></div>
-      <div id="mapbox">${bodyFig("anterior")}</div>
-      <div class="fig-cap">Muscle figure: Gray's Anatomy (1918) · Wikimedia Commons</div></div>
-    </div>
-    <div class="map-side"><h1>Interactive body map</h1><p class="hint">Click a region on the figure — or from the list — to explore its structures.</p>
-      <div class="region-list">${META.regionOrder.filter(r=>r!=="whole-body").map(r=>`<a class="region-item" href="#/region/${r}"><span class="nm">${REGIONS[r].name}</span><span class="ct">${regCount[r]||0} structures</span></a>`).join("")}</div>
-    </div>
-  </div>`;
-  const bind = ()=> view.querySelectorAll(".hotspot").forEach(h=>h.addEventListener("click",()=>{ location.hash = "/region/"+h.dataset.region; }));
-  bind();
-  view.querySelectorAll("#vt button").forEach(b=>b.addEventListener("click",()=>{
-    view.querySelectorAll("#vt button").forEach(x=>x.classList.remove("on"));
-    b.classList.add("on");
-    $("#mapbox").innerHTML = bodyFig(b.dataset.v);
-    bind();
-  }));
+  view.innerHTML = `<div class="list-head"><h1>🗺️ Body regions</h1><p>Pick a body region to explore its structures.</p></div>
+  <div class="region-list">${META.regionOrder.filter(r=>regCount[r]).map(r=>`<a class="region-item" href="#/region/${r}"><span class="nm">${REGIONS[r].name}</span><span class="ct">${regCount[r]} structures</span></a>`).join("")}</div>`;
 }
 
 function vGallery(){

@@ -43,3 +43,4 @@ Then open http://localhost:3000 (service workers require http(s) or localhost).
 
 - 3D model: [Z-Anatomy](https://www.z-anatomy.com/) (CC BY-SA 4.0), based on BodyParts3D © DBCLS
 - Plates: Gray's Anatomy (1918) and open-license sources via Wikimedia Commons
+- Skeleton poster: "Human skeleton front" by LadyofHats (public domain, Wikimedia Commons)
