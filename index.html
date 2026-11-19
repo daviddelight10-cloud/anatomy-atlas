@@ -760,10 +760,6 @@ body.can-install .hero-install{display:inline-flex!important}
 <meta property="og:url" content="https://daviddelight10-cloud.github.io/anatomy-atlas/">
 <meta property="og:image" content="https://daviddelight10-cloud.github.io/anatomy-atlas/icons/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="importmap">{"imports":{
-  "three":"./vendor/three.module.js",
-  "three/addons/":"./vendor/addons/"
-}}</script>
 </head>
 <body>
 <div id="app">
@@ -18941,26 +18937,28 @@ const SYS_COLOR = { skeletal:0xcfc7b8, muscular:0xa8473f, nervous:0xd8b13c, card
 
 function loadThree(){
   if(window.THREE && THREE.OrbitControls) return Promise.resolve();
-  /* r169 via the importmap — modules are fetched once, then the SW serves them offline */
+  /* r169 vendored — direct relative imports, no importmap needed.
+     The addons' `from 'three'` was rewritten to ../../three.module.js so the
+     whole graph resolves without importmap support (old browsers included). */
   return Promise.all([
-    import("three"),
-    import("three/addons/controls/OrbitControls.js"),
-    import("three/addons/loaders/GLTFLoader.js"),
-    import("three/addons/loaders/DRACOLoader.js"),
-    import("three/addons/environments/RoomEnvironment.js"),
-  ]).then(([T,O,G,D,E])=>{ window.THREE=T;
-    THREE.OrbitControls=O.OrbitControls; THREE.GLTFLoader=G.GLTFLoader;
-    THREE.DRACOLoader=D.DRACOLoader; THREE.RoomEnvironment=E.RoomEnvironment; });
+    import("./vendor/three.module.js"),
+    import("./vendor/addons/controls/OrbitControls.js"),
+    import("./vendor/addons/loaders/GLTFLoader.js"),
+    import("./vendor/addons/loaders/DRACOLoader.js"),
+    import("./vendor/addons/environments/RoomEnvironment.js"),
+  ]).then(([T,O,G,D,E])=>{ window.THREE = Object.assign({}, T, {
+    OrbitControls: O.OrbitControls, GLTFLoader: G.GLTFLoader,
+    DRACOLoader: D.DRACOLoader, RoomEnvironment: E.RoomEnvironment }); });
 }
 /* post-processing chain for ambient occlusion, loaded lazily on first AO toggle */
 function loadPost(){
   if(window.THREE && THREE.SSAOPass && THREE.EffectComposer) return Promise.resolve(true);
   return Promise.all([
-    import("three/addons/postprocessing/EffectComposer.js"),
-    import("three/addons/postprocessing/RenderPass.js"),
-    import("three/addons/postprocessing/ShaderPass.js"),
-    import("three/addons/postprocessing/SSAOPass.js"),
-    import("three/addons/shaders/GammaCorrectionShader.js"),
+    import("./vendor/addons/postprocessing/EffectComposer.js"),
+    import("./vendor/addons/postprocessing/RenderPass.js"),
+    import("./vendor/addons/postprocessing/ShaderPass.js"),
+    import("./vendor/addons/postprocessing/SSAOPass.js"),
+    import("./vendor/addons/shaders/GammaCorrectionShader.js"),
   ]).then(([ec,rp,sp,sa,gs])=>{ Object.assign(THREE,{
     EffectComposer:ec.EffectComposer, RenderPass:rp.RenderPass, ShaderPass:sp.ShaderPass,
     SSAOPass:sa.SSAOPass, GammaCorrectionShader:gs.GammaCorrectionShader }); return true; })
@@ -19046,11 +19044,13 @@ function buildScene(gltf, st){
   const l2=new THREE.DirectionalLight(0xbcd2ff,0.4); l2.position.set(-1.2,0.4,0.6); scene.add(l2);
   const l3=new THREE.DirectionalLight(0xffd9b3,0.55); l3.position.set(0.3,0.8,-1.4); scene.add(l3);
   /* studio environment reflections — the biggest single "feels like CA" boost;
-     one-time PMREM render, then every standard material picks it up */
-  { const pm = new THREE.PMREMGenerator(renderer);
+     one-time PMREM render, then every standard material picks it up.
+     try/catch: on very weak GPUs a PMREM failure must not kill the scene */
+  try{ const pm = new THREE.PMREMGenerator(renderer);
     scene.environment = pm.fromScene(new THREE.RoomEnvironment(), 0.04).texture;
     if("environmentIntensity" in scene) scene.environmentIntensity = 0.55;
-    pm.dispose(); }
+    pm.dispose();
+  }catch(e){ console.warn("env map skipped:", e); }
   const group = new THREE.Group(); scene.add(group);
   const chipOn = {}, hidden = new Set(), faded = new Set(); let isolated = null, aidsOn = false, focusSet = null, skinOp = 1;
   const GP = window.ATLAS_GLB_PARENT || {};
@@ -20891,7 +20891,7 @@ function v3D(sel){
     const el = $("#b3dload"); if(el) el.remove();
     const app = $("#b3dapp"); if(app) app.classList.remove("loading");
     buildScene(gltf, st);
-  }).catch(e=>{ const el=$("#b3dload"); if(el) el.innerHTML = `<div class="b3d-prog"><div class="t">Couldn't load the 3D body — check your connection.</div></div><button class="b3d-retry" onclick="location.reload()">Retry</button>`; console.error(e); });
+  }).catch(e=>{ const el=$("#b3dload"); if(el) el.innerHTML = `<div class="b3d-prog"><div class="t">Couldn't load the 3D body</div><div class="t" style="font-size:11px;opacity:.7;margin-top:4px">${esc(String(e && e.message || e))}</div></div><button class="b3d-retry" onclick="location.reload()">Retry</button>`; console.error(e); });
 }
 
 function lightbox(im){
