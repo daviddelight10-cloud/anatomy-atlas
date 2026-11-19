@@ -1,5 +1,5 @@
 /* Anatomy Atlas service worker — app shell + model + plates + CDN caching. */
-const VERSION = "v13";
+const VERSION = "v14";
 const SHELL = `atlas-shell-${VERSION}-r1`;
 const MODEL = `atlas-model-${VERSION}`;
 const PLATES = `atlas-plates-${VERSION}`;
@@ -19,6 +19,26 @@ const SHELL_URLS = [
   "icons/apple-touch-icon.png",
   "icons/favicon-32.png",
   "icons/favicon-16.png",
+  "vendor/three.module.js",
+  "vendor/addons/controls/OrbitControls.js",
+  "vendor/addons/loaders/GLTFLoader.js",
+  "vendor/addons/loaders/DRACOLoader.js",
+  "vendor/addons/environments/RoomEnvironment.js",
+  "vendor/addons/postprocessing/EffectComposer.js",
+  "vendor/addons/postprocessing/RenderPass.js",
+  "vendor/addons/postprocessing/ShaderPass.js",
+  "vendor/addons/postprocessing/MaskPass.js",
+  "vendor/addons/postprocessing/Pass.js",
+  "vendor/addons/postprocessing/SSAOPass.js",
+  "vendor/addons/shaders/CopyShader.js",
+  "vendor/addons/shaders/SSAOShader.js",
+  "vendor/addons/shaders/UnpackDepthRGBAShader.js",
+  "vendor/addons/shaders/GammaCorrectionShader.js",
+  "vendor/addons/math/SimplexNoise.js",
+  "vendor/addons/utils/BufferGeometryUtils.js",
+  "vendor/draco/draco_decoder.js",
+  "vendor/draco/draco_decoder.wasm",
+  "vendor/draco/draco_wasm_wrapper.js",
 ];
 
 const MODEL_URL = "model.bin";

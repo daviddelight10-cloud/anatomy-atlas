@@ -760,6 +760,10 @@ body.can-install .hero-install{display:inline-flex!important}
 <meta property="og:url" content="https://daviddelight10-cloud.github.io/anatomy-atlas/">
 <meta property="og:image" content="https://daviddelight10-cloud.github.io/anatomy-atlas/icons/og.png">
 <meta name="twitter:card" content="summary_large_image">
+<script type="importmap">{"imports":{
+  "three":"./vendor/three.module.js",
+  "three/addons/":"./vendor/addons/"
+}}</script>
 </head>
 <body>
 <div id="app">
@@ -18937,24 +18941,30 @@ const SYS_COLOR = { skeletal:0xcfc7b8, muscular:0xa8473f, nervous:0xd8b13c, card
 
 function loadThree(){
   if(window.THREE && THREE.OrbitControls) return Promise.resolve();
-  return new Promise((res,rej)=>{
-    const add=(src,ok,err)=>{const s=document.createElement("script");s.src=src;s.onload=ok;s.onerror=err;document.head.appendChild(s);};
-    add("https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js",
-      ()=>add("https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js",
-      ()=>add("https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js",
-      ()=>add("https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js",res,rej),rej),rej),rej);
-  });
+  /* r169 via the importmap — modules are fetched once, then the SW serves them offline */
+  return Promise.all([
+    import("three"),
+    import("three/addons/controls/OrbitControls.js"),
+    import("three/addons/loaders/GLTFLoader.js"),
+    import("three/addons/loaders/DRACOLoader.js"),
+    import("three/addons/environments/RoomEnvironment.js"),
+  ]).then(([T,O,G,D,E])=>{ window.THREE=T;
+    THREE.OrbitControls=O.OrbitControls; THREE.GLTFLoader=G.GLTFLoader;
+    THREE.DRACOLoader=D.DRACOLoader; THREE.RoomEnvironment=E.RoomEnvironment; });
 }
 /* post-processing chain for ambient occlusion, loaded lazily on first AO toggle */
-const POST_URLS = ["shaders/CopyShader.js","shaders/SSAOShader.js","shaders/DepthLimitedBlurShader.js",
-  "shaders/UnpackDepthRGBAShader.js","shaders/GammaCorrectionShader.js","postprocessing/EffectComposer.js",
-  "postprocessing/RenderPass.js","postprocessing/ShaderPass.js","postprocessing/MaskPass.js",
-  "postprocessing/SSAOPass.js"].map(u=>"https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/"+u);
 function loadPost(){
-  if(window.THREE && THREE.SSAOPass && THREE.EffectComposer && THREE.GammaCorrectionShader) return Promise.resolve(true);
-  return new Promise(res=>{ let i=0; const step=()=>{ if(i>=POST_URLS.length) return res(true);
-    const s=document.createElement("script"); s.src=POST_URLS[i++];
-    s.onload=step; s.onerror=()=>res(false); document.head.appendChild(s); }; step(); });
+  if(window.THREE && THREE.SSAOPass && THREE.EffectComposer) return Promise.resolve(true);
+  return Promise.all([
+    import("three/addons/postprocessing/EffectComposer.js"),
+    import("three/addons/postprocessing/RenderPass.js"),
+    import("three/addons/postprocessing/ShaderPass.js"),
+    import("three/addons/postprocessing/SSAOPass.js"),
+    import("three/addons/shaders/GammaCorrectionShader.js"),
+  ]).then(([ec,rp,sp,sa,gs])=>{ Object.assign(THREE,{
+    EffectComposer:ec.EffectComposer, RenderPass:rp.RenderPass, ShaderPass:sp.ShaderPass,
+    SSAOPass:sa.SSAOPass, GammaCorrectionShader:gs.GammaCorrectionShader }); return true; })
+  .catch(()=>false);
 }
 /* Stream model.bin (gzipped GLB) with real progress — the SW caches it on first fetch. */
 async function fetchModel(prog){
@@ -18992,7 +19002,7 @@ async function loadBodyGlb(){
     : gz.buffer;
   prog("Decoding 2,300+ anatomical meshes…");
   const draco = new THREE.DRACOLoader();
-  draco.setDecoderPath("https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/draco/gltf/");
+  draco.setDecoderPath("./vendor/draco/");
   const loader = new THREE.GLTFLoader();
   loader.setDRACOLoader(draco);
   const gltf = await new Promise((res,rej)=>loader.parse(buf,"",res,rej));
@@ -19006,10 +19016,14 @@ function buildScene(gltf, st){
   const stage = cv.parentElement;
   const H = () => stage.clientHeight, W = () => stage.clientWidth;
   const lowPower = (navigator.hardwareConcurrency||8)<=4 || matchMedia("(pointer:coarse)").matches;
+  /* quality preference: auto adapts, high forces crisp, low saves battery */
+  const qual = { mode: localStorage.getItem("atlas-qual") || "auto" };
+  const prTarget = () => qual.mode==="low" ? 1 : qual.mode==="high" ? Math.min(devicePixelRatio,2)
+    : Math.min(devicePixelRatio, lowPower?1.3:2);
   const renderer = new THREE.WebGLRenderer({canvas:cv, antialias:!lowPower});
-  renderer.setPixelRatio(Math.min(devicePixelRatio, lowPower?1.3:2));
+  renderer.setPixelRatio(prTarget());
   renderer.setSize(W(),H());
-  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
   renderer.shadowMap.enabled = !lowPower;
@@ -19026,11 +19040,17 @@ function buildScene(gltf, st){
   scene.add(new THREE.HemisphereLight(0xdfe9ff, 0x33291f, 0.55));
   scene.add(new THREE.AmbientLight(0xffffff,0.18));
   const l1=new THREE.DirectionalLight(0xfff4e8,1.25); l1.position.set(0.8,1.4,1.1);
-  if(!lowPower){ l1.castShadow = true; l1.shadow.mapSize.set(2048,2048);
+  if(!lowPower){ l1.castShadow = true; l1.shadow.mapSize.set(4096,4096);
     l1.shadow.bias = -0.0006; l1.shadow.normalBias = 0.02; }
   scene.add(l1); scene.add(l1.target);
   const l2=new THREE.DirectionalLight(0xbcd2ff,0.4); l2.position.set(-1.2,0.4,0.6); scene.add(l2);
   const l3=new THREE.DirectionalLight(0xffd9b3,0.55); l3.position.set(0.3,0.8,-1.4); scene.add(l3);
+  /* studio environment reflections — the biggest single "feels like CA" boost;
+     one-time PMREM render, then every standard material picks it up */
+  { const pm = new THREE.PMREMGenerator(renderer);
+    scene.environment = pm.fromScene(new THREE.RoomEnvironment(), 0.04).texture;
+    if("environmentIntensity" in scene) scene.environmentIntensity = 0.55;
+    pm.dispose(); }
   const group = new THREE.Group(); scene.add(group);
   const chipOn = {}, hidden = new Set(), faded = new Set(); let isolated = null, aidsOn = false, focusSet = null, skinOp = 1;
   const GP = window.ATLAS_GLB_PARENT || {};
@@ -19299,7 +19319,7 @@ function buildScene(gltf, st){
     renderer.clippingPlanes = [clipPlane]; poke(); queueUrl();
   };
   const home = new THREE.Vector3(ctr.x, ctr.y, ctr.z + rad*2.3);
-  camera.position.copy(home); camera.near = rad/300; camera.far = rad*20; camera.updateProjectionMatrix();
+  camera.position.copy(home); camera.near = rad/120; camera.far = rad*30; camera.updateProjectionMatrix();
   /* aim shadow camera + ground catcher at the body */
   l1.position.multiplyScalar(rad*3).add(ctr); l1.target.position.copy(ctr);
   if(!lowPower){ const sc = l1.shadow.camera; sc.left=sc.bottom=-rad; sc.right=sc.top=rad; sc.near=rad*0.5; sc.far=rad*8; sc.updateProjectionMatrix();
@@ -19310,8 +19330,11 @@ function buildScene(gltf, st){
   const controls = new THREE.OrbitControls(camera, cv);
   controls.target.copy(ctr); controls.enableDamping = true; controls.dampingFactor = .1;
   controls.minDistance = rad/30; controls.maxDistance = rad*4;
-  /* gentler dolly — full-speed wheel steps overshoot badly at macro range */
-  controls.zoomSpeed = .7;
+  /* wheel/pinch zoom toward the pointer (r146+ feature) — the old hand-rolled
+     version was removed for jank; the built-in is damped and target-safe */
+  controls.zoomSpeed = .95; controls.zoomToCursor = true;
+  /* keep the dolly target inside the body — stops the pivot drifting to a toe */
+  controls.minTargetRadius = 0; controls.maxTargetRadius = rad*0.6;
   controls.update();
   controls.autoRotate = !lowPower; controls.autoRotateSpeed = 0.7;
   cv.style.opacity = "0"; cv.style.transition = "opacity .6s";
@@ -19390,13 +19413,20 @@ function buildScene(gltf, st){
     return h ? h.object : null;
   };
   /* glow clones the (often shared) base material once so only the picked part lights up */
-  const glow = (m,hex)=>{ if(!m) return;
+  const _tint = new THREE.Color();
+  const selHex = () => 0x0f7a3d;
+  /* tintOnly → highlight by color alone (no emissive): the part keeps its own
+     shading so bumps/roughness still read; quizzes/hover keep the emissive flash */
+  const glow = (m,hex,tintOnly)=>{ if(!m) return;
     if(hex){ const base = m.userData.baseMat || m.material;
       if(!m.userData.glowMat || m.userData.glowMat.userData.src!==base){
         m.userData.glowMat = base.clone(); m.userData.glowMat.userData.src = base; }
-      m.userData.glowMat.emissive.setHex(hex);
+      m.userData.glowMat.emissive.setHex(tintOnly ? 0 : hex);
+      if(base.color) m.userData.glowMat.color.copy(base.color).lerp(_tint.setHex(hex), tintOnly ? 0.55 : 0.35);
       if(!m.userData.ghost) m.material = m.userData.glowMat; }
-    else if(m.userData.glowMat){ m.userData.glowMat.emissive.setHex(0); } poke(); };
+    else if(m.userData.glowMat){ m.userData.glowMat.emissive.setHex(0);
+      const base = m.userData.baseMat || m.material;
+      if(base.color) m.userData.glowMat.color.copy(base.color); } poke(); };
 
   /* ---- undo: snapshot {hidden,isolated} before each mutating action ---- */
   const undoBtn = $("#b3dundo");
@@ -19605,7 +19635,7 @@ function buildScene(gltf, st){
   };
   const defInfo = `<h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p>`;
   /* selection glow tinted to the part's system colour, dimmed like CA's highlight */
-  const selHex = id => new THREE.Color(SYS_COLOR[sysOf(id)]||0x8a6d00).multiplyScalar(0.45).getHex();
+
   /* docked-panel feel: shift the projection left so the card doesn't cover the model */
   const dockSync = () => { const w = W(), h = H();
     const mobile = matchMedia("(max-width:760px)").matches;
@@ -19622,7 +19652,7 @@ function buildScene(gltf, st){
     if(selected) each(selected, m=>glow(m,0));
     if(id!==selected) fxClear();
     selected = id;
-    if(id){ each(id, m=>glow(m,selHex(id))); showInfo(id);
+    if(id){ each(id, m=>glow(m,selHex(),true)); showInfo(id);
       try{ localStorage.setItem("atlas-last", window.ATLAS_GLB_PARENT && window.ATLAS_GLB_PARENT[id] || id); }catch(e){} }
     else setInfo(defInfo);
     info.classList.toggle("has-sel", !!id);
@@ -20089,7 +20119,7 @@ function buildScene(gltf, st){
       for(const m of loose){ m.userData.baseMat = nx==="z" ? m.userData.origMat
         : tintMat(nx==="reg" ? 0x8d99a6 : (SYS_COLOR[m.userData.sys]||0x8d99a6));
         m.userData.glowMat = null; }
-      applyVis(); if(selected) each(selected,m=>glow(m,selHex(selected)));
+      applyVis(); if(selected) each(selected,m=>glow(m,selHex(),true));
       }); }
 
   /* layer peel slider */
@@ -20332,6 +20362,17 @@ function buildScene(gltf, st){
       else { aoOn = !aoOn; aob.classList.toggle("on", aoOn); poke(); } }); }
 
   $("#b3dreset").addEventListener("click",()=>{ fly=null; camera.position.copy(home); controls.target.copy(home2); controls.update(); });
+  /* quality: auto adapts via the governor below; high/low pin the pixel ratio */
+  const applyQual = () => { const pr = prTarget();
+    renderer.setPixelRatio(pr); if(composer) composer.setPixelRatio(pr); poke(); };
+  const qBtn = $("#b3dqual"), qLbl = $("#b3dqb");
+  if(qBtn){ const syncQ = () => { qLbl.textContent = qual.mode==="auto" ? "Auto" : qual.mode==="high" ? "High" : "Low";
+      qBtn.classList.toggle("on", qual.mode!=="auto"); };
+    syncQ();
+    qBtn.addEventListener("click",()=>{
+      qual.mode = qual.mode==="auto" ? "high" : qual.mode==="high" ? "low" : "auto";
+      try{ localStorage.setItem("atlas-qual",qual.mode); }catch(e){}
+      syncQ(); applyQual(); }); }
   const peekB = $("#b3dpeek"), unpeekB = $("#b3dunpeek");
   if(peekB) peekB.addEventListener("click",()=>appEl.classList.add("peek"));
   if(unpeekB) unpeekB.addEventListener("click",()=>appEl.classList.remove("peek"));
@@ -20718,9 +20759,10 @@ function buildScene(gltf, st){
   /* never touches shadows (toggling them recompiles every shader = a freeze)
      and never resizes the canvas while the user is zooming/dragging */
   const qStep = ms => { ftEma = ftEma*0.9 + ms*0.1; if(++ftN < 90) return; ftN = 0;
-    if(ftEma <= 34 || performance.now() - lastIn < 2500) return;
+    if(qual.mode !== "auto" || ftEma <= 34 || performance.now() - lastIn < 2500) return;
     const pr = renderer.getPixelRatio();
-    if(pr > 1.01){ renderer.setPixelRatio(Math.max(1, pr - 0.25)); poke(); } };
+    if(pr > 0.76){ const n = Math.max(0.75, pr - 0.25);
+      renderer.setPixelRatio(n); if(composer) composer.setPixelRatio(n); poke(); } };
   tick();
   const onRs = ()=>{ if(!document.body.contains(cv)) return removeEventListener("resize",onRs); dockSync(); renderer.setSize(W(),H()); if(composer) composer.setSize(W(),H()); poke(); };
   addEventListener("resize",onRs);
@@ -20800,6 +20842,7 @@ function v3D(sel){
         <button class="dock-b" id="b3dundo" title="Undo hide/isolate (Ctrl+Z)" disabled><i>${I("undo-2")}</i><b>Undo</b></button>
         <button class="dock-b" id="b3dshot" title="Save a screenshot (PNG)"><i>${I("camera")}</i><b>Photo</b></button>
         <button class="dock-b" id="b3dreset" title="Reset view"><i>${I("rotate-ccw")}</i><b>Reset</b></button>
+        <button class="dock-b" id="b3dqual" title="Render quality — Auto adapts to the device, High forces crisp, Low saves battery"><i>${I("sliders")}</i><b id="b3dqb">Auto</b></button>
       </div></div>
 
     <nav class="b3d-dock" aria-label="3D tools"><div class="dock-in">
