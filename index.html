@@ -19045,11 +19045,12 @@ function buildScene(gltf, st){
   const l3=new THREE.DirectionalLight(0xffd9b3,0.55); l3.position.set(0.3,0.8,-1.4); scene.add(l3);
   /* studio environment reflections — the biggest single "feels like CA" boost;
      one-time PMREM render, then every standard material picks it up.
-     try/catch: on very weak GPUs a PMREM failure must not kill the scene */
-  try{ const pm = new THREE.PMREMGenerator(renderer);
+     Skipped on lowPower: env sampling costs every mesh every frame.
+     try/catch too: a PMREM failure must not kill the scene */
+  try{ if(!lowPower){ const pm = new THREE.PMREMGenerator(renderer);
     scene.environment = pm.fromScene(new THREE.RoomEnvironment(), 0.04).texture;
     if("environmentIntensity" in scene) scene.environmentIntensity = 0.55;
-    pm.dispose();
+    pm.dispose(); }
   }catch(e){ console.warn("env map skipped:", e); }
   const group = new THREE.Group(); scene.add(group);
   const chipOn = {}, hidden = new Set(), faded = new Set(); let isolated = null, aidsOn = false, focusSet = null, skinOp = 1;
@@ -19330,9 +19331,9 @@ function buildScene(gltf, st){
   const controls = new THREE.OrbitControls(camera, cv);
   controls.target.copy(ctr); controls.enableDamping = true; controls.dampingFactor = .1;
   controls.minDistance = rad/30; controls.maxDistance = rad*4;
-  /* wheel/pinch zoom toward the pointer (r146+ feature) — the old hand-rolled
-     version was removed for jank; the built-in is damped and target-safe */
-  controls.zoomSpeed = .95; controls.zoomToCursor = true;
+  /* center-zoom with a stable pivot — zoomToCursor was tried but drifting the
+     orbit target made manual rotation feel worse than the fly-to */
+  controls.zoomSpeed = .95;
   controls.update();
   controls.autoRotate = !lowPower; controls.autoRotateSpeed = 0.7;
   cv.style.opacity = "0"; cv.style.transition = "opacity .6s";
@@ -20743,7 +20744,7 @@ function buildScene(gltf, st){
     const animated = !!fly || controls.autoRotate || lifeVis || quiz.on || traceFx;
     if(animated||moved||dirty){ updLabels(); updLms(); updPins(); }
     if(animated || moved || dirty){
-      if(renderer.shadowMap.enabled) renderer.shadowMap.needsUpdate = dirty || animated;
+      if(renderer.shadowMap.enabled) renderer.shadowMap.needsUpdate = dirty || lifeVis || !!traceFx;
       dirty = false;
       const _t0 = performance.now();
       try{ if(aoOn && composer) composer.render(); else renderer.render(scene,camera); }
