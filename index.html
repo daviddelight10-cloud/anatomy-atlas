@@ -448,8 +448,8 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-rail .pchip:hover{background:#242424;color:#fff}
 .b3d-rail .pchip.on{background:rgba(255,214,10,.16);border-color:rgba(255,214,10,.5);color:#ffd60a}
 .b3d-rail .b3d-views .pchip{opacity:1}
-.b3d-app .b3d-info{display:none;flex:none;position:absolute;z-index:18;right:0;top:calc(64px + var(--safe-t));bottom:0;width:min(360px,88vw);overflow-y:auto;padding:16px;background:rgba(16,16,16,.92);border:0;border-left:1px solid var(--gb);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#e8e8e8}
-.b3d-app .b3d-info.has-sel{display:block;animation:b3dIn .18s ease-out}
+.b3d-app .b3d-info{display:none;flex:none;position:absolute;z-index:18;right:0;top:calc(64px + var(--safe-t));bottom:0;width:min(360px,88vw);overflow:hidden;padding:0;background:rgba(16,16,16,.92);border:0;border-left:1px solid var(--gb);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#e8e8e8}
+.b3d-app .b3d-info.has-sel{display:flex;flex-direction:column;animation:b3dIn .18s ease-out}
 @keyframes b3dIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
 @keyframes b3dUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .b3d-app .b3d-iclose{display:block;top:10px;right:10px;width:30px;height:30px}
@@ -465,6 +465,37 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-app .b3d-actions button:hover{border-color:#ffd60a}
 .b3d-app a.b3d-rel{color:#ffd60a;background:rgba(255,214,10,.12);border-color:rgba(255,214,10,.35)}
 .b3d-app .b3d-open{background:#ffd60a;color:#0a0a0a}
+/* info card: pinned header (title + one swipe strip + tabs) over a scrolling body */
+.b3d-app .inf-head{flex:none;position:relative;padding:12px 16px 0;border-bottom:1px solid #2a2a2a}
+.b3d-app .inf-head .b3d-iclose{z-index:4}
+.b3d-app .inf-title{display:flex;align-items:center;gap:6px;margin-right:38px}
+.b3d-app .inf-head h3{font-size:18px;margin:0;margin-right:0;line-height:1.2}
+.inf-say{flex:none;background:none;border:0;color:#a3a3a3;font-size:15px;cursor:pointer;padding:2px 4px;border-radius:6px}
+.inf-say:hover{color:#ffd60a}
+.b3d-app .inf-head .b3d-aka{font-size:12px;margin:1px 0 0}
+.inf-strip{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:8px -16px 0;padding:0 16px 2px;scroll-snap-type:x proximity}
+.inf-strip::-webkit-scrollbar{display:none}
+.inf-strip button{flex:none;display:flex;flex-direction:column;align-items:center;gap:1px;min-width:46px;padding:4px 6px;background:#202020;color:#d8d8d8;border:1px solid #333;border-radius:9px;cursor:pointer;scroll-snap-align:start}
+.inf-strip button i{font-style:normal;font-size:14px;line-height:1.15}
+.inf-strip button b{font:600 8.5px var(--font);white-space:nowrap}
+.inf-strip button:hover{border-color:#ffd60a}
+.inf-strip button.pri{background:#ffd60a;color:#0a0a0a;border-color:#ffd60a}
+.inf-strip button.on{background:rgba(255,214,10,.18);color:#ffd60a;border-color:rgba(255,214,10,.55)}
+.b3d-app .inf-body{flex:1;min-height:0;overflow-y:auto;padding:12px 16px 18px;overscroll-behavior:contain}
+.b3d-app .inf-meta{margin:0 0 8px}
+.b3d-app .inf-meta .badges{margin:4px 0 0!important}
+.b3d-app .b3d-plate{max-height:110px}
+.inf-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin:0 -4px}
+.inf-tabs::-webkit-scrollbar{display:none}
+.inf-tabs button{flex:none;background:none;border:0;border-bottom:2px solid transparent;color:#8d887a;padding:8px 11px;font:600 12.5px var(--font);cursor:pointer}
+.inf-tabs button:hover{color:#e8e8e8}
+.inf-tabs button.on{color:#ffd60a;border-bottom-color:#ffd60a}
+.inf-pane{display:none}
+.inf-pane.on{display:block}
+.inf-body.covered .b3d-sum,.inf-body.covered .b3d-sec p,.inf-body.covered .oitable td{filter:blur(7px);cursor:pointer;user-select:none;transition:filter .2s}
+.inf-body.covered .rev{filter:none;user-select:auto}
+.badge.mast.ok{color:#4ade80;border-color:rgba(74,222,128,.4);background:rgba(74,222,128,.1)}
+.badge.mast.due{color:#ffb300;border-color:rgba(255,179,0,.4);background:rgba(255,179,0,.1)}
 .b3d-dock{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(12px + var(--safe-b));z-index:20;max-width:calc(100% - 20px);overflow-x:auto;scrollbar-width:none;background:var(--g);border:1px solid var(--gb);border-radius:22px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 36px rgba(0,0,0,.55);transition:transform .22s ease,opacity .18s ease}
 /* desktop: while a side panel is open the dock collapses to a slim icon-only
    strip, re-centred in the free space left of the panel — never disappears */
@@ -482,8 +513,8 @@ body.b3d-open .pwa-toast{bottom:112px}
 @media(max-width:760px){
   .b3d-app.sel:not(.peek) .b3d-dock,.b3d-app.lesson:not(.peek) .b3d-dock{transform:translate(-50%,calc(100% + 18px));opacity:0;pointer-events:none}
   .b3d-app.sel:not(.peek) .b3d-pop,.b3d-app.lesson:not(.peek) .b3d-pop{opacity:0!important;pointer-events:none}
-  .b3d-app.sel:not(.peek) .b3d-peekbtn,.b3d-app.lesson:not(.peek) .b3d-peekbtn{display:inline-flex}
-  .b3d-app.peek #b3dunpeek{display:flex}
+  .b3d-app .b3d-info .b3d-crumb{display:none}
+  .b3d-app .b3d-info>.b3d-grab{margin-top:8px}
   .b3d-app.sel .dock-b b,.b3d-app.lesson .dock-b b{display:block}
   .b3d-app.sel .dock-b,.b3d-app.lesson .dock-b{min-width:50px;height:52px}
   .b3d-app.sel .dock-b,.b3d-app.lesson .dock-b{height:52px}
@@ -571,6 +602,22 @@ body.b3d-open .pwa-toast{bottom:112px}
 .les-nav button:disabled{opacity:.35;pointer-events:none}
 .les-nav button.dim{margin-left:auto}
 .les-prog{flex:1;text-align:center;font:600 11.5px var(--font);color:#8d887a}
+.les-nav button.les-prog{background:none;border:0;padding:7px 4px;color:#a3a3a3}
+.les-nav button.les-prog:hover{color:#ffd60a}
+.les-path{flex:none;padding:7px 16px 9px;border-bottom:1px solid #262626;font:600 11px var(--font);color:#a3a3a3}
+.les-path .bar{height:3px;border-radius:2px;background:#2a2a2a;margin-top:6px;overflow:hidden}
+.les-path .bar i{display:block;height:100%;background:#ffd60a;transition:width .3s}
+.les-outline{display:grid;gap:2px}
+.les-outline button{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:none;border:0;border-radius:8px;padding:8px 8px;color:#c9c2b0;font:500 13px var(--font);cursor:pointer}
+.les-outline button:hover{background:#1e1e1e;color:#fff}
+.les-outline button.cur{color:#ffd60a;background:rgba(255,214,10,.1)}
+.les-outline button .n{flex:none;width:20px;height:20px;border-radius:50%;background:#2a2a2a;color:#a3a3a3;font:700 10.5px/20px var(--font);text-align:center}
+.les-outline button.done .n{background:#14532d;color:#4ade80}
+.les-q{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.les-q .les-sc{font-size:11px;color:#a3a3a3;font-weight:600}
+.les-q .les-qa{margin-left:auto;display:flex;gap:5px}
+.les-q .les-qa button{background:#242424;color:#e8e8e8;border:1px solid #3d3d3d;border-radius:7px;padding:3px 9px;font:600 11px var(--font);cursor:pointer}
+.les-q .les-qa button:hover{border-color:#ffd60a;color:#ffd60a}
 .les-hint{font-size:11.5px;color:#8d887a;margin-top:8px;text-align:center}
 .b3d-app.lesson .b3d-hbar{display:none}
 .b3d-app.lesson .b3d-info{display:none}
@@ -585,9 +632,10 @@ body.b3d-open .pwa-toast{bottom:112px}
   .b3d-rail .b3d-views{padding-left:8px;border-left:1px solid #3a3a3a}
   .b3d-rail .pchip{flex-direction:row;gap:6px;width:auto;flex:none;padding:8px 13px;font-size:12.5px;white-space:nowrap;border-radius:20px;border-color:#363636;background:var(--g);scroll-snap-align:start}
   .b3d-rail .pchip .ic{font-size:15px}
-  .b3d-app .b3d-info{left:0;right:0;top:auto;width:auto;bottom:0;max-height:46dvh;animation-name:b3dUp;border-radius:20px 20px 0 0;border-bottom:0;border-left:0;border-top:1px solid var(--gb);padding-top:8px;transition:max-height .22s ease;overscroll-behavior:contain}
+  .b3d-app .b3d-info{left:0;right:0;top:auto;width:auto;bottom:0;max-height:46dvh;animation-name:b3dUp;border-radius:20px 20px 0 0;border-bottom:0;border-left:0;border-top:1px solid var(--gb);transition:max-height .22s ease;overscroll-behavior:contain}
   .b3d-app .b3d-info.full{max-height:74dvh}
   .b3d-app .b3d-info .badges{display:none}
+  .b3d-app .inf-head{padding-top:8px}
   .b3d-app .b3d-grab{display:block;width:38px;height:4.5px;border-radius:3px;background:#4d4d4d;margin:0 auto 8px;touch-action:none;cursor:grab}
   .b3d-app .b3d-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:2px 0 8px;padding:0}
   .b3d-app .b3d-actions button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;padding:8px 4px;border-radius:10px}
@@ -19229,7 +19277,10 @@ function buildScene(gltf, st){
   const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
   const tip = $("#b3dtip"), info = $("#b3di");
   /* panel renders through setInfo so the floating card gets a close button */
-  const setInfo = html => { info.innerHTML = `<div class="b3d-grab"></div><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button>${html}`;
+  const setInfo = html => { const hd = html.startsWith('<div class="inf-head"');
+    info.innerHTML = `<div class="b3d-grab"></div><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button>${hd?html:`<div class="inf-body">${html}</div>`}`;
+    { const h = info.querySelector(".inf-head");
+      if(h){ const g = info.querySelector(":scope>.b3d-grab"), cb = info.querySelector(":scope>#b3dic"); if(g) h.prepend(g); if(cb) h.appendChild(cb); } }
     const c = info.querySelector("#b3dic"); if(c) c.addEventListener("click",()=>select(null)); };
   { const ic0 = info.querySelector("#b3dic"); if(ic0) ic0.addEventListener("click",()=>select(null)); }
   /* mobile sheet: drag or tap the grab handle to expand/collapse (delegated —
@@ -19394,6 +19445,7 @@ function buildScene(gltf, st){
         setTimeout(()=>each(id,mm=>glow(mm,0)),420); }
       quizPaint(["q-flash-bad","✖ "+(id?esc(nameOf(id)):"missed")+" — try again"]); } };
 
+  let infoTab = "ov";
   const showInfo = id => {
     const d = byId[id];
     const s = sysOf(id), c = SYSTEMS[s] || SYSTEMS.general;
@@ -19414,32 +19466,49 @@ function buildScene(gltf, st){
     const partsHtml = parts.length ? `<div class="b3d-rel"><b>Parts</b><div class="b3d-relch">${parts.slice(0,14).map(k=>`<a class="b3d-rel" href="#/part/${k}">${esc(nameOf(k))}</a>`).join("")}</div></div>` : "";
     const rg = d ? d.region : pd ? pd.region : null;
     const crumb = `<div class="b3d-crumb"><a href="#" data-sys="${s}">${c.icon} ${esc(c.name)}</a><span class="csep">›</span>${rg && REGIONS[rg] ? `<a href="#/region/${rg}">${esc(REGIONS[rg].name)}</a><span class="csep">›</span>` : (md ? `<span>${esc(md.regName)} region</span><span class="csep">›</span>` : "")}<b>${esc(nm)}</b></div>`;
-    setInfo(`${crumb}<h3>${esc(nm)}</h3>
+    const mast = d ? (lessonDone(id) ? `<span class="badge mast ok">✓ Learned</span>`
+      : (srBox(id) && srBox(id).due<=today() ? `<span class="badge mast due">⏰ Due for review</span>` : "")) : "";
+    const sb = (a,ic,lb,t,cls="") => `<button data-a="${a}" class="${cls}" title="${t}" aria-label="${t}"><i>${ic}</i><b>${lb}</b></button>`;
+    const strip = `<div class="inf-strip">${d?sb("learn","🎓","Learn","Guided lesson for this structure","pri")+sb("quizme","🎯","Quiz","Test yourself on it"):""}${sb("pin","📌",pinHas(id)?"Pinned":"Pin","Pin a label here")}${sb("isolate","◎","Isolate","Hide everything else")}${sb("hide","⊘","Hide","Hide this structure")}${sb("fade","◑",faded.has(id)?"Unfade":"Fade","See through this structure")}${sb("hideo","⧉","Hide others","Hide everything except this")}${sb("fadeo","◐",(focusSet&&focusSet.has(id))?"Unfade others":"Fade others","Ghost everything around it")}${d&&d.oi?sb("att","📎","Attach","Highlight origin and insertion markers"):""}${ATLAS_TRACES&&ATLAS_TRACES.some(t=>t.chain.includes(id))?sb("trace","🛤","Trace","Trace its pathway"):""}${d?sb("cover","👁","Cover","Blur the text, recall it, tap to reveal"):""}${sb("copy","🔗","Link","Copy a link to this exact view")}${hidden.size||faded.size||isolated!==null||focusSet?sb("showall","↺","Show all","Restore everything"):""}</div>`;
+    const meta = `<div class="inf-meta">${crumb}<div class="badges"><span class="badge sys" style="--badge-c:${c.color}">${c.icon} ${c.name}</span>${d?`<span class="badge">📍 ${REGIONS[d.region].name}</span>`:md?`<span class="badge">📍 ${md.regName} region</span><span class="badge">Unnamed detail</span>`:`<span class="badge">🧩 Z-Anatomy structure</span>`}${mast}</div></div>`;
+    const TC = (window.ATLAS_TEACH||{})[id] || {};
+    let tabsHtml = "", bodyHtml = "";
+    if(d){
+      const oiTbl = d.oi ? `<table class="oitable small">
+        ${d.oi.o?`<tr><th>Origin</th><td>${esc(d.oi.o)}</td></tr>`:""}${d.oi.i?`<tr><th>Insertion</th><td>${esc(d.oi.i)}</td></tr>`:""}${d.oi.n?`<tr><th>Innervation</th><td>${esc(d.oi.n)}</td></tr>`:""}${d.oi.a?`<tr><th>Action</th><td>${esc(d.oi.a)}</td></tr>`:""}</table>` : "";
+      const T = [["ov","Overview",`${meta}${im?`<a class="b3d-plate-a" href="${esc(im.url)}" target="_blank" rel="noopener" title="Open full plate"><img class="b3d-plate" src="${esc(im.thumb||im.url)}" alt="" loading="lazy"></a>`:""}<p class="b3d-sum">${esc(d.summary)}</p>${sec("Structure",d.structure)}${sec("Function",d.fn)}`]];
+      if(oiTbl) T.push(["oi","Muscle facts",oiTbl]);
+      if(d.clinical || TC.case || TC.mnemonic) T.push(["cl","Clinical",`${sec("Clinical relevance",d.clinical)}${sec("Classic case",TC.case)}${sec("Memory hook",TC.mnemonic)}`]);
+      T.push(["rel","Related",`${lmHtml}${partsHtml}${rel?`<div class="b3d-rel"><b>Related structures</b><div class="b3d-relch">${rel}</div></div>`:""}<a class="b3d-open" href="#/part/${id}">Open full entry →</a>`]);
+      if(!T.some(t=>t[0]===infoTab)) infoTab = "ov";
+      tabsHtml = `<div class="inf-tabs">${T.map(t=>`<button data-tab="${t[0]}" class="${t[0]===infoTab?"on":""}">${t[1]}</button>`).join("")}</div>`;
+      bodyHtml = T.map(t=>`<div class="inf-pane${t[0]===infoTab?" on":""}" data-pane="${t[0]}">${t[2]}</div>`).join("");
+    } else bodyHtml = `<div class="inf-pane on">${meta}${
+      pd?`<p class="b3d-sum">Part of the <b>${esc(pd.name)}</b>.</p><p>${esc(pd.summary)}</p><a class="b3d-open" href="#/part/${parent}">Open ${esc(pd.name)} entry →</a>`
+      : md?`<p class="b3d-sum">${esc(md.desc)}</p>${sec("Detail note",md.note)}`
+      : `<p class="hint">Sub-structure from the original Z-Anatomy model (CC BY-SA 4.0) — no separate atlas article yet.</p>`}${lmHtml}${partsHtml}</div>`;
+    setInfo(`<div class="inf-head"><div class="inf-title"><h3>${esc(nm)}</h3><button class="inf-say" data-a="say" title="Pronounce it" aria-label="Pronounce it">🔊</button></div>
       ${d&&d.latin?`<div class="b3d-aka latin">${esc(d.latin)}</div>`:""}
       ${d&&d.aka?`<div class="b3d-aka">${esc(d.aka)}</div>`:""}
-      <div class="badges" style="margin:6px 0 8px"><span class="badge sys" style="--badge-c:${c.color}">${c.icon} ${c.name}</span>${d?`<span class="badge">📍 ${REGIONS[d.region].name}</span>`:md?`<span class="badge">📍 ${md.regName} region</span><span class="badge">Unnamed detail</span>`:`<span class="badge">🧩 Z-Anatomy structure</span>`}</div>
-      <div class="b3d-actions">
-        <button data-a="isolate" title="Hide everything else"><i>◎</i><b>Isolate</b></button>
-        <button data-a="hide" title="Hide this structure"><i>⊘</i><b>Hide</b></button>
-        <button data-a="fade" title="See through this structure"><i>◑</i><b>${faded.has(id)?"Unfade":"Fade"}</b></button>
-        <button data-a="hideo" title="Hide everything except this"><i>⧉</i><b>Hide others</b></button>
-        <button data-a="fadeo" title="Ghost everything around it"><i>◐</i><b>${(focusSet&&focusSet.has(id))?"Unfade others":"Fade others"}</b></button>
-        <button data-a="say" title="Pronounce it"><i>🔊</i><b>Say</b></button>
-        <button data-a="pin"><i>📌</i><b>${pinHas(id)?"Pinned":"Pin"}</b></button>
-        ${d&&d.oi?`<button data-a="att" title="Highlight origin & insertion markers"><i>🎯</i><b>Attachments</b></button>`:""}
-        ${ATLAS_TRACES&&ATLAS_TRACES.some(t=>t.chain.includes(id))?`<button data-a="trace" title="Trace its pathway"><i>🛤</i><b>Trace</b></button>`:""}
-        ${hidden.size||faded.size||isolated!==null||focusSet?`<button data-a="showall"><i>↺</i><b>Show all</b></button>`:""}
-      </div>
-      ${lmHtml}${partsHtml}
-      ${im?`<img class="b3d-plate" src="${esc(im.thumb||im.url)}" alt="" loading="lazy">`:""}
-      ${d?`<p class="b3d-sum">${esc(d.summary)}</p>${d.oi?`<div class="b3d-sec"><b>Muscle facts</b><table class="oitable small">
-        ${d.oi.o?`<tr><th>Origin</th><td>${esc(d.oi.o)}</td></tr>`:""}${d.oi.i?`<tr><th>Insertion</th><td>${esc(d.oi.i)}</td></tr>`:""}${d.oi.n?`<tr><th>Innervation</th><td>${esc(d.oi.n)}</td></tr>`:""}${d.oi.a?`<tr><th>Action</th><td>${esc(d.oi.a)}</td></tr>`:""}</table></div>`:""}${sec("Structure",d.structure)}${sec("Function",d.fn)}${sec("Clinical relevance",d.clinical)}${rel?`<div class="b3d-rel"><b>Related structures</b><div class="b3d-relch">${rel}</div></div>`:""}<a class="b3d-open" href="#/part/${id}">Open full entry →</a>`
-        : pd?`<p class="b3d-sum">Part of the <b>${esc(pd.name)}</b>.</p><p>${esc(pd.summary)}</p><a class="b3d-open" href="#/part/${parent}">Open ${esc(pd.name)} entry →</a>`
-        : md?`<p class="b3d-sum">${esc(md.desc)}</p>${sec("Detail note",md.note)}`
-        : `<p class="hint">Sub-structure from the original Z-Anatomy model (CC BY-SA 4.0) — no separate atlas article yet.</p>`}`);
+      ${strip}${tabsHtml}</div>
+      <div class="inf-body">${bodyHtml}</div>`);
+    info.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{
+      infoTab = b.dataset.tab;
+      info.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("on",x===b));
+      info.querySelectorAll("[data-pane]").forEach(p=>p.classList.toggle("on",p.dataset.pane===infoTab)); }));
+    /* cover mode: tap a blurred block to reveal just that one */
+    { const bd = info.querySelector(".inf-body");
+      if(bd) bd.addEventListener("click",e=>{ if(!bd.classList.contains("covered")) return;
+        const t = e.target.closest(".b3d-sum,.b3d-sec p,.oitable td"); if(t) t.classList.add("rev"); }); }
     info.querySelectorAll("[data-a]").forEach(b=>b.addEventListener("click",()=>{
       const a=b.dataset.a;
       if(a==="say"){ say(nm); return; }
+      if(a==="learn"){ lessonStart(id, s); return; }
+      if(a==="quizme"){ quizStart(id, "tap"); return; }
+      if(a==="cover"){ const bd = info.querySelector(".inf-body"); if(!bd) return;
+        bd.classList.toggle("covered"); bd.querySelectorAll(".rev").forEach(x=>x.classList.remove("rev"));
+        b.classList.toggle("on", bd.classList.contains("covered")); return; }
+      if(a==="copy"){ try{ navigator.clipboard.writeText(location.href); learnToast("Link copied"); }catch(e){} return; }
       if(a==="pin"){ pinToggle(id, pick.pid===id ? pick.pt : null); showInfo(id); return; }
       if(a==="att"){ attShow(id); return; }
       if(a==="trace"){ tracePick(id); return; }
@@ -20248,7 +20317,8 @@ function buildScene(gltf, st){
 
   /* ---- guided lesson: step-by-step tour through one structure ---- */
   const lesEl = $("#b3dles");
-  const lesson = { on:false, id:null, sys:null, steps:[], i:0, q:null, smp:false, lblSaved:null };
+  const lesson = { on:false, id:null, sys:null, steps:[], i:0, q:null, smp:false, lblSaved:null,
+    outline:false, sc:{ok:0,tot:0}, qTry:false };
   const TEACH = window.ATLAS_TEACH || {};
   /* plain-language variant: authored `s` or the step's first sentence */
   const firstSent = html => { const t = html.replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
@@ -20332,32 +20402,67 @@ function buildScene(gltf, st){
     if(!q) return;
     if(m && m.userData.partId===q.id){
       lesson.q = null; qEl.style.display = "none";
+      lesson.sc.tot++; if(!lesson.qTry) lesson.sc.ok++;
       srRecord(q.id,true); addXP(5,"recall"); checkBadges();
-      qst.className = "les-qst ok"; qst.textContent = `✓ Correct — that's the ${nameOf(q.id)}`;
+      qst.className = "les-qst ok"; qst.textContent = `✓ Correct — that's the ${nameOf(q.id)} · score ${lesson.sc.ok}/${lesson.sc.tot}`;
       select(q.id);
     } else {
+      lesson.qTry = true;
       qst.className = "les-qst bad";
       qst.textContent = m ? `That's the ${nameOf(m.userData.partId)} — try again.` : "Missed it — tap on the structure itself.";
       if(m) srRecord(q.id,false);
     }
   };
+  /* "Show me": glow the answer and count it as a miss; "Skip": move on uncounted-for-SR */
+  const lesShow = () => { const q = lesson.q; if(!q) return;
+    lesson.qTry = true; srRecord(q.id,false);
+    each(q.id, m=>glow(m,0xffb300));
+    const qst = $("#lesqst"); qst.className = "les-qst bad";
+    qst.textContent = `Highlighted — that's the ${nameOf(q.id)}. Tap it to continue.`;
+    setTimeout(()=>{ if(selected!==q.id) each(q.id, m=>glow(m,0)); }, 3000); };
+  const lesSkip = () => { const q = lesson.q; if(!q) return;
+    lesson.sc.tot++; lesson.q = null; $("#lesq").style.display = "none";
+    const qst = $("#lesqst"); qst.className = "les-qst"; qst.textContent = `Skipped — it was the ${nameOf(q.id)}.`; };
+  /* step body: the teaching text, or the clickable step outline */
+  const lesBodyPaint = () => { const s = lesson.steps[lesson.i], bd = $("#lesbody"); if(!s || !bd) return;
+    if(lesson.outline){
+      bd.innerHTML = `<div class="les-outline">${lesson.steps.map((st,k)=>`<button data-k="${k}" class="${k===lesson.i?"cur":k<lesson.i?"done":""}"><span class="n">${k<lesson.i?"✓":k+1}</span>${esc(st.t)}</button>`).join("")}</div>`;
+      bd.querySelectorAll("[data-k]").forEach(b=>b.addEventListener("click",()=>lesGo(+b.dataset.k)));
+    } else bd.innerHTML = lesson.smp ? (s.s || firstSent(s.x)) : s.x; };
   const lesGo = i => {
     lesson.i = Math.max(0, Math.min(lesson.steps.length-1, i));
     const s = lesson.steps[lesson.i];
+    lesson.outline = false;
     $("#lest").textContent = s.t;
-    $("#lesbody").innerHTML = lesson.smp ? (s.s || firstSent(s.x)) : s.x;
+    lesBodyPaint();
+    /* where we are in the bigger journey — path or system lesson list */
+    { const pl = $("#lespath"); let ctx = null;
+      const frac = ix => (ix + lesson.i/Math.max(1,lesson.steps.length-1));
+      if(lesson.sys && lesson.sys.startsWith("path:")){
+        const p = (window.ATLAS_PATHS||[]).find(x=>x.id===lesson.sys.slice(5)), ix = p ? p.steps.indexOf(lesson.id) : -1;
+        if(p && ix>=0) ctx = { t:`${p.title} · structure ${ix+1} of ${p.steps.length}`, f:frac(ix)/p.steps.length };
+      } else if(lesson.sys && SYSTEMS[lesson.sys]){
+        const L = lessonsOf(lesson.sys), ix = L.findIndex(x=>x.id===lesson.id);
+        if(ix>=0) ctx = { t:`${SYSTEMS[lesson.sys].name} · lesson ${ix+1} of ${L.length}`, f:frac(ix)/L.length };
+      }
+      if(pl){ if(ctx){ pl.innerHTML = `${esc(ctx.t)}<div class="bar"><i style="width:${Math.round(Math.min(1,ctx.f)*100)}%"></i></div>`; pl.style.display=""; }
+        else pl.style.display="none"; } }
     /* retrieval question prompt for this step */
-    lesson.q = s.q || null;
+    lesson.q = s.q || null; lesson.qTry = false;
     const qEl = $("#lesq"), qst = $("#lesqst");
-    if(s.q){ qEl.innerHTML = `🎯 ${s.q.t || `Tap the <b>${esc(nameOf(s.q.id))}</b> on the body`}`; qEl.style.display=""; }
+    if(s.q){ qEl.innerHTML = `<span>🎯 ${s.q.t || `Tap the <b>${esc(nameOf(s.q.id))}</b> on the body`}</span>${lesson.sc.tot?`<span class="les-sc">${lesson.sc.ok}/${lesson.sc.tot}</span>`:""}<span class="les-qa"><button data-q="show">Show me</button><button data-q="skip">Skip</button></span>`;
+      qEl.style.display="";
+      qEl.querySelector("[data-q=show]").addEventListener("click",lesShow);
+      qEl.querySelector("[data-q=skip]").addEventListener("click",lesSkip); }
     else qEl.style.display="none";
     qst.textContent=""; qst.className="les-qst";
     $("#lesdots").innerHTML = lesson.steps.map((_,k)=>`<i class="${k===lesson.i?"on":k<lesson.i?"done":""}"></i>`).join("");
     $("#lesnav").innerHTML =
-      `${lesson.i>0?`<button id="lespv">← Back</button>`:""}<span class="les-prog">${lesson.i+1} / ${lesson.steps.length}</span>` +
+      `${lesson.i>0?`<button id="lespv">← Back</button>`:""}<button class="les-prog" id="lesprog" title="Jump to any step">${lesson.i+1} / ${lesson.steps.length} ▾</button>` +
       (s.finish
         ? `<button class="pri" id="lestest">🎯 Test me</button><button class="dim" id="lesdone">Done ✓</button>`
         : `<button class="pri" id="lesnx">Next →</button>`);
+    const pg=$("#lesprog"); if(pg) pg.addEventListener("click",()=>{ lesson.outline=!lesson.outline; lesBodyPaint(); });
     const pv=$("#lespv"); if(pv) pv.addEventListener("click",()=>lesGo(lesson.i-1));
     const nx=$("#lesnx"); if(nx) nx.addEventListener("click",()=>lesGo(lesson.i+1));
     const tt=$("#lestest"); if(tt) tt.addEventListener("click",()=>quizStart(lesson.id));
@@ -20372,7 +20477,7 @@ function buildScene(gltf, st){
           nxt = nid && byId[nid] ? {id:nid, name:byId[nid].name} : null;
           if(!nxt){ giveBadge("path-1"); if((window.ATLAS_PATHS||[]).every(x=>x.steps.every(s=>lessonDone(s)))) giveBadge("path-all"); } }
       } else nxt = lessonsOf(lesson.sys).find(x=>!lessonDone(x.id));
-      $("#lesbody").innerHTML = `🎉 <b>${esc(nameOf(lesson.id))}</b> — lesson complete.${nxt?` Next up: <b>${esc(nxt.name)}</b>.`:" You've finished this path!"}`;
+      $("#lesbody").innerHTML = `🎉 <b>${esc(nameOf(lesson.id))}</b> — lesson complete.${lesson.sc.tot?` Recall score: <b>${lesson.sc.ok}/${lesson.sc.tot}</b> first try.`:""}${nxt?` Next up: <b>${esc(nxt.name)}</b>.`:" You've finished this path!"}`;
       $("#lesnav").innerHTML = (nxt?`<button class="pri" id="lesgo2">Next lesson →</button>`:"") + `<button class="dim" id="lesout">Exit</button>`;
       if(nxt) $("#lesgo2").addEventListener("click",()=>{ location.hash = `/3d/${nxt.id}?lesson=${lesson.sys}`; });
       $("#lesout").addEventListener("click",lesClose);
@@ -20385,6 +20490,7 @@ function buildScene(gltf, st){
     const steps = buildLesson(id,sys);
     if(!steps || !lesEl) return;
     lesson.on=true; lesson.id=id; lesson.sys=sys; lesson.steps=steps;
+    lesson.sc = {ok:0,tot:0}; lesson.outline = false;
     lesson.lblSaved = [labelsOn,stOn];
     appEl.classList.add("lesson");
     lesEl.style.display="flex"; lesGo(0); };
@@ -20392,8 +20498,12 @@ function buildScene(gltf, st){
   const smpB = $("#lessmp");
   if(smpB) smpB.addEventListener("click",()=>{ lesson.smp=!lesson.smp;
     smpB.classList.toggle("on",lesson.smp);
-    const s = lesson.steps[lesson.i];
-    if(s) $("#lesbody").innerHTML = lesson.smp ? (s.s||firstSent(s.x)) : s.x; });
+    lesBodyPaint(); });
+  /* ⟲ replay the step's camera move + layer setup after you've orbited away */
+  const repB = $("#lesrep");
+  if(repB) repB.addEventListener("click",()=>{ const s = lesson.steps[lesson.i];
+    if(lesson.outline){ lesson.outline = false; lesBodyPaint(); }
+    if(s && s.act) s.act(); setLbl((s&&s.lbl)||"off"); });
   if(lesEl) $("#lesx").addEventListener("click",lesClose);
 
   /* subtle life motion — heartbeat on the heart, breathing on the lungs */
@@ -20601,8 +20711,10 @@ function v3D(sel){
     <div class="b3d-hbar" id="b3dhbar"></div>
     <div class="b3d-lesson" id="b3dles" style="display:none">
       <div class="les-top"><b class="les-step" id="lest"></b><span class="les-dots" id="lesdots"></span>
+        <button class="les-smp" id="lesrep" title="Replay the camera move" aria-label="Replay the camera move">⟲</button>
         <button class="les-smp" id="lessmp" title="Explain it simply" aria-label="Explain it simply">🧠</button>
         <button class="les-x" id="lesx" title="Exit lesson" aria-label="Exit lesson">✕</button></div>
+      <div class="les-path" id="lespath" style="display:none"></div>
       <div class="les-body" id="lesbody"></div>
       <div class="les-q" id="lesq" style="display:none"></div>
       <div class="les-qst" id="lesqst"></div>
