@@ -619,6 +619,41 @@ body.b3d-open .pwa-toast{bottom:112px}
 .streakb{background:var(--panel2);border:1px solid var(--border);color:#f2a900;border-radius:20px;padding:5px 13px;font:700 12.5px var(--font)}
 .hero-install{display:none!important}
 body.can-install .hero-install{display:inline-flex!important}
+/* feature-pack additions */
+.say{background:none;border:1px solid var(--border);color:var(--text3);border-radius:8px;font-size:15px;padding:2px 8px;cursor:pointer;vertical-align:6px}
+.say:hover{color:var(--accent);border-color:var(--accent)}
+.latin{font-style:italic;color:var(--text3);font-size:15px;margin-top:2px}
+.oitable{width:100%;border-collapse:collapse;font-size:14px}
+.oitable th{text-align:left;color:var(--accent);font-weight:700;padding:6px 10px 6px 0;width:110px;vertical-align:top;white-space:nowrap}
+.oitable td{padding:6px 0;border-bottom:1px solid var(--border);color:var(--text)}
+.oitable tr:last-child td{border-bottom:none}
+.qtype{flex:1;min-width:180px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:11px 14px;font:500 15px var(--font)}
+.qtype:focus{outline:none;border-color:var(--accent)}
+.qtype.right{border-color:var(--good,#3ddc84);background:color-mix(in srgb,var(--good,#3ddc84) 12%,var(--panel2))}
+.qtype.wrong{border-color:var(--bad,#ff5f56);background:color-mix(in srgb,var(--bad,#ff5f56) 12%,var(--panel2))}
+.qsel{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:4px 8px;font:600 12.5px var(--font)}
+.qbchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{background:var(--panel2);border:1px solid var(--border);color:var(--text3);border-radius:16px;padding:5px 12px;font:600 12.5px var(--font);cursor:pointer;user-select:none}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:color-mix(in srgb,var(--accent) 20%,var(--panel2));color:var(--accent);border-color:var(--accent)}
+.qbrow{margin:14px 0}
+.qbrow>b{display:block;font-size:13px;color:var(--text2);margin-bottom:2px}
+.pathprog{height:6px;background:var(--panel2);border-radius:4px;overflow:hidden;margin-top:8px}
+.pathprog i{display:block;height:100%;background:var(--accent);border-radius:4px}
+.prow{display:flex;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--border);border-radius:12px;margin:8px 0;background:var(--panel)}
+.prow .pi{flex:none;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--panel2);font:700 13px var(--font);color:var(--text3)}
+.prow .pt{flex:1}
+.prow .pt b{font-size:14px}
+.prow .pt span{display:block;font-size:12px;color:var(--text3)}
+.b3dlbl.trace{color:#ffd166!important;border-color:#ffd166!important}
+.kind{background:var(--accent);color:#0a0a0a;border-radius:6px;padding:1px 7px;font:700 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em}
+.kind-section{background:#7fb3ff}
+.kind-dissection{background:#e8a33d}
+.b3d-movebar{position:absolute;left:50%;bottom:calc(var(--above) + 14px);transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:rgba(18,18,18,.92);border:1px solid var(--gb);border-radius:14px;padding:8px 14px;z-index:20;font-size:13px;backdrop-filter:blur(10px)}
+.b3d-movebar b{color:#ffd60a;font-size:12.5px}
+.b3d-movebar button{background:var(--panel2);border:1px solid var(--gb);color:#e8e8e8;border-radius:8px;padding:4px 10px;cursor:pointer}
+.b3d-movebar input[type=range]{width:130px}
+.b3d-movebar .hint{font-size:10.5px;color:#8d887a}
 </style>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫀</text></svg>">
 <link rel="manifest" href="manifest.webmanifest">
@@ -17851,6 +17886,245 @@ window.ATLAS_LM = {
   ]
 };
 
+/* Latin (Terminologia Anatomica) names — shown under the English name on
+   part pages and 3D cards, and searchable. Authored for the highest-yield
+   structures; entries without a latin field simply show nothing. */
+window.ATLAS_LATIN = {
+"bone-tissue":"Os / textus osseus","skeleton-overview":"Sceleton","periosteum":"Periosteum","bone-marrow":"Medulla ossium","cartilage":"Cartilago","ligament":"Ligamentum","tendon":"Tendo","synovial-joint":"Junctura synovialis",
+"skull":"Cranium","frontal-bone":"Os frontale","parietal-bone":"Os parietale","temporal-bone":"Os temporale","occipital-bone":"Os occipitale","sphenoid-bone":"Os sphenoidale","ethmoid-bone":"Os ethmoidale","mandible":"Mandibula","maxilla":"Maxilla","zygomatic-bone":"Os zygomaticum","nasal-bones":"Ossa nasalia","lacrimal-bone":"Os lacrimale","palatine-bone":"Os palatinum","vomer":"Vomer","inferior-concha":"Concha nasalis inferior","hyoid":"Os hyoideum","auditory-ossicles":"Ossicula auditus","cranial-sutures":"Suturae cranii","fontanelles":"Fonticuli","foramen-magnum":"Foramen magnum","orbit":"Orbita",
+"vertebral-column":"Columna vertebralis","vertebra":"Vertebra","atlas":"Atlas (C1)","axis":"Axis (C2)","cervical-vertebrae":"Vertebrae cervicales","thoracic-vertebrae":"Vertebrae thoracicae","lumbar-vertebrae":"Vertebrae lumbales","sacrum":"Os sacrum","coccyx":"Os coccygis","intervertebral-disc":"Discus intervertebralis",
+"thoracic-cage":"Cavea thoracis","ribs":"Costae","sternum":"Sternum","xiphoid":"Processus xiphoideus","costal-cartilage":"Cartilago costalis",
+"clavicle":"Clavicula","scapula":"Scapula","humerus":"Humerus","radius":"Radius","ulna":"Ulna","carpals":"Ossa carpi","scaphoid":"Os scaphoideum","lunate":"Os lunatum","triquetrum":"Os triquetrum","pisiform":"Os pisiforme","trapezium":"Os trapezium","trapezoid":"Os trapezoideum","capitate":"Os capitatum","hamate":"Os hamatum","metacarpals":"Ossa metacarpi","phalanges-hand":"Phalanges (manus)","wrist":"Articulatio radiocarpea",
+"pelvic-girdle":"Pelvis / ossa coxae","ilium":"Os ilium","ischium":"Os ischii","pubis":"Os pubis","acetabulum":"Acetabulum","pubic-symphysis":"Symphysis pubica","sacroiliac-joint":"Articulatio sacroiliaca","femur":"Os femoris","patella":"Patella","tibia":"Tibia","fibula":"Fibula","talus":"Talus","calcaneus":"Calcaneus","navicular":"Os naviculare","cuboid":"Os cuboideum","cuneiforms":"Ossa cuneiformia","metatarsals":"Ossa metatarsi","tarsals":"Ossa tarsi","phalanges-foot":"Phalanges (pedis)",
+"shoulder-joint":"Articulatio glenohumeralis","elbow-joint":"Articulatio cubiti","hip-joint":"Articulatio coxae","knee-joint":"Articulatio genus","ankle-joint":"Articulatio talocruralis","tmj":"Articulatio temporomandibularis","meniscus":"Meniscus",
+"skeletal-muscle":"Musculus skeleticus","cardiac-muscle":"Myocardium (textus)","smooth-muscle":"Musculus nonstriatus","frontalis":"Venter frontalis","orbicularis-oculi":"M. orbicularis oculi","orbicularis-oris":"M. orbicularis oris","masseter":"M. masseter","temporalis":"M. temporalis","medial-pterygoid":"M. pterygoideus medialis","lateral-pterygoid":"M. pterygoideus lateralis","buccinator":"M. buccinator","zygomaticus":"M. zygomaticus major","sternocleidomastoid":"M. sternocleidomastoideus","scalenes":"Mm. scaleni","platysma":"Platysma","trapezius":"M. trapezius","latissimus-dorsi":"M. latissimus dorsi","erector-spinae":"M. erector spinae","rhomboids":"Mm. rhomboidei","levator-scapulae":"M. levator scapulae","quadratus-lumborum":"M. quadratus lumborum","pectoralis-major":"M. pectoralis major","pectoralis-minor":"M. pectoralis minor","serratus-anterior":"M. serratus anterior","intercostal-muscles":"Mm. intercostales","diaphragm":"Diaphragma","rectus-abdominis":"M. rectus abdominis","external-oblique":"M. obliquus externus abdominis","internal-oblique":"M. obliquus internus abdominis","transversus-abdominis":"M. transversus abdominis","levator-ani":"M. levator ani",
+"deltoid":"M. deltoideus","rotator-cuff":"Musculi rotatores cuffae","supraspinatus":"M. supraspinatus","infraspinatus":"M. infraspinatus","teres-minor":"M. teres minor","subscapularis":"M. subscapularis","teres-major":"M. teres major","biceps-brachii":"M. biceps brachii","brachialis":"M. brachialis","triceps-brachii":"M. triceps brachii","coracobrachialis":"M. coracobrachialis","anconeus":"M. anconeus","brachioradialis":"M. brachioradialis","pronator-teres":"M. pronator teres","supinator":"M. supinator","pronator-quadratus":"M. pronator quadratus",
+"iliopsoas":"M. iliopsoas","gluteus-maximus":"M. gluteus maximus","gluteus-medius":"M. gluteus medius","gluteus-minimus":"M. gluteus minimus","tensor-fasciae-latae":"M. tensor fasciae latae","piriformis":"M. piriformis","quadriceps-femoris":"M. quadriceps femoris","rectus-femoris":"M. rectus femoris","sartorius":"M. sartorius","gracilis":"M. gracilis","hamstrings":"Mm. ischiocrurales","biceps-femoris":"M. biceps femoris","gastrocnemius":"M. gastrocnemius","soleus":"M. soleus","achilles-tendon":"Tendo calcaneus","tibialis-anterior":"M. tibialis anterior","tibialis-posterior":"M. tibialis posterior","fibularis-muscles":"Mm. fibulares","extensor-digitorum-longus":"M. extensor digitorum longus","extensor-hallucis-longus":"M. extensor hallucis longus","flexor-hallucis-longus":"M. flexor hallucis longus","flexor-digitorum-longus":"M. flexor digitorum longus",
+"brain":"Encephalon","cerebrum":"Cerebrum","cerebellum":"Cerebellum","brainstem":"Truncus encephali","midbrain":"Mesencephalon","pons":"Pons","medulla-oblongata":"Medulla oblongata","thalamus":"Thalamus","hypothalamus":"Hypothalamus","hippocampus":"Hippocampus","basal-ganglia":"Nuclei basales","corpus-callosum":"Corpus callosum","spinal-cord":"Medulla spinalis","meninges":"Meninges","dura-mater":"Dura mater","csf":"Liquor cerebrospinalis","ventricles-brain":"Ventriculi cerebri","insula":"Insula","pituitary-gland":"Hypophysis","pineal-gland":"Glandula pinealis",
+"olfactory-nerve":"N. olfactorius (CN I)","optic-nerve":"N. opticus (CN II)","trigeminal-nerve":"N. trigeminus (CN V)","facial-nerve":"N. facialis (CN VII)","vestibulocochlear":"N. vestibulocochlearis (CN VIII)","vagus-nerve":"N. vagus (CN X)","accessory-nerve":"N. accessorius (CN XI)","hypoglossal":"N. hypoglossus (CN XII)","brachial-plexus":"Plexus brachialis","median-nerve":"N. medianus","ulnar-nerve":"N. ulnaris","radial-nerve":"N. radialis","axillary-nerve":"N. axillaris","musculocutaneous-nerve":"N. musculocutaneus","sciatic-nerve":"N. ischiadicus","femoral-nerve":"N. femoralis","tibial-nerve":"N. tibialis","common-fibular-nerve":"N. fibularis communis","obturator-nerve":"N. obturatorius","phrenic-nerve":"N. phrenicus","intercostal-nerves":"Nn. intercostales","autonomic-nervous-system":"Systema nervosum autonomicum","sympathetic":"Pars sympathica","parasympathetic":"Pars parasympathica",
+"heart":"Cor","pericardium":"Pericardium","myocardium":"Myocardium","right-atrium":"Atrium dextrum","left-atrium":"Atrium sinistrum","right-ventricle":"Ventriculus dexter","left-ventricle":"Ventriculus sinister","heart-valves":"Valvae cordis","coronary-arteries":"Aa. coronariae","aorta":"Aorta","abdominal-aorta":"Aorta abdominalis","thoracic-aorta":"Aorta thoracica","aortic-arch":"Arcus aortae","vena-cava":"Vena cava (sup./inf.)","pulmonary-artery":"Truncus pulmonalis","pulmonary-veins":"Vv. pulmonales","carotid":"A. carotis","internal-carotid":"A. carotis interna","external-carotid":"A. carotis externa","jugular":"V. jugularis","subclavian-artery":"A. subclavia","axillary-artery":"A. axillaris","brachial-artery":"A. brachialis","radial-artery":"A. radialis","ulnar-artery":"A. ulnaris","femoral-artery":"A. femoralis","popliteal-artery":"A. poplitea","anterior-tibial-artery":"A. tibialis anterior","posterior-tibial-artery":"A. tibialis posterior","dorsalis-pedis":"A. dorsalis pedis","common-iliac-artery":"A. iliaca communis","external-iliac-artery":"A. iliaca externa","renal-arteries":"Aa. renales","portal-vein":"V. portae hepatis","superior-mesenteric":"A. mesenterica superior","inferior-mesenteric":"A. mesenterica inferior","cephalic-vein":"V. cephalica","basilic-vein":"V. basilica","median-cubital":"V. mediana cubiti","femoral-vein":"V. femoralis","saphenous-vein":"V. saphena magna","azygos-vein":"V. azygos","blood":"Sanguis",
+"lungs":"Pulmones","trachea":"Trachea","bronchi":"Bronchi","larynx":"Larynx","pharynx":"Pharynx","nasal-cavity":"Cavitas nasi","paranasal-sinuses":"Sinus paranasales","pleura":"Pleura",
+"esophagus":"Oesophagus","stomach":"Gaster","small-intestine":"Intestinum tenue","duodenum":"Duodenum","jejunum":"Jejunum","ileum":"Ileum","large-intestine":"Intestinum crassum","cecum":"Caecum","appendix":"Appendix vermiformis","colon":"Colon","rectum":"Rectum","anus":"Anus","liver":"Hepar","gallbladder":"Vesica biliaris","pancreas":"Pancreas","salivary-glands":"Glandulae salivales","tongue":"Lingua","teeth":"Dentes","peritoneum":"Peritoneum","mesentery":"Mesenterium",
+"kidney":"Ren","ureter":"Ureter","bladder":"Vesica urinaria","urethra":"Urethra","nephron":"Nephron",
+"male-reproductive":"Organa genitalia masculina","testis":"Testis","epididymis":"Epididymis","vas-deferens":"Ductus deferens","prostate":"Prostata","penis":"Penis","scrotum":"Scrotum","seminal-vesicle":"Vesicula seminalis",
+"female-reproductive":"Organa genitalia feminina","ovary":"Ovarium","fallopian-tube":"Tuba uterina","uterus":"Uterus","cervix":"Cervix uteri","vagina":"Vagina","vulva":"Vulva","clitoris":"Clitoris","breast":"Mamma","placenta":"Placenta",
+"thyroid":"Glandula thyroidea","parathyroid":"Glandulae parathyroideae","adrenal-glands":"Glandulae suprarenales","pancreas-endocrine":"Insulae pancreaticae",
+"spleen":"Splen","thymus":"Thymus","lymph-nodes":"Nodi lymphoidei","tonsils":"Tonsillae","lymph-vessels":"Vasa lymphatica",
+"skin":"Cutis","epidermis":"Epidermis","dermis":"Dermis","hair":"Pilus","nails":"Ungues",
+"eye":"Oculus","retina":"Retina","cornea":"Cornea","lens-eye":"Lens","iris":"Iris","cochlea":"Cochlea","ear":"Auris","tympanic-membrane":"Membrana tympani","vestibular-system":"Systema vestibulare","olfactory-epithelium":"Regio olfactoria"
+};
+
+/* Structured muscle facts — o:origin, i:insertion, n:innervation, a:action.
+   Rendered as a table on part pages and the 3D info card; powers the
+   "Muscle facts" quiz mode. */
+window.ATLAS_OI = {
+"frontalis":{o:"Epicranial aponeurosis (galea)",i:"Skin of the eyebrows and forehead",n:"Facial nerve (CN VII), temporal branches",a:"Raises the eyebrows; wrinkles the forehead"},
+"orbicularis-oculi":{o:"Medial orbital margin, medial palpebral ligament, lacrimal bone",i:"Skin around the eyelid margins",n:"Facial nerve (CN VII), temporal & zygomatic branches",a:"Closes the eyelids — gently for blinking, firmly for squinting"},
+"orbicularis-oris":{o:"Maxilla, mandible and modiolus at the mouth angle",i:"Skin and mucosa of the lips",n:"Facial nerve (CN VII), buccal branches",a:"Closes and purses the lips — whistling, kissing, speech"},
+"masseter":{o:"Zygomatic arch (inferior border and deep surface)",i:"Lateral surface of the mandibular ramus and angle",n:"Mandibular nerve (V3) — masseteric branch",a:"Elevates the mandible — the strongest jaw closer; slight protrusion"},
+"temporalis":{o:"Temporal fossa and deep temporal fascia",i:"Coronoid process and anterior border of the mandibular ramus",n:"Mandibular nerve (V3) — deep temporal branches",a:"Elevates the mandible; posterior fibres retract it"},
+"medial-pterygoid":{o:"Medial surface of the lateral pterygoid plate; tuberosity of maxilla",i:"Medial surface of the mandibular angle",n:"Mandibular nerve (V3) — medial pterygoid branch",a:"Elevates the mandible; side-to-side grinding"},
+"lateral-pterygoid":{o:"Greater wing of sphenoid and lateral surface of the lateral pterygoid plate",i:"Condylar neck of mandible and TMJ disc/capsule",n:"Mandibular nerve (V3) — lateral pterygoid branch",a:"Protrudes and depresses the mandible; opens the jaw; side-to-side movement"},
+"buccinator":{o:"Alveolar processes of maxilla and mandible, pterygomandibular raphe",i:"Modiolus at the angle of the mouth",n:"Facial nerve (CN VII), buccal branches",a:"Presses the cheek against the teeth — keeps food on the occlusal surfaces; expels air (blowing)"},
+"zygomaticus":{o:"Zygomatic bone",i:"Modiolus and skin at the angle of the mouth",n:"Facial nerve (CN VII), zygomatic & buccal branches",a:"Draws the mouth angle up and out — smiling"},
+"extraocular-muscles":{o:"Common tendinous ring and orbital walls",i:"Sclera of the eyeball",n:"CN III (superior, inferior, medial recti, inferior oblique), CN IV (superior oblique), CN VI (lateral rectus)",a:"Move the eye in all directions; coordinate gaze"},
+"tongue-muscles":{o:"Mandible, hyoid, styloid process, soft palate (extrinsics)",i:"Tongue body and mucosa",n:"Hypoglossal nerve (CN XII) — except palatoglossus (CN X)",a:"Shape and move the tongue for speech, chewing and swallowing"},
+"sternocleidomastoid":{o:"Manubrium of sternum and medial third of clavicle",i:"Mastoid process and lateral superior nuchal line",n:"Accessory nerve (CN XI) with C2–C3 proprioceptive fibres",a:"One side: turns the face to the opposite side and tilts it toward the shoulder. Both: flex the neck; help elevate the head"},
+"scalenes":{o:"Transverse processes of C2–C7",i:"First rib (anterior & middle scalene) and second rib (posterior)",n:"Anterior rami C4–C8",a:"Elevate ribs 1–2 in forced inspiration; lateral flexion of the neck; slight rotation"},
+"platysma":{o:"Fascia over the pectoralis major and deltoid",i:"Inferior border of mandible, skin of cheek and mouth angle",n:"Facial nerve (CN VII), cervical branch",a:"Tenses the neck skin; pulls the mouth angle down — grimacing"},
+"suprahyoid-muscles":{o:"Mandible, styloid process (digastric, mylohyoid, geniohyoid, stylohyoid)",i:"Hyoid bone and floor of mouth",n:"Trigeminal V3 (mylohyoid, anterior digastric), facial CN VII (posterior digastric, stylohyoid), C1 via hypoglossal (geniohyoid)",a:"Elevate the hyoid and floor of mouth in swallowing; depress the mandible"},
+"infrahyoid-muscles":{o:"Sternum, clavicle, scapula (sternohyoid, sternothyroid, omohyoid, thyrohyoid)",i:"Hyoid bone and thyroid cartilage",n:"Ansa cervicalis (C1–C3)",a:"Depress and steady the hyoid and larynx during swallowing and speech"},
+"trapezius":{o:"External occipital protuberance, nuchal ligament, spinous processes C7–T12",i:"Lateral clavicle, acromion and spine of scapula",n:"Accessory nerve (CN XI) with C3–C4 sensory",a:"Upper: elevates and upwardly rotates the scapula. Middle: retracts. Lower: depresses. Together they rotate the glenoid upward for overhead reach"},
+"latissimus-dorsi":{o:"Spinous processes T7–L5, thoracolumbar fascia, iliac crest, lower ribs",i:"Floor of the intertubercular groove of humerus",n:"Thoracodorsal nerve (C6–C8)",a:"Extends, adducts and medially rotates the humerus — the 'climbing and pull-up' muscle"},
+"erector-spinae":{o:"Sacrum, iliac crest, spinous processes of lumbar and lower thoracic vertebrae",i:"Ribs, transverse and spinous processes up to the skull (iliocostalis, longissimus, spinalis columns)",n:"Dorsal rami of spinal nerves",a:"Extends and laterally flexes the vertebral column; holds posture against gravity"},
+"multifidus":{o:"Sacrum, mammillary processes, articular processes and transverse processes",i:"Spinous processes 2–4 levels above each origin",n:"Dorsal rami of spinal nerves",a:"Stabilizes and rotates vertebrae segment by segment; deep spine stabilizer"},
+"rhomboids":{o:"Spinous processes C7–T1 (minor) and T2–T5 (major)",i:"Medial border of scapula from spine to inferior angle",n:"Dorsal scapular nerve (C4–C5)",a:"Retracts the scapula to the spine and rotates the glenoid downward"},
+"levator-scapulae":{o:"Transverse processes C1–C4",i:"Superior angle and medial border of scapula",n:"Dorsal scapular nerve (C5) and C3–C4",a:"Elevates the scapula; downwardly rotates the glenoid; helps lateral neck flexion"},
+"quadratus-lumborum":{o:"Iliac crest and iliolumbar ligament",i:"12th rib and transverse processes L1–L4",n:"Anterior rami T12–L4",a:"Lateral flexion of the trunk; fixes the 12th rib for breathing; hip 'hitch'"},
+"pectoralis-major":{o:"Medial clavicle, sternum, costal cartilages 1–6",i:"Lateral lip of the intertubercular groove of humerus",n:"Medial and lateral pectoral nerves (C5–T1)",a:"Adducts, flexes and medially rotates the humerus; clavicular part flexes, sternal part extends from flexed position"},
+"pectoralis-minor":{o:"Ribs 3–5 near costal cartilages",i:"Coracoid process of scapula",n:"Medial pectoral nerve (C8–T1)",a:"Protracts, depresses and downwardly rotates the scapula; elevates ribs when the shoulder is fixed"},
+"serratus-anterior":{o:"Outer surfaces of ribs 1–8 (or 9)",i:"Anterior medial border of scapula",n:"Long thoracic nerve (C5–C7)",a:"Protracts the scapula and upwardly rotates the glenoid — punching and pushing; holds scapula to the wall (damage = winged scapula)"},
+"intercostal-muscles":{o:"Inferior borders of ribs",i:"Superior borders of ribs below",n:"Intercostal nerves T1–T11",a:"External: elevate ribs in inspiration. Internal: depress ribs in forced expiration"},
+"diaphragm":{o:"Xiphoid process, lower 6 costal cartilages, L1–L3 crura",i:"Central tendon of the diaphragm",n:"Phrenic nerve (C3–C5) — 'C3,4,5 keep you alive'",a:"Prime mover of inspiration — flattens to expand the thorax; raises intra-abdominal pressure for straining"},
+"rectus-abdominis":{o:"Pubic symphysis and pubic crest",i:"Xiphoid process and costal cartilages 5–7",n:"Thoracoabdominal nerves T7–T12",a:"Flexes the trunk; compresses the abdomen; posterior pelvic tilt"},
+"external-oblique":{o:"External surfaces of ribs 5–12",i:"Linea alba, pubic tubercle, anterior iliac crest",n:"Thoracoabdominal nerves T7–T12 and iliohypogastric",a:"Compresses abdomen; bilateral trunk flexion; contralateral rotation (with opposite internal oblique)"},
+"internal-oblique":{o:"Thoracolumbar fascia, anterior iliac crest, lateral inguinal ligament",i:"Costal cartilages 10–12, linea alba, pubis",n:"Thoracoabdominal nerves T7–T12 and L1 (iliohypogastric/ilioinguinal)",a:"Compresses abdomen; bilateral trunk flexion; ipsilateral rotation"},
+"transversus-abdominis":{o:"Costal cartilages 7–12, thoracolumbar fascia, iliac crest, inguinal ligament",i:"Linea alba and pubic crest via aponeurosis",n:"Thoracoabdominal nerves T7–T12 and L1",a:"Corset muscle — compresses abdomen and stabilizes the core; no trunk movement"},
+"pelvic-floor":{o:"Pubis, ischial spine, obturator fascia",i:"Coccyx and central tendon of perineum",n:"Pudendal nerve and direct S3–S4 branches",a:"Supports pelvic organs; maintains continence; resists intra-abdominal pressure"},
+"levator-ani":{o:"Pubis, ischial spine, arcus tendineus of obturator fascia",i:"Coccyx, anococcygeal raphe, structures of the midline",n:"Pudendal nerve (S2–S4) and direct sacral branches",a:"Elevates the pelvic floor; supports pelvic viscera; contributes to continence"},
+"deltoid":{o:"Lateral clavicle, acromion, spine of scapula",i:"Deltoid tuberosity of humerus",n:"Axillary nerve (C5–C6)",a:"Middle: abducts the arm (the power abductor). Anterior: flexes and medially rotates. Posterior: extends and laterally rotates"},
+"supraspinatus":{o:"Supraspinous fossa of scapula",i:"Greater tubercle of humerus (superior facet)",n:"Suprascapular nerve (C5–C6)",a:"Initiates abduction (first 15°); centers the humeral head in the glenoid"},
+"infraspinatus":{o:"Infraspinous fossa of scapula",i:"Greater tubercle of humerus (middle facet)",n:"Suprascapular nerve (C5–C6)",a:"Laterally rotates the humerus; stabilizes the glenohumeral joint"},
+"teres-minor":{o:"Lateral border of scapula",i:"Greater tubercle of humerus (inferior facet)",n:"Axillary nerve (C5–C6)",a:"Laterally rotates and weakly adducts the humerus; cuff stabilizer"},
+"subscapularis":{o:"Subscapular fossa of scapula",i:"Lesser tubercle of humerus",n:"Upper and lower subscapular nerves (C5–C6)",a:"Medially rotates the humerus — the cuff's internal rotator"},
+"teres-major":{o:"Inferior angle of scapula",i:"Medial lip of intertubercular groove of humerus",n:"Lower subscapular nerve (C5–C6)",a:"Adducts, extends and medially rotates the humerus — 'lat's little helper'"},
+"biceps-brachii":{o:"Long head: supraglenoid tubercle; short head: coracoid process",i:"Radial tuberosity and bicipital aponeurosis to forearm fascia",n:"Musculocutaneous nerve (C5–C6)",a:"Supinates the forearm (the strongest supinator) and flexes the elbow; weak shoulder flexion"},
+"brachialis":{o:"Anterior distal humerus",i:"Coronoid process and tuberosity of ulna",n:"Musculocutaneous nerve (C5–C6) with radial contribution",a:"Flexes the elbow — the pure elbow flexor in all forearm positions"},
+"triceps-brachii":{o:"Long head: infraglenoid tubercle; lateral & medial heads: posterior humerus",i:"Olecranon of ulna",n:"Radial nerve (C6–C8)",a:"Extends the elbow; long head also extends and adducts the shoulder"},
+"coracobrachialis":{o:"Coracoid process of scapula",i:"Medial mid-shaft of humerus",n:"Musculocutaneous nerve (C6–C7) — pierced by it",a:"Flexes and adducts the humerus"},
+"anconeus":{o:"Lateral epicondyle of humerus",i:"Lateral olecranon and posterior proximal ulna",n:"Radial nerve (C7–T1)",a:"Assists elbow extension; stabilizes the joint; abducts ulna in pronation"},
+"brachioradialis":{o:"Lateral supracondylar ridge of humerus",i:"Styloid process of radius",n:"Radial nerve (C5–C6)",a:"Flexes the elbow strongest in mid-position (hammer curls); returns forearm to neutral"},
+"pronator-teres":{o:"Medial epicondyle of humerus and coronoid of ulna",i:"Lateral mid-shaft of radius",n:"Median nerve (C6–C7)",a:"Pronates the forearm; assists elbow flexion"},
+"supinator":{o:"Lateral epicondyle, radial collateral ligament, supinator crest of ulna",i:"Lateral, posterior and anterior proximal radius",n:"Radial nerve — deep branch / posterior interosseous (C6–C7)",a:"Supinates the forearm in all elbow positions"},
+"pronator-quadratus":{o:"Anterior distal ulna",i:"Anterior distal radius",n:"Median nerve — anterior interosseous branch (C8–T1)",a:"Pronates the forearm; binds distal radius to ulna"},
+"flexor-compartment-forearm":{o:"Medial epicondyle (common flexor origin), ulna, radius, interosseous membrane",i:"Carpals, metacarpals and phalanges",n:"Median nerve (most), ulnar nerve (FCU + medial FDP)",a:"Flexes wrist and fingers; pronates; ulnar/radial deviation"},
+"extensor-compartment-forearm":{o:"Lateral epicondyle (common extensor origin) and posterior forearm bones",i:"Extensor expansions of digits, metacarpals",n:"Radial nerve — posterior interosseous branch",a:"Extends wrist and fingers; supinates; ulnar/radial deviation"},
+"thenar-muscles":{o:"Flexor retinaculum, scaphoid and trapezium",i:"Base of thumb metacarpal and proximal phalanx",n:"Median nerve recurrent branch (opponens, APB, FPB head) + ulnar (deep FPB)",a:"Opposes, abducts and flexes the thumb — grip and pinch"},
+"hypothenar-muscles":{o:"Pisiform, hook of hamate, flexor retinaculum",i:"Base of little-finger metacarpal and proximal phalanx",n:"Ulnar nerve deep branch",a:"Opposes, abducts and flexes the little finger"},
+"interossei-hand":{o:"Metacarpal shafts",i:"Proximal phalanges and extensor expansions",n:"Ulnar nerve deep branch",a:"Dorsal interossei abduct (DAB), palmar adduct (PAD); flex MCPs while extending IPs"},
+"lumbricals":{o:"Flexor digitorum profundus tendons",i:"Lateral extensor expansions of digits 2–5",n:"Median nerve (1–2), ulnar nerve deep branch (3–4)",a:"Flex the MCP joints while extending the IP joints — writing position"},
+"iliopsoas":{o:"Psoas: transverse processes and bodies T12–L5; iliacus: iliac fossa",i:"Lesser trochanter of femur",n:"Lumbar plexus L1–L3 and femoral nerve",a:"The prime hip flexor — brings thigh to trunk (or trunk to thigh in sit-ups); lateral rotator"},
+"gluteus-maximus":{o:"Posterior ilium, sacrum, coccyx, sacrotuberous ligament",i:"Iliotibial tract and gluteal tuberosity of femur",n:"Inferior gluteal nerve (L5–S2)",a:"Extends and laterally rotates the hip — rising, climbing, sprinting; postural muscle"},
+"gluteus-medius":{o:"External ilium between anterior and posterior gluteal lines",i:"Lateral greater trochanter",n:"Superior gluteal nerve (L4–S1)",a:"Abducts and medially rotates the hip; holds pelvis level in single-leg stance (damage = Trendelenburg gait)"},
+"gluteus-minimus":{o:"External ilium between anterior and inferior gluteal lines",i:"Anterior greater trochanter",n:"Superior gluteal nerve (L4–S1)",a:"Abducts and medially rotates the hip; pelvic stabilizer"},
+"tensor-fasciae-latae":{o:"Anterior iliac crest and ASIS",i:"Iliotibial tract to Gerdy's tubercle on tibia",n:"Superior gluteal nerve (L4–S1)",a:"Flexes, abducts and medially rotates the hip; tenses the IT band to steady knee and pelvis"},
+"piriformis":{o:"Anterior sacrum",i:"Superior border of greater trochanter",n:"Nerve to piriformis (S1–S2)",a:"Laterally rotates the extended hip; abducts the flexed hip; sciatic nerve landmark"},
+"deep-hip-rotators":{o:"Ischial spine/tuber, obturator membrane and sacrum",i:"Greater trochanter and trochanteric crest",n:"Sacral plexus branches (L5–S2)",a:"Laterally rotate the extended hip; stabilize the femoral head"},
+"quadriceps-femoris":{o:"Rectus femoris: AIIS and acetabular rim; vasti: femoral shaft and linea aspera",i:"Tibial tuberosity via patellar ligament",n:"Femoral nerve (L2–L4)",a:"Extends the knee — kicking, stairs, standing; rectus femoris also flexes the hip"},
+"rectus-femoris":{o:"Anterior inferior iliac spine and groove above acetabulum",i:"Tibial tuberosity via patella and patellar ligament",n:"Femoral nerve (L2–L4)",a:"Extends the knee and flexes the hip — the only quad crossing two joints"},
+"vastus-muscles":{o:"Femoral shaft, linea aspera, intertrochanteric line",i:"Tibial tuberosity via patellar ligament",n:"Femoral nerve (L2–L4)",a:"Extends the knee; vastus medialis oblique fibers track the patella"},
+"sartorius":{o:"Anterior superior iliac spine",i:"Upper medial tibia (pes anserinus)",n:"Femoral nerve (L2–L3)",a:"The tailor's muscle — flexes, abducts and laterally rotates hip plus flexes knee (cross-legged position)"},
+"gracilis":{o:"Body and inferior ramus of pubis",i:"Upper medial tibia (pes anserinus)",n:"Obturator nerve (L2–L4)",a:"Adducts the thigh; flexes and medially rotates the knee"},
+"adductor-group":{o:"Pubis, ischial ramus and ischial tuberosity",i:"Linea aspera and adductor tubercle of femur",n:"Obturator nerve (L2–L4); adductor magnus hamstring part — tibial nerve",a:"Adducts the thigh; assists flexion and rotation; adductor magnus posterior part extends"},
+"hamstrings":{o:"Ischial tuberosity (semitendinosus, semimembranosus, biceps long head); biceps short head: linea aspera",i:"Medial tibia (semitendinosus/membranosus) and fibular head (biceps)",n:"Sciatic nerve — tibial division (biceps short head: common fibular)",a:"Flexes the knee and extends the hip; decelerates the leg in running"},
+"biceps-femoris":{o:"Long head: ischial tuberosity; short head: linea aspera",i:"Head of fibula",n:"Sciatic nerve — tibial (long) and common fibular (short) divisions",a:"Flexes the knee, extends the hip, laterally rotates the leg"},
+"gastrocnemius":{o:"Medial and lateral femoral condyles",i:"Calcaneus via the Achilles tendon",n:"Tibial nerve (S1–S2)",a:"Plantarflexes the ankle and flexes the knee — the spring of walking and jumping"},
+"soleus":{o:"Soleal line of tibia and posterior fibula",i:"Calcaneus via the Achilles tendon",n:"Tibial nerve (S1–S2)",a:"Plantarflexes the ankle — postural muscle and 'second heart' pumping blood up the leg"},
+"tibialis-anterior":{o:"Lateral tibia and interosseous membrane",i:"Medial cuneiform and base of 1st metatarsal",n:"Deep fibular nerve (L4–L5)",a:"Dorsiflexes and inverts the foot — lifts the toes to clear the ground in walking"},
+"tibialis-posterior":{o:"Interosseous membrane and posterior tibia/fibula",i:"Navicular tuberosity, cuneiforms, metatarsals 2–4",n:"Tibial nerve (L4–L5)",a:"Inverts and plantarflexes the foot; holds up the medial arch"},
+"fibularis-muscles":{o:"Lateral fibula (longus: upper 2/3; brevis: lower 2/3)",i:"Longus: base of 1st metatarsal & medial cuneiform; brevis: tuberosity of 5th metatarsal",n:"Superficial fibular nerve (L5–S1)",a:"Everts and plantarflexes the foot; longus supports the transverse arch"},
+"extensor-digitorum-longus":{o:"Lateral tibial condyle, anterior fibula, interosseous membrane",i:"Middle and distal phalanges of toes 2–5",n:"Deep fibular nerve (L5–S1)",a:"Extends the lateral four toes; dorsiflexes the ankle"},
+"extensor-hallucis-longus":{o:"Anterior fibula and interosseous membrane",i:"Distal phalanx of the great toe",n:"Deep fibular nerve (L5–S1)",a:"Extends the great toe; dorsiflexes the ankle"},
+"flexor-hallucis-longus":{o:"Posterior fibula and interosseous membrane",i:"Base of distal phalanx of great toe",n:"Tibial nerve (S2–S3)",a:"Flexes the great toe — push-off in walking and ballet pointe; plantarflexes ankle"},
+"flexor-digitorum-longus":{o:"Posterior tibia",i:"Bases of distal phalanges of toes 2–5",n:"Tibial nerve (S2–S3)",a:"Flexes the lateral four toes; plantarflexes the ankle; supports the arch"},
+"foot-intrinsics":{o:"Calcaneus, plantar aponeurosis, metatarsals",i:"Phalanges and extensor expansions of toes",n:"Medial and lateral plantar nerves (tibial)",a:"Support the arches; flex, abduct and adduct toes; fine-tune balance"},
+"pes-anserinus":{o:"Three tendons: sartorius (ASIS), gracilis (pubis), semitendinosus (ischial tuberosity)",i:"Common insertion on upper medial tibia",n:"Femoral, obturator and tibial nerves respectively",a:"The 'goose's foot' — together flex the knee and rotate medially; protect the medial knee"},
+"splenius-region":{o:"Nuchal ligament and spinous processes C7–T6",i:"Mastoid process and transverse processes C1–C3",n:"Dorsal rami of middle cervical nerves",a:"Both: extend head and neck. One side: rotates face to the same side"}
+};
+
+/* Nerve & vessel pathways — ordered proximal→distal chains of model ids.
+   `polyline` entries are "boneid:dx,dy,dz" = partCenter + offset×radius,
+   for paths with no meshes (lower-limb nerves). kind: nerve|artery|vein */
+window.ATLAS_TRACES = [
+{id:"tr-brachial-plexus",name:"Brachial plexus → arm nerves",kind:"nerve",chain:["brachial-plexus","z:anterior-cord-of-brachial-plexus","musculocutaneous-nerve","median-nerve"]},
+{id:"tr-median",name:"Median nerve",kind:"nerve",chain:["brachial-plexus","median-nerve","z:anterior-interosseus-nerve-of-forearm","z:common-palmar-digital-branches-of-median-nerve"]},
+{id:"tr-ulnar",name:"Ulnar nerve",kind:"nerve",chain:["brachial-plexus","ulnar-nerve","z:dorsal-branch-of-ulnar-nerve","z:deep-branch-of-ulnar-nerve","z:common-palmar-digital-branches-of-ulnar-nerve"]},
+{id:"tr-radial",name:"Radial nerve",kind:"nerve",chain:["brachial-plexus","radial-nerve","z:deep-branch-of-radial-nerve"]},
+{id:"tr-musculocutaneous",name:"Musculocutaneous nerve",kind:"nerve",chain:["brachial-plexus","musculocutaneous-nerve"]},
+{id:"tr-dorsal-scapular",name:"Dorsal scapular nerve",kind:"nerve",chain:["brachial-plexus","z:dorsal-scapular-nerve"]},
+{id:"tr-optic",name:"Visual pathway",kind:"nerve",chain:["optic-nerve","midbrain"]},
+{id:"tr-olfactory",name:"Olfactory pathway",kind:"nerve",chain:["olfactory-nerve","frontal-bone"]},
+{id:"tr-lumbar-plexus",name:"Lumbar plexus",kind:"nerve",chain:["lumbar-plexus","hip-bone","femur"]},
+{id:"tr-sciatic",name:"Sciatic nerve (approx. course)",kind:"nerve",chain:[],
+  polyline:["sacrum:-.25,-.55,-.5","hip-bone:-.35,-.9,-.45","femur:0,.28,-.32","tibia:0,-.12,-.22"]},
+{id:"tr-femoral-nerve",name:"Femoral nerve (approx. course)",kind:"nerve",chain:["lumbar-plexus"],
+  polyline:["hip-bone:-.3,-.55,.3","femur:0,.25,.18","patella:0,-.3,.2"]},
+{id:"tr-arm-arterial",name:"Arm arterial axis",kind:"artery",chain:["brachiocephalic-trunk","subclavian-artery","axillary-artery","brachial-artery"]},
+{id:"tr-radial-line",name:"Radial artery line",kind:"artery",chain:["brachial-artery","radial-artery"]},
+{id:"tr-ulnar-line",name:"Ulnar artery line",kind:"artery",chain:["brachial-artery","ulnar-artery"]},
+{id:"tr-leg-arterial",name:"Leg arterial axis",kind:"artery",chain:["abdominal-aorta","common-iliac-artery","external-iliac-artery","femoral-artery","popliteal-artery","posterior-tibial-artery"]},
+{id:"tr-ant-tibial",name:"Anterior tibial → dorsalis pedis",kind:"artery",chain:["popliteal-artery","anterior-tibial-artery","dorsalis-pedis"]},
+{id:"tr-carotid",name:"Carotid → cerebral",kind:"artery",chain:["brachiocephalic-trunk","common-carotid","internal-carotid"]},
+{id:"tr-vertebrobasilar",name:"Vertebrobasilar",kind:"artery",chain:["subclavian-artery","vertebral-artery","basilar-artery"]},
+{id:"tr-coronary",name:"Coronary circulation",kind:"artery",chain:["aortic-arch","coronary-arteries","coronary-sinus"]},
+{id:"tr-renal",name:"Renal vessels",kind:"artery",chain:["abdominal-aorta","renal-arteries","kidney","renal-veins"]},
+{id:"tr-mesenteric",name:"Mesenteric arteries",kind:"artery",chain:["abdominal-aorta","superior-mesenteric-artery","inferior-mesenteric-artery"]},
+{id:"tr-arm-veins",name:"Arm venous return",kind:"vein",chain:["basilic-vein","axillary-vein","subclavian-vein","brachiocephalic-vein","internal-jugular"]},
+{id:"tr-cephalic",name:"Cephalic vein",kind:"vein",chain:["cephalic-vein","axillary-vein","subclavian-vein"]},
+{id:"tr-saphenous",name:"Great saphenous → iliac",kind:"vein",chain:["great-saphenous-vein","femoral-vein","external-iliac-vein","common-iliac-vein"]},
+{id:"tr-azygos",name:"Azygos system",kind:"vein",chain:["hemiazygos-vein","azygos-vein","accessory-hemiazygos-vein"]},
+{id:"tr-portal",name:"Mesenteric venous → liver",kind:"vein",chain:["superior-mesenteric-vein","liver"]}
+];
+
+/* Guided learning paths — ordered structure tours that reuse the lesson engine.
+   level: 1 intro · 2 core · 3 advanced */
+window.ATLAS_PATHS = [
+{id:"upper-limb",title:"Upper limb essentials",level:2,time:"~40 min",
+ desc:"Bones, muscles, nerves and vessels of the shoulder, arm and hand — the classic exam block.",
+ objectives:["Name the shoulder and arm bones and their key landmarks","Map the rotator cuff and brachial compartments","Trace the brachial plexus into median, ulnar and radial nerves","Follow the arterial axis to the hand"],
+ steps:["clavicle","scapula","humerus","shoulder-joint","rotator-cuff","supraspinatus","deltoid","biceps-brachii","triceps-brachii","radius","ulna","brachial-plexus","median-nerve","ulnar-nerve","radial-nerve","brachial-artery","carpal-tunnel"]},
+{id:"lower-limb",title:"Lower limb essentials",level:2,time:"~40 min",
+ desc:"Hip-to-foot tour: the weight-bearing skeleton, powerhouse muscles and the sciatic pathway.",
+ objectives:["Identify the pelvis, femur, tibia and foot bones","Explain knee mechanics and the menisci","Group the thigh into flexor/extensor/adductor compartments","Trace the femoral and sciatic nerve courses","Map the arterial axis to dorsalis pedis"],
+ steps:["pelvic-girdle","hip-joint","femur","gluteus-maximus","gluteus-medius","iliopsoas","quadriceps-femoris","hamstrings","knee-joint","meniscus","tibia","fibula","sciatic-nerve","femoral-nerve","femoral-artery","popliteal-artery","dorsalis-pedis","achilles-tendon"]},
+{id:"head-neck",title:"Head & neck tour",level:3,time:"~45 min",
+ desc:"Skull, brain, cranial nerves and the neck's packed triangles.",
+ objectives:["Orient the skull bones, sutures and foramina","Meet the 12 cranial nerves by territory","Follow the carotid and jugular columns","Locate the thyroid, pharynx and larynx"],
+ steps:["skull","cranial-sutures","mandible","tmj","brain","cerebellum","brainstem","trigeminal-nerve","facial-nerve","vagus-nerve","sternocleidomastoid","common-carotid","internal-jugular","thyroid","pharynx","larynx"]},
+{id:"neuro-intro",title:"Nervous system starter",level:1,time:"~25 min",
+ desc:"Brain lobes to spinal cord to peripheral nerves — the wiring diagram.",
+ objectives:["Divide the CNS from the PNS","Name the brain's major divisions","Explain what a plexus is","Distinguish motor and sensory roles"],
+ steps:["brain","cerebrum","cerebellum","brainstem","spinal-cord","meninges","csf","brachial-plexus","sciatic-nerve","autonomic-nervous-system"]},
+{id:"cardio",title:"Cardiovascular journey",level:2,time:"~35 min",
+ desc:"Chambers to coronaries, out the aorta and back through the great veins.",
+ objectives:["Walk blood through the four chambers and valves","Name the coronary arteries","Map the aorta's three branches and major offshoots","Distinguish the systemic and pulmonary circuits"],
+ steps:["heart","pericardium","heart-valves","coronary-arteries","aorta","aortic-arch","pulmonary-artery","pulmonary-veins","vena-cava","common-carotid","femoral-artery","great-saphenous-vein"]},
+{id:"breath-gut",title:"Breath & digestion",level:1,time:"~30 min",
+ desc:"Nose to alveoli, mouth to anus — the two great tubes.",
+ objectives:["Follow air from nose to alveolus","Follow food from mouth to rectum","Name the accessory organs (liver, pancreas, gallbladder)","Relate the diaphragm to both systems"],
+ steps:["nasal-cavity","pharynx","larynx","trachea","bronchi","lungs","diaphragm","esophagus","stomach","liver","gallbladder","pancreas","small-intestine","large-intestine","rectum"]},
+{id:"gu",title:"Genitourinary system",level:2,time:"~25 min",
+ desc:"Kidney to bladder, plus the reproductive organs in both sexes.",
+ objectives:["Trace urine: nephron → ureter → bladder → urethra","Compare male and female reproductive organs","Connect the urinary and reproductive tracts"],
+ steps:["kidney","nephron","ureter","bladder","urethra","prostate","testis","ovary","fallopian-tube","uterus","vagina"]},
+{id:"brachial-plexus",title:"Brachial plexus deep dive",level:3,time:"~30 min",
+ desc:"Roots → trunks → divisions → cords → branches: the anatomy students' rite of passage.",
+ objectives:["Recite the five terminal nerves","Match each cord to its named branches","Predict the deficit of each nerve lesion","Connect nerves to the muscles they supply"],
+ steps:["brachial-plexus","scalenes","musculocutaneous-nerve","axillary-nerve","median-nerve","ulnar-nerve","radial-nerve","supraspinatus","deltoid","biceps-brachii","carpal-tunnel"]},
+{id:"core-surface",title:"Core & surface landmarks",level:1,time:"~20 min",
+ desc:"The bumps you can palpate — bone landmarks plus the muscles between them.",
+ objectives:["Palpate the major bone landmarks by name","Connect landmarks to the muscles that attach","Use landmarks to find nerves and pulse points"],
+ steps:["sternum","sternal-angle","clavicle","acromion","iliac-crest","asis","pubic-symphysis","ischial-tuberosity","medial-malleolus","lateral-malleolus","radial-artery","trapezius","rectus-abdominis"]},
+{id:"exam-cram",title:"Exam cram — top 50",level:1,time:"~60 min",
+ desc:"The highest-yield fifty structures every anatomy exam loves.",
+ objectives:["Recognize the 50 most-tested structures on sight","Recall each structure's one-line clinical pearl"],
+ steps:["skull","vertebral-column","ribs","sternum","humerus","radius","ulna","femur","tibia","fibula","pelvic-girdle","scapula","clavicle","heart","lungs","liver","kidney","brain","spinal-cord","aorta","diaphragm","trapezius","deltoid","biceps-brachii","triceps-brachii","gluteus-maximus","quadriceps-femoris","hamstrings","gastrocnemius","median-nerve","ulnar-nerve","radial-nerve","sciatic-nerve","femoral-nerve","common-carotid","internal-jugular","subclavian-artery","femoral-artery","thyroid","stomach","small-intestine","large-intestine","pancreas","spleen","bladder","uterus","prostate","eye","ear"]}
+];
+
+/* Curated free video lessons — AnatomyZone, The Noted Anatomist, Instant
+   Anatomy etc. Field: t=title, u=URL, ch=channel, d=optional blurb.
+   "sys:<system>" keys apply to every entry of that system. */
+window.ATLAS_VIDEOS = {
+"sys:skeletal":[{t:"Bone structure & the skeleton — AnatomyZone",u:"https://www.youtube.com/anatomyzone",ch:"AnatomyZone",d:"3D skeletal tutorials"}],
+"sys:muscular":[{t:"Muscle anatomy tutorials — AnatomyZone",u:"https://www.youtube.com/anatomyzone",ch:"AnatomyZone"},{t:"Muscles of the body — The Noted Anatomist",u:"https://www.youtube.com/@TheNotedAnatomist",ch:"The Noted Anatomist"}],
+"sys:nervous":[{t:"Neuroanatomy series — The Noted Anatomist",u:"https://www.youtube.com/@TheNotedAnatomist",ch:"The Noted Anatomist"},{t:"Neuroscience — Ninja Nerd",u:"https://www.youtube.com/@NinjaNerdOfficial",ch:"Ninja Nerd"}],
+"sys:cardiovascular":[{t:"Heart & circulation — Ninja Nerd",u:"https://www.youtube.com/@NinjaNerdOfficial",ch:"Ninja Nerd"},{t:"Blood vessels — Instant Anatomy",u:"https://www.instantanatomy.net",ch:"Instant Anatomy"}],
+"sys:respiratory":[{t:"Respiratory anatomy — The Noted Anatomist",u:"https://www.youtube.com/@TheNotedAnatomist",ch:"The Noted Anatomist"}],
+"sys:digestive":[{t:"GI anatomy — Ninja Nerd",u:"https://www.youtube.com/@NinjaNerdOfficial",ch:"Ninja Nerd"}],
+"sys:urinary":[{t:"Kidney & urinary tract — Instant Anatomy",u:"https://www.instantanatomy.net",ch:"Instant Anatomy"}],
+"sys:reproductive":[{t:"Pelvis & perineum — The Noted Anatomist",u:"https://www.youtube.com/@TheNotedAnatomist",ch:"The Noted Anatomist"}],
+"sys:endocrine":[{t:"Endocrine glands — Ninja Nerd",u:"https://www.youtube.com/@NinjaNerdOfficial",ch:"Ninja Nerd"}],
+"sys:lymphatic":[{t:"Lymphatic system — Instant Anatomy",u:"https://www.instantanatomy.net",ch:"Instant Anatomy"}],
+"sys:integumentary":[{t:"Skin & fascia — Instant Anatomy",u:"https://www.instantanatomy.net",ch:"Instant Anatomy"}],
+"brachial-plexus":[{t:"Brachial plexus made easy — The Noted Anatomist",u:"https://www.youtube.com/@TheNotedAnatomist",ch:"The Noted Anatomist",d:"the famous diagram method"}],
+"heart":[{t:"Cardiac anatomy — AnatomyZone",u:"https://www.youtube.com/anatomyzone",ch:"AnatomyZone"}],
+"knee-joint":[{t:"Knee joint — The Noted Anatomist",u:"https://www.youtube.com/@TheNotedAnatomist",ch:"The Noted Anatomist"}],
+"shoulder-joint":[{t:"Shoulder joint & rotator cuff — The Noted Anatomist",u:"https://www.youtube.com/@TheNotedAnatomist",ch:"The Noted Anatomist"}],
+"sciatic-nerve":[{t:"Lumbosacral plexus & sciatic nerve — The Noted Anatomist",u:"https://www.youtube.com/@TheNotedAnatomist",ch:"The Noted Anatomist"}],
+"liver":[{t:"Liver segments & anatomy — Ninja Nerd",u:"https://www.youtube.com/@NinjaNerdOfficial",ch:"Ninja Nerd"}],
+"brain":[{t:"Brain overview — Ninja Nerd neuroanatomy",u:"https://www.youtube.com/@NinjaNerdOfficial",ch:"Ninja Nerd"}],
+"cranial-sutures":[{t:"Skull osteology — The Noted Anatomist",u:"https://www.youtube.com/@TheNotedAnatomist",ch:"The Noted Anatomist"}]
+};
+
+/* Cadaver dissection & specimen photos + anatomical sections from Wikimedia
+   Commons (Wellcome Collection, CC BY 4.0; others as marked). Merged into
+   IMAGES at boot — each shows as an extra plate with a kind badge. */
+window.ATLAS_EXTRAS = {
+"axillary-artery":[{url:"https://upload.wikimedia.org/wikipedia/commons/4/43/Dissection_of_axilla.jpg",title:"Dissection of the axilla — vessels and cords of the brachial plexus",license:"CC BY-SA 3.0",page:"https://commons.wikimedia.org/wiki/File:Dissection_of_axilla.jpg",kind:"dissection"}],
+"axillary-vein":[{url:"https://upload.wikimedia.org/wikipedia/commons/4/43/Dissection_of_axilla.jpg",title:"Dissection of the axilla — vessels and cords of the brachial plexus",license:"CC BY-SA 3.0",page:"https://commons.wikimedia.org/wiki/File:Dissection_of_axilla.jpg",kind:"dissection"}],
+"axillary-lymph-nodes":[{url:"https://upload.wikimedia.org/wikipedia/commons/4/43/Dissection_of_axilla.jpg",title:"Dissection of the axilla — the space drained by axillary nodes",license:"CC BY-SA 3.0",page:"https://commons.wikimedia.org/wiki/File:Dissection_of_axilla.jpg",kind:"dissection"}],
+"brachial-plexus":[{url:"https://upload.wikimedia.org/wikipedia/commons/4/43/Dissection_of_axilla.jpg",title:"Dissection of the axilla — cords and terminal nerves exposed",license:"CC BY-SA 3.0",page:"https://commons.wikimedia.org/wiki/File:Dissection_of_axilla.jpg",kind:"dissection"}],
+"spinal-cord":[{url:"https://upload.wikimedia.org/wikipedia/commons/a/af/Dissection_of_spinal_cord.jpg",title:"Dissection of the spinal cord within the vertebral canal",license:"CC BY-SA 3.0",page:"https://commons.wikimedia.org/wiki/File:Dissection_of_spinal_cord.jpg",kind:"dissection"}],
+"cervical-vertebrae":[{url:"https://upload.wikimedia.org/wikipedia/commons/8/86/Cervical_vertebra.jpg",title:"Cervical vertebra specimen — note the foramen transversarium",license:"CC BY-SA 4.0",page:"https://commons.wikimedia.org/wiki/File:Cervical_vertebra.jpg",kind:"dissection"}],
+"skeletal-muscle":[{url:"https://upload.wikimedia.org/wikipedia/commons/d/d4/Dissection_of_muscles_and_blood-vessels_Wellcome_V0008530.jpg",title:"Dissection of muscles and blood vessels",license:"CC BY 4.0 (Wellcome Collection)",page:"https://commons.wikimedia.org/wiki/File:Dissection_of_muscles_and_blood-vessels_Wellcome_V0008530.jpg",kind:"dissection"},
+  {url:"https://upload.wikimedia.org/wikipedia/commons/f/fc/Dissection_of_the_male_torso_showing_muscles_Wellcome_V0047802.jpg",title:"Dissection of the torso showing the muscle layers",license:"CC BY 4.0 (Wellcome Collection)",page:"https://commons.wikimedia.org/wiki/File:Dissection_of_the_male_torso_showing_muscles_Wellcome_V0047802.jpg",kind:"dissection"}],
+"liver":[{url:"https://upload.wikimedia.org/wikipedia/commons/e/ef/A_torso%2C_dissected_to_reveal_the_liver%2C_stomach_and_intestin_Wellcome_V0010425.jpg",title:"Torso dissected to reveal the liver, stomach and intestines",license:"CC BY 4.0 (Wellcome Collection)",page:"https://commons.wikimedia.org/wiki/File:A_torso,_dissected_to_reveal_the_liver,_stomach_and_intestin_Wellcome_V0010425.jpg",kind:"dissection"}],
+"stomach":[{url:"https://upload.wikimedia.org/wikipedia/commons/e/ef/A_torso%2C_dissected_to_reveal_the_liver%2C_stomach_and_intestin_Wellcome_V0010425.jpg",title:"Torso dissected to reveal the liver, stomach and intestines",license:"CC BY 4.0 (Wellcome Collection)",page:"https://commons.wikimedia.org/wiki/File:A_torso,_dissected_to_reveal_the_liver,_stomach_and_intestin_Wellcome_V0010425.jpg",kind:"dissection"}],
+"small-intestine":[{url:"https://upload.wikimedia.org/wikipedia/commons/e/ef/A_torso%2C_dissected_to_reveal_the_liver%2C_stomach_and_intestin_Wellcome_V0010425.jpg",title:"Torso dissected to reveal the liver, stomach and intestines",license:"CC BY 4.0 (Wellcome Collection)",page:"https://commons.wikimedia.org/wiki/File:A_torso,_dissected_to_reveal_the_liver,_stomach_and_intestin_Wellcome_V0010425.jpg",kind:"dissection"}],
+"female-reproductive":[{url:"https://upload.wikimedia.org/wikipedia/commons/3/39/A_Plain_section_of_a_woman_%2825_years_old%29_Wellcome_L0033919.jpg",title:"Frozen anatomical cross-section of a woman, 25 years old",license:"CC BY 4.0 (Wellcome Collection)",page:"https://commons.wikimedia.org/wiki/File:A_Plain_section_of_a_woman_(25_years_old)_Wellcome_L0033919.jpg",kind:"section"}],
+"uterus":[{url:"https://upload.wikimedia.org/wikipedia/commons/3/39/A_Plain_section_of_a_woman_%2825_years_old%29_Wellcome_L0033919.jpg",title:"Frozen anatomical cross-section showing the female pelvis",license:"CC BY 4.0 (Wellcome Collection)",page:"https://commons.wikimedia.org/wiki/File:A_Plain_section_of_a_woman_(25_years_old)_Wellcome_L0033919.jpg",kind:"section"}]
+};
+
 /* Authored teaching notes — richer lesson detail for the most-studied
    structures. Fields: where (location narrative), look (what to find),
    rel (how named neighbours relate), supply (blood/nerve supply),
@@ -18219,6 +18493,14 @@ window.ATLAS_TEACH = {
 "use strict";
 const DATA = window.ATLAS_DATA;
 const IMAGES = window.ATLAS_IMAGES || {};
+/* dissection/specimen photos & cross-sections — merged into IMAGES at boot so
+   they appear as extra plates with a "dissection"/"section" badge */
+if (window.ATLAS_EXTRAS) for (const k in ATLAS_EXTRAS) {
+  const e = IMAGES[k] = IMAGES[k] || { extras: [] };
+  (e.extras = e.extras || []).push(...ATLAS_EXTRAS[k]);
+  if (!e.url && e.extras.length){ e.url = e.extras[0].url; e.thumb = e.extras[0].thumb||e.extras[0].url;
+    e.title = e.extras[0].title; e.license = e.extras[0].license; e.page = e.extras[0].page; e.kind = e.extras[0].kind; }
+}
 const MODELS = window.ATLAS_MODELS || {};
 const META = window.ATLAS_META;
 const $ = s => document.querySelector(s);
@@ -18249,6 +18531,9 @@ const _sayVoice = () => { try{ const vs=speechSynthesis.getVoices();
 const say = text => { try{ speechSynthesis.cancel();
     const u=new SpeechSynthesisUtterance(text); u.rate=0.92; const v=_sayVoice(); if(v)u.voice=v;
     speechSynthesis.speak(u); }catch(e){} };
+/* delegated 🔊 buttons anywhere in the app */
+document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-say]");
+  if(b){ e.preventDefault(); e.stopPropagation(); say(b.dataset.say); } });
 
 const byId = {};
 DATA.forEach(d => byId[d.id] = d);
@@ -18274,6 +18559,10 @@ if (window.ATLAS_LM) for (const pid in window.ATLAS_LM) {
   });
 }
 const SYSTEMS = META.systems, REGIONS = META.regions;
+const TEACH = window.ATLAS_TEACH || {};
+/* merge satellite data maps into records */
+if (window.ATLAS_LATIN) for (const id in ATLAS_LATIN) { const d = byId[id]; if (d && !d.latin) d.latin = ATLAS_LATIN[id]; }
+if (window.ATLAS_OI) for (const id in ATLAS_OI) { const d = byId[id]; if (d && !d.oi) d.oi = ATLAS_OI[id]; }
 const sysCount = {}, regCount = {};
 DATA.forEach(d => { sysCount[d.system]=(sysCount[d.system]||0)+1; regCount[d.region]=(regCount[d.region]||0)+1; });
 
@@ -18301,7 +18590,9 @@ function buildNav(){
   <a class="nav-link" data-href="#/map"><span class="ic">🗺️</span>Body map</a>
   <a class="nav-link" data-href="#/3d"><span class="ic">🧊</span>3D explorer</a>
   <a class="nav-link" data-href="#/learn"><span class="ic">🎓</span>Learn</a>
+  <a class="nav-link" data-href="#/paths"><span class="ic">🛤</span>Guided paths</a>
   <a class="nav-link" data-href="#/quiz"><span class="ic">🎯</span>Quiz me</a>
+  <a class="nav-link" data-href="#/quiz-builder"><span class="ic">⚙</span>Custom quiz</a>
   <a class="nav-link" data-href="#/gallery"><span class="ic">🖼️</span>Plates gallery</a></div>`;
   h += `<div class="nav-sec"><h4>Body systems</h4>`;
   META.systemOrder.forEach(s=>{ if(sysCount[s]) h += `<a class="nav-link" data-href="#/system/${s}"><span class="ic">${SYSTEMS[s].icon}</span>${SYSTEMS[s].name}<span class="ct">${sysCount[s]}</span></a>`; });
@@ -18422,7 +18713,7 @@ function vDetail(id){
   crumbs([{t:"Home",href:"#/"},{t:c.name,href:"#/system/"+d.system},{t:d.name}]);
   const im = imgOf(id);
   const allImgs = im ? [im, ...(im.extras||[])] : [];
-  const plateCap = x => `${esc(x.title||"Anatomical plate")} · ${esc(x.license||"")} · via <a href="${esc(x.page||"#")}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
+  const plateCap = x => `${x.kind?`<b class="kind kind-${x.kind}">${x.kind}</b> `:""}${esc(x.title||"Anatomical plate")} · ${esc(x.license||"")} · via <a href="${esc(x.page||"#")}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
   const plate = im ? `<div class="plate"><div class="frame"><img id="plateimg" src="${esc(im.url)}" alt="${esc(d.name)}" title="Click to enlarge"></div>
     ${allImgs.length>1?`<div class="thumbs">${allImgs.map((x,i)=>`<img class="th${i===0?" on":""}" src="${esc(x.thumb||x.url)}" data-i="${i}" alt="plate ${i+1}" loading="lazy">`).join("")}</div>`:""}
     <div class="cap" id="platecap">${plateCap(im)}</div></div>` : "";
@@ -18433,11 +18724,18 @@ function vDetail(id){
   const prev = sameSys[(idx-1+sameSys.length)%sameSys.length], next = sameSys[(idx+1)%sameSys.length];
   const rel = (d.related||[]).filter(r=>byId[r]).map(r=>{ const x=byId[r]; return `<a class="rel" href="#/part/${r}"><span class="dot" style="--c:${SYSTEMS[x.system].color}"></span>${x.name}</a>`; }).join("");
   const inRegion = DATA.filter(x=>x.region===d.region && x.id!==d.id).slice(0,8).map(x=>`<a class="rel" href="#/part/${x.id}"><span class="dot" style="--c:${SYSTEMS[x.system].color}"></span>${x.name}</a>`).join("");
-  const t = (window.ATLAS_TEACH||{})[id] || null;
+  const t = TEACH[id] || null;
+  const vids = (window.ATLAS_VIDEOS||{})[id] || (window.ATLAS_VIDEOS||{})["sys:"+d.system] || [];
+  const oiTable = d.oi ? `<div class="section"><h2>Muscle facts</h2><table class="oitable">
+    ${d.oi.o?`<tr><th>Origin</th><td>${esc(d.oi.o)}</td></tr>`:""}
+    ${d.oi.i?`<tr><th>Insertion</th><td>${esc(d.oi.i)}</td></tr>`:""}
+    ${d.oi.n?`<tr><th>Innervation</th><td>${esc(d.oi.n)}</td></tr>`:""}
+    ${d.oi.a?`<tr><th>Action</th><td>${esc(d.oi.a)}</td></tr>`:""}</table>
+    ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}?att=1" style="margin-top:8px">🎯 See attachments in 3D</a>`:""}</div>` : "";
   view.innerHTML = `
   <div class="detail-head">
     <div class="dh-main">
-      <h1>${d.name}</h1>${d.aka?`<div class="aka">Also: ${esc(d.aka)}</div>`:""}
+      <h1>${d.name} <button class="say" data-say="${esc(d.name)}" title="Hear pronunciation">🔊</button></h1>${d.latin?`<div class="aka latin">${esc(d.latin)}</div>`:""}${d.aka?`<div class="aka">Also: ${esc(d.aka)}</div>`:""}
       <div class="badges"><a class="badge sys" style="--badge-c:${c.color}" href="#/system/${d.system}">${c.icon} ${c.name}</a>
       <a class="badge" href="#/region/${d.region}">📍 ${REGIONS[d.region].name}</a>
       ${d.of?`<a class="badge" href="#/part/${d.ofRec||d.of}">🦴 Landmark of: ${esc(byId[d.ofRec||d.of] ? byId[d.ofRec||d.of].name : d.of)}</a>`:""}
@@ -18449,6 +18747,7 @@ function vDetail(id){
   ${d.fn?`<div class="section"><h2>Function</h2><p>${esc(d.fn)}</p></div>`:""}
   ${model3d}
   <div class="section"><h2>Location</h2><p>Located in <b>${REGIONS[d.region].name}</b>${d.aka?` — also known as ${esc(d.aka)}`:""} — <a href="#/region/${d.region}">browse this region →</a></p></div>
+  ${oiTable}
   ${d.att?`<div class="section"><h2>Attachments</h2><p>${esc(d.att)}</p></div>`:""}
   ${d.art?`<div class="section"><h2>Articulations</h2><p>${esc(d.art)}</p></div>`:""}
   ${d.pal?`<div class="section"><h2>Surface anatomy</h2><p>${esc(d.pal)}</p></div>`:""}
@@ -18462,6 +18761,7 @@ function vDetail(id){
   ${t.simple?`<div class="section"><h2>In plain words</h2><p>${esc(t.simple)}</p></div>`:""}
   `:""}
   ${d.clinical?`<div class="section"><h2>Clinical relevance</h2><p>${esc(d.clinical)}</p></div>`:""}
+  ${vids.length?`<div class="section"><h2>Watch</h2><ul class="tlist">${vids.map(v=>`<li>▶ <a href="${esc(v.u)}" target="_blank" rel="noopener"><b>${esc(v.t)}</b></a> — ${esc(v.ch)}${v.d?` · ${esc(v.d)}`:""}</li>`).join("")}</ul></div>`:""}
   ${rel?`<div class="section"><h2>Related structures</h2><div class="rel-row">${rel}</div></div>`:""}
   ${LM_BY[id]?`<div class="section"><h2>Landmarks (${LM_BY[id].length})</h2><p class="hint" style="margin:0 0 10px">Named surface features of the ${esc(d.name)} — each opens its own entry, and all are pinned in the 3D view when you select this bone.</p><div class="lm-list">${LM_BY[id].map(x=>`<a class="lm-item" href="#/part/${x.id}"><b>📍 ${esc(x.name)}</b><span>${esc(x.summary)}</span></a>`).join("")}</div></div>`:""}
   <div class="section"><h2>Also in ${REGIONS[d.region].name}</h2><div class="rel-row">${inRegion}</div></div>
@@ -18671,6 +18971,7 @@ function buildScene(gltf, st){
       if(peelN) q.set("peel",peelN);
       if(expVal) q.set("exp",expVal);
       if(clipOn) q.set("clip",clipAxis+":"+Math.round(clipPos*100));
+      if(traceFx && traceFx.tr) q.set("trace",traceFx.tr.id);
       const qs = q.toString();
       history.replaceState(null,"","#/3d/"+(selected||"")+(qs?"?"+qs:""));
     }catch(e){} }, 200); };
@@ -19081,6 +19382,7 @@ function buildScene(gltf, st){
     const rg = d ? d.region : pd ? pd.region : null;
     const crumb = `<div class="b3d-crumb"><a href="#" data-sys="${s}">${c.icon} ${esc(c.name)}</a><span class="csep">›</span>${rg && REGIONS[rg] ? `<a href="#/region/${rg}">${esc(REGIONS[rg].name)}</a><span class="csep">›</span>` : (md ? `<span>${esc(md.regName)} region</span><span class="csep">›</span>` : "")}<b>${esc(nm)}</b></div>`;
     setInfo(`${crumb}<h3>${esc(nm)}</h3>
+      ${d&&d.latin?`<div class="b3d-aka latin">${esc(d.latin)}</div>`:""}
       ${d&&d.aka?`<div class="b3d-aka">${esc(d.aka)}</div>`:""}
       <div class="badges" style="margin:6px 0 8px"><span class="badge sys" style="--badge-c:${c.color}">${c.icon} ${c.name}</span>${d?`<span class="badge">📍 ${REGIONS[d.region].name}</span>`:md?`<span class="badge">📍 ${md.regName} region</span><span class="badge">Unnamed detail</span>`:`<span class="badge">🧩 Z-Anatomy structure</span>`}</div>
       <div class="b3d-actions">
@@ -19091,20 +19393,23 @@ function buildScene(gltf, st){
         <button data-a="fadeo" title="Ghost everything around it"><i>◐</i><b>${(focusSet&&focusSet.has(id))?"Unfade others":"Fade others"}</b></button>
         <button data-a="say" title="Pronounce it"><i>🔊</i><b>Say</b></button>
         <button data-a="pin"><i>📌</i><b>${pinHas(id)?"Pinned":"Pin"}</b></button>
+        ${d&&d.oi?`<button data-a="att" title="Highlight origin & insertion markers"><i>🎯</i><b>Attachments</b></button>`:""}
+        ${ATLAS_TRACES&&ATLAS_TRACES.some(t=>t.chain.includes(id))?`<button data-a="trace" title="Trace its pathway"><i>🛤</i><b>Trace</b></button>`:""}
         ${hidden.size||faded.size||isolated!==null||focusSet?`<button data-a="showall"><i>↺</i><b>Show all</b></button>`:""}
       </div>
       ${lmHtml}${partsHtml}
       ${im?`<img class="b3d-plate" src="${esc(im.thumb||im.url)}" alt="" loading="lazy">`:""}
-      ${d?`<p class="b3d-sum">${esc(d.summary)}</p>${sec("Structure",d.structure)}${sec("Function",d.fn)}${sec("Clinical relevance",d.clinical)}${rel?`<div class="b3d-rel"><b>Related structures</b><div class="b3d-relch">${rel}</div></div>`:""}<a class="b3d-open" href="#/part/${id}">Open full entry →</a>`
+      ${d?`<p class="b3d-sum">${esc(d.summary)}</p>${d.oi?`<div class="b3d-sec"><b>Muscle facts</b><table class="oitable small">
+        ${d.oi.o?`<tr><th>Origin</th><td>${esc(d.oi.o)}</td></tr>`:""}${d.oi.i?`<tr><th>Insertion</th><td>${esc(d.oi.i)}</td></tr>`:""}${d.oi.n?`<tr><th>Innervation</th><td>${esc(d.oi.n)}</td></tr>`:""}${d.oi.a?`<tr><th>Action</th><td>${esc(d.oi.a)}</td></tr>`:""}</table></div>`:""}${sec("Structure",d.structure)}${sec("Function",d.fn)}${sec("Clinical relevance",d.clinical)}${rel?`<div class="b3d-rel"><b>Related structures</b><div class="b3d-relch">${rel}</div></div>`:""}<a class="b3d-open" href="#/part/${id}">Open full entry →</a>`
         : pd?`<p class="b3d-sum">Part of the <b>${esc(pd.name)}</b>.</p><p>${esc(pd.summary)}</p><a class="b3d-open" href="#/part/${parent}">Open ${esc(pd.name)} entry →</a>`
         : md?`<p class="b3d-sum">${esc(md.desc)}</p>${sec("Detail note",md.note)}`
         : `<p class="hint">Sub-structure from the original Z-Anatomy model (CC BY-SA 4.0) — no separate atlas article yet.</p>`}`);
     info.querySelectorAll("[data-a]").forEach(b=>b.addEventListener("click",()=>{
       const a=b.dataset.a;
-      if(a==="say"){ try{ speechSynthesis.cancel();
-          const u=new SpeechSynthesisUtterance(nm); u.rate=0.95; speechSynthesis.speak(u); }catch(e){}
-        return; }
+      if(a==="say"){ say(nm); return; }
       if(a==="pin"){ pinToggle(id, pick.pid===id ? pick.pt : null); showInfo(id); return; }
+      if(a==="att"){ attShow(id); return; }
+      if(a==="trace"){ tracePick(id); return; }
       pushHist();
       if(a==="hide"){ hidden.add(id); applyVis(); select(null); }
       else if(a==="hideo"){ isolated=id; focusSet=null; applyVis(); showInfo(id); }
@@ -19148,6 +19453,7 @@ function buildScene(gltf, st){
     camera.updateProjectionMatrix(); poke(); };
   const select = id => {
     if(selected) each(selected, m=>glow(m,0));
+    if(id!==selected) fxClear();
     selected = id;
     if(id){ each(id, m=>glow(m,selHex(id))); showInfo(id); }
     else setInfo(defInfo);
@@ -19163,7 +19469,7 @@ function buildScene(gltf, st){
     else if(hidden.size||faded.size) hbar.innerHTML = `<span>${hidden.size?`${hidden.size} hidden`:""}${hidden.size&&faded.size?" · ":""}${faded.size?`${faded.size} faded`:""}</span><button id="b3dall">Show all</button>`;
     else hbar.innerHTML = "";
     const b = hbar.querySelector("#b3dall");
-    if(b) b.addEventListener("click",()=>{ pushHist(); hidden.clear(); faded.clear(); isolated=null; focusSet=null; applyVis(); syncHiddenBar(); });
+    if(b) b.addEventListener("click",()=>{ pushHist(); hidden.clear(); faded.clear(); isolated=null; focusSet=null; fxClear(); traceStop(); applyVis(); syncHiddenBar(); });
     queueUrl();
   };
 
@@ -19804,7 +20110,7 @@ function buildScene(gltf, st){
     skinV.textContent = +skinIn.value<100 ? skinIn.value+"%" : ""; applySkinOp(); });
   /* study aids: Z-Anatomy's annotation layers (insertions, regions, lines) */
   const aidb = document.createElement("button");
-  aidb.className = "fchip on"; aidb.textContent = "🗺 study aids"; aidb.style.setProperty("--fc","#8d99a6");
+  aidb.id = "b3daids"; aidb.className = "fchip"; aidb.textContent = "🗺 study aids"; aidb.style.setProperty("--fc","#8d99a6");
   aidb.addEventListener("click",()=>{ aidsOn = aidb.classList.toggle("on"); applyVis(); });
   f.appendChild(aidb);
 
@@ -20014,7 +20320,15 @@ function buildScene(gltf, st){
     const tt=$("#lestest"); if(tt) tt.addEventListener("click",()=>quizStart(lesson.id));
     const dn=$("#lesdone"); if(dn) dn.addEventListener("click",()=>{
       markLesson(lesson.id); addXP(30,"lesson complete"); checkBadges();
-      const nxt = lessonsOf(lesson.sys).find(x=>!lessonDone(x.id));
+      /* next structure: path steps run in order; system lessons take next undone */
+      let nxt = null;
+      if(lesson.sys && lesson.sys.startsWith("path:")){
+        const p = (window.ATLAS_PATHS||[]).find(x=>x.id===lesson.sys.slice(5));
+        if(p){ const i = p.steps.indexOf(lesson.id);
+          const nid = i>=0 ? p.steps[i+1] : p.steps.find(s=>!lessonDone(s));
+          nxt = nid && byId[nid] ? {id:nid, name:byId[nid].name} : null;
+          if(!nxt){ giveBadge("path-1"); if((window.ATLAS_PATHS||[]).every(x=>x.steps.every(s=>lessonDone(s)))) giveBadge("path-all"); } }
+      } else nxt = lessonsOf(lesson.sys).find(x=>!lessonDone(x.id));
       $("#lesbody").innerHTML = `🎉 <b>${esc(nameOf(lesson.id))}</b> — lesson complete.${nxt?` Next up: <b>${esc(nxt.name)}</b>.`:" You've finished this path!"}`;
       $("#lesnav").innerHTML = (nxt?`<button class="pri" id="lesgo2">Next lesson →</button>`:"") + `<button class="dim" id="lesout">Exit</button>`;
       if(nxt) $("#lesgo2").addEventListener("click",()=>{ location.hash = `/3d/${nxt.id}?lesson=${lesson.sys}`; });
@@ -20046,9 +20360,102 @@ function buildScene(gltf, st){
       life.push({m, c:m.geometry.boundingSphere.center.clone(), p0:m.position.clone(), amp, freq}); } };
   addPulse("heart", 0.04, 1.1); addPulse("lungs", 0.018, 0.2);
 
+  /* ---- feature pack: muscle attachments, pull arrows, motion, pathways ---- */
+  const GP0B = window.ATLAS_GLB_PARENT || {};
+  /* marker children of a muscle: mapped back to it via ATLAS_GLB_PARENT */
+  const attMarks = id => Object.keys(meshes).filter(k => k !== id && GP0B[k] === id);
+  const marksCenter = ids => { const b = new THREE.Box3(); let n = 0;
+    ids.forEach(k => each(k, m => { m.geometry.computeBoundingSphere(); m.updateWorldMatrix(true,false);
+      _sph.copy(m.geometry.boundingSphere).applyMatrix4(m.matrixWorld); b.expandByPoint(_sph.center); n++; }));
+    return n ? b.getCenter(new THREE.Vector3()) : null; };
+  const mkArrow = (from, to, color) => {
+    const g = new THREE.Group(), dir = to.clone().sub(from), len = dir.length();
+    if(len < 1e-4) return g;
+    const mat = new THREE.MeshBasicMaterial({ color, transparent:true, opacity:.95, depthTest:false });
+    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(.006,.006,len*.82,8), mat);
+    const head = new THREE.Mesh(new THREE.ConeGeometry(.02,len*.18,10), mat);
+    shaft.position.y = len*.41; head.position.y = len*.91;
+    g.add(shaft, head); g.renderOrder = 98;
+    g.position.copy(from);
+    g.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), dir.normalize());
+    return g; };
+  let attGlow = null, pullArrow = null, traceFx = null;
+  const fxClear = () => {
+    if(attGlow){ attGlow.forEach(m=>glow(m,0)); attGlow=null; }
+    if(pullArrow){ scene.remove(pullArrow); pullArrow=null; } };
+  const attShow = id => {
+    const marks = attMarks(id);
+    attClear();
+    if(!aidsOn){ aidsOn = true; const b=$("#b3daids"); if(b) b.classList.add("on"); applyVis(); }
+    pushHist(); hidden.delete(id);
+    focusSet = new Set([id, ...marks]); isolated = null; applyVis();
+    attGlow = [];
+    marks.forEach(k=>each(k,m=>{ glow(m,0xffb300); attGlow.push(m); }));
+    /* pull arrow: origin-markers → insertion-markers (fallback = muscle center → marks) */
+    const ins = marks.filter(k=>/insertion|ending/i.test(k));
+    const org = marks.filter(k=>/origin/i.test(k));
+    const pc = partCenter(id);
+    const from = marksCenter(org.length?org:[]) || (pc&&pc.c) , to = marksCenter(ins.length?ins:marks) || (pc&&pc.c);
+    if(from && to){ pullArrow = mkArrow(from, to, 0xffd60a); scene.add(pullArrow); }
+    focusOn(id); syncHiddenBar(); };
+  const attClear = () => fxClear();
+  /* nerve / vessel pathway tracing */
+  const ATLAS_TRACES = window.ATLAS_TRACES || [];
+  const traceStop = () => { if(!traceFx) return;
+    if(traceFx.tube) scene.remove(traceFx.tube);
+    if(traceFx.ball) scene.remove(traceFx.ball);
+    if(traceFx.bar) traceFx.bar.remove();
+    traceFx = null; };
+  const traceStart = tid => {
+    const tr = ATLAS_TRACES.find(t=>t.id===tid); if(!tr) return;
+    fxClear(); traceStop();
+    const pts = [];
+    tr.chain.forEach(pid=>{ const p=partCenter(pid); if(p) pts.push({pid, c:p.c.clone(), r:p.r}); });
+    if(tr.polyline) tr.polyline.forEach(pt=>{
+      if(typeof pt === "string"){ const m = pt.match(/^([a-z0-9:-]+):([-\d.e]+),([-\d.e]+),([-\d.e]+)$/i); if(!m) return;
+        const p = partCenter(m[1]); if(!p) return;
+        pts.push({pid:null, c:p.c.clone().add(new THREE.Vector3(+m[2],+m[3],+m[4]).multiplyScalar(p.r)), r:.06});
+      } else pts.push({pid:null, c:new THREE.Vector3(...pt), r:.03}); });
+    if(pts.length<2) return;
+    const chainIds = tr.chain.filter(pid=>meshes[pid]);
+    pushHist(); hidden.clear(); chainIds.forEach(pid=>hidden.delete(pid));
+    isolated = null; focusSet = new Set(chainIds); applyVis();
+    const curve = new THREE.CatmullRomCurve3(pts.map(p=>p.c));
+    const col = tr.kind==="nerve"?0xffd166 : tr.kind==="vein"?0x6ab0ff : 0xff5f56;
+    const tube = new THREE.Mesh(new THREE.TubeGeometry(curve, Math.max(24,pts.length*6), .007, 6, false),
+      new THREE.MeshBasicMaterial({ color:col, transparent:true, opacity:.8, depthTest:false }));
+    tube.renderOrder = 97; scene.add(tube);
+    const ball = new THREE.Mesh(new THREE.SphereGeometry(.014,12,12),
+      new THREE.MeshBasicMaterial({ color:0xffffff, depthTest:false }));
+    ball.renderOrder = 99; scene.add(ball);
+    traceFx = { on:true, tr, pts, curve, tube, ball, t:0, i:0 };
+    const bar = document.createElement("div"); bar.className = "b3d-movebar trace";
+    bar.innerHTML = `<b>🛤 ${esc(tr.name)}</b><span class="hint" id="trstep"></span>
+      <button data-tr="prev">‹</button><button data-tr="next">›</button><button data-tr="stop">✕</button>`;
+    stage.appendChild(bar); traceFx.bar = bar;
+    const step = i => { traceFx.i = Math.max(0, Math.min(pts.length-1, i));
+      const p = pts[traceFx.i];
+      bar.querySelector("#trstep").textContent = p.pid ? nameOf(p.pid) : `point ${traceFx.i+1}/${pts.length}`;
+      flyTo(p.c, Math.max(p.r, .1)); };
+    bar.querySelector("[data-tr=prev]").addEventListener("click",()=>step(traceFx.i-1));
+    bar.querySelector("[data-tr=next]").addEventListener("click",()=>step(traceFx.i+1));
+    bar.querySelector("[data-tr=stop]").addEventListener("click",()=>{ traceStop(); focusSet=null; applyVis(); syncHiddenBar(); });
+    step(0);
+  };
+  const tracePick = id => { const tr = ATLAS_TRACES.find(t=>t.chain.includes(id));
+    if(tr) traceStart(tr.id); };
+  /* pathways list in the layers drawer */
+  { const tEl = $("#b3dtraces"), tSec = $("#dr-traces");
+    if(tEl && ATLAS_TRACES.length){ tSec.style.display = "";
+      tEl.innerHTML = ATLAS_TRACES.map(t=>`<button class="pchip" data-tr="${t.id}" title="${esc(t.name)}">${t.kind==="nerve"?"🟡":t.kind==="vein"?"🔵":"🔴"} ${esc(t.name)}</button>`).join("");
+      tEl.querySelectorAll("[data-tr]").forEach(b=>b.addEventListener("click",()=>traceStart(b.dataset.tr))); } }
+
   paintPins();
   select(selId && meshes[selId] ? selId : null);
   if(selId && meshes[selId]) focusOn(selId);
+  /* feature-pack deep links */
+  if(st.att && selId) attShow(selId);
+  if(st.trace) traceStart(st.trace);
   if(st.lesson && selId) lessonStart(selId, st.lesson);
   /* landmark deep link: #/3d/<bone>?lm=<landmark-id> — reveal the layer, select
      the parent bone, fly to it and pulse that landmark's pill */
@@ -20069,9 +20476,13 @@ function buildScene(gltf, st){
       for(const L of life){ const s = 1 + L.amp*Math.sin(t*6.283*L.freq);
         L.m.scale.setScalar(s);
         L.m.position.copy(L.p0).addScaledVector(L.m.userData.expD||_zeroV,explodeAmt).addScaledVector(L.c, 1-s); } }
+    if(traceFx){ traceFx.t += 0.005;
+      const u = traceFx.t % 1;
+      traceFx.ball.position.copy(traceFx.curve.getPointAt(u));
+      const s = 1 + 0.4*Math.sin(performance.now()/90); traceFx.ball.scale.setScalar(s); }
     const moved = controls.update();
     const lifeVis = life.some(L=>effVis(L.m));
-    const animated = !!fly || controls.autoRotate || lifeVis || quiz.on;
+    const animated = !!fly || controls.autoRotate || lifeVis || quiz.on || traceFx;
     if(animated||moved||dirty){ updLabels(); updLms(); updPins(); }
     if(animated || moved || dirty){
       dirty = false;
@@ -20100,7 +20511,9 @@ function v3D(sel){
     clip: q.get("clip") || null,
     lesson: q.get("lesson") || null,
     lm: q.get("lm") || null,
-    quiz: q.get("quiz") || null };
+    quiz: q.get("quiz") || null,
+    att: q.get("att") || null,
+    trace: q.get("trace") || null };
   const ids = Object.keys(MODELS).filter(id=>byId[id]);
   document.body.classList.add("b3d-open");
   view.innerHTML = `<div class="b3d-app loading" id="b3dapp">
@@ -20177,6 +20590,7 @@ function v3D(sel){
           <button class="fchip" id="b3dreshid" style="display:none;margin-top:8px">↺ Show hidden</button></div>
         <div class="dr-sec"><h4>Colors</h4><button class="fchip on b3d-cmode" id="b3dcmode" data-m="sys">🎨 colors: by system</button>
           <div class="b3d-peel" style="margin-top:10px"><span style="min-width:88px;font-size:11.5px">🧴 Skin opacity</span><input id="b3dskin" type="range" min="15" max="100" value="100" aria-label="Skin opacity"><em id="b3dskinv"></em></div></div>
+        <div class="dr-sec" id="dr-traces" style="display:none"><h4>🛤 Pathways</h4><div class="b3d-presets" id="b3dtraces"></div></div>
         <div class="dr-sec"><h4>📌 Pinned structures</h4><div class="b3d-presets b3d-pins" id="b3dpins"></div></div>
         <div class="dr-sec"><h4>Structure index</h4><div class="b3d-idx" id="b3didx"></div></div>
         <div class="dr-sec" id="b3dhelp"><h4>How to use</h4>
@@ -20220,64 +20634,141 @@ function vGallery(){
   crumbs([{t:"Home",href:"#/"},{t:"Plates gallery"}]);
   const items = DATA.filter(d=>IMAGES[d.id]);
   view.innerHTML = `<div class="list-head"><h1>🖼️ Anatomical plates</h1><p>${items.length} labeled illustrations from Wikimedia Commons — public-domain Gray's Anatomy and open-license sources. Click to enlarge.</p></div>
-  <div class="gallery">${items.map(d=>{const im=IMAGES[d.id];return `<div class="gitem" data-id="${d.id}"><img src="${esc(im.thumb||im.url)}" loading="lazy"><div class="c">${d.name}</div></div>`}).join("")}</div>`;
+  <div class="gallery">${items.map(d=>{const im=IMAGES[d.id];return `<div class="gitem" data-id="${d.id}"><img src="${esc(im.thumb||im.url)}" loading="lazy"><div class="c">${im.kind?`<b class="kind kind-${im.kind}">${im.kind}</b> `:""}${d.name}</div></div>`}).join("")}</div>`;
   view.querySelectorAll(".gitem").forEach(g=>g.addEventListener("click",()=>lightbox(IMAGES[g.dataset.id])));
 }
 
 /* ---------- quiz ---------- */
 let quiz = {score:0, asked:0, cur:null};
-function vQuiz(sys){
-  const isDue = sys==="due";
+const qAccept = (ans, d) => fuzzyMatch(ans, [d.name, d.aka||"", d.latin||""]);
+const QMODES = [["choices","Multiple choice"],["type","Type it"],["cases","Clinical cases"],["facts","Muscle facts"],["mix","Mix"]];
+function parseQC(s){ const c={sys:[],regs:[],mode:"mix",n:0,t:0,plate:0};
+  s.slice(2).split("&").forEach(kv=>{ const [k,v]=kv.split("="); const val=decodeURIComponent(v||"");
+    if(k==="sys") c.sys=val.split(",").filter(x=>SYSTEMS[x]);
+    else if(k==="r") c.regs=val.split(",").filter(x=>REGIONS[x]);
+    else if(k==="mode"&&QMODES.some(m=>m[0]===val)) c.mode=val;
+    else if(k==="n") c.n=+val||0; else if(k==="t") c.t=Math.min(600,+val||0); else if(k==="plate") c.plate=val==="1"; });
+  return c; }
+function cfgToHash(c){ const p=[];
+  if(c.sys.length)p.push("sys="+c.sys.join(",")); if(c.regs.length)p.push("r="+c.regs.join(","));
+  if(c.mode)p.push("mode="+c.mode); if(c.n)p.push("n="+c.n); if(c.t)p.push("t="+c.t); if(c.plate)p.push("plate=1");
+  return "#/quiz/c:"+p.join("&"); }
+function quizPool(c){
+  let pool = DATA.filter(d=>d.summary);
+  if(c.mode==="cases") pool = pool.filter(d=>TEACH[d.id] && TEACH[d.id].case);
+  else if(c.mode==="facts") pool = pool.filter(d=>d.oi);
+  if(c.sys.length) pool = pool.filter(d=>c.sys.includes(d.system));
+  if(c.regs.length) pool = pool.filter(d=>c.regs.includes(d.region));
+  if(c.plate) pool = pool.filter(d=>imgOf(d.id));
+  return pool;
+}
+function vQuiz(arg){
+  const isDue = arg==="due";
   const dueIds = isDue ? srDue() : null;
   if(isDue && !dueIds.length){ location.hash = "/learn/review"; return; }
-  const pool = DATA.filter(d=>d.summary && (isDue || !sys || d.system===sys));
+  const isCfg = arg && arg.startsWith("c:");
+  let cfg = isCfg ? parseQC(arg)
+    : {sys: SYSTEMS[arg]?[arg]:[], regs:[], mode: localStorage.getItem("atlas-q2mode")||"choices", n:0, t:0, plate:0};
+  if(isDue) cfg.mode = "choices";
+  let pool = quizPool(cfg);
+  if(!pool.length) pool = DATA.filter(d=>d.summary);
   crumbs([{t:"Home",href:"#/"},...(isDue?[{t:"Learn",href:"#/learn"},{t:"Review"}]:[{t:"Quiz"}])]);
+  const modeOpts = QMODES.map(m=>`<option value="${m[0]}" ${m[0]===cfg.mode?"selected":""}>${m[1]}</option>`).join("");
   view.innerHTML = `<div class="quiz-box">
     <div class="quiz-score">
       ${isDue?`<span class="badge">🧠 Review · left <b id="qr">${Math.min(20,dueIds.length)}</b></span>`:""}
       <span class="badge">Score: <b id="qs">0</b></span>
       <span class="badge">Answered: <b id="qa">0</b></span>
       <span class="badge">Streak: <b id="qk">0</b></span>
-      <a class="badge" href="#/3d?quiz=mix" title="Quiz yourself on the 3D model — tap it or name it">🧊 Spot-test in 3D</a>
-      ${isDue?"":`<select id="qsys" style="background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:4px 8px">
-        <option value="">All systems</option>${META.systemOrder.map(s=>`<option value="${s}" ${s===sys?"selected":""}>${SYSTEMS[s].name}</option>`).join("")}
+      ${cfg.t?`<span class="badge">⏱ <b id="qtimer">${Math.floor(cfg.t/60)}:${String(cfg.t%60).padStart(2,"0")}</b></span>`:""}
+      <select id="qmode" class="qsel" title="Question style">${modeOpts}</select>
+      ${isDue?"":`<select id="qsys" class="qsel" title="Filter by system">
+        <option value="">All systems</option>${META.systemOrder.map(s=>`<option value="${s}" ${cfg.sys.includes(s)?"selected":""}>${SYSTEMS[s].name}</option>`).join("")}
       </select>`}
+      <a class="badge" href="#/quiz-builder" title="Build a custom quiz">⚙ Custom</a>
+      <a class="badge" href="#/3d?quiz=mix" title="Quiz yourself on the 3D model — tap it or name it">🧊 Spot-test in 3D</a>
     </div>
     <div class="qcard" id="qcard"></div></div>`;
   const qsel = $("#qsys"); if(qsel) qsel.addEventListener("change",e=>{ location.hash = "/quiz"+(e.target.value?"/"+e.target.value:""); });
-  quiz = {score:0, asked:0, streak:0, pool,
-    queue: isDue ? shuffle(dueIds.slice(0,20)) : null};
+  $("#qmode").addEventListener("change",e=>{ try{localStorage.setItem("atlas-q2mode",e.target.value);}catch(err){}
+    if(isCfg){ cfg.mode=e.target.value; location.hash=cfgToHash(cfg); } else vQuiz($("#qsys")?$("#qsys").value||null:(SYSTEMS[arg]?arg:null)); });
+  quiz = {score:0, asked:0, streak:0, pool, cfg,
+    queue: isDue ? shuffle(dueIds.slice(0,20)) : (cfg.n ? shuffle(pool).slice(0,cfg.n).map(d=>d.id) : null),
+    left: cfg.t};
+  if(cfg.t){ quiz.timer = setInterval(()=>{ quiz.left--; const el=$("#qtimer");
+      if(el) el.textContent = Math.floor(quiz.left/60)+":"+String(Math.max(0,quiz.left%60)).padStart(2,"0");
+      if(quiz.left<=0) endQuiz("Time's up!"); },1000); }
+  try{ localStorage.setItem("atlas-qcfg", JSON.stringify(cfg)); }catch(e){}
   nextQ();
 }
+function endQuiz(msg){
+  if(quiz.timer){ clearInterval(quiz.timer); quiz.timer=null; }
+  const pct = quiz.asked ? Math.round(quiz.score/quiz.asked*100) : 0;
+  const qc = $("#qcard"); if(!qc) return;
+  qc.innerHTML = `<div class="q">${msg||"Quiz complete 🎉"}</div>
+    <div class="qsub">${quiz.score} of ${quiz.asked} correct (${pct}%)</div>
+    <div class="quiz-foot"><a class="btn primary" href="#/quiz">Again</a>
+      <a class="btn" href="#/quiz-builder" style="margin-left:8px">⚙ Custom quiz</a>
+      <a class="btn" href="#/learn" style="margin-left:8px">Back to learn</a></div>`;
+  if(quiz.asked>=10) giveBadge("review-10");
+  if(quiz.score) addXP(quiz.score*2,"quiz session");
+}
+function qAnswer(right, d, extra){
+  quiz.asked++; if(right){quiz.score++; quiz.streak=(quiz.streak||0)+1;} else quiz.streak=0;
+  srRecord(d.id, right);
+  if(right){ PROG.quizRight=(PROG.quizRight|0)+1; PROG.xp=(PROG.xp|0)+10; touchStreak(); saveProg(); checkBadges(); }
+  try{ if(right && window.parent !== window) parent.postMessage({type:"atlas:quiz-correct", id:d.id}, location.origin); }catch(e){}
+  const qs=$("#qs"),qa=$("#qa"),qk=$("#qk");
+  if(qs)qs.textContent=quiz.score; if(qa)qa.textContent=quiz.asked; if(qk)qk.textContent=quiz.streak;
+  const note = $("#qnote");
+  if(note){ note.innerHTML = right ? "Correct." : `It was <b>${extra||d.name}</b>.`;
+    const link=document.createElement("a"); link.href="#/part/"+d.id; link.textContent="See the atlas entry →"; link.style.marginLeft="10px";
+    note.appendChild(link); }
+  const n=$("#qnext"); if(n){ n.style.display="inline-flex"; n.onclick=nextQ; }
+  const im = imgOf(d.id);
+  if(im){ const qrev=$("#qrev"); if(qrev && !qrev.querySelector("img")){
+    const pic=document.createElement("img"); pic.src=im.url; pic.alt=d.name; pic.style.marginTop="16px";
+    qrev.appendChild(pic); } }
+}
+const FACT_FIELDS = [["o","origin"],["i","insertion"],["n","innervation"],["a","action"]];
 function nextQ(){
   const pool = quiz.pool || DATA.filter(d=>d.summary);
   let d;
   if(quiz.queue){
-    if(!quiz.queue.length){
-      const pct = quiz.asked ? Math.round(quiz.score/quiz.asked*100) : 0;
-      $("#qcard").innerHTML = `<div class="q">Review complete 🎉</div>
-        <div class="qsub">${quiz.score} of ${quiz.asked} correct (${pct}%)</div>
-        <div class="quiz-foot"><a class="btn primary" href="#/learn">← Back to learn</a>
-          <a class="btn" href="#/quiz" style="margin-left:8px">Keep quizzing →</a></div>`;
-      if(quiz.asked>=10) giveBadge("review-10");
-      if(quiz.score) addXP(quiz.score*2,"review session");
-      return; }
-    d = quiz.queue.pop();
+    if(!quiz.queue.length){ endQuiz(quiz.cfg && quiz.cfg.n ? "Custom quiz complete 🎉" : "Review complete 🎉"); return; }
+    const id = quiz.queue.pop();
+    d = typeof id==="string" ? byId[id] : id;
+    if(!d) return nextQ();
     const qr = $("#qr"); if(qr) qr.textContent = quiz.queue.length;
   } else d = pool[Math.floor(Math.random()*pool.length)];
   quiz.cur = d;
+  /* decide question kind */
+  let kind = quiz.cfg ? quiz.cfg.mode : "choices";
+  if(kind==="mix"){ const ks=["choices","type"]; if(TEACH[d.id]&&TEACH[d.id].case)ks.push("cases"); if(d.oi)ks.push("facts");
+    kind = ks[Math.floor(Math.random()*ks.length)]; }
+  if(kind==="cases" && !(TEACH[d.id]&&TEACH[d.id].case)) kind="choices";
+  if(kind==="facts" && !d.oi) kind="choices";
+  if(kind==="type") return qType(d);
+  if(kind==="facts") return qFact(d);
+  return qMCQ(d, kind==="cases");
+}
+function qDistractors(pool, d){
   const same = pool.filter(x=>x.id!==d.id && x.system===d.system);
   const others = pool.filter(x=>x.id!==d.id && x.system!==d.system);
   const distract = shuffle(same).slice(0,3);
   while(distract.length<3 && others.length) distract.push(others.splice(Math.floor(Math.random()*others.length),1)[0]);
-  const opts = shuffle([d,...distract]);
-  let q = d.summary;
-  const nameRe = new RegExp(d.name.split(/[ (]/)[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"gi");
-  q = q.replace(nameRe,"this structure");
-  const im = imgOf(d.id);
+  return distract;
+}
+function qMCQ(d, isCase){
+  const opts = shuffle([d,...qDistractors(quiz.pool||[], d)]);
+  let q, title;
+  if(isCase){ title="Clinical case"; q = TEACH[d.id].case + " — which structure is most likely involved?"; }
+  else { title="Which structure is this?"; q = d.summary;
+    const nameRe = new RegExp(d.name.split(/[ (]/)[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"gi");
+    q = q.replace(nameRe,"this structure"); }
   $("#qcard").innerHTML = `
-    <div class="q">Which structure is this?</div>
-    <div class="qsub">${q}</div>
+    <div class="q">${title}</div>
+    <div class="qsub">${esc(q)}</div>
     <div class="opts">${opts.map((o,i)=>`<button class="opt" data-id="${o.id}"><span class="k">${"ABCD"[i]}</span>${o.name}</button>`).join("")}</div>
     <div id="qrev"></div>
     <div class="quiz-foot"><span class="qnote" id="qnote"></span><button class="btn plain" id="qnext" style="display:none">Next →</button></div>`;
@@ -20285,19 +20776,77 @@ function nextQ(){
     const right = b.dataset.id===d.id;
     $("#qcard").querySelectorAll(".opt").forEach(x=>{ x.disabled=true; if(x.dataset.id===d.id) x.classList.add("right"); });
     if(!right) b.classList.add("wrong");
-    quiz.asked++; if(right){quiz.score++; quiz.streak=(quiz.streak||0)+1;} else quiz.streak=0;
-    srRecord(d.id, right);
-    if(right){ PROG.quizRight=(PROG.quizRight|0)+1; PROG.xp=(PROG.xp|0)+10; touchStreak(); saveProg(); checkBadges(); }
-    try{ if(right && window.parent !== window) parent.postMessage({type:"atlas:quiz-correct", id:d.id}, location.origin); }catch(e){}
-    $("#qs").textContent=quiz.score; $("#qa").textContent=quiz.asked; $("#qk").textContent=quiz.streak;
-    $("#qnote").innerHTML = right ? "Correct." : `It was <b>${d.name}</b>.`;
-    const n=$("#qnext"); n.style.display="inline-flex"; n.onclick=nextQ;
-    const link=document.createElement("a"); link.href="#/part/"+d.id; link.textContent="See the atlas entry →"; link.style.marginLeft="10px";
-    $("#qnote").appendChild(link);
-    /* plate reveals only after answering — most plates are labeled and would give it away */
-    if(im){ const pic=document.createElement("img"); pic.src=im.url; pic.alt=d.name; pic.style.marginTop="16px";
-      $("#qrev").appendChild(pic); }
+    qAnswer(right, d);
   }));
+}
+function qType(d){
+  let q = d.summary;
+  const nameRe = new RegExp(d.name.split(/[ (]/)[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"gi");
+  q = q.replace(nameRe,"this structure");
+  const im = imgOf(d.id);
+  $("#qcard").innerHTML = `
+    <div class="q">Name this structure</div>
+    <div class="qsub">${esc(q)}</div>
+    ${im?`<img src="${im.url}" alt="plate" style="max-height:220px;margin:8px auto;display:block">`:""}
+    <div class="opts"><input class="qtype" id="qt" type="text" autocomplete="off" autocapitalize="off" placeholder="Type the name…">
+      <button class="btn primary" id="qgo">Check</button></div>
+    <div id="qrev"></div>
+    <div class="quiz-foot"><span class="qnote" id="qnote"></span><button class="btn plain" id="qnext" style="display:none">Next →</button></div>`;
+  const inp = $("#qt"); inp.focus();
+  const grade = () => { const right = qAccept(inp.value, d); inp.disabled=true; $("#qgo").disabled=true;
+    inp.classList.add(right?"right":"wrong"); qAnswer(right, d); };
+  $("#qgo").addEventListener("click",grade);
+  inp.addEventListener("keydown",e=>{ if(e.key==="Enter") grade(); });
+}
+function qFact(d){
+  const f = FACT_FIELDS[Math.floor(Math.random()*FACT_FIELDS.length)];
+  const pool = (quiz.pool||DATA).filter(x=>x.oi && x.oi[f[0]] && x.id!==d.id);
+  const distract = shuffle(pool).slice(0,3).map(x=>x.oi[f[0]]);
+  const opts = shuffle([d.oi[f[0]],...distract]);
+  $("#qcard").innerHTML = `
+    <div class="q">Muscle facts — ${d.name}</div>
+    <div class="qsub">Name the <b>${f[1]}</b> of the ${esc(d.name)}.</div>
+    <div class="opts">${opts.map((o,i)=>`<button class="opt" data-v="${esc(o)}"><span class="k">${"ABCD"[i]}</span>${esc(o)}</button>`).join("")}</div>
+    <div id="qrev"></div>
+    <div class="quiz-foot"><span class="qnote" id="qnote"></span><button class="btn plain" id="qnext" style="display:none">Next →</button></div>`;
+  $("#qcard").querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{
+    const right = b.dataset.v===d.oi[f[0]];
+    $("#qcard").querySelectorAll(".opt").forEach(x=>{ x.disabled=true; if(x.dataset.v===d.oi[f[0]]) x.classList.add("right"); });
+    if(!right) b.classList.add("wrong");
+    qAnswer(right, d, d.oi[f[0]]);
+  }));
+}
+function vQuizBuilder(){
+  let cfg; try{ cfg = JSON.parse(localStorage.getItem("atlas-qcfg")||"null") || parseQC("c:mode="+(localStorage.getItem("atlas-q2mode")|| "choices")); }catch(e){ cfg = parseQC("c:mode=choices"); }
+  crumbs([{t:"Home",href:"#/"},{t:"Quiz",href:"#/quiz"},{t:"Custom quiz"}]);
+  view.innerHTML = `<div class="quiz-box">
+    <h1 style="margin:4px 0 12px">⚙ Custom quiz</h1>
+    <div class="qbuilder">
+      <div class="qbrow"><b>Systems</b><div class="qbchips" id="qb-sys">
+        ${META.systemOrder.map(s=>`<button class="chip ${cfg.sys.includes(s)?"on":""}" data-v="${s}">${SYSTEMS[s].name}</button>`).join("")}</div></div>
+      <div class="qbrow"><b>Regions</b><div class="qbchips" id="qb-reg">
+        ${META.regionOrder.map(r=>`<button class="chip ${cfg.regs.includes(r)?"on":""}" data-v="${r}">${REGIONS[r].name}</button>`).join("")}</div></div>
+      <div class="qbrow"><b>Style</b><select id="qb-mode" class="qsel">${QMODES.map(m=>`<option value="${m[0]}" ${m[0]===cfg.mode?"selected":""}>${m[1]}</option>`).join("")}</select></div>
+      <div class="qbrow"><b>Questions</b><div class="qbchips" id="qb-n">
+        ${[10,20,40,0].map(n=>`<button class="chip ${cfg.n===n?"on":""}" data-v="${n}">${n||"∞"}</button>`).join("")}</div></div>
+      <div class="qbrow"><b>Timer</b><div class="qbchips" id="qb-t">
+        ${[[0,"Off"],[60,"1 min"],[120,"2 min"],[300,"5 min"]].map(t=>`<button class="chip ${cfg.t===t[0]?"on":""}" data-v="${t[0]}">${t[1]}</button>`).join("")}</div></div>
+      <div class="qbrow"><label class="chip ${cfg.plate?"on":""}" id="qb-plate"><input type="checkbox" ${cfg.plate?"checked":""} style="display:none"> 🖼 Has plate only</label></div>
+      <div class="qbrow"><a class="btn primary" id="qb-go">Start quiz →</a>
+        <a class="btn" id="qb-share" style="margin-left:8px">🔗 Copy link</a></div>
+    </div></div>`;
+  const pick = sel => { cfg[sel]=[]; $("#qb-"+sel).querySelectorAll(".chip.on").forEach(c=>cfg[sel].push(c.dataset.v)); };
+  view.querySelectorAll(".qbchips .chip").forEach(c=>c.addEventListener("click",()=>{
+    if(c.parentElement.id==="qb-n"||c.parentElement.id==="qb-t") c.parentElement.querySelectorAll(".chip").forEach(x=>x.classList.remove("on")),c.classList.add("on");
+    else c.classList.toggle("on");
+    pick("sys"); pick("reg");
+    cfg.n = +view.querySelector("#qb-n .chip.on").dataset.v;
+    cfg.t = +view.querySelector("#qb-t .chip.on").dataset.v;
+  }));
+  $("#qb-plate").addEventListener("click",e=>{ e.preventDefault(); cfg.plate=!cfg.plate; $("#qb-plate").classList.toggle("on",cfg.plate); });
+  $("#qb-mode").addEventListener("change",e=>cfg.mode=e.target.value);
+  $("#qb-go").addEventListener("click",()=>{ try{localStorage.setItem("atlas-qcfg",JSON.stringify(cfg));}catch(e){} location.hash = cfgToHash(cfg); });
+  $("#qb-share").addEventListener("click",()=>{ try{ navigator.clipboard.writeText(location.origin+location.pathname+cfgToHash(cfg)); learnToast("Link copied"); }catch(e){} });
 }
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
@@ -20332,7 +20881,9 @@ const BADGES = [
   ["five-lessons","📚 Scholar","Finish 5 lessons"],
   ["quiz-25","🎯 Sharp eye","Answer 25 quiz questions correctly"],
   ["streak-3","🔥 On a roll","Learn 3 days in a row"],
-  ["review-10","🧠 Long-term memory","Clear 10 spaced-repetition reviews"] ];
+  ["review-10","🧠 Long-term memory","Clear 10 spaced-repetition reviews"],
+  ["path-1","🛤 Trailblazer","Finish a guided learning path"],
+  ["path-all","🏆 Master anatomist","Finish every guided learning path"] ];
 const badgeHas = id => (PROG.badges||[]).includes(id);
 const giveBadge = id => { if(badgeHas(id)) return;
   const b = BADGES.find(x=>x[0]===id); if(!b) return;
@@ -20377,6 +20928,7 @@ function vLearn(arg){
     <div class="learn-head">
       ${nx?`<a class="btn primary" href="#/3d/${nx.d.id}?lesson=${nx.s}">▶ Continue learning: ${esc(nx.d.name)}</a>`:`<span class="badge">🎉 All lessons complete!</span>`}
       <a class="btn" href="#/learn/review">🧠 Review${due?` (${due} due)`:""}</a>
+      <a class="btn" href="#/paths">🛤 Guided paths</a>
       <span class="xp"><span class="xpbadge">⭐ <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">🔥 ${PROG.streak} days</span>`:""}</span>
     </div>
     ${(PROG.badges||[]).length?`<p class="hint" style="margin:-4px 0 14px">Badges: ${PROG.badges.map(b=>{const x=BADGES.find(y=>y[0]===b);return x?x[1]:"";}).filter(Boolean).join(" · ")}</p>`:""}
@@ -20399,22 +20951,67 @@ function vReview(){
   location.hash = "/quiz/due";
 }
 
+/* ---------- guided learning paths ---------- */
+const pathProg = p => { const done = p.steps.filter(s=>lessonDone(s)).length;
+  return {done, pct: p.steps.length ? Math.round(done/p.steps.length*100) : 0}; };
+function vPaths(){
+  crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:"Guided paths"}]);
+  const LVL=["","🟢 Intro","🔵 Core","🟣 Advanced"];
+  view.innerHTML = `<div class="list-head"><h1>🛤 Guided learning paths</h1>
+    <p>Curated routes through the atlas — each step opens an interactive 3D lesson. Finish a path to earn its badge.</p></div>
+    <div class="grid tight" style="grid-template-columns:1fr">${(window.ATLAS_PATHS||[]).map(p=>{
+      const {done,pct} = pathProg(p);
+      return `<a class="lpath${pct===100?" done":""}" href="#/path/${p.id}">
+        <span class="li">${p.level===3?"🎓":p.level===2?"📘":"🌱"}</span>
+        <span class="lm"><span class="lt">${esc(p.title)}</span>
+          <span class="ld">${LVL[p.level]||""} · ${p.steps.length} stops · ${esc(p.time)}${done?` · ${done} done`:""}</span>
+          <span class="lbar"><i style="width:${pct}%"></i></span></span>
+        <span class="ln"><b>${pct}%</b>${pct===100?"✓":"›"}</span></a>`; }).join("")}</div>`;
+}
+function vPath(pid){
+  const p = (window.ATLAS_PATHS||[]).find(x=>x.id===pid);
+  if(!p){ location.hash="/paths"; return; }
+  crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:"Paths",href:"#/paths"},{t:p.title}]);
+  const {done,pct} = pathProg(p);
+  const nxt = p.steps.find(s=>!lessonDone(s)) || p.steps[0];
+  view.innerHTML = `<div class="list-head"><h1>${esc(p.title)}</h1>
+    <p>${esc(p.desc)} ${done?`Progress: ${done}/${p.steps.length} (${pct}%)`:""}</p></div>
+    <div class="section"><h2>Objectives</h2><ul class="tlist">${(p.objectives||[]).map(o=>`<li>✅ ${esc(o)}</li>`).join("")}</ul></div>
+    <p><a class="btn primary" href="#/3d/${nxt}?lesson=path:${p.id}">▶ ${done?"Continue":"Start"} the path</a></p>
+    ${p.steps.map((s,i)=>{ const d=byId[s]; if(!d) return "";
+      const ok = lessonDone(s);
+      return `<a class="lrow${ok?" done":""}" href="#/3d/${s}?lesson=path:${p.id}">
+        <span class="lck">${ok?"✓":i+1}</span>
+        <span class="lr"><span class="ln2">${esc(d.name)}</span><span class="lm2">${SYSTEMS[d.system].icon} ${SYSTEMS[d.system].name} · ${REGIONS[d.region].name}</span></span>
+        <span class="lgo">›</span></a>`; }).join("")}`;
+}
+
 /* ---------- search ---------- */
+let lastFuzzy = false;
 function search(q){
   q = q.trim().toLowerCase(); if(!q) return [];
   const score = d => {
-    const n = d.name.toLowerCase(), aka=(d.aka||"").toLowerCase(), s=d.summary.toLowerCase();
+    const n = d.name.toLowerCase(), aka=(d.aka||"").toLowerCase(), lat=(d.latin||"").toLowerCase(), s=d.summary.toLowerCase();
     if(n===q) return 100;
     if(n.startsWith(q)) return 80;
     if(n.includes(q)) return 60;
     if(aka.includes(q)) return 45;
+    if(lat && lat.includes(q)) return 44;
     if((d.tags||[]).some(t=>t.toLowerCase().includes(q))) return 35;
     if(s.includes(q)) return 15;
     if(SYSTEMS[d.system].name.toLowerCase().includes(q)) return 12;
     if(REGIONS[d.region].name.toLowerCase().includes(q)) return 12;
     return 0;
   };
-  return DATA.map(d=>({d,s:score(d)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).map(x=>x.d);
+  const exact = DATA.map(d=>({d,s:score(d)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).map(x=>x.d);
+  lastFuzzy = false;
+  if(exact.length) return exact;
+  /* fuzzy fallback: trigram similarity over name/aka/latin/tags — catches typos */
+  lastFuzzy = true;
+  return DATA.map(d=>{
+      const hay = [d.name,d.aka||"",d.latin||"",(d.tags||[]).join(" ")].join(" ");
+      return {d, s: triScore(q, hay)};
+    }).filter(x=>x.s>=0.42).sort((a,b)=>b.s-a.s).slice(0,12).map(x=>x.d);
 }
 const si = $("#search"), sd = $("#search-drop");
 si.addEventListener("input",()=>{
@@ -20436,8 +21033,9 @@ document.addEventListener("keydown",e=>{ if(e.key==="/" && document.activeElemen
 function vSearch(q){
   const res = search(decodeURIComponent(q));
   crumbs([{t:"Home",href:"#/"},{t:`Search: “${decodeURIComponent(q)}”`}]);
+  const fuzzyNote = lastFuzzy ? `<p class="hint">No exact match — did you mean:</p>` : "";
   view.innerHTML = res.length
-    ? `<div class="list-head"><h1>${res.length} result${res.length>1?"s":""} for “${esc(decodeURIComponent(q))}”</h1></div><div class="grid">${res.map(cardHTML).join("")}</div>`
+    ? `<div class="list-head"><h1>${res.length} result${res.length>1?"s":""} for “${esc(decodeURIComponent(q))}”</h1>${fuzzyNote}</div><div class="grid">${res.map(cardHTML).join("")}</div>`
     : `<div class="empty"><div class="big">🔍</div>No structures match “${esc(decodeURIComponent(q))}”.<br>Try a bone, muscle, organ or nerve name.</div>`;
 }
 
@@ -20445,6 +21043,7 @@ function vSearch(q){
 let routeN = 0;
 function route(){
   routeN++;
+  if(quiz.timer){ clearInterval(quiz.timer); quiz.timer=null; }
   document.body.classList.remove("b3d-open");
   const h = location.hash.replace(/^#\/?/,"").replace(/^3d\?(.*)$/,"3d/?$1");
   const [_,kind,arg] = h.match(/^(\w*)(?:\/(.*))?$/) || [];
@@ -20457,6 +21056,9 @@ function route(){
   else if(kind==="part" && byId[arg]){ vDetail(arg); }
   else if(kind==="map"){ vMap(); mark("map"); }
   else if(kind==="quiz"){ vQuiz(arg||null); mark("quiz"); }
+  else if(kind==="quiz-builder"){ vQuizBuilder(); mark("quiz-builder"); }
+  else if(kind==="path" && arg){ vPath(arg); mark("paths"); }
+  else if(kind==="paths"){ vPaths(); mark("paths"); }
   else if(kind==="learn"){ arg==="review" ? vReview() : vLearn(arg||null); mark("learn"); }
   else if(kind==="gallery"){ vGallery(); mark("gallery"); }
   else if(kind==="3d"){ v3D(arg||null); mark("3d"); }
