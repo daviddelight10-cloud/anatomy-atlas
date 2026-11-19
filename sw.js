@@ -51,7 +51,7 @@ const PIXEL = new Response(
 );
 
 self.addEventListener("install", e => {
-  e.waitUntil(caches.open(SHELL).then(c => c.addAll(SHELL_URLS)));
+  e.waitUntil(caches.open(SHELL).then(c => c.addAll(SHELL_URLS)).then(() => self.skipWaiting()));
 });
 
 self.addEventListener("activate", e => {
