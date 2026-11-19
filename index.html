@@ -83,6 +83,9 @@ img{max-width:100%}
 #main{flex:1;margin-left:288px;min-width:0;display:flex;flex-direction:column}
 #topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:10px 26px;display:flex;align-items:center;gap:14px}
 #menu-btn{display:none;background:none;border:1px solid var(--border);border-radius:9px;color:var(--text);font-size:18px;padding:4px 10px;cursor:pointer}
+.tb-stats{margin-left:auto;display:flex;gap:8px;align-items:center}
+.tb-stats:empty{display:none}
+.tb-stats .xpbadge,.tb-stats .streakb{padding:4px 11px;font-size:12px}
 #crumbs{font-size:13.5px;color:var(--text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #crumbs a{color:var(--text2)}
 #view{padding:26px 30px 60px;max-width:1180px;width:100%;margin:0 auto}
@@ -790,6 +793,7 @@ body.can-install .hero-install{display:inline-flex!important}
     <header id="topbar">
       <button id="menu-btn" aria-label="Menu"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
       <div id="crumbs"></div>
+      <div id="tb-stats" class="tb-stats"></div>
     </header>
     <div id="view"></div>
   </main>
@@ -18719,17 +18723,15 @@ function vHome(){
   const learnBar = nx ? (()=>{ const items = lessonsOf(nx.s), done = items.filter(d=>lessonDone(d.id)).length;
     const pct = items.length ? Math.round(done/items.length*100) : 0;
     return `<span class="pbar"><i style="width:${pct}%"></i></span><span class="pbar-t">${SYSTEMS[nx.s].icon} ${esc(SYSTEMS[nx.s].name)} path · ${done}/${items.length} done</span>`; })() : "";
-  const learnMeta = (PROG.xp|0)>0 ? `<span class="meta"><span class="xpbadge">${I("star")} <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">${I("flame")} ${PROG.streak} days</span>`:""}</span>` : "";
   const testHref = due ? "#/learn/review" : "#/quiz";
   const testSub = due ? `${I("brain")} ${due} review${due>1?"s":""} due` : "Quick quizzes to lock it in";
-  /* glanceable progress strip — only once there's something to show */
-  const hstats = hasProg ? `<div class="hstats">
-    <span>${I("star")} <b>${PROG.xp|0}</b> XP</span>
-    ${PROG.streak>1?`<span>${I("flame")} <b>${PROG.streak}</b>-day streak</span>`:""}
-    ${nLessons?`<span>${I("book-open")} <b>${nLessons}</b> lesson${nLessons===1?"":"s"}</span>`:""}
-    ${due?`<span>${I("brain")} <b>${due}</b> review${due===1?"":"s"} due</span>`:""}
-    ${(PROG.quizRight|0)?`<span>${I("target")} <b>${PROG.quizRight}</b> quiz hits</span>`:""}
-  </div>` : "";
+  /* glanceable progress strip — XP/streak live in the topbar, so only
+     the remaining counters show here (nothing if they're all zero) */
+  const hstatIn =
+      (nLessons?`<span>${I("book-open")} <b>${nLessons}</b> lesson${nLessons===1?"":"s"}</span>`:"")
+    + (due?`<span>${I("brain")} <b>${due}</b> review${due===1?"":"s"} due</span>`:"")
+    + ((PROG.quizRight|0)?`<span>${I("target")} <b>${PROG.quizRight}</b> quiz hits</span>`:"");
+  const hstats = hstatIn ? `<div class="hstats">${hstatIn}</div>` : "";
   /* system-tinted jump chips + a resume chip for the last thing you opened */
   const chipC = s => "#"+((SYS_COLOR[s]||0x8d99a6).toString(16).padStart(6,"0"));
   let last = null; try{ last = localStorage.getItem("atlas-last"); }catch(e){}
@@ -18777,7 +18779,7 @@ function vHome(){
   </section>
   ${hstats}
   <div class="path2">
-    <a class="pcard" href="${learnHref}"><span class="ic">${I("graduation-cap")}</span><span class="tx"><b>Learn</b><small>${learnSub}</small>${learnBar}${learnMeta}</span><span class="go">›</span></a>
+    <a class="pcard" href="${learnHref}"><span class="ic">${I("graduation-cap")}</span><span class="tx"><b>Learn</b><small>${learnSub}</small>${learnBar}</span><span class="go">›</span></a>
     <a class="pcard" href="${testHref}"><span class="ic">${I("target")}</span><span class="tx"><b>Test yourself</b><small>${testSub}</small></span><span class="go">›</span></a>
     ${pcard3}
   </div>
@@ -21177,7 +21179,10 @@ function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.fl
 /* ---------- learning progress: XP, lessons, streak, spaced repetition ---------- */
 const PROG = (()=>{ try{ const p=JSON.parse(localStorage.getItem("atlas-progress")||"{}");
     return p && typeof p==="object" ? p : {}; }catch(e){ return {}; } })();
-const saveProg = () => { try{ localStorage.setItem("atlas-progress",JSON.stringify(PROG)); }catch(e){} };
+const updTbStats = () => { const el = $("#tb-stats"); if(!el) return;
+  el.innerHTML = `${(PROG.streak|0)>1?`<span class="streakb" title="${PROG.streak|0}-day streak">${I("flame")} ${PROG.streak|0}</span>`:""}${(PROG.xp|0)>0?`<span class="xpbadge" title="${PROG.xp|0} XP">${I("star")} <b>${PROG.xp|0}</b></span>`:""}`; };
+const saveProg = () => { try{ localStorage.setItem("atlas-progress",JSON.stringify(PROG)); }catch(e){} updTbStats(); };
+updTbStats();
 const today = () => Math.floor(Date.now()/86400000);
 const touchStreak = () => { const t=today();
   if(PROG.stLast===t) return;
