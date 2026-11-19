@@ -19853,12 +19853,18 @@ function buildScene(gltf, st){
     if(lmLn[lid]) lmLn[lid].style.display="none"; };
   const lmPt = it => { if(!it.m.geometry.boundingSphere) it.m.geometry.computeBoundingSphere();
     return _v.copy(it.m.geometry.boundingSphere.center).applyMatrix4(it.m.matrixWorld).add(it.o); };
-  /* occlusion with a short cache: the first solid thing the camera→point ray
-     meets must be the parent bone (or one of its z: sub-patches) */
+  /* occlusion with a camera-keyed cache + a per-frame raycast budget:
+     a static camera reuses every result for free, and mid-orbit only a few
+     landmarks pay for a fresh cross-occlusion test — the rest fall back to
+     the free normal-facing test. (Was: a full scene raycast per landmark
+     every 150–300ms — the humerus' ~20 pins tanked the frame rate.) */
   const lmVT = {};
+  let lmOcclBudget = 0, lmCK = "";
+  const lmCamKey = () => camera.position.x.toFixed(1)+","+camera.position.y.toFixed(1)+","+camera.position.z.toFixed(1)+"|"
+    +camera.quaternion.x.toFixed(2)+","+camera.quaternion.y.toFixed(2)+","+camera.quaternion.z.toFixed(2)+","+camera.quaternion.w.toFixed(2);
   const lmVis = (it, pt) => {
     const now = performance.now(), rec = lmVT[it.L.id];
-    if (rec && now - rec.t < (lowPower ? 300 : 150)) return rec.v;
+    if (rec && (rec.ck === lmCK || now - rec.t < (lowPower ? 300 : 150))) return rec.v;
     /* self-occlusion without a triangle test: the landmark's offset from the
        bone's centre must roughly face the camera — free and flicker-proof,
        and the dense parent mesh never enters a raycast */
@@ -19867,9 +19873,10 @@ function buildScene(gltf, st){
     const ol = it.o.length();
     const facing = ol > 1e-6 ? it.o.dot(_nd.copy(camera.position).sub(c).normalize()) / ol : 1;
     let v = facing > -0.18;
-    if (v) { /* cross-occlusion: a landmark is blocked only if a DIFFERENT part
+    if (v && lmOcclBudget > 0) { /* cross-occlusion: a landmark is blocked only if a DIFFERENT part
                 is in front of it — the parent bone's own meshes are filtered
                 out before intersectObjects, so they cost nothing */
+      lmOcclBudget--;
       ray.set(camera.position, _nd.copy(pt).sub(camera.position).normalize());
       const GP = window.ATLAS_GLB_PARENT || {};
       const others = rayMeshes().filter(o => o.userData.partId !== it.pid && GP[o.userData.partId] !== it.pid);
@@ -19878,7 +19885,7 @@ function buildScene(gltf, st){
         if (!effVis(o) || o.userData.ghost) continue;
         if (o.material && o.material.transparent && o.material.opacity < 0.5) continue;
         v = false; break; } }
-    lmVT[it.L.id] = { v, t: now }; return v;
+    lmVT[it.L.id] = { v, t: now, ck: lmCK }; return v;
   };
   const lmType = n => { const m = n.toLowerCase().match(/foramen|notch|fossa|facet|groove|sulcus|canal|meatus|tubercle|tuberosity|trochanter|spine|crest|eminence|malleolus|styloid|condyle|process|line|border|angle|arch|surface|head|neck|symphysis|disc|fovea|protuberance|apex|base|end|ramus|sinus|notch|area|region|bed|point|peak|edge/); return m ? m[0][0].toUpperCase()+m[0].slice(1) : null; };
   const lmInfo = it => {
@@ -19916,6 +19923,7 @@ function buildScene(gltf, st){
     }
     /* contextual only — landmarks on the selected/isolated bone, never global */
     const focusPid = isolated !== null && LM_HAS[isolated] ? isolated : selected;
+    lmOcclBudget = lowPower ? 2 : 4; lmCK = lmCamKey();
     const list = LMS.filter(x => x.pid === focusPid);
     const sw = W(), sh = H(), seen = {}, items = [];
     for (const it of list) {
