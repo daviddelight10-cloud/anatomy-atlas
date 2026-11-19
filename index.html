@@ -465,7 +465,13 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-app .b3d-actions button:hover{border-color:#ffd60a}
 .b3d-app a.b3d-rel{color:#ffd60a;background:rgba(255,214,10,.12);border-color:rgba(255,214,10,.35)}
 .b3d-app .b3d-open{background:#ffd60a;color:#0a0a0a}
-.b3d-dock{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(12px + var(--safe-b));z-index:20;max-width:calc(100% - 20px);overflow-x:auto;scrollbar-width:none;background:var(--g);border:1px solid var(--gb);border-radius:22px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 36px rgba(0,0,0,.55)}
+.b3d-dock{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(12px + var(--safe-b));z-index:20;max-width:calc(100% - 20px);overflow-x:auto;scrollbar-width:none;background:var(--g);border:1px solid var(--gb);border-radius:22px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 36px rgba(0,0,0,.55);transition:transform .22s ease,opacity .18s ease}
+/* dock recedes whenever a panel owns the screen — a small pill brings it back */
+.b3d-app.sel:not(.peek) .b3d-dock,.b3d-app.lesson:not(.peek) .b3d-dock{transform:translate(-50%,calc(100% + 18px));opacity:0;pointer-events:none}
+.b3d-app.sel:not(.peek) .b3d-pop,.b3d-app.lesson:not(.peek) .b3d-pop{opacity:0!important;pointer-events:none}
+.b3d-peekbtn{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(12px + var(--safe-b));z-index:19;display:none;align-items:center;gap:6px;background:var(--g);border:1px solid var(--gb);color:#cfcabc;border-radius:20px;padding:9px 18px;font:600 12px var(--font);cursor:pointer;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.b3d-peekbtn:hover{color:#ffd60a;border-color:#ffd60a}
+.b3d-app.sel:not(.peek) .b3d-peekbtn,.b3d-app.lesson:not(.peek) .b3d-peekbtn{display:inline-flex}
 .b3d-dock::-webkit-scrollbar{display:none}
 .dock-in{display:flex;align-items:stretch;gap:2px;padding:6px;width:max-content}
 .dock-b{position:relative;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:54px;height:52px;padding:0 6px;border:0;background:transparent;color:#cfcabc;border-radius:15px;cursor:pointer;font:600 10px var(--font)}
@@ -19464,6 +19470,8 @@ function buildScene(gltf, st){
     if(id){ each(id, m=>glow(m,selHex(id))); showInfo(id); }
     else setInfo(defInfo);
     info.classList.toggle("has-sel", !!id);
+    appEl.classList.toggle("sel", !!id);
+    if(!id) appEl.classList.remove("peek");
     updLabels(); updIdx(); dockSync(); queueUrl();
   };
 
@@ -20168,6 +20176,8 @@ function buildScene(gltf, st){
       else { aoOn = !aoOn; aob.classList.toggle("on", aoOn); poke(); } }); }
 
   $("#b3dreset").addEventListener("click",()=>{ fly=null; camera.position.copy(home); controls.target.copy(home2); controls.update(); });
+  const peekB = $("#b3dpeek");
+  if(peekB) peekB.addEventListener("click",()=>appEl.classList.add("peek"));
   /* the explorer is already a full-viewport view; ⤢ additionally asks the browser for true fullscreen */
   const appEl = $("#b3dapp");
   const fsbtn = $("#b3dfs");
@@ -20207,6 +20217,8 @@ function buildScene(gltf, st){
   cv.addEventListener("pointerdown",rmHint,{once:true}); setTimeout(rmHint,9000);
   /* stop the idle spin on first real drag — also keeps the render loop quiet */
   cv.addEventListener("pointerdown",()=>{ controls.autoRotate = false; },{once:true});
+  /* a peeked dock recedes as soon as attention returns to the model */
+  cv.addEventListener("pointerdown",()=>{ appEl.classList.remove("peek"); });
   syncDock();
 
   /* ---- guided lesson: step-by-step tour through one structure ---- */
@@ -20600,6 +20612,7 @@ function v3D(sel){
       <button class="dock-b" data-pop="more" title="Wireframe, depth shading, undo, screenshot, reset"><i>⋯</i><b>More</b></button>
       <button class="dock-b" id="b3dlayers" title="Body systems, colors &amp; more"><i>☰</i><b>Layers</b></button>
     </div></nav>
+    <button class="b3d-peekbtn" id="b3dpeek" title="Show the tools">▴ Tools</button>
 
     <div class="b3d-scrim" id="b3dscrim"></div>
     <aside class="b3d-drawer" id="b3ddrawer" aria-label="Layers and options">
