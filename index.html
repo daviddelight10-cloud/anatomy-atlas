@@ -121,6 +121,8 @@ img{max-width:100%}
 .card p{font-size:13px;color:var(--text2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .card .tags{margin-top:auto;display:flex;gap:6px;flex-wrap:wrap}
 .badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:2.5px 9px;border-radius:20px;background:var(--panel2);color:var(--text2);border:1px solid var(--border)}
+svg.ico{width:1.15em;height:1.15em;flex:none;vertical-align:-.2em}
+.cdot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c,#888);vertical-align:-1px;margin-right:2px}
 .badge.sys{color:var(--badge-c,#ffd60a);border-color:color-mix(in srgb,var(--badge-c,#ffd60a) 40%,transparent);background:color-mix(in srgb,var(--badge-c,#ffd60a) 10%,transparent)}
 .sys-card{position:relative;overflow:hidden}
 .sys-card .ic{font-size:26px}
@@ -150,9 +152,19 @@ img{max-width:100%}
 .m3d-body .btn.big:hover{filter:brightness(1.1);color:#141414}
 .m3d-chips{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px}
 .m3d-chips .lbl{font-size:12.5px;color:var(--text3);margin-right:2px}
-.m3d-chips a{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:20px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-size:13px;font-weight:600}
-.m3d-chips a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
-.path2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.m3d-chips a{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:20px;border:1px solid color-mix(in srgb,var(--chip-c,var(--border)) 50%,var(--border));background:var(--panel2);color:var(--text);font-size:13px;font-weight:600}
+.m3d-chips a:hover{border-color:var(--chip-c,var(--accent));color:var(--chip-c,var(--accent));text-decoration:none}
+.m3d-chips a.resume{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.m3d-chips a.resume:hover{color:var(--accent);filter:brightness(1.1)}
+.m3d-poster img{animation:heroFloat 7s ease-in-out infinite}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media(prefers-reduced-motion:reduce){.m3d-poster img{animation:none}}
+.hstats{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 2px}
+.hstats span{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 13px;font:600 12.5px var(--font);color:var(--text2)}
+.hstats b{color:var(--text)}
+.sec-title .more{color:var(--accent);text-decoration:none;font-weight:600}
+.sec-title .more:hover{text-decoration:underline}
+.path2{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:14px}
 .pcard{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;color:var(--text);transition:border-color .12s,transform .12s}
 .pcard:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
 .pcard .ic{font-size:32px;flex:none}
@@ -161,6 +173,9 @@ img{max-width:100%}
 .pcard small{display:block;font-size:13.5px;color:var(--text2);margin-top:2px}
 .pcard .go{flex:none;font-size:22px;color:var(--text3)}
 .pcard .meta{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.pcard .pbar{display:block;height:5px;background:var(--border);border-radius:5px;overflow:hidden;margin-top:9px}
+.pcard .pbar i{display:block;height:100%;background:var(--accent);border-radius:5px}
+.pcard .pbar-t{display:block;font-size:11px;color:var(--text3);margin-top:5px}
 .s3d-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
 .mini-card{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:13px;padding:10px 12px;color:var(--text);transition:border-color .12s}
 .mini-card:hover{border-color:var(--accent);text-decoration:none}
@@ -754,7 +769,7 @@ body.can-install .hero-install{display:inline-flex!important}
         <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/><path d="M9 11c-3 1-5 3-5 6v4h16v-4c0-3-2-5-5-6"/><path d="M12 11v4"/></svg>
         <span>Anatomy Atlas</span>
       </a>
-      <button id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">◐</button>
+      <button id="theme-toggle" title="Toggle theme" aria-label="Toggle theme"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 18a6 6 0 0 0 0-12v12z" fill="currentColor" stroke="none"/></svg></button>
     </div>
     <div class="search-wrap">
       <input id="search" type="search" placeholder="Search anatomy…  ( / )" autocomplete="off" spellcheck="false">
@@ -763,8 +778,8 @@ body.can-install .hero-install{display:inline-flex!important}
     <nav id="nav"></nav>
     <div class="side-foot">
       <div class="pwa-actions">
-        <button id="pwa-install" class="pwa-btn hidden" type="button">⬇ Install app</button>
-        <button id="pwa-offline" class="pwa-btn" type="button">💾 Save 3D body for offline</button>
+        <button id="pwa-install" class="pwa-btn hidden" type="button"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Install app</button>
+        <button id="pwa-offline" class="pwa-btn" type="button"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Save 3D body for offline</button>
       </div>
       Diagrams: Wikimedia Commons<br>Gray's Anatomy (1918) &amp; open-license sources
     </div>
@@ -772,29 +787,33 @@ body.can-install .hero-install{display:inline-flex!important}
   <div id="scrim" class="hidden"></div>
   <main id="main">
     <header id="topbar">
-      <button id="menu-btn" aria-label="Menu">☰</button>
+      <button id="menu-btn" aria-label="Menu"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
       <div id="crumbs"></div>
     </header>
     <div id="view"></div>
   </main>
 </div>
 <script>
+/* inline SVG icon set (lucide-style strokes) — tint via currentColor */
+const ICONS = {"bone":"<path d=\"M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z\"/>","dumbbell":"<path d=\"m6.5 6.5 11 11\"/><path d=\"m21 21-1-1\"/><path d=\"m3 3 1 1\"/><path d=\"m18 22 4-4\"/><path d=\"m2 6 4-4\"/><path d=\"m3 10 7-7\"/><path d=\"m14 21 7-7\"/>","zap":"<polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"/>","heart-pulse":"<path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\"/><path d=\"M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27\"/>","wind":"<path d=\"M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2\"/><path d=\"M9.6 4.6A2 2 0 1 1 11 8H2\"/><path d=\"M12.6 19.4A2 2 0 1 0 14 16H2\"/>","apple":"<path d=\"M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z\"/><path d=\"M10 2c1 .5 2 2 2 5\"/>","droplet":"<path d=\"M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z\"/>","dna":"<path d=\"M4 3c0 5 16 7 16 12\"/><path d=\"M20 3c0 5-16 7-16 12\"/><path d=\"M4 21c0-5 16-7 16-12\"/><path d=\"M20 21c0-5-16-7-16-12\"/><path d=\"M8 6.5h8\"/><path d=\"M8 17.5h8\"/>","test-tube":"<path d=\"M14.5 2v17.5a2.5 2.5 0 0 1-5 0V2\"/><path d=\"M8.5 2h7\"/><path d=\"M14.5 16h-5\"/>","shield":"<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\"/>","layers":"<path d=\"m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z\"/><path d=\"m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65\"/><path d=\"m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65\"/>","eye":"<path d=\"M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>","compass":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><polygon points=\"16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76\"/>","house":"<path d=\"m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><polyline points=\"9 22 9 12 15 12 15 22\"/>","map":"<path d=\"M15 5.76v15\"/><path d=\"M9 3.24v15\"/><path d=\"M14.1 5.55a2 2 0 0 0 1.8 0l4.1-1.93A1 1 0 0 1 21 4.62v12.76a1 1 0 0 1-.55.9l-4.55 2.27a2 2 0 0 1-1.8 0l-4.2-2.1a2 2 0 0 0-1.8 0l-3.55 1.78A1 1 0 0 1 3 19.38V6.62a1 1 0 0 1 .55-.9l4.55-2.27a2 2 0 0 1 1.8 0z\"/>","box":"<path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\"/><path d=\"m3.3 7 8.7 5 8.7-5\"/><path d=\"M12 22V12\"/>","graduation-cap":"<path d=\"M22 10v6\"/><path d=\"M2 10l10-5 10 5-10 5z\"/><path d=\"M6 12v5c3 3 9 3 12 0v-5\"/>","route":"<circle cx=\"6\" cy=\"19\" r=\"3\"/><path d=\"M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15\"/><circle cx=\"18\" cy=\"5\" r=\"3\"/>","target":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><circle cx=\"12\" cy=\"12\" r=\"6\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/>","sliders":"<line x1=\"21\" x2=\"14\" y1=\"4\" y2=\"4\"/><line x1=\"10\" x2=\"3\" y1=\"4\" y2=\"4\"/><line x1=\"21\" x2=\"12\" y1=\"12\" y2=\"12\"/><line x1=\"8\" x2=\"3\" y1=\"12\" y2=\"12\"/><line x1=\"21\" x2=\"16\" y1=\"20\" y2=\"20\"/><line x1=\"12\" x2=\"3\" y1=\"20\" y2=\"20\"/><line x1=\"14\" x2=\"14\" y1=\"2\" y2=\"6\"/><line x1=\"8\" x2=\"8\" y1=\"10\" y2=\"14\"/><line x1=\"16\" x2=\"16\" y1=\"18\" y2=\"22\"/>","image":"<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\"/><circle cx=\"9\" cy=\"9\" r=\"2\"/><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\"/>","eye-off":"<path d=\"M9.88 9.88a3 3 0 1 0 4.24 4.24\"/><path d=\"M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68\"/><path d=\"M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61\"/><line x1=\"2\" x2=\"22\" y1=\"2\" y2=\"22\"/>","ghost":"<path d=\"M9 10h.01\"/><path d=\"M15 10h.01\"/><path d=\"M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z\"/>","scissors":"<circle cx=\"6\" cy=\"6\" r=\"3\"/><circle cx=\"6\" cy=\"18\" r=\"3\"/><line x1=\"20\" x2=\"8.12\" y1=\"4\" y2=\"15.88\"/><line x1=\"14.47\" x2=\"20\" y1=\"14.48\" y2=\"20\"/><line x1=\"8.12\" x2=\"12\" y1=\"8.12\" y2=\"12\"/>","sparkles":"<path d=\"m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z\"/>","grid":"<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\"/><path d=\"M3 9h18\"/><path d=\"M3 15h18\"/><path d=\"M9 3v18\"/><path d=\"M15 3v18\"/>","contrast":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 18a6 6 0 0 0 0-12v12z\" fill=\"currentColor\" stroke=\"none\"/>","undo-2":"<path d=\"M9 14 4 9l5-5\"/><path d=\"M4 9h10.5a5.5 5.5 0 1 1 0 11H11\"/>","camera":"<path d=\"M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z\"/><circle cx=\"12\" cy=\"13\" r=\"3\"/>","rotate-ccw":"<path d=\"M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8\"/><path d=\"M3 3v5h5\"/>","pin":"<path d=\"M12 17v5\"/><path d=\"M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1z\"/>","focus":"<circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M3 7V5a2 2 0 0 1 2-2h2\"/><path d=\"M17 3h2a2 2 0 0 1 2 2v2\"/><path d=\"M21 17v2a2 2 0 0 1-2 2h-2\"/><path d=\"M7 21H5a2 2 0 0 1-2-2v-2\"/>","ban":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m4.9 4.9 14.2 14.2\"/>","eclipse":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 2a7 7 0 1 0 10 10\"/>","anchor":"<circle cx=\"12\" cy=\"5\" r=\"3\"/><line x1=\"12\" x2=\"12\" y1=\"22\" y2=\"8\"/><path d=\"M5 12H2a10 10 0 0 0 20 0h-3\"/>","venetian-mask":"<path d=\"M2 12a5 5 0 0 0 5 5 8 8 0 0 1 5 2 8 8 0 0 1 5-2 5 5 0 0 0 5-5V7h-5a8 8 0 0 0-5 2 8 8 0 0 0-5-2H2Z\"/><path d=\"M6 11c1.5 0 3 .5 3 2-2 0-3-.5-3-2Z\"/><path d=\"M18 11c-1.5 0-3 .5-3 2 2 0 3-.5 3-2Z\"/>","link":"<path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\"/>","volume-2":"<path d=\"M11 5 6 9H2v6h4l5 4z\"/><path d=\"M15.54 8.46a5 5 0 0 1 0 7.07\"/><path d=\"M19.07 4.93a10 10 0 0 1 0 14.14\"/>","lightbulb":"<path d=\"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5\"/><path d=\"M9 18h6\"/><path d=\"M10 22h4\"/>","shuffle":"<path d=\"m18 14 4 4-4 4\"/><path d=\"m18 2 4 4-4 4\"/><path d=\"M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22\"/><path d=\"M2 6h1.972a4 4 0 0 1 3.6 2.2\"/><path d=\"M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45\"/>","skip-forward":"<polygon points=\"5 4 15 12 5 20 5 4\"/><line x1=\"19\" x2=\"19\" y1=\"5\" y2=\"19\"/>","x":"<path d=\"M18 6 6 18\"/><path d=\"m6 6 12 12\"/>","star":"<polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/>","flame":"<path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\"/>","book-open":"<path d=\"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z\"/><path d=\"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z\"/>","brain":"<path d=\"M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z\"/><path d=\"M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z\"/><path d=\"M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4\"/><path d=\"M17.599 6.5a3 3 0 0 0 .399-1.375\"/><path d=\"M6.003 5.125A3 3 0 0 0 6.401 6.5\"/><path d=\"M3.477 10.896a4 4 0 0 1 .585-.396\"/><path d=\"M19.938 10.5a4 4 0 0 1 .585.396\"/><path d=\"M6 18a4 4 0 0 1-1.967-.516\"/><path d=\"M19.967 17.484A4 4 0 0 1 18 18\"/>","trophy":"<path d=\"M6 9H4.5a2.5 2.5 0 0 1 0-5H6\"/><path d=\"M18 9h1.5a2.5 2.5 0 0 0 0-5H18\"/><path d=\"M4 22h16\"/><path d=\"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22\"/><path d=\"M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22\"/><path d=\"M18 2H6v7a6 6 0 0 0 12 0V2Z\"/>","download":"<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\"/>","menu":"<line x1=\"4\" x2=\"20\" y1=\"6\" y2=\"6\"/><line x1=\"4\" x2=\"20\" y1=\"12\" y2=\"12\"/><line x1=\"4\" x2=\"20\" y1=\"18\" y2=\"18\"/>","person":"<circle cx=\"12\" cy=\"5\" r=\"2\"/><path d=\"m9 20 3-6 3 6\"/><path d=\"m6 8 6 2 6-2\"/><path d=\"M12 10v4\"/>","stethoscope":"<path d=\"M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3\"/><path d=\"M8 15v1a6 6 0 0 0 6 6a6 6 0 0 0 6-6v-4\"/><circle cx=\"20\" cy=\"10\" r=\"2\"/>","hand":"<path d=\"M18 11V6.5a1.5 1.5 0 0 0-3 0V11\"/><path d=\"M15 11V4.5a1.5 1.5 0 0 0-3 0v6\"/><path d=\"M12 11V3.5a1.5 1.5 0 0 0-3 0V11\"/><path d=\"M9 11.5V7a1.5 1.5 0 0 0-3 0v6.5c0 4 2.5 8 7.5 8 4 0 7-3 7-7.5v-4.5a1.5 1.5 0 0 0-3 0\"/>","skull":"<path d=\"M12 2a8 8 0 0 0-8 8c0 2.2 1 4.2 2.6 5.6L7 19a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l.4-3.4A8 8 0 0 0 12 2Z\"/><path d=\"M9 12h.01\"/><path d=\"M15 12h.01\"/><path d=\"M10 19v-2\"/><path d=\"M14 19v-2\"/>","sprout":"<path d=\"M7 20h10\"/><path d=\"M10 20c5.5-2.5.8-6.4 3-10\"/><path d=\"M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z\"/><path d=\"M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-3 0-4.7 1.2-4.9 2z\"/>","map-pin":"<path d=\"M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/>","clock":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/>","dice":"<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"3\"/><circle cx=\"8.5\" cy=\"8.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15.5\" cy=\"8.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"8.5\" cy=\"15.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15.5\" cy=\"15.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/>","check":"<polyline points=\"20 6 9 17 4 12\"/>","play":"<polygon points=\"6 3 20 12 6 21 6 3\"/>","palette":"<circle cx=\"13.5\" cy=\"6.5\" r=\".5\"/><circle cx=\"17.5\" cy=\"10.5\" r=\".5\"/><circle cx=\"8.5\" cy=\"7.5\" r=\".5\"/><circle cx=\"6.5\" cy=\"12.5\" r=\".5\"/><path d=\"M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z\"/>","expand":"<path d=\"m21 21-6-6m6 6v-4.8m0 4.8h-4.8\"/><path d=\"M3 16.2V21m0 0h4.8M3 21l6-6\"/><path d=\"M21 7.8V3m0 0h-4.8M21 3l-6 6\"/><path d=\"M3 7.8V3m0 0h4.8M3 3l6 6\"/>","chevron-up":"<polyline points=\"18 15 12 9 6 15\"/>","chevron-down":"<polyline points=\"6 9 12 15 18 9\"/>","search":"<circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/>"};
+const I = n => `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]||""}</svg>`;
+
 window.ATLAS_DATA = window.ATLAS_DATA || [];
 window.ATLAS_META = {
   systems: {
-    "skeletal":      { name:"Skeletal system",      icon:"🦴", color:"#7dd3fc", blurb:"The 206 bones of the adult skeleton, plus cartilages, joints and ligaments — the body's frame, levers and mineral store." },
-    "muscular":      { name:"Muscular system",      icon:"💪", color:"#f472b6", blurb:"Over 600 skeletal muscles plus smooth and cardiac muscle — producing movement, posture, heat and the heartbeat." },
-    "nervous":       { name:"Nervous system",       icon:"⚡", color:"#a78bfa", blurb:"Brain, spinal cord and peripheral nerves — sensing, integrating and commanding every other system." },
-    "cardiovascular":{ name:"Cardiovascular system",icon:"❤️", color:"#fb7185", blurb:"Heart, blood and vessels — a closed hydraulic circuit delivering oxygen and fuel to every cell." },
-    "respiratory":   { name:"Respiratory system",   icon:"🫁", color:"#34d399", blurb:"Airways and lungs — bringing oxygen in and venting carbon dioxide with every breath." },
-    "digestive":     { name:"Digestive system",     icon:"🌀", color:"#fbbf24", blurb:"The alimentary canal and accessory glands — breaking food into absorbable molecules." },
-    "urinary":       { name:"Urinary system",       icon:"💧", color:"#38bdf8", blurb:"Kidneys, ureters, bladder and urethra — filtering blood and balancing water, salts and acidity." },
-    "reproductive":  { name:"Reproductive system",  icon:"🧬", color:"#f9a8d4", blurb:"Male and female organs of gamete production, fertilization, pregnancy and lactation." },
-    "endocrine":     { name:"Endocrine system",     icon:"⚗️", color:"#c4b5fd", blurb:"Ductless glands secreting hormones into the blood — the body's slow chemical messaging network." },
-    "lymphatic":     { name:"Lymphatic & immune",   icon:"🛡️", color:"#86efac", blurb:"Lymph vessels, nodes, spleen, thymus and marrow — returning fluid to blood and defending against disease." },
-    "integumentary": { name:"Integumentary system", icon:"🖐️", color:"#fdba74", blurb:"Skin, hair, nails and glands — the body's largest organ and first line of defense." },
-    "sensory":       { name:"Sensory organs",       icon:"👁️", color:"#67e8f9", blurb:"Eye, ear, nose, tongue and skin receptors — windows converting the outside world into nerve signals." },
-    "general":       { name:"General anatomy",      icon:"🧭", color:"#94a3b8", blurb:"Foundational structures and concepts that span systems — tissues, membranes, cavities and body plans." }
+    "skeletal":      { name:"Skeletal system",      icon:I("bone"), color:"#7dd3fc", blurb:"The 206 bones of the adult skeleton, plus cartilages, joints and ligaments — the body's frame, levers and mineral store." },
+    "muscular":      { name:"Muscular system",      icon:I("dumbbell"), color:"#f472b6", blurb:"Over 600 skeletal muscles plus smooth and cardiac muscle — producing movement, posture, heat and the heartbeat." },
+    "nervous":       { name:"Nervous system",       icon:I("zap"), color:"#a78bfa", blurb:"Brain, spinal cord and peripheral nerves — sensing, integrating and commanding every other system." },
+    "cardiovascular":{ name:"Cardiovascular system",icon:I("heart-pulse"), color:"#fb7185", blurb:"Heart, blood and vessels — a closed hydraulic circuit delivering oxygen and fuel to every cell." },
+    "respiratory":   { name:"Respiratory system",   icon:I("wind"), color:"#34d399", blurb:"Airways and lungs — bringing oxygen in and venting carbon dioxide with every breath." },
+    "digestive":     { name:"Digestive system",     icon:I("apple"), color:"#fbbf24", blurb:"The alimentary canal and accessory glands — breaking food into absorbable molecules." },
+    "urinary":       { name:"Urinary system",       icon:I("droplet"), color:"#38bdf8", blurb:"Kidneys, ureters, bladder and urethra — filtering blood and balancing water, salts and acidity." },
+    "reproductive":  { name:"Reproductive system",  icon:I("dna"), color:"#f9a8d4", blurb:"Male and female organs of gamete production, fertilization, pregnancy and lactation." },
+    "endocrine":     { name:"Endocrine system",     icon:I("test-tube"), color:"#c4b5fd", blurb:"Ductless glands secreting hormones into the blood — the body's slow chemical messaging network." },
+    "lymphatic":     { name:"Lymphatic & immune",   icon:I("shield"), color:"#86efac", blurb:"Lymph vessels, nodes, spleen, thymus and marrow — returning fluid to blood and defending against disease." },
+    "integumentary": { name:"Integumentary system", icon:I("layers"), color:"#fdba74", blurb:"Skin, hair, nails and glands — the body's largest organ and first line of defense." },
+    "sensory":       { name:"Sensory organs",       icon:I("eye"), color:"#67e8f9", blurb:"Eye, ear, nose, tongue and skin receptors — windows converting the outside world into nerve signals." },
+    "general":       { name:"General anatomy",      icon:I("compass"), color:"#94a3b8", blurb:"Foundational structures and concepts that span systems — tissues, membranes, cavities and body plans." }
   },
   regions: {
     "head":        { name:"Head",        blurb:"Skull, brain, face, eyes, ears, nose, mouth and jaws." },
@@ -18642,7 +18661,7 @@ DATA.forEach(d => { sysCount[d.system]=(sysCount[d.system]||0)+1; regCount[d.reg
 
 const imgOf = id => IMAGES[id] || null;
 const imgTag = (id,cls) => { const im = imgOf(id); return im ? `<img class="${cls}" src="${esc(im.thumb||im.url)}" alt="" loading="lazy" onerror="this.remove()">` : `<span class="${cls} ph">${esc(systemIcon(id))}</span>`; };
-function systemIcon(id){ const d=byId[id]; return d ? SYSTEMS[d.system].icon : "🦴"; }
+function systemIcon(id){ const d=byId[id]; return d ? SYSTEMS[d.system].icon : I("bone"); }
 
 /* ---------- theme ---------- */
 const theme = () => document.documentElement.getAttribute("data-theme");
@@ -18660,18 +18679,18 @@ $("#theme-toggle").addEventListener("click",()=>{
 /* ---------- sidebar nav ---------- */
 function buildNav(){
   const nav = $("#nav");
-  let h = `<div class="nav-sec"><a class="nav-link" data-href="#/" ><span class="ic">🏠</span>Overview</a>
-  <a class="nav-link" data-href="#/map"><span class="ic">🗺️</span>Body map</a>
-  <a class="nav-link" data-href="#/3d"><span class="ic">🧊</span>3D explorer</a>
-  <a class="nav-link" data-href="#/learn"><span class="ic">🎓</span>Learn</a>
-  <a class="nav-link" data-href="#/paths"><span class="ic">🛤</span>Guided paths</a>
-  <a class="nav-link" data-href="#/quiz"><span class="ic">🎯</span>Quiz me</a>
-  <a class="nav-link" data-href="#/quiz-builder"><span class="ic">⚙</span>Custom quiz</a>
-  <a class="nav-link" data-href="#/gallery"><span class="ic">🖼️</span>Plates gallery</a></div>`;
+  let h = `<div class="nav-sec"><a class="nav-link" data-href="#/" ><span class="ic">${I("house")}</span>Overview</a>
+  <a class="nav-link" data-href="#/map"><span class="ic">${I("map")}</span>Body map</a>
+  <a class="nav-link" data-href="#/3d"><span class="ic">${I("box")}</span>3D explorer</a>
+  <a class="nav-link" data-href="#/learn"><span class="ic">${I("graduation-cap")}</span>Learn</a>
+  <a class="nav-link" data-href="#/paths"><span class="ic">${I("route")}</span>Guided paths</a>
+  <a class="nav-link" data-href="#/quiz"><span class="ic">${I("target")}</span>Quiz me</a>
+  <a class="nav-link" data-href="#/quiz-builder"><span class="ic">${I("sliders")}</span>Custom quiz</a>
+  <a class="nav-link" data-href="#/gallery"><span class="ic">${I("image")}</span>Plates gallery</a></div>`;
   h += `<div class="nav-sec"><h4>Body systems</h4>`;
   META.systemOrder.forEach(s=>{ if(sysCount[s]) h += `<a class="nav-link" data-href="#/system/${s}"><span class="ic">${SYSTEMS[s].icon}</span>${SYSTEMS[s].name}<span class="ct">${sysCount[s]}</span></a>`; });
   h += `</div><div class="nav-sec"><h4>Body regions</h4>`;
-  META.regionOrder.forEach(r=>{ if(regCount[r]) h += `<a class="nav-link" data-href="#/region/${r}"><span class="ic">◈</span>${REGIONS[r].name}<span class="ct">${regCount[r]}</span></a>`; });
+  META.regionOrder.forEach(r=>{ if(regCount[r]) h += `<a class="nav-link" data-href="#/region/${r}"><span class="ic">${I("map-pin")}</span>${REGIONS[r].name}<span class="ct">${regCount[r]}</span></a>`; });
   h += `</div>`;
   nav.innerHTML = h;
   nav.addEventListener("click",e=>{ const a = e.target.closest("[data-href]"); if(a){ location.hash = a.dataset.href.slice(1); closeSidebar(); }});
@@ -18691,49 +18710,83 @@ const view = $("#view");
 function vHome(){
   crumbs([{t:"Overview"}]);
   const due = srDue().length;
-  const hasProg = (PROG.xp|0)>0 || Object.keys(PROG.lessons||{}).length>0 || due>0;
+  const nLessons = Object.keys(PROG.lessons||{}).length;
+  const hasProg = (PROG.xp|0)>0 || nLessons>0 || due>0;
   const nx = LEARN_ORDER.filter(s=>sysCount[s]).map(s=>({s,d:nextLesson(s)})).find(x=>x.d && !lessonDone(x.d.id));
   const learnHref = hasProg && nx ? `#/3d/${nx.d.id}?lesson=${nx.s}` : "#/learn";
   const learnSub = hasProg && nx ? `Continue: ${esc(nx.d.name)}` : "Guided lessons, one system at a time";
-  const learnMeta = (PROG.xp|0)>0 ? `<span class="meta"><span class="xpbadge">⭐ <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">🔥 ${PROG.streak} days</span>`:""}</span>` : "";
+  const learnBar = nx ? (()=>{ const items = lessonsOf(nx.s), done = items.filter(d=>lessonDone(d.id)).length;
+    const pct = items.length ? Math.round(done/items.length*100) : 0;
+    return `<span class="pbar"><i style="width:${pct}%"></i></span><span class="pbar-t">${SYSTEMS[nx.s].icon} ${esc(SYSTEMS[nx.s].name)} path · ${done}/${items.length} done</span>`; })() : "";
+  const learnMeta = (PROG.xp|0)>0 ? `<span class="meta"><span class="xpbadge">${I("star")} <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">${I("flame")} ${PROG.streak} days</span>`:""}</span>` : "";
   const testHref = due ? "#/learn/review" : "#/quiz";
-  const testSub = due ? `🧠 ${due} review${due>1?"s":""} due` : "Quick quizzes to lock it in";
-  const shortcuts = [["💀","Skeleton","skeletal"],["💪","Muscles","muscular"],["🧠","Nerves","nervous"],["🫀","Blood","cardiovascular,lymphatic"],["🫁","Organs","digestive,respiratory,urinary,reproductive,endocrine,sensory"]]
-    .map(([i,n,s])=>`<a href="#/3d/?sys=${s}">${i} ${n}</a>`).join("");
-  let ids3 = ["skeleton-overview","heart","brain","lungs","kidney","femur","eye","deltoid"].filter(id=>byId[id] && MODELS[id]);
-  if(ids3.length<4) ids3 = [...new Set([...ids3,...Object.keys(MODELS).filter(id=>byId[id])])].slice(0,8);
+  const testSub = due ? `${I("brain")} ${due} review${due>1?"s":""} due` : "Quick quizzes to lock it in";
+  /* glanceable progress strip — only once there's something to show */
+  const hstats = hasProg ? `<div class="hstats">
+    <span>${I("star")} <b>${PROG.xp|0}</b> XP</span>
+    ${PROG.streak>1?`<span>${I("flame")} <b>${PROG.streak}</b>-day streak</span>`:""}
+    ${nLessons?`<span>${I("book-open")} <b>${nLessons}</b> lesson${nLessons===1?"":"s"}</span>`:""}
+    ${due?`<span>${I("brain")} <b>${due}</b> review${due===1?"":"s"} due</span>`:""}
+    ${(PROG.quizRight|0)?`<span>${I("target")} <b>${PROG.quizRight}</b> quiz hits</span>`:""}
+  </div>` : "";
+  /* system-tinted jump chips + a resume chip for the last thing you opened */
+  const chipC = s => "#"+((SYS_COLOR[s]||0x8d99a6).toString(16).padStart(6,"0"));
+  let last = null; try{ last = localStorage.getItem("atlas-last"); }catch(e){}
+  const resume = last && byId[last] && B3D_IDS.has(last) ? `<a class="resume" href="#/3d/${last}">${I("undo-2")} ${esc(byId[last].name)}</a>` : "";
+  const shortcuts = [["bone","Skeleton","skeletal","skeletal"],["dumbbell","Muscles","muscular","muscular"],["zap","Nerves","nervous","nervous"],["heart-pulse","Blood","cardiovascular,lymphatic","cardiovascular"],["stethoscope","Organs","digestive,respiratory,urinary,reproductive,endocrine,sensory","digestive"]]
+    .map(([i,n,s,cs])=>`<a href="#/3d/?sys=${s}" style="--chip-c:${chipC(cs)}">${I(i)} ${n}</a>`).join("");
+  /* jump-into-3D cards: open the viewer focused on that structure */
+  let ids3 = ["heart","brain","femur","deltoid","lungs","kidney","eye","stomach"].filter(id=>byId[id] && B3D_IDS.has(id));
+  if(ids3.length<4) ids3 = [...new Set([...ids3,...[...B3D_IDS].filter(id=>byId[id] && IMAGES[id])])].slice(0,8);
   const struct3d = ids3.map(id=>{ const d = byId[id];
-    return `<a class="mini-card" href="#/part/${id}">${imgTag(id,"thumb")}<span class="mc-t"><b>${d.name}</b><small>🧊 Interactive 3D model</small></span></a>`; }).join("");
+    return `<a class="mini-card" href="#/3d/${id}">${imgTag(id,"thumb")}<span class="mc-t"><b>${d.name}</b><small>Open in 3D</small></span></a>`; }).join("");
+  /* third card: the guided path with the most progress (or the first one) */
+  const paths = window.ATLAS_PATHS||[];
+  let pcard3 = "";
+  if(paths.length){
+    let best = null, bd = -1, nDone = 0;
+    paths.forEach(p=>{ const pr = pathProg(p); if(pr.pct===100) nDone++;
+      else if(pr.done>bd){ bd = pr.done; best = p; } });
+    if(!best && nDone) pcard3 = `<a class="pcard" href="#/paths"><span class="ic">${I("trophy")}</span><span class="tx"><b>Guided paths</b><small>All ${paths.length} paths complete</small></span><span class="go">›</span></a>`;
+    else { const p = best||paths[0], pr = pathProg(p);
+      pcard3 = `<a class="pcard" href="#/path/${p.id}"><span class="ic">${I("route")}</span><span class="tx"><b>Guided paths</b><small>${esc(p.title)}</small><span class="pbar"><i style="width:${pr.pct}%"></i></span><span class="pbar-t">${pr.done}/${p.steps.length} stops${nDone?` · ${nDone} complete`:""}</span></span><span class="go">›</span></a>`; } }
   const pool = DATA.filter(d=>d.summary && IMAGES[d.id]);
   const sod = pool.length ? pool[today() % pool.length] : null;
   const sodC = sod ? SYSTEMS[sod.system] : null;
   const sodHTML = sod ? `<div class="sod">
       <a class="sod-img" href="#/part/${sod.id}" aria-label="${esc(sod.name)}">${imgTag(sod.id,"sod-thumb")}</a>
-      <div class="sod-body"><span class="kick">✨ Structure of the day</span><h3><a href="#/part/${sod.id}">${sod.name}</a></h3>
+      <div class="sod-body"><span class="kick">${I("sparkles")} Structure of the day</span><h3><a href="#/part/${sod.id}">${sod.name}</a></h3>
       <p>${esc(sod.summary)}</p>
       <div class="sod-actions"><span class="badge sys" style="--badge-c:${sodC.color}">${sodC.icon} ${sodC.name}</span>
       <a class="btn plain sm" href="#/part/${sod.id}">Read more</a>
-      ${B3D_IDS.has(sod.id)?`<a class="btn plain sm" href="#/3d/${sod.id}">🧊 View in 3D</a>`:""}</div></div></div>` : "";
+      ${B3D_IDS.has(sod.id)?`<a class="btn plain sm" href="#/3d/${sod.id}">${I("box")} View in 3D</a>`:""}</div></div></div>` : "";
   view.innerHTML = `
   <header class="home-head">
     <h1>Explore the human body</h1>
     <p>Open the 3D body, follow a guided lesson, or test what you know.</p>
-    <button class="menu-hint" id="menuhint" type="button">☰ Menu: search, systems, regions</button>
-    <a class="btn hero-install" href="#" onclick="atlasInstall();return false">⬇️ Install app</a>
+    <button class="menu-hint" id="menuhint" type="button">${I("menu")} Menu: search, systems, regions</button>
+    <a class="btn hero-install" href="#" onclick="atlasInstall();return false">${I("download")} Install app</a>
   </header>
   <section class="main3d">
     <a class="m3d-poster" href="#/3d" aria-label="Open the 3D body"><img src="img/skeleton.svg" width="436" height="842" alt="Human skeleton" onerror="this.closest('.main3d').classList.add('noimg')"></a>
     <div class="m3d-body"><span class="kick">Interactive</span><h2>3D interactive body</h2>
       <p>Rotate, peel away layers and tap any structure to learn what it is.</p>
-      <a class="btn big" href="#/3d">🧊 Open 3D body</a>
-      <div class="m3d-chips"><span class="lbl">Jump to:</span>${shortcuts}</div></div>
+      <a class="btn big" href="#/3d">${I("box")} Open 3D body</a>
+      <div class="m3d-chips"><span class="lbl">Jump to:</span>${shortcuts}${resume}</div></div>
   </section>
+  ${hstats}
   <div class="path2">
-    <a class="pcard" href="${learnHref}"><span class="ic">🎓</span><span class="tx"><b>Learn</b><small>${learnSub}</small>${learnMeta}</span><span class="go">›</span></a>
-    <a class="pcard" href="${testHref}"><span class="ic">🎯</span><span class="tx"><b>Test yourself</b><small>${testSub}</small></span><span class="go">›</span></a>
+    <a class="pcard" href="${learnHref}"><span class="ic">${I("graduation-cap")}</span><span class="tx"><b>Learn</b><small>${learnSub}</small>${learnBar}${learnMeta}</span><span class="go">›</span></a>
+    <a class="pcard" href="${testHref}"><span class="ic">${I("target")}</span><span class="tx"><b>Test yourself</b><small>${testSub}</small></span><span class="go">›</span></a>
+    ${pcard3}
   </div>
-  ${struct3d?`<h2 class="sec-title">Interactive 3D models</h2><div class="s3d-row">${struct3d}</div>`:""}
-  ${sodHTML?`<h2 class="sec-title">Structure of the day</h2>${sodHTML}`:""}`;
+  ${struct3d?`<h2 class="sec-title">Jump into 3D<a class="more" href="#/3d">Open viewer ›</a></h2><div class="s3d-row">${struct3d}</div>`:""}
+  <h2 class="sec-title">Discover</h2>
+  ${sodHTML}
+  <div class="path2">
+    <a class="pcard" href="#/quiz-builder"><span class="ic">${I("sliders")}</span><span class="tx"><b>Custom quiz</b><small>Pick systems, regions and question count</small></span><span class="go">›</span></a>
+    <a class="pcard" href="#/part/${DATA[Math.floor(Math.random()*DATA.length)].id}"><span class="ic">${I("dice")}</span><span class="tx"><b>Surprise me</b><small>Open a random structure</small></span><span class="go">›</span></a>
+  </div>`;
   const mh = $("#menuhint"); if(mh) mh.addEventListener("click",()=>$("#menu-btn").click());
 }
 
@@ -18782,7 +18835,8 @@ function vRegion(r){
 }
 
 function vDetail(id){
-  const d = byId[id]; if(!d){ view.innerHTML = `<div class="empty"><div class="big">🤔</div>Not found.</div>`; return; }
+  const d = byId[id]; if(!d){ view.innerHTML = `<div class="empty"><div class="big">${I("search")}</div>Not found.</div>`; return; }
+  try{ localStorage.setItem("atlas-last", id); }catch(e){}
   const c = SYSTEMS[d.system];
   crumbs([{t:"Home",href:"#/"},{t:c.name,href:"#/system/"+d.system},{t:d.name}]);
   const im = imgOf(id);
@@ -18799,21 +18853,20 @@ function vDetail(id){
   const rel = (d.related||[]).filter(r=>byId[r]).map(r=>{ const x=byId[r]; return `<a class="rel" href="#/part/${r}"><span class="dot" style="--c:${SYSTEMS[x.system].color}"></span>${x.name}</a>`; }).join("");
   const inRegion = DATA.filter(x=>x.region===d.region && x.id!==d.id).slice(0,8).map(x=>`<a class="rel" href="#/part/${x.id}"><span class="dot" style="--c:${SYSTEMS[x.system].color}"></span>${x.name}</a>`).join("");
   const t = TEACH[id] || null;
-  const vids = (window.ATLAS_VIDEOS||{})[id] || (window.ATLAS_VIDEOS||{})["sys:"+d.system] || [];
   const oiTable = d.oi ? `<div class="section"><h2>Muscle facts</h2><table class="oitable">
     ${d.oi.o?`<tr><th>Origin</th><td>${esc(d.oi.o)}</td></tr>`:""}
     ${d.oi.i?`<tr><th>Insertion</th><td>${esc(d.oi.i)}</td></tr>`:""}
     ${d.oi.n?`<tr><th>Innervation</th><td>${esc(d.oi.n)}</td></tr>`:""}
     ${d.oi.a?`<tr><th>Action</th><td>${esc(d.oi.a)}</td></tr>`:""}</table>
-    ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}?att=1" style="margin-top:8px">🎯 See attachments in 3D</a>`:""}</div>` : "";
+    ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}?att=1" style="margin-top:8px">${I("anchor")} See attachments in 3D</a>`:""}</div>` : "";
   view.innerHTML = `
   <div class="detail-head">
     <div class="dh-main">
-      <h1>${d.name} <button class="say" data-say="${esc(d.name)}" title="Hear pronunciation">🔊</button></h1>${d.latin?`<div class="aka latin">${esc(d.latin)}</div>`:""}${d.aka?`<div class="aka">Also: ${esc(d.aka)}</div>`:""}
+      <h1>${d.name} <button class="say" data-say="${esc(d.name)}" title="Hear pronunciation">${I("volume-2")}</button></h1>${d.latin?`<div class="aka latin">${esc(d.latin)}</div>`:""}${d.aka?`<div class="aka">Also: ${esc(d.aka)}</div>`:""}
       <div class="badges"><a class="badge sys" style="--badge-c:${c.color}" href="#/system/${d.system}">${c.icon} ${c.name}</a>
-      <a class="badge" href="#/region/${d.region}">📍 ${REGIONS[d.region].name}</a>
-      ${d.of?`<a class="badge" href="#/part/${d.ofRec||d.of}">🦴 Landmark of: ${esc(byId[d.ofRec||d.of] ? byId[d.ofRec||d.of].name : d.of)}</a>`:""}
-      ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}">🧊 View in 3D body</a>`:d.of?`<a class="badge" href="#/3d/${d.of}?lm=${id}">🧊 Show on 3D model</a>`:""}</div>
+      <a class="badge" href="#/region/${d.region}">${I("map-pin")} ${REGIONS[d.region].name}</a>
+      ${d.of?`<a class="badge" href="#/part/${d.ofRec||d.of}">${I("bone")} Landmark of: ${esc(byId[d.ofRec||d.of] ? byId[d.ofRec||d.of].name : d.of)}</a>`:""}
+      ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}">${I("box")} View in 3D body</a>`:d.of?`<a class="badge" href="#/3d/${d.of}?lm=${id}">${I("box")} Show on 3D model</a>`:""}</div>
     </div>${plate}
   </div>
   <div class="section"><h2>Overview</h2><p>${esc(d.summary)}</p></div>
@@ -18831,13 +18884,12 @@ function vDetail(id){
   ${t.supply?`<div class="section"><h2>Blood & nerve supply</h2><p>${esc(t.supply)}</p></div>`:""}
   ${t.rel?`<div class="section"><h2>How the neighbours relate</h2><ul class="tlist">${Object.entries(t.rel).map(([k,v])=>`<li>${byId[k]?`<a href="#/part/${k}"><b>${esc(byId[k].name)}</b></a>`:`<b>${esc(k)}</b>`} — ${esc(v)}</li>`).join("")}</ul></div>`:""}
   ${t.mnemonic?`<div class="section"><h2>Memory hook</h2><p>💡 ${esc(t.mnemonic)}</p></div>`:""}
-  ${t.case?`<div class="section"><h2>Clinical vignette</h2><p>🩺 ${esc(t.case)}</p></div>`:""}
+  ${t.case?`<div class="section"><h2>Clinical vignette</h2><p>${I("stethoscope")} ${esc(t.case)}</p></div>`:""}
   ${t.simple?`<div class="section"><h2>In plain words</h2><p>${esc(t.simple)}</p></div>`:""}
   `:""}
   ${d.clinical?`<div class="section"><h2>Clinical relevance</h2><p>${esc(d.clinical)}</p></div>`:""}
-  ${vids.length?`<div class="section"><h2>Watch</h2><ul class="tlist">${vids.map(v=>`<li>▶ <a href="${esc(v.u)}" target="_blank" rel="noopener"><b>${esc(v.t)}</b></a> — ${esc(v.ch)}${v.d?` · ${esc(v.d)}`:""}</li>`).join("")}</ul></div>`:""}
   ${rel?`<div class="section"><h2>Related structures</h2><div class="rel-row">${rel}</div></div>`:""}
-  ${LM_BY[id]?`<div class="section"><h2>Landmarks (${LM_BY[id].length})</h2><p class="hint" style="margin:0 0 10px">Named surface features of the ${esc(d.name)} — each opens its own entry, and all are pinned in the 3D view when you select this bone.</p><div class="lm-list">${LM_BY[id].map(x=>`<a class="lm-item" href="#/part/${x.id}"><b>📍 ${esc(x.name)}</b><span>${esc(x.summary)}</span></a>`).join("")}</div></div>`:""}
+  ${LM_BY[id]?`<div class="section"><h2>Landmarks (${LM_BY[id].length})</h2><p class="hint" style="margin:0 0 10px">Named surface features of the ${esc(d.name)} — each opens its own entry, and all are pinned in the 3D view when you select this bone.</p><div class="lm-list">${LM_BY[id].map(x=>`<a class="lm-item" href="#/part/${x.id}"><b>${I("map-pin")} ${esc(x.name)}</b><span>${esc(x.summary)}</span></a>`).join("")}</div></div>`:""}
   <div class="section"><h2>Also in ${REGIONS[d.region].name}</h2><div class="rel-row">${inRegion}</div></div>
   <div class="pn"><a href="#/part/${prev.id}"><div class="dir">← ${c.name}</div><div class="nm">${prev.name}</div></a>
   <a class="next" href="#/part/${next.id}"><div class="dir">${c.name} →</div><div class="nm">${next.name}</div></a></div>`;
@@ -18858,7 +18910,7 @@ function vDetail(id){
 function modelCard(key){
   const m = MODELS[key]; if(!m) return "";
   const src = `https://sketchfab.com/models/${m.uid}/embed?autostart=1&preload=1&ui_controls=1&ui_infos=1&ui_watermark_link=0&ui_watermark=0&ui_theme=dark`;
-  return `<div class="m3d"><div class="m3d-frame"><button class="m3d-load" data-src="${esc(src)}"><span class="big">🧊</span><span class="b">Load interactive 3D model</span><span class="sub">${esc(m.name)}</span></button></div>
+  return `<div class="m3d"><div class="m3d-frame"><button class="m3d-load" data-src="${esc(src)}"><span class="big">${I("box")}</span><span class="b">Load interactive 3D model</span><span class="sub">${esc(m.name)}</span></button></div>
   <div class="m3d-cap">${esc(m.name)}${m.author?" by "+esc(m.author):""}${m.license?" · "+esc(m.license):""} · <a href="${esc(m.page)}" target="_blank" rel="noopener">Sketchfab</a></div></div>`;
 }
 function wire3D(root){
@@ -18981,6 +19033,7 @@ function buildScene(gltf, st){
   const l3=new THREE.DirectionalLight(0xffd9b3,0.55); l3.position.set(0.3,0.8,-1.4); scene.add(l3);
   const group = new THREE.Group(); scene.add(group);
   const chipOn = {}, hidden = new Set(), faded = new Set(); let isolated = null, aidsOn = false, focusSet = null, skinOp = 1;
+  const GP = window.ATLAS_GLB_PARENT || {};
   let hover = null, selected = null, xr = false;
   /* render-on-demand: only draw frames when something actually changed */
   let dirty = true; const poke = () => { dirty = true; };
@@ -19022,11 +19075,11 @@ function buildScene(gltf, st){
   const paintPins = () => { const el = $("#b3dpins"); if(!el) return;
     const ids = Object.keys(pinsV2);
     if(!ids.length){ el.innerHTML=""; return; }
-    el.innerHTML = `<span class="pin-cap">📌</span>` + ids.map(id=>
+    el.innerHTML = `<span class="pin-cap">${I("pin")}</span>` + ids.map(id=>
       `<button class="pchip pinchip" data-id="${id}" title="${esc(nameOf(id))}">${esc(nameOf(id))}</button>`).join("");
     el.querySelectorAll(".pinchip").forEach(b=>b.addEventListener("click",()=>{
       const id=b.dataset.id;
-      if(!anyVis(id)){ pushHist(); isolated=id; applyVis(); syncHiddenBar(); }
+      if(!anyVis(id)){ pushHist(); showOnly(id); }
       focusOn(id); })); };
   /* shareable deep link: #/3d/<sel>?iso=&hid=&sys=&peel=&clip= — debounced;
      declared up here because applyVis() runs before the helpers below */
@@ -19171,7 +19224,9 @@ function buildScene(gltf, st){
   if(st.sys) for(const s in chipOn) chipOn[s] = st.sys.includes(s);
   if(st.hid) st.hid.forEach(id=>hidden.add(id));
   if(st.fad) st.fad.forEach(id=>{ if(meshes[id]) faded.add(id); });
-  if(st.iso && meshes[st.iso]) isolated = st.iso;
+  if(st.iso){ const t = GP[st.iso] && meshes[GP[st.iso]] ? GP[st.iso] : st.iso;
+    if(meshes[t]){ isolated = t; hidden.delete(t);
+      for(const m of meshes[t]) chipOn[m.userData.sys] = true; } }
   if(st.pins){ st.pins.forEach(id=>{ if(meshes[id] && !pinsV2[id]) pinsV2[id] = {o:[0,0,0]}; }); savePins(); }
 
   /* outer→inner peel order for the layer slider */
@@ -19197,7 +19252,7 @@ function buildScene(gltf, st){
     for(const id in meshes) for(const m of meshes[id]){
       m.visible = chipOn[m.userData.sys] && !hidden.has(id)
         && peelOf(m.userData.sys) >= peelN && (!m.userData.aid || aidsOn)
-        && (isolated===null || id===isolated);
+        && (isolated===null || id===isolated || GP[id]===isolated);
       m.userData.ghost = focusSet ? !focusSet.has(id) : false;
       const base = m.userData.baseMat || m.material;
       m.material = m.userData.ghost ? ghostOf(base)
@@ -19216,6 +19271,17 @@ function buildScene(gltf, st){
     syncSys(); updIdx();
     poke(); queueUrl();
     if(quiz.on && quiz.target && !anyVis(quiz.target)) quizNext();
+  };
+  /* isolate that can't blank the canvas: resolve a picked sub-part to the
+     structure the panel names (ATLAS_GLB_PARENT), unhide the whole family,
+     and turn its system layers on — z: children stay visible through the
+     GP[id]===isolated check in applyVis */
+  const showOnly = id => {
+    const t = GP[id] && meshes[GP[id]] ? GP[id] : id;
+    isolated = t; focusSet = null;
+    for(const k in meshes){ if(k===t || GP[k]===t){ hidden.delete(k);
+      for(const m of meshes[k]) chipOn[m.userData.sys] = true; } }
+    applyVis(); syncHiddenBar();
   };
   applyVis();
   window.__b3d = {group, meshes, camera, THREE};
@@ -19278,7 +19344,7 @@ function buildScene(gltf, st){
   const tip = $("#b3dtip"), info = $("#b3di");
   /* panel renders through setInfo so the floating card gets a close button */
   const setInfo = html => { const hd = html.startsWith('<div class="inf-head"');
-    info.innerHTML = `<div class="b3d-grab"></div><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button>${hd?html:`<div class="inf-body">${html}</div>`}`;
+    info.innerHTML = `<div class="b3d-grab"></div><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">${I("x")}</button>${hd?html:`<div class="inf-body">${html}</div>`}`;
     { const h = info.querySelector(".inf-head");
       if(h){ const g = info.querySelector(":scope>.b3d-grab"), cb = info.querySelector(":scope>#b3dic"); if(g) h.prepend(g); if(cb) h.appendChild(cb); } }
     const c = info.querySelector("#b3dic"); if(c) c.addEventListener("click",()=>select(null)); };
@@ -19359,7 +19425,7 @@ function buildScene(gltf, st){
      spotlighted structure) and "Mix". Spot questions ghost every other part —
      like Complete Anatomy pin-tests — and show 4 name options. ---- */
   const quizPool = () => Object.keys(meshes).filter(id=>byId[id] && anyVis(id) && !id.startsWith("z:"));
-  const QUIZ_MODES = [["tap","🎯 Find it"],["spot","💡 Name it"],["mix","🔀 Mix"]];
+  const QUIZ_MODES = [["tap",I("target")+" Find it"],["spot",I("lightbulb")+" Name it"],["mix",I("shuffle")+" Mix"]];
   const quizPaint = note => { if(!quizEl) return;
     quizEl.innerHTML =
       `<span class="q-modes">${QUIZ_MODES.map(([m,l])=>`<button data-m="${m}" class="${quiz.mode===m?"on":""}">${l}</button>`).join("")}</span>`
@@ -19368,8 +19434,8 @@ function buildScene(gltf, st){
             ? `<span class="q-s">Name it:</span><span class="q-opts">${quiz.opts.map((o,i)=>`<button class="qopt" data-opt="${esc(o)}"><b>${"ABCD"[i]}</b> ${esc(nameOf(o))}</button>`).join("")}</span>`
             : `<span class="q-s">Find:</span><span class="q-t">${esc(nameOf(quiz.target))}</span>`)
       + `<span class="q-s">✔ ${quiz.score} · ✖ ${quiz.tries}</span>`
-      + (quiz.streak>1 ? `<span class="q-streak">🔥${quiz.streak}</span>` : "")
-      + `<button data-q="skip">skip ⏭</button><button data-q="quit">✕ quit</button>`;
+      + (quiz.streak>1 ? `<span class="q-streak">${I("flame")}${quiz.streak}</span>` : "")
+      + `<button data-q="skip">${I("skip-forward")} skip</button><button data-q="quit">${I("x")} quit</button>`;
     quizEl.querySelectorAll("[data-q]").forEach(b=>b.addEventListener("click",ev=>{
       ev.stopPropagation();
       b.dataset.q==="quit" ? quizStop() : quizNext(); }));
@@ -19460,16 +19526,16 @@ function buildScene(gltf, st){
     /* CA-style sections: bone landmarks and sub-parts, both tappable */
     const GP0 = window.ATLAS_GLB_PARENT || {}, base = GP0[id] || id;
     const lms = LM_HAS[base] ? LMS.filter(x=>x.pid===base) : [];
-    const lmHtml = lms.length ? `<div class="b3d-rel"><b>📍 Landmarks (${lms.length})</b><div class="b3d-relch">${lms.map(x=>`<a class="b3d-rel" href="#" data-lm="${x.L.id}">${esc(x.L.n)}</a>`).join("")}</div></div>` : "";
+    const lmHtml = lms.length ? `<div class="b3d-rel"><b>${I("map-pin")} Landmarks (${lms.length})</b><div class="b3d-relch">${lms.map(x=>`<a class="b3d-rel" href="#" data-lm="${x.L.id}">${esc(x.L.n)}</a>`).join("")}</div></div>` : "";
     const parts = [];
     for(const k in meshes) if(GP0[k]===id) parts.push(k);
     const partsHtml = parts.length ? `<div class="b3d-rel"><b>Parts</b><div class="b3d-relch">${parts.slice(0,14).map(k=>`<a class="b3d-rel" href="#/part/${k}">${esc(nameOf(k))}</a>`).join("")}</div></div>` : "";
     const rg = d ? d.region : pd ? pd.region : null;
     const crumb = `<div class="b3d-crumb"><a href="#" data-sys="${s}">${c.icon} ${esc(c.name)}</a><span class="csep">›</span>${rg && REGIONS[rg] ? `<a href="#/region/${rg}">${esc(REGIONS[rg].name)}</a><span class="csep">›</span>` : (md ? `<span>${esc(md.regName)} region</span><span class="csep">›</span>` : "")}<b>${esc(nm)}</b></div>`;
     const mast = d ? (lessonDone(id) ? `<span class="badge mast ok">✓ Learned</span>`
-      : (srBox(id) && srBox(id).due<=today() ? `<span class="badge mast due">⏰ Due for review</span>` : "")) : "";
+      : (srBox(id) && srBox(id).due<=today() ? `<span class="badge mast due">${I("clock")} Due for review</span>` : "")) : "";
     const sb = (a,ic,lb,t,cls="") => `<button data-a="${a}" class="${cls}" title="${t}" aria-label="${t}"><i>${ic}</i><b>${lb}</b></button>`;
-    const strip = `<div class="inf-strip">${d?sb("learn","🎓","Learn","Guided lesson for this structure","pri")+sb("quizme","🎯","Quiz","Test yourself on it"):""}${sb("pin","📌",pinHas(id)?"Pinned":"Pin","Pin a label here")}${sb("isolate","◎","Isolate","Hide everything else")}${sb("hide","⊘","Hide","Hide this structure")}${sb("fade","◑",faded.has(id)?"Unfade":"Fade","See through this structure")}${sb("hideo","⧉","Hide others","Hide everything except this")}${sb("fadeo","◐",(focusSet&&focusSet.has(id))?"Unfade others":"Fade others","Ghost everything around it")}${d&&d.oi?sb("att","📎","Attach","Highlight origin and insertion markers"):""}${ATLAS_TRACES&&ATLAS_TRACES.some(t=>t.chain.includes(id))?sb("trace","🛤","Trace","Trace its pathway"):""}${d?sb("cover","👁","Cover","Blur the text, recall it, tap to reveal"):""}${sb("copy","🔗","Link","Copy a link to this exact view")}${hidden.size||faded.size||isolated!==null||focusSet?sb("showall","↺","Show all","Restore everything"):""}</div>`;
+    const strip = `<div class="inf-strip">${d?sb("learn",I("graduation-cap"),"Learn","Guided lesson for this structure","pri")+sb("quizme",I("target"),"Quiz","Test yourself on it"):""}${sb("pin",I("pin"),pinHas(id)?"Pinned":"Pin","Pin a label here")}${sb("isolate",I("focus"),"Isolate","Hide everything else")}${sb("hide",I("eye-off"),"Hide","Hide this structure")}${sb("fade",I("contrast"),faded.has(id)?"Unfade":"Fade","See through this structure")}${sb("fadeo",I("eclipse"),(focusSet&&focusSet.has(id))?"Unfade others":"Fade others","Ghost everything around it")}${d&&d.oi?sb("att",I("anchor"),"Attach","Highlight origin and insertion markers"):""}${ATLAS_TRACES&&ATLAS_TRACES.some(t=>t.chain.includes(id))?sb("trace",I("route"),"Trace","Trace its pathway"):""}${d?sb("cover",I("venetian-mask"),"Cover","Blur the text, recall it, tap to reveal"):""}${sb("copy",I("link"),"Link","Copy a link to this exact view")}${hidden.size||faded.size||isolated!==null||focusSet?sb("showall",I("rotate-ccw"),"Show all","Restore everything"):""}</div>`;
     const meta = `<div class="inf-meta">${crumb}<div class="badges"><span class="badge sys" style="--badge-c:${c.color}">${c.icon} ${c.name}</span>${d?`<span class="badge">📍 ${REGIONS[d.region].name}</span>`:md?`<span class="badge">📍 ${md.regName} region</span><span class="badge">Unnamed detail</span>`:`<span class="badge">🧩 Z-Anatomy structure</span>`}${mast}</div></div>`;
     const TC = (window.ATLAS_TEACH||{})[id] || {};
     let tabsHtml = "", bodyHtml = "";
@@ -19487,7 +19553,7 @@ function buildScene(gltf, st){
       pd?`<p class="b3d-sum">Part of the <b>${esc(pd.name)}</b>.</p><p>${esc(pd.summary)}</p><a class="b3d-open" href="#/part/${parent}">Open ${esc(pd.name)} entry →</a>`
       : md?`<p class="b3d-sum">${esc(md.desc)}</p>${sec("Detail note",md.note)}`
       : `<p class="hint">Sub-structure from the original Z-Anatomy model (CC BY-SA 4.0) — no separate atlas article yet.</p>`}${lmHtml}${partsHtml}</div>`;
-    setInfo(`<div class="inf-head"><div class="inf-title"><h3>${esc(nm)}</h3><button class="inf-say" data-a="say" title="Pronounce it" aria-label="Pronounce it">🔊</button></div>
+    setInfo(`<div class="inf-head"><div class="inf-title"><h3>${esc(nm)}</h3><button class="inf-say" data-a="say" title="Pronounce it" aria-label="Pronounce it">${I("volume-2")}</button></div>
       ${d&&d.latin?`<div class="b3d-aka latin">${esc(d.latin)}</div>`:""}
       ${d&&d.aka?`<div class="b3d-aka">${esc(d.aka)}</div>`:""}
       ${strip}${tabsHtml}</div>
@@ -19514,8 +19580,7 @@ function buildScene(gltf, st){
       if(a==="trace"){ tracePick(id); return; }
       pushHist();
       if(a==="hide"){ hidden.add(id); applyVis(); select(null); }
-      else if(a==="hideo"){ isolated=id; focusSet=null; applyVis(); showInfo(id); }
-      else if(a==="isolate"){ isolated=id; focusSet=null; applyVis(); focusOn(id); }
+      else if(a==="isolate"){ showOnly(id); focusOn(id); }
       else if(a==="fade"){ faded.has(id) ? faded.delete(id) : faded.add(id); applyVis(); showInfo(id); }
       else if(a==="fadeo"){ focusSet = (focusSet && focusSet.has(id)) ? null : new Set([id]); applyVis(); showInfo(id); }
       else { hidden.clear(); faded.clear(); isolated=null; focusSet=null; applyVis(); select(null); }
@@ -19534,7 +19599,7 @@ function buildScene(gltf, st){
     info.querySelectorAll(".b3d-rel").forEach(a=>a.addEventListener("click",e=>{
       const rid = (a.getAttribute("href")||"").replace(/^#\/part\//,"");
       if(rid && meshes[rid]){ e.preventDefault();
-        if(!anyVis(rid)){ pushHist(); isolated=rid; applyVis(); syncHiddenBar(); }
+        if(!anyVis(rid)){ pushHist(); showOnly(rid); }
         focusOn(rid); }
     }));
   };
@@ -19557,7 +19622,8 @@ function buildScene(gltf, st){
     if(selected) each(selected, m=>glow(m,0));
     if(id!==selected) fxClear();
     selected = id;
-    if(id){ each(id, m=>glow(m,selHex(id))); showInfo(id); }
+    if(id){ each(id, m=>glow(m,selHex(id))); showInfo(id);
+      try{ localStorage.setItem("atlas-last", window.ATLAS_GLB_PARENT && window.ATLAS_GLB_PARENT[id] || id); }catch(e){} }
     else setInfo(defInfo);
     info.classList.toggle("has-sel", !!id);
     appEl.classList.toggle("sel", !!id);
@@ -19789,7 +19855,7 @@ function buildScene(gltf, st){
   const lmInfo = it => {
     const p = byId[(LM_PID2REC || {})[it.pid] || it.pid], c = p ? SYSTEMS[p.system] : null;
     const lt = lmType(it.L.n);
-    setInfo(`<h3>📍 ${esc(it.L.n)}</h3>
+    setInfo(`<h3>${I("map-pin")} ${esc(it.L.n)}</h3>
       <div class="badges" style="margin:6px 0 8px"><span class="badge">Bone landmark</span>${lt?`<span class="badge">${lt}</span>`:""}${c?`<span class="badge sys" style="--badge-c:${c.color}">${c.icon} On the ${esc(p.name)}</span>`:""}</div>
       <p class="b3d-sum">${esc(it.L.d)}</p>
       ${it.L.att?`<div class="b3d-sec"><b>Attachments</b><p>${esc(it.L.att)}</p></div>`:""}
@@ -19902,7 +19968,7 @@ function buildScene(gltf, st){
   const mkPin = id => {
     const el = document.createElement("div");
     el.className = "b3dpin" + (pinsV2[id] && pinsV2[id].n ? " noted" : "");
-    el.innerHTML = `<span class="pl"><span class="nm">${esc(nameOf(id))}</span><button class="px" title="Remove pin" aria-label="Remove pin">✕</button></span>`;
+    el.innerHTML = `<span class="pl"><span class="nm">${esc(nameOf(id))}</span><button class="px" title="Remove pin" aria-label="Remove pin">${I("x")}</button></span>`;
     el.title = (pinsV2[id] && pinsV2[id].n) || nameOf(id);
     plLayer.appendChild(el);
     const g = document.createElementNS(SVGNS,"g");
@@ -19918,7 +19984,7 @@ function buildScene(gltf, st){
         if(!moved && dx*dx+dy*dy>16) moved=true;
         if(moved){ pin.lo=[lo0[0]+dx, lo0[1]+dy]; updPins(); } };
       const up = ev => { removeEventListener("pointermove",mv); removeEventListener("pointerup",up);
-        if(!moved){ if(!anyVis(id)){ pushHist(); isolated=id; applyVis(); syncHiddenBar(); } focusOn(id); }
+        if(!moved){ if(!anyVis(id)){ pushHist(); showOnly(id); } focusOn(id); }
         else savePins(); };
       addEventListener("pointermove",mv); addEventListener("pointerup",up); });
     /* double-click writes/removes a study note on the pin */
@@ -19930,7 +19996,7 @@ function buildScene(gltf, st){
       const done = save => { if(save){ pin.n = inp.value.trim(); if(!pin.n) delete pin.n;
           el.classList.toggle("noted",!!pin.n); el.title = pin.n || nameOf(id); savePins(); }
         const npl = document.createElement("span"); npl.className="pl";
-        npl.innerHTML = `<span class="nm">${esc(nameOf(id))}</span><button class="px" title="Remove pin">✕</button>`;
+        npl.innerHTML = `<span class="nm">${esc(nameOf(id))}</span><button class="px" title="Remove pin">${I("x")}</button>`;
         inp.replaceWith(npl);
         npl.querySelector(".px").addEventListener("click",ev=>{ ev.stopPropagation(); pinDel(id); if(selected===id) showInfo(id); }); };
       inp.addEventListener("keydown",ev=>{ ev.stopPropagation();
@@ -19992,7 +20058,7 @@ function buildScene(gltf, st){
       cv.toBlob(b=>{ if(!b) return;
         const a=document.createElement("a"); a.href=URL.createObjectURL(b);
         a.download="anatomy-3d.png"; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),4000);
-        const si = shotBtn.querySelector("i"); si.textContent="✓"; setTimeout(()=>si.textContent="📷",1200); });
+        const si = shotBtn.querySelector("i"); si.innerHTML=I("check"); setTimeout(()=>si.innerHTML=I("camera"),1200); });
     }catch(e){}
   });
   /* wireframe toggle — strips shading so meshes read as pure geometry */
@@ -20011,11 +20077,11 @@ function buildScene(gltf, st){
   const REG_COLOR = { head:0xe3a94e, neck:0xd98e8e, thorax:0xc25b52, abdomen:0xc7864e, pelvis:0x9b68ae,
     back:0x6fa3a0, "upper-limb":0x5f95c8, "lower-limb":0x4f9a6b, "whole-body":0x8d99a6 };
   const cmb = $("#b3dcmode");
-  if(cmb){ cmb.dataset.m = "z"; cmb.textContent = "🎨 colors: anatomy";
+  if(cmb){ cmb.dataset.m = "z"; cmb.innerHTML = I("palette")+" colors: anatomy";
     cmb.addEventListener("click",()=>{
       const order=["z","sys","reg"];
       const nx = order[(order.indexOf(cmb.dataset.m)+1)%3];
-      cmb.dataset.m = nx; cmb.textContent = "🎨 colors: "+(nx==="z"?"anatomy":nx==="sys"?"system":"region");
+      cmb.dataset.m = nx; cmb.innerHTML = I("palette")+" colors: "+(nx==="z"?"anatomy":nx==="sys"?"system":"region");
       for(const id in meshes) for(const m of meshes[id]){
         m.userData.baseMat = nx==="z" ? m.userData.origMat
           : tintMat(nx==="reg" ? (REG_COLOR[regOf(id)]||0x8d99a6) : (SYS_COLOR[m.userData.sys]||0x8d99a6));
@@ -20127,20 +20193,20 @@ function buildScene(gltf, st){
     /* landmarks are searchable too — they fly to their parent bone and pulse */
     const lmHits = LMS.filter(x=>x.L.n.toLowerCase().includes(q) || x.L.id.includes(q)).slice(0, Math.max(0, 8-hits.length));
     qres.innerHTML = hits.map(id=>`<div class="qhit" data-id="${id}">${esc(nameOf(id))}</div>`).join("")
-      + lmHits.map(x=>`<div class="qhit" data-lid="${x.L.id}">📍 ${esc(x.L.n)}</div>`).join("")
+      + lmHits.map(x=>`<div class="qhit" data-lid="${x.L.id}">${I("map-pin")} ${esc(x.L.n)}</div>`).join("")
       || `<div class="qhit dim">No match</div>`;
     qres.style.display="block";
     qres.querySelectorAll(".qhit[data-id]").forEach(h=>h.addEventListener("pointerdown",ev=>{
       ev.preventDefault(); ev.stopPropagation();
       const id=h.dataset.id; qres.style.display="none"; qin.value=nameOf(id);
-      if(!anyVis(id)){ isolated=id; applyVis(); syncHiddenBar(); }
+      if(!anyVis(id)){ showOnly(id); }
       focusOn(id);
     }));
     qres.querySelectorAll(".qhit[data-lid]").forEach(h=>h.addEventListener("pointerdown",ev=>{
       ev.preventDefault(); ev.stopPropagation();
       const it = lmById(h.dataset.lid); if(!it) return;
       qres.style.display="none"; qin.value=it.L.n;
-      if(!anyVis(it.pid)){ isolated=it.pid; applyVis(); syncHiddenBar(); }
+      if(!anyVis(it.pid)){ showOnly(it.pid); }
       select(it.pid); focusOn(it.pid); lmFlash=it.L.id; lmInfo(it);
       setTimeout(()=>{ lmFlash=null; }, 8000);
     }));
@@ -20190,7 +20256,7 @@ function buildScene(gltf, st){
     idxEl.innerHTML = Object.keys(bySysL).sort((a,b)=>SYSTEMS[a].name.localeCompare(SYSTEMS[b].name))
       .map(s=>`<div class="idx-g"><h5>${SYSTEMS[s].icon} ${esc(SYSTEMS[s].name)}</h5>${
         bySysL[s].sort((a,b)=>nameOf(a).localeCompare(nameOf(b))).map(id=>
-          `<div class="idx-r${id===selected?" on":""}" data-id="${id}"><span>${esc(nameOf(id))}</span><button data-x="${id}" title="Hide">👁</button></div>`).join("")
+          `<div class="idx-r${id===selected?" on":""}" data-id="${id}"><span>${esc(nameOf(id))}</span><button data-x="${id}" title="Hide">${I("eye-off")}</button></div>`).join("")
       }</div>`).join("");
     idxEl.querySelectorAll(".idx-r").forEach(r=>r.addEventListener("click",e=>{
       const id = r.dataset.id;
@@ -20212,20 +20278,20 @@ function buildScene(gltf, st){
     skinV.textContent = +skinIn.value<100 ? skinIn.value+"%" : ""; applySkinOp(); });
   /* study aids: Z-Anatomy's annotation layers (insertions, regions, lines) */
   const aidb = document.createElement("button");
-  aidb.id = "b3daids"; aidb.className = "fchip"; aidb.textContent = "🗺 study aids"; aidb.style.setProperty("--fc","#8d99a6");
+  aidb.id = "b3daids"; aidb.className = "fchip"; aidb.innerHTML = I("map")+" study aids"; aidb.style.setProperty("--fc","#8d99a6");
   aidb.addEventListener("click",()=>{ aidsOn = aidb.classList.toggle("on"); applyVis(); });
   f.appendChild(aidb);
 
   /* one-tap system presets + guided camera views */
   const SYSPRESETS = [
-    ["🧍 All", null], ["💀 Skeleton", ["skeletal"]], ["💪 Muscles", ["muscular"]],
-    ["🧠 Nerves", ["nervous"]], ["🫀 Blood", ["cardiovascular","lymphatic"]],
-    ["🫁 Organs", ["digestive","respiratory","urinary","reproductive","endocrine","sensory"]],
-    ["🧴 Skin", ["integumentary"]] ];
+    ["person","All", null], ["bone","Skeleton", ["skeletal"]], ["dumbbell","Muscles", ["muscular"]],
+    ["zap","Nerves", ["nervous"]], ["heart-pulse","Blood", ["cardiovascular","lymphatic"]],
+    ["stethoscope","Organs", ["digestive","respiratory","urinary","reproductive","endocrine","sensory"]],
+    ["hand","Skin", ["integumentary"]] ];
   const VIEWS = [
-    ["🧍 Full", null, null], ["🫀 Heart", ["cardiovascular","lymphatic","skeletal"], "heart", 1.6],
-    ["🧠 Brain", ["nervous"], "midbrain", 1.4], ["👁 Eye", ["sensory","muscular"], "eye"],
-    ["✋ Hand", ["skeletal","muscular","nervous"], "metacarpals"], ["💀 Skull", ["skeletal"], "mandible"] ];
+    ["person","Full", null, null], ["heart-pulse","Heart", ["cardiovascular","lymphatic","skeletal"], "heart", 1.6],
+    ["brain","Brain", ["nervous"], "midbrain", 1.4], ["eye","Eye", ["sensory","muscular"], "eye"],
+    ["hand","Hand", ["skeletal","muscular","nervous"], "metacarpals"], ["skull","Skull", ["skeletal"], "mandible"] ];
   const setLayers = sel => {
     pushHist();
     for(const s in chipOn) chipOn[s] = sel===null ? s!=="integumentary" : sel.includes(s);
@@ -20234,17 +20300,17 @@ function buildScene(gltf, st){
     f.querySelectorAll(".fchip[data-s]").forEach(ch=>ch.classList.toggle("on",!!chipOn[ch.dataset.s]));
     applyVis(); syncHiddenBar(); };
   const preEl = $("#b3dpre"), vwEl = $("#b3dvw");
-  const chipIn = s => { const k = s.indexOf(" "); return `<span class="ic">${s.slice(0,k)}</span><span class="lb">${s.slice(k+1)}</span>`; };
-  if(preEl){ preEl.innerHTML = SYSPRESETS.map((p,i)=>`<button class="pchip${i===0?" on":""}" data-i="${i}" title="${p[0].slice(p[0].indexOf(" ")+1)}">${chipIn(p[0])}</button>`).join("");
+  const chipIn = v => `<span class="ic">${I(v[0])}</span><span class="lb">${v[1]}</span>`;
+  if(preEl){ preEl.innerHTML = SYSPRESETS.map((p,i)=>`<button class="pchip${i===0?" on":""}" data-i="${i}" title="${p[1]}">${chipIn(p)}</button>`).join("");
     preEl.querySelectorAll(".pchip").forEach(b=>b.addEventListener("click",()=>{
-      setLayers(SYSPRESETS[+b.dataset.i][1]);
+      setLayers(SYSPRESETS[+b.dataset.i][2]);
       preEl.querySelectorAll(".pchip").forEach(x=>x.classList.toggle("on",x===b)); })); }
-  if(vwEl){ vwEl.innerHTML = VIEWS.map((v,i)=>`<button class="pchip vchip" data-i="${i}" title="${v[0].slice(v[0].indexOf(" ")+1)}">${chipIn(v[0])}</button>`).join("");
+  if(vwEl){ vwEl.innerHTML = VIEWS.map((v,i)=>`<button class="pchip vchip" data-i="${i}" title="${v[1]}">${chipIn(v)}</button>`).join("");
     vwEl.querySelectorAll(".vchip").forEach(b=>b.addEventListener("click",()=>{
-      const v = VIEWS[+b.dataset.i]; setLayers(v[1]);
+      const v = VIEWS[+b.dataset.i]; setLayers(v[2]);
       if(preEl) preEl.querySelectorAll(".pchip").forEach(x=>x.classList.remove("on"));
-      if(v[2] && meshes[v[2]]){ const p = partCenter(v[2]);
-        if(p) flyTo(p.c, p.r*(v[3]||1)); select(v[2]); }
+      if(v[3] && meshes[v[3]]){ const p = partCenter(v[3]);
+        if(p) flyTo(p.c, p.r*(v[4]||1)); select(v[3]); }
       else { fly=null; camera.position.copy(home); controls.target.copy(home2); controls.update(); } })); }
 
   /* ambient occlusion — post-processed depth shading (desktop only) */
@@ -20367,7 +20433,7 @@ function buildScene(gltf, st){
       const phrase = (t.rel && t.rel[r]) ? esc(t.rel[r])
         : rd && rd.summary ? esc(rd.summary)
         : `It sits close to the ${esc(d.name)}.`;
-      steps.push({ t:`🔗 ${nameOf(r)}`, lbl:"off",
+      steps.push({ t:`${I("link")} ${nameOf(r)}`, lbl:"off",
         x:`<b>${esc(nameOf(r))}</b><br><br>${phrase}<br><br><span class="dim">Everything else is ghosted — look at where it sits next to the ${esc(d.name)}.</span>`,
         q:{id:r, t:`Now tap the <b>${esc(nameOf(r))}</b> on the body`},
         act:()=>{ onlyIds([id,r]);
@@ -20450,7 +20516,7 @@ function buildScene(gltf, st){
     /* retrieval question prompt for this step */
     lesson.q = s.q || null; lesson.qTry = false;
     const qEl = $("#lesq"), qst = $("#lesqst");
-    if(s.q){ qEl.innerHTML = `<span>🎯 ${s.q.t || `Tap the <b>${esc(nameOf(s.q.id))}</b> on the body`}</span>${lesson.sc.tot?`<span class="les-sc">${lesson.sc.ok}/${lesson.sc.tot}</span>`:""}<span class="les-qa"><button data-q="show">Show me</button><button data-q="skip">Skip</button></span>`;
+    if(s.q){ qEl.innerHTML = `<span>${I("target")} ${s.q.t || `Tap the <b>${esc(nameOf(s.q.id))}</b> on the body`}</span>${lesson.sc.tot?`<span class="les-sc">${lesson.sc.ok}/${lesson.sc.tot}</span>`:""}<span class="les-qa"><button data-q="show">Show me</button><button data-q="skip">Skip</button></span>`;
       qEl.style.display="";
       qEl.querySelector("[data-q=show]").addEventListener("click",lesShow);
       qEl.querySelector("[data-q=skip]").addEventListener("click",lesSkip); }
@@ -20460,7 +20526,7 @@ function buildScene(gltf, st){
     $("#lesnav").innerHTML =
       `${lesson.i>0?`<button id="lespv">← Back</button>`:""}<button class="les-prog" id="lesprog" title="Jump to any step">${lesson.i+1} / ${lesson.steps.length} ▾</button>` +
       (s.finish
-        ? `<button class="pri" id="lestest">🎯 Test me</button><button class="dim" id="lesdone">Done ✓</button>`
+        ? `<button class="pri" id="lestest">${I("target")} Test me</button><button class="dim" id="lesdone">Done ✓</button>`
         : `<button class="pri" id="lesnx">Next →</button>`);
     const pg=$("#lesprog"); if(pg) pg.addEventListener("click",()=>{ lesson.outline=!lesson.outline; lesBodyPaint(); });
     const pv=$("#lespv"); if(pv) pv.addEventListener("click",()=>lesGo(lesson.i-1));
@@ -20477,11 +20543,11 @@ function buildScene(gltf, st){
           nxt = nid && byId[nid] ? {id:nid, name:byId[nid].name} : null;
           if(!nxt){ giveBadge("path-1"); if((window.ATLAS_PATHS||[]).every(x=>x.steps.every(s=>lessonDone(s)))) giveBadge("path-all"); } }
       } else nxt = lessonsOf(lesson.sys).find(x=>!lessonDone(x.id));
-      $("#lesbody").innerHTML = `🎉 <b>${esc(nameOf(lesson.id))}</b> — lesson complete.${lesson.sc.tot?` Recall score: <b>${lesson.sc.ok}/${lesson.sc.tot}</b> first try.`:""}${nxt?` Next up: <b>${esc(nxt.name)}</b>.`:" You've finished this path!"}`;
+      $("#lesbody").innerHTML = `${I("trophy")} <b>${esc(nameOf(lesson.id))}</b> — lesson complete.${lesson.sc.tot?` Recall score: <b>${lesson.sc.ok}/${lesson.sc.tot}</b> first try.`:""}${nxt?` Next up: <b>${esc(nxt.name)}</b>.`:" You've finished this path!"}`;
       $("#lesnav").innerHTML = (nxt?`<button class="pri" id="lesgo2">Next lesson →</button>`:"") + `<button class="dim" id="lesout">Exit</button>`;
       if(nxt) $("#lesgo2").addEventListener("click",()=>{ location.hash = `/3d/${nxt.id}?lesson=${lesson.sys}`; });
       $("#lesout").addEventListener("click",lesClose);
-      $("#lest").textContent = "🎉 Lesson complete"; });
+      $("#lest").textContent = "Lesson complete"; });
     if(s.act) s.act();
     setLbl(s.lbl||"off");
     queueUrl();
@@ -20583,8 +20649,8 @@ function buildScene(gltf, st){
     ball.renderOrder = 99; scene.add(ball);
     traceFx = { on:true, tr, pts, curve, tube, ball, t:0, i:0 };
     const bar = document.createElement("div"); bar.className = "b3d-movebar trace";
-    bar.innerHTML = `<b>🛤 ${esc(tr.name)}</b><span class="hint" id="trstep"></span>
-      <button data-tr="prev">‹</button><button data-tr="next">›</button><button data-tr="stop">✕</button>`;
+    bar.innerHTML = `<b>${I("route")} ${esc(tr.name)}</b><span class="hint" id="trstep"></span>
+      <button data-tr="prev">‹</button><button data-tr="next">›</button><button data-tr="stop">${I("x")}</button>`;
     stage.appendChild(bar); traceFx.bar = bar;
     const step = i => { traceFx.i = Math.max(0, Math.min(pts.length-1, i));
       const p = pts[traceFx.i];
@@ -20600,7 +20666,7 @@ function buildScene(gltf, st){
   /* pathways list in the layers drawer */
   { const tEl = $("#b3dtraces"), tSec = $("#dr-traces");
     if(tEl && ATLAS_TRACES.length){ tSec.style.display = "";
-      tEl.innerHTML = ATLAS_TRACES.map(t=>`<button class="pchip" data-tr="${t.id}" title="${esc(t.name)}">${t.kind==="nerve"?"🟡":t.kind==="vein"?"🔵":"🔴"} ${esc(t.name)}</button>`).join("");
+      tEl.innerHTML = ATLAS_TRACES.map(t=>`<button class="pchip" data-tr="${t.id}" title="${esc(t.name)}"><i class="cdot" style="--c:${t.kind==="nerve"?"#eab308":t.kind==="vein"?"#3b82f6":"#ef4444"}"></i>${esc(t.name)}</button>`).join("");
       tEl.querySelectorAll("[data-tr]").forEach(b=>b.addEventListener("click",()=>traceStart(b.dataset.tr))); } }
 
   paintPins();
@@ -20707,13 +20773,13 @@ function v3D(sel){
       <div class="b3d-presets b3d-views" id="b3dvw"></div>
     </nav>
 
-    <div class="b3d-info" id="b3di"><div class="b3d-grab"></div><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">✕</button><h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p></div>
+    <div class="b3d-info" id="b3di"><div class="b3d-grab"></div><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">${I("x")}</button><h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p></div>
     <div class="b3d-hbar" id="b3dhbar"></div>
     <div class="b3d-lesson" id="b3dles" style="display:none">
       <div class="les-top"><b class="les-step" id="lest"></b><span class="les-dots" id="lesdots"></span>
-        <button class="les-smp" id="lesrep" title="Replay the camera move" aria-label="Replay the camera move">⟲</button>
-        <button class="les-smp" id="lessmp" title="Explain it simply" aria-label="Explain it simply">🧠</button>
-        <button class="les-x" id="lesx" title="Exit lesson" aria-label="Exit lesson">✕</button></div>
+        <button class="les-smp" id="lesrep" title="Replay the camera move" aria-label="Replay the camera move">${I("rotate-ccw")}</button>
+        <button class="les-smp" id="lessmp" title="Explain it simply" aria-label="Explain it simply">${I("lightbulb")}</button>
+        <button class="les-x" id="lesx" title="Exit lesson" aria-label="Exit lesson">${I("x")}</button></div>
       <div class="les-path" id="lespath" style="display:none"></div>
       <div class="les-body" id="lesbody"></div>
       <div class="les-q" id="lesq" style="display:none"></div>
@@ -20721,55 +20787,55 @@ function v3D(sel){
       <div class="les-nav" id="lesnav"></div>
     </div>
 
-    <div class="b3d-pop" id="pop-slice"><div class="pop-h">✂ Slice <small>cut through the body</small></div>
+    <div class="b3d-pop" id="pop-slice"><div class="pop-h">${I("scissors")} Slice <small>cut through the body</small></div>
       <div class="b3d-peel"><span class="b3d-ax" id="b3dax"><button data-a="x">X</button><button data-a="y">Y</button><button data-a="z" class="on">Z</button></span><input id="b3dsl" type="range" min="0" max="100" value="0" aria-label="Slice position"></div></div>
-    <div class="b3d-pop" id="pop-exp"><div class="pop-h">💥 Explode <small>push structures apart</small></div>
+    <div class="b3d-pop" id="pop-exp"><div class="pop-h">${I("expand")} Explode <small>push structures apart</small></div>
       <div class="b3d-peel"><input id="b3dexp" type="range" min="0" max="100" value="0" aria-label="Explode view"><em id="b3dexpv"></em></div></div>
-    <div class="b3d-pop" id="pop-peel"><div class="pop-h">🧅 Peel layers <small>skin → muscle → … → bone</small></div>
+    <div class="b3d-pop" id="pop-peel"><div class="pop-h">${I("layers")} Peel layers <small>skin → muscle → … → bone</small></div>
       <div class="b3d-peel"><input id="b3dpeel" type="range" min="0" max="100" value="0" aria-label="Peel anatomical layers"><em id="b3dpeelv"></em></div></div>
     <div class="b3d-pop" id="pop-more"><div class="pop-h">⋯ More <small>display &amp; actions</small></div>
       <div class="pop-tools">
-        <button class="dock-b" id="b3dwire" title="Wireframe on/off"><i>🕸</i><b>Wire</b></button>
-        <button class="dock-b" id="b3dao" title="Depth shading (ambient occlusion)"><i>🕳</i><b>AO</b></button>
-        <button class="dock-b" id="b3dundo" title="Undo hide/isolate (Ctrl+Z)" disabled><i>⎌</i><b>Undo</b></button>
-        <button class="dock-b" id="b3dshot" title="Save a screenshot (PNG)"><i>📷</i><b>Photo</b></button>
-        <button class="dock-b" id="b3dreset" title="Reset view"><i>⟲</i><b>Reset</b></button>
+        <button class="dock-b" id="b3dwire" title="Wireframe on/off"><i>${I("grid")}</i><b>Wire</b></button>
+        <button class="dock-b" id="b3dao" title="Depth shading (ambient occlusion)"><i>${I("contrast")}</i><b>AO</b></button>
+        <button class="dock-b" id="b3dundo" title="Undo hide/isolate (Ctrl+Z)" disabled><i>${I("undo-2")}</i><b>Undo</b></button>
+        <button class="dock-b" id="b3dshot" title="Save a screenshot (PNG)"><i>${I("camera")}</i><b>Photo</b></button>
+        <button class="dock-b" id="b3dreset" title="Reset view"><i>${I("rotate-ccw")}</i><b>Reset</b></button>
       </div></div>
 
     <nav class="b3d-dock" aria-label="3D tools"><div class="dock-in">
-      <button class="dock-b" id="b3dst" title="Hide the names — tap a ? to reveal it (self-test)"><i>🙈</i><b>Test</b></button>
-      <button class="dock-b" id="b3dxr" title="X-ray: fade the outer layers"><i>👻</i><b>X-ray</b></button>
+      <button class="dock-b" id="b3dst" title="Hide the names — tap a ? to reveal it (self-test)"><i>${I("eye-off")}</i><b>Test</b></button>
+      <button class="dock-b" id="b3dxr" title="X-ray: fade the outer layers"><i>${I("ghost")}</i><b>X-ray</b></button>
       <span class="dock-sep"></span>
-      <button class="dock-b" data-pop="slice" title="Slice through the body"><i>✂</i><b>Slice</b></button>
-      <button class="dock-b" data-pop="exp" title="Exploded view"><i>💥</i><b>Explode</b></button>
-      <button class="dock-b" data-pop="peel" title="Peel layers"><i>🧅</i><b>Peel</b></button>
+      <button class="dock-b" data-pop="slice" title="Slice through the body"><i>${I("scissors")}</i><b>Slice</b></button>
+      <button class="dock-b" data-pop="exp" title="Exploded view"><i>${I("sparkles")}</i><b>Explode</b></button>
+      <button class="dock-b" data-pop="peel" title="Peel layers"><i>${I("layers")}</i><b>Peel</b></button>
       <span class="dock-sep"></span>
-      <button class="dock-b" id="b3dquiz" title="Quiz: find or name structures"><i>🎯</i><b>Quiz</b></button>
+      <button class="dock-b" id="b3dquiz" title="Quiz: find or name structures"><i>${I("target")}</i><b>Quiz</b></button>
       <button class="dock-b" data-pop="more" title="Wireframe, depth shading, undo, screenshot, reset"><i>⋯</i><b>More</b></button>
-      <button class="dock-b" id="b3dlayers" title="Body systems, colors &amp; more"><i>☰</i><b>Layers</b></button>
-      <button class="dock-b" id="b3dunpeek" title="Hide the toolbar"><i>▾</i><b>Hide</b></button>
+      <button class="dock-b" id="b3dlayers" title="Body systems, colors &amp; more"><i>${I("layers")}</i><b>Layers</b></button>
+      <button class="dock-b" id="b3dunpeek" title="Hide the toolbar"><i>${I("chevron-down")}</i><b>Hide</b></button>
     </div></nav>
-    <button class="b3d-peekbtn" id="b3dpeek" title="Show the tools">▴ Tools</button>
+    <button class="b3d-peekbtn" id="b3dpeek" title="Show the tools">${I("chevron-up")} Tools</button>
 
     <div class="b3d-scrim" id="b3dscrim"></div>
     <aside class="b3d-drawer" id="b3ddrawer" aria-label="Layers and options">
-      <div class="dr-head"><span>Layers &amp; options</span><button class="b3d-iconbtn" id="b3ddrclose" aria-label="Close">✕</button></div>
+      <div class="dr-head"><span>Layers &amp; options</span><button class="b3d-iconbtn" id="b3ddrclose" aria-label="Close">${I("x")}</button></div>
       <div class="dr-body">
         <div class="dr-sec"><h4>Body systems</h4><div class="b3d-filters" id="b3df"></div>
-          <button class="fchip" id="b3dreshid" style="display:none;margin-top:8px">↺ Show hidden</button></div>
-        <div class="dr-sec"><h4>Colors</h4><button class="fchip on b3d-cmode" id="b3dcmode" data-m="sys">🎨 colors: by system</button>
-          <div class="b3d-peel" style="margin-top:10px"><span style="min-width:88px;font-size:11.5px">🧴 Skin opacity</span><input id="b3dskin" type="range" min="15" max="100" value="100" aria-label="Skin opacity"><em id="b3dskinv"></em></div></div>
-        <div class="dr-sec" id="dr-traces" style="display:none"><h4>🛤 Pathways</h4><div class="b3d-presets" id="b3dtraces"></div></div>
-        <div class="dr-sec"><h4>📌 Pinned structures</h4><div class="b3d-presets b3d-pins" id="b3dpins"></div></div>
+          <button class="fchip" id="b3dreshid" style="display:none;margin-top:8px">${I("rotate-ccw")} Show hidden</button></div>
+        <div class="dr-sec"><h4>Colors</h4><button class="fchip on b3d-cmode" id="b3dcmode" data-m="sys">${I("palette")} colors: by system</button>
+          <div class="b3d-peel" style="margin-top:10px"><span style="min-width:88px;font-size:11.5px">${I("droplet")} Skin opacity</span><input id="b3dskin" type="range" min="15" max="100" value="100" aria-label="Skin opacity"><em id="b3dskinv"></em></div></div>
+        <div class="dr-sec" id="dr-traces" style="display:none"><h4>${I("route")} Pathways</h4><div class="b3d-presets" id="b3dtraces"></div></div>
+        <div class="dr-sec"><h4>${I("pin")} Pinned structures</h4><div class="b3d-presets b3d-pins" id="b3dpins"></div></div>
         <div class="dr-sec"><h4>Structure index</h4><div class="b3d-idx" id="b3didx"></div></div>
         <div class="dr-sec" id="b3dhelp"><h4>How to use</h4>
           <ul class="dr-help">
             <li><b>Rotate</b> — drag · <b>Pan</b> — right-drag or two fingers · <b>Zoom</b> — scroll or pinch</li>
             <li><b>Select</b> — tap a structure · <b>Zoom to it</b> — double-tap</li>
             <li><b>Hide a part</b> — right-click or long-press, then ⎌ Undo (Ctrl+Z)</li>
-            <li><b>📌 Pin a structure</b> — from its info card; the marker sticks to the body — drag the label, double-click it to add a note</li>
-            <li><b>🎯 Quiz</b> — you're given a name, tap the right structure</li>
-            <li><b>🎓 Guided lessons</b> — open <a href="#/learn" style="color:#ffd60a">Learn</a> for step-by-step tours that drive the camera</li>
+            <li><b>${I("pin")} Pin a structure</b> — from its info card; the marker sticks to the body — drag the label, double-click it to add a note</li>
+            <li><b>${I("target")} Quiz</b> — you're given a name, tap the right structure</li>
+            <li><b>${I("graduation-cap")} Guided lessons</b> — open <a href="#/learn" style="color:#ffd60a">Learn</a> for step-by-step tours that drive the camera</li>
             <li><b>Share</b> — the address bar always matches your current view; copy it to send</li>
           </ul></div>
         <div class="dr-sec"><details><summary>Close-up models</summary><div class="grid">${ids.map(id=>cardHTML(byId[id])).join("")}</div></details></div>
@@ -20795,14 +20861,14 @@ function lightbox(im){
 
 function vMap(){
   crumbs([{t:"Home",href:"#/"},{t:"Body map"}]);
-  view.innerHTML = `<div class="list-head"><h1>🗺️ Body regions</h1><p>Pick a body region to explore its structures.</p></div>
+  view.innerHTML = `<div class="list-head"><h1>${I("map")} Body regions</h1><p>Pick a body region to explore its structures.</p></div>
   <div class="region-list">${META.regionOrder.filter(r=>regCount[r]).map(r=>`<a class="region-item" href="#/region/${r}"><span class="nm">${REGIONS[r].name}</span><span class="ct">${regCount[r]} structures</span></a>`).join("")}</div>`;
 }
 
 function vGallery(){
   crumbs([{t:"Home",href:"#/"},{t:"Plates gallery"}]);
   const items = DATA.filter(d=>IMAGES[d.id]);
-  view.innerHTML = `<div class="list-head"><h1>🖼️ Anatomical plates</h1><p>${items.length} labeled illustrations from Wikimedia Commons — public-domain Gray's Anatomy and open-license sources. Click to enlarge.</p></div>
+  view.innerHTML = `<div class="list-head"><h1>${I("image")} Anatomical plates</h1><p>${items.length} labeled illustrations from Wikimedia Commons — public-domain Gray's Anatomy and open-license sources. Click to enlarge.</p></div>
   <div class="gallery">${items.map(d=>{const im=IMAGES[d.id];return `<div class="gitem" data-id="${d.id}"><img src="${esc(im.thumb||im.url)}" loading="lazy"><div class="c">${im.kind?`<b class="kind kind-${im.kind}">${im.kind}</b> `:""}${d.name}</div></div>`}).join("")}</div>`;
   view.querySelectorAll(".gitem").forEach(g=>g.addEventListener("click",()=>lightbox(IMAGES[g.dataset.id])));
 }
@@ -20845,17 +20911,17 @@ function vQuiz(arg){
   const modeOpts = QMODES.map(m=>`<option value="${m[0]}" ${m[0]===cfg.mode?"selected":""}>${m[1]}</option>`).join("");
   view.innerHTML = `<div class="quiz-box">
     <div class="quiz-score">
-      ${isDue?`<span class="badge">🧠 Review · left <b id="qr">${Math.min(20,dueIds.length)}</b></span>`:""}
+      ${isDue?`<span class="badge">${I("brain")} Review · left <b id="qr">${Math.min(20,dueIds.length)}</b></span>`:""}
       <span class="badge">Score: <b id="qs">0</b></span>
       <span class="badge">Answered: <b id="qa">0</b></span>
       <span class="badge">Streak: <b id="qk">0</b></span>
-      ${cfg.t?`<span class="badge">⏱ <b id="qtimer">${Math.floor(cfg.t/60)}:${String(cfg.t%60).padStart(2,"0")}</b></span>`:""}
+      ${cfg.t?`<span class="badge">${I("clock")} <b id="qtimer">${Math.floor(cfg.t/60)}:${String(cfg.t%60).padStart(2,"0")}</b></span>`:""}
       <select id="qmode" class="qsel" title="Question style">${modeOpts}</select>
       ${isDue?"":`<select id="qsys" class="qsel" title="Filter by system">
         <option value="">All systems</option>${META.systemOrder.map(s=>`<option value="${s}" ${cfg.sys.includes(s)?"selected":""}>${SYSTEMS[s].name}</option>`).join("")}
       </select>`}
-      <a class="badge" href="#/quiz-builder" title="Build a custom quiz">⚙ Custom</a>
-      <a class="badge" href="#/3d?quiz=mix" title="Quiz yourself on the 3D model — tap it or name it">🧊 Spot-test in 3D</a>
+      <a class="badge" href="#/quiz-builder" title="Build a custom quiz">${I("sliders")} Custom</a>
+      <a class="badge" href="#/3d?quiz=mix" title="Quiz yourself on the 3D model — tap it or name it">${I("box")} Spot-test in 3D</a>
     </div>
     <div class="qcard" id="qcard"></div></div>`;
   const qsel = $("#qsys"); if(qsel) qsel.addEventListener("change",e=>{ location.hash = "/quiz"+(e.target.value?"/"+e.target.value:""); });
@@ -20874,10 +20940,10 @@ function endQuiz(msg){
   if(quiz.timer){ clearInterval(quiz.timer); quiz.timer=null; }
   const pct = quiz.asked ? Math.round(quiz.score/quiz.asked*100) : 0;
   const qc = $("#qcard"); if(!qc) return;
-  qc.innerHTML = `<div class="q">${msg||"Quiz complete 🎉"}</div>
+  qc.innerHTML = `<div class="q">${msg||"Quiz complete"}</div>
     <div class="qsub">${quiz.score} of ${quiz.asked} correct (${pct}%)</div>
     <div class="quiz-foot"><a class="btn primary" href="#/quiz">Again</a>
-      <a class="btn" href="#/quiz-builder" style="margin-left:8px">⚙ Custom quiz</a>
+      <a class="btn" href="#/quiz-builder" style="margin-left:8px">${I("sliders")} Custom quiz</a>
       <a class="btn" href="#/learn" style="margin-left:8px">Back to learn</a></div>`;
   if(quiz.asked>=10) giveBadge("review-10");
   if(quiz.score) addXP(quiz.score*2,"quiz session");
@@ -20904,7 +20970,7 @@ function nextQ(){
   const pool = quiz.pool || DATA.filter(d=>d.summary);
   let d;
   if(quiz.queue){
-    if(!quiz.queue.length){ endQuiz(quiz.cfg && quiz.cfg.n ? "Custom quiz complete 🎉" : "Review complete 🎉"); return; }
+    if(!quiz.queue.length){ endQuiz(quiz.cfg && quiz.cfg.n ? "Custom quiz complete" : "Review complete"); return; }
     const id = quiz.queue.pop();
     d = typeof id==="string" ? byId[id] : id;
     if(!d) return nextQ();
@@ -20989,7 +21055,7 @@ function vQuizBuilder(){
   let cfg; try{ cfg = JSON.parse(localStorage.getItem("atlas-qcfg")||"null") || parseQC("c:mode="+(localStorage.getItem("atlas-q2mode")|| "choices")); }catch(e){ cfg = parseQC("c:mode=choices"); }
   crumbs([{t:"Home",href:"#/"},{t:"Quiz",href:"#/quiz"},{t:"Custom quiz"}]);
   view.innerHTML = `<div class="quiz-box">
-    <h1 style="margin:4px 0 12px">⚙ Custom quiz</h1>
+    <h1 style="margin:4px 0 12px">${I("sliders")} Custom quiz</h1>
     <div class="qbuilder">
       <div class="qbrow"><b>Systems</b><div class="qbchips" id="qb-sys">
         ${META.systemOrder.map(s=>`<button class="chip ${cfg.sys.includes(s)?"on":""}" data-v="${s}">${SYSTEMS[s].name}</button>`).join("")}</div></div>
@@ -21000,9 +21066,9 @@ function vQuizBuilder(){
         ${[10,20,40,0].map(n=>`<button class="chip ${cfg.n===n?"on":""}" data-v="${n}">${n||"∞"}</button>`).join("")}</div></div>
       <div class="qbrow"><b>Timer</b><div class="qbchips" id="qb-t">
         ${[[0,"Off"],[60,"1 min"],[120,"2 min"],[300,"5 min"]].map(t=>`<button class="chip ${cfg.t===t[0]?"on":""}" data-v="${t[0]}">${t[1]}</button>`).join("")}</div></div>
-      <div class="qbrow"><label class="chip ${cfg.plate?"on":""}" id="qb-plate"><input type="checkbox" ${cfg.plate?"checked":""} style="display:none"> 🖼 Has plate only</label></div>
+      <div class="qbrow"><label class="chip ${cfg.plate?"on":""}" id="qb-plate"><input type="checkbox" ${cfg.plate?"checked":""} style="display:none"> ${I("image")} Has plate only</label></div>
       <div class="qbrow"><a class="btn primary" id="qb-go">Start quiz →</a>
-        <a class="btn" id="qb-share" style="margin-left:8px">🔗 Copy link</a></div>
+        <a class="btn" id="qb-share" style="margin-left:8px">${I("link")} Copy link</a></div>
     </div></div>`;
   const pick = sel => { cfg[sel]=[]; $("#qb-"+sel).querySelectorAll(".chip.on").forEach(c=>cfg[sel].push(c.dataset.v)); };
   view.querySelectorAll(".qbchips .chip").forEach(c=>c.addEventListener("click",()=>{
@@ -21046,18 +21112,18 @@ const srRecord = (id,ok) => { if(!id) return;
 const srDue = () => { const t=today(), boxes=PROG.boxes||{};
   return Object.keys(boxes).filter(id=>byId[id] && boxes[id].due<=t); };
 const BADGES = [
-  ["first-lesson","🎓 First steps","Finish your first guided lesson"],
-  ["five-lessons","📚 Scholar","Finish 5 lessons"],
-  ["quiz-25","🎯 Sharp eye","Answer 25 quiz questions correctly"],
-  ["streak-3","🔥 On a roll","Learn 3 days in a row"],
-  ["review-10","🧠 Long-term memory","Clear 10 spaced-repetition reviews"],
-  ["path-1","🛤 Trailblazer","Finish a guided learning path"],
-  ["path-all","🏆 Master anatomist","Finish every guided learning path"] ];
+  ["first-lesson","First steps","Finish your first guided lesson"],
+  ["five-lessons","Scholar","Finish 5 lessons"],
+  ["quiz-25","Sharp eye","Answer 25 quiz questions correctly"],
+  ["streak-3","On a roll","Learn 3 days in a row"],
+  ["review-10","Long-term memory","Clear 10 spaced-repetition reviews"],
+  ["path-1","Trailblazer","Finish a guided learning path"],
+  ["path-all","Master anatomist","Finish every guided learning path"] ];
 const badgeHas = id => (PROG.badges||[]).includes(id);
 const giveBadge = id => { if(badgeHas(id)) return;
   const b = BADGES.find(x=>x[0]===id); if(!b) return;
   (PROG.badges=PROG.badges||[]).push(id); saveProg();
-  learnToast(`🏅 Badge earned: ${b[1]}`, 3200); };
+  learnToast(`Badge earned: ${b[1]}`, 3200); };
 const checkBadges = () => {
   const nl = Object.keys(PROG.lessons||{}).length;
   if(nl>=1) giveBadge("first-lesson");
@@ -21081,8 +21147,8 @@ function vLearn(arg){
     crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:c.name}]);
     view.innerHTML = `<div class="list-head"><h1><span class="ic">${c.icon}</span>Learn ${c.name.toLowerCase()}</h1>
       <p>${done}/${items.length} lessons complete — each one walks you through the structure in the 3D body: where it is, what it looks like, what it does and what sits next to it.</p></div>
-      ${nx?`<p><a class="btn primary" href="#/3d/${nx.id}?lesson=${arg}">▶ ${done?"Continue":"Start"}: ${esc(nx.name)}</a>
-        <a class="btn" href="#/quiz/${arg}">🎯 Quiz this system</a></p>`:""}
+      ${nx?`<p><a class="btn primary" href="#/3d/${nx.id}?lesson=${arg}">${I("play")} ${done?"Continue":"Start"}: ${esc(nx.name)}</a>
+        <a class="btn" href="#/quiz/${arg}">${I("target")} Quiz this system</a></p>`:""}
       <div class="grid tight" style="grid-template-columns:1fr">${items.map(d=>
         `<a class="lrow${lessonDone(d.id)?" done":""}" href="#/3d/${d.id}?lesson=${arg}">
           <span class="lck">${lessonDone(d.id)?"✓":""}</span>
@@ -21092,13 +21158,13 @@ function vLearn(arg){
   /* course map */
   const due = srDue().length;
   const nx = LEARN_ORDER.map(s=>({s,d:nextLesson(s)})).find(x=>x.d && !lessonDone(x.d.id));
-  view.innerHTML = `<div class="list-head"><h1>🎓 Learn anatomy</h1>
+  view.innerHTML = `<div class="list-head"><h1>${I("graduation-cap")} Learn anatomy</h1>
     <p>Guided lessons that walk you through each structure inside the 3D body — location, shape, function and neighbours, one step at a time. Method inspired by the "why, not what" approach of TeachMeAnatomy and AnatomyQuest.</p></div>
     <div class="learn-head">
-      ${nx?`<a class="btn primary" href="#/3d/${nx.d.id}?lesson=${nx.s}">▶ Continue learning: ${esc(nx.d.name)}</a>`:`<span class="badge">🎉 All lessons complete!</span>`}
-      <a class="btn" href="#/learn/review">🧠 Review${due?` (${due} due)`:""}</a>
-      <a class="btn" href="#/paths">🛤 Guided paths</a>
-      <span class="xp"><span class="xpbadge">⭐ <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">🔥 ${PROG.streak} days</span>`:""}</span>
+      ${nx?`<a class="btn primary" href="#/3d/${nx.d.id}?lesson=${nx.s}">${I("play")} Continue learning: ${esc(nx.d.name)}</a>`:`<span class="badge">${I("trophy")} All lessons complete!</span>`}
+      <a class="btn" href="#/learn/review">${I("brain")} Review${due?` (${due} due)`:""}</a>
+      <a class="btn" href="#/paths">${I("route")} Guided paths</a>
+      <span class="xp"><span class="xpbadge">${I("star")} <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">${I("flame")} ${PROG.streak} days</span>`:""}</span>
     </div>
     ${(PROG.badges||[]).length?`<p class="hint" style="margin:-4px 0 14px">Badges: ${PROG.badges.map(b=>{const x=BADGES.find(y=>y[0]===b);return x?x[1]:"";}).filter(Boolean).join(" · ")}</p>`:""}
     <div class="grid tight" style="grid-template-columns:1fr">${LEARN_ORDER.filter(s=>sysCount[s]).map(s=>{
@@ -21114,9 +21180,9 @@ function vLearn(arg){
 function vReview(){
   const due = srDue();
   crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:"Review"}]);
-  if(!due.length){ view.innerHTML = `<div class="list-head"><h1>🧠 Review</h1>
+  if(!due.length){ view.innerHTML = `<div class="list-head"><h1>${I("brain")} Review</h1>
     <p>Nothing due right now — structures you miss in quizzes come back here on a spaced schedule (1, 2, 4, 8 and 16 days) until they stick.</p>
-    <p><a class="btn" href="#/quiz">🎯 Take a quiz</a> <a class="btn" href="#/learn">← Back to learn</a></p></div>`; return; }
+    <p><a class="btn" href="#/quiz">${I("target")} Take a quiz</a> <a class="btn" href="#/learn">← Back to learn</a></p></div>`; return; }
   location.hash = "/quiz/due";
 }
 
@@ -21125,13 +21191,13 @@ const pathProg = p => { const done = p.steps.filter(s=>lessonDone(s)).length;
   return {done, pct: p.steps.length ? Math.round(done/p.steps.length*100) : 0}; };
 function vPaths(){
   crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:"Guided paths"}]);
-  const LVL=["","🟢 Intro","🔵 Core","🟣 Advanced"];
-  view.innerHTML = `<div class="list-head"><h1>🛤 Guided learning paths</h1>
+  const LVL=["",'<i class="cdot" style="--c:#22c55e"></i>Intro','<i class="cdot" style="--c:#3b82f6"></i>Core','<i class="cdot" style="--c:#a855f7"></i>Advanced'];
+  view.innerHTML = `<div class="list-head"><h1>${I("route")} Guided learning paths</h1>
     <p>Curated routes through the atlas — each step opens an interactive 3D lesson. Finish a path to earn its badge.</p></div>
     <div class="grid tight" style="grid-template-columns:1fr">${(window.ATLAS_PATHS||[]).map(p=>{
       const {done,pct} = pathProg(p);
       return `<a class="lpath${pct===100?" done":""}" href="#/path/${p.id}">
-        <span class="li">${p.level===3?"🎓":p.level===2?"📘":"🌱"}</span>
+        <span class="li">${I(p.level===3?"graduation-cap":p.level===2?"book-open":"sprout")}</span>
         <span class="lm"><span class="lt">${esc(p.title)}</span>
           <span class="ld">${LVL[p.level]||""} · ${p.steps.length} stops · ${esc(p.time)}${done?` · ${done} done`:""}</span>
           <span class="lbar"><i style="width:${pct}%"></i></span></span>
@@ -21145,8 +21211,8 @@ function vPath(pid){
   const nxt = p.steps.find(s=>!lessonDone(s)) || p.steps[0];
   view.innerHTML = `<div class="list-head"><h1>${esc(p.title)}</h1>
     <p>${esc(p.desc)} ${done?`Progress: ${done}/${p.steps.length} (${pct}%)`:""}</p></div>
-    <div class="section"><h2>Objectives</h2><ul class="tlist">${(p.objectives||[]).map(o=>`<li>✅ ${esc(o)}</li>`).join("")}</ul></div>
-    <p><a class="btn primary" href="#/3d/${nxt}?lesson=path:${p.id}">▶ ${done?"Continue":"Start"} the path</a></p>
+    <div class="section"><h2>Objectives</h2><ul class="tlist">${(p.objectives||[]).map(o=>`<li>${I("check")} ${esc(o)}</li>`).join("")}</ul></div>
+    <p><a class="btn primary" href="#/3d/${nxt}?lesson=path:${p.id}">${I("play")} ${done?"Continue":"Start"} the path</a></p>
     ${p.steps.map((s,i)=>{ const d=byId[s]; if(!d) return "";
       const ok = lessonDone(s);
       return `<a class="lrow${ok?" done":""}" href="#/3d/${s}?lesson=path:${p.id}">
@@ -21205,7 +21271,7 @@ function vSearch(q){
   const fuzzyNote = lastFuzzy ? `<p class="hint">No exact match — did you mean:</p>` : "";
   view.innerHTML = res.length
     ? `<div class="list-head"><h1>${res.length} result${res.length>1?"s":""} for “${esc(decodeURIComponent(q))}”</h1>${fuzzyNote}</div><div class="grid">${res.map(cardHTML).join("")}</div>`
-    : `<div class="empty"><div class="big">🔍</div>No structures match “${esc(decodeURIComponent(q))}”.<br>Try a bone, muscle, organ or nerve name.</div>`;
+    : `<div class="empty"><div class="big">${I("search")}</div>No structures match “${esc(decodeURIComponent(q))}”.<br>Try a bone, muscle, organ or nerve name.</div>`;
 }
 
 /* ---------- router ---------- */
@@ -21300,14 +21366,14 @@ route();
   document.addEventListener("click", e => {
     if(e.target.closest && e.target.closest("#pwa-install")) window.atlasInstall();
   });
-  window.addEventListener("appinstalled", () => toast("Anatomy Atlas installed ✨"));
+  window.addEventListener("appinstalled", () => toast("Anatomy Atlas installed"));
 
   /* ---- save 3D body for offline ---- */
   const paintOff = p => {
     const b = document.getElementById("pwa-offline"); if(!b) return;
-    if(modelSaved){ b.classList.add("done"); b.innerHTML = "✓ Works fully offline"; }
-    else if(p != null){ b.innerHTML = `💾 Saving… ${p}%<div class="bar"><i style="width:${p}%"></i></div>`; }
-    else { b.classList.remove("done"); b.innerHTML = "💾 Save 3D body for offline"; }
+    if(modelSaved){ b.classList.add("done"); b.innerHTML = `${I("check")} Works fully offline`; }
+    else if(p != null){ b.innerHTML = `${I("download")} Saving… ${p}%<div class="bar"><i style="width:${p}%"></i></div>`; }
+    else { b.classList.remove("done"); b.innerHTML = `${I("download")} Save 3D body for offline`; }
   };
   (async () => {
     try{ modelSaved = !!(await caches.match("model.bin")); }catch(e){ modelSaved = false; }
