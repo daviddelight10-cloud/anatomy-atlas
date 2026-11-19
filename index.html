@@ -288,7 +288,7 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 @keyframes b3dsp{to{transform:rotate(360deg)}}
 .b3d-tip{position:absolute;pointer-events:none;background:#1a1a1a;color:#e8e8e8;padding:3px 9px;border-radius:6px;font-size:12px;font-weight:600;display:none;border:1px solid #3d3d3d;z-index:5;white-space:nowrap}
 #b3dcv.quizmode{cursor:crosshair}
-.b3d-quiz{position:absolute;top:calc(68px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:rgba(14,14,14,.93);border:1px solid #3d3d3d;border-radius:12px;padding:8px 14px;z-index:6;font-size:13.5px;color:#e8e8e8;box-shadow:0 8px 24px rgba(0,0,0,.45);max-width:min(94%,620px)}
+.b3d-quiz{position:absolute;top:calc(68px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;row-gap:7px;background:rgba(14,14,14,.93);border:1px solid #3d3d3d;border-radius:12px;padding:8px 14px;z-index:6;font-size:13.5px;color:#e8e8e8;box-shadow:0 8px 24px rgba(0,0,0,.45);max-width:min(94%,720px)}
 .b3d-quiz .q-t{font-weight:700;color:#ffd60a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px}
 .b3d-quiz .q-s{color:#a3a3a3;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:12.5px}
 .b3d-quiz .q-streak{color:#f2a900}
@@ -296,6 +296,14 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3d-quiz button:hover{border-color:#ffd60a;color:#ffd60a}
 .b3d-quiz .q-flash-good{color:#3ddc84;font-weight:700}
 .b3d-quiz .q-flash-bad{color:#ff5d6c;font-weight:700}
+.b3d-quiz .q-modes{display:flex;gap:4px;padding-right:9px;margin-right:1px;border-right:1px solid #3d3d3d}
+.b3d-quiz .q-modes button.on{border-color:#ffd60a;color:#ffd60a;background:#2b2b2b}
+.b3d-quiz .q-opts{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.b3d-quiz .q-opts .qopt{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;font-size:12.5px}
+.b3d-quiz .q-opts .qopt b{color:#ffd60a;font-size:11px}
+.b3d-quiz .q-opts .qopt:hover{border-color:#ffd60a}
+.b3d-quiz .q-opts .qopt.right{border-color:#3ddc84;color:#3ddc84}
+.b3d-quiz .q-opts .qopt.wrong{border-color:#ff5d6c;color:#ff5d6c}
 .b3d-lbls{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}
 .b3dlbl{position:absolute;transform:translate(-50%,-100%);font:600 10.5px var(--font);color:#e8e8e8;background:rgba(18,18,18,.88);border:1px solid rgba(255,214,10,.45);border-radius:5px;padding:2px 7px;white-space:nowrap;pointer-events:auto;cursor:pointer}
 .b3dlbl:hover{border-color:#ffd60a;color:#ffd60a}
@@ -318,6 +326,14 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3dlmd{position:absolute;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#40e0ff;box-shadow:0 0 5px rgba(64,224,255,.9);pointer-events:none}
 .lm-row{display:flex;flex-wrap:wrap;gap:8px}
 .lm-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(64,224,255,.08);border:1px solid rgba(64,224,255,.35);color:var(--text1);border-radius:8px;padding:5px 9px;font:600 12px var(--font);text-decoration:none}
+.lm-list{display:flex;flex-direction:column;gap:6px}
+.lm-item{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;color:var(--text);text-decoration:none}
+.lm-item:hover{border-color:var(--accent)}
+.lm-item b{color:var(--text1);font-size:13.5px}
+.lm-item span{font-size:12.5px;color:var(--text3);line-height:1.45}
+.tlist{margin:0;padding-left:18px}
+.tlist li{margin:4px 0;font-size:13.5px;color:var(--text2);line-height:1.5}
+.tlist a{color:var(--accent);text-decoration:none}
 .lm-chip:hover{border-color:#40e0ff;background:rgba(64,224,255,.16)}
 .lm-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:#40e0ff;box-shadow:0 0 5px rgba(64,224,255,.8)}
 /* anchored pins — dot glued to the part, label offset with a leader line */
@@ -17738,14 +17754,32 @@ window.ATLAS_LM = {
     {id:"subclavian-groove",n:"Subclavian groove",a:"z:subclavius-muscle-clavicular-insertion",d:"The groove along the underside of the shaft that holds the small subclavius muscle and cushions the underlying subclavian vessels."}
   ],
   "radius": [
-    {id:"radial-head",n:"Head of radius",a:"z:annular-ligament-of-radius",d:"The disc-shaped top of the radius that spins within the ring of the annular ligament — the pivot that lets the palm turn up and down.",c:"A sudden pull in a child can slip the head partly out of the ligament — 'nursemaid's elbow'."},
-    {id:"radial-tuberosity",n:"Radial tuberosity",a:"z:biceps-brachii-muscle-radial-insertion",d:"The rough bump just below the radial neck where the biceps tendon inserts — the insertion that powers forearm flexion and supination (turning a screwdriver)."},
-    {id:"radial-styloid",n:"Radial styloid process",o:[-0.014,-0.109,0.025],d:"The pointed flare at the outer wrist, palpable in the floor of the 'anatomical snuffbox'.",c:"Falling on an outstretched hand can fracture it (Hutchinson fracture)."}
+    {id:"radial-head",n:"Head of radius",a:"z:annular-ligament-of-radius",d:"The disc-shaped top of the radius that spins within the ring of the annular ligament — the pivot that lets the palm turn up and down.",att:"Encircled by the annular ligament.",art:"Capitulum of the humerus above; radial notch of the ulna on its inner rim.",pal:"Rotate the forearm with fingers on the outer elbow — the head spins under your touch.",c:"A sudden pull in a child can slip the head partly out of the ligament — 'nursemaid's elbow'."},
+    {id:"radial-fovea",n:"Fovea of the radial head",a:"z:radial-foveola",d:"The shallow cup on top of the radial head that rocks and spins against the capitulum of the humerus during flexion and forearm rotation.",art:"Capitulum of the humerus."},
+    {id:"radial-neck",n:"Neck of radius",o:[-0.004,0.098,0.008],d:"The narrow waist just below the head, hugged by the annular ligament as the radius rotates.",c:"The deep branch of the radial nerve crosses here on its way into the supinator — a poorly placed surgical approach can injure it."},
+    {id:"anterior-oblique-line",n:"Anterior oblique line",a:"z:flexor-digitorum-superficialis-radial-insertion",d:"The ridge sweeping down the upper front of the radius — the origin of the radial head of flexor digitorum superficialis.",att:"Flexor digitorum superficialis, radial head (origin)."},
+    {id:"supinator-insertion",n:"Supinator region",a:"z:supinator-radial-insertion",d:"The upper third of the radius where the supinator muscle wraps around and grips — the main lever for turning the palm up.",att:"Supinator (insertion)."},
+    {id:"radial-tuberosity",n:"Radial tuberosity",a:"z:biceps-brachii-muscle-radial-insertion",d:"The rough bump on the inner side of the radial neck where the biceps tendon inserts — the insertion that powers forearm flexion and supination (turning a screwdriver).",att:"Biceps brachii tendon (insertion); the bicipitoradial bursa cushions it.",pal:"Feel a cord move in the crook of the elbow when you flex against resistance — follow it down to this point.",c:"A biceps tear here produces the 'Popeye' bulge and weak supination."},
+    {id:"pronator-tuberosity",n:"Pronator tuberosity",a:"z:pronator-teres-radial-insertion",d:"The rough area at the middle of the radius's outer curve — the insertion of pronator teres, the muscle that turns the palm down.",att:"Pronator teres (insertion)."},
+    {id:"fpl-surface",n:"Anterior (flexor) surface",a:"z:flexor-pollicis-longus-radial-insertion",d:"The broad, gently hollowed front of the radial shaft — the origin of flexor pollicis longus, the thumb's deep flexor.",att:"Flexor pollicis longus (origin); the anterior interosseous vessels and nerve run on it."},
+    {id:"pronator-quadratus-area",n:"Pronator quadratus area",a:"z:pronator-quadratus-radial-insertions",d:"The flattened distal quarter of the radius's front — the grip of pronator quadratus, the deepest and strongest of the pronators.",att:"Pronator quadratus (insertion)."},
+    {id:"dorsal-tubercle",n:"Dorsal (Lister's) tubercle",o:[-0.004,-0.098,-0.02],d:"The small bump on the back of the distal radius — a pulley that redirects the extensor pollicis longus tendon toward the thumb.",pal:"Feel the back of your wrist just off-centre toward the thumb; the EPL tendon angles sharply around it.",c:"A key landmark in wrist surgery — a badly placed screw here can saw through the EPL tendon."},
+    {id:"ulnar-notch-radius",n:"Ulnar notch",a:"z:articular-disc-of-distal-radio-ulnar-joint",d:"The inward curve at the lower inner corner of the radius where the head of the ulna sits — the lower pivot of forearm rotation.",art:"Head of the ulna (distal radioulnar joint); the TFCC disc closes the joint below.",c:"Injuries here destabilise the DRUJ — a common cause of ulnar-sided wrist pain."},
+    {id:"radial-styloid",n:"Radial styloid process",o:[-0.014,-0.109,0.025],d:"The pointed flare at the outer wrist — the radius's farthest reach, palpable in the floor of the 'anatomical snuffbox'.",att:"Brachioradialis tendon inserts at its base; the radial collateral ligament of the wrist runs from its tip.",art:"Scaphoid and lunate through the distal articular surface.",pal:"Slide your thumb along the outer wrist — the last bony point before the joint line is the styloid.",c:"Falling on an outstretched hand can fracture it (Hutchinson fracture); a Colles fracture breaks just above it."}
   ],
   "ulna": [
-    {id:"olecranon",n:"Olecranon",a:"z:triceps-brachii-ulnar-insertion",d:"The point of the elbow — where the triceps tendon inserts, forming the lever that straightens the arm.",c:"A direct blow can fracture it; the ulnar nerve grooves behind it."},
-    {id:"coronoid-process",n:"Coronoid process",o:[0.007,0.077,-0.01],d:"The forward projection of the proximal ulna that locks into the humeral trochlea and anchors the brachialis muscle.",c:"Small anterior elbow fragments indicate a dislocation injury."},
-    {id:"ulnar-styloid",n:"Ulnar styloid process",o:[-0.008,-0.123,0.011],d:"The small spike at the inner wrist, easily palpated on the little-finger side — the posterior anchor of the wrist's triangular disc.",c:"Avulsion here accompanies many distal radius (Colles) fractures."}
+    {id:"olecranon",n:"Olecranon",a:"z:triceps-brachii-ulnar-insertion",d:"The point of the elbow — where the triceps tendon inserts, forming the lever that straightens the arm.",att:"Triceps brachii tendon (insertion); the olecranon bursa overlies it.",art:"Fits the olecranon fossa of the humerus in full extension.",pal:"The hard point of the elbow — you can roll it under your fingers.",c:"A direct blow can fracture it; the ulnar nerve grooves just behind the medial epicondyle beside it."},
+    {id:"coronoid-process",n:"Coronoid process",o:[0.007,0.077,-0.01],d:"The forward projection of the proximal ulna that locks into the humeral trochlea and anchors the brachialis muscle.",att:"Brachialis inserts on its front; the medial collateral ligament grips its inner edge.",art:"Trochlea of the humerus — the deep groove of the elbow hinge.",c:"Even a small fracture here signals an elbow dislocation — it is a key stability point."},
+    {id:"ulnar-tuberosity",n:"Ulnar tuberosity",a:"z:brachialis-muscle-ulnar-insertion",d:"The rough patch on the front of the ulna just below the coronoid — the main insertion of the brachialis, the elbow's dedicated flexor.",att:"Brachialis (insertion)."},
+    {id:"radial-notch-ulna",n:"Radial notch",o:[-0.002,0.068,-0.012],d:"The smooth depression on the outer side of the coronoid where the rim of the radial head rotates — the upper pivot of the forearm.",art:"Head of the radius (proximal radioulnar joint); the annular ligament holds it there."},
+    {id:"supinator-crest",n:"Supinator crest",a:"z:supinator-ulnar-insertion",d:"The sharp ridge on the upper outer ulna — the ulnar origin of the supinator muscle that untwists the forearm.",att:"Supinator (ulnar origin)."},
+    {id:"anconeus-bed",n:"Anconeus surface",a:"z:anconeus-muscle-ulnar-insertion",d:"The small triangle on the outer side of the olecranon where the anconeus — the elbow's little stabiliser — attaches.",att:"Anconeus (insertion)."},
+    {id:"pronator-teres-ulnar-head",n:"Pronator teres, ulnar head",a:"z:pronator-teres-ulnar-insertion",d:"The ulnar (deep) head of pronator teres springs from the inner side of the coronoid, joining its larger humeral head.",att:"Pronator teres, ulnar head (origin)."},
+    {id:"fpl-ulnar-head",n:"Coronoid (FPL origin)",a:"z:flexor-pollicis-longus-ulnar-insertion",d:"The small ulnar head of flexor pollicis longus rising near the coronoid, beside its much larger origin from the radius.",att:"Flexor pollicis longus, ulnar head (origin)."},
+    {id:"posterior-border-ulna",n:"Posterior border",a:"z:ulnar-head-of-flexor-carpi-ulnaris-ulnar-insertion",d:"The long, sharp, subcutaneous ridge running the whole back of the ulna — shared by flexor and extensor carpi ulnaris and the deep fascia.",att:"Flexor carpi ulnaris, extensor carpi ulnaris and the deep fascia.",pal:"Run a finger from the point of the elbow to the inner wrist — the ridge under the skin is the posterior border."},
+    {id:"pronator-quadratus-ulna",n:"Pronator quadratus area",a:"z:pronator-quadratus-ulnar-insertion",d:"The distal front of the ulna — the origin of pronator quadratus, the flat square muscle that pulls the radius over the ulna.",att:"Pronator quadratus (origin)."},
+    {id:"ulnar-head",n:"Head of ulna",a:"z:articular-disc-of-distal-radio-ulnar-joint",d:"The small rounded lower end of the ulna. It plays in the ulnar notch of the radius and is cushioned from the wrist by the TFCC disc — the ulna barely touches the carpus.",art:"Ulnar notch of the radius (distal radioulnar joint); the TFCC separates it from the lunate and triquetrum.",c:"TFCC tears cause ulnar-sided wrist pain, clicking and a weak grip."},
+    {id:"ulnar-styloid",n:"Ulnar styloid process",o:[-0.008,-0.123,0.011],d:"The small spike at the inner wrist, easily palpated on the little-finger side — the posterior anchor of the wrist's triangular disc.",att:"TFCC attaches to its base; the extensor carpi ulnaris tendon grooves behind it.",pal:"The bump on the inner (little-finger) side of the wrist, a thumb's breadth above the joint line.",c:"Avulsion here accompanies many distal radius (Colles) fractures."}
   ],
   "femur": [
     {id:"femoral-head",n:"Head of femur",o:[0.014,0.203,0.02],d:"The ball of the hip joint, fitting deep into the acetabulum. Its blood supply travels up the neck, which makes it vulnerable.",c:"A fractured femoral neck can cut that supply, causing the head to die (avascular necrosis) — the reason many hip fractures need replacement."},
@@ -17756,7 +17790,9 @@ window.ATLAS_LM = {
     {id:"adductor-tubercle",n:"Adductor tubercle",o:[0.035,-0.197,0.005],d:"The small bump just above the medial epicondyle — the tendon mark of adductor magnus's hamstring part."},
     {id:"lateral-epicondyle-femur",n:"Lateral epicondyle",a:"z:lateral-head-of-gastrocnemius-on-lat-supracondylar-tubercle",d:"The outer flare above the lateral condyle of the knee — the line of the lateral collateral ligament."},
     {id:"medial-epicondyle-femur",n:"Medial epicondyle",a:"z:medial-head-of-gastrocnemius-on-med-supracondylar-tubercle",d:"The inner flare above the medial condyle — the origin of the medial collateral ligament of the knee.",c:"Tenderness here after a knee blow suggests a medial collateral ligament sprain."},
-    {id:"patellar-surface",n:"Patellar surface",o:[-0.001,-0.197,0.02],d:"The smooth anterior groove between the femoral condyles where the kneecap glides as the knee bends and straightens."}
+    {id:"patellar-surface",n:"Patellar surface",o:[-0.001,-0.197,0.02],d:"The smooth anterior groove between the femoral condyles where the kneecap glides as the knee bends and straightens."},
+    {id:"popliteus-groove",n:"Popliteus groove",a:"z:popliteus-muscle-in-the-groove-for-popliteus-muscle",d:"The smooth notch on the outer condyle of the femur where the popliteus tendon runs — the 'key' that unlocks the knee's screw-home rotation.",att:"Popliteus tendon."},
+    {id:"intercondylar-fossa",n:"Intercondylar fossa",o:[0,-0.185,-0.02],d:"The deep notch between the femoral condyles at the back of the knee — the tunnel that houses both cruciate ligaments as they cross.",att:"The ACL and PCL pass through it.",c:"Notch impingement is a recognised cause of ACL failure after reconstruction."}
   ],
   "tibia": [
     {id:"medial-condyle-tibia",n:"Medial condyle",o:[0.025,0.171,0.017],d:"The larger, inner plateau of the tibia's knee surface — its cartilage and medial meniscus carry most of the body's weight."},
@@ -17764,18 +17800,30 @@ window.ATLAS_LM = {
     {id:"tibial-tuberosity",n:"Tibial tuberosity",a:"z:patellar-tendon-on-anterior-tibial-tuberosity",d:"The bump at the top of the shin where the patellar tendon attaches — the quadriceps' final grip on the tibia across the kneecap.",c:"In adolescents, overuse can inflame its growth plate (Osgood-Schlatter disease)."},
     {id:"pes-anserinus",n:"Pes anserinus",a:"z:sartorius-on-patte-doie",d:"The 'goose's foot' — the three tendons of sartorius, gracilis and semitendinosus converging on the inner upper tibia.",c:"Inflammation of the bursa beneath it mimics knee-joint pain."},
     {id:"soleal-line",n:"Soleal line",a:"z:popliteus-above-oblique-line-of-tibia",d:"The oblique ridge across the back of the proximal tibia where the soleus muscle originates."},
-    {id:"medial-malleolus",n:"Medial malleolus",o:[0.03,-0.164,-0.005],d:"The inner ankle bone — the downward grip of the tibia that holds the talus from the medial side of the ankle mortise."}
+    {id:"medial-malleolus",n:"Medial malleolus",o:[0.03,-0.164,-0.005],d:"The inner ankle bone — the downward grip of the tibia that holds the talus from the medial side of the ankle mortise.",att:"The deltoid ligament fans out from its tip.",art:"Medial surface of the talus (ankle mortise).",pal:"The prominent bump on the inner side of the ankle."},
+    {id:"intercondylar-eminence",n:"Intercondylar eminence",o:[0,0.185,0.008],d:"The spine of the tibia between the two condyles — the anchor of both cruciate ligaments and both menisci, locking the knee together.",att:"Anterior and posterior cruciate ligaments; medial and lateral menisci.",c:"A tibial spine avulsion can rip off the ACL's attachment — a classic children's knee injury."},
+    {id:"gerdys-tubercle",n:"Gerdy's tubercle",o:[-0.042,0.115,0.025],d:"The bump on the outer front of the upper tibia where the iliotibial band inserts — the outer anchor that stabilises the knee in running.",att:"Iliotibial band (insertion).",c:"Friction here is IT-band syndrome — the runner's lateral knee pain."},
+    {id:"posterior-surface-tibia",n:"Posterior surface",a:"z:flexor-digitorum-longus-on-medial-third-of-post-tibial-surf",d:"The back of the tibial shaft below the soleal line — origin of tibialis posterior and flexor digitorum longus, the deep calf muscles that hold the arch.",att:"Tibialis posterior and flexor digitorum longus (origin); the posterior tibial vessels and nerve run on it."}
   ],
   "fibula": [
-    {id:"fibular-head",n:"Head of fibula",a:"z:long-head-of-biceps-femoris-on-fibular-head",d:"The knob at the top of the outer calf, just below the knee — the tendon anchor of biceps femoris. The common fibular nerve wraps around its neck.",c:"A blow here can cause foot drop by injuring that nerve."},
-    {id:"lateral-malleolus",n:"Lateral malleolus",o:[0.006,-0.174,0.003],d:"The outer ankle bone. It descends lower than the medial one and grips the talus from the lateral side of the mortise.",c:"Ankle sprains most often injure the ligaments running from its tip."}
+    {id:"fibular-head",n:"Head of fibula",a:"z:long-head-of-biceps-femoris-on-fibular-head",d:"The knob at the top of the outer calf, just below the knee — the tendon anchor of biceps femoris. The common fibular nerve wraps around its neck.",att:"Biceps femoris tendon and the fibular collateral ligament.",art:"Lateral condyle of the tibia (superior tibiofibular joint).",c:"A blow here can cause foot drop by injuring that nerve."},
+    {id:"fibular-neck",n:"Neck of fibula",o:[0.004,0.148,0.006],d:"The narrow waist just below the fibular head — the common fibular (peroneal) nerve winds around it before splitting into deep and superficial branches.",c:"A blow or a tight cast compresses the nerve — the classic cause of foot drop."},
+    {id:"soleal-crest",n:"Soleal crest",a:"z:solear-on-solear-crest-on-fibular-head",d:"The ridge running down from the back of the fibular head — the fibular origin of the soleus, the calf's great posture muscle.",att:"Soleus (fibular origin)."},
+    {id:"lateral-surface-fibula",n:"Lateral surface",a:"z:fibularis-longus-on-lateral-side-of-fibula",d:"The outer face of the fibular shaft — the compartment of fibularis longus and brevis, the muscles that evert the foot and brace the outer ankle.",att:"Fibularis longus and brevis (origin)."},
+    {id:"posterior-surface-fibula",n:"Posterior surface",a:"z:flexor-hallucis-longus-on-post-fibular-surf",d:"The back of the fibular shaft — origin of flexor hallucis longus, the big-toe flexor whose tendon runs behind the ankle to the foot.",att:"Flexor hallucis longus and tibialis posterior (origin)."},
+    {id:"anterior-border-fibula",n:"Anterior border",a:"z:extensor-digitorum-longus-on-fibula-and-interosseus-membrane",d:"The sharp front edge of the fibula — origin of the toe extensors that lift the foot when you walk.",att:"Extensor digitorum longus and fibularis tertius (origin)."},
+    {id:"lateral-malleolus",n:"Lateral malleolus",o:[0.006,-0.174,0.003],d:"The outer ankle bone. It descends lower than the medial one and grips the talus from the lateral side of the mortise.",att:"Anterior and posterior talofibular ligaments and the calcaneofibular ligament run from it.",art:"Lateral surface of the talus (ankle mortise).",pal:"The prominent bump on the outer side of the ankle — lower and farther back than the inner one.",c:"Ankle sprains most often injure the ligaments running from its tip."}
   ],
   "patella": [
     {id:"apex-of-patella",n:"Apex of patella",a:"z:patellar-tendon-on-apex-of-patella",d:"The pointed lower end of the kneecap, where the patellar tendon leaves for the tibial tuberosity."},
-    {id:"base-of-patella",n:"Base of patella",a:"z:quadriceps-femoris-on-base-of-patella",d:"The thick upper border of the kneecap, where the quadriceps tendon inserts."}
+    {id:"base-of-patella",n:"Base of patella",a:"z:quadriceps-femoris-on-base-of-patella",d:"The thick upper border of the kneecap, where the quadriceps tendon inserts."},
+    {id:"articular-surface-patella",n:"Articular surface",o:[0,0,-0.012],d:"The smooth back of the kneecap — a vertical ridge splits it into medial and lateral facets that ride the femur's patellar groove as the knee bends.",art:"Patellar surface of the femur.",c:"Softening of this cartilage (chondromalacia patellae) causes front-of-knee pain on stairs."}
   ],
   "calcaneus": [
-    {id:"calcaneal-tuberosity",n:"Calcaneal tuberosity",a:"z:triceps-surae-on-calcaneal-tuberosity",d:"The heel — the back of the largest tarsal bone, where the Achilles tendon inserts.",c:"The calcaneus is the most commonly fractured tarsal bone; jump-landings drive the talus down into it."}
+    {id:"calcaneal-tuberosity",n:"Calcaneal tuberosity",a:"z:triceps-surae-on-calcaneal-tuberosity",d:"The heel — the back of the largest tarsal bone, where the Achilles tendon inserts.",att:"Calcaneal (Achilles) tendon — the strongest tendon in the body.",c:"The calcaneus is the most commonly fractured tarsal bone; jump-landings drive the talus down into it."},
+    {id:"medial-process-calcaneus",n:"Medial process of tuberosity",a:"z:abductor-hallucis-on-medial-process-of-calcaneal-tuberosity",d:"The inner of the two weight-bearing prongs under the heel — the origin of abductor hallucis and the anchor of the plantar fascia.",att:"Abductor hallucis, flexor digitorum brevis and the plantar fascia.",c:"Heel-spur pain and plantar fasciitis centre on this point."},
+    {id:"plantar-surface-calcaneus",n:"Plantar surface",a:"z:quadratus-plantae-muscle-on-plantar-surface-of-calcaneus",d:"The long sole of the heel bone, bound by the long plantar ligament — it forms the back pillar of the foot's arches.",att:"Quadratus plantae and the long plantar ligament."},
+    {id:"anterior-process-calcaneus",n:"Anterior process",a:"z:extensor-hallucis-brevis-on-dorsal-surface-of-calcaneus",d:"The front end of the calcaneus that meets the cuboid — the outer beam of the midfoot, crossed above by the small extensor muscles.",art:"Cuboid (calcaneocuboid joint).",c:"Twisting injuries can avulse it — often mistaken for a sprain."}
   ],
   "hip-bone": [
     {id:"iliac-crest",n:"Iliac crest",o:[-0.031,0.075,-0.005],d:"The top rim of the pelvis, felt at the waist between the hip and the flank — the anchor of the abdominal wall muscles.",c:"Its posterior end is the standard bone-marrow biopsy site."},
@@ -17784,15 +17832,22 @@ window.ATLAS_LM = {
     {id:"ischial-tuberosity",n:"Ischial tuberosity",o:[0.009,-0.095,-0.036],d:"The 'sitting bone' — the rough posterior-inferior prominence you sit on, and the common origin of the hamstring muscles.",c:"Avulsions occur in sprinting adolescents; bursitis here affects cyclists."},
     {id:"pubic-tubercle",n:"Pubic tubercle",o:[0.044,-0.065,0.059],d:"The small bump beside the pubic symphysis — the medial anchor of the inguinal ligament, felt above the groin crease."},
     {id:"acetabulum",n:"Acetabulum",o:[0.019,-0.055,-0.005],d:"The deep hip socket, formed where the ilium, ischium and pubis fuse in childhood. Its labrum-lipped rim cradles the femoral head."},
-    {id:"psis",n:"Posterior superior iliac spine",aka:"PSIS",o:[0.014,0.055,-0.068],d:"The bony prominence behind the hip — the visible 'dimples' of the lower back sit on it, marking the sacroiliac joint."}
+    {id:"psis",n:"Posterior superior iliac spine",aka:"PSIS",o:[0.014,0.055,-0.068],d:"The bony prominence behind the hip — the visible 'dimples' of the lower back sit on it, marking the sacroiliac joint."},
+    {id:"pectineal-line",n:"Pectineal line",a:"z:pectineus-muscle-pubic-insertion",d:"The sharp crest along the superior pubic ramus — origin of the pectineus and part of the pelvic brim that divides the true from the false pelvis.",att:"Pectineus and the conjoint tendon."},
+    {id:"pubic-symphysis",n:"Pubic symphysis",a:"z:interpubic-disc",d:"The midline joint where the two hip bones meet through a fibrous disc — it flexes a few millimetres, more during pregnancy and childbirth.",art:"The opposite pubic bone via the interpubic disc.",c:"Diastasis after childbirth or trauma causes severe pelvic pain on walking."},
+    {id:"ischial-spine",n:"Ischial spine",a:"z:sacrospinous-ligament",d:"The pointed projection on the posterior hip bone between the greater and lesser sciatic notches — anchor of the sacrospinous ligament and the marker for the pudendal nerve.",att:"Sacrospinous ligament and coccygeus.",c:"The pudendal nerve hooks around it — the landmark for pudendal blocks in obstetric anaesthesia."},
+    {id:"obturator-foramen",n:"Obturator foramen",a:"z:obturator-membrane",d:"The large opening closed by the obturator membrane — the biggest foramen in the skeleton, through which the obturator nerve and vessels pass to the thigh.",att:"Obturator membrane, obturator internus and externus.",c:"An obturator hernia through its canal can compress the nerve — medial knee pain (Howship–Romberg sign)."}
   ],
   "sternum": [
     {id:"jugular-notch",n:"Jugular (suprasternal) notch",o:[-0.008,0.091,-0.03],d:"The U-shaped dip at the top of the chest, easily felt between the heads of the two clavicles — the level of the lower cervical trachea."},
     {id:"sternal-angle",n:"Sternal angle",aka:"Angle of Louis",o:[0,0.031,-0.016],d:"The transverse ridge where the manubrium meets the body of the sternum. Count ribs from here: the second rib attaches at this line.",c:"It marks the level where the trachea divides, and the aortic arch begins and ends."},
-    {id:"xiphoid-process",n:"Xiphoid process",o:[0,-0.067,0.013],d:"The small, cartilaginous tip at the bottom of the breastbone — the landmark for hand position in CPR chest compressions.",c:"The liver lies just beneath it; a fractured xiphoid can injure it."}
+    {id:"xiphoid-process",n:"Xiphoid process",o:[0,-0.067,0.013],d:"The small, cartilaginous tip at the bottom of the breastbone — the landmark for hand position in CPR chest compressions.",c:"The liver lies just beneath it; a fractured xiphoid can injure it."},
+    {id:"clavicular-notch",n:"Clavicular notch",a:"z:articular-disc-of-sternoclavicular-joint",d:"The shallow socket on each top corner of the manubrium where the sternal end of the clavicle sits — the only joint linking the arm to the skeleton's midline.",art:"Sternal end of the clavicle, through a fibrous disc.",c:"Posterior dislocation here can compress the trachea and great vessels — an orthopaedic emergency."}
   ],
   "mandible": [
-    {id:"mental-protuberance",n:"Mental protuberance",o:[0,-0.037,0.038],d:"The chin — the triangular elevation at the front of the lower jaw and the only bony prominence of the human face's midline.",c:"Its two mental tubercles give the human chin its shape."}
+    {id:"mental-protuberance",n:"Mental protuberance",o:[0,-0.037,0.038],d:"The chin — the triangular elevation at the front of the lower jaw and the only bony prominence of the human face's midline.",c:"Its two mental tubercles give the human chin its shape."},
+    {id:"mylohyoid-line",n:"Mylohyoid line",a:"z:mylohyoid-muscle",d:"The diagonal ridge on the inner side of the jaw body — origin of the mylohyoid, the sling of muscle that forms the floor of the mouth.",att:"Mylohyoid (origin)."},
+    {id:"genial-tubercles",n:"Genial tubercles",a:"z:geniohyoid-muscle",d:"Tiny bumps on the inner midline of the chin where the genioglossus and geniohyoid muscles attach — the anchors that keep the tongue from falling back.",att:"Genioglossus and geniohyoid (origin).",c:"If they fracture, the tongue loses its anchor — an airway risk in jaw injuries."}
   ]
 };
 
@@ -18169,6 +18224,32 @@ const META = window.ATLAS_META;
 const $ = s => document.querySelector(s);
 const esc = s => (s||"").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+/* ---------- text & speech helpers ---------- */
+const normTxt = s => (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();
+const lev = (a,b) => { a=normTxt(a); b=normTxt(b); const n=a.length,m=b.length;
+  if(Math.abs(n-m)>3) return 9; const d=[]; for(let i=0;i<=n;i++)d[i]=[i];
+  for(let j=0;j<=m;j++)d[0][j]=j;
+  for(let i=1;i<=n;i++)for(let j=1;j<=m;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  return d[n][m]; };
+const triScore = (q,s) => { q=normTxt(q); s=" "+normTxt(s)+" "; if(!q||q.length<3) return 0;
+  const grams = new Set(); for(let i=0;i<q.length-2;i++) grams.add(q.slice(i,i+3));
+  let hit=0; for(const g of grams) if(s.includes(g)) hit++;
+  return hit/grams.size; };
+/* fuzzy name match for typed answers + "did you mean": accepts ≤1-2 typos or strong trigram overlap */
+const fuzzyMatch = (input, names) => { const i2=normTxt(input); if(!i2) return false;
+  return names.filter(Boolean).some(n=>{ const t=normTxt(n); if(!t) return false;
+    if(i2===t) return true;
+    const short = t.split(" ").filter(w=>w.length>2).join(" ")||t;
+    if(lev(i2,t)<=Math.max(1,Math.floor(t.length*0.12))) return true;
+    if(lev(i2,short)<=Math.max(1,Math.floor(short.length*0.12))) return true;
+    return triScore(i2,t)>=0.72; }); };
+const _sayVoice = () => { try{ const vs=speechSynthesis.getVoices();
+    return vs.find(v=>/^en(-|_)/i.test(v.lang)&&/female|samantha|zira|google/i.test(v.name))||vs.find(v=>/^en(-|_)/i.test(v.lang))||null;
+  }catch(e){ return null; } };
+const say = text => { try{ speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text); u.rate=0.92; const v=_sayVoice(); if(v)u.voice=v;
+    speechSynthesis.speak(u); }catch(e){} };
+
 const byId = {};
 DATA.forEach(d => byId[d.id] = d);
 /* bone landmarks become first-class inventory records: searchable, browsable,
@@ -18185,7 +18266,8 @@ if (window.ATLAS_LM) for (const pid in window.ATLAS_LM) {
     if (!rec) {
       rec = { id: L.id, name: L.n, aka: L.aka || "", system: p.system, region: p.region,
         tags: ["landmark", "bone feature", p.name.toLowerCase()],
-        summary: L.d, structure: "", fn: "", clinical: L.c || "", related: [recId], of: pid, ofRec: recId };
+        summary: L.d, structure: "", fn: "", clinical: L.c || "", related: [recId], of: pid, ofRec: recId,
+        att: L.att || "", art: L.art || "", pal: L.pal || "" };
       DATA.push(rec); byId[L.id] = rec;
     } else { rec.of = pid; rec.ofRec = recId; if (!rec.clinical && L.c) rec.clinical = L.c; }
     return rec;
@@ -18351,6 +18433,7 @@ function vDetail(id){
   const prev = sameSys[(idx-1+sameSys.length)%sameSys.length], next = sameSys[(idx+1)%sameSys.length];
   const rel = (d.related||[]).filter(r=>byId[r]).map(r=>{ const x=byId[r]; return `<a class="rel" href="#/part/${r}"><span class="dot" style="--c:${SYSTEMS[x.system].color}"></span>${x.name}</a>`; }).join("");
   const inRegion = DATA.filter(x=>x.region===d.region && x.id!==d.id).slice(0,8).map(x=>`<a class="rel" href="#/part/${x.id}"><span class="dot" style="--c:${SYSTEMS[x.system].color}"></span>${x.name}</a>`).join("");
+  const t = (window.ATLAS_TEACH||{})[id] || null;
   view.innerHTML = `
   <div class="detail-head">
     <div class="dh-main">
@@ -18366,9 +18449,21 @@ function vDetail(id){
   ${d.fn?`<div class="section"><h2>Function</h2><p>${esc(d.fn)}</p></div>`:""}
   ${model3d}
   <div class="section"><h2>Location</h2><p>Located in <b>${REGIONS[d.region].name}</b>${d.aka?` — also known as ${esc(d.aka)}`:""} — <a href="#/region/${d.region}">browse this region →</a></p></div>
+  ${d.att?`<div class="section"><h2>Attachments</h2><p>${esc(d.att)}</p></div>`:""}
+  ${d.art?`<div class="section"><h2>Articulations</h2><p>${esc(d.art)}</p></div>`:""}
+  ${d.pal?`<div class="section"><h2>Surface anatomy</h2><p>${esc(d.pal)}</p></div>`:""}
+  ${t?`
+  ${t.where?`<div class="section"><h2>Where it is</h2><p>${esc(t.where)}</p></div>`:""}
+  ${t.look?`<div class="section"><h2>What to look for</h2><p>${esc(t.look)}</p></div>`:""}
+  ${t.supply?`<div class="section"><h2>Blood & nerve supply</h2><p>${esc(t.supply)}</p></div>`:""}
+  ${t.rel?`<div class="section"><h2>How the neighbours relate</h2><ul class="tlist">${Object.entries(t.rel).map(([k,v])=>`<li>${byId[k]?`<a href="#/part/${k}"><b>${esc(byId[k].name)}</b></a>`:`<b>${esc(k)}</b>`} — ${esc(v)}</li>`).join("")}</ul></div>`:""}
+  ${t.mnemonic?`<div class="section"><h2>Memory hook</h2><p>💡 ${esc(t.mnemonic)}</p></div>`:""}
+  ${t.case?`<div class="section"><h2>Clinical vignette</h2><p>🩺 ${esc(t.case)}</p></div>`:""}
+  ${t.simple?`<div class="section"><h2>In plain words</h2><p>${esc(t.simple)}</p></div>`:""}
+  `:""}
   ${d.clinical?`<div class="section"><h2>Clinical relevance</h2><p>${esc(d.clinical)}</p></div>`:""}
   ${rel?`<div class="section"><h2>Related structures</h2><div class="rel-row">${rel}</div></div>`:""}
-  ${LM_BY[id]?`<div class="section"><h2>Landmarks</h2><p class="hint" style="margin:0 0 10px">Named surface features of the ${esc(d.name)} — each opens its own entry, and all are pinned in the 3D view when you select this bone.</p><div class="lm-row">${LM_BY[id].map(x=>`<a class="lm-chip" href="#/part/${x.id}">${esc(x.name)}</a>`).join("")}</div></div>`:""}
+  ${LM_BY[id]?`<div class="section"><h2>Landmarks (${LM_BY[id].length})</h2><p class="hint" style="margin:0 0 10px">Named surface features of the ${esc(d.name)} — each opens its own entry, and all are pinned in the 3D view when you select this bone.</p><div class="lm-list">${LM_BY[id].map(x=>`<a class="lm-item" href="#/part/${x.id}"><b>📍 ${esc(x.name)}</b><span>${esc(x.summary)}</span></a>`).join("")}</div></div>`:""}
   <div class="section"><h2>Also in ${REGIONS[d.region].name}</h2><div class="rel-row">${inRegion}</div></div>
   <div class="pn"><a href="#/part/${prev.id}"><div class="dir">← ${c.name}</div><div class="nm">${prev.name}</div></a>
   <a class="next" href="#/part/${next.id}"><div class="dir">${c.name} →</div><div class="nm">${next.name}</div></a></div>`;
@@ -18516,8 +18611,9 @@ function buildScene(gltf, st){
   let visParts = null, anchorPool = {}, _pcCache = {}, _pmCache = {};
   /* undo stack for hide / isolate / layer-reset actions */
   const undoStack = [];
-  /* tap-the-structure quiz state */
-  const quiz = { on:false, target:null, score:0, tries:0, streak:0 };
+  /* quiz state: qtype "tap" = tap the named structure; "spot" = name the spotlighted one */
+  const quiz = { on:false, target:null, last:null, score:0, tries:0, streak:0,
+    mode:"mix", qtype:"tap", opts:null, savedFS:null };
   let quizEl = null;
   /* exploded view + wireframe */
   let expVal = 0, explodeAmt = 0, wireOn = false;
@@ -18570,6 +18666,7 @@ function buildScene(gltf, st){
       const pk = Object.keys(pinsV2);
       if(pk.length && pk.length<=24) q.set("pins",pk.join(","));
       if(lesson.on && lesson.sys) q.set("lesson",lesson.sys);
+      if(quiz.on) q.set("quiz",quiz.mode);
       if(faded.size && faded.size<=24) q.set("fad",[...faded].join(","));
       if(peelN) q.set("peel",peelN);
       if(expVal) q.set("exp",expVal);
@@ -18873,28 +18970,71 @@ function buildScene(gltf, st){
       e.preventDefault(); undo(); } };
   addEventListener("keydown",onKey);
 
-  /* ---- tap-the-structure quiz ---- */
+  /* ---- 3D quiz: "Find it" (tap the named structure), "Name it" (pin-test on a
+     spotlighted structure) and "Mix". Spot questions ghost every other part —
+     like Complete Anatomy pin-tests — and show 4 name options. ---- */
   const quizPool = () => Object.keys(meshes).filter(id=>byId[id] && anyVis(id) && !id.startsWith("z:"));
+  const QUIZ_MODES = [["tap","🎯 Find it"],["spot","💡 Name it"],["mix","🔀 Mix"]];
   const quizPaint = note => { if(!quizEl) return;
     quizEl.innerHTML =
-      (note ? `<span class="${note[0]}">${note[1]}</span>`
-           : `<span class="q-s">Find:</span><span class="q-t">${esc(nameOf(quiz.target))}</span>`)
+      `<span class="q-modes">${QUIZ_MODES.map(([m,l])=>`<button data-m="${m}" class="${quiz.mode===m?"on":""}">${l}</button>`).join("")}</span>`
+      + (note ? `<span class="${note[0]}">${note[1]}</span>`
+          : quiz.qtype==="spot" && quiz.opts
+            ? `<span class="q-s">Name it:</span><span class="q-opts">${quiz.opts.map((o,i)=>`<button class="qopt" data-opt="${esc(o)}"><b>${"ABCD"[i]}</b> ${esc(nameOf(o))}</button>`).join("")}</span>`
+            : `<span class="q-s">Find:</span><span class="q-t">${esc(nameOf(quiz.target))}</span>`)
       + `<span class="q-s">✔ ${quiz.score} · ✖ ${quiz.tries}</span>`
       + (quiz.streak>1 ? `<span class="q-streak">🔥${quiz.streak}</span>` : "")
       + `<button data-q="skip">skip ⏭</button><button data-q="quit">✕ quit</button>`;
     quizEl.querySelectorAll("[data-q]").forEach(b=>b.addEventListener("click",ev=>{
       ev.stopPropagation();
-      b.dataset.q==="quit" ? quizStop() : quizNext(); })); };
+      b.dataset.q==="quit" ? quizStop() : quizNext(); }));
+    quizEl.querySelectorAll("[data-m]").forEach(b=>b.addEventListener("click",ev=>{
+      ev.stopPropagation(); quiz.mode = b.dataset.m;
+      try{ localStorage.setItem("atlas-qmode",quiz.mode); }catch(e){}
+      quizNext(); }));
+    quizEl.querySelectorAll("[data-opt]").forEach(b=>b.addEventListener("click",ev=>{
+      ev.stopPropagation(); quizOpt(b.dataset.opt); })); };
   const quizNext = () => { const pool = quizPool();
+    quiz.target = null; quiz.opts = null;
+    if(focusSet){ focusSet = null; applyVis(); }   /* drop last spotlight */
+    if(!pool.length){ quizPaint(["q-flash-bad","No visible named structures — enable more systems"]); return; }
     let t = pool[Math.floor(Math.random()*pool.length)], guard = 40;
-    while(pool.length>1 && t===quiz.target && --guard) t = pool[Math.floor(Math.random()*pool.length)];
-    quiz.target = t; quizPaint(); };
-  const quizStop = () => { quiz.on=false; quiz.target=null; cv.classList.remove("quizmode");
+    while(pool.length>1 && t===quiz.last && --guard) t = pool[Math.floor(Math.random()*pool.length)];
+    quiz.target = t; quiz.last = t;
+    quiz.qtype = quiz.mode==="mix" ? (Math.random()<.5 ? "tap" : "spot") : quiz.mode;
+    if(quiz.qtype==="spot"){
+      focusSet = new Set([t]); applyVis();
+      const p = partCenter(t); if(p) flyTo(p.c, p.r);
+      /* distractors from every named part: same system first, then any */
+      const sys = sysOf(t), named = Object.keys(meshes).filter(id=>byId[id] && !id.startsWith("z:"));
+      const distract = shuffle(named.filter(id=>id!==t && sysOf(id)===sys)).slice(0,3);
+      const other = shuffle(named.filter(id=>id!==t && sysOf(id)!==sys)); let i = 0;
+      while(distract.length<3 && i<other.length) distract.push(other[i++]);
+      quiz.opts = shuffle([t,...distract]);
+    }
+    quizPaint(); };
+  const quizOpt = id => { if(!quiz.on || quiz.qtype!=="spot" || !quiz.target) return;
+    const t = quiz.target, right = id===t;
+    if(right){ quiz.score++; quiz.streak++;
+      srRecord(t,true); PROG.quizRight=(PROG.quizRight|0)+1; PROG.xp=(PROG.xp|0)+10; touchStreak(); saveProg(); checkBadges();
+      each(t,mm=>glow(mm,0x0f7a3d));
+      quizPaint(["q-flash-good","✓ "+esc(nameOf(t))]); }
+    else { quiz.tries++; quiz.streak=0;
+      srRecord(t,false); saveProg();
+      each(t,mm=>glow(mm,0x7a1020));
+      quizPaint(["q-flash-bad","✖ It was "+esc(nameOf(t))]); }
+    quiz.target = null; quiz.opts = null;
+    setTimeout(()=>{ if(!quiz.on) return; each(t,mm=>glow(mm,0)); quizNext(); }, right?700:1500); };
+  const quizStop = () => { quiz.on=false; quiz.target=null; quiz.opts=null; cv.classList.remove("quizmode");
+    focusSet = quiz.savedFS || null; quiz.savedFS = null;   /* restore any pre-quiz fade */
+    if(document.body.contains(cv)) applyVis();
     if(quizEl){ quizEl.remove(); quizEl=null; }
     const qb=$("#b3dquiz"); if(qb) qb.classList.remove("on");
     updPins(); stSync(); if(labelsOn) updLabels(); };
-  const quizStart = first => { if(quiz.on) return;
-    quiz.on=true; cv.classList.add("quizmode");
+  const quizStart = (first, mode) => { if(quiz.on) return;
+    quiz.on=true; quiz.savedFS = focusSet; cv.classList.add("quizmode");
+    if(mode) quiz.mode = mode;
+    else try{ quiz.mode = localStorage.getItem("atlas-qmode") || "mix"; }catch(e){}
     tip.style.display="none"; if(hover){ glow(hover,0); hover=null; }
     select(null);
     quizEl = document.createElement("div"); quizEl.className="b3d-quiz"; stage.appendChild(quizEl);
@@ -18904,10 +19044,10 @@ function buildScene(gltf, st){
     stSync(); if(labelsOn) updLabels();
     if(!quizPool().length){ quizPaint(["q-flash-bad","No visible named structures — enable more systems"]);
       quiz.target=null; return; }
-    if(first && meshes[first] && byId[first]){ quiz.target = first; quizPaint(); }
+    if(first && meshes[first] && byId[first]){ quiz.target = quiz.last = first; quiz.qtype = "tap"; quizPaint(); }
     else quizNext(); };
   const quizAnswer = m => { const id = m && m.userData.partId;
-    if(!quiz.target) return;
+    if(!quiz.target || quiz.qtype!=="tap") return;
     if(id===quiz.target){ quiz.score++; quiz.streak++;
       srRecord(id,true); PROG.quizRight=(PROG.quizRight|0)+1; PROG.xp=(PROG.xp|0)+10; touchStreak(); saveProg(); checkBadges();
       each(id,mm=>glow(mm,0x0f7a3d));
@@ -19019,7 +19159,7 @@ function buildScene(gltf, st){
   const hbar = $("#b3dhbar");
   const syncHiddenBar = () => {
     if(isolated!==null) hbar.innerHTML = `<span>Showing only <b>${esc(nameOf(isolated))}</b></span><button id="b3dall">Show all</button>`;
-    else if(focusSet && !lesson.on) hbar.innerHTML = `<span>Fading other structures</span><button id="b3dall">Show all</button>`;
+    else if(focusSet && !lesson.on && !quiz.on) hbar.innerHTML = `<span>Fading other structures</span><button id="b3dall">Show all</button>`;
     else if(hidden.size||faded.size) hbar.innerHTML = `<span>${hidden.size?`${hidden.size} hidden`:""}${hidden.size&&faded.size?" · ":""}${faded.size?`${faded.size} faded`:""}</span><button id="b3dall">Show all</button>`;
     else hbar.innerHTML = "";
     const b = hbar.querySelector("#b3dall");
@@ -19214,22 +19354,37 @@ function buildScene(gltf, st){
   const lmVis = (it, pt) => {
     const now = performance.now(), rec = lmVT[it.L.id];
     if (rec && now - rec.t < (lowPower ? 300 : 150)) return rec.v;
-    ray.set(camera.position, _nd.copy(pt).sub(camera.position).normalize());
-    const hits = ray.intersectObjects(rayMeshes(), false);
-    let v = true;
-    for (const h of hits) { const o = h.object;
-      if (!effVis(o) || o.userData.ghost) continue;
-      if (o.material && o.material.transparent && o.material.opacity < 0.5) continue;
-      const pid = o.userData.partId;
-      v = pid === it.pid || (window.ATLAS_GLB_PARENT || {})[pid] === it.pid;
-      break; }
+    /* self-occlusion without a triangle test: the landmark's offset from the
+       bone's centre must roughly face the camera — free and flicker-proof,
+       and the dense parent mesh never enters a raycast */
+    const m = it.m; if(!m.geometry.boundingSphere) m.geometry.computeBoundingSphere();
+    const c = m.geometry.boundingSphere.center.clone().applyMatrix4(m.matrixWorld);
+    const ol = it.o.length();
+    const facing = ol > 1e-6 ? it.o.dot(_nd.copy(camera.position).sub(c).normalize()) / ol : 1;
+    let v = facing > -0.18;
+    if (v) { /* cross-occlusion: a landmark is blocked only if a DIFFERENT part
+                is in front of it — the parent bone's own meshes are filtered
+                out before intersectObjects, so they cost nothing */
+      ray.set(camera.position, _nd.copy(pt).sub(camera.position).normalize());
+      const GP = window.ATLAS_GLB_PARENT || {};
+      const others = rayMeshes().filter(o => o.userData.partId !== it.pid && GP[o.userData.partId] !== it.pid);
+      for (const h of ray.intersectObjects(others, false)) {
+        const o = h.object;
+        if (!effVis(o) || o.userData.ghost) continue;
+        if (o.material && o.material.transparent && o.material.opacity < 0.5) continue;
+        v = false; break; } }
     lmVT[it.L.id] = { v, t: now }; return v;
   };
+  const lmType = n => { const m = n.toLowerCase().match(/foramen|notch|fossa|facet|groove|sulcus|canal|meatus|tubercle|tuberosity|trochanter|spine|crest|eminence|malleolus|styloid|condyle|process|line|border|angle|arch|surface|head|neck|symphysis|disc|fovea|protuberance|apex|base|end|ramus|sinus|notch|area|region|bed|point|peak|edge/); return m ? m[0][0].toUpperCase()+m[0].slice(1) : null; };
   const lmInfo = it => {
     const p = byId[(LM_PID2REC || {})[it.pid] || it.pid], c = p ? SYSTEMS[p.system] : null;
+    const lt = lmType(it.L.n);
     setInfo(`<h3>📍 ${esc(it.L.n)}</h3>
-      <div class="badges" style="margin:6px 0 8px"><span class="badge">Bone landmark</span>${c?`<span class="badge sys" style="--badge-c:${c.color}">${c.icon} On the ${esc(p.name)}</span>`:""}</div>
+      <div class="badges" style="margin:6px 0 8px"><span class="badge">Bone landmark</span>${lt?`<span class="badge">${lt}</span>`:""}${c?`<span class="badge sys" style="--badge-c:${c.color}">${c.icon} On the ${esc(p.name)}</span>`:""}</div>
       <p class="b3d-sum">${esc(it.L.d)}</p>
+      ${it.L.att?`<div class="b3d-sec"><b>Attachments</b><p>${esc(it.L.att)}</p></div>`:""}
+      ${it.L.art?`<div class="b3d-sec"><b>Articulations</b><p>${esc(it.L.art)}</p></div>`:""}
+      ${it.L.pal?`<div class="b3d-sec"><b>Surface anatomy</b><p>${esc(it.L.pal)}</p></div>`:""}
       ${it.L.c?`<div class="b3d-sec"><b>Clinical note</b><p>${esc(it.L.c)}</p></div>`:""}
       <div class="b3d-actions">
         ${p?`<button data-la="parent">About the ${esc(p.name)}</button>`:""}
@@ -19902,6 +20057,8 @@ function buildScene(gltf, st){
     if (it) { select(it.pid); focusOn(it.pid); lmFlash = st.lm; lmInfo(it);
       setTimeout(()=>{ lmFlash = null; }, 8000); }
   }
+  /* quiz deep link: #/3d?quiz=find|name|mix — start a quiz straight away */
+  if(st.quiz) quizStart(null, {find:"tap",tap:"tap",name:"spot",spot:"spot"}[st.quiz] || "mix");
 
   let raf;
   const tick = ()=>{ if(!document.body.contains(cv)){ cancelAnimationFrame(raf); quizStop(); return; }
@@ -19942,7 +20099,8 @@ function v3D(sel){
     exp: Math.max(0, Math.min(100, +q.get("exp")||0)),
     clip: q.get("clip") || null,
     lesson: q.get("lesson") || null,
-    lm: q.get("lm") || null };
+    lm: q.get("lm") || null,
+    quiz: q.get("quiz") || null };
   const ids = Object.keys(MODELS).filter(id=>byId[id]);
   document.body.classList.add("b3d-open");
   view.innerHTML = `<div class="b3d-app loading" id="b3dapp">
@@ -20006,7 +20164,7 @@ function v3D(sel){
       <button class="dock-b" data-pop="exp" title="Exploded view"><i>💥</i><b>Explode</b></button>
       <button class="dock-b" data-pop="peel" title="Peel layers"><i>🧅</i><b>Peel</b></button>
       <span class="dock-sep"></span>
-      <button class="dock-b" id="b3dquiz" title="Quiz: tap the named structure"><i>🎯</i><b>Quiz</b></button>
+      <button class="dock-b" id="b3dquiz" title="Quiz: find or name structures"><i>🎯</i><b>Quiz</b></button>
       <button class="dock-b" data-pop="more" title="Wireframe, depth shading, undo, screenshot, reset"><i>⋯</i><b>More</b></button>
       <button class="dock-b" id="b3dlayers" title="Body systems, colors &amp; more"><i>☰</i><b>Layers</b></button>
     </div></nav>
@@ -20080,6 +20238,7 @@ function vQuiz(sys){
       <span class="badge">Score: <b id="qs">0</b></span>
       <span class="badge">Answered: <b id="qa">0</b></span>
       <span class="badge">Streak: <b id="qk">0</b></span>
+      <a class="badge" href="#/3d?quiz=mix" title="Quiz yourself on the 3D model — tap it or name it">🧊 Spot-test in 3D</a>
       ${isDue?"":`<select id="qsys" style="background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:4px 8px">
         <option value="">All systems</option>${META.systemOrder.map(s=>`<option value="${s}" ${s===sys?"selected":""}>${SYSTEMS[s].name}</option>`).join("")}
       </select>`}
@@ -20118,8 +20277,9 @@ function nextQ(){
   const im = imgOf(d.id);
   $("#qcard").innerHTML = `
     <div class="q">Which structure is this?</div>
-    <div class="qsub">${q}${im?`<img src="${esc(im.url)}" style="margin-top:14px">`:""}</div>
+    <div class="qsub">${q}</div>
     <div class="opts">${opts.map((o,i)=>`<button class="opt" data-id="${o.id}"><span class="k">${"ABCD"[i]}</span>${o.name}</button>`).join("")}</div>
+    <div id="qrev"></div>
     <div class="quiz-foot"><span class="qnote" id="qnote"></span><button class="btn plain" id="qnext" style="display:none">Next →</button></div>`;
   $("#qcard").querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{
     const right = b.dataset.id===d.id;
@@ -20134,6 +20294,9 @@ function nextQ(){
     const n=$("#qnext"); n.style.display="inline-flex"; n.onclick=nextQ;
     const link=document.createElement("a"); link.href="#/part/"+d.id; link.textContent="See the atlas entry →"; link.style.marginLeft="10px";
     $("#qnote").appendChild(link);
+    /* plate reveals only after answering — most plates are labeled and would give it away */
+    if(im){ const pic=document.createElement("img"); pic.src=im.url; pic.alt=d.name; pic.style.marginTop="16px";
+      $("#qrev").appendChild(pic); }
   }));
 }
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
@@ -20283,7 +20446,7 @@ let routeN = 0;
 function route(){
   routeN++;
   document.body.classList.remove("b3d-open");
-  const h = location.hash.replace(/^#\/?/,"");
+  const h = location.hash.replace(/^#\/?/,"").replace(/^3d\?(.*)$/,"3d/?$1");
   const [_,kind,arg] = h.match(/^(\w*)(?:\/(.*))?$/) || [];
   closeSidebar();
   document.querySelectorAll(".nav-link").forEach(a=>a.classList.remove("active"));
