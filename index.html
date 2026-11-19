@@ -19054,6 +19054,8 @@ function buildScene(gltf, st){
   }catch(e){ console.warn("env map skipped:", e); }
   const group = new THREE.Group(); scene.add(group);
   const chipOn = {}, hidden = new Set(), faded = new Set(); let isolated = null, aidsOn = false, focusSet = null, skinOp = 1;
+  /* lateral half kept by isolate — "l"/"r"/null (null = both sides / not bilateral) */
+  let isoSide = null, selMesh = null;
   const GP = window.ATLAS_GLB_PARENT || {};
   let hover = null, selected = null, xr = false;
   /* render-on-demand: only draw frames when something actually changed */
@@ -19176,6 +19178,7 @@ function buildScene(gltf, st){
     const id = isMisc ? "__misc" : B3D_MAP[key];
     const sys = isSkin ? "integumentary" : (isMisc ? (MAT_SYS[mn] || "general") : sysOf(id));
     o.userData.partId = id;
+    o.userData.zName = key;
     o.userData.sys = sys;
     o.userData.origMat = o.material;
     o.userData.baseMat = o.material;
@@ -19240,7 +19243,7 @@ function buildScene(gltf, st){
       (meshes[mid] = meshes[mid] || []).push(o);
       (bySysM[sys] = bySysM[sys] || []).push(o);
     } }
-  for(const s in bySysM) chipOn[s] = s !== "integumentary";
+  for(const s in bySysM) chipOn[s] = s === "skeletal";
   /* restore deep-linked state (?sys=&hid=&iso=&peel=&clip=) */
   if(st.sys) for(const s in chipOn) chipOn[s] = st.sys.includes(s);
   if(st.hid) st.hid.forEach(id=>hidden.add(id));
@@ -19273,11 +19276,12 @@ function buildScene(gltf, st){
     for(const id in meshes) for(const m of meshes[id]){
       m.visible = chipOn[m.userData.sys] && !hidden.has(id)
         && peelOf(m.userData.sys) >= peelN && (!m.userData.aid || aidsOn)
-        && (isolated===null || id===isolated || GP[id]===isolated);
+        && (isolated===null || (id===isolated || GP[id]===isolated)
+            && (isoSide===null || m.userData.side===null || m.userData.side===isoSide));
       m.userData.ghost = focusSet ? !focusSet.has(id) : false;
       const base = m.userData.baseMat || m.material;
       m.material = m.userData.ghost ? ghostOf(base)
-        : (id===selected && m.userData.glowMat) ? m.userData.glowMat
+        : (id===selected && (m.userData.selMat || m.userData.glowMat)) ? (m.userData.selMat || m.userData.glowMat)
         : faded.has(id) ? fadeOf(base) : base;
       if(m.visible && !m.userData.ghost) visList.push(m);
     }
@@ -19302,6 +19306,13 @@ function buildScene(gltf, st){
     isolated = t; focusSet = null;
     for(const k in meshes){ if(k===t || GP[k]===t){ hidden.delete(k);
       for(const m of meshes[k]) chipOn[m.userData.sys] = true; } }
+    /* bilateral parts isolate ONE side — the tapped side wins; no tap
+       context falls back to right (the anatomical convention). If the family
+       has no mesh on that side at all, keep both rather than blank the view */
+    isoSide = (selMesh && (selMesh.userData.partId===t || GP[selMesh.userData.partId]===t)
+      && selMesh.userData.side) || "r";
+    if(!Object.keys(meshes).some(k=>(k===t||GP[k]===t)
+      && meshes[k].some(m=>m.userData.side===isoSide))) isoSide = null;
     applyVis(); syncHiddenBar();
   };
   applyVis();
@@ -19321,6 +19332,23 @@ function buildScene(gltf, st){
   };
   const home = new THREE.Vector3(ctr.x, ctr.y, ctr.z + rad*2.3);
   camera.position.copy(home); camera.near = rad/120; camera.far = rad*30; camera.updateProjectionMatrix();
+  /* per-mesh side for bilateral isolation: suffix on the source name says
+     l/r, but a mesh spanning the midline (|x|≈0) is treated as sideless so
+     midline structures survive either side's isolate */
+  const sideOfName = n => { if(/\bleft\b/i.test(n)) return "l";
+    if(/\bright\b/i.test(n)) return "r";
+    const m = /[._-]([lr])(?:[._-]\d+)?$/i.exec(n); return m ? m[1].toLowerCase() : null; };
+  { const _sx = new THREE.Vector3();
+    for(const id in meshes) for(const m of meshes[id]){
+      let s = sideOfName(m.userData.zName || "");
+      if(s){ if(!m.geometry.boundingSphere) m.geometry.computeBoundingSphere();
+        _sx.copy(m.geometry.boundingSphere.center).applyMatrix4(m.matrixWorld);
+        if(Math.abs(_sx.x) < rad*0.02) s = null; }
+      m.userData.side = s; } }
+  /* deep-link isolate (?iso=) has no tap context — default to right side too */
+  if(isolated!==null){ isoSide = Object.keys(meshes).some(k=>(k===isolated||GP[k]===isolated)
+    && meshes[k].some(m=>m.userData.side==="r")) ? "r" : null;
+    if(isoSide) applyVis(); }
   /* aim shadow camera + ground catcher at the body */
   l1.position.multiplyScalar(rad*3).add(ctr); l1.target.position.copy(ctr);
   if(!lowPower){ const sc = l1.shadow.camera; sc.left=sc.bottom=-rad; sc.right=sc.top=rad; sc.near=rad*0.5; sc.far=rad*8; sc.updateProjectionMatrix();
@@ -19416,16 +19444,28 @@ function buildScene(gltf, st){
   const selHex = () => 0x0f7a3d;
   /* tintOnly → highlight by color alone (no emissive): the part keeps its own
      shading so bumps/roughness still read; quizzes/hover keep the emissive flash */
+  /* one tinted clone per SOURCE material — persistent selection no longer
+     clones per mesh (the humerus family was cloning on every first tap) */
+  const selTintPool = new Map();
   const glow = (m,hex,tintOnly)=>{ if(!m) return;
-    if(hex){ const base = m.userData.baseMat || m.material;
-      if(!m.userData.glowMat || m.userData.glowMat.userData.src!==base){
-        m.userData.glowMat = base.clone(); m.userData.glowMat.userData.src = base; }
-      m.userData.glowMat.emissive.setHex(tintOnly ? 0 : hex);
-      if(base.color) m.userData.glowMat.color.copy(base.color).lerp(_tint.setHex(hex), tintOnly ? 0.55 : 0.35);
-      if(!m.userData.ghost) m.material = m.userData.glowMat; }
-    else if(m.userData.glowMat){ m.userData.glowMat.emissive.setHex(0);
-      const base = m.userData.baseMat || m.material;
-      if(base.color) m.userData.glowMat.color.copy(base.color); } poke(); };
+    const base = m.userData.baseMat || m.material;
+    if(hex){
+      if(tintOnly){ let gm = selTintPool.get(base);
+        if(!gm || gm.userData.hex!==hex){ gm = base.clone(); gm.userData.src = base;
+          gm.userData.hex = hex; gm.emissive.setHex(0);
+          if(base.color) gm.color.copy(base.color).lerp(_tint.setHex(hex), .55);
+          selTintPool.set(base, gm); }
+        m.userData.selMat = gm; if(!m.userData.ghost) m.material = gm; }
+      else { if(!m.userData.glowMat || m.userData.glowMat.userData.src!==base){
+          m.userData.glowMat = base.clone(); m.userData.glowMat.userData.src = base; }
+        m.userData.glowMat.emissive.setHex(hex);
+        if(base.color) m.userData.glowMat.color.copy(base.color).lerp(_tint.setHex(hex), .35);
+        if(!m.userData.ghost) m.material = m.userData.glowMat; } }
+    else { m.userData.selMat = null;
+      if(m.userData.glowMat){ m.userData.glowMat.emissive.setHex(0);
+        if(base.color) m.userData.glowMat.color.copy(base.color); }
+      m.material = m.userData.ghost ? ghostOf(base)
+        : faded.has(m.userData.partId) ? fadeOf(base) : base; } poke(); };
 
   /* ---- undo: snapshot {hidden,isolated} before each mutating action ---- */
   const undoBtn = $("#b3dundo");
@@ -19435,7 +19475,7 @@ function buildScene(gltf, st){
   const undo = () => { const s = undoStack.pop(); if(!s) return;
     hidden.clear(); s.h.forEach(id=>hidden.add(id));
     faded.clear(); (s.f||[]).forEach(id=>faded.add(id));
-    isolated = s.iso; focusSet = s.fs ? new Set(s.fs) : null;
+    isolated = s.iso; isoSide = null; focusSet = s.fs ? new Set(s.fs) : null;
     applyVis(); syncHiddenBar(); syncUndo(); };
   if(undoBtn) undoBtn.addEventListener("click",undo);
   const onKey = e => { if(!document.body.contains(cv)){ removeEventListener("keydown",onKey); return; }
@@ -19541,6 +19581,11 @@ function buildScene(gltf, st){
       quizPaint(["q-flash-bad","✖ "+(id?esc(nameOf(id)):"missed")+" — try again"]); } };
 
   let infoTab = "ov";
+  /* parent→children map built once — showInfo no longer scans all 1766 ids per select */
+  let _gpKids = null;
+  const gpKids = pid => { if(!_gpKids){ _gpKids = {}; const G = window.ATLAS_GLB_PARENT || {};
+      for(const k in meshes){ const p = G[k]; if(p) (_gpKids[p] = _gpKids[p] || []).push(k); } }
+    return _gpKids[pid] || []; };
   const showInfo = id => {
     const d = byId[id];
     const s = sysOf(id), c = SYSTEMS[s] || SYSTEMS.general;
@@ -19556,8 +19601,7 @@ function buildScene(gltf, st){
     const GP0 = window.ATLAS_GLB_PARENT || {}, base = GP0[id] || id;
     const lms = LM_HAS[base] ? LMS.filter(x=>x.pid===base) : [];
     const lmHtml = lms.length ? `<div class="b3d-rel"><b>${I("map-pin")} Landmarks (${lms.length})</b><div class="b3d-relch">${lms.map(x=>`<a class="b3d-rel" href="#" data-lm="${x.L.id}">${esc(x.L.n)}</a>`).join("")}</div></div>` : "";
-    const parts = [];
-    for(const k in meshes) if(GP0[k]===id) parts.push(k);
+    const parts = gpKids(id);
     const partsHtml = parts.length ? `<div class="b3d-rel"><b>Parts</b><div class="b3d-relch">${parts.slice(0,14).map(k=>`<a class="b3d-rel" href="#/part/${k}">${esc(nameOf(k))}</a>`).join("")}</div></div>` : "";
     const rg = d ? d.region : pd ? pd.region : null;
     const crumb = `<div class="b3d-crumb"><a href="#" data-sys="${s}">${c.icon} ${esc(c.name)}</a><span class="csep">›</span>${rg && REGIONS[rg] ? `<a href="#/region/${rg}">${esc(REGIONS[rg].name)}</a><span class="csep">›</span>` : (md ? `<span>${esc(md.regName)} region</span><span class="csep">›</span>` : "")}<b>${esc(nm)}</b></div>`;
@@ -19647,10 +19691,10 @@ function buildScene(gltf, st){
       else { camera.aspect = (w + s) / h; camera.setViewOffset(w + s, h, s, 0, w, h); } }
     else { camera.aspect = w / h; camera.clearViewOffset(); }
     camera.updateProjectionMatrix(); poke(); };
-  const select = id => {
+  const select = (id, mesh) => {
     if(selected) each(selected, m=>glow(m,0));
     if(id!==selected) fxClear();
-    selected = id;
+    selected = id; selMesh = mesh || null;
     if(id){ each(id, m=>glow(m,selHex(),true)); showInfo(id);
       try{ localStorage.setItem("atlas-last", window.ATLAS_GLB_PARENT && window.ATLAS_GLB_PARENT[id] || id); }catch(e){} }
     else setInfo(defInfo);
@@ -19663,12 +19707,12 @@ function buildScene(gltf, st){
   /* hidden/isolated status bar */
   const hbar = $("#b3dhbar");
   const syncHiddenBar = () => {
-    if(isolated!==null) hbar.innerHTML = `<span>Showing only <b>${esc(nameOf(isolated))}</b></span><button id="b3dall">Show all</button>`;
+    if(isolated!==null) hbar.innerHTML = `<span>Showing only <b>${esc(nameOf(isolated))}${isoSide?` (${isoSide==="l"?"left":"right"})`:""}</b></span><button id="b3dall">Show all</button>`;
     else if(focusSet && !lesson.on && !quiz.on) hbar.innerHTML = `<span>Fading other structures</span><button id="b3dall">Show all</button>`;
     else if(hidden.size||faded.size) hbar.innerHTML = `<span>${hidden.size?`${hidden.size} hidden`:""}${hidden.size&&faded.size?" · ":""}${faded.size?`${faded.size} faded`:""}</span><button id="b3dall">Show all</button>`;
     else hbar.innerHTML = "";
     const b = hbar.querySelector("#b3dall");
-    if(b) b.addEventListener("click",()=>{ pushHist(); hidden.clear(); faded.clear(); isolated=null; focusSet=null; fxClear(); traceStop(); applyVis(); syncHiddenBar(); });
+    if(b) b.addEventListener("click",()=>{ pushHist(); hidden.clear(); faded.clear(); isolated=null; isoSide=null; focusSet=null; fxClear(); traceStop(); applyVis(); syncHiddenBar(); });
     queueUrl();
   };
 
@@ -19847,45 +19891,36 @@ function buildScene(gltf, st){
     }
   }
   const lmById = lid => LMS.find(x => x.L.id === lid) || null;
-  const lmPool = {}, lmDot = {}, lmLn = {};
+  /* landmark dots live INSIDE the scene as one THREE.Points draw call —
+     depthTest:true means the GPU occludes each dot against every mesh every
+     frame for free (the CA approach), so no CPU raycast ever runs. The HTML
+     pills + leader lines stay DOM. */
+  const LM_MAX = 96, lmEps = rad*0.004;
+  const lmDotGeo = new THREE.BufferGeometry();
+  lmDotGeo.setAttribute("position", new THREE.BufferAttribute(new Float32Array(LM_MAX*3), 3));
+  const lmDots = new THREE.Points(lmDotGeo, new THREE.PointsMaterial({
+    size:11, sizeAttenuation:false, depthTest:true, depthWrite:false, transparent:true,
+    map:(()=>{ const c=document.createElement("canvas"); c.width=c.height=64;
+      const g=c.getContext("2d"), gr=g.createRadialGradient(32,32,2,32,32,30);
+      gr.addColorStop(0,"rgba(64,224,255,1)"); gr.addColorStop(.32,"rgba(64,224,255,1)");
+      gr.addColorStop(.55,"rgba(64,224,255,.45)"); gr.addColorStop(1,"rgba(64,224,255,0)");
+      g.fillStyle=gr; g.fillRect(0,0,64,64); return new THREE.CanvasTexture(c); })() }));
+  lmDots.frustumCulled = false; lmDots.renderOrder = 50; lmDots.visible = false;
+  scene.add(lmDots);
+  const lmPool = {}, lmLn = {};
   const hideLm = lid => { if(lmPool[lid]) lmPool[lid].style.display="none";
-    if(lmDot[lid]) lmDot[lid].style.display="none";
     if(lmLn[lid]) lmLn[lid].style.display="none"; };
   const lmPt = it => { if(!it.m.geometry.boundingSphere) it.m.geometry.computeBoundingSphere();
     return _v.copy(it.m.geometry.boundingSphere.center).applyMatrix4(it.m.matrixWorld).add(it.o); };
-  /* occlusion with a camera-keyed cache + a per-frame raycast budget:
-     a static camera reuses every result for free, and mid-orbit only a few
-     landmarks pay for a fresh cross-occlusion test — the rest fall back to
-     the free normal-facing test. (Was: a full scene raycast per landmark
-     every 150–300ms — the humerus' ~20 pins tanked the frame rate.) */
-  const lmVT = {};
-  let lmOcclBudget = 0, lmCK = "";
-  const lmCamKey = () => camera.position.x.toFixed(1)+","+camera.position.y.toFixed(1)+","+camera.position.z.toFixed(1)+"|"
-    +camera.quaternion.x.toFixed(2)+","+camera.quaternion.y.toFixed(2)+","+camera.quaternion.z.toFixed(2)+","+camera.quaternion.w.toFixed(2);
-  const lmVis = (it, pt) => {
-    const now = performance.now(), rec = lmVT[it.L.id];
-    if (rec && (rec.ck === lmCK || now - rec.t < (lowPower ? 300 : 150))) return rec.v;
-    /* self-occlusion without a triangle test: the landmark's offset from the
-       bone's centre must roughly face the camera — free and flicker-proof,
-       and the dense parent mesh never enters a raycast */
+  /* pill visibility = free normal-facing test only. True occlusion of the
+     dot itself is GPU-side via depthTest — including cross-occlusion by other
+     parts and self-occlusion when the bone rotates its far side forward. */
+  const lmVis = (it) => {
     const m = it.m; if(!m.geometry.boundingSphere) m.geometry.computeBoundingSphere();
     const c = m.geometry.boundingSphere.center.clone().applyMatrix4(m.matrixWorld);
     const ol = it.o.length();
     const facing = ol > 1e-6 ? it.o.dot(_nd.copy(camera.position).sub(c).normalize()) / ol : 1;
-    let v = facing > -0.18;
-    if (v && lmOcclBudget > 0) { /* cross-occlusion: a landmark is blocked only if a DIFFERENT part
-                is in front of it — the parent bone's own meshes are filtered
-                out before intersectObjects, so they cost nothing */
-      lmOcclBudget--;
-      ray.set(camera.position, _nd.copy(pt).sub(camera.position).normalize());
-      const GP = window.ATLAS_GLB_PARENT || {};
-      const others = rayMeshes().filter(o => o.userData.partId !== it.pid && GP[o.userData.partId] !== it.pid);
-      for (const h of ray.intersectObjects(others, false)) {
-        const o = h.object;
-        if (!effVis(o) || o.userData.ghost) continue;
-        if (o.material && o.material.transparent && o.material.opacity < 0.5) continue;
-        v = false; break; } }
-    lmVT[it.L.id] = { v, t: now, ck: lmCK }; return v;
+    return facing > -0.18;
   };
   const lmType = n => { const m = n.toLowerCase().match(/foramen|notch|fossa|facet|groove|sulcus|canal|meatus|tubercle|tuberosity|trochanter|spine|crest|eminence|malleolus|styloid|condyle|process|line|border|angle|arch|surface|head|neck|symphysis|disc|fovea|protuberance|apex|base|end|ramus|sinus|notch|area|region|bed|point|peak|edge/); return m ? m[0][0].toUpperCase()+m[0].slice(1) : null; };
   const lmInfo = it => {
@@ -19919,22 +19954,29 @@ function buildScene(gltf, st){
     if (!lmLayer) return;
     const auto = (isolated !== null && LM_HAS[isolated]) || (selected !== null && LM_HAS[selected]);
     if (quiz.on || stOn || !auto) {
-      for (const k in lmPool) hideLm(k); return;
+      for (const k in lmPool) hideLm(k); lmDots.visible = false; return;
     }
     /* contextual only — landmarks on the selected/isolated bone, never global */
     const focusPid = isolated !== null && LM_HAS[isolated] ? isolated : selected;
-    lmOcclBudget = lowPower ? 2 : 4; lmCK = lmCamKey();
     const list = LMS.filter(x => x.pid === focusPid);
     const sw = W(), sh = H(), seen = {}, items = [];
+    const dotPos = lmDotGeo.attributes.position;
+    let dn = 0;
     for (const it of list) {
       const pt = lmPt(it);
-      if (!lmVis(it, pt)) continue;
+      if (!lmVis(it)) continue;
+      const wx = pt.x, wy = pt.y, wz = pt.z; /* world pos before _v is reused */
       _v.copy(pt).project(camera);
       if (_v.z > 1) continue;
       const lx = (_v.x + 1) / 2 * sw, ly = (1 - _v.y) / 2 * sh;
       if (lx < -40 || ly < -20 || lx > sw + 40 || ly > sh + 20) continue;
       items.push({ it, lx, ly });
+      /* dot nudged along the surface offset so it doesn't z-fight the bone */
+      if (dn < LM_MAX) { const il = it.o.length() || 1;
+        dotPos.setXYZ(dn++, wx + it.o.x/il*lmEps, wy + it.o.y/il*lmEps, wz + it.o.z/il*lmEps); }
     }
+    lmDotGeo.setDrawRange(0, dn);
+    dotPos.needsUpdate = true; lmDots.visible = dn > 0;
     /* anatomy-plate layout: dots stay glued on the bone, name pills fan out to
        the side in a spaced column, each tied back to its dot by a leader line */
     const TOP = 12, BOT = sh - 12, GAP = 5, RUN = 26;
@@ -19971,10 +20013,6 @@ function buildScene(gltf, st){
     for (const q of items) {
       const { lx, ly, side } = q, ex = q.gx, id = q.it.L.id;
       seen[id] = 1;
-      let d = lmDot[id];
-      if (!d) { d = document.createElement("div"); d.className = "b3dlmd";
-        lmDot[id] = d; lmLayer.appendChild(d); }
-      d.style.display = "block"; d.style.left = lx + "px"; d.style.top = ly + "px";
       const el = lmPool[id];
       el.style.left = ex + "px"; el.style.top = q.py + "px";
       el.style.transform = side === 1 ? "translate(0,-50%)" : "translate(-100%,-50%)";
@@ -20179,7 +20217,7 @@ function buildScene(gltf, st){
       if(m && nowT-lastTapT<380 && (e.clientX-lastTapX)**2+(e.clientY-lastTapY)**2<625){
         lastTapT=0; focusOn(m.userData.partId); return; }
       lastTapT=nowT; lastTapX=e.clientX; lastTapY=e.clientY;
-      select(m ? m.userData.partId : null);
+      select(m ? m.userData.partId : null, m);
     }
   });
   /* hover highlight is throttled — a pick every pointermove stalled on dense meshes */
