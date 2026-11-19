@@ -19333,8 +19333,6 @@ function buildScene(gltf, st){
   /* wheel/pinch zoom toward the pointer (r146+ feature) — the old hand-rolled
      version was removed for jank; the built-in is damped and target-safe */
   controls.zoomSpeed = .95; controls.zoomToCursor = true;
-  /* keep the dolly target inside the body — stops the pivot drifting to a toe */
-  controls.minTargetRadius = 0; controls.maxTargetRadius = rad*0.6;
   controls.update();
   controls.autoRotate = !lowPower; controls.autoRotateSpeed = 0.7;
   cv.style.opacity = "0"; cv.style.transition = "opacity .6s";
