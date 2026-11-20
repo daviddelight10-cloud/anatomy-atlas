@@ -146,7 +146,7 @@ svg.ico{width:1.15em;height:1.15em;flex:none;vertical-align:-.2em}
 .menu-hint:hover{border-color:var(--accent);color:var(--accent)}
 .main3d{position:relative;overflow:hidden;display:grid;grid-template-columns:1fr;align-items:center;border-radius:22px;padding:24px 30px;border:1px solid var(--accent);box-shadow:var(--shadow);background:radial-gradient(110% 130% at 0% 0%,var(--accent-soft),transparent 60%),var(--panel)}
 .m3d-poster{position:absolute;top:0;right:0;bottom:0;width:min(46%,380px);display:flex}
-.m3d-poster img{display:block;height:100%;width:100%;object-fit:cover;object-position:50% 0;opacity:.32;-webkit-mask-image:linear-gradient(to right,transparent,#000 55%);mask-image:linear-gradient(to right,transparent,#000 55%)}
+.m3d-poster img{display:block;height:100%;width:100%;object-fit:cover;object-position:50% 0;opacity:.38;-webkit-mask-image:linear-gradient(to right,transparent,#000 55%);mask-image:linear-gradient(to right,transparent,#000 55%)}
 .main3d.noimg .m3d-poster{display:none}
 .m3d-body{position:relative;z-index:1}
 .m3d-body .kick{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
@@ -161,7 +161,7 @@ svg.ico{width:1.15em;height:1.15em;flex:none;vertical-align:-.2em}
 .m3d-chips a.resume{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .m3d-chips a.resume:hover{color:var(--accent);filter:brightness(1.1)}
 .m3d-poster img{animation:heroFloat 7s ease-in-out infinite}
-.m3d-poster:hover img{opacity:.42}
+.m3d-poster:hover img{opacity:.48}
 @keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @media(prefers-reduced-motion:reduce){.m3d-poster img{animation:none}}
 .hstats{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 2px}
@@ -18782,7 +18782,7 @@ function vHome(){
     <a class="btn hero-install" href="#" onclick="atlasInstall();return false">${I("download")} Install app</a>
   </header>
   <section class="main3d">
-    <a class="m3d-poster" href="#/3d" aria-label="Open the 3D body"><img src="img/skeleton.svg" width="436" height="842" alt="Human skeleton" onerror="this.closest('.main3d').classList.add('noimg')"></a>
+    <a class="m3d-poster" href="#/3d" aria-label="Open the 3D body"><img src="img/poster.jpg" width="1000" height="751" alt="Golden skeleton with holographic organs" onerror="this.closest('.main3d').classList.add('noimg')"></a>
     <div class="m3d-body"><span class="kick">Interactive</span><h2>3D interactive body</h2>
       <p>Rotate, peel away layers and tap any structure to learn what it is.</p>
       <a class="btn big" href="#/3d">${I("box")} Open 3D body</a>
