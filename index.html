@@ -72,6 +72,13 @@ img{max-width:100%}
 #nav{flex:1;overflow-y:auto;padding:4px 8px 16px}
 .nav-sec{margin-top:14px}
 .nav-sec h4{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);padding:0 10px 6px}
+.nav-sec-h{display:flex;align-items:center;gap:8px;width:100%;background:none;border:0;color:var(--text3);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:0 10px 6px;cursor:pointer;font-family:inherit;font-weight:600}
+.nav-sec-h:hover{color:var(--text)}
+.nav-sec-h .chev{display:inline-block;transition:transform .15s;font-size:15px;line-height:1;font-weight:400}
+.nav-sec-h[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.nav-sec-h .ct{margin-left:auto;font-size:11px;color:var(--text3);background:var(--panel2);padding:1px 7px;border-radius:20px}
+.nav-coll{max-height:1400px;overflow:hidden;transition:max-height .22s ease}
+.nav-coll.closed{max-height:0}
 .nav-link{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:9px;color:var(--text2);font-size:14px;cursor:pointer}
 .nav-link:hover{background:var(--accent-soft);color:var(--text);text-decoration:none}
 .nav-link.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
@@ -18703,13 +18710,23 @@ function buildNav(){
   <a class="nav-link" data-href="#/learn/review"><span class="ic">${I("brain")}</span>Review<span class="ct due" id="nav-rev-ct">${due||""}</span></a></div>
   <div class="nav-sec"><h4>Practice</h4>
   <a class="nav-link" data-href="#/quiz"><span class="ic">${I("target")}</span>Quiz</a></div>`;
-  h += `<div class="nav-sec"><h4>Body systems</h4>`;
-  META.systemOrder.forEach(s=>{ if(sysCount[s]) h += `<a class="nav-link" data-href="#/system/${s}"><span class="ic">${SYSTEMS[s].icon}</span>${SYSTEMS[s].name}<span class="ct">${sysCount[s]}</span></a>`; });
-  h += `</div><div class="nav-sec"><h4>Body regions</h4>`;
-  META.regionOrder.forEach(r=>{ if(regCount[r]) h += `<a class="nav-link" data-href="#/region/${r}"><span class="ic">${I("map-pin")}</span>${REGIONS[r].name}<span class="ct">${regCount[r]}</span></a>`; });
-  h += `</div>`;
+  const navOpen = (()=>{ try{ const o = JSON.parse(localStorage.getItem("atlas-nav-open")||"null");
+    return o ? Object.assign({sys:true,reg:false},o) : {sys:true,reg:false}; }catch(e){ return {sys:true,reg:false}; } })();
+  const sec = (key,title,items)=>`<div class="nav-sec"><button class="nav-sec-h" data-coll="${key}" aria-expanded="${navOpen[key]}"><span class="chev">›</span>${title}<span class="ct">${items.length}</span></button><div class="nav-coll ${navOpen[key]?"":"closed"}" id="navcoll-${key}">${items.join("")}</div></div>`;
+  h += sec("sys","Body systems",
+    META.systemOrder.filter(s=>sysCount[s]).map(s=>`<a class="nav-link" data-href="#/system/${s}"><span class="ic">${SYSTEMS[s].icon}</span>${SYSTEMS[s].name}<span class="ct">${sysCount[s]}</span></a>`));
+  h += sec("reg","Body regions",
+    META.regionOrder.filter(r=>regCount[r]).map(r=>`<a class="nav-link" data-href="#/region/${r}"><span class="ic">${I("map-pin")}</span>${REGIONS[r].name}<span class="ct">${regCount[r]}</span></a>`));
   nav.innerHTML = h;
-  nav.addEventListener("click",e=>{ const a = e.target.closest("[data-href]"); if(a){ location.hash = a.dataset.href.slice(1); closeSidebar(); }});
+  nav.addEventListener("click",e=>{
+    const hb = e.target.closest(".nav-sec-h");
+    if(hb){ const open = hb.getAttribute("aria-expanded")==="true";
+      hb.setAttribute("aria-expanded", open?"false":"true");
+      $("#navcoll-"+hb.dataset.coll).classList.toggle("closed",open);
+      navOpen[hb.dataset.coll] = !open;
+      try{ localStorage.setItem("atlas-nav-open",JSON.stringify(navOpen)); }catch(err){}
+      return; }
+    const a = e.target.closest("[data-href]"); if(a){ location.hash = a.dataset.href.slice(1); closeSidebar(); }});
 }
 const closeSidebar = () => { $("#sidebar").classList.remove("open"); $("#scrim").classList.add("hidden"); };
 $("#menu-btn").addEventListener("click",()=>{ $("#sidebar").classList.toggle("open"); $("#scrim").classList.toggle("hidden"); });
@@ -21428,7 +21445,11 @@ function route(){
   const [_,kind,arg] = h.match(/^([\w-]*)(?:\/(.*))?$/) || [];
   closeSidebar();
   document.querySelectorAll(".nav-link").forEach(a=>a.classList.remove("active"));
-  const mark = sel => { const el=document.querySelector(`.nav-link[data-href="#/${sel}"]`); if(el) el.classList.add("active"); };
+  const mark = sel => { const el=document.querySelector(`.nav-link[data-href="#/${sel}"]`);
+    if(!el) return; el.classList.add("active");
+    const c = el.closest(".nav-coll");
+    if(c && c.classList.contains("closed")){ c.classList.remove("closed");
+      const hb = c.previousElementSibling; if(hb) hb.setAttribute("aria-expanded","true"); } };
   if(!kind){ vHome(); mark(""); }
   else if(kind==="system" && SYSTEMS[arg]){ vSystem(arg); mark("system/"+arg); }
   else if(kind==="region" && REGIONS[arg]){ vRegion(arg); mark("region/"+arg); }
