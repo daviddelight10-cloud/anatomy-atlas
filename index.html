@@ -269,7 +269,9 @@ svg.ico{width:1.15em;height:1.15em;flex:none;vertical-align:-.2em}
 .region-item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:13px;padding:11px 14px;cursor:pointer}
 .region-item:hover{border-color:var(--accent);text-decoration:none}
 .region-item .nm{font-weight:600}
-.region-item .ct{margin-left:auto;font-size:12px;color:var(--text3)}
+.region-item .nm small{display:block;font-weight:400;font-size:12px;color:var(--text3);margin-top:2px}
+.region-item .nm .ico{color:var(--accent)}
+.region-item .ct{margin-left:auto;font-size:12px;color:var(--text3);flex:none}
 
 /* ---------- quiz ---------- */
 .quiz-box{max-width:680px;margin:0 auto}
@@ -20997,6 +20999,30 @@ const savedQCfg = () => { try{
   const c = JSON.parse(localStorage.getItem("atlas-qcfg")||"null");
   return c ? Object.assign({sys:[],regs:[],mode:"choices",n:0,t:0,plate:0}, c) : null;
 }catch(e){ return null; } };
+function vQuizHub(){
+  const due = srDue().length;
+  crumbs([{t:"Home",href:"#/"},{t:"Quizzes"}]);
+  const q = "&mode=mix&n=20";
+  const regionRow = r => `<a class="region-item" href="#/quiz/c:r=${r}${q}">
+      <span class="nm">${REGIONS[r].name}<small>${esc(REGIONS[r].blurb)}</small></span>
+      <span class="ct">${regCount[r]} structures ›</span></a>`;
+  const sysRow = s => `<a class="region-item" href="#/quiz/c:sys=${s}${q}">
+      <span class="nm">${SYSTEMS[s].icon} ${SYSTEMS[s].name}<small>${esc(SYSTEMS[s].blurb)}</small></span>
+      <span class="ct">${sysCount[s]} structures ›</span></a>`;
+  view.innerHTML = `
+    <div class="list-head"><h1>${I("target")} Quizzes</h1>
+      <p>Pick a region or system to practice — a 20-question set in mixed styles. Or jump into a mixed set below.</p></div>
+    <div class="path2">
+      <a class="pcard" href="#/quiz/c:mode=mix&n=20"><span class="ic">${I("shuffle")}</span><span class="tx"><b>Mixed quiz</b><small>All regions and systems · 20 questions</small></span><span class="go">›</span></a>
+      <a class="pcard" href="#/quiz/due"><span class="ic">${I("brain")}</span><span class="tx"><b>Review</b><small>${due?`${due} structure${due>1?"s":""} due now`:"Spaced repetition queue — nothing due yet"}</small></span><span class="go">›</span></a>
+      <a class="pcard" href="#/3d?quiz=mix"><span class="ic">${I("box")}</span><span class="tx"><b>3D spot-test</b><small>Tap or name structures on the 3D body</small></span><span class="go">›</span></a>
+      <a class="pcard" href="#/quiz-builder"><span class="ic">${I("sliders")}</span><span class="tx"><b>Custom quiz</b><small>Systems, regions, count, timer, plates only</small></span><span class="go">›</span></a>
+    </div>
+    <h2 class="sec-title">By region</h2>
+    <div class="region-list">${META.regionOrder.filter(r=>regCount[r]).map(regionRow).join("")}</div>
+    <h2 class="sec-title">By system</h2>
+    <div class="region-list">${META.systemOrder.filter(s=>sysCount[s]).map(sysRow).join("")}</div>`;
+}
 function vQuiz(arg){
   const isDue = arg==="due";
   const dueIds = isDue ? srDue() : null;
@@ -21009,7 +21035,9 @@ function vQuiz(arg){
   if(isDue) cfg.mode = "choices";
   let pool = quizPool(cfg);
   if(!pool.length) pool = DATA.filter(d=>d.summary);
-  crumbs([{t:"Home",href:"#/"},...(isDue?[{t:"Learn",href:"#/learn"},{t:"Review"}]:[{t:"Quiz"}])]);
+  const scope = cfg.regs.length ? cfg.regs.map(r=>REGIONS[r].name).join(" + ")
+    : cfg.sys.length ? cfg.sys.map(s=>SYSTEMS[s].name).join(" + ") : "Mixed";
+  crumbs([{t:"Home",href:"#/"},...(isDue?[{t:"Learn",href:"#/learn"},{t:"Review"}]:[{t:"Quizzes",href:"#/quiz"},{t:scope}])]);
   const modeOpts = QMODES.map(m=>`<option value="${m[0]}" ${m[0]===cfg.mode?"selected":""}>${m[1]}</option>`).join("");
   view.innerHTML = `<div class="quiz-box">
     <div class="quiz-score">
@@ -21030,12 +21058,14 @@ function vQuiz(arg){
   const qbcfg = $("#qbcfg"), qcu = $("#qcustom");
   if(qcu) qcu.addEventListener("click",e=>{ e.preventDefault(); qbcfg.classList.toggle("hidden"); });
   wireQB(qbcfg, {sys:[...cfg.sys], regs:[...cfg.regs], mode:cfg.mode, n:cfg.n, t:cfg.t, plate:cfg.plate});
-  const qsel = $("#qsys"); if(qsel) qsel.addEventListener("change",e=>{ location.hash = "/quiz"+(e.target.value?"/"+e.target.value:""); });
+  const qsel = $("#qsys"); if(qsel) qsel.addEventListener("change",e=>{
+    if(e.target.value) location.hash = "/quiz/"+e.target.value;
+    else { cfg.sys=[]; location.hash = cfgToHash(cfg); } });
   $("#qmode").addEventListener("change",e=>{ try{localStorage.setItem("atlas-q2mode",e.target.value);}catch(err){}
     if(isCfg){ cfg.mode=e.target.value; location.hash=cfgToHash(cfg); } else vQuiz($("#qsys")?$("#qsys").value||null:(SYSTEMS[arg]?arg:null)); });
   quiz = {score:0, asked:0, streak:0, pool, cfg,
     queue: isDue ? shuffle(dueIds.slice(0,20)) : (cfg.n ? shuffle(pool).slice(0,cfg.n).map(d=>d.id) : null),
-    left: cfg.t};
+    left: cfg.t, again: isDue ? "#/quiz/due" : cfgToHash(cfg)};
   if(cfg.t){ quiz.timer = setInterval(()=>{ quiz.left--; const el=$("#qtimer");
       if(el) el.textContent = Math.floor(quiz.left/60)+":"+String(Math.max(0,quiz.left%60)).padStart(2,"0");
       if(quiz.left<=0) endQuiz("Time's up!"); },1000); }
@@ -21048,9 +21078,9 @@ function endQuiz(msg){
   const qc = $("#qcard"); if(!qc) return;
   qc.innerHTML = `<div class="q">${msg||"Quiz complete"}</div>
     <div class="qsub">${quiz.score} of ${quiz.asked} correct (${pct}%)</div>
-    <div class="quiz-foot"><a class="btn primary" href="#/quiz">Again</a>
-      <a class="btn" href="#/quiz-builder" style="margin-left:8px">${I("sliders")} Custom quiz</a>
-      <a class="btn" href="#/learn" style="margin-left:8px">Back to learn</a></div>`;
+    <div class="quiz-foot"><a class="btn primary" href="${quiz.again||"#/quiz"}">Again</a>
+      <a class="btn" href="#/quiz" style="margin-left:8px">All quizzes</a>
+      <a class="btn" href="#/quiz-builder" style="margin-left:8px">${I("sliders")} Custom quiz</a></div>`;
   if(quiz.asked>=10) giveBadge("review-10");
   if(quiz.score) addXP(quiz.score*2,"quiz session");
 }
@@ -21076,7 +21106,7 @@ function nextQ(){
   const pool = quiz.pool || DATA.filter(d=>d.summary);
   let d;
   if(quiz.queue){
-    if(!quiz.queue.length){ endQuiz(quiz.cfg && quiz.cfg.n ? "Custom quiz complete" : "Review complete"); return; }
+    if(!quiz.queue.length){ endQuiz(quiz.cfg && quiz.cfg.n ? "Quiz complete" : "Review complete"); return; }
     const id = quiz.queue.pop();
     d = typeof id==="string" ? byId[id] : id;
     if(!d) return nextQ();
@@ -21400,7 +21430,7 @@ function route(){
   else if(kind==="region" && REGIONS[arg]){ vRegion(arg); mark("region/"+arg); }
   else if(kind==="part" && byId[arg]){ vDetail(arg); }
   else if(kind==="map"){ vMap(); mark("map"); }
-  else if(kind==="quiz"){ vQuiz(arg||null); mark(arg==="due"?"learn/review":"quiz"); }
+  else if(kind==="quiz"){ if(arg){ vQuiz(arg); mark(arg==="due"?"learn/review":"quiz"); } else { vQuizHub(); mark("quiz"); } }
   else if(kind==="quiz-builder"){ vQuizBuilder(); mark("quiz"); }
   else if(kind==="path" && arg){ vPath(arg); mark("paths"); }
   else if(kind==="paths"){ vPaths(); mark("paths"); }
