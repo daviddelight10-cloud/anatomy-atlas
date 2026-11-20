@@ -296,6 +296,12 @@ svg.ico{width:1.15em;height:1.15em;flex:none;vertical-align:-.2em}
 .opt:disabled{cursor:default;opacity:.85}
 .quiz-foot{margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .qnote{font-size:13.5px;color:var(--text2)}
+.qwhy{font-size:13px;color:var(--text2);background:var(--panel2);border-left:3px solid var(--accent);border-radius:8px;padding:9px 13px;margin-top:14px;line-height:1.45}
+.lgroup{font:700 11.5px var(--font);text-transform:uppercase;letter-spacing:.09em;color:var(--text3);margin:16px 4px -2px}
+.acc{font-weight:700}
+.acc.good{color:#22c55e}
+.acc.mid{color:#fbbf24}
+.acc.bad{color:#fb7185}
 
 /* ---------- misc ---------- */
 .empty{text-align:center;padding:70px 20px;color:var(--text3)}
@@ -18715,8 +18721,7 @@ function buildNav(){
   const sec = (key,title,items)=>`<div class="nav-sec"><button class="nav-sec-h" data-coll="${key}" aria-expanded="${navOpen[key]}"><span class="chev">›</span>${title}<span class="ct">${items.length}</span></button><div class="nav-coll ${navOpen[key]?"":"closed"}" id="navcoll-${key}">${items.join("")}</div></div>`;
   h += sec("sys","Body systems",
     META.systemOrder.filter(s=>sysCount[s]).map(s=>`<a class="nav-link" data-href="#/system/${s}"><span class="ic">${SYSTEMS[s].icon}</span>${SYSTEMS[s].name}<span class="ct">${sysCount[s]}</span></a>`));
-  h += sec("reg","Body regions",
-    META.regionOrder.filter(r=>regCount[r]).map(r=>`<a class="nav-link" data-href="#/region/${r}"><span class="ic">${I("map-pin")}</span>${REGIONS[r].name}<span class="ct">${regCount[r]}</span></a>`));
+  /* regions intentionally not listed — the Body map page is the region index */
   nav.innerHTML = h;
   nav.addEventListener("click",e=>{
     const hb = e.target.closest(".nav-sec-h");
@@ -20996,19 +21001,20 @@ function vGallery(){
 let quiz = {score:0, asked:0, cur:null};
 const qAccept = (ans, d) => fuzzyMatch(ans, [d.name, d.aka||"", d.latin||""]);
 const QMODES = [["choices","Multiple choice"],["type","Type it"],["cases","Clinical cases"],["facts","Muscle facts"],["mix","Mix"]];
-function parseQC(s){ const c={sys:[],regs:[],mode:"mix",n:0,t:0,plate:0};
+function parseQC(s){ const c={sys:[],regs:[],mode:"mix",n:0,t:0,plate:0,path:null,ids:[]};
   s.slice(2).split("&").forEach(kv=>{ const [k,v]=kv.split("="); const val=decodeURIComponent(v||"");
     if(k==="sys") c.sys=val.split(",").filter(x=>SYSTEMS[x]);
     else if(k==="r") c.regs=val.split(",").filter(x=>REGIONS[x]);
     else if(k==="mode"&&QMODES.some(m=>m[0]===val)) c.mode=val;
+    else if(k==="p"){ const p=(window.ATLAS_PATHS||[]).find(x=>x.id===val); if(p){c.path=val;c.ids=p.steps.filter(id=>byId[id]);} }
     else if(k==="n") c.n=+val||0; else if(k==="t") c.t=Math.min(600,+val||0); else if(k==="plate") c.plate=val==="1"; });
   return c; }
 function cfgToHash(c){ const p=[];
-  if(c.sys.length)p.push("sys="+c.sys.join(",")); if(c.regs.length)p.push("r="+c.regs.join(","));
+  if(c.path)p.push("p="+c.path); if(c.sys.length)p.push("sys="+c.sys.join(",")); if(c.regs.length)p.push("r="+c.regs.join(","));
   if(c.mode)p.push("mode="+c.mode); if(c.n)p.push("n="+c.n); if(c.t)p.push("t="+c.t); if(c.plate)p.push("plate=1");
   return "#/quiz/c:"+p.join("&"); }
 function quizPool(c){
-  let pool = DATA.filter(d=>d.summary);
+  let pool = (c.ids&&c.ids.length) ? c.ids.map(id=>byId[id]).filter(d=>d&&d.summary) : DATA.filter(d=>d.summary);
   if(c.mode==="cases") pool = pool.filter(d=>TEACH[d.id] && TEACH[d.id].case);
   else if(c.mode==="facts") pool = pool.filter(d=>d.oi);
   if(c.sys.length) pool = pool.filter(d=>c.sys.includes(d.system));
@@ -21269,7 +21275,8 @@ const SR_GAP = [0,1,2,4,8,16];
 const srBox = id => (PROG.boxes=PROG.boxes||{})[id];
 const srRecord = (id,ok) => { if(!id) return;
   const b = srBox(id) || (PROG.boxes[id] = {b:1,due:today()});
-  b.b = ok ? Math.min(5,b.b+1) : 1; b.due = today()+SR_GAP[b.b]; saveProg(); };
+  b.b = ok ? Math.min(5,b.b+1) : 1; b.due = today()+SR_GAP[b.b];
+  b.r = (b.r||0)+(ok?1:0); b.w = (b.w||0)+(ok?0:1); saveProg(); };
 const srDue = () => { const t=today(), boxes=PROG.boxes||{};
   return Object.keys(boxes).filter(id=>byId[id] && boxes[id].due<=t); };
 const BADGES = [
