@@ -55,7 +55,7 @@ img{max-width:100%}
 .side-head{display:flex;align-items:center;justify-content:space-between;padding:16px 16px 10px}
 .logo{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:700;color:var(--text)}
 .logo:hover{text-decoration:none}
-.logo svg{color:var(--accent)}
+.logo img{width:26px;height:26px;border-radius:6px;display:block}
 #theme-toggle{background:var(--panel2);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;border-radius:9px;cursor:pointer;font-size:15px}
 #theme-toggle:hover{color:var(--accent);border-color:var(--accent)}
 .search-wrap{position:relative;padding:4px 16px 12px}
@@ -77,6 +77,8 @@ img{max-width:100%}
 .nav-link.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
 .nav-link .ic{width:20px;text-align:center;flex:none}
 .nav-link .ct{margin-left:auto;font-size:11px;color:var(--text3);background:var(--panel2);padding:1px 7px;border-radius:20px}
+.nav-link .ct:empty{display:none}
+.nav-link .ct.due{background:#f2a90026;color:#f2a900;font-weight:700}
 .side-foot{padding:12px 16px;font-size:11px;color:var(--text3);border-top:1px solid var(--border);line-height:1.5}
 
 /* ---------- main ---------- */
@@ -748,7 +750,6 @@ body.can-install .hero-install{display:inline-flex!important}
 .b3d-movebar input[type=range]{width:130px}
 .b3d-movebar .hint{font-size:10.5px;color:#8d887a}
 </style>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫀</text></svg>">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0a0a0a">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -770,7 +771,7 @@ body.can-install .hero-install{display:inline-flex!important}
   <aside id="sidebar">
     <div class="side-head">
       <a class="logo" href="#/">
-        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/><path d="M9 11c-3 1-5 3-5 6v4h16v-4c0-3-2-5-5-6"/><path d="M12 11v4"/></svg>
+        <img src="icons/mark-256.png" alt="" width="26" height="26">
         <span>Anatomy Atlas</span>
       </a>
       <button id="theme-toggle" title="Toggle theme" aria-label="Toggle theme"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 18a6 6 0 0 0 0-12v12z" fill="currentColor" stroke="none"/></svg></button>
@@ -18684,14 +18685,18 @@ $("#theme-toggle").addEventListener("click",()=>{
 /* ---------- sidebar nav ---------- */
 function buildNav(){
   const nav = $("#nav");
-  let h = `<div class="nav-sec"><a class="nav-link" data-href="#/" ><span class="ic">${I("house")}</span>Overview</a>
-  <a class="nav-link" data-href="#/map"><span class="ic">${I("map")}</span>Body map</a>
+  const due = srDue().length;
+  let h = `<div class="nav-sec"><a class="nav-link" data-href="#/"><span class="ic">${I("house")}</span>Overview</a></div>
+  <div class="nav-sec"><h4>Explore</h4>
   <a class="nav-link" data-href="#/3d"><span class="ic">${I("box")}</span>3D explorer</a>
-  <a class="nav-link" data-href="#/learn"><span class="ic">${I("graduation-cap")}</span>Learn</a>
+  <a class="nav-link" data-href="#/map"><span class="ic">${I("map")}</span>Body map</a>
+  <a class="nav-link" data-href="#/gallery"><span class="ic">${I("image")}</span>Plates gallery</a></div>
+  <div class="nav-sec"><h4>Learn</h4>
+  <a class="nav-link" data-href="#/learn"><span class="ic">${I("graduation-cap")}</span>Lessons</a>
   <a class="nav-link" data-href="#/paths"><span class="ic">${I("route")}</span>Guided paths</a>
-  <a class="nav-link" data-href="#/quiz"><span class="ic">${I("target")}</span>Quiz me</a>
-  <a class="nav-link" data-href="#/quiz-builder"><span class="ic">${I("sliders")}</span>Custom quiz</a>
-  <a class="nav-link" data-href="#/gallery"><span class="ic">${I("image")}</span>Plates gallery</a></div>`;
+  <a class="nav-link" data-href="#/learn/review"><span class="ic">${I("brain")}</span>Review<span class="ct due" id="nav-rev-ct">${due||""}</span></a></div>
+  <div class="nav-sec"><h4>Practice</h4>
+  <a class="nav-link" data-href="#/quiz"><span class="ic">${I("target")}</span>Quiz</a></div>`;
   h += `<div class="nav-sec"><h4>Body systems</h4>`;
   META.systemOrder.forEach(s=>{ if(sysCount[s]) h += `<a class="nav-link" data-href="#/system/${s}"><span class="ic">${SYSTEMS[s].icon}</span>${SYSTEMS[s].name}<span class="ct">${sysCount[s]}</span></a>`; });
   h += `</div><div class="nav-sec"><h4>Body regions</h4>`;
@@ -20988,12 +20993,18 @@ function quizPool(c){
   if(c.plate) pool = pool.filter(d=>imgOf(d.id));
   return pool;
 }
+const savedQCfg = () => { try{
+  const c = JSON.parse(localStorage.getItem("atlas-qcfg")||"null");
+  return c ? Object.assign({sys:[],regs:[],mode:"choices",n:0,t:0,plate:0}, c) : null;
+}catch(e){ return null; } };
 function vQuiz(arg){
   const isDue = arg==="due";
   const dueIds = isDue ? srDue() : null;
   if(isDue && !dueIds.length){ location.hash = "/learn/review"; return; }
   const isCfg = arg && arg.startsWith("c:");
+  const isBld = arg==="builder";
   let cfg = isCfg ? parseQC(arg)
+    : isBld ? (savedQCfg() || parseQC("c:mode="+(localStorage.getItem("atlas-q2mode")||"choices")))
     : {sys: SYSTEMS[arg]?[arg]:[], regs:[], mode: localStorage.getItem("atlas-q2mode")||"choices", n:0, t:0, plate:0};
   if(isDue) cfg.mode = "choices";
   let pool = quizPool(cfg);
@@ -21011,10 +21022,14 @@ function vQuiz(arg){
       ${isDue?"":`<select id="qsys" class="qsel" title="Filter by system">
         <option value="">All systems</option>${META.systemOrder.map(s=>`<option value="${s}" ${cfg.sys.includes(s)?"selected":""}>${SYSTEMS[s].name}</option>`).join("")}
       </select>`}
-      <a class="badge" href="#/quiz-builder" title="Build a custom quiz">${I("sliders")} Custom</a>
+      <a class="badge" id="qcustom" style="cursor:pointer" title="Customize this quiz">${I("sliders")} Customize</a>
       <a class="badge" href="#/3d?quiz=mix" title="Quiz yourself on the 3D model — tap it or name it">${I("box")} Spot-test in 3D</a>
     </div>
+    <div id="qbcfg" ${isBld?"":`class="hidden"`}>${qbHTML(cfg)}</div>
     <div class="qcard" id="qcard"></div></div>`;
+  const qbcfg = $("#qbcfg"), qcu = $("#qcustom");
+  if(qcu) qcu.addEventListener("click",e=>{ e.preventDefault(); qbcfg.classList.toggle("hidden"); });
+  wireQB(qbcfg, {sys:[...cfg.sys], regs:[...cfg.regs], mode:cfg.mode, n:cfg.n, t:cfg.t, plate:cfg.plate});
   const qsel = $("#qsys"); if(qsel) qsel.addEventListener("change",e=>{ location.hash = "/quiz"+(e.target.value?"/"+e.target.value:""); });
   $("#qmode").addEventListener("change",e=>{ try{localStorage.setItem("atlas-q2mode",e.target.value);}catch(err){}
     if(isCfg){ cfg.mode=e.target.value; location.hash=cfgToHash(cfg); } else vQuiz($("#qsys")?$("#qsys").value||null:(SYSTEMS[arg]?arg:null)); });
@@ -21142,47 +21157,48 @@ function qFact(d){
     qAnswer(right, d, d.oi[f[0]]);
   }));
 }
-function vQuizBuilder(){
-  let cfg; try{ cfg = JSON.parse(localStorage.getItem("atlas-qcfg")||"null") || parseQC("c:mode="+(localStorage.getItem("atlas-q2mode")|| "choices")); }catch(e){ cfg = parseQC("c:mode=choices"); }
-  crumbs([{t:"Home",href:"#/"},{t:"Quiz",href:"#/quiz"},{t:"Custom quiz"}]);
-  view.innerHTML = `<div class="quiz-box">
-    <h1 style="margin:4px 0 12px">${I("sliders")} Custom quiz</h1>
-    <div class="qbuilder">
-      <div class="qbrow"><b>Systems</b><div class="qbchips" id="qb-sys">
-        ${META.systemOrder.map(s=>`<button class="chip ${cfg.sys.includes(s)?"on":""}" data-v="${s}">${SYSTEMS[s].name}</button>`).join("")}</div></div>
-      <div class="qbrow"><b>Regions</b><div class="qbchips" id="qb-reg">
-        ${META.regionOrder.map(r=>`<button class="chip ${cfg.regs.includes(r)?"on":""}" data-v="${r}">${REGIONS[r].name}</button>`).join("")}</div></div>
-      <div class="qbrow"><b>Style</b><select id="qb-mode" class="qsel">${QMODES.map(m=>`<option value="${m[0]}" ${m[0]===cfg.mode?"selected":""}>${m[1]}</option>`).join("")}</select></div>
-      <div class="qbrow"><b>Questions</b><div class="qbchips" id="qb-n">
-        ${[10,20,40,0].map(n=>`<button class="chip ${cfg.n===n?"on":""}" data-v="${n}">${n||"∞"}</button>`).join("")}</div></div>
-      <div class="qbrow"><b>Timer</b><div class="qbchips" id="qb-t">
-        ${[[0,"Off"],[60,"1 min"],[120,"2 min"],[300,"5 min"]].map(t=>`<button class="chip ${cfg.t===t[0]?"on":""}" data-v="${t[0]}">${t[1]}</button>`).join("")}</div></div>
-      <div class="qbrow"><label class="chip ${cfg.plate?"on":""}" id="qb-plate"><input type="checkbox" ${cfg.plate?"checked":""} style="display:none"> ${I("image")} Has plate only</label></div>
-      <div class="qbrow"><a class="btn primary" id="qb-go">Start quiz →</a>
-        <a class="btn" id="qb-share" style="margin-left:8px">${I("link")} Copy link</a></div>
-    </div></div>`;
-  const pick = sel => { cfg[sel]=[]; $("#qb-"+sel).querySelectorAll(".chip.on").forEach(c=>cfg[sel].push(c.dataset.v)); };
-  view.querySelectorAll(".qbchips .chip").forEach(c=>c.addEventListener("click",()=>{
+function qbHTML(cfg){
+  return `<div class="qbuilder">
+    <div class="qbrow"><b>Systems</b><div class="qbchips" id="qb-sys">
+      ${META.systemOrder.map(s=>`<button class="chip ${cfg.sys.includes(s)?"on":""}" data-v="${s}">${SYSTEMS[s].name}</button>`).join("")}</div></div>
+    <div class="qbrow"><b>Regions</b><div class="qbchips" id="qb-reg">
+      ${META.regionOrder.map(r=>`<button class="chip ${cfg.regs.includes(r)?"on":""}" data-v="${r}">${REGIONS[r].name}</button>`).join("")}</div></div>
+    <div class="qbrow"><b>Style</b><select id="qb-mode" class="qsel">${QMODES.map(m=>`<option value="${m[0]}" ${m[0]===cfg.mode?"selected":""}>${m[1]}</option>`).join("")}</select></div>
+    <div class="qbrow"><b>Questions</b><div class="qbchips" id="qb-n">
+      ${[10,20,40,0].map(n=>`<button class="chip ${cfg.n===n?"on":""}" data-v="${n}">${n||"∞"}</button>`).join("")}</div></div>
+    <div class="qbrow"><b>Timer</b><div class="qbchips" id="qb-t">
+      ${[[0,"Off"],[60,"1 min"],[120,"2 min"],[300,"5 min"]].map(t=>`<button class="chip ${cfg.t===t[0]?"on":""}" data-v="${t[0]}">${t[1]}</button>`).join("")}</div></div>
+    <div class="qbrow"><label class="chip ${cfg.plate?"on":""}" id="qb-plate"><input type="checkbox" ${cfg.plate?"checked":""} style="display:none"> ${I("image")} Has plate only</label></div>
+    <div class="qbrow"><a class="btn primary" id="qb-go">Start quiz →</a>
+      <a class="btn" id="qb-share" style="margin-left:8px">${I("link")} Copy link</a></div>
+  </div>`;
+}
+function wireQB(root, cfg){
+  const pick = sel => { cfg[sel]=[]; root.querySelector("#qb-"+sel).querySelectorAll(".chip.on").forEach(c=>cfg[sel].push(c.dataset.v)); };
+  root.querySelectorAll(".qbchips .chip").forEach(c=>c.addEventListener("click",()=>{
     if(c.parentElement.id==="qb-n"||c.parentElement.id==="qb-t") c.parentElement.querySelectorAll(".chip").forEach(x=>x.classList.remove("on")),c.classList.add("on");
     else c.classList.toggle("on");
     pick("sys"); pick("reg");
-    cfg.n = +view.querySelector("#qb-n .chip.on").dataset.v;
-    cfg.t = +view.querySelector("#qb-t .chip.on").dataset.v;
+    cfg.n = +root.querySelector("#qb-n .chip.on").dataset.v;
+    cfg.t = +root.querySelector("#qb-t .chip.on").dataset.v;
   }));
-  $("#qb-plate").addEventListener("click",e=>{ e.preventDefault(); cfg.plate=!cfg.plate; $("#qb-plate").classList.toggle("on",cfg.plate); });
-  $("#qb-mode").addEventListener("change",e=>cfg.mode=e.target.value);
-  $("#qb-go").addEventListener("click",()=>{ try{localStorage.setItem("atlas-qcfg",JSON.stringify(cfg));}catch(e){} location.hash = cfgToHash(cfg); });
-  $("#qb-share").addEventListener("click",()=>{ try{ navigator.clipboard.writeText(location.origin+location.pathname+cfgToHash(cfg)); learnToast("Link copied"); }catch(e){} });
+  root.querySelector("#qb-plate").addEventListener("click",e=>{ e.preventDefault(); cfg.plate=!cfg.plate; root.querySelector("#qb-plate").classList.toggle("on",cfg.plate); });
+  root.querySelector("#qb-mode").addEventListener("change",e=>cfg.mode=e.target.value);
+  root.querySelector("#qb-go").addEventListener("click",()=>{ try{localStorage.setItem("atlas-qcfg",JSON.stringify(cfg));}catch(e){} location.hash = cfgToHash(cfg); });
+  root.querySelector("#qb-share").addEventListener("click",()=>{ try{ navigator.clipboard.writeText(location.origin+location.pathname+cfgToHash(cfg)); learnToast("Link copied"); }catch(e){} });
 }
+/* #/quiz-builder deep-links land on the quiz page with the panel open */
+function vQuizBuilder(){ vQuiz("builder"); }
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
 /* ---------- learning progress: XP, lessons, streak, spaced repetition ---------- */
 const PROG = (()=>{ try{ const p=JSON.parse(localStorage.getItem("atlas-progress")||"{}");
     return p && typeof p==="object" ? p : {}; }catch(e){ return {}; } })();
 const updTbStats = () => { const el = $("#tb-stats"); if(!el) return;
-  el.innerHTML = `${(PROG.streak|0)>1?`<span class="streakb" title="${PROG.streak|0}-day streak">${I("flame")} ${PROG.streak|0}</span>`:""}${(PROG.xp|0)>0?`<span class="xpbadge" title="${PROG.xp|0} XP">${I("star")} <b>${PROG.xp|0}</b></span>`:""}`; };
+  el.innerHTML = `${(PROG.streak|0)>1?`<span class="streakb" title="${PROG.streak|0}-day streak">${I("flame")} ${PROG.streak|0}</span>`:""}${(PROG.xp|0)>0?`<span class="xpbadge" title="${PROG.xp|0} XP">${I("star")} <b>${PROG.xp|0}</b></span>`:""}`;
+  const rv = $("#nav-rev-ct"); if(rv) rv.textContent = srDue().length || ""; };
 const saveProg = () => { try{ localStorage.setItem("atlas-progress",JSON.stringify(PROG)); }catch(e){} updTbStats(); };
-updTbStats();
+setTimeout(updTbStats,0); /* deferred — srDue is a later const in this block */
 const today = () => Math.floor(Date.now()/86400000);
 const touchStreak = () => { const t=today();
   if(PROG.stLast===t) return;
@@ -21375,7 +21391,7 @@ function route(){
   if(quiz.timer){ clearInterval(quiz.timer); quiz.timer=null; }
   document.body.classList.remove("b3d-open");
   const h = location.hash.replace(/^#\/?/,"").replace(/^3d\?(.*)$/,"3d/?$1");
-  const [_,kind,arg] = h.match(/^(\w*)(?:\/(.*))?$/) || [];
+  const [_,kind,arg] = h.match(/^([\w-]*)(?:\/(.*))?$/) || [];
   closeSidebar();
   document.querySelectorAll(".nav-link").forEach(a=>a.classList.remove("active"));
   const mark = sel => { const el=document.querySelector(`.nav-link[data-href="#/${sel}"]`); if(el) el.classList.add("active"); };
@@ -21384,11 +21400,11 @@ function route(){
   else if(kind==="region" && REGIONS[arg]){ vRegion(arg); mark("region/"+arg); }
   else if(kind==="part" && byId[arg]){ vDetail(arg); }
   else if(kind==="map"){ vMap(); mark("map"); }
-  else if(kind==="quiz"){ vQuiz(arg||null); mark("quiz"); }
-  else if(kind==="quiz-builder"){ vQuizBuilder(); mark("quiz-builder"); }
+  else if(kind==="quiz"){ vQuiz(arg||null); mark(arg==="due"?"learn/review":"quiz"); }
+  else if(kind==="quiz-builder"){ vQuizBuilder(); mark("quiz"); }
   else if(kind==="path" && arg){ vPath(arg); mark("paths"); }
   else if(kind==="paths"){ vPaths(); mark("paths"); }
-  else if(kind==="learn"){ arg==="review" ? vReview() : vLearn(arg||null); mark("learn"); }
+  else if(kind==="learn"){ if(arg==="review"){ vReview(); mark("learn/review"); } else { vLearn(arg||null); mark("learn"); } }
   else if(kind==="gallery"){ vGallery(); mark("gallery"); }
   else if(kind==="3d"){ v3D(arg||null); mark("3d"); }
   else if(kind==="search"){ vSearch(arg||""); }
