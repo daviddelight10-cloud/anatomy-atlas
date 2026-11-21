@@ -32,10 +32,34 @@ Z-Anatomy (CC BY-SA 4.0, based on BodyParts3D © DBCLS).
 | `model.bin` | Gzipped glTF of the Z-Anatomy body (22 MB), streamed with progress and gunzipped via `DecompressionStream` |
 | `sw.js` | Service worker: precaches the shell, cache-first for plates/three.js/fonts/model with LRU trimming |
 | `manifest.webmanifest` + `icons/` | Installability |
+| `supabase/` | `schema.sql` (subscriptions table + RLS) and the `verify-payment` Edge Function |
 
 On a slow network the first visit downloads only the app shell — the 3D model
 loads lazily with a progress bar when you open the explorer, and every repeat
 visit is instant.
+
+## Auth & Premium
+
+The app requires an account (Supabase Auth — email/password or Google).
+The atlas reference (systems, regions, plates, body map) is free; the 3D
+explorer, lessons, guided paths, quizzes, review and articles need **Premium**:
+
+| Plan | Price | Days |
+|---|---|---|
+| 1 Month | ₦1,500 | 30 |
+| Semester | ₦6,000 | 180 |
+| 1 Year | ₦10,000 | 365 |
+
+Payments run through the **Paystack** inline popup; a Supabase Edge Function
+(`supabase/functions/verify-payment`) verifies the transaction server-side and
+writes the subscription row. The `subscriptions` table is RLS-locked — users
+read their own rows, only the function writes. Entitlement is cached in
+`localStorage("atlas-premium")` so Premium survives offline until expiry.
+
+Setup: create a Supabase project, run `supabase/schema.sql`, deploy
+`verify-payment`, set `PAYSTACK_SECRET_KEY` as a function secret, then fill
+`SUPA_URL` / `SUPA_ANON_KEY` / `PAYSTACK_PK` near the top of the auth module in
+`index.html` (search for `SUPA_URL`; see `.env.example`).
 
 ## Local preview
 

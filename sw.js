@@ -1,5 +1,5 @@
 /* Anatomy Atlas service worker — app shell + model + plates + CDN caching. */
-const VERSION = "v16";
+const VERSION = "v17";
 const SHELL = `atlas-shell-${VERSION}-r4`;
 const MODEL = `atlas-model-${VERSION}`;
 const PLATES = `atlas-plates-${VERSION}`;

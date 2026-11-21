@@ -235,6 +235,29 @@ svg.ico{width:1.15em;height:1.15em;flex:none;vertical-align:-.2em}
 .detail-head .badges{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 .plate{width:300px;max-width:100%;flex:none}
 .plate .frame{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;min-height:200px}
+.schematic{overflow-x:auto;background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:10px 8px 8px;margin-top:8px}
+.schematic svg{min-width:640px;width:100%;height:auto;display:block}
+.schematic .sc-cap{font-size:11px;color:var(--text3);padding:6px 6px 0}
+.schematic a rect{transition:fill .15s}
+.schematic a:hover rect{fill:var(--card-h)}
+.schematic .on rect{stroke-width:3}
+.article{max-width:78ch;line-height:1.75;color:var(--text)}
+.article .a-lead{font-size:17px;color:var(--text2);border-left:3px solid var(--accent);padding-left:14px;margin-bottom:22px}
+.article h2{font-size:19px;margin:26px 0 10px;color:var(--text)}
+.article p{margin:0 0 14px;color:var(--text2)}
+.article .a-clin{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--warn);border-radius:10px;padding:12px 14px;margin:12px 0}
+.article .a-clin b{display:block;margin-bottom:6px;color:var(--text)}
+.article .a-clin p{margin:0}
+.article .a-pearls{list-style:none;padding:0;margin:0 0 8px}
+.article .a-pearls li{padding:8px 0 8px 28px;position:relative;color:var(--text2)}
+.article .a-pearls li svg,.article .a-pearls li i{position:absolute;left:0;top:10px;color:var(--good)}
+.article .a-fig{max-width:560px;margin:18px auto 8px}
+.article .a-fig img{width:100%;display:block;border:1px solid var(--border);border-radius:14px;background:#fff;cursor:zoom-in}
+.article .a-fig figcaption{font-size:11px;color:var(--text3);text-align:center;padding-top:6px}
+.article .a-src{margin-top:28px;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.article .a-src h2{font-size:14px;margin:0 0 8px;text-transform:uppercase;letter-spacing:1px;color:var(--text3)}
+.article .a-src ul{margin:0;padding-left:18px;font-size:13px;color:var(--text3)}
+.article .a-src li{margin-bottom:4px}
 .plate img{display:block;width:100%;height:auto;cursor:zoom-in}
 .plate .cap{font-size:11.5px;color:var(--text3);margin-top:8px;line-height:1.45}
 .plate .cap a{color:var(--text3);text-decoration:underline}
@@ -691,6 +714,7 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-prog .bar{height:6px;background:#2a2a2a;border-radius:6px;overflow:hidden}
 .b3d-prog .bar i{display:block;height:100%;width:0;background:#ffd60a;border-radius:6px;transition:width .15s}
 .b3d-prog .pct{font-variant-numeric:tabular-nums;color:#a3a3a3;font-size:12.5px;margin-top:6px}
+.b3d-ctxlost{position:absolute;inset:0;display:grid;place-items:center;background:rgba(10,10,10,.72);backdrop-filter:blur(6px);z-index:30;text-align:center;padding:20px}
 .pwa-actions{display:flex;gap:8px;margin-bottom:10px}
 .pwa-btn{flex:1;background:var(--panel2);border:1px solid var(--border);color:var(--text2);font:inherit;font-size:12px;font-weight:600;padding:7px 8px;border-radius:9px;cursor:pointer;text-align:center}
 .pwa-btn:hover{color:var(--accent);border-color:var(--accent)}
@@ -764,6 +788,171 @@ body.can-install .hero-install{display:inline-flex!important}
 .b3d-movebar button{background:var(--panel2);border:1px solid var(--gb);color:#e8e8e8;border-radius:8px;padding:4px 10px;cursor:pointer}
 .b3d-movebar input[type=range]{width:130px}
 .b3d-movebar .hint{font-size:10.5px;color:#8d887a}
+
+/* ---------- signed-out chrome ---------- */
+body.signed-out #sidebar,body.signed-out #topbar{display:none}
+body.signed-out #scrim{display:none!important}
+body.signed-out #main{margin-left:0}
+body.signed-out #view{max-width:none;padding:0}
+.boot{min-height:100vh;display:grid;place-items:center}
+.boot i{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:bootspin .8s linear infinite}
+@keyframes bootspin{to{transform:rotate(360deg)}}
+
+/* ---------- landing ---------- */
+.land{min-height:100vh}
+.land-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:13px 30px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.land-nav .logo{font-size:17px;cursor:default}
+.land-nav .logo:hover{text-decoration:none}
+.land-nav .acts{display:flex;gap:8px;align-items:center}
+.land-signin{color:var(--text2);font-weight:600;font-size:13.5px;padding:9px 13px;border-radius:9px}
+.land-signin:hover{color:var(--text);text-decoration:none;background:var(--panel2)}
+.land-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;padding:66px 44px 58px;background:linear-gradient(160deg,#221d12,var(--bg) 72%);border-bottom:1px solid var(--border)}
+[data-theme="light"] .land-hero{background:linear-gradient(160deg,#efe7cf,var(--bg) 72%)}
+.land-hero::before{content:"";position:absolute;inset:0;background:url("img/hero-anatomy.jpg") center 28%/cover no-repeat;opacity:.15;pointer-events:none}
+[data-theme="light"] .land-hero::before{opacity:.10}
+.land-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 6%,transparent 58%),radial-gradient(90% 120% at 85% 0%,rgba(255,214,10,.15),transparent 55%);pointer-events:none}
+[data-theme="light"] .land-hero::after{background:linear-gradient(90deg,var(--bg) 6%,color-mix(in srgb,var(--bg) 45%,transparent) 58%),radial-gradient(90% 120% at 85% 0%,rgba(176,141,10,.14),transparent 55%)}
+.land-hero>*{position:relative;z-index:1}
+.land-kick{display:inline-flex;align-items:center;gap:7px;color:var(--accent);font-weight:700;font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px}
+.land-kick .ico{width:15px;height:15px}
+.land-hero h1{font-size:clamp(34px,4.8vw,56px);line-height:1.05;letter-spacing:-.025em;margin-bottom:18px}
+.land-hero h1 em{font-style:normal;color:var(--accent)}
+.land-hero p{max-width:560px;color:var(--text2);font-size:16px;margin:0 0 26px}
+.land-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.btn.big{padding:13px 24px;font-size:15px;border-radius:13px}
+.land-mini{font-size:12.5px;color:var(--text3)}
+.land-art{position:relative;display:grid;place-items:center;min-height:320px}
+.land-art .halo{position:absolute;width:min(30vw,380px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,214,10,.26),transparent 65%);filter:blur(8px)}
+.land-frame{position:relative;border-radius:26px;overflow:hidden;border:1px solid color-mix(in srgb,var(--accent) 45%,var(--border));box-shadow:0 34px 90px rgba(0,0,0,.55),0 0 70px rgba(255,214,10,.16);animation:landfloat 7s ease-in-out infinite}
+.land-frame img{display:block;width:min(30vw,420px);max-width:100%}
+.land-frame .ftag{position:absolute;left:14px;bottom:14px;display:inline-flex;align-items:center;gap:6px;background:rgba(10,10,10,.74);backdrop-filter:blur(8px);border:1px solid rgba(255,214,10,.42);color:#ffd60a;font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:20px}
+.land-frame .ftag .ico{width:13px;height:13px}
+@keyframes landfloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(.4deg)}}
+.land-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.land-stat{background:var(--panel);padding:22px 16px;text-align:center}
+.land-stat b{display:block;font-size:26px;color:var(--accent);letter-spacing:-.02em}
+.land-stat span{font-size:12.5px;color:var(--text3)}
+.land-sec{padding:54px 40px;max-width:1180px;margin:0 auto}
+.land-sec h2{font-size:26px;letter-spacing:-.02em;margin-bottom:6px}
+.land-sec .sub{color:var(--text2);margin:0 0 26px}
+.land-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.land-feat{position:relative;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;transition:border-color .15s,background .15s}
+.land-feat:hover{border-color:var(--border2);background:var(--card-h)}
+.land-feat .ic{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--accent-soft);color:var(--accent);margin-bottom:13px}
+.land-feat .ic .ico{width:20px;height:20px}
+.land-feat h3{font-size:15px;margin-bottom:6px}
+.land-feat p{font-size:13.5px;color:var(--text2);margin:0}
+.land-prem{position:absolute;top:15px;right:15px;display:inline-flex;align-items:center;gap:4px;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px;letter-spacing:.05em}
+.land-prem .ico{width:11px;height:11px}
+.land-prices{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.land-pfree{display:flex;flex-direction:column;gap:4px;background:var(--panel2);border:1.5px dashed var(--border2);border-radius:16px;padding:18px 16px;color:var(--text2)}
+.land-pfree .pn{font-weight:700;font-size:14px}
+.land-pfree .fp{font-size:22px;font-weight:800;color:var(--text)}
+.land-pfree .pd{font-size:12px;color:var(--text3)}
+.land-foot{border-top:1px solid var(--border);padding:26px 40px;color:var(--text3);font-size:12.5px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+@media(max-width:900px){.land-hero{grid-template-columns:1fr;padding:46px 24px}.land-art{display:none}.land-stats{grid-template-columns:repeat(2,1fr)}.land-feats,.land-prices{grid-template-columns:1fr 1fr}.land-sec{padding:42px 22px}}
+@media(max-width:560px){.land-feats,.land-prices{grid-template-columns:1fr}}
+
+/* ---------- plan cards ---------- */
+.plcards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.plcard{position:relative;display:flex;flex-direction:column;gap:4px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:18px 16px 16px;cursor:pointer;text-align:left;color:var(--text);font:inherit;transition:border-color .12s,background .12s,box-shadow .12s}
+.plcard:hover{border-color:var(--border2)}
+.plcard.on{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.plcard .pn{font-weight:700;font-size:14px}
+.plcard .pp{font-size:23px;font-weight:800;color:var(--accent);letter-spacing:-.02em}
+.plcard .pd{font-size:12px;color:var(--text3)}
+.plcard .pn2{font-size:11.5px;color:var(--good);font-weight:700;min-height:14px}
+.plcard .pb{position:absolute;top:-9px;left:14px;background:var(--accent);color:#141414;font-size:10px;font-weight:800;letter-spacing:.06em;padding:3px 9px;border-radius:20px;text-transform:uppercase}
+.plcard .pk{position:absolute;top:13px;right:13px;width:19px;height:19px;border:1.5px solid var(--border2);border-radius:50%;display:grid;place-items:center;color:transparent}
+.plcard.on .pk{background:var(--accent);border-color:var(--accent);color:#141414}
+.plcard .pk .ico{width:11px;height:11px;stroke-width:3.2}
+@media(max-width:640px){.plcards{grid-template-columns:1fr}}
+
+/* ---------- auth ---------- */
+.auth-wrap{position:relative;overflow:hidden;min-height:100vh;display:grid;place-items:center;padding:28px 18px;background:var(--bg)}
+.auth-wrap::before{content:"";position:absolute;inset:0;background:url("img/hero-anatomy.jpg") center 30%/cover no-repeat;opacity:.12;pointer-events:none}
+[data-theme="light"] .auth-wrap::before{opacity:.08}
+.auth-wrap::after{content:"";position:absolute;inset:0;background:radial-gradient(75% 85% at 50% 38%,color-mix(in srgb,var(--bg) 35%,transparent) 20%,var(--bg) 92%),radial-gradient(80% 100% at 50% -10%,rgba(255,214,10,.12),transparent 60%);pointer-events:none}
+.auth-card{position:relative;z-index:1}
+.auth-card::before{content:"";position:absolute;top:0;left:26px;right:26px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.auth-card{width:100%;max-width:400px;background:var(--panel);border:1px solid var(--border);border-radius:22px;padding:34px 32px;box-shadow:var(--shadow)}
+.auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:26px}
+.auth-logo img{width:30px;height:30px;border-radius:8px}
+.auth-logo b{font-size:17px}
+.auth-card h1{font-size:23px;letter-spacing:-.02em;margin-bottom:6px}
+.auth-sub{color:var(--text2);font-size:13.5px;margin:0 0 24px}
+.auth-gbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:11px;border-radius:11px;border:1px solid var(--border2);background:#fff;color:#1f1f1f;font:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.auth-gbtn:hover{background:#f3f3f3}
+.auth-gbtn svg{width:18px;height:18px;flex:none}
+.auth-or{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--text3);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.auth-or::before,.auth-or::after{content:"";flex:1;height:1px;background:var(--border)}
+.auth-f{margin-bottom:14px}
+.auth-f label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px}
+.auth-f input{width:100%;padding:11px 13px;border-radius:10px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font:inherit;font-size:14px;outline:none;transition:border-color .15s,box-shadow .15s}
+.auth-f input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.auth-err{display:flex;gap:8px;align-items:flex-start;background:color-mix(in srgb,var(--bad) 12%,transparent);border:1px solid color-mix(in srgb,var(--bad) 42%,transparent);color:var(--bad);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:14px}
+.auth-err .ico{flex:none;width:15px;height:15px;margin-top:1px}
+.auth-ok{display:flex;gap:8px;align-items:flex-start;background:color-mix(in srgb,var(--good) 12%,transparent);border:1px solid color-mix(in srgb,var(--good) 42%,transparent);color:var(--good);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:14px}
+.auth-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:11px;border:none;background:var(--accent);color:#141414;font:inherit;font-weight:700;font-size:14.5px;cursor:pointer}
+.auth-btn:hover{filter:brightness(1.08)}
+.auth-btn:disabled{opacity:.6;cursor:default}
+.auth-alt{margin-top:18px;text-align:center;font-size:13.5px;color:var(--text3)}
+.auth-alt button{color:var(--accent);font-weight:600;background:none;border:none;font:inherit;cursor:pointer;padding:0}
+.auth-alt button:hover{text-decoration:underline}
+.auth-forgot{margin-top:12px;text-align:center}
+.auth-forgot button{background:none;border:none;color:var(--text3);font:inherit;font-size:12.5px;cursor:pointer}
+.auth-forgot button:hover{color:var(--accent)}
+.auth-note{margin-top:24px;text-align:center;font-size:11.5px;color:var(--text3);line-height:1.5}
+.auth-back{display:inline-flex;align-items:center;gap:6px;color:var(--text3);font-size:13px;margin-bottom:18px}
+.auth-back:hover{color:var(--text);text-decoration:none}
+.auth-back .ico{width:15px;height:15px}
+.auth-ve{text-align:center}
+.auth-ve .ve-ic{display:inline-grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--accent-soft);color:var(--accent);margin-bottom:16px}
+.auth-ve .ve-ic .ico{width:26px;height:26px}
+.auth-ve p{color:var(--text2);font-size:14px}
+
+/* ---------- premium / paywall ---------- */
+.gate{max-width:780px;margin:0 auto;padding:6px 0 90px}
+.gate-hero{position:relative;overflow:hidden;text-align:center;padding:48px 20px 42px;margin-top:16px;border:1px solid var(--border);border-radius:22px}
+.gate-hero::before{content:"";position:absolute;inset:0;background:url("img/hero-anatomy.jpg") center 26%/cover;opacity:.16;pointer-events:none}
+[data-theme="light"] .gate-hero::before{opacity:.10}
+.gate-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 50%,transparent),color-mix(in srgb,var(--bg) 92%,transparent));pointer-events:none}
+.gate-hero>*{position:relative;z-index:1}
+.gate-ic{display:inline-grid;place-items:center;width:68px;height:68px;border-radius:50%;background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);color:var(--accent);margin-bottom:18px}
+.gate-ic .ico{width:30px;height:30px}
+.gate-hero h1{font-size:27px;letter-spacing:-.02em;margin-bottom:8px}
+.gate-hero p{color:var(--text2);max-width:500px;margin:0 auto;font-size:14.5px}
+.gate-list{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:24px 0 30px}
+.gate-list span{display:inline-flex;align-items:center;gap:6px;background:var(--panel2);border:1px solid var(--border);border-radius:20px;padding:6px 13px;font-size:12.5px;color:var(--text2)}
+.gate-list .ico{width:13px;height:13px;color:var(--accent)}
+.pay-btn{width:100%;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px;border-radius:13px;border:none;background:var(--accent);color:#141414;font:inherit;font-weight:800;font-size:15.5px;cursor:pointer}
+.pay-btn:hover{filter:brightness(1.08)}
+.pay-btn:disabled{opacity:.65;cursor:default}
+.pay-btn .ico{width:18px;height:18px}
+.pay-trust{text-align:center;color:var(--text3);font-size:12.5px;margin-top:12px}
+.prem-stat{background:linear-gradient(150deg,color-mix(in srgb,var(--accent) 15%,var(--panel)),var(--panel));border:1px solid color-mix(in srgb,var(--accent) 35%,var(--border));border-radius:18px;padding:24px;margin-bottom:28px}
+.prem-stat .ps-top{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15.5px;margin-bottom:4px}
+.prem-stat .ps-top .ico{color:var(--accent);width:20px;height:20px}
+.prem-stat .ps-sub{color:var(--text2);font-size:13px}
+.prem-stat .ps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.prem-stat .ps-box{background:color-mix(in srgb,var(--bg) 50%,transparent);border:1px solid var(--border);border-radius:12px;padding:11px 14px}
+.prem-stat .ps-box span{display:block;font-size:11px;color:var(--text3);margin-bottom:3px;text-transform:uppercase;letter-spacing:.05em}
+.prem-stat .ps-box b{font-size:16px}
+.prem-bar{height:8px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:14px}
+.prem-bar i{display:block;height:100%;background:var(--accent);border-radius:8px}
+
+/* ---------- sidebar account ---------- */
+.acct{display:flex;align-items:center;gap:9px;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:9px 10px;margin-bottom:10px}
+.acct-ava{flex:none;width:30px;height:30px;border-radius:50%;background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);color:var(--accent);display:grid;place-items:center;font-size:13px;font-weight:800;text-transform:uppercase}
+.acct-tx{min-width:0;flex:1}
+.acct-mail{font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acct-chip{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;color:var(--accent);font-weight:700;text-decoration:none}
+.acct-chip.free{color:var(--text3)}
+.acct-chip:hover{text-decoration:underline}
+.acct-chip .ico{width:11px;height:11px}
+.acct-out{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:8px;border:none;background:none;color:var(--text3);cursor:pointer}
+.acct-out:hover{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.acct-out .ico{width:15px;height:15px}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0a0a0a">
@@ -784,6 +973,8 @@ body.can-install .hero-install{display:inline-flex!important}
 <meta property="og:image:alt" content="Anatomy Atlas — golden skull over an open book">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://daviddelight10-cloud.github.io/anatomy-atlas/icons/og.jpg">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 </head>
 <body>
 <div id="app">
@@ -801,6 +992,7 @@ body.can-install .hero-install{display:inline-flex!important}
     </div>
     <nav id="nav"></nav>
     <div class="side-foot">
+      <div id="side-acct"></div>
       <div class="pwa-actions">
         <button id="pwa-install" class="pwa-btn hidden" type="button"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Install app</button>
         <button id="pwa-offline" class="pwa-btn" type="button"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Save 3D body for offline</button>
@@ -820,7 +1012,7 @@ body.can-install .hero-install{display:inline-flex!important}
 </div>
 <script>
 /* inline SVG icon set (lucide-style strokes) — tint via currentColor */
-const ICONS = {"bone":"<path d=\"M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z\"/>","dumbbell":"<path d=\"m6.5 6.5 11 11\"/><path d=\"m21 21-1-1\"/><path d=\"m3 3 1 1\"/><path d=\"m18 22 4-4\"/><path d=\"m2 6 4-4\"/><path d=\"m3 10 7-7\"/><path d=\"m14 21 7-7\"/>","zap":"<polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"/>","heart-pulse":"<path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\"/><path d=\"M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27\"/>","wind":"<path d=\"M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2\"/><path d=\"M9.6 4.6A2 2 0 1 1 11 8H2\"/><path d=\"M12.6 19.4A2 2 0 1 0 14 16H2\"/>","apple":"<path d=\"M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z\"/><path d=\"M10 2c1 .5 2 2 2 5\"/>","droplet":"<path d=\"M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z\"/>","dna":"<path d=\"M4 3c0 5 16 7 16 12\"/><path d=\"M20 3c0 5-16 7-16 12\"/><path d=\"M4 21c0-5 16-7 16-12\"/><path d=\"M20 21c0-5-16-7-16-12\"/><path d=\"M8 6.5h8\"/><path d=\"M8 17.5h8\"/>","test-tube":"<path d=\"M14.5 2v17.5a2.5 2.5 0 0 1-5 0V2\"/><path d=\"M8.5 2h7\"/><path d=\"M14.5 16h-5\"/>","shield":"<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\"/>","layers":"<path d=\"m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z\"/><path d=\"m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65\"/><path d=\"m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65\"/>","eye":"<path d=\"M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>","compass":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><polygon points=\"16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76\"/>","house":"<path d=\"m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><polyline points=\"9 22 9 12 15 12 15 22\"/>","map":"<path d=\"M15 5.76v15\"/><path d=\"M9 3.24v15\"/><path d=\"M14.1 5.55a2 2 0 0 0 1.8 0l4.1-1.93A1 1 0 0 1 21 4.62v12.76a1 1 0 0 1-.55.9l-4.55 2.27a2 2 0 0 1-1.8 0l-4.2-2.1a2 2 0 0 0-1.8 0l-3.55 1.78A1 1 0 0 1 3 19.38V6.62a1 1 0 0 1 .55-.9l4.55-2.27a2 2 0 0 1 1.8 0z\"/>","box":"<path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\"/><path d=\"m3.3 7 8.7 5 8.7-5\"/><path d=\"M12 22V12\"/>","graduation-cap":"<path d=\"M22 10v6\"/><path d=\"M2 10l10-5 10 5-10 5z\"/><path d=\"M6 12v5c3 3 9 3 12 0v-5\"/>","route":"<circle cx=\"6\" cy=\"19\" r=\"3\"/><path d=\"M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15\"/><circle cx=\"18\" cy=\"5\" r=\"3\"/>","target":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><circle cx=\"12\" cy=\"12\" r=\"6\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/>","sliders":"<line x1=\"21\" x2=\"14\" y1=\"4\" y2=\"4\"/><line x1=\"10\" x2=\"3\" y1=\"4\" y2=\"4\"/><line x1=\"21\" x2=\"12\" y1=\"12\" y2=\"12\"/><line x1=\"8\" x2=\"3\" y1=\"12\" y2=\"12\"/><line x1=\"21\" x2=\"16\" y1=\"20\" y2=\"20\"/><line x1=\"12\" x2=\"3\" y1=\"20\" y2=\"20\"/><line x1=\"14\" x2=\"14\" y1=\"2\" y2=\"6\"/><line x1=\"8\" x2=\"8\" y1=\"10\" y2=\"14\"/><line x1=\"16\" x2=\"16\" y1=\"18\" y2=\"22\"/>","image":"<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\"/><circle cx=\"9\" cy=\"9\" r=\"2\"/><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\"/>","eye-off":"<path d=\"M9.88 9.88a3 3 0 1 0 4.24 4.24\"/><path d=\"M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68\"/><path d=\"M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61\"/><line x1=\"2\" x2=\"22\" y1=\"2\" y2=\"22\"/>","ghost":"<path d=\"M9 10h.01\"/><path d=\"M15 10h.01\"/><path d=\"M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z\"/>","scissors":"<circle cx=\"6\" cy=\"6\" r=\"3\"/><circle cx=\"6\" cy=\"18\" r=\"3\"/><line x1=\"20\" x2=\"8.12\" y1=\"4\" y2=\"15.88\"/><line x1=\"14.47\" x2=\"20\" y1=\"14.48\" y2=\"20\"/><line x1=\"8.12\" x2=\"12\" y1=\"8.12\" y2=\"12\"/>","sparkles":"<path d=\"m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z\"/>","grid":"<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\"/><path d=\"M3 9h18\"/><path d=\"M3 15h18\"/><path d=\"M9 3v18\"/><path d=\"M15 3v18\"/>","contrast":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 18a6 6 0 0 0 0-12v12z\" fill=\"currentColor\" stroke=\"none\"/>","undo-2":"<path d=\"M9 14 4 9l5-5\"/><path d=\"M4 9h10.5a5.5 5.5 0 1 1 0 11H11\"/>","camera":"<path d=\"M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z\"/><circle cx=\"12\" cy=\"13\" r=\"3\"/>","rotate-ccw":"<path d=\"M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8\"/><path d=\"M3 3v5h5\"/>","pin":"<path d=\"M12 17v5\"/><path d=\"M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1z\"/>","focus":"<circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M3 7V5a2 2 0 0 1 2-2h2\"/><path d=\"M17 3h2a2 2 0 0 1 2 2v2\"/><path d=\"M21 17v2a2 2 0 0 1-2 2h-2\"/><path d=\"M7 21H5a2 2 0 0 1-2-2v-2\"/>","ban":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m4.9 4.9 14.2 14.2\"/>","eclipse":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 2a7 7 0 1 0 10 10\"/>","anchor":"<circle cx=\"12\" cy=\"5\" r=\"3\"/><line x1=\"12\" x2=\"12\" y1=\"22\" y2=\"8\"/><path d=\"M5 12H2a10 10 0 0 0 20 0h-3\"/>","venetian-mask":"<path d=\"M2 12a5 5 0 0 0 5 5 8 8 0 0 1 5 2 8 8 0 0 1 5-2 5 5 0 0 0 5-5V7h-5a8 8 0 0 0-5 2 8 8 0 0 0-5-2H2Z\"/><path d=\"M6 11c1.5 0 3 .5 3 2-2 0-3-.5-3-2Z\"/><path d=\"M18 11c-1.5 0-3 .5-3 2 2 0 3-.5 3-2Z\"/>","link":"<path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\"/>","volume-2":"<path d=\"M11 5 6 9H2v6h4l5 4z\"/><path d=\"M15.54 8.46a5 5 0 0 1 0 7.07\"/><path d=\"M19.07 4.93a10 10 0 0 1 0 14.14\"/>","lightbulb":"<path d=\"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5\"/><path d=\"M9 18h6\"/><path d=\"M10 22h4\"/>","shuffle":"<path d=\"m18 14 4 4-4 4\"/><path d=\"m18 2 4 4-4 4\"/><path d=\"M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22\"/><path d=\"M2 6h1.972a4 4 0 0 1 3.6 2.2\"/><path d=\"M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45\"/>","skip-forward":"<polygon points=\"5 4 15 12 5 20 5 4\"/><line x1=\"19\" x2=\"19\" y1=\"5\" y2=\"19\"/>","x":"<path d=\"M18 6 6 18\"/><path d=\"m6 6 12 12\"/>","star":"<polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/>","flame":"<path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\"/>","book-open":"<path d=\"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z\"/><path d=\"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z\"/>","brain":"<path d=\"M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z\"/><path d=\"M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z\"/><path d=\"M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4\"/><path d=\"M17.599 6.5a3 3 0 0 0 .399-1.375\"/><path d=\"M6.003 5.125A3 3 0 0 0 6.401 6.5\"/><path d=\"M3.477 10.896a4 4 0 0 1 .585-.396\"/><path d=\"M19.938 10.5a4 4 0 0 1 .585.396\"/><path d=\"M6 18a4 4 0 0 1-1.967-.516\"/><path d=\"M19.967 17.484A4 4 0 0 1 18 18\"/>","trophy":"<path d=\"M6 9H4.5a2.5 2.5 0 0 1 0-5H6\"/><path d=\"M18 9h1.5a2.5 2.5 0 0 0 0-5H18\"/><path d=\"M4 22h16\"/><path d=\"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22\"/><path d=\"M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22\"/><path d=\"M18 2H6v7a6 6 0 0 0 12 0V2Z\"/>","download":"<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\"/>","menu":"<line x1=\"4\" x2=\"20\" y1=\"6\" y2=\"6\"/><line x1=\"4\" x2=\"20\" y1=\"12\" y2=\"12\"/><line x1=\"4\" x2=\"20\" y1=\"18\" y2=\"18\"/>","person":"<circle cx=\"12\" cy=\"5\" r=\"2\"/><path d=\"m9 20 3-6 3 6\"/><path d=\"m6 8 6 2 6-2\"/><path d=\"M12 10v4\"/>","stethoscope":"<path d=\"M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3\"/><path d=\"M8 15v1a6 6 0 0 0 6 6a6 6 0 0 0 6-6v-4\"/><circle cx=\"20\" cy=\"10\" r=\"2\"/>","hand":"<path d=\"M18 11V6.5a1.5 1.5 0 0 0-3 0V11\"/><path d=\"M15 11V4.5a1.5 1.5 0 0 0-3 0v6\"/><path d=\"M12 11V3.5a1.5 1.5 0 0 0-3 0V11\"/><path d=\"M9 11.5V7a1.5 1.5 0 0 0-3 0v6.5c0 4 2.5 8 7.5 8 4 0 7-3 7-7.5v-4.5a1.5 1.5 0 0 0-3 0\"/>","skull":"<path d=\"M12 2a8 8 0 0 0-8 8c0 2.2 1 4.2 2.6 5.6L7 19a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l.4-3.4A8 8 0 0 0 12 2Z\"/><path d=\"M9 12h.01\"/><path d=\"M15 12h.01\"/><path d=\"M10 19v-2\"/><path d=\"M14 19v-2\"/>","sprout":"<path d=\"M7 20h10\"/><path d=\"M10 20c5.5-2.5.8-6.4 3-10\"/><path d=\"M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z\"/><path d=\"M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-3 0-4.7 1.2-4.9 2z\"/>","map-pin":"<path d=\"M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/>","clock":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/>","dice":"<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"3\"/><circle cx=\"8.5\" cy=\"8.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15.5\" cy=\"8.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"8.5\" cy=\"15.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15.5\" cy=\"15.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/>","check":"<polyline points=\"20 6 9 17 4 12\"/>","play":"<polygon points=\"6 3 20 12 6 21 6 3\"/>","palette":"<circle cx=\"13.5\" cy=\"6.5\" r=\".5\"/><circle cx=\"17.5\" cy=\"10.5\" r=\".5\"/><circle cx=\"8.5\" cy=\"7.5\" r=\".5\"/><circle cx=\"6.5\" cy=\"12.5\" r=\".5\"/><path d=\"M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z\"/>","expand":"<path d=\"m21 21-6-6m6 6v-4.8m0 4.8h-4.8\"/><path d=\"M3 16.2V21m0 0h4.8M3 21l6-6\"/><path d=\"M21 7.8V3m0 0h-4.8M21 3l-6 6\"/><path d=\"M3 7.8V3m0 0h4.8M3 3l6 6\"/>","chevron-up":"<polyline points=\"18 15 12 9 6 15\"/>","chevron-down":"<polyline points=\"6 9 12 15 18 9\"/>","search":"<circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/>"};
+const ICONS = {"bone":"<path d=\"M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z\"/>","dumbbell":"<path d=\"m6.5 6.5 11 11\"/><path d=\"m21 21-1-1\"/><path d=\"m3 3 1 1\"/><path d=\"m18 22 4-4\"/><path d=\"m2 6 4-4\"/><path d=\"m3 10 7-7\"/><path d=\"m14 21 7-7\"/>","zap":"<polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"/>","heart-pulse":"<path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\"/><path d=\"M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27\"/>","wind":"<path d=\"M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2\"/><path d=\"M9.6 4.6A2 2 0 1 1 11 8H2\"/><path d=\"M12.6 19.4A2 2 0 1 0 14 16H2\"/>","apple":"<path d=\"M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z\"/><path d=\"M10 2c1 .5 2 2 2 5\"/>","droplet":"<path d=\"M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z\"/>","dna":"<path d=\"M4 3c0 5 16 7 16 12\"/><path d=\"M20 3c0 5-16 7-16 12\"/><path d=\"M4 21c0-5 16-7 16-12\"/><path d=\"M20 21c0-5-16-7-16-12\"/><path d=\"M8 6.5h8\"/><path d=\"M8 17.5h8\"/>","test-tube":"<path d=\"M14.5 2v17.5a2.5 2.5 0 0 1-5 0V2\"/><path d=\"M8.5 2h7\"/><path d=\"M14.5 16h-5\"/>","shield":"<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\"/>","layers":"<path d=\"m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z\"/><path d=\"m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65\"/><path d=\"m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65\"/>","eye":"<path d=\"M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>","compass":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><polygon points=\"16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76\"/>","house":"<path d=\"m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><polyline points=\"9 22 9 12 15 12 15 22\"/>","map":"<path d=\"M15 5.76v15\"/><path d=\"M9 3.24v15\"/><path d=\"M14.1 5.55a2 2 0 0 0 1.8 0l4.1-1.93A1 1 0 0 1 21 4.62v12.76a1 1 0 0 1-.55.9l-4.55 2.27a2 2 0 0 1-1.8 0l-4.2-2.1a2 2 0 0 0-1.8 0l-3.55 1.78A1 1 0 0 1 3 19.38V6.62a1 1 0 0 1 .55-.9l4.55-2.27a2 2 0 0 1 1.8 0z\"/>","box":"<path d=\"M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z\"/><path d=\"m3.3 7 8.7 5 8.7-5\"/><path d=\"M12 22V12\"/>","graduation-cap":"<path d=\"M22 10v6\"/><path d=\"M2 10l10-5 10 5-10 5z\"/><path d=\"M6 12v5c3 3 9 3 12 0v-5\"/>","route":"<circle cx=\"6\" cy=\"19\" r=\"3\"/><path d=\"M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15\"/><circle cx=\"18\" cy=\"5\" r=\"3\"/>","target":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><circle cx=\"12\" cy=\"12\" r=\"6\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/>","sliders":"<line x1=\"21\" x2=\"14\" y1=\"4\" y2=\"4\"/><line x1=\"10\" x2=\"3\" y1=\"4\" y2=\"4\"/><line x1=\"21\" x2=\"12\" y1=\"12\" y2=\"12\"/><line x1=\"8\" x2=\"3\" y1=\"12\" y2=\"12\"/><line x1=\"21\" x2=\"16\" y1=\"20\" y2=\"20\"/><line x1=\"12\" x2=\"3\" y1=\"20\" y2=\"20\"/><line x1=\"14\" x2=\"14\" y1=\"2\" y2=\"6\"/><line x1=\"8\" x2=\"8\" y1=\"10\" y2=\"14\"/><line x1=\"16\" x2=\"16\" y1=\"18\" y2=\"22\"/>","image":"<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\"/><circle cx=\"9\" cy=\"9\" r=\"2\"/><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\"/>","eye-off":"<path d=\"M9.88 9.88a3 3 0 1 0 4.24 4.24\"/><path d=\"M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68\"/><path d=\"M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61\"/><line x1=\"2\" x2=\"22\" y1=\"2\" y2=\"22\"/>","ghost":"<path d=\"M9 10h.01\"/><path d=\"M15 10h.01\"/><path d=\"M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z\"/>","scissors":"<circle cx=\"6\" cy=\"6\" r=\"3\"/><circle cx=\"6\" cy=\"18\" r=\"3\"/><line x1=\"20\" x2=\"8.12\" y1=\"4\" y2=\"15.88\"/><line x1=\"14.47\" x2=\"20\" y1=\"14.48\" y2=\"20\"/><line x1=\"8.12\" x2=\"12\" y1=\"8.12\" y2=\"12\"/>","sparkles":"<path d=\"m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z\"/>","grid":"<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\"/><path d=\"M3 9h18\"/><path d=\"M3 15h18\"/><path d=\"M9 3v18\"/><path d=\"M15 3v18\"/>","contrast":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 18a6 6 0 0 0 0-12v12z\" fill=\"currentColor\" stroke=\"none\"/>","undo-2":"<path d=\"M9 14 4 9l5-5\"/><path d=\"M4 9h10.5a5.5 5.5 0 1 1 0 11H11\"/>","camera":"<path d=\"M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z\"/><circle cx=\"12\" cy=\"13\" r=\"3\"/>","rotate-ccw":"<path d=\"M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8\"/><path d=\"M3 3v5h5\"/>","pin":"<path d=\"M12 17v5\"/><path d=\"M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1z\"/>","focus":"<circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M3 7V5a2 2 0 0 1 2-2h2\"/><path d=\"M17 3h2a2 2 0 0 1 2 2v2\"/><path d=\"M21 17v2a2 2 0 0 1-2 2h-2\"/><path d=\"M7 21H5a2 2 0 0 1-2-2v-2\"/>","ban":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m4.9 4.9 14.2 14.2\"/>","eclipse":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 2a7 7 0 1 0 10 10\"/>","anchor":"<circle cx=\"12\" cy=\"5\" r=\"3\"/><line x1=\"12\" x2=\"12\" y1=\"22\" y2=\"8\"/><path d=\"M5 12H2a10 10 0 0 0 20 0h-3\"/>","venetian-mask":"<path d=\"M2 12a5 5 0 0 0 5 5 8 8 0 0 1 5 2 8 8 0 0 1 5-2 5 5 0 0 0 5-5V7h-5a8 8 0 0 0-5 2 8 8 0 0 0-5-2H2Z\"/><path d=\"M6 11c1.5 0 3 .5 3 2-2 0-3-.5-3-2Z\"/><path d=\"M18 11c-1.5 0-3 .5-3 2 2 0 3-.5 3-2Z\"/>","link":"<path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\"/>","volume-2":"<path d=\"M11 5 6 9H2v6h4l5 4z\"/><path d=\"M15.54 8.46a5 5 0 0 1 0 7.07\"/><path d=\"M19.07 4.93a10 10 0 0 1 0 14.14\"/>","lightbulb":"<path d=\"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5\"/><path d=\"M9 18h6\"/><path d=\"M10 22h4\"/>","shuffle":"<path d=\"m18 14 4 4-4 4\"/><path d=\"m18 2 4 4-4 4\"/><path d=\"M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22\"/><path d=\"M2 6h1.972a4 4 0 0 1 3.6 2.2\"/><path d=\"M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45\"/>","skip-forward":"<polygon points=\"5 4 15 12 5 20 5 4\"/><line x1=\"19\" x2=\"19\" y1=\"5\" y2=\"19\"/>","x":"<path d=\"M18 6 6 18\"/><path d=\"m6 6 12 12\"/>","star":"<polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/>","flame":"<path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\"/>","book-open":"<path d=\"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z\"/><path d=\"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z\"/>","brain":"<path d=\"M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z\"/><path d=\"M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z\"/><path d=\"M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4\"/><path d=\"M17.599 6.5a3 3 0 0 0 .399-1.375\"/><path d=\"M6.003 5.125A3 3 0 0 0 6.401 6.5\"/><path d=\"M3.477 10.896a4 4 0 0 1 .585-.396\"/><path d=\"M19.938 10.5a4 4 0 0 1 .585.396\"/><path d=\"M6 18a4 4 0 0 1-1.967-.516\"/><path d=\"M19.967 17.484A4 4 0 0 1 18 18\"/>","trophy":"<path d=\"M6 9H4.5a2.5 2.5 0 0 1 0-5H6\"/><path d=\"M18 9h1.5a2.5 2.5 0 0 0 0-5H18\"/><path d=\"M4 22h16\"/><path d=\"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22\"/><path d=\"M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22\"/><path d=\"M18 2H6v7a6 6 0 0 0 12 0V2Z\"/>","download":"<path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\"/>","menu":"<line x1=\"4\" x2=\"20\" y1=\"6\" y2=\"6\"/><line x1=\"4\" x2=\"20\" y1=\"12\" y2=\"12\"/><line x1=\"4\" x2=\"20\" y1=\"18\" y2=\"18\"/>","person":"<circle cx=\"12\" cy=\"5\" r=\"2\"/><path d=\"m9 20 3-6 3 6\"/><path d=\"m6 8 6 2 6-2\"/><path d=\"M12 10v4\"/>","stethoscope":"<path d=\"M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3\"/><path d=\"M8 15v1a6 6 0 0 0 6 6a6 6 0 0 0 6-6v-4\"/><circle cx=\"20\" cy=\"10\" r=\"2\"/>","hand":"<path d=\"M18 11V6.5a1.5 1.5 0 0 0-3 0V11\"/><path d=\"M15 11V4.5a1.5 1.5 0 0 0-3 0v6\"/><path d=\"M12 11V3.5a1.5 1.5 0 0 0-3 0V11\"/><path d=\"M9 11.5V7a1.5 1.5 0 0 0-3 0v6.5c0 4 2.5 8 7.5 8 4 0 7-3 7-7.5v-4.5a1.5 1.5 0 0 0-3 0\"/>","skull":"<path d=\"M12 2a8 8 0 0 0-8 8c0 2.2 1 4.2 2.6 5.6L7 19a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l.4-3.4A8 8 0 0 0 12 2Z\"/><path d=\"M9 12h.01\"/><path d=\"M15 12h.01\"/><path d=\"M10 19v-2\"/><path d=\"M14 19v-2\"/>","sprout":"<path d=\"M7 20h10\"/><path d=\"M10 20c5.5-2.5.8-6.4 3-10\"/><path d=\"M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z\"/><path d=\"M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-3 0-4.7 1.2-4.9 2z\"/>","map-pin":"<path d=\"M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/>","clock":"<circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/>","dice":"<rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"3\"/><circle cx=\"8.5\" cy=\"8.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15.5\" cy=\"8.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"8.5\" cy=\"15.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15.5\" cy=\"15.5\" r=\"1.4\" fill=\"currentColor\" stroke=\"none\"/>","check":"<polyline points=\"20 6 9 17 4 12\"/>","play":"<polygon points=\"6 3 20 12 6 21 6 3\"/>","palette":"<circle cx=\"13.5\" cy=\"6.5\" r=\".5\"/><circle cx=\"17.5\" cy=\"10.5\" r=\".5\"/><circle cx=\"8.5\" cy=\"7.5\" r=\".5\"/><circle cx=\"6.5\" cy=\"12.5\" r=\".5\"/><path d=\"M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z\"/>","expand":"<path d=\"m21 21-6-6m6 6v-4.8m0 4.8h-4.8\"/><path d=\"M3 16.2V21m0 0h4.8M3 21l6-6\"/><path d=\"M21 7.8V3m0 0h-4.8M21 3l-6 6\"/><path d=\"M3 7.8V3m0 0h4.8M3 3l6 6\"/>","chevron-up":"<polyline points=\"18 15 12 9 6 15\"/>","chevron-down":"<polyline points=\"6 9 12 15 18 9\"/>","search":"<circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/>","lock":"<rect width=\"18\" height=\"11\" x=\"3\" y=\"11\" rx=\"2\" ry=\"2\"/><path d=\"M7 11V7a5 5 0 0 1 10 0v4\"/>","log-out":"<path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"/><polyline points=\"16 17 21 12 16 7\"/><line x1=\"21\" x2=\"9\" y1=\"12\" y2=\"12\"/>","mail":"<rect width=\"20\" height=\"16\" x=\"2\" y=\"4\" rx=\"2\"/><path d=\"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7\"/>","user":"<path d=\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/>","gem":"<path d=\"M6 3h12l4 6-10 13L2 9Z\"/><path d=\"M11 3 8 9l4 13 4-13-3-6\"/><path d=\"M2 9h20\"/>","external":"<path d=\"M15 3h6v6\"/><path d=\"M10 14 21 3\"/><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"/>","key":"<path d=\"m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4\"/>"};
 const I = n => `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]||""}</svg>`;
 
 window.ATLAS_DATA = window.ATLAS_DATA || [];
@@ -1421,7 +1613,13 @@ ATLAS_DATA.push(
 {id:"lacteal",name:"Lacteals",aka:"",system:"lymphatic",region:"abdomen",tags:["fat absorption","villi","chyle"],summary:"The lymph capillary in each intestinal villus — carrying absorbed fat as milky chyle.",structure:"Blind-ended lymph vessel at each villus's core draining into mesenteric lymphatics → thoracic duct.",fn:"Absorbs dietary fat (chylomicrons) bypassing the liver's first pass.",clinical:"Blocked lacteals cause fat malabsorption (steatorrhea).",related:["villi","lymph-vessels","thoracic-duct","small-intestine"]},
 {id:"mesenteric-nodes",name:"Mesenteric lymph nodes",aka:"",system:"lymphatic",region:"abdomen",tags:["gut","mesentery","immune"],summary:"The hundreds of nodes in the mesentery — the gut's largest immune outpost.",structure:"Along the SMA branches in the mesentery; drain the jejunum/ileum and most of the colon.",fn:"Filter intestinal lymph and respond to the gut's microbial load.",clinical:"Mesenteric adenitis mimics appendicitis in children.",related:["mesentery","lymph-nodes","small-intestine","large-intestine"]},
 {id:"inguinal-lymph-nodes",name:"Inguinal lymph nodes",aka:"Groin nodes",system:"lymphatic",region:"pelvis",tags:["groin","drainage","palpable"],summary:"The palpable nodes of the groin — draining leg, lower abdomen, genitals and perineum.",structure:"Superficial group along the saphenous vein (leg) and horizontal group below the inguinal ligament (genitals/perineum); deep group beside the femoral vein.",fn:"Filter lymph from the lower limb and perineum.",clinical:"Enlarged groin nodes signal leg infection, genital infection or malignancy.",related:["lymph-nodes","great-saphenous-vein","femoral-triangle","lymph-vessels"]},
-{id:"cervical-lymph-nodes",name:"Cervical lymph nodes",aka:"Neck nodes",system:"lymphatic",region:"neck",tags:["neck","drainage","mononucleosis"],summary:"The neck node chains — drainage of head and neck, felt along the SCM and jaw.",structure:"Submental/submandibular (face/mouth), deep cervical (along the jugular), posterior triangle (behind SCM), supraclavicular (warning sign).",fn:"Filter lymph from head and neck.",clinical:"Supraclavicular node (Virchow's) can herald abdominal cancer; mononucleosis swells them all.",related:["lymph-nodes","internal-jugular","sternocleidomastoid","tonsils"]}
+{id:"cervical-lymph-nodes",name:"Cervical lymph nodes",aka:"Neck nodes",system:"lymphatic",region:"neck",tags:["neck","drainage","mononucleosis"],summary:"The neck node chains — drainage of head and neck, felt along the SCM and jaw.",structure:"Submental/submandibular (face/mouth), deep cervical (along the jugular), posterior triangle (behind SCM), supraclavicular (warning sign).",fn:"Filter lymph from head and neck.",clinical:"Supraclavicular node (Virchow's) can herald abdominal cancer; mononucleosis swells them all.",related:["lymph-nodes","internal-jugular","sternocleidomastoid","tonsils"]},
+{id:"neck-triangles",name:"Triangles of the neck",aka:"",system:"general",region:"neck",tags:["neck","landmark","nodes","vessels"],summary:"The sternocleidomastoid splits each side of the neck into anterior and posterior triangles — the classic map for nodes, vessels and nerves.",structure:"Anterior triangle (between SCM and midline; subdivided into digastric, carotid, muscular and submental parts): submandibular gland, carotid sheath, larynx, thyroid. Posterior triangle (between SCM and trapezius; occipital and supraclavicular parts): external jugular, accessory nerve, brachial-plexus trunks, cervical nodes.",fn:"Topographic framework for neck dissection, node biopsy, central-line access and describing where a lesion sits.",clinical:"CN XI is injured in posterior-triangle node biopsy (shoulder drop); the carotid pulse is felt in the carotid triangle; a supraclavicular (Virchow's) node can signal abdominal cancer.",related:["sternocleidomastoid","internal-jugular","external-jugular","common-carotid","accessory-nerve","brachial-plexus","trapezius","cervical-lymph-nodes"]},
+{id:"mediastinum",name:"Mediastinum",aka:"",system:"general",region:"thorax",tags:["chest","compartment","heart","vessels"],summary:"The central compartment of the chest between the pleural sacs — everything in the thorax except the lungs.",structure:"Split by the sternal-angle plane (T4/5) into superior and inferior mediastina; the inferior divides into anterior, middle (heart, pericardium, phrenic nerves) and posterior (esophagus, thoracic aorta, thoracic duct, vagi).",fn:"Corridor for the heart, great vessels, trachea, esophagus, thymus, thoracic duct and the phrenic and vagus nerves.",clinical:"A widened mediastinum on chest X-ray suggests aortic rupture or a mass; thymomas and lymphomas typically grow in the anterior mediastinum.",related:["heart","pericardium","trachea","esophagus","aorta","vagus-nerve","phrenic-nerve","thymus","diaphragm"]},
+{id:"porta-hepatis",name:"Porta hepatis",aka:"Liver hilum",system:"general",region:"abdomen",tags:["liver","portal triad","bile"],summary:"The liver's hilum — where the portal triad enters: portal vein, hepatic artery and bile duct.",structure:"In the free edge of the lesser omentum: the common bile duct lies anterolateral (right), the hepatic artery proper anteromedial (left) and the portal vein posterior to both; lymphatics and nerves travel with them.",fn:"The liver's only gateway — blood enters from the gut and artery, bile and lymph leave, nerves pass through.",clinical:"The Pringle maneuver clamps the triad here to control liver bleeding; portal-vein thrombosis raises portal pressure and causes splenomegaly.",related:["hepatic-portal-vein","hepatic-artery","bile-duct","liver","gallbladder","mesentery"]},
+{id:"thoracic-outlet",name:"Thoracic outlet (scalene hiatus)",aka:"Interscalene triangle",system:"general",region:"neck",tags:["thoracic outlet","brachial plexus","compression"],summary:"The gap between the anterior and middle scalenes — where the subclavian artery and brachial plexus squeeze through to the arm.",structure:"Bounded by the anterior scalene in front, middle scalene behind and the first rib below; it transmits the subclavian artery and the plexus trunks. The subclavian vein takes a separate route, passing in front of the anterior scalene.",fn:"The neurovascular gateway from the neck into the axilla and arm.",clinical:"Thoracic outlet syndrome — compression by a cervical rib or tight scalenes causes arm numbness, weakness and vascular signs; Adson's test dims the radial pulse.",related:["scalenes","subclavian-artery","subclavian-vein","brachial-plexus","axillary-artery","clavicle","ribs","phrenic-nerve"]},
+{id:"femoral-canal",name:"Femoral canal",aka:"",system:"general",region:"lower-limb",tags:["hernia","femoral","lymphatics"],summary:"The medial compartment of the femoral sheath — the 'empty space' of NAVEL and the femoral hernia route.",structure:"Medial to the femoral vein within the sheath, below the inguinal ligament; it holds fat, lymphatics and the node of Cloquet. Its opening (the femoral ring) is bounded by the inguinal ligament in front, the lacunar ligament medially, the pectineal ligament behind and the femoral vein laterally.",fn:"A dead space letting the femoral vein expand — and the channel through which a femoral hernia descends.",clinical:"Femoral hernias enter the femoral ring and emerge in the femoral triangle — commoner in women, with the highest strangulation risk because the ring cannot stretch.",related:["femoral-triangle","femoral-vein","inguinal-ligament","inguinal-canal","inguinal-lymph-nodes","sartorius"]},
+{id:"adductor-canal",name:"Adductor canal (Hunter's canal)",aka:"Subsartorial canal",system:"general",region:"lower-limb",tags:["thigh","vessels","saphenous"],summary:"The mid-thigh tunnel under the sartorius — ferrying the femoral vessels toward the popliteal fossa.",structure:"A triangular channel in the middle third of the thigh: roofed by the sartorius and vasto-adductor membrane, walled by vastus medialis (anterolateral) and adductor longus/magnus (posterior); contents: femoral artery, femoral vein, saphenous nerve and nerve to vastus medialis.",fn:"Conduit for the lower limb's main vessels; the saphenous nerve exits here to supply the medial leg and foot.",clinical:"Saphenous nerve block in the canal anesthetizes the medial leg for foot surgery; the artery exits through the adductor hiatus to become popliteal.",related:["femoral-artery","femoral-vein","saphenous-nerve","sartorius","popliteal-artery","adductor-group","quadriceps-femoris"]}
 );
 
 </script>
@@ -18160,15 +18358,15 @@ window.ATLAS_PATHS = [
 {id:"upper-limb",title:"Upper limb essentials",level:2,time:"~40 min",
  desc:"Bones, muscles, nerves and vessels of the shoulder, arm and hand — the classic exam block.",
  objectives:["Name the shoulder and arm bones and their key landmarks","Map the rotator cuff and brachial compartments","Trace the brachial plexus into median, ulnar and radial nerves","Follow the arterial axis to the hand"],
- steps:["clavicle","scapula","humerus","shoulder-joint","rotator-cuff","supraspinatus","deltoid","biceps-brachii","triceps-brachii","radius","ulna","brachial-plexus","median-nerve","ulnar-nerve","radial-nerve","brachial-artery","carpal-tunnel"]},
+ steps:["clavicle","scapula","humerus","shoulder-joint","rotator-cuff","supraspinatus","deltoid","biceps-brachii","triceps-brachii","radius","ulna","brachial-plexus","axilla","median-nerve","ulnar-nerve","radial-nerve","brachial-artery","cubital-fossa","carpal-tunnel","lacrimal-region"]},
 {id:"lower-limb",title:"Lower limb essentials",level:2,time:"~40 min",
  desc:"Hip-to-foot tour: the weight-bearing skeleton, powerhouse muscles and the sciatic pathway.",
  objectives:["Identify the pelvis, femur, tibia and foot bones","Explain knee mechanics and the menisci","Group the thigh into flexor/extensor/adductor compartments","Trace the femoral and sciatic nerve courses","Map the arterial axis to dorsalis pedis"],
- steps:["pelvic-girdle","hip-joint","femur","gluteus-maximus","gluteus-medius","iliopsoas","quadriceps-femoris","hamstrings","knee-joint","meniscus","tibia","fibula","sciatic-nerve","femoral-nerve","femoral-artery","popliteal-artery","dorsalis-pedis","achilles-tendon"]},
+ steps:["pelvic-girdle","hip-joint","femur","gluteus-maximus","gluteus-medius","iliopsoas","quadriceps-femoris","hamstrings","knee-joint","meniscus","tibia","fibula","sciatic-nerve","femoral-nerve","femoral-triangle","femoral-canal","femoral-artery","adductor-canal","popliteal-fossa","popliteal-artery","dorsalis-pedis","achilles-tendon"]},
 {id:"head-neck",title:"Head & neck tour",level:3,time:"~45 min",
  desc:"Skull, brain, cranial nerves and the neck's packed triangles.",
  objectives:["Orient the skull bones, sutures and foramina","Meet the 12 cranial nerves by territory","Follow the carotid and jugular columns","Locate the thyroid, pharynx and larynx"],
- steps:["skull","cranial-sutures","mandible","tmj","brain","cerebellum","brainstem","trigeminal-nerve","facial-nerve","vagus-nerve","sternocleidomastoid","common-carotid","internal-jugular","thyroid","pharynx","larynx"]},
+ steps:["skull","cranial-sutures","mandible","tmj","brain","cerebellum","brainstem","trigeminal-nerve","facial-nerve","vagus-nerve","sternocleidomastoid","neck-triangles","thoracic-outlet","common-carotid","internal-jugular","thyroid-gland","pharynx","larynx"]},
 {id:"neuro-intro",title:"Nervous system starter",level:1,time:"~25 min",
  desc:"Brain lobes to spinal cord to peripheral nerves — the wiring diagram.",
  objectives:["Divide the CNS from the PNS","Name the brain's major divisions","Explain what a plexus is","Distinguish motor and sensory roles"],
@@ -18176,11 +18374,11 @@ window.ATLAS_PATHS = [
 {id:"cardio",title:"Cardiovascular journey",level:2,time:"~35 min",
  desc:"Chambers to coronaries, out the aorta and back through the great veins.",
  objectives:["Walk blood through the four chambers and valves","Name the coronary arteries","Map the aorta's three branches and major offshoots","Distinguish the systemic and pulmonary circuits"],
- steps:["heart","pericardium","heart-valves","coronary-arteries","aorta","aortic-arch","pulmonary-artery","pulmonary-veins","vena-cava","common-carotid","femoral-artery","great-saphenous-vein"]},
+ steps:["heart","mediastinum","pericardium","heart-valves","coronary-arteries","aorta","aortic-arch","pulmonary-trunk","pulmonary-veins","svc","ivc","common-carotid","femoral-artery","great-saphenous-vein"]},
 {id:"breath-gut",title:"Breath & digestion",level:1,time:"~30 min",
  desc:"Nose to alveoli, mouth to anus — the two great tubes.",
  objectives:["Follow air from nose to alveolus","Follow food from mouth to rectum","Name the accessory organs (liver, pancreas, gallbladder)","Relate the diaphragm to both systems"],
- steps:["nasal-cavity","pharynx","larynx","trachea","bronchi","lungs","diaphragm","esophagus","stomach","liver","gallbladder","pancreas","small-intestine","large-intestine","rectum"]},
+ steps:["nasal-cavity","pharynx","larynx","trachea","bronchi","lungs","diaphragm","esophagus","stomach","liver","gallbladder","porta-hepatis","pancreas","small-intestine","large-intestine","rectum"]},
 {id:"gu",title:"Genitourinary system",level:2,time:"~25 min",
  desc:"Kidney to bladder, plus the reproductive organs in both sexes.",
  objectives:["Trace urine: nephron → ureter → bladder → urethra","Compare male and female reproductive organs","Connect the urinary and reproductive tracts"],
@@ -18196,7 +18394,7 @@ window.ATLAS_PATHS = [
 {id:"exam-cram",title:"Exam cram — top 50",level:1,time:"~60 min",
  desc:"The highest-yield fifty structures every anatomy exam loves.",
  objectives:["Recognize the 50 most-tested structures on sight","Recall each structure's one-line clinical pearl"],
- steps:["skull","vertebral-column","ribs","sternum","humerus","radius","ulna","femur","tibia","fibula","pelvic-girdle","scapula","clavicle","heart","lungs","liver","kidney","brain","spinal-cord","aorta","diaphragm","trapezius","deltoid","biceps-brachii","triceps-brachii","gluteus-maximus","quadriceps-femoris","hamstrings","gastrocnemius","median-nerve","ulnar-nerve","radial-nerve","sciatic-nerve","femoral-nerve","common-carotid","internal-jugular","subclavian-artery","femoral-artery","thyroid","stomach","small-intestine","large-intestine","pancreas","spleen","bladder","uterus","prostate","eye","ear"]}
+ steps:["skull","vertebral-column","ribs","sternum","humerus","radius","ulna","femur","tibia","fibula","pelvic-girdle","scapula","clavicle","heart","lungs","liver","kidney","brain","spinal-cord","aorta","diaphragm","trapezius","deltoid","biceps-brachii","triceps-brachii","gluteus-maximus","quadriceps-femoris","hamstrings","gastrocnemius","median-nerve","ulnar-nerve","radial-nerve","sciatic-nerve","femoral-nerve","common-carotid","internal-jugular","subclavian-artery","femoral-artery","thyroid-gland","stomach","small-intestine","large-intestine","pancreas","spleen","bladder","uterus","prostate","mediastinum","inguinal-canal","femoral-triangle","eye","ear"]}
 ];
 
 /* Curated free video lessons — AnatomyZone, The Noted Anatomist, Instant
@@ -18602,6 +18800,264 @@ window.ATLAS_TEACH = {
   mnemonic:"Sciatica = shooting pain down the leg — the nerve compressed by a herniated L4–5 or L5–S1 disc.",
   simple:"The sciatic nerve is the leg's main cable — the biggest nerve in your body, running from your lower back to your foot.",
   case:"A slipped disc pressing the L5 or S1 root gives sciatica — pain and pins-and-needles down the leg."},
+"femoral-triangle":{where:"In the upper front of the thigh, just below the inguinal crease — the pulse you feel in the groin is here.",
+  look:"Look for the shallow gutter between the strap-like sartorius sweeping inward and the adductor mass on the medial side.",
+  rel:{"femoral-artery":"the middle of the NAVEL sequence — this is your pulse point","femoral-vein":"just medial to the artery, inside the sheath","femoral-nerve":"most lateral — it lies outside the femoral sheath","inguinal-ligament":"forms the triangle's base",sartorius:"the lateral border"},
+  supply:"The contents are the supply — the femoral artery gives off the profunda femoris a few cm below the inguinal ligament.",
+  mnemonic:"NAVEL, lateral to medial: Nerve, Artery, Vein, Empty space (femoral canal), Lymphatics.",
+  simple:"A triangle in the groin holding the leg's nerve, artery and vein in order.",
+  case:"An irreducible, painful lump below and lateral to the pubic tubercle = femoral hernia — it passed through the femoral canal, medial to the vein."},
+"axilla":{where:"The pyramid under the shoulder joint — between the upper arm and the chest wall.",
+  look:"Four walls: pecs in front, subscapularis and lats behind, serratus anterior on the ribs medially, the humerus laterally; the apex funnels up into the neck.",
+  rel:{"axillary-artery":"runs through, giving branches to the walls","axillary-vein":"anteromedial to the artery","axillary-lymph-nodes":"drain the breast, arm and upper trunk","brachial-plexus":"its three cords wrap around the artery","pectoralis-major":"the anterior wall","serratus-anterior":"the medial wall on the ribs","latissimus-dorsi":"the posterior wall fold"},
+  supply:"Everything destined for the arm passes through — axillary vessels and the cords of the brachial plexus.",
+  simple:"The armpit — the doorway through which every vessel and nerve reaches the arm.",
+  case:"A breast lump with firm armpit nodes — axillary nodes are the first landing zone for breast cancer spread."},
+"cubital-fossa":{where:"The hollow in front of the elbow — where the pulse is felt for blood pressure and where blood is drawn.",
+  look:"A triangle: brachioradialis borders it laterally, pronator teres medially; the biceps tendon drops through its center to the radius.",
+  rel:{"brachial-artery":"ends here, splitting into radial and ulnar","median-nerve":"most medial content — deep to the bicipital aponeurosis","biceps-brachii":"its tendon anchors the center","radial-nerve":"hides at the lateral edge under brachioradialis",brachialis:"the floor","pronator-teres":"the medial border",brachioradialis:"the lateral border"},
+  supply:"The brachial artery bifurcates within the fossa into radial and ulnar arteries.",
+  mnemonic:"Medial to lateral — MBBR: Median nerve, Brachial artery, Biceps tendon, Radial nerve.",
+  simple:"The elbow pit — artery, the big biceps tendon and two nerves.",
+  case:"A supracondylar humerus fracture can injure the brachial artery and median nerve here — a lost radial pulse warns of Volkmann's ischemia."},
+"popliteal-fossa":{where:"The diamond-shaped hollow behind the knee — easy to feel with the knee slightly bent.",
+  look:"Hamstring tendons edge the top half, the two gastrocnemius heads edge the bottom; the vessels run deep while the nerve rides superficial.",
+  rel:{"popliteal-artery":"deepest — the femoral artery continued through the adductor hiatus","popliteal-vein":"between the artery and the nerve","tibial-nerve":"most superficial — the sciatic's medial half","sciatic-nerve":"splits at the apex into tibial and common fibular",gastrocnemius:"its two heads form the lower borders","biceps-femoris":"the superolateral border"},
+  supply:"Deep to superficial: popliteal artery, popliteal vein, tibial nerve.",
+  mnemonic:"Contents deep to superficial: Artery, Vein, Nerve (AVN) — and the common fibular nerve runs along the biceps edge.",
+  simple:"The knee pit — where the sciatic splits and the leg's vessels pass.",
+  case:"A knee dislocation stretches the tethered popliteal artery — an intimal tear can silently thrombose; always re-check foot pulses."},
+"inguinal-canal":{where:"An oblique ~4 cm tunnel above the medial half of the inguinal ligament, in the lower abdominal wall.",
+  look:"Two rings: the deep ring is a hole in the transversalis fascia (lateral), the superficial ring a slit in the external oblique aponeurosis (medial).",
+  rel:{"external-oblique":"its aponeurosis forms the anterior wall and superficial ring","internal-oblique":"reinforces the lateral anterior wall and forms the roof","spermatic-cord":"travels the canal's full length in males","inguinal-ligament":"the floor","rectus-abdominis":"its lateral edge bounds Hesselbach's triangle"},
+  supply:"Males: the spermatic cord (vas, testicular artery, pampiniform plexus). Females: the round ligament. Both: the ilioinguinal nerve partway.",
+  mnemonic:"Hesselbach's triangle — the direct-hernia zone: inferior epigastric vessels laterally, inguinal ligament below, lateral border of rectus medially.",
+  simple:"A weak-walled groin tunnel — the road the spermatic cord takes, and where hernias slip through.",
+  case:"A groin bulge descending into the scrotum, worse on coughing = indirect hernia through the deep ring — lateral to the inferior epigastric vessels."},
+"lacrimal-region":{where:"At the wrist's base on the thumb side — extend the thumb and the dip appears between two tendons.",
+  look:"EPL tendon on the ulnar side, APL + EPB on the radial side; the scaphoid forms the floor and the radial artery crosses it.",
+  rel:{scaphoid:"the floor — palpate it through the hollow","radial-artery":"crosses the floor toward the deep palm","wrist-joint":"lies just deep to the box","extensor-compartment-forearm":"the tendon groups forming its walls"},
+  supply:"The radial artery passes through the floor; the superficial radial nerve and cephalic vein lie in the roof.",
+  simple:"The little dip at the thumb base — the window for checking the scaphoid.",
+  case:"A fall on an outstretched hand plus snuffbox tenderness = occult scaphoid fracture until proven otherwise — the proximal pole can necrose."},
+"neck-triangles":{where:"Draw the sternocleidomastoid and trapezius — the anterior triangle sits in front of the SCM, the posterior triangle between SCM and trapezius.",
+  look:"Anterior triangle = the viscera side: thyroid, larynx, carotid sheath, submandibular gland. Posterior triangle = the root-of-neck side: a muscular floor with plexus trunks, nodes and the external jugular.",
+  rel:{sternocleidomastoid:"the dividing muscle between the two triangles","internal-jugular":"runs in the carotid sheath inside the anterior triangle","common-carotid":"its pulse is felt in the carotid triangle","accessory-nerve":"crosses the posterior triangle — vulnerable to biopsy","external-jugular":"runs superficial over the SCM into the posterior triangle","brachial-plexus":"its trunks emerge between the scalenes in the posterior triangle",trapezius:"the posterior boundary","cervical-lymph-nodes":"cluster in both triangles — Virchow's node sits supraclavicular"},
+  supply:"The posterior triangle's floor hides the trunks of the brachial plexus and the third part of the subclavian artery.",
+  mnemonic:"Anterior triangle = structures in front of the sheath line (gland, larynx, thyroid); posterior triangle = nerve zone — CN XI, plexus trunks, EJV, nodes.",
+  simple:"The sternocleidomastoid splits the neck into an anterior triangle (viscera and great vessels) and a posterior triangle (nerves and nodes).",
+  case:"A posterior-triangle node biopsy followed by a drooping shoulder and winged scapula = spinal accessory nerve (CN XI) injury."},
+"mediastinum":{where:"Between the two pleural sacs, from the thoracic inlet above to the diaphragm below — the chest's central strip.",
+  look:"The sternal angle (T4/5) splits it into superior and inferior; the inferior wraps around the pericardium into anterior, middle and posterior parts.",
+  rel:{heart:"sits in the middle mediastinum inside the pericardium",pericardium:"the sac that defines the middle mediastinum",aorta:"its arch marks the superior–inferior boundary",trachea:"descends through the superior mediastinum to split at T4",esophagus:"slides through the posterior mediastinum to the diaphragm","vagus-nerve":"gives the recurrent laryngeal branches at the arch","phrenic-nerve":"runs on the pericardium down to the diaphragm",thymus:"sits in the superior and anterior mediastinum",diaphragm:"the floor of the whole compartment"},
+  supply:"Superior: aortic arch and branches, SVC, trachea, esophagus, thoracic duct, phrenic and vagus nerves. Middle: heart and phrenics. Posterior: thoracic aorta, azygos system, thoracic duct, vagi. Anterior: thymus remnant and nodes.",
+  mnemonic:"Middle mediastinum = 'the heart and its servants' — pericardium plus the two phrenic nerves; everything behind the pericardium is posterior.",
+  simple:"The chest's central corridor — everything except the lungs, with the heart in the middle compartment.",
+  case:"A chest X-ray after a high-speed crash shows a widened mediastinum — think thoracic aortic rupture until proven otherwise."},
+"porta-hepatis":{where:"On the liver's undersurface — the fissure where the lesser omentum attaches, between the gallbladder and the duodenum.",
+  look:"Three tubes travel together in the free edge of the lesser omentum: bile duct front-right, hepatic artery front-left, portal vein behind both.",
+  rel:{"hepatic-portal-vein":"the big posterior member — about 75% of liver blood flow","hepatic-artery":"the small anterior-left member — the liver's oxygen supply","bile-duct":"anterior-right — drains bile toward the duodenum",liver:"the organ it serves",gallbladder:"its neck sits in the same portal plane",mesentery:"the portal vein forms from the mesenteric veins behind the pancreas"},
+  supply:"The portal vein and hepatic artery enter; hepatic veins leave separately at the back, straight into the IVC.",
+  mnemonic:"Duct — Artery — Vein, right to left, front to back: 'DAVe' — and the vein always sits posterior.",
+  simple:"The liver's front door — portal vein behind, artery and bile duct in front.",
+  case:"In liver-trauma surgery the surgeon pinches the hepatoduodenal ligament — the Pringle maneuver stops all inflow through the porta hepatis."},
+"thoracic-outlet":{where:"At the root of the neck, just above the first rib — the narrow pass between the anterior and middle scalene muscles.",
+  look:"Slide a finger behind the lateral edge of the sternocleidomastoid down to the first rib — that gap is where the plexus and subclavian artery pass.",
+  rel:{scalenes:"the anterior and middle scalenes form the gap","subclavian-artery":"passes through the gap with the plexus","subclavian-vein":"passes in FRONT of the anterior scalene — a separate route","brachial-plexus":"its trunks ride through the gap on the first rib","axillary-artery":"the subclavian's continuation beyond the first rib",clavicle:"overlies the outlet — another pinch point",ribs:"the first rib is the floor","phrenic-nerve":"runs on the anterior scalene's surface"},
+  supply:"Through the gap: subclavian artery + plexus. In front of it: subclavian vein. On the anterior scalene: phrenic nerve.",
+  mnemonic:"The vein goes over, the artery goes through — 'V over A' at the scalene gap.",
+  simple:"The neck-to-arm squeeze point — artery and nerve bundle through the scalene gap, vein in front.",
+  case:"Arm tingling and a weak hand when carrying a heavy bag = thoracic outlet syndrome — often a cervical rib or tight scalenes compressing the plexus."},
+"femoral-canal":{where:"Just medial to the femoral vein, inside the femoral sheath below the inguinal ligament — the 'E' of NAVEL.",
+  look:"An empty-looking compartment holding only fat, lymphatics and Cloquet's node — until a hernia fills it.",
+  rel:{"femoral-triangle":"the canal opens into its apex","femoral-vein":"its lateral wall within the sheath","inguinal-ligament":"the anterior boundary of the femoral ring","inguinal-canal":"the more lateral, longer hernia route","inguinal-lymph-nodes":"the deep group receives the node of Cloquet",sartorius:"overlies the canal as it descends"},
+  supply:"Its only regular residents: fat, lymphatics and the node of Cloquet — the dead space that lets the femoral vein expand.",
+  mnemonic:"The femoral ring is bounded by four structures — inguinal ligament in front, lacunar ligament medially, pectineal ligament behind, femoral vein laterally.",
+  simple:"The sheath's medial dead space — the path of the femoral hernia.",
+  case:"An elderly woman with bowel obstruction and a tender groin lump — strangulated femoral hernia through the femoral ring."},
+"adductor-canal":{where:"The middle third of the thigh, deep to the sartorius — the tunnel that hands the femoral vessels to the popliteal fossa.",
+  look:"Look for the channel roofed by the sartorius crossing the thigh — vastus medialis on one side, the adductors behind.",
+  rel:{"femoral-artery":"travels through it — becomes popliteal at the adductor hiatus","femoral-vein":"runs with the artery","saphenous-nerve":"exits the canal to descend with the great saphenous vein",sartorius:"the roof","popliteal-artery":"its continuation beyond the hiatus","adductor-group":"the posterior wall","quadriceps-femoris":"vastus medialis forms the anterolateral wall"},
+  supply:"Contents: femoral artery, femoral vein, saphenous nerve and the nerve to vastus medialis.",
+  mnemonic:"The canal sends the artery to the popliteal fossa through the adductor hiatus — the artery exits the back door.",
+  simple:"The thigh's mid-tunnel under sartorius — ferrying the femoral vessels to the knee pit.",
+  case:"A saphenous-nerve block at the adductor canal anesthetizes the medial leg and foot — used for foot and ankle surgery."},
+};
+
+/* Built-in schematic diagrams — declarative node/edge trees rendered as SVG.
+   for: other structure ids that also show this diagram on their page.
+   focus: node key to highlight when that structure's page is open.
+   nodes: {l:label,x,y,w,h,c:color,s:smallFont,to:part-link}; edges: [from,to,{d:dashed}] */
+window.ATLAS_DIAGRAMS = {
+"brachial-plexus":{
+  title:"Brachial plexus — roots, trunks, divisions, cords, branches",
+  w:760,h:400,
+  cols:[["Roots",44],["Trunks",200],["Divisions",326],["Cords",500],["Terminal nerves",675]],
+  cap:"Terminal nerves are linked — tap one to open its entry. The dashed line is the median nerve's medial root crossing to join it.",
+  for:["brachial-plexus","musculocutaneous-nerve","median-nerve","ulnar-nerve","radial-nerve","axillary-nerve"],
+  focus:{"musculocutaneous-nerve":"bMusc","median-nerve":"bMed","ulnar-nerve":"bUln","radial-nerve":"bRad","axillary-nerve":"bAx"},
+  nodes:{
+    c5:{l:"C5",x:15,y:40,w:58,h:26,c:"#8b95a9"},
+    c6:{l:"C6",x:15,y:112,w:58,h:26,c:"#8b95a9"},
+    c7:{l:"C7",x:15,y:184,w:58,h:26,c:"#8b95a9"},
+    c8:{l:"C8",x:15,y:256,w:58,h:26,c:"#8b95a9"},
+    t1:{l:"T1",x:15,y:328,w:58,h:26,c:"#8b95a9"},
+    tU:{l:"Upper",x:160,y:76,w:80,h:28,c:"#f2c14e"},
+    tM:{l:"Middle",x:160,y:184,w:80,h:28,c:"#f2c14e"},
+    tL:{l:"Lower",x:160,y:292,w:80,h:28,c:"#f2c14e"},
+    dUa:{l:"ant.",x:300,y:52,w:52,h:22,c:"#67708a",s:1},
+    dUp:{l:"post.",x:300,y:104,w:52,h:22,c:"#67708a",s:1},
+    dMa:{l:"ant.",x:300,y:156,w:52,h:22,c:"#67708a",s:1},
+    dMp:{l:"post.",x:300,y:208,w:52,h:22,c:"#67708a",s:1},
+    dLa:{l:"ant.",x:300,y:268,w:52,h:22,c:"#67708a",s:1},
+    dLp:{l:"post.",x:300,y:320,w:52,h:22,c:"#67708a",s:1},
+    cLat:{l:"Lateral",x:445,y:88,w:110,h:30,c:"#5ec8f8"},
+    cPost:{l:"Posterior",x:445,y:212,w:110,h:30,c:"#f2c14e"},
+    cMed:{l:"Medial",x:445,y:316,w:110,h:30,c:"#f08a9b"},
+    bMusc:{l:"Musculocutaneous n.",x:600,y:52,w:145,h:30,c:"#5ec8f8",to:"musculocutaneous-nerve"},
+    bMed:{l:"Median n.",x:600,y:112,w:145,h:30,c:"#b48ef2",to:"median-nerve"},
+    bAx:{l:"Axillary n.",x:600,y:192,w:145,h:30,c:"#f2c14e",to:"axillary-nerve"},
+    bRad:{l:"Radial n.",x:600,y:262,w:145,h:30,c:"#f2c14e",to:"radial-nerve"},
+    bUln:{l:"Ulnar n.",x:600,y:342,w:145,h:30,c:"#f08a9b",to:"ulnar-nerve"}
+  },
+  edges:[
+    ["c5","tU"],["c6","tU"],["c7","tM"],["c8","tL"],["t1","tL"],
+    ["tU","dUa"],["tU","dUp"],["tM","dMa"],["tM","dMp"],["tL","dLa"],["tL","dLp"],
+    ["dUa","cLat"],["dMa","cLat"],["dUp","cPost"],["dMp","cPost"],["dLp","cPost"],["dLa","cMed"],
+    ["cLat","bMusc"],["cLat","bMed"],["cPost","bAx"],["cPost","bRad"],["cMed","bUln"],["cMed","bMed",{d:1}]
+  ]
+}
+};
+
+/* Long-form teaching articles — TMA-style deep dives. Structure follows the
+   section framework of OpenStax Anatomy & Physiology 2e (CC BY 4.0) with
+   original clinical vignettes, mnemonics and exam pearls.
+   Shape: {title,intro,sections:[{h,p:[...]}],clinical:[{h,p}],pearls:[...]} */
+window.ATLAS_ARTICLES = {
+"heart":{
+  title:"The heart — chambers, valves and the cardiac cycle",
+  intro:"The heart is a muscular double pump sitting in the middle mediastinum, wrapped in the pericardium. It beats roughly 100,000 times a day, moving blood through two circuits in series — the low-pressure pulmonary circuit to the lungs and the high-pressure systemic circuit to the body. Understanding the heart means understanding four chambers, four valves, two circuits and one electrical wiring system.",
+  sections:[
+    {h:"Position and the pericardium",p:[
+      "The heart sits in the middle mediastinum between the pleural sacs, about two-thirds left of the midline. Its base — the posterior surface formed mainly by the left atrium — anchors the great vessels; the apex points down, forward and left, and its beat is felt at the 5th intercostal space in the mid-clavicular line.",
+      "The fibrous pericardium tethers the heart to the sternum and diaphragm; inside it, the serous pericardium forms a closed sac. The two layers of serous pericardium slide on a film of pericardial fluid — when fluid accumulates faster than it drains (tamponade), the chambers cannot fill and output collapses."]},
+    {h:"Four chambers, two pumps",p:[
+      "The right atrium receives systemic venous blood from the superior and inferior venae cavae and the coronary sinus, and passes it through the tricuspid valve to the right ventricle. The right ventricle ejects through the pulmonary valve into the pulmonary trunk — the only artery carrying deoxygenated blood.",
+      "Oxygenated blood returns via four pulmonary veins to the left atrium, crosses the mitral (bicuspid) valve into the left ventricle, and is ejected through the aortic valve into the aorta. The left ventricular wall is about three times thicker than the right — it generates systemic pressure (≈120 mmHg) while the right works against the low-resistance lungs (≈25 mmHg)."]},
+    {h:"The valves and the fibrous skeleton",p:[
+      "The atrioventricular valves — tricuspid (right) and mitral (left) — are anchored to papillary muscles by chordae tendineae, which prevent the cusps inverting into the atria during systole. The semilunar valves — pulmonary and aortic — are pocket-like cusps that snap shut when flow reverses, producing the second heart sound.",
+      "All four valves sit in the fibrous skeleton of the heart: a set of collagenous rings that anchor the cusps, separate atrial from ventricular muscle, and electrically insulate the two — the only normal conduction pathway between them is the AV bundle."]},
+    {h:"Coronary circulation",p:[
+      "The heart supplies itself first: the right and left coronary arteries arise in the aortic sinuses just above the aortic valve. The left coronary divides into the anterior interventricular (LAD) — supplying the anterior septum and front wall — and the circumflex, wrapping leftward. The right coronary (RCA) supplies the right side and usually the posterior wall via the posterior interventricular artery.",
+      "Dominance describes which artery gives the posterior interventricular — right-dominant in ~85% of people. The RCA supplies the SA node in ~60% and the AV node in ~80–90%, which is why inferior infarcts can cause bradycardia and heart block."]},
+    {h:"The conduction system and the cycle",p:[
+      "The heartbeat is intrinsic — modified cardiac cells, not nerves. The sinoatrial node (in the upper right atrium) fires fastest and paces at ~70–80/min; the impulse spreads across the atria to the atrioventricular node, where a ~120 ms delay lets the ventricles fill. It then races through the bundle of His, the right and left bundle branches and the Purkinje network to excite the ventricles apex-first.",
+      "Systole is ventricular contraction: the AV valves slam shut (S1, 'lub'), pressure rises, semilunar valves open and blood ejects. In diastole the semilunar valves close (S2, 'dub') and the cycle restarts. Cardiac output = heart rate × stroke volume — about 5 L/min at rest."]}
+  ],
+  clinical:[
+    {h:"Myocardial infarction territories",p:"LAD occlusion → anterior wall and septum ('widow-maker'); RCA occlusion → inferior wall, often with AV-node ischaemia and bradycardia; circumflex → lateral wall. Referred pain to the left arm, jaw or epigastrium travels via visceral afferents entering T1–T5."},
+    {h:"Valve disease and heart sounds",p:"Stenosis narrows the orifice (e.g., calcific aortic stenosis → ejection murmur radiating to the carotids); regurgitation leaks backward. Auscultation sites are downstream of the valves, not on top of them: aortic 2nd right ICS, pulmonary 2nd left ICS, tricuspid left lower sternal edge, mitral at the apex."}
+  ],
+  pearls:["Auscultation sites — 'All Physicians Take Money': Aortic, Pulmonary, Tricuspid, Mitral.","The LAD is the most commonly occluded coronary — and the most dangerous.","Cardiac output ≈ 5 L/min at rest = HR × stroke volume.","The apex beat (5th ICS, mid-clavicular) is formed by the left ventricle."]
+},
+"brachial-plexus":{
+  title:"The brachial plexus — roots to branches",
+  intro:"The brachial plexus is the nerve network that powers the entire upper limb: the ventral rami of C5–T1 weaving between the scalene muscles, behind the clavicle and through the axilla to emerge as five terminal nerves. Its roots–trunks–divisions–cords–branches logic is one of the most-examined structures in anatomy — and the most feared. Break it into columns and it becomes a simple family tree.",
+  sections:[
+    {h:"Why a plexus at all",p:[
+      "A plexus lets nerve fibres re-sort: muscles that act together embryologically share a compartment and a nerve, regardless of which spinal segments supply them. The result is that each terminal nerve carries fibres from several roots — which is why a single root lesion and a single nerve lesion produce different deficits.",
+      "The plexus forms in the posterior triangle of the neck, between the anterior and middle scalenes (the thoracic outlet), passes behind the clavicle with the subclavian artery, and reorganises in the axilla around the artery's second part."]},
+    {h:"Roots and trunks",p:[
+      "The five roots are the ventral rami of C5, C6, C7, C8 and T1. They unite into three trunks behind the scalene gap: upper (C5–C6), middle (C7) and lower (C8–T1).",
+      "Variants matter clinically: a 'prefixed' plexus takes a large C4 contribution and loses T1; 'postfixed' adds T2. A cervical rib can kink the lower trunk — one cause of thoracic outlet syndrome."]},
+    {h:"Divisions and cords",p:[
+      "Each trunk splits into an anterior and a posterior division — six in all. The anterior divisions of the upper and middle trunks form the lateral cord (destined for flexor compartments); all three posterior divisions unite as the posterior cord (the extensor line); the anterior division of the lower trunk continues alone as the medial cord (the hand's fine-control line).",
+      "The cords are named by their position around the second part of the axillary artery — lateral, posterior and medial — a relationship worth memorising because it is how surgeons and imaging describe them."]},
+    {h:"The five terminal branches",p:[
+      "The classic terminal five — 'MARMU' — are the musculocutaneous, axillary, radial, median and ulnar nerves. The musculocutaneous (lateral cord) powers the elbow flexors. The axillary and radial nerves (posterior cord) abduct the shoulder and extend everything distal to it. The median nerve — unique in drawing from both the lateral and medial cords — runs the palm's working muscles; the ulnar (medial cord) drives most of the hand's intrinsics.",
+      "Do not forget the pre-terminal branches: suprascapular (supra/infraspinatus), long thoracic (serratus anterior — winged scapula if cut), thoracodorsal (latissimus), and the medial and lateral pectoral nerves. They leave earlier than the cords and are exam favourites."]},
+    {h:"Reading lesions off the diagram",p:[
+      "Erb–Duchenne palsy (upper trunk, C5–6) follows traction on the neck–shoulder angle — a difficult birth or a motorbike fall — leaving the 'waiter's tip' arm: adducted, internally rotated, extended and pronated.",
+      "Klumpke palsy (lower trunk, C8–T1) follows upward traction on the arm — grabbing a branch to break a fall — producing claw hand; if T1's sympathetic fibres are involved, add Horner's syndrome. Mid-shaft humeral fractures injure the radial nerve (wrist drop); humeral neck fractures and anterior dislocations injure the axillary nerve (deltoid paralysis + the 'regimental badge' sensory loss)."]}
+  ],
+  clinical:[
+    {h:"Thoracic outlet syndrome",p:"Compression of the lower trunk (or subclavian vessels) between the scalenes, a cervical rib or the clavicle produces arm numbness, wasting of the hand intrinsics and vascular signs; Adson's test dims the radial pulse."},
+    {h:"Erb vs Klumpke",p:"Erb = upper trunk, arm dragged down, waiter's tip. Klumpke = lower trunk, arm pulled up, claw hand ± Horner's. Draw the plexus — the deficit is just the sum of the missing branches."}
+  ],
+  pearls:["MARMU — the five terminal nerves in order: Musculocutaneous, Axillary, Radial, Median, Ulnar.","Cords are named for where they sit beside the axillary artery: lateral, posterior, medial.","Only the median nerve gets two roots — it is formed where lateral and medial cords unite.","Sensory landmarks: median = index pad, ulnar = little finger, radial = first dorsal web space."]
+},
+"femoral-triangle":{
+  title:"The femoral triangle — borders, contents and the hernia route",
+  intro:"The femoral triangle is the most useful few centimetres in surface anatomy: a shallow gutter in the upper thigh where the leg's nerve, artery, vein and lymphatics line up in a strict lateral-to-medial order. It is where you feel a pulse, place a line, compress a bleeding vessel — and where the femoral canal funnels hernias into the thigh.",
+  sections:[
+    {h:"Boundaries and floor",p:[
+      "The triangle's base is the inguinal ligament; its lateral border is the medial edge of the sartorius and its medial border the medial edge of the adductor longus, the two meeting at the apex, which drains into the adductor canal.",
+      "The floor, lateral to medial, is formed by the iliopsoas, the pectineus and (partially) the adductor longus — three muscles of two different compartments, which is why the contents sit at different depths. The roof is the fascia lata, pierced by the great saphenous vein at the saphenous opening."]},
+    {h:"Contents: NAVEL",p:[
+      "Lateral to medial the triangle contains the femoral Nerve, Artery, Vein, the Empty space of the femoral canal, and Lymphatics — NAVEL. The femoral nerve is the outlier: it lies outside the femoral sheath, plastered on the iliopsoas in the triangle's lateral angle.",
+      "The femoral sheath is a funnel of fascia enclosing only the artery, vein and canal — three compartments; the nerve never enters it. Within the sheath the vein sits medial to the artery, which is why venous access is found a finger-breadth medial to the arterial pulse."]},
+    {h:"The femoral canal and ring",p:[
+      "The canal is the sheath's medial compartment — a dead space holding fat, lymphatics and the node of Cloquet. Its mouth, the femoral ring, is bounded by the inguinal ligament in front, the lacunar ligament medially, the pectineal ligament behind and the femoral vein laterally: four rigid borders that cannot stretch.",
+      "Because the ring is rigid, whatever enters it cannot easily exit — the mechanical reason femoral hernias strangulate more often than any other groin hernia."]},
+    {h:"Femoral versus inguinal hernias",p:[
+      "The surface landmark that separates them is the pubic tubercle: a femoral hernia emerges below and lateral to it (down through the canal into the triangle), while an inguinal hernia appears above and medial to it.",
+      "Femoral hernias are commoner in women (wider pelvis, larger ring) and in the elderly; any 'groin lump' with bowel-obstruction symptoms in an elderly woman is a strangulated femoral hernia until proven otherwise."]}
+  ],
+  clinical:[
+    {h:"Femoral access",p:"The femoral artery is palpated at the mid-inguinal point (halfway between the ASIS and the pubic symphysis — not the midpoint of the inguinal ligament). Arterial puncture here feeds angiography and cardiac catheterisation; the vein for central access lies just medial, inside the sheath."},
+    {h:"Compression and emergency",p:"The artery can be compressed against the superior pubic ramus to control distal leg bleeding — and the same pulse is the first check in any limb-threat assessment."}
+  ],
+  pearls:["NAVEL, lateral to medial: Nerve, Artery, Vein, Empty space, Lymphatics.","The femoral sheath holds artery, vein and canal — never the nerve.","Femoral hernia = below and lateral to the pubic tubercle; inguinal = above and medial.","A rigid ring (inguinal, lacunar, pectineal ligaments + femoral vein) is why femoral hernias strangulate."]
+},
+"kidney":{
+  title:"The kidney — retroperitoneal architecture and the nephron",
+  intro:"The kidneys are paired retroperitoneal filters, each about the size of a fist, that clean ~180 litres of plasma a day down to 1–2 litres of urine. Their value in exams is threefold: a predictable position and relations, a beautifully ordered internal anatomy, and the nephron — the repeating functional unit that explains almost everything the organ does.",
+  sections:[
+    {h:"Position, coverings and relations",p:[
+      "Each kidney lies against the posterior abdominal wall between T12 and L3; the right sits a centimetre or so lower, pushed down by the liver. Posteriorly both rest on the diaphragm, psoas and quadratus lumborum; the 12th rib crosses the left kidney and both 11th and 12th cross the right — the reason a posterior stab wound can threaten pleura, lung and kidney together.",
+      "From inside out the coverings are the fibrous capsule, a cushion of perirenal fat and the renal fascia. The suprarenal (adrenal) gland caps the upper pole of each kidney inside the same fascia — 'suprarenal', not superior, because it is a separate organ."]},
+    {h:"External anatomy and the hilum",p:[
+      "The bean shape has a medial concavity — the hilum — opening into the renal sinus. Through the hilum, anterior to posterior, pass the renal vein, the renal artery and the renal pelvis (the top of the ureter): 'V-A-P', the kidney's own little NAVEL.",
+      "The left renal vein is the longer vessel — it crosses in front of the aorta beneath the superior mesenteric artery, which is why a tight SMA angle ('nutcracker syndrome') can compress it."]},
+    {h:"Inside: cortex, medulla and calyces",p:[
+      "A cut kidney shows an outer cortex dotted with glomeruli, and an inner medulla of 8–18 striated pyramids whose tips (papillae) drip urine into the minor calyces. Cortical tissue dips between pyramids as the columns of Bertin.",
+      "Minor calyces merge into 2–3 major calyces, which unite into the renal pelvis — the funnel that narrows into the ureter at the pelviureteric junction, the first of the three natural narrowings where stones lodge."]},
+    {h:"The nephron — the working unit",p:[
+      "Each kidney holds about a million nephrons. Filtration happens at the glomerulus: a tuft of capillaries wrapped in Bowman's capsule, producing protein-free filtrate. The proximal convoluted tubule reabsorbs the bulk of it — glucose, amino acids, most water and salts.",
+      "The loop of Henle dips into the medulla to build the osmotic gradient that concentrates urine; the distal convoluted tubule and collecting duct then fine-tune under hormonal control — aldosterone reclaiming sodium, ADH reclaiming water. Urine finally exits the papilla into the calyceal system."]},
+    {h:"The vascular plan",p:[
+      "The kidney is one of the body's most perfused organs — a quarter of cardiac output at rest. The renal artery divides into segmental, interlobar, arcuate and interlobular arteries feeding an afferent arteriole into each glomerulus.",
+      "Uniquely, blood leaves the glomerulus through a second arteriole — the efferent — into peritubular capillaries (or the vasa recta beside the loops of Henle). Two capillary beds in series make the kidney a portal system, and the efferent arteriole is how the body adjusts glomerular filtration pressure."]}
+  ],
+  clinical:[
+    {h:"Renal angle and stones",p:"The costovertebral angle (spine × 12th rib) is where kidney pain is elicited — pyelonephritis tenderness lives here. Stones lodge at three narrowings: the PUJ, the pelvic brim, and the vesicoureteric junction; colic radiates loin-to-groin following the T11–L2 segments."},
+    {h:"Retroperitoneal logic",p:"Because the kidneys are retroperitoneal, kidney surgery is approached from the flank without opening the peritoneum — and renal bleeding can hide in the retroperitoneum without free intraperitoneal blood."}
+  ],
+  pearls:["Hilum, anterior to posterior: Vein, Artery, Pelvis — 'VAP'.","Two capillary beds in series (glomerulus → efferent arteriole → peritubular) make the kidney a portal system.","Right kidney sits lower — the liver pushes it down.","Stone lodging sites: PUJ, pelvic brim, VUJ."]
+},
+"knee-joint":{
+  title:"The knee joint — the hinge that also rotates",
+  intro:"The knee is the largest and most mechanically stressed joint in the body — a modified hinge between the femur and tibia that must bear the whole body weight while still allowing a little rotation. Its stability comes not from its shallow bony fit but from four ligaments and two menisci, which is exactly why it is the most commonly injured major joint.",
+  sections:[
+    {h:"Bones and the patellofemoral half",p:[
+      "The joint is actually two articulations in one capsule: the tibiofemoral joint between the femoral condyles and the tibial plateau, and the patellofemoral joint where the patella — the body's largest sesamoid, embedded in the quadriceps tendon — glides in the femur's trochlear groove.",
+      "The tibial plateau is nearly flat, which is poor bony stability; the femoral condyles rock and glide on it rather than fitting into sockets. Stability is therefore delegated to soft tissue."]},
+    {h:"The four great ligaments",p:[
+      "The medial collateral ligament is a flat band firmly fused to the medial meniscus; the lateral collateral is a separate cord — free of the lateral meniscus — resisting varus stress. The MCL is injured by valgus blows; the LCL rarely.",
+      "The cruciate ligaments cross inside the capsule. The anterior cruciate runs from the anterior tibia to the posterior aspect of the lateral femoral condyle — it resists anterior translation of the tibia and hyperextension. The posterior cruciate, thicker and less often torn, resists posterior translation. Naming follows the tibial attachment, not the femoral."]},
+    {h:"Menisci and the screw-home",p:[
+      "The menisci are C-shaped fibrocartilage wedges that deepen the tibial plateau and spread load. The medial meniscus is broader and anchored to the MCL — less mobile and torn more often; the lateral meniscus is more circular and mobile.",
+      "As the knee reaches full extension, the femur rotates medially on the tibia — the 'screw-home' mechanism that locks the joint for standing with minimal muscle effort. Unlocking to flex requires the popliteus to laterally rotate the femur back."]},
+    {h:"Bursae and the unhappy triad",p:[
+      "A dozen bursae cushion the joint — the prepatellar bursa ('housemaid's knee') and infrapatellar bursae are the usual inflamed suspects. The suprapatellar bursa is continuous with the joint cavity, which is why effusions balloon above the patella.",
+      "A lateral blow to the planted knee classically tears the MCL, the ACL and the medial meniscus together — the 'unhappy triad': the valgus force stretches the collateral, the rotation snaps the cruciate, and the trapped medial meniscus splits because it is fused to the MCL."]}
+  ],
+  clinical:[
+    {h:"Testing the cruciates",p:"The anterior drawer test and — more sensitive — the Lachman test assess the ACL; a positive posterior 'sag sign' suggests PCL injury. Swelling within hours implies haemarthrosis (cruciate tear, fracture); swelling that appears next day is typical of a meniscus tear."},
+    {h:"Locking",p:"A knee that cannot fully extend — mechanical 'locking' — points to a displaced bucket-handle meniscus tear or a loose body wedged in the joint."}
+  ],
+  pearls:["The unhappy triad = MCL + ACL + medial meniscus — one lateral blow, three tears.","Cruciates are named by their tibial attachment: ACL front, PCL back.","Medial meniscus is fused to the MCL — immobile, and torn the most.","Screw-home = femur rotates medially to lock full extension; popliteus unlocks it."]
+}
 };
 
 </script>
@@ -18685,6 +19141,31 @@ const sysCount = {}, regCount = {};
 DATA.forEach(d => { sysCount[d.system]=(sysCount[d.system]||0)+1; regCount[d.region]=(regCount[d.region]||0)+1; });
 
 const imgOf = id => IMAGES[id] || null;
+const DIAGRAMS = window.ATLAS_DIAGRAMS || {};
+const ARTICLES = window.ATLAS_ARTICLES || {};
+const DIAGRAMS_FOR = {};
+for (const k in DIAGRAMS) (DIAGRAMS[k].for || [k]).forEach(id => { DIAGRAMS_FOR[id] = k; });
+const schematicInner = id => {
+  const g = DIAGRAMS[DIAGRAMS_FOR[id]]; if (!g) return "";
+  const focus = g.focus && g.focus[id];
+  const node = n => {
+    const w = n.w || 96, h = n.h || 28, c = n.c || "#8b95a9";
+    const inner = `<rect x="${n.x}" y="${n.y}" rx="7" width="${w}" height="${h}" fill="var(--panel)" stroke="${c}" stroke-width="1.5"/><text x="${n.x + w / 2}" y="${n.y + h / 2 + (n.s ? 3.5 : 4)}" text-anchor="middle" font-size="${n.s ? 10 : 11.5}" font-weight="600" fill="var(--text)" font-family="inherit">${n.l}</text>`;
+    return n.to && byId[n.to] ? `<a href="#/part/${n.to}">${inner}</a>` : `<g>${inner}</g>`;
+  };
+  const edges = g.edges.map(([a, b, o]) => {
+    const A = g.nodes[a], B = g.nodes[b];
+    const x1 = A.x + (A.w || 96), y1 = A.y + (A.h || 28) / 2, x2 = B.x, y2 = B.y + (B.h || 28) / 2, mx = (x1 + x2) / 2;
+    return `<path d="M${x1} ${y1} C${mx} ${y1} ${mx} ${y2} ${x2} ${y2}" fill="none" stroke="${B.c || "#8b95a9"}" stroke-width="${o && o.d ? 1.5 : 2.2}"${o && o.d ? ' stroke-dasharray="5 4" opacity=".7"' : ""}/>`;
+  }).join("");
+  const nodes = Object.keys(g.nodes).map(k => `<g class="${k === focus ? "on" : ""}">${node(g.nodes[k])}</g>`).join("");
+  const heads = (g.cols || []).map(([t, x]) => `<text x="${x}" y="14" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.5" fill="var(--text3)" font-family="inherit">${t.toUpperCase()}</text>`).join("");
+  return `<div class="schematic"><svg viewBox="0 0 ${g.w || 760} ${g.h || 400}" role="img" aria-label="${esc(g.title || id)}">${heads}${edges}${nodes}</svg>${g.cap ? `<div class="sc-cap">${esc(g.cap)}</div>` : ""}</div>`;
+};
+const schematicSVG = id => {
+  const s = schematicInner(id);
+  return s ? `<div class="section"><h2>Schematic</h2>${s}</div>` : "";
+};
 const imgTag = (id,cls) => { const im = imgOf(id); return im ? `<img class="${cls}" src="${esc(im.thumb||im.url)}" alt="" loading="lazy" onerror="this.remove()">` : `<span class="${cls} ph">${esc(systemIcon(id))}</span>`; };
 function systemIcon(id){ const d=byId[id]; return d ? SYSTEMS[d.system].icon : I("bone"); }
 
@@ -18717,7 +19198,7 @@ function buildNav(){
   <div class="nav-sec"><h4>Practice</h4>
   <a class="nav-link" data-href="#/quiz"><span class="ic">${I("target")}</span>Quiz</a></div>`;
   const navOpen = (()=>{ try{ const o = JSON.parse(localStorage.getItem("atlas-nav-open")||"null");
-    return o ? Object.assign({sys:true,reg:false},o) : {sys:true,reg:false}; }catch(e){ return {sys:true,reg:false}; } })();
+    return o ? Object.assign({sys:false,reg:false},o) : {sys:false,reg:false}; }catch(e){ return {sys:false,reg:false}; } })();
   const sec = (key,title,items)=>`<div class="nav-sec"><button class="nav-sec-h" data-coll="${key}" aria-expanded="${navOpen[key]}"><span class="chev">›</span>${title}<span class="ct">${items.length}</span></button><div class="nav-coll ${navOpen[key]?"":"closed"}" id="navcoll-${key}">${items.join("")}</div></div>`;
   h += sec("sys","Body systems",
     META.systemOrder.filter(s=>sysCount[s]).map(s=>`<a class="nav-link" data-href="#/system/${s}"><span class="ic">${SYSTEMS[s].icon}</span>${SYSTEMS[s].name}<span class="ct">${sysCount[s]}</span></a>`));
@@ -18882,6 +19363,7 @@ function vDetail(id){
     ${allImgs.length>1?`<div class="thumbs">${allImgs.map((x,i)=>`<img class="th${i===0?" on":""}" src="${esc(x.thumb||x.url)}" data-i="${i}" alt="plate ${i+1}" loading="lazy">`).join("")}</div>`:""}
     <div class="cap" id="platecap">${plateCap(im)}</div></div>` : "";
   const model3d = MODELS[id] ? `<div class="section"><h2>Interactive 3D model</h2><p class="hint" style="margin:0 0 10px">Rotate, zoom and inspect — loads from Sketchfab.</p>${modelCard(id)}</div>` : "";
+  const schematic = schematicSVG(id);
   const siblings = DATA.filter(x=>x.system===d.system && x.id!==d.id);
   const idx = DATA.filter(x=>x.system===d.system).findIndex(x=>x.id===d.id);
   const sameSys = DATA.filter(x=>x.system===d.system);
@@ -18902,11 +19384,13 @@ function vDetail(id){
       <div class="badges"><a class="badge sys" style="--badge-c:${c.color}" href="#/system/${d.system}">${c.icon} ${c.name}</a>
       <a class="badge" href="#/region/${d.region}">${I("map-pin")} ${REGIONS[d.region].name}</a>
       ${d.of?`<a class="badge" href="#/part/${d.ofRec||d.of}">${I("bone")} Landmark of: ${esc(byId[d.ofRec||d.of] ? byId[d.ofRec||d.of].name : d.of)}</a>`:""}
-      ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}">${I("box")} View in 3D body</a>`:d.of?`<a class="badge" href="#/3d/${d.of}?lm=${id}">${I("box")} Show on 3D model</a>`:""}</div>
+      ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}">${I("box")} View in 3D body</a>`:d.of?`<a class="badge" href="#/3d/${d.of}?lm=${id}">${I("box")} Show on 3D model</a>`:""}
+      ${ARTICLES[id]?`<a class="badge" href="#/article/${id}">${I("book-open")} Read the deep-dive article</a>`:""}</div>
     </div>${plate}
   </div>
   <div class="section"><h2>Overview</h2><p>${esc(d.summary)}</p></div>
   ${d.structure?`<div class="section"><h2>Structure</h2><p>${esc(d.structure)}</p></div>`:""}
+  ${schematic}
   ${d.fn?`<div class="section"><h2>Function</h2><p>${esc(d.fn)}</p></div>`:""}
   ${model3d}
   <div class="section"><h2>Location</h2><p>Located in <b>${REGIONS[d.region].name}</b>${d.aka?` — also known as ${esc(d.aka)}`:""} — <a href="#/region/${d.region}">browse this region →</a></p></div>
@@ -19044,8 +19528,35 @@ async function loadBodyGlb(){
   return gltf;
 }
 
+/* Tear down the previous 3D session before rebuilding — every visit used to
+   leak a whole WebGL context + its buffers, which is the main driver of the
+   memory pressure that makes iOS Safari force-reload the tab. Shared model
+   data (B3D.gltf geometries/materials) is deliberately NOT disposed. */
+function destroyScene(){
+  try{ if(B3D.composer){ if(B3D.composer.dispose) B3D.composer.dispose(); B3D.composer = null; } }catch(e){}
+  try{ if(B3D.ssao){ if(B3D.ssao.dispose) B3D.ssao.dispose(); B3D.ssao = null; } }catch(e){}
+  try{ if(B3D.envRT){ B3D.envRT.dispose(); B3D.envRT = null; } }catch(e){}
+  try{ if(B3D.controls){ B3D.controls.dispose(); B3D.controls = null; } }catch(e){}
+  const r = B3D.renderer;
+  if(r){
+    B3D.renderer = null;
+    try{ r.dispose(); }catch(e){}
+    try{ r.forceContextLoss(); }catch(e){}
+  }
+}
+
 function buildScene(gltf, st){
   const cv = $("#b3dcv"); if(!cv) return;
+  destroyScene();
+  cv.addEventListener("webglcontextlost", e => {
+    e.preventDefault();
+    const stage = cv.parentElement;
+    if(!stage || stage.querySelector(".b3d-ctxlost")) return;
+    const d = document.createElement("div");
+    d.className = "b3d-ctxlost";
+    d.innerHTML = `<div class="b3d-prog"><div class="t">The 3D view paused — the device reclaimed its graphics memory</div><div class="t" style="font-size:11px;opacity:.7;margin-top:4px">Your view is saved in the link — tap to reload</div><button class="b3d-retry" onclick="location.reload()">Reload 3D</button></div>`;
+    stage.appendChild(d);
+  });
   const selId = st.sel;
   const stage = cv.parentElement;
   const H = () => stage.clientHeight, W = () => stage.clientWidth;
@@ -19084,12 +19595,25 @@ function buildScene(gltf, st){
      Skipped on lowPower: env sampling costs every mesh every frame.
      try/catch too: a PMREM failure must not kill the scene */
   try{ if(!lowPower){ const pm = new THREE.PMREMGenerator(renderer);
-    scene.environment = pm.fromScene(new THREE.RoomEnvironment(), 0.04).texture;
+    B3D.envRT = pm.fromScene(new THREE.RoomEnvironment(), 0.04);
+    scene.environment = B3D.envRT.texture;
     if("environmentIntensity" in scene) scene.environmentIntensity = 0.55;
     pm.dispose(); }
   }catch(e){ console.warn("env map skipped:", e); }
   const group = new THREE.Group(); scene.add(group);
   const chipOn = {}, hidden = new Set(), faded = new Set(); let isolated = null, aidsOn = false, focusSet = null, skinOp = 1;
+  /* one-tap system presets — declared here (before first applyVis) because
+     syncSys() reads them via presetIdx() */
+  const SYSPRESETS = [
+    ["person","All", null], ["bone","Skeleton", ["skeletal"]], ["dumbbell","Muscles", ["muscular"]],
+    ["zap","Nerves", ["nervous"]], ["heart-pulse","Blood", ["cardiovascular","lymphatic"]],
+    ["stethoscope","Organs", ["digestive","respiratory","urinary","reproductive","endocrine","sensory"]],
+    ["hand","Skin", ["integumentary"]] ];
+  /* which preset matches the live layer state (boot = skeleton only) */
+  const presetIdx = () => { const cur = Object.keys(chipOn).filter(s=>chipOn[s]).sort().join(",");
+    return SYSPRESETS.findIndex(p => {
+      const w = p[2]===null ? Object.keys(chipOn).filter(s=>s!=="integumentary") : p[2];
+      return w.slice().sort().join(",") === cur; }); };
   /* lateral half kept by isolate — "l"/"r"/null (null = both sides / not bilateral) */
   let isoSide = null, selMesh = null;
   const GP = window.ATLAS_GLB_PARENT || {};
@@ -19400,6 +19924,7 @@ function buildScene(gltf, st){
   controls.zoomSpeed = .95;
   controls.update();
   controls.autoRotate = !lowPower; controls.autoRotateSpeed = 0.7;
+  B3D.controls = controls;
   cv.style.opacity = "0"; cv.style.transition = "opacity .6s";
   requestAnimationFrame(()=>{ cv.style.opacity = "1"; });
   const home2 = controls.target.clone();
@@ -20355,6 +20880,8 @@ function buildScene(gltf, st){
       for(const id of faded) if(sysOf(id)===s) n++;
       ch.classList.toggle("warn",n>0);
       ch.title = n ? `${n} structure${n>1?"s":""} hidden/faded — ↺ below restores` : ""; });
+    const pp = $("#b3dpre"); if(pp){ const ai = presetIdx();
+      pp.querySelectorAll(".pchip").forEach((b,i)=>b.classList.toggle("on",i===ai)); }
     const rb = $("#b3dreshid"); if(rb){ const n = hidden.size + faded.size;
       rb.style.display = n ? "" : "none";
       rb.textContent = `↺ Show ${n} hidden/faded`; } }
@@ -20393,12 +20920,7 @@ function buildScene(gltf, st){
   aidb.addEventListener("click",()=>{ aidsOn = aidb.classList.toggle("on"); applyVis(); });
   f.appendChild(aidb);
 
-  /* one-tap system presets + guided camera views */
-  const SYSPRESETS = [
-    ["person","All", null], ["bone","Skeleton", ["skeletal"]], ["dumbbell","Muscles", ["muscular"]],
-    ["zap","Nerves", ["nervous"]], ["heart-pulse","Blood", ["cardiovascular","lymphatic"]],
-    ["stethoscope","Organs", ["digestive","respiratory","urinary","reproductive","endocrine","sensory"]],
-    ["hand","Skin", ["integumentary"]] ];
+  /* guided camera views */
   const VIEWS = [
     ["person","Full", null, null], ["heart-pulse","Heart", ["cardiovascular","lymphatic","skeletal"], "heart", 1.6],
     ["brain","Brain", ["nervous"], "midbrain", 1.4], ["eye","Eye", ["sensory","muscular"], "eye"],
@@ -20412,7 +20934,7 @@ function buildScene(gltf, st){
     applyVis(); syncHiddenBar(); };
   const preEl = $("#b3dpre"), vwEl = $("#b3dvw");
   const chipIn = v => `<span class="ic">${I(v[0])}</span><span class="lb">${v[1]}</span>`;
-  if(preEl){ preEl.innerHTML = SYSPRESETS.map((p,i)=>`<button class="pchip${i===0?" on":""}" data-i="${i}" title="${p[1]}">${chipIn(p)}</button>`).join("");
+  if(preEl){ preEl.innerHTML = SYSPRESETS.map((p,i)=>`<button class="pchip${i===presetIdx()?" on":""}" data-i="${i}" title="${p[1]}">${chipIn(p)}</button>`).join("");
     preEl.querySelectorAll(".pchip").forEach(b=>b.addEventListener("click",()=>{
       setLayers(SYSPRESETS[+b.dataset.i][2]);
       preEl.querySelectorAll(".pchip").forEach(x=>x.classList.toggle("on",x===b)); })); }
@@ -20435,6 +20957,7 @@ function buildScene(gltf, st){
           if(!ok || !THREE.SSAOPass){ aob.style.display = "none"; return; }
           composer = new THREE.EffectComposer(renderer);
           ssaoPass = new THREE.SSAOPass(scene, camera, W(), H());
+          B3D.composer = composer; B3D.ssao = ssaoPass;
           ssaoPass.kernelRadius = rad*0.03; ssaoPass.minDistance = 0.0008; ssaoPass.maxDistance = 0.08;
           composer.addPass(ssaoPass);
           const gam = new THREE.ShaderPass(THREE.GammaCorrectionShader);
@@ -20546,8 +21069,8 @@ function buildScene(gltf, st){
         ${sysMeta?`<br><br><span class="dim">It belongs to the <b>${esc(sysMeta.name)}</b> — ${esc((sysMeta.blurb||"").split(".")[0].toLowerCase())}.</span>`:""}`,
       act:()=>{ setLayers(msys); focusIt(); select(id); flyK(3.0); } });
     /* 2 · Form — what it actually looks like */
-    if(d.structure || t.look) steps.push({ t:"🔍 Form & structure", lbl:"all",
-      x:`${d.structure?esc(d.structure):""}${t.look?`<br><br><b class="les-kw">What to look for:</b> ${esc(t.look)}`:""}`,
+    if(d.structure || t.look || imgOf(id)) steps.push({ t:"🔍 Form & structure", lbl:"all",
+      x:`${d.structure?esc(d.structure):""}${t.look?`<br><br><b class="les-kw">What to look for:</b> ${esc(t.look)}`:""}${(()=>{const im=imgOf(id);return im?`<img src="${esc(im.thumb||im.url)}" alt="" style="display:block;max-width:100%;border-radius:10px;margin-top:12px">`:"";})()}${schematicInner(id)}`,
       act:()=>{ onlyIds([id]); flyK(1.4); } });
     /* 3 · Neighbours — one guided step per key neighbour, each ending in a tap-it check */
     for(const r of rel.slice(0,3)){
@@ -20792,6 +21315,16 @@ function buildScene(gltf, st){
       tEl.querySelectorAll("[data-tr]").forEach(b=>b.addEventListener("click",()=>traceStart(b.dataset.tr))); } }
 
   paintPins();
+  /* deep-linked part (or landmark's part): enable its system layer and
+     spotlight it — otherwise #/3d/heart flies into an empty ribcage
+     (skeletal-only default). Skipped for lessons/quizzes/traces/explicit
+     ?sys links, which manage their own layers. */
+  const dsel = selId && meshes[selId] ? selId
+    : st.lm && lmById(st.lm) && meshes[lmById(st.lm).pid] ? lmById(st.lm).pid : null;
+  if(dsel && !st.lesson){
+    meshes[dsel].forEach(m=>chipOn[m.userData.sys]=true);
+    if(!st.sys && !st.quiz && !st.trace) focusSet = new Set([dsel]);
+    applyVis(); syncHiddenBar(); }
   select(selId && meshes[selId] ? selId : null);
   if(selId && meshes[selId]) focusOn(selId);
   /* feature-pack deep links */
@@ -21030,12 +21563,20 @@ function vQuizHub(){
   const due = srDue().length;
   crumbs([{t:"Home",href:"#/"},{t:"Quizzes"}]);
   const q = "&mode=mix&n=20";
+  /* lifetime accuracy per region/system from spaced-rep counters */
+  const accR={},accS={};
+  DATA.forEach(d=>{ const b=srBox(d.id); if(!b||!(b.r||b.w)) return;
+    for(const [m,k] of [[accR,d.region],[accS,d.system]]){
+      const o=m[k]=m[k]||{r:0,w:0}; o.r+=b.r||0; o.w+=b.w||0; } });
+  const accTag = (m,k) => { const o=m[k]; if(!o) return "";
+    const p=Math.round(o.r/(o.r+o.w)*100);
+    return ` · <b class="acc ${p>=80?"good":p>=60?"mid":"bad"}" title="${o.r} right / ${o.w} wrong">${p}%</b>`; };
   const regionRow = r => `<a class="region-item" href="#/quiz/c:r=${r}${q}">
       <span class="nm">${REGIONS[r].name}<small>${esc(REGIONS[r].blurb)}</small></span>
-      <span class="ct">${regCount[r]} structures ›</span></a>`;
+      <span class="ct">${regCount[r]} structures${accTag(accR,r)} ›</span></a>`;
   const sysRow = s => `<a class="region-item" href="#/quiz/c:sys=${s}${q}">
       <span class="nm">${SYSTEMS[s].icon} ${SYSTEMS[s].name}<small>${esc(SYSTEMS[s].blurb)}</small></span>
-      <span class="ct">${sysCount[s]} structures ›</span></a>`;
+      <span class="ct">${sysCount[s]} structures${accTag(accS,s)} ›</span></a>`;
   view.innerHTML = `
     <div class="list-head"><h1>${I("target")} Quizzes</h1>
       <p>Pick a region or system to practice — a 20-question set in mixed styles. Or jump into a mixed set below.</p></div>
@@ -21062,7 +21603,8 @@ function vQuiz(arg){
   if(isDue) cfg.mode = "choices";
   let pool = quizPool(cfg);
   if(!pool.length) pool = DATA.filter(d=>d.summary);
-  const scope = cfg.regs.length ? cfg.regs.map(r=>REGIONS[r].name).join(" + ")
+  const scope = cfg.path ? (((window.ATLAS_PATHS||[]).find(x=>x.id===cfg.path))||{}).title||"Path quiz"
+    : cfg.regs.length ? cfg.regs.map(r=>REGIONS[r].name).join(" + ")
     : cfg.sys.length ? cfg.sys.map(s=>SYSTEMS[s].name).join(" + ") : "Mixed";
   crumbs([{t:"Home",href:"#/"},...(isDue?[{t:"Learn",href:"#/learn"},{t:"Review"}]:[{t:"Quizzes",href:"#/quiz"},{t:scope}])]);
   const modeOpts = QMODES.map(m=>`<option value="${m[0]}" ${m[0]===cfg.mode?"selected":""}>${m[1]}</option>`).join("");
@@ -21123,6 +21665,13 @@ function qAnswer(right, d, extra){
     const link=document.createElement("a"); link.href="#/part/"+d.id; link.textContent="See the atlas entry →"; link.style.marginLeft="10px";
     note.appendChild(link); }
   const n=$("#qnext"); if(n){ n.style.display="inline-flex"; n.onclick=nextQ; }
+  /* TeachMeAnatomy-style explanation: one-line why under a missed answer */
+  if(!right && (d.clinical||d.summary)){
+    const qrev=$("#qrev");
+    if(qrev){ const why=document.createElement("div"); why.className="qwhy";
+      const t=d.clinical||d.summary||""; const m=t.match(/^[^.!?]+[.!?]?/);
+      why.innerHTML=`<b>${esc(d.name)}</b> — ${esc((m?m[0]:t).trim())}`;
+      qrev.appendChild(why); } }
   const im = imgOf(d.id);
   if(im){ const qrev=$("#qrev"); if(qrev && !qrev.querySelector("img")){
     const pic=document.createElement("img"); pic.src=im.url; pic.alt=d.name; pic.style.marginTop="16px";
@@ -21312,16 +21861,22 @@ function vLearn(arg){
     const c = SYSTEMS[arg], items = lessonsOf(arg);
     const done = items.filter(d=>lessonDone(d.id)).length;
     const nx = nextLesson(arg);
+    /* group lessons by body region (TeachMeAnatomy-style subsections) */
+    const lrow = d => `<a class="lrow${lessonDone(d.id)?" done":""}" href="#/3d/${d.id}?lesson=${arg}">
+        <span class="lck">${lessonDone(d.id)?"✓":""}</span>
+        <span class="lr"><span class="ln2">${esc(d.name)}</span><span class="lm2">${REGIONS[d.region].name}${d.aka?" · "+esc(d.aka):""}</span></span>
+        <span class="lgo">›</span></a>`;
+    const byReg = {}; items.forEach(d=>{ (byReg[d.region]=byReg[d.region]||[]).push(d); });
+    const regs = META.regionOrder.filter(r=>byReg[r]);
+    const rows = regs.length>1
+      ? regs.map(r=>`<div class="lgroup">${REGIONS[r].name} · ${byReg[r].length} lessons</div>`+byReg[r].map(lrow).join("")).join("")
+      : items.map(lrow).join("");
     crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:c.name}]);
     view.innerHTML = `<div class="list-head"><h1><span class="ic">${c.icon}</span>Learn ${c.name.toLowerCase()}</h1>
       <p>${done}/${items.length} lessons complete — each one walks you through the structure in the 3D body: where it is, what it looks like, what it does and what sits next to it.</p></div>
       ${nx?`<p><a class="btn primary" href="#/3d/${nx.id}?lesson=${arg}">${I("play")} ${done?"Continue":"Start"}: ${esc(nx.name)}</a>
         <a class="btn" href="#/quiz/${arg}">${I("target")} Quiz this system</a></p>`:""}
-      <div class="grid tight" style="grid-template-columns:1fr">${items.map(d=>
-        `<a class="lrow${lessonDone(d.id)?" done":""}" href="#/3d/${d.id}?lesson=${arg}">
-          <span class="lck">${lessonDone(d.id)?"✓":""}</span>
-          <span class="lr"><span class="ln2">${esc(d.name)}</span><span class="lm2">${REGIONS[d.region].name}${d.aka?" · "+esc(d.aka):""}</span></span>
-          <span class="lgo">›</span></a>`).join("")}</div>`;
+      <div class="grid tight" style="grid-template-columns:1fr">${rows}</div>`;
     return; }
   /* course map */
   const due = srDue().length;
@@ -21343,7 +21898,12 @@ function vLearn(arg){
         <span class="lm"><span class="lt">${SYSTEMS[s].name}</span>
           <span class="ld">${items.length} lessons${done?` · ${done} done`:""}</span>
           <span class="lbar"><i style="width:${pct}%"></i></span></span>
-        <span class="ln"><b>${pct}%</b>${done===items.length?"✓":"›"}</span></a>`; }).join("")}</div>`;
+        <span class="ln"><b>${pct}%</b>${done===items.length?"✓":"›"}</span></a>`; }).join("")}</div>
+    ${Object.keys(ARTICLES).filter(id=>byId[id]).length?`<div class="list-head" style="margin-top:22px"><h1 style="font-size:20px">${I("book-open")} Deep-dive articles</h1>
+    <p>Long-form reads on the high-yield topics — sources cited at the end of each. <a href="#/articles">Browse all articles →</a></p></div>
+    <div class="grid tight" style="grid-template-columns:1fr">${Object.keys(ARTICLES).filter(id=>byId[id]).slice(0,3).map(id=>{ const d=byId[id],a=ARTICLES[id];
+      return `<a class="lrow" href="#/article/${id}"><span class="lck">${SYSTEMS[d.system].icon}</span>
+        <span class="lr"><span class="ln2">${esc(a.title)}</span><span class="lm2">${esc(d.name)} · ${REGIONS[d.region].name}</span></span><span class="lgo">›</span></a>`; }).join("")}</div>`:""}`;
 }
 function vReview(){
   const due = srDue();
@@ -21380,13 +21940,57 @@ function vPath(pid){
   view.innerHTML = `<div class="list-head"><h1>${esc(p.title)}</h1>
     <p>${esc(p.desc)} ${done?`Progress: ${done}/${p.steps.length} (${pct}%)`:""}</p></div>
     <div class="section"><h2>Objectives</h2><ul class="tlist">${(p.objectives||[]).map(o=>`<li>${I("check")} ${esc(o)}</li>`).join("")}</ul></div>
-    <p><a class="btn primary" href="#/3d/${nxt}?lesson=path:${p.id}">${I("play")} ${done?"Continue":"Start"} the path</a></p>
+    <p><a class="btn primary" href="#/3d/${nxt}?lesson=path:${p.id}">${I("play")} ${done?"Continue":"Start"} the path</a>
+      <a class="btn" href="#/quiz/c:p=${p.id}&mode=mix&n=${Math.min(20,p.steps.length)}" style="margin-left:8px">${I("target")} Quiz this path</a></p>
     ${p.steps.map((s,i)=>{ const d=byId[s]; if(!d) return "";
       const ok = lessonDone(s);
       return `<a class="lrow${ok?" done":""}" href="#/3d/${s}?lesson=path:${p.id}">
         <span class="lck">${ok?"✓":i+1}</span>
         <span class="lr"><span class="ln2">${esc(d.name)}</span><span class="lm2">${SYSTEMS[d.system].icon} ${SYSTEMS[d.system].name} · ${REGIONS[d.region].name}</span></span>
         <span class="lgo">›</span></a>`; }).join("")}`;
+}
+
+/* ---------- long-form articles ---------- */
+function vArticles(){
+  crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:"Articles"}]);
+  const list = Object.keys(ARTICLES).filter(id=>byId[id]);
+  view.innerHTML = `<div class="list-head"><h1>${I("book-open")} Deep-dive articles</h1>
+    <p>${list.length} long-form reads — textbook-style coverage of the high-yield topics, built on the OpenStax Anatomy &amp; Physiology framework (CC BY 4.0) with original clinical vignettes and memory hooks.</p></div>
+    <div class="grid tight" style="grid-template-columns:1fr">${list.map(id=>{ const d=byId[id], a=ARTICLES[id];
+      return `<a class="lrow" href="#/article/${id}">
+        <span class="lck">${SYSTEMS[d.system].icon}</span>
+        <span class="lr"><span class="ln2">${esc(a.title)}</span><span class="lm2">${esc(d.name)} · ${SYSTEMS[d.system].name} · ${REGIONS[d.region].name}</span></span>
+        <span class="lgo">›</span></a>`; }).join("")}</div>`;
+}
+function vArticle(id){
+  const a = ARTICLES[id], d = byId[id]; if(!a||!d){ view.innerHTML = `<div class="empty">Article not found.</div>`; return; }
+  const c = SYSTEMS[d.system];
+  crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:"Articles",href:"#/articles"},{t:d.name}]);
+  const im = imgOf(id);
+  const plateSrc = im ? `<li>${esc(im.title||"Anatomical plate")} by ${esc(im.artist||"unknown")} — ${esc(im.license||"")}, via <a href="${esc(im.page||"#")}" target="_blank" rel="noopener">Wikimedia Commons</a></li>` : "";
+  view.innerHTML = `<div class="list-head"><h1>${esc(a.title)}</h1>
+    <div class="badges"><a class="badge sys" style="--badge-c:${c.color}" href="#/system/${d.system}">${c.icon} ${c.name}</a>
+    <a class="badge" href="#/region/${d.region}">${I("map-pin")} ${REGIONS[d.region].name}</a>
+    <a class="badge" href="#/part/${id}">${I("bone")} ${esc(d.name)} — quick entry</a>
+    ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}">${I("box")} Explore in 3D</a>`:""}</div></div>
+    <div class="article">
+      <p class="a-lead">${esc(a.intro)}</p>
+      ${schematicInner(id)}
+      ${im?`<figure class="a-fig"><img id="afigimg" src="${esc(im.url)}" alt="${esc(d.name)}" loading="lazy"><figcaption>${esc(im.title||"Anatomical plate")} · ${esc(im.license||"")} · tap to enlarge</figcaption></figure>`:""}
+      ${a.sections.map(s=>`<h2>${esc(s.h)}</h2>${s.p.map(p=>`<p>${esc(p)}</p>`).join("")}`).join("")}
+      ${(a.clinical||[]).length?`<h2>Clinical correlations</h2>`+a.clinical.map(x=>`<div class="a-clin"><b>${I("stethoscope")} ${esc(x.h)}</b><p>${esc(x.p)}</p></div>`).join(""):""}
+      ${(a.pearls||[]).length?`<h2>Exam pearls</h2><ul class="a-pearls">${a.pearls.map(p=>`<li>${I("check")} ${esc(p)}</li>`).join("")}</ul>`:""}
+      <div class="a-src"><h2>Sources &amp; attribution</h2><ul>
+        <li>Framework and factual review: <a href="https://openstax.org/details/books/anatomy-and-physiology-2e" target="_blank" rel="noopener">OpenStax, Anatomy &amp; Physiology 2e</a> — free to reuse under CC BY 4.0.</li>
+        ${plateSrc}
+        <li>Gray's Anatomy of the Human Body (1918) — public-domain reference.</li>
+        <li>Clinical vignettes, mnemonics and exam pearls are original to this atlas.</li>
+      </ul></div>
+    </div>
+    <div class="pn"><a href="#/part/${id}"><div class="dir">← Quick entry</div><div class="nm">${esc(d.name)}</div></a>
+    <a class="next" href="#/quiz/c:sys=${d.system}&mode=mix&n=20"><div class="dir">Test yourself →</div><div class="nm">Quiz the ${esc(c.name)}</div></a></div>`;
+  const afig = view.querySelector("#afigimg");
+  if(afig) afig.addEventListener("click",()=>lightbox(im));
 }
 
 /* ---------- search ---------- */
@@ -21451,6 +22055,15 @@ function route(){
   const h = location.hash.replace(/^#\/?/,"").replace(/^3d\?(.*)$/,"3d/?$1");
   const [_,kind,arg] = h.match(/^([\w-]*)(?:\/(.*))?$/) || [];
   closeSidebar();
+  /* free the WebGL context as soon as the user leaves the 3D view — holding it
+     while browsing plates/quizzes is what pushed iOS over its memory limit */
+  if(kind !== "3d" && B3D.renderer) destroyScene();
+  /* ---- auth & premium gate ---- */
+  document.body.classList.toggle("signed-out", !AUTH.session);
+  if(!AUTH.ready){ vBoot(); return; }
+  if(!AUTH.session){ if(kind==="auth") vAuth(arg); else vLanding(); return; }
+  if(kind==="auth"){ location.hash = "#/"; return; }
+  if(PREMIUM_KINDS.has(kind) && !AUTH.isPremium()){ vPaywall(kind); return; }
   document.querySelectorAll(".nav-link").forEach(a=>a.classList.remove("active"));
   const mark = sel => { const el=document.querySelector(`.nav-link[data-href="#/${sel}"]`);
     if(!el) return; el.classList.add("active");
@@ -21466,10 +22079,14 @@ function route(){
   else if(kind==="quiz-builder"){ vQuizBuilder(); mark("quiz"); }
   else if(kind==="path" && arg){ vPath(arg); mark("paths"); }
   else if(kind==="paths"){ vPaths(); mark("paths"); }
+  else if(kind==="article" && arg && ARTICLES[arg] && byId[arg]){ vArticle(arg); mark("learn"); }
+  else if(kind==="articles"){ vArticles(); mark("learn"); }
   else if(kind==="learn"){ if(arg==="review"){ vReview(); mark("learn/review"); } else { vLearn(arg||null); mark("learn"); } }
   else if(kind==="gallery"){ vGallery(); mark("gallery"); }
   else if(kind==="3d"){ v3D(arg||null); mark("3d"); }
   else if(kind==="search"){ vSearch(arg||""); }
+  else if(kind==="premium"){ vPremium(); }
+  else if(kind==="reset"){ vReset(); }
   else { vHome(); }
   $("#view").scrollTop=0; window.scrollTo(0,0);
 }
@@ -21491,6 +22108,419 @@ try{
     parent.postMessage({type:"atlas:ready"}, location.origin);
   }
 }catch(err){}
+
+/* ============ auth & premium — Supabase + Paystack ============ */
+/* Fill these in (see .env.example). Anon/public keys are safe to ship. */
+const SUPA_URL = "https://gvxvuyuabsahwsfqzbzb.supabase.co";
+const SUPA_ANON_KEY = "sb_publishable_7NRzkFUPN7K1LC33vMia3w_Cl0bkpzI";
+const PAYSTACK_PK = "pk_test_2c321f6a4471b672ee716506912ede6f6f99d8cd"; // TODO: swap to pk_live for launch
+
+const PLANS = [
+  { id:"monthly",  label:"1 Month",  price:1500,  days:30 },
+  { id:"semester", label:"Semester", price:6000,  days:180, note:"Save 33%" },
+  { id:"yearly",   label:"1 Year",   price:10000, days:365, best:true, note:"Save 44%" },
+];
+const PREMIUM_KINDS = new Set(["3d","quiz","quiz-builder","learn","paths","path","articles","article"]);
+const FEATURE_LABEL = {"3d":"The 3D explorer","quiz":"Quizzes","quiz-builder":"The quiz builder","learn":"Lessons & review","paths":"Guided paths","path":"Guided paths","articles":"Articles","article":"Articles"};
+const PREMIUM_FEATS = [["box","3D body explorer"],["graduation-cap","Guided lessons"],["route","Learning paths"],["target","Quizzes & builder"],["brain","Spaced review"],["book-open","Articles"]];
+const EMBEDDED = (()=>{ try{ return window.parent && window.parent !== window; }catch(e){ return false; } })();
+const GOOGLE_SVG = `<svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A11 11 0 0 0 1 12c0 1.77.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>`;
+
+const supa = (SUPA_URL.indexOf("YOUR-PROJECT") < 0 && window.supabase)
+  ? window.supabase.createClient(SUPA_URL, SUPA_ANON_KEY)
+  : null;
+
+const AUTH = {
+  ready: false, session: null, premiumUntil: null, lastPlan: null,
+  isPremium(){ const t = this.premiumUntil ? new Date(this.premiumUntil).getTime() : 0; return t > Date.now(); },
+  daysLeft(){ const t = this.premiumUntil ? new Date(this.premiumUntil).getTime() : 0; return Math.max(0, Math.ceil((t - Date.now()) / 86400000)); },
+};
+
+function premCacheGet(uid){
+  try{ const c = JSON.parse(localStorage.getItem("atlas-premium") || "null"); if(c && c.uid === uid) return c; }catch(e){}
+  return null;
+}
+function premCacheSet(uid, exp, plan){ try{ localStorage.setItem("atlas-premium", JSON.stringify({ uid, exp, plan })); }catch(e){} }
+function premCacheClear(){ try{ localStorage.removeItem("atlas-premium"); }catch(e){} }
+
+async function refreshEntitlement(){
+  if(!supa || !AUTH.session){ AUTH.premiumUntil = null; AUTH.lastPlan = null; return; }
+  const uid = AUTH.session.user.id;
+  try{
+    const { data } = await supa.from("subscriptions").select("plan,expires_at").eq("user_id", uid).order("expires_at", { ascending:false }).limit(1);
+    const row = data && data[0];
+    AUTH.premiumUntil = row ? row.expires_at : null;
+    AUTH.lastPlan = row ? row.plan : null;
+    premCacheSet(uid, AUTH.premiumUntil, AUTH.lastPlan);
+  }catch(e){
+    const c = premCacheGet(uid);
+    AUTH.premiumUntil = c ? c.exp : null;
+    AUTH.lastPlan = c ? c.plan : null;
+  }
+}
+
+/* tiny toast — reuses the PWA toast styling */
+let authToastT = null;
+function toast(msg, act, fn){
+  let t = document.getElementById("pwa-toast");
+  if(!t){ t = document.createElement("div"); t.id = "pwa-toast"; t.className = "pwa-toast"; document.body.appendChild(t); }
+  t.innerHTML = `<span>${esc(msg)}</span>${act ? `<button type="button">${esc(act)}</button>` : ""}`;
+  t.classList.add("on");
+  clearTimeout(authToastT);
+  if(act){ t.querySelector("button").onclick = () => { t.classList.remove("on"); fn && fn(); }; }
+  else authToastT = setTimeout(() => t.classList.remove("on"), 4500);
+}
+
+const naira = n => "₦" + Number(n).toLocaleString();
+const planOf = id => PLANS.find(p => p.id === id) || PLANS[0];
+const featChips = () => PREMIUM_FEATS.map(x => `<span>${I(x[0])}${x[1]}</span>`).join("");
+
+function authErr(msg, ok){
+  const el = $("#auth-err"); if(!el) return;
+  el.className = ok ? "auth-ok" : "auth-err";
+  el.innerHTML = `${ok ? I("check") : I("x")} <span>${esc(msg)}</span>`;
+  el.classList.remove("hidden");
+}
+
+/* ---------- auth/premium views ---------- */
+
+function vBoot(){ view.innerHTML = `<div class="boot"><i></i></div>`; }
+
+function vLanding(){
+  crumbs([{ t:"Welcome" }]);
+  const total = DATA.length, imgs = Object.keys(IMAGES).length;
+  const feats = [
+    ["bone","500+ atlas entries","Every major bone, muscle, organ, nerve and vessel — with summaries, clinical notes and cross-links.",false],
+    ["image","Real anatomical plates","Gray's Anatomy (1918) and open-license illustrations on every entry.",false],
+    ["map","Interactive body map","Tap a region to jump straight into its structures.",false],
+    ["box","Full 3D explorer","Rotate, slice, hide and label a complete human body — skeleton to organs.",true],
+    ["graduation-cap","Lessons & guided paths","Step-by-step fly-through lessons and curated study paths per system.",true],
+    ["target","Quizzes & spaced review","Test yourself on plates or the 3D body; smart review returns cards when you're due.",true],
+  ];
+  view.innerHTML = `
+  <div class="land">
+    <header class="land-nav">
+      <a class="logo" href="#/"><img src="icons/mark-256.png" alt="" width="26" height="26"><span>Anatomy Atlas</span></a>
+      <div class="acts"><a class="land-signin" href="#/auth">Sign in</a><a class="btn primary" href="#/auth/signup">Get started</a></div>
+    </header>
+    <section class="land-hero">
+      <div>
+        <div class="land-kick">${I("sparkles")} Interactive human anatomy atlas</div>
+        <h1>Explore the human body<br><em>inside and out</em></h1>
+        <p>${total}+ labeled structures across ${Object.keys(sysCount).length} systems — real Gray's plates, a complete 3D body you can rotate and dissect, and quizzes that make it stick. Built for medical &amp; anatomy students.</p>
+        <div class="land-cta"><a class="btn primary big" href="#/auth/signup">Create free account</a><a class="btn plain big" href="#/auth">Sign in</a></div>
+        <div class="land-mini">Free forever for the atlas reference · Premium unlocks 3D, lessons &amp; quizzes</div>
+      </div>
+      <div class="land-art"><div class="halo"></div><div class="land-frame"><img src="img/hero-anatomy.jpg" alt="Golden skeleton with holographic brain and heart"><span class="ftag">${I("gem")} Full 3D explorer · Premium</span></div></div>
+    </section>
+    <section class="land-stats">
+      <div class="land-stat"><b>${total}</b><span>Structures</span></div>
+      <div class="land-stat"><b>${Object.keys(sysCount).length}</b><span>Body systems</span></div>
+      <div class="land-stat"><b>${imgs}</b><span>Anatomical plates</span></div>
+      <div class="land-stat"><b>100%</b><span>Offline capable</span></div>
+    </section>
+    <section class="land-sec">
+      <h2>Everything an anatomy student needs</h2>
+      <p class="sub">The reference is free with an account. Go Premium to unlock the interactive study tools.</p>
+      <div class="land-feats">${feats.map(f => `<div class="land-feat">${f[3] ? `<span class="land-prem">${I("gem")} PREMIUM</span>` : ""}<span class="ic">${I(f[0])}</span><h3>${f[1]}</h3><p>${f[2]}</p></div>`).join("")}</div>
+    </section>
+    <section class="land-sec">
+      <h2>Simple, student-priced plans</h2>
+      <p class="sub">One-time payment — days stack. Prices in Nigerian Naira, secured by Paystack.</p>
+      <div class="land-prices">
+        <a class="land-pfree" href="#/auth/signup"><span class="pn"><b>Free</b></span><span class="fp">₦0</span><span class="pd">Atlas reference, plates &amp; body map — forever</span></a>
+        ${PLANS.map(p => `<a class="plcard" href="#/auth/signup">${p.best ? `<span class="pb">Best value</span>` : ""}<span class="pn">${p.label}</span><span class="pp">${naira(p.price)}</span><span class="pd">${p.days} days of Premium</span><span class="pn2">${p.note || ""}</span></a>`).join("")}
+      </div>
+      <p class="land-mini" style="margin-top:16px">Premium = 3D explorer · guided lessons · learning paths · quizzes · spaced review · articles</p>
+    </section>
+    <footer class="land-foot">
+      <span>Plates: Gray's Anatomy (1918) &amp; Wikimedia Commons · 3D: Z-Anatomy (CC BY-SA 4.0)</span>
+      <span><a href="#/auth">Sign in</a> · <a href="#/auth/signup">Create account</a></span>
+    </footer>
+  </div>`;
+}
+
+function vAuth(arg){
+  const up = arg === "signup";
+  crumbs([{ t:"Welcome", href:"#/" }, { t: up ? "Create account" : "Sign in" }]);
+  view.innerHTML = `
+  <div class="auth-wrap"><div class="auth-card">
+    <a class="auth-back" href="#/">← Back</a>
+    <div class="auth-logo"><img src="icons/mark-256.png" alt=""><b>Anatomy Atlas</b></div>
+    <h1>${up ? "Create your account" : "Welcome back"}</h1>
+    <p class="auth-sub">${up ? "Free atlas access — upgrade anytime for 3D, lessons &amp; quizzes." : "Sign in to open the atlas."}</p>
+    <button class="auth-gbtn" id="ag-google" type="button">${GOOGLE_SVG}${EMBEDDED ? "Continue with Google ↗" : "Continue with Google"}</button>
+    <div class="auth-or">or with email</div>
+    <form id="auth-form" novalidate>
+      ${up ? `<div class="auth-f"><label for="af-name">Full name</label><input id="af-name" type="text" autocomplete="name" placeholder="Adaeze Okafor" maxlength="60"></div>` : ""}
+      <div class="auth-f"><label for="af-email">Email</label><input id="af-email" type="email" autocomplete="email" placeholder="you@school.edu" required></div>
+      <div class="auth-f"><label for="af-pass">Password</label><input id="af-pass" type="password" autocomplete="${up ? "new-password" : "current-password"}" placeholder="••••••••" minlength="6" required></div>
+      <div id="auth-err" class="hidden"></div>
+      <button class="auth-btn" id="auth-go" type="submit">${up ? "Create account" : "Sign in"}</button>
+    </form>
+    <div class="auth-alt">${up ? `Already have an account? <button type="button" data-go="">Sign in</button>` : `New here? <button type="button" data-go="signup">Create an account</button>`}</div>
+    ${up ? "" : `<div class="auth-forgot"><button type="button" id="af-forgot">Forgot password?</button></div>`}
+    <div class="auth-note">Secure sign-in by Supabase · payments by Paystack</div>
+  </div></div>`;
+
+  const gbtn = $("#ag-google");
+  gbtn.addEventListener("click", async () => {
+    if(EMBEDDED){ window.open(`${location.origin}${location.pathname}#/auth`, "_blank"); return; }
+    if(!supa){ authErr("Auth isn't configured yet — see .env.example."); return; }
+    gbtn.disabled = true;
+    const { error } = await supa.auth.signInWithOAuth({ provider:"google", options:{ redirectTo: location.origin + location.pathname } });
+    if(error){ authErr(error.message); gbtn.disabled = false; }
+  });
+
+  view.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => {
+    location.hash = "#/auth" + (b.dataset.go ? "/" + b.dataset.go : "");
+  }));
+
+  $("#auth-form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const btn = $("#auth-go");
+    const email = $("#af-email").value.trim(), pass = $("#af-pass").value;
+    const name = up ? ($("#af-name") ? $("#af-name").value.trim() : "") : "";
+    if(!email || pass.length < 6){ authErr("Enter a valid email and a password of at least 6 characters."); return; }
+    if(!supa){ authErr("Auth isn't configured yet — see .env.example."); return; }
+    btn.disabled = true;
+    try{
+      if(up){
+        const { data, error } = await supa.auth.signUp({ email, password: pass, options:{ data:{ full_name: name } } });
+        if(error) throw error;
+        if(!data.session){ vVerify(email); return; }
+      } else {
+        const { error } = await supa.auth.signInWithPassword({ email, password: pass });
+        if(error) throw error;
+      }
+      location.hash = "#/";
+    }catch(err){
+      authErr(err.message || "Something went wrong — please try again.");
+      btn.disabled = false;
+    }
+  });
+
+  const fg = $("#af-forgot");
+  if(fg) fg.addEventListener("click", async () => {
+    const email = $("#af-email").value.trim();
+    if(!email){ authErr("Enter your email first, then tap Forgot password."); return; }
+    if(!supa){ authErr("Auth isn't configured yet."); return; }
+    const { error } = await supa.auth.resetPasswordForEmail(email, { redirectTo: location.origin + location.pathname });
+    authErr(error ? error.message : "Reset link sent — check your inbox.", !error);
+  });
+}
+
+function vVerify(email){
+  view.innerHTML = `<div class="auth-wrap"><div class="auth-card auth-ve">
+    <span class="ve-ic">${I("mail")}</span>
+    <h1>Check your inbox</h1>
+    <p>We sent a confirmation link to <b>${esc(email)}</b>.<br>Tap it, then come back and sign in.</p>
+    <div class="auth-alt"><button type="button" id="ve-back">← Back to sign in</button></div>
+  </div></div>`;
+  $("#ve-back").addEventListener("click", () => { location.hash = "#/auth"; });
+}
+
+function vReset(){
+  crumbs([{ t:"Account" }, { t:"Reset password" }]);
+  view.innerHTML = `<div class="auth-wrap"><div class="auth-card">
+    <div class="auth-logo"><img src="icons/mark-256.png" alt=""><b>Anatomy Atlas</b></div>
+    <h1>Set a new password</h1>
+    <p class="auth-sub">Choose a new password for your account.</p>
+    <form id="auth-form"><div class="auth-f"><label for="af-pass">New password</label><input id="af-pass" type="password" minlength="6" autocomplete="new-password" required></div>
+    <div id="auth-err" class="hidden"></div><button class="auth-btn" type="submit">Update password</button></form>
+  </div></div>`;
+  $("#auth-form").addEventListener("submit", async e => {
+    e.preventDefault();
+    if(!supa) return;
+    const { error } = await supa.auth.updateUser({ password: $("#af-pass").value });
+    if(error) authErr(error.message);
+    else { toast("Password updated"); location.hash = "#/"; }
+  });
+}
+
+/* ---------- premium views ---------- */
+
+let paySel = "yearly";
+function planCardHTML(p, sel){
+  return `<button type="button" class="plcard${p.id === sel ? " on" : ""}" data-plan="${p.id}">
+    ${p.best ? `<span class="pb">Best value</span>` : ""}
+    <span class="pk">${I("check")}</span>
+    <span class="pn">${p.label}</span>
+    <span class="pp">${naira(p.price)}</span>
+    <span class="pd">${p.days} days of Premium</span>
+    <span class="pn2">${p.note || ""}</span>
+  </button>`;
+}
+function renderPlanCards(sel){
+  paySel = sel;
+  const host = $("#pay-plans"); if(!host) return;
+  host.innerHTML = PLANS.map(p => planCardHTML(p, sel)).join("");
+  const lbl = $("#pay-lbl"); if(lbl) lbl.textContent = `Pay ${naira(planOf(sel).price)} with Paystack`;
+  host.querySelectorAll(".plcard").forEach(b => b.addEventListener("click", () => {
+    renderPlanCards(b.dataset.plan);
+  }));
+}
+const payBlock = () => `
+  <div class="plcards" id="pay-plans"></div>
+  <button class="pay-btn" id="pay-go">${I("key")} <span id="pay-lbl"></span></button>
+  <div class="pay-trust">Secured by Paystack · card, bank or USSD · instant unlock · days stack</div>`;
+
+function vPaywall(kind){
+  crumbs([{ t:"Home", href:"#/" }, { t:"Premium" }]);
+  const feat = FEATURE_LABEL[kind] || "This feature";
+  view.innerHTML = `
+  <div class="gate">
+    <div class="gate-hero">
+      <span class="gate-ic">${I("lock")}</span>
+      <h1>${esc(feat)} is a Premium feature</h1>
+      <p>One payment unlocks the full study toolkit — the atlas reference stays free forever.</p>
+    </div>
+    <div class="gate-list">${featChips()}</div>
+    ${payBlock()}
+  </div>`;
+  renderPlanCards("yearly");
+  $("#pay-go").addEventListener("click", () => payFor(paySel));
+}
+
+function vPremium(){
+  crumbs([{ t:"Home", href:"#/" }, { t:"Premium" }]);
+  const prem = AUTH.isPremium();
+  const plan = AUTH.lastPlan ? planOf(AUTH.lastPlan) : null;
+  const exp = AUTH.premiumUntil ? new Date(AUTH.premiumUntil) : null;
+  const left = AUTH.daysLeft();
+  const pct = prem && plan ? Math.min(100, Math.round(left / plan.days * 100)) : 0;
+  view.innerHTML = `
+  <div class="gate">
+    ${prem && exp ? `
+    <div class="prem-stat">
+      <div class="ps-top">${I("gem")} Anatomy Atlas Premium</div>
+      <div class="ps-sub">Everything unlocked — thanks for supporting the atlas</div>
+      <div class="prem-bar"><i style="width:${pct}%"></i></div>
+      <div class="ps-grid">
+        <div class="ps-box"><span>Plan</span><b>${plan.label}</b></div>
+        <div class="ps-box"><span>Days left</span><b>${left}</b></div>
+        <div class="ps-box"><span>Expires</span><b>${exp.toLocaleDateString("en-GB", { day:"numeric", month:"short", year:"numeric" })}</b></div>
+      </div>
+    </div>
+    <h2 style="font-size:19px;margin-bottom:14px">Extend your Premium</h2>`
+    : `
+    <div class="gate-hero">
+      <span class="gate-ic">${I("gem")}</span>
+      <h1>Go Premium</h1>
+      <p>Unlock the 3D explorer, guided lessons, learning paths, quizzes and spaced review — one payment, instant access.</p>
+    </div>
+    <div class="gate-list">${featChips()}</div>`}
+    ${payBlock()}
+  </div>`;
+  renderPlanCards("yearly");
+  $("#pay-go").addEventListener("click", () => payFor(paySel));
+}
+
+/* ---------- payment ---------- */
+
+function payFor(planId){
+  const plan = planOf(planId);
+  if(!AUTH.session || !plan) return;
+  if(!supa){ toast("Payments aren't configured yet."); return; }
+  if(typeof PaystackPop === "undefined"){ toast("Payments couldn't load — check your connection and retry."); return; }
+  const email = AUTH.session.user.email || `${AUTH.session.user.id}@atlas.app`;
+  const ref = `ATLAS-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  try{
+    const handler = PaystackPop.setup({
+      key: PAYSTACK_PK,
+      email,
+      amount: plan.price * 100,
+      currency: "NGN",
+      ref,
+      metadata: { user_id: AUTH.session.user.id, plan: plan.id, custom_fields: [] },
+      callback: res => verifyPayment((res && (res.reference || res.trxref)) || ref, plan.id),
+      onClose: () => {},
+    });
+    handler.openIframe();
+  }catch(e){
+    toast("Couldn't open the payment window — try again.");
+  }
+}
+
+let verifyingPay = false;
+async function verifyPayment(reference, planId){
+  if(verifyingPay) return;
+  verifyingPay = true;
+  toast("Verifying your payment…");
+  try{
+    const r = await fetch(`${SUPA_URL}/functions/v1/verify-payment`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${AUTH.session.access_token}`, apikey: SUPA_ANON_KEY },
+      body: JSON.stringify({ reference, plan: planId }),
+    });
+    const j = await r.json().catch(() => ({}));
+    if(r.ok && j.activated){
+      AUTH.premiumUntil = j.expires_at;
+      AUTH.lastPlan = planId;
+      premCacheSet(AUTH.session.user.id, j.expires_at, planId);
+      renderAccount();
+      toast("Payment confirmed — Premium unlocked");
+      location.hash = "#/premium";
+      route();
+    } else {
+      toast(j.error || "Verification failed — contact support with your payment reference.", "Premium", () => { location.hash = "#/premium"; });
+    }
+  }catch(e){
+    toast("Payment went through but verification failed — contact support with your reference.");
+  }finally{
+    verifyingPay = false;
+  }
+}
+
+/* ---------- sidebar account block ---------- */
+
+function renderAccount(){
+  const host = $("#side-acct"); if(!host) return;
+  const u = AUTH.session && AUTH.session.user;
+  if(!u){ host.innerHTML = ""; return; }
+  const name = (u.user_metadata && u.user_metadata.full_name) || u.email || "?";
+  const initial = (name[0] || "?").toUpperCase();
+  const chip = AUTH.isPremium()
+    ? `<a class="acct-chip" href="#/premium">${I("gem")} Premium · ${AUTH.daysLeft()}d left</a>`
+    : `<a class="acct-chip free" href="#/premium">${I("gem")} Go Premium</a>`;
+  host.innerHTML = `<div class="acct">
+    <span class="acct-ava">${esc(initial)}</span>
+    <div class="acct-tx"><div class="acct-mail" title="${esc(u.email || "")}">${esc(name)}</div>${chip}</div>
+    <button class="acct-out" title="Sign out" aria-label="Sign out">${I("log-out")}</button>
+  </div>`;
+  host.querySelector(".acct-out").addEventListener("click", async () => {
+    if(supa) await supa.auth.signOut();
+    premCacheClear();
+    AUTH.session = null; AUTH.premiumUntil = null; AUTH.lastPlan = null;
+    renderAccount();
+    location.hash = "#/";
+    route();
+  });
+}
+
+/* ---------- auth init ---------- */
+
+async function initAuth(){
+  if(!supa){ AUTH.ready = true; renderAccount(); return; }
+  try{
+    const { data: { session } } = await supa.auth.getSession();
+    AUTH.session = session;
+    if(session) await refreshEntitlement();
+  }catch(e){}
+  AUTH.ready = true;
+  renderAccount();
+  route();
+  supa.auth.onAuthStateChange(async (event, session) => {
+    AUTH.session = session;
+    if(event === "PASSWORD_RECOVERY"){ vReset(); return; }
+    if(session) await refreshEntitlement();
+    else { AUTH.premiumUntil = null; AUTH.lastPlan = null; }
+    renderAccount();
+    route();
+  });
+}
+
+initAuth();
 buildNav();
 route();
 })();

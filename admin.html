@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atlas Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="icons/mark-256.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+:root{
+  --bg:#0a0a0a;--panel:#141414;--panel2:#1c1c1c;--card:#161616;--card-h:#1f1f1f;
+  --text:#e8e8e8;--text2:#b5b0a3;--text3:#8d887a;--border:#2e2e2e;
+  --accent:#ffd60a;--accent-soft:rgba(255,214,10,.13);
+  --ok:#34c759;--bad:#ff453a;--warn:#ff9f0a;--shadow:0 12px 40px rgba(0,0,0,.5);
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font:14px/1.5 var(--font);-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+input{font:inherit;color:var(--text)}
+
+/* ---------- sign-in gate ---------- */
+#gate{min-height:100vh;display:grid;place-items:center;padding:24px;background:
+  radial-gradient(80% 60% at 50% 0%,rgba(255,214,10,.07),transparent 60%),var(--bg)}
+.gate-card{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:34px 30px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.gate-card::before{content:"";position:absolute;top:0;left:26px;right:26px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.gate-logo{width:52px;height:52px;border-radius:14px;display:block;margin:0 auto 14px;border:1px solid var(--border)}
+.gate-card h1{text-align:center;font-size:20px;letter-spacing:-.02em}
+.gate-card .sub{text-align:center;color:var(--text3);font-size:12.5px;margin:4px 0 22px}
+.f{margin-bottom:13px}
+.f input{width:100%;padding:11px 13px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;outline:none}
+.f input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:11px;border:none;background:var(--accent);color:#141414;font-weight:700;font-size:14.5px}
+.btn:hover{filter:brightness(1.05)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.g-or{display:flex;align-items:center;gap:10px;color:var(--text3);font-size:11.5px;margin:16px 0}
+.g-or::before,.g-or::after{content:"";flex:1;height:1px;background:var(--border)}
+.err{background:rgba(255,69,58,.1);border:1px solid rgba(255,69,58,.35);color:#ff9d95;border-radius:10px;padding:10px 13px;font-size:13px;margin-bottom:14px;display:none}
+.err.show{display:block}
+
+/* ---------- denied ---------- */
+#denied{min-height:100vh;display:grid;place-items:center;padding:24px}
+.denied-card{text-align:center;max-width:380px}
+.denied-card .ic{font-size:40px;margin-bottom:12px}
+.denied-card h2{margin-bottom:8px}
+.denied-card p{color:var(--text2);font-size:13.5px;margin-bottom:20px}
+.denied-card .btn{max-width:200px;margin:0 auto}
+
+/* ---------- dashboard ---------- */
+#app{min-height:100vh}
+.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.top-in{max-width:1240px;margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:12px}
+.top-in img{width:30px;height:30px;border-radius:8px}
+.top-in h1{font-size:15.5px;letter-spacing:-.01em}
+.top-in h1 span{color:var(--accent)}
+.top-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.top-right .who{font-size:12px;color:var(--text3)}
+.tbtn{background:var(--panel2);border:1px solid var(--border);color:var(--text2);border-radius:9px;padding:7px 12px;font-size:12.5px;font-weight:600}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:22px}
+
+.tabs{display:flex;gap:6px;margin-bottom:18px}
+.tabs button{background:var(--panel);border:1px solid var(--border);color:var(--text2);border-radius:10px;padding:9px 18px;font-size:13px;font-weight:700}
+.tabs button.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:14px}
+.stat{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+.stat .l{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+.stat .v{font-size:24px;font-weight:800;letter-spacing:-.02em}
+.stat .v.gold{color:var(--accent)}
+.stat .v.ok{color:var(--ok)}
+.stat .v.warn{color:var(--warn)}
+
+.planbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.planbit{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;font-size:12.5px}
+.planbit .pn{color:var(--text3);font-weight:600}
+.planbit .pv{font-weight:800;color:var(--accent)}
+
+.tools{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.tools input[type=search]{flex:1;min-width:200px;padding:9px 13px;background:var(--panel);border:1px solid var(--border);border-radius:10px;outline:none}
+.tools input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.flt{display:flex;gap:6px;flex-wrap:wrap}
+.flt button{background:var(--panel);border:1px solid var(--border);color:var(--text2);border-radius:9px;padding:8px 13px;font-size:12.5px;font-weight:600}
+.flt button.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+
+.tcard{background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.tscroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:980px}
+th{text-align:left;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);padding:12px 14px;border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
+th:hover{color:var(--accent)}
+th.nosort{cursor:default}
+td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:middle;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+tbody tr.uro{cursor:pointer}
+tbody tr.uro:hover,tr.uro.open{background:var(--card-h)}
+.u-mail{font-weight:600}
+.u-mail .caret{display:inline-block;color:var(--text3);font-size:10px;margin-right:6px;transition:transform .15s}
+tr.open .caret{transform:rotate(90deg);color:var(--accent)}
+.u-prov{font-size:11px;color:var(--text3)}
+.mut{color:var(--text3);font-size:12px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;color:var(--text2)}
+.copyable{cursor:pointer}
+.copyable:hover{color:var(--accent)}
+.badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:3px 9px;border-radius:20px;text-transform:uppercase}
+.badge.on{background:rgba(52,199,89,.14);color:var(--ok);border:1px solid rgba(52,199,89,.35)}
+.badge.soon{background:rgba(255,159,10,.14);color:var(--warn);border:1px solid rgba(255,159,10,.35)}
+.badge.off{background:rgba(255,69,58,.12);color:#ff8a80;border:1px solid rgba(255,69,58,.3)}
+.badge.free{background:var(--panel2);color:var(--text3);border:1px solid var(--border)}
+.badge.pl{background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);text-transform:none;letter-spacing:0;font-size:11px}
+.badge.manual{background:rgba(138,143,255,.12);color:#a5a9ff;border-color:rgba(138,143,255,.3)}
+.acts{display:flex;gap:5px}
+.abtn{background:var(--panel2);border:1px solid var(--border);color:var(--text2);border-radius:7px;padding:5px 9px;font-size:11.5px;font-weight:700}
+.abtn:hover{border-color:var(--accent);color:var(--accent)}
+.abtn.grant:hover{border-color:var(--ok);color:var(--ok)}
+.abtn.kill:hover{border-color:var(--bad);color:var(--bad)}
+.abtn:disabled{opacity:.4;cursor:default}
+.empty{padding:40px;text-align:center;color:var(--text3)}
+
+/* ---------- drawer ---------- */
+tr.drawer td{padding:0;border-bottom:1px solid var(--border);white-space:normal}
+.drawer-in{background:var(--bg);padding:16px 22px;border-left:2px solid var(--accent)}
+.dw-h{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.dw-tx{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.dw-tx .tx{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:9px 13px;font-size:12px;min-width:210px}
+.dw-tx .tx .t1{display:flex;justify-content:space-between;gap:14px;font-weight:700;margin-bottom:2px}
+.dw-tx .tx .t2{color:var(--text3);font-size:11.5px}
+.dw-tx .tx.live{border-color:rgba(52,199,89,.45)}
+.dw-grant{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.dw-grant .lbl{font-size:12.5px;color:var(--text2);font-weight:600}
+.dw-grant input{width:80px;padding:7px 10px;background:var(--panel);border:1px solid var(--border);border-radius:8px;outline:none}
+.dw-grant input:focus{border-color:var(--accent)}
+
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(90px);background:var(--panel);border:1px solid var(--accent);color:var(--text);padding:10px 18px;border-radius:12px;font-weight:700;font-size:13.5px;z-index:50;box-shadow:var(--shadow);opacity:0;transition:transform .3s,opacity .3s;pointer-events:none;max-width:90vw}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+@media(max-width:640px){.who{display:none}}
+</style>
+</head>
+<body>
+
+<!-- ======================= SIGN-IN GATE ======================= -->
+<div id="gate">
+  <div class="gate-card">
+    <img class="gate-logo" src="icons/mark-256.png" alt="">
+    <h1>Atlas Admin</h1>
+    <p class="sub">Sign in with the admin account</p>
+    <div class="err" id="g-err"></div>
+    <div class="f"><input id="g-email" type="email" placeholder="Email" autocomplete="username"></div>
+    <div class="f"><input id="g-pass" type="password" placeholder="Password" autocomplete="current-password"></div>
+    <button class="btn" id="g-go">Sign in</button>
+    <div class="g-or">or</div>
+    <button class="btn ghost" id="g-google">
+      <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continue with Google
+    </button>
+  </div>
+</div>
+
+<!-- ======================= DENIED ======================= -->
+<div id="denied" style="display:none">
+  <div class="denied-card">
+    <div class="ic">🔒</div>
+    <h2>Access denied</h2>
+    <p id="denied-msg">This account isn't the admin account. Sign in with the admin account to continue.</p>
+    <button class="btn ghost" id="d-out">Sign out</button>
+  </div>
+</div>
+
+<!-- ======================= DASHBOARD ======================= -->
+<div id="app" style="display:none">
+  <div class="top">
+    <div class="top-in">
+      <img src="icons/mark-256.png" alt="">
+      <h1>Atlas <span>Admin</span></h1>
+      <div class="top-right">
+        <span class="who" id="who"></span>
+        <button class="tbtn" id="csv">⬇ CSV</button>
+        <button class="tbtn" id="refresh">↻ Refresh</button>
+        <button class="tbtn" id="out">Sign out</button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="tabs">
+      <button data-tab="users" class="on">Users</button>
+      <button data-tab="tx">Transactions</button>
+    </div>
+
+    <!-- ============ USERS TAB ============ -->
+    <section id="tab-users">
+      <div class="stats">
+        <div class="stat"><div class="l">Total users</div><div class="v" id="st-users">—</div></div>
+        <div class="stat"><div class="l">Active Premium</div><div class="v ok" id="st-active">—</div></div>
+        <div class="stat"><div class="l">Expiring ≤7d</div><div class="v warn" id="st-soon">—</div></div>
+        <div class="stat"><div class="l">Expired</div><div class="v" id="st-expired">—</div></div>
+        <div class="stat"><div class="l">Revenue</div><div class="v gold" id="st-rev">—</div></div>
+      </div>
+      <div class="planbar" id="planbar"></div>
+      <div class="tools">
+        <input id="q" type="search" placeholder="Search by email…">
+        <div class="flt">
+          <button data-f="all" class="on">All</button>
+          <button data-f="ACTIVE">Active</button>
+          <button data-f="SOON">Expiring ≤7d</button>
+          <button data-f="expired">Expired</button>
+          <button data-f="free">Free</button>
+        </div>
+      </div>
+      <div class="tcard"><div class="tscroll">
+        <table>
+          <thead><tr>
+            <th data-k="email">User</th>
+            <th data-k="signed_up">Signed up</th>
+            <th data-k="purchases">Purchases</th>
+            <th data-k="total_paid_ngn">Paid</th>
+            <th data-k="latest_expiry">Expires</th>
+            <th data-k="days_left">Days left</th>
+            <th data-k="status">Status</th>
+            <th class="nosort">Actions</th>
+          </tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div class="empty" id="empty" style="display:none">No users match.</div>
+      </div></div>
+    </section>
+
+    <!-- ============ TRANSACTIONS TAB ============ -->
+    <section id="tab-tx" style="display:none">
+      <div class="tools">
+        <input id="qtx" type="search" placeholder="Search by email or payment reference (ATLAS-…)…">
+      </div>
+      <div class="tcard"><div class="tscroll">
+        <table>
+          <thead><tr>
+            <th class="nosort">User</th>
+            <th class="nosort">Reference</th>
+            <th class="nosort">Plan</th>
+            <th class="nosort">Amount</th>
+            <th class="nosort">Purchased</th>
+            <th class="nosort">Expires</th>
+            <th class="nosort">State</th>
+          </tr></thead>
+          <tbody id="txrows"></tbody>
+        </table>
+        <div class="empty" id="txempty" style="display:none">No transactions match.</div>
+      </div></div>
+    </section>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const SUPA_URL = "https://gvxvuyuabsahwsfqzbzb.supabase.co";
+const SUPA_ANON_KEY = "sb_publishable_7NRzkFUPN7K1LC33vMia3w_Cl0bkpzI";
+
+const $ = s => document.querySelector(s);
+const supa = window.supabase.createClient(SUPA_URL, SUPA_ANON_KEY);
+
+let session = null;
+let rows = [];
+let tx = [];
+let filterStatus = "all";
+let query = "";
+let txQuery = "";
+let sortKey = null, sortDir = 1;
+let openUser = null;
+let tab = "users";
+
+/* ---------- helpers ---------- */
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const fmtDate = t => t ? new Date(t).toLocaleDateString(undefined, { day:"numeric", month:"short", year:"numeric" }) : "—";
+const fmtDT = t => t ? new Date(t).toLocaleString(undefined, { day:"numeric", month:"short", hour:"2-digit", minute:"2-digit" }) : "—";
+const fmtN = n => "₦" + Number(n || 0).toLocaleString();
+const live = t => t && new Date(t) > new Date();
+
+let toastT;
+function toast(msg){
+  const el = $("#toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastT);
+  toastT = setTimeout(() => el.classList.remove("show"), 2800);
+}
+const show = el => el.style.display = "";
+const hide = el => el.style.display = "none";
+
+function csv(filename, cols, data){
+  const q = v => { v = v == null ? "" : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g,'""') + '"' : v; };
+  const body = [cols.map(c => q(c[0])).join(",")]
+    .concat(data.map(r => cols.map(c => q(typeof c[1] === "function" ? c[1](r) : r[c[1]])).join(",")))
+    .join("\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob(["\ufeff" + body], { type: "text/csv" }));
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+/* ---------- views ---------- */
+function render(){
+  hide($("#gate")); hide($("#denied")); hide($("#app"));
+  if(!session){ show($("#gate")); return; }
+  show($("#app"));
+}
+
+async function load(){
+  const [ov, tr] = await Promise.all([
+    supa.rpc("admin_overview"),
+    supa.rpc("admin_transactions", { p_search: "" })
+  ]);
+  if(ov.error){
+    if(String(ov.error.message).includes("not admin")){ hide($("#app")); show($("#denied")); }
+    else toast("Load failed: " + ov.error.message);
+    return;
+  }
+  rows = ov.data || [];
+  tx = tr.error ? [] : (tr.data || []);
+  if(tr.error && String(tr.error.message).includes("not admin")){ hide($("#app")); show($("#denied")); return; }
+  $("#who").textContent = session.user.email || "";
+  renderStats(); renderRows(); renderTx();
+}
+
+function renderStats(){
+  const active = rows.filter(r => r.status === "ACTIVE");
+  const soon = active.filter(r => r.days_left <= 7).length;
+  $("#st-users").textContent = rows.length;
+  $("#st-active").textContent = active.length;
+  $("#st-soon").textContent = soon;
+  $("#st-expired").textContent = rows.filter(r => r.status === "expired").length;
+  $("#st-rev").textContent = fmtN(tx.reduce((a, t) => a + Number(t.amount_kobo || 0), 0) / 100);
+
+  // Revenue by plan
+  const plans = { monthly: 0, semester: 0, yearly: 0, manual: 0 };
+  tx.forEach(t => { if(plans[t.plan] != null) plans[t.plan] += Number(t.amount_kobo || 0) / 100; });
+  const manualCount = tx.filter(t => t.plan === "manual").length;
+  $("#planbar").innerHTML = `
+    <div class="planbit"><span class="pn">Monthly</span><span class="pv">${fmtN(plans.monthly)}</span></div>
+    <div class="planbit"><span class="pn">Semester</span><span class="pv">${fmtN(plans.semester)}</span></div>
+    <div class="planbit"><span class="pn">Yearly</span><span class="pv">${fmtN(plans.yearly)}</span></div>
+    <div class="planbit"><span class="pn">Manual grants</span><span class="pv">${manualCount}</span></div>`;
+}
+
+function statusBadge(r){
+  if(r.status === "ACTIVE" && r.days_left <= 7) return '<span class="badge soon">Expiring</span>';
+  if(r.status === "ACTIVE") return '<span class="badge on">Active</span>';
+  if(r.status === "expired") return '<span class="badge off">Expired</span>';
+  return '<span class="badge free">Free</span>';
+}
+
+function matches(r){
+  const s = filterStatus === "all"
+    || (filterStatus === "SOON" ? (r.status === "ACTIVE" && r.days_left <= 7) : r.status === filterStatus);
+  return s && (!query || (r.email || "").toLowerCase().includes(query));
+}
+
+function drawerHtml(r){
+  const mine = tx.filter(t => t.user_id === r.user_id);
+  const cards = mine.length ? mine.map(t => `
+    <div class="tx ${live(t.expires_at) ? "live" : ""}">
+      <div class="t1"><span class="badge pl ${t.plan === "manual" ? "manual" : ""}">${esc(t.plan)}</span><span>${fmtN(t.amount_kobo / 100)}</span></div>
+      <div class="t2 mono copyable" data-copy="${esc(t.paystack_ref)}" title="Click to copy">${esc(t.paystack_ref)}</div>
+      <div class="t2">${fmtDT(t.purchased_at)} → ${fmtDate(t.expires_at)}</div>
+    </div>`).join("") : '<div class="mut">No purchases yet.</div>';
+  return `
+    <div class="drawer-in">
+      <div class="dw-h">Purchases — ${mine.length}</div>
+      <div class="dw-tx">${cards}</div>
+      <div class="dw-grant">
+        <span class="lbl">Grant</span>
+        <button class="abtn grant" data-a="grant" data-d="30" data-u="${r.user_id}">+30d</button>
+        <button class="abtn grant" data-a="grant" data-d="180" data-u="${r.user_id}">+180d</button>
+        <button class="abtn grant" data-a="grant" data-d="365" data-u="${r.user_id}">+365d</button>
+        <input type="number" min="1" max="3660" placeholder="days" id="gd-${r.user_id}">
+        <button class="abtn grant" data-a="custom" data-u="${r.user_id}">Add</button>
+        ${r.status === "ACTIVE" ? `<button class="abtn kill" data-a="revoke" data-u="${r.user_id}">Deactivate Premium</button>` : ""}
+      </div>
+    </div>`;
+}
+
+function renderRows(){
+  let list = rows.filter(matches);
+  if(sortKey){
+    list = [...list].sort((a, b) => {
+      let x = a[sortKey], y = b[sortKey];
+      if(x == null) return 1;
+      if(y == null) return -1;
+      if(typeof x === "string") x = x.toLowerCase(), y = (y || "").toLowerCase();
+      return (x > y ? 1 : x < y ? -1 : 0) * sortDir;
+    });
+  }
+  $("#empty").style.display = list.length ? "none" : "";
+  let html = "";
+  for(const r of list){
+    const open = openUser === r.user_id;
+    html += `
+    <tr class="uro ${open ? "open" : ""}" data-u="${r.user_id}">
+      <td><div class="u-mail"><span class="caret">▶</span>${esc(r.email)}</div><div class="u-prov">${esc(r.provider)}</div></td>
+      <td class="mut">${fmtDate(r.signed_up)}</td>
+      <td>${r.purchases || 0}</td>
+      <td>${fmtN(r.total_paid_ngn)}</td>
+      <td class="mut">${fmtDate(r.latest_expiry)}</td>
+      <td>${r.status === "ACTIVE" ? r.days_left : "—"}</td>
+      <td>${statusBadge(r)}</td>
+      <td><div class="acts">
+        <button class="abtn grant" data-a="grant" data-d="30" data-u="${r.user_id}" title="Add 30 days">+30d</button>
+        ${r.status === "ACTIVE" ? `<button class="abtn kill" data-a="revoke" data-u="${r.user_id}">Deactivate</button>` : ""}
+      </div></td>
+    </tr>`;
+    if(open) html += `<tr class="drawer"><td colspan="8">${drawerHtml(r)}</td></tr>`;
+  }
+  $("#rows").innerHTML = html;
+}
+
+function renderTx(){
+  const q = txQuery;
+  const list = tx.filter(t => !q || (t.email || "").toLowerCase().includes(q) || (t.paystack_ref || "").toLowerCase().includes(q));
+  $("#txempty").style.display = list.length ? "none" : "";
+  $("#txrows").innerHTML = list.map(t => `
+    <tr>
+      <td class="u-mail">${esc(t.email)}</td>
+      <td class="mono copyable" data-copy="${esc(t.paystack_ref)}" title="Click to copy">${esc(t.paystack_ref)}</td>
+      <td><span class="badge pl ${t.plan === "manual" ? "manual" : ""}">${esc(t.plan)}</span></td>
+      <td>${fmtN(t.amount_kobo / 100)}</td>
+      <td class="mut">${fmtDT(t.purchased_at)}</td>
+      <td class="mut">${fmtDate(t.expires_at)}</td>
+      <td>${live(t.expires_at) ? '<span class="badge on">Live</span>' : '<span class="badge off">Ended</span>'}</td>
+    </tr>`).join("");
+}
+
+/* ---------- actions ---------- */
+async function grant(uid, days, btn){
+  btn.disabled = true;
+  const { data, error } = await supa.rpc("admin_grant", { p_user_id: uid, p_days: days });
+  btn.disabled = false;
+  if(error) return toast("Grant failed: " + error.message);
+  const u = rows.find(r => r.user_id === uid);
+  toast(`Premium until ${fmtDate(data)} for ${u ? u.email : "user"}`);
+  load();
+}
+
+$("#rows").addEventListener("click", async e => {
+  const cp = e.target.closest("[data-copy]");
+  if(cp){ navigator.clipboard.writeText(cp.dataset.copy); toast("Reference copied"); return; }
+  const b = e.target.closest("button[data-a]");
+  if(b && !b.disabled){
+    const uid = b.dataset.u;
+    const user = rows.find(r => r.user_id === uid);
+    if(b.dataset.a === "grant") return grant(uid, Number(b.dataset.d), b);
+    if(b.dataset.a === "custom"){
+      const inp = $("#gd-" + uid);
+      const days = inp && Number(inp.value);
+      if(!days || days < 1) return toast("Enter a day count first");
+      return grant(uid, days, b);
+    }
+    if(b.dataset.a === "revoke"){
+      if(!confirm(`Deactivate Premium for ${user ? user.email : "this user"}?`)) return;
+      b.disabled = true;
+      const { error } = await supa.rpc("admin_revoke", { p_user_id: uid });
+      b.disabled = false;
+      if(error) return toast("Revoke failed: " + error.message);
+      toast("Premium deactivated");
+      return load();
+    }
+    return;
+  }
+  const tr = e.target.closest("tr.uro");
+  if(tr){ openUser = openUser === tr.dataset.u ? null : tr.dataset.u; renderRows(); }
+});
+
+$("#txrows").addEventListener("click", e => {
+  const cp = e.target.closest("[data-copy]");
+  if(cp){ navigator.clipboard.writeText(cp.dataset.copy); toast("Reference copied"); }
+});
+
+$("#q").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); renderRows(); });
+$("#qtx").addEventListener("input", e => { txQuery = e.target.value.trim().toLowerCase(); renderTx(); });
+
+document.querySelectorAll(".flt button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".flt button").forEach(x => x.classList.remove("on"));
+  b.classList.add("on");
+  filterStatus = b.dataset.f;
+  renderRows();
+}));
+document.querySelectorAll("th[data-k]").forEach(th => th.addEventListener("click", () => {
+  const k = th.dataset.k;
+  if(sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = 1; }
+  renderRows();
+}));
+
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.classList.remove("on"));
+  b.classList.add("on");
+  tab = b.dataset.tab;
+  $("#tab-users").style.display = tab === "users" ? "" : "none";
+  $("#tab-tx").style.display = tab === "tx" ? "" : "none";
+}));
+
+$("#csv").addEventListener("click", () => {
+  const stamp = new Date().toISOString().slice(0, 10);
+  if(tab === "users"){
+    csv(`atlas-users-${stamp}.csv`, [
+      ["email", "email"], ["provider", "provider"], ["signed_up", "signed_up"],
+      ["purchases", "purchases"], ["paid_ngn", "total_paid_ngn"],
+      ["expires_at", "latest_expiry"], ["days_left", "days_left"], ["status", "status"]
+    ], rows.filter(matches));
+  } else {
+    csv(`atlas-transactions-${stamp}.csv`, [
+      ["email", "email"], ["reference", "paystack_ref"], ["plan", "plan"],
+      ["amount_ngn", t => t.amount_kobo / 100], ["purchased_at", "purchased_at"], ["expires_at", "expires_at"]
+    ], tx.filter(t => !txQuery || (t.email || "").toLowerCase().includes(txQuery) || (t.paystack_ref || "").toLowerCase().includes(txQuery)));
+  }
+  toast("CSV downloaded");
+});
+
+$("#refresh").addEventListener("click", load);
+$("#out").addEventListener("click", () => supa.auth.signOut());
+$("#d-out").addEventListener("click", () => supa.auth.signOut());
+
+/* ---------- auth ---------- */
+const gErr = m => { const e = $("#g-err"); e.textContent = m; e.classList.toggle("show", !!m); };
+
+$("#g-go").addEventListener("click", async () => {
+  gErr("");
+  const btn = $("#g-go");
+  btn.disabled = true;
+  const { error } = await supa.auth.signInWithPassword({ email: $("#g-email").value.trim(), password: $("#g-pass").value });
+  btn.disabled = false;
+  if(error) gErr(error.message);
+});
+$("#g-pass").addEventListener("keydown", e => { if(e.key === "Enter") $("#g-go").click(); });
+$("#g-google").addEventListener("click", async () => {
+  const { error } = await supa.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.href } });
+  if(error) gErr(error.message);
+});
+
+supa.auth.onAuthStateChange((_e, s) => { session = s; render(); if(session) load(); });
+supa.auth.getSession().then(({ data: { session: s } }) => { session = s; render(); if(session) load(); });
+</script>
+</body>
+</html>
