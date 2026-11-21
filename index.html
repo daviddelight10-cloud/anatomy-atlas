@@ -22147,7 +22147,8 @@ async function refreshEntitlement(){
   if(!supa || !AUTH.session){ AUTH.premiumUntil = null; AUTH.lastPlan = null; return; }
   const uid = AUTH.session.user.id;
   try{
-    const { data } = await supa.from("subscriptions").select("plan,expires_at").eq("user_id", uid).order("expires_at", { ascending:false }).limit(1);
+    const { data, error } = await supa.from("subscriptions").select("plan,expires_at").eq("user_id", uid).order("expires_at", { ascending:false }).limit(1);
+    if(error) throw error;  // network failures return error, not a throw — route them to the cache below
     const row = data && data[0];
     AUTH.premiumUntil = row ? row.expires_at : null;
     AUTH.lastPlan = row ? row.plan : null;
