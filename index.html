@@ -503,10 +503,16 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-rail .b3d-presets{flex-direction:column;flex-wrap:nowrap;gap:2px;margin:0}
 .b3d-rail .rail-cap{font:700 9px var(--font);letter-spacing:.12em;text-transform:uppercase;color:#6f6b60;text-align:center;margin:8px 0 2px;border-top:1px solid #2e2e2e;padding-top:8px}
 .b3d-rail .pchip{display:flex;flex-direction:column;align-items:center;gap:3px;width:100%;padding:8px 2px 6px;border-radius:12px;border:1px solid transparent;background:transparent;color:#bdb8aa;font:600 9.5px var(--font);line-height:1.1}
-.b3d-rail .pchip .ic{font-size:20px;line-height:1}
+.b3d-rail .pchip .ic{font-size:20px;line-height:1;color:var(--fc,#bdb8aa);transition:color .15s}
 .b3d-rail .pchip:hover{background:#242424;color:#fff}
-.b3d-rail .pchip.on{background:rgba(255,214,10,.16);border-color:rgba(255,214,10,.5);color:#ffd60a}
+.b3d-rail .pchip.on{background:color-mix(in srgb,var(--fc,#ffd60a) 16%,transparent);border-color:color-mix(in srgb,var(--fc,#ffd60a) 55%,transparent);color:var(--fc,#ffd60a)}
+.b3d-rail .pchip.lk{opacity:.6}
 .b3d-rail .b3d-views .pchip{opacity:1}
+.rail-modes{display:flex;gap:2px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:3px;flex:none}
+.rmode{flex:1;border:0;background:transparent;color:#8d887a;padding:6px 2px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.rmode .ico{width:14px;height:14px}
+.rmode:hover{color:#e8e8e8}
+.rmode.on{background:rgba(255,214,10,.16);color:#ffd60a}
 .b3d-app .b3d-info{display:none;flex:none;position:absolute;z-index:18;right:0;top:calc(64px + var(--safe-t));bottom:0;width:min(360px,88vw);overflow:hidden;padding:0;background:rgba(16,16,16,.92);border:0;border-left:1px solid var(--gb);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#e8e8e8}
 .b3d-app .b3d-info.has-sel{display:flex;flex-direction:column;animation:b3dIn .18s ease-out}
 @keyframes b3dIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
@@ -688,6 +694,9 @@ body.b3d-open .pwa-toast{bottom:112px}
   .b3d-rail{left:0;right:0;top:auto;bottom:var(--above);width:auto;max-height:none;flex-direction:row;align-items:center;gap:6px;padding:6px 10px;background:none;border:0;border-radius:0;backdrop-filter:none;-webkit-backdrop-filter:none;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity}
   .b3d-rail .b3d-presets{flex-direction:row;flex:none;gap:6px}
   .b3d-rail .rail-cap{display:none}
+  .b3d-rail .rail-modes{flex-direction:row;flex:none;gap:4px;margin:0;padding:0;border:0;border-right:1px solid #3a3a3a;padding-right:8px;background:none}
+  .b3d-rail .rmode{padding:8px 12px;border-radius:20px}
+  .b3d-rail .rmode .ico{width:15px;height:15px}
   .b3d-rail .b3d-views{padding-left:8px;border-left:1px solid #3a3a3a}
   .b3d-rail .pchip{flex-direction:row;gap:6px;width:auto;flex:none;padding:8px 13px;font-size:12.5px;white-space:nowrap;border-radius:20px;border-color:#363636;background:var(--g);scroll-snap-align:start}
   .b3d-rail .pchip .ic{font-size:15px}
@@ -715,6 +724,34 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-prog .bar i{display:block;height:100%;width:0;background:#ffd60a;border-radius:6px;transition:width .15s}
 .b3d-prog .pct{font-variant-numeric:tabular-nums;color:#a3a3a3;font-size:12.5px;margin-top:6px}
 .b3d-ctxlost{position:absolute;inset:0;display:grid;place-items:center;background:rgba(10,10,10,.72);backdrop-filter:blur(6px);z-index:30;text-align:center;padding:20px}
+.b3d-upsell{position:absolute;left:50%;top:16px;transform:translateX(-50%);z-index:33;width:max-content;max-width:min(460px,94%);animation:bupop .22s ease}
+@keyframes bupop{from{opacity:0;transform:translateX(-50%) translateY(-6px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.bu-in{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--accent);border-radius:14px;padding:9px 12px;box-shadow:var(--shadow);font-size:13px}
+.bu-ic{display:inline-flex;color:var(--accent);flex:none}
+.bu-t{font-weight:600;color:var(--text);line-height:1.35}
+.bu-btn{background:var(--accent);color:#141414;font-weight:800;font-size:12px;padding:6px 12px;border-radius:9px;text-decoration:none;white-space:nowrap;flex:none}
+.bu-x{background:none;border:none;color:var(--text3);font-size:13px;cursor:pointer;padding:4px;flex:none}
+.fchip.lk{opacity:.55}
+.dr-free{background:linear-gradient(150deg,color-mix(in srgb,var(--accent) 12%,var(--panel)),var(--panel));border:1px solid color-mix(in srgb,var(--accent) 45%,var(--border));border-radius:12px;padding:12px 14px;margin:6px 0 14px;font-size:12.5px}
+.dr-free b{display:block;color:var(--accent);font-size:13px;margin-bottom:3px}
+.dr-free span{display:block;color:var(--text2);margin-bottom:8px;line-height:1.45}
+.dr-free a{color:var(--accent);font-weight:700;text-decoration:none}
+.region-item.lk,.pcard.lk,.lrow.lk{opacity:.62}
+.region-item.lk .ct{color:var(--accent);font-weight:700}
+.qhit.lk{opacity:.6}
+.badge.qfree{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 50%,var(--border))}
+.depth-lock{position:relative}
+.depth-lock .dl-blur{filter:blur(6px);pointer-events:none;user-select:none}
+.dl-card{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:min(330px,90%);background:var(--panel);border:1px solid var(--accent);border-radius:16px;padding:18px 20px;text-align:center;box-shadow:var(--shadow);z-index:5}
+.dl-card .dl-ic{display:inline-flex;color:var(--accent);margin-bottom:4px}
+.dl-card b{display:block;font-size:15px;margin-bottom:5px}
+.dl-card p{color:var(--text2);font-size:12.5px;margin:0 0 12px;line-height:1.45}
+.dl-card .btn{display:inline-block}
+.ipl{padding:24px 12px;text-align:center}
+.ipl .ipl-ic{display:inline-flex;color:var(--accent);margin-bottom:6px}
+.ipl b{display:block;font-size:14px;margin-bottom:5px}
+.ipl p{color:#a3a3a3;font-size:12.5px;margin:0 0 10px}
+.ipl a{color:#ffd60a;font-weight:700;font-size:13px;text-decoration:none}
 .pwa-actions{display:flex;gap:8px;margin-bottom:10px}
 .pwa-btn{flex:1;background:var(--panel2);border:1px solid var(--border);color:var(--text2);font:inherit;font-size:12px;font-weight:600;padding:7px 8px;border-radius:9px;cursor:pointer;text-align:center}
 .pwa-btn:hover{color:var(--accent);border-color:var(--accent)}
@@ -19338,9 +19375,14 @@ function vRegion(r){
   const c = REGIONS[r]; const items = DATA.filter(d=>d.region===r);
   const bySys = {};
   items.forEach(d=>{ (bySys[d.system]=bySys[d.system]||[]).push(d); });
+  /* head+neck share one 3D region; whole-body entries have no dissection view */
+  const reg3d = {head:"head",neck:"head",thorax:"thorax",abdomen:"abdomen",pelvis:"pelvis",
+    back:"back","upper-limb":"upper-limb","lower-limb":"lower-limb"}[r] || null;
   crumbs([{t:"Home",href:"#/"},{t:c.name}]);
   view.innerHTML = `
   <div class="list-head"><h1>${c.name}</h1><p>${c.blurb}</p>
+  ${reg3d?`<p><a class="btn primary" href="#/3d?reg=${reg3d}">${I("box")} Dissect this region in 3D</a>
+    <a class="btn" href="#/quiz/c:r=${r}&mode=mix&n=20">${I("target")} Quiz this region</a></p>`:""}
   <div class="subchips">${META.systemOrder.filter(s=>bySys[s]).map(s=>`<span class="subchip" data-s="${s}">${SYSTEMS[s].icon} ${SYSTEMS[s].name} · ${bySys[s].length}</span>`).join("")}</div></div>
   <div class="grid" id="reggrid">${items.map(cardHTML).join("")}</div>`;
   view.querySelectorAll(".subchip").forEach(ch=>ch.addEventListener("click",()=>{
@@ -19377,23 +19419,12 @@ function vDetail(id){
     ${d.oi.n?`<tr><th>Innervation</th><td>${esc(d.oi.n)}</td></tr>`:""}
     ${d.oi.a?`<tr><th>Action</th><td>${esc(d.oi.a)}</td></tr>`:""}</table>
     ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}?att=1" style="margin-top:8px">${I("anchor")} See attachments in 3D</a>`:""}</div>` : "";
-  view.innerHTML = `
-  <div class="detail-head">
-    <div class="dh-main">
-      <h1>${d.name} <button class="say" data-say="${esc(d.name)}" title="Hear pronunciation">${I("volume-2")}</button></h1>${d.latin?`<div class="aka latin">${esc(d.latin)}</div>`:""}${d.aka?`<div class="aka">Also: ${esc(d.aka)}</div>`:""}
-      <div class="badges"><a class="badge sys" style="--badge-c:${c.color}" href="#/system/${d.system}">${c.icon} ${c.name}</a>
-      <a class="badge" href="#/region/${d.region}">${I("map-pin")} ${REGIONS[d.region].name}</a>
-      ${d.of?`<a class="badge" href="#/part/${d.ofRec||d.of}">${I("bone")} Landmark of: ${esc(byId[d.ofRec||d.of] ? byId[d.ofRec||d.of].name : d.of)}</a>`:""}
-      ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}">${I("box")} View in 3D body</a>`:d.of?`<a class="badge" href="#/3d/${d.of}?lm=${id}">${I("box")} Show on 3D model</a>`:""}
-      ${ARTICLES[id]?`<a class="badge" href="#/article/${id}">${I("book-open")} Read the deep-dive article</a>`:""}</div>
-    </div>${plate}
-  </div>
-  <div class="section"><h2>Overview</h2><p>${esc(d.summary)}</p></div>
+  /* freemium: the summary stays free — depth (structure, function, clinical
+     pearls, muscle facts, study notes) is the paid layer */
+  const free = !AUTH.isPremium();
+  const depth = `
   ${d.structure?`<div class="section"><h2>Structure</h2><p>${esc(d.structure)}</p></div>`:""}
-  ${schematic}
   ${d.fn?`<div class="section"><h2>Function</h2><p>${esc(d.fn)}</p></div>`:""}
-  ${model3d}
-  <div class="section"><h2>Location</h2><p>Located in <b>${REGIONS[d.region].name}</b>${d.aka?` — also known as ${esc(d.aka)}`:""} — <a href="#/region/${d.region}">browse this region →</a></p></div>
   ${oiTable}
   ${d.att?`<div class="section"><h2>Attachments</h2><p>${esc(d.att)}</p></div>`:""}
   ${d.art?`<div class="section"><h2>Articulations</h2><p>${esc(d.art)}</p></div>`:""}
@@ -19408,6 +19439,26 @@ function vDetail(id){
   ${t.simple?`<div class="section"><h2>In plain words</h2><p>${esc(t.simple)}</p></div>`:""}
   `:""}
   ${d.clinical?`<div class="section"><h2>Clinical relevance</h2><p>${esc(d.clinical)}</p></div>`:""}
+  `;
+  view.innerHTML = `
+  <div class="detail-head">
+    <div class="dh-main">
+      <h1>${d.name} <button class="say" data-say="${esc(d.name)}" title="Hear pronunciation">${I("volume-2")}</button></h1>${d.latin?`<div class="aka latin">${esc(d.latin)}</div>`:""}${d.aka?`<div class="aka">Also: ${esc(d.aka)}</div>`:""}
+      <div class="badges"><a class="badge sys" style="--badge-c:${c.color}" href="#/system/${d.system}">${c.icon} ${c.name}</a>
+      <a class="badge" href="#/region/${d.region}">${I("map-pin")} ${REGIONS[d.region].name}</a>
+      ${d.of?`<a class="badge" href="#/part/${d.ofRec||d.of}">${I("bone")} Landmark of: ${esc(byId[d.ofRec||d.of] ? byId[d.ofRec||d.of].name : d.of)}</a>`:""}
+      ${B3D_IDS.has(id)?`<a class="badge" href="#/3d/${id}">${I("box")} View in 3D body</a>`:d.of?`<a class="badge" href="#/3d/${d.of}?lm=${id}">${I("box")} Show on 3D model</a>`:""}
+      ${ARTICLES[id]?`<a class="badge" href="#/article/${id}">${I("book-open")} Read the deep-dive article</a>`:""}</div>
+    </div>${plate}
+  </div>
+  <div class="section"><h2>Overview</h2><p>${esc(d.summary)}</p></div>
+  ${schematic}
+  ${model3d}
+  <div class="section"><h2>Location</h2><p>Located in <b>${REGIONS[d.region].name}</b>${d.aka?` — also known as ${esc(d.aka)}`:""} — <a href="#/region/${d.region}">browse this region →</a></p></div>
+  ${free && depth.trim() ? `<div class="depth-lock"><div class="dl-blur" aria-hidden="true">${depth}</div>
+    <div class="dl-card"><span class="dl-ic">${I("gem")}</span><b>Full notes are Premium</b>
+    <p>Structure, function, muscle facts, clinical pearls &amp; memory hooks.</p>
+    <a class="btn primary" href="#/premium">Unlock Premium</a></div></div>` : depth}
   ${rel?`<div class="section"><h2>Related structures</h2><div class="rel-row">${rel}</div></div>`:""}
   ${LM_BY[id]?`<div class="section"><h2>Landmarks (${LM_BY[id].length})</h2><p class="hint" style="margin:0 0 10px">Named surface features of the ${esc(d.name)} — each opens its own entry, and all are pinned in the 3D view when you select this bone.</p><div class="lm-list">${LM_BY[id].map(x=>`<a class="lm-item" href="#/part/${x.id}"><b>${I("map-pin")} ${esc(x.name)}</b><span>${esc(x.summary)}</span></a>`).join("")}</div></div>`:""}
   <div class="section"><h2>Also in ${REGIONS[d.region].name}</h2><div class="rel-row">${inRegion}</div></div>
@@ -19561,11 +19612,41 @@ function buildScene(gltf, st){
   const stage = cv.parentElement;
   const H = () => stage.clientHeight, W = () => stage.clientWidth;
   const lowPower = (navigator.hardwareConcurrency||8)<=4 || matchMedia("(pointer:coarse)").matches;
+  /* freemium: signed-out/free accounts get the 3D explorer with the skeleton
+     only — every other system is enforced invisible in applyVis (belt) and
+     locked in the UI (braces), so no code path can reveal them */
+  const free3d = !AUTH.isPremium();
+  const b3dUpsell = msg => {
+    let d = stage.querySelector(".b3d-upsell");
+    if(!d){ d = document.createElement("div"); d.className = "b3d-upsell"; stage.appendChild(d); }
+    d.innerHTML = `<div class="bu-in"><span class="bu-ic">${I("gem")}</span><span class="bu-t">${esc(msg)}</span><a class="bu-btn" href="#/premium">Unlock</a><button class="bu-x" aria-label="Dismiss">✕</button></div>`;
+    d.querySelector(".bu-x").onclick = () => d.remove();
+    clearTimeout(d._t); d._t = setTimeout(()=>{ if(d.parentElement) d.remove(); }, 9000);
+  };
   /* quality preference: auto adapts, high forces crisp, low saves battery */
   const qual = { mode: localStorage.getItem("atlas-qual") || "auto" };
   const prTarget = () => qual.mode==="low" ? 1 : qual.mode==="high" ? Math.min(devicePixelRatio,2)
     : Math.min(devicePixelRatio, lowPower?1.3:2);
-  const renderer = new THREE.WebGLRenderer({canvas:cv, antialias:!lowPower});
+  let renderer = null;
+  try{ renderer = new THREE.WebGLRenderer({canvas:cv, antialias:!lowPower}); }
+  catch(e){
+    /* the browser refused a WebGL context — most often the previous context's
+       cleanup is still racing ours (forceContextLoss → new context can fail
+       briefly), or the per-page context budget is exhausted. Retry once
+       automatically; if it still fails, show a recoverable overlay instead
+       of a dead page. */
+    if(!st._glretry){ st._glretry = true;
+      setTimeout(()=>{ try{ if(document.body.contains(cv)) buildScene(gltf, st); }catch(x){ console.error(x); } }, 450);
+      return; }
+    const d = document.createElement("div"); d.className = "b3d-ctxlost";
+    d.innerHTML = `<div class="b3d-prog"><div class="t">The 3D view couldn't start</div>
+      <div class="t" style="font-size:11px;opacity:.7;margin-top:4px">Your browser refused a graphics context — close heavy tabs and retry.</div></div>
+      <button class="b3d-retry">Try again</button>`;
+    stage.appendChild(d);
+    d.querySelector(".b3d-retry").onclick = () => { d.remove();
+      try{ buildScene(gltf, st); }catch(x){ console.error(x); } };
+    return;
+  }
   renderer.setPixelRatio(prTarget());
   renderer.setSize(W(),H());
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -19601,14 +19682,14 @@ function buildScene(gltf, st){
     pm.dispose(); }
   }catch(e){ console.warn("env map skipped:", e); }
   const group = new THREE.Group(); scene.add(group);
-  const chipOn = {}, hidden = new Set(), faded = new Set(); let isolated = null, aidsOn = false, focusSet = null, skinOp = 1;
+  const chipOn = {}, hidden = new Set(), faded = new Set(); let isolated = null, isoRegion = null, aidsOn = false, focusSet = null, skinOp = 1;
   /* one-tap system presets — declared here (before first applyVis) because
      syncSys() reads them via presetIdx() */
   const SYSPRESETS = [
-    ["person","All", null], ["bone","Skeleton", ["skeletal"]], ["dumbbell","Muscles", ["muscular"]],
-    ["zap","Nerves", ["nervous"]], ["heart-pulse","Blood", ["cardiovascular","lymphatic"]],
-    ["stethoscope","Organs", ["digestive","respiratory","urinary","reproductive","endocrine","sensory"]],
-    ["hand","Skin", ["integumentary"]] ];
+    ["person","All", null, "#9aa4b0"], ["bone","Skeleton", ["skeletal"], "#d8d0c2"], ["dumbbell","Muscles", ["muscular"], "#d96a60"],
+    ["zap","Nerves", ["nervous"], "#e8c04a"], ["heart-pulse","Blood", ["cardiovascular","lymphatic"], "#e05648"],
+    ["stethoscope","Organs", ["digestive","respiratory","urinary","reproductive","endocrine","sensory"], "#e09a52"],
+    ["hand","Skin", ["integumentary"], "#e8b596"] ];
   /* which preset matches the live layer state (boot = skeleton only) */
   const presetIdx = () => { const cur = Object.keys(chipOn).filter(s=>chipOn[s]).sort().join(",");
     return SYSPRESETS.findIndex(p => {
@@ -19672,6 +19753,7 @@ function buildScene(gltf, st){
     try{
       const q = new URLSearchParams();
       if(isolated!==null) q.set("iso",isolated);
+      if(isoRegion) q.set("reg",isoRegion);
       if(hidden.size && hidden.size<=24) q.set("hid",[...hidden].join(","));
       const onS = Object.keys(chipOn).filter(s=>chipOn[s]).sort();
       const defS = Object.keys(chipOn).filter(s=>s!=="integumentary").sort();
@@ -19804,8 +19886,64 @@ function buildScene(gltf, st){
       (bySysM[sys] = bySysM[sys] || []).push(o);
     } }
   for(const s in bySysM) chipOn[s] = s === "skeletal";
+  /* ══ regional dissection — CA-style region isolation ══
+     every mesh part resolves to a display region: named parts via
+     DATA.region, misc z: parts via MISC_META.reg, sub-parts via their
+     GP parent, and leftovers by spatial nearest-region fallback */
+  const REG_LK = { head:"head", neck:"head", thorax:"thorax", abdomen:"abdomen",
+    pelvis:"pelvis", back:"back", "upper-limb":"upper-limb", arm:"upper-limb", hand:"upper-limb",
+    "lower-limb":"lower-limb", leg:"lower-limb", foot:"lower-limb" };
+  const REGIONS_3D = [["head","skull","Head & neck"],["thorax","heart-pulse","Thorax"],
+    ["abdomen","apple","Abdomen"],["pelvis","bone","Pelvis"],["back","person","Back & spine"],
+    ["upper-limb","hand","Upper limb"],["lower-limb","map-pin","Lower limb"]];
+  /* free tier gets two showcase regions — skull/neck + arm bones are the demo;
+     the organ-heavy trunk regions stay Premium */
+  const FREE_REGS = ["head","upper-limb"];
+  const partRegion = {}, regionBoxes = {};
+  { const _sp = new THREE.Sphere();
+    const boxOf = id => { const bx = new THREE.Box3();
+      for(const m of (meshes[id]||[])){ m.geometry.computeBoundingSphere();
+        _sp.copy(m.geometry.boundingSphere).applyMatrix4(m.matrixWorld);
+        bx.min.min(new THREE.Vector3(_sp.center.x-_sp.radius,_sp.center.y-_sp.radius,_sp.center.z-_sp.radius));
+        bx.max.max(new THREE.Vector3(_sp.center.x+_sp.radius,_sp.center.y+_sp.radius,_sp.center.z+_sp.radius)); }
+      return bx.isEmpty() ? null : bx; };
+    const regOf = id => { let p = id;
+      while(p){ const r = byId[p] ? byId[p].region : (MISC_META[p] ? MISC_META[p].reg : null);
+        if(r) return REG_LK[r] || "whole";
+        p = GP[p]; }
+      return null; };
+    const left = [];
+    for(const id in meshes){ const k = regOf(id);
+      if(k && k!=="whole"){ partRegion[id] = k; const b = boxOf(id);
+        if(b) regionBoxes[k] = (regionBoxes[k]||new THREE.Box3()).union(b); }
+      else if(k==="whole") partRegion[id] = "whole";
+      else left.push(id); }
+    const _c = new THREE.Vector3();
+    for(const id of left){ const b = boxOf(id); let k = "whole", bd = Infinity;
+      if(b){ const c = b.getCenter(new THREE.Vector3());
+        for(const r in regionBoxes){ const d = c.distanceToSquared(regionBoxes[r].getCenter(_c));
+          if(d<bd){ bd = d; k = r; } } }
+      partRegion[id] = k; } }
+  const regionGo = k => {
+    pushHist();
+    if(traceStop) traceStop();
+    isoRegion = isoRegion===k ? null : k;
+    /* the region is a spatial filter — drop point states that fell outside it */
+    if(isoRegion){
+      if(selected && regOf(selected)!==isoRegion) select(null);
+      if(isolated && regOf(isolated)!==isoRegion) isolated = null;
+      if(focusSet && ![...focusSet].some(id=>regOf(id)===isoRegion)) focusSet = null; }
+    applyVis(); syncHiddenBar();
+    if(isoRegion && regionBoxes[isoRegion] && !regionBoxes[isoRegion].isEmpty()){
+      const c = regionBoxes[isoRegion].getCenter(new THREE.Vector3());
+      const r = regionBoxes[isoRegion].getSize(new THREE.Vector3()).length()/2;
+      flyTo(c, Math.max(r*0.85, rad*0.05));
+    } else if(!isoRegion){ flyTo(ctr, rad*0.82); }
+  };
   /* restore deep-linked state (?sys=&hid=&iso=&peel=&clip=) */
   if(st.sys) for(const s in chipOn) chipOn[s] = st.sys.includes(s);
+  if(free3d) for(const s in chipOn) chipOn[s] = s === "skeletal";
+  if(st.reg && REGIONS_3D.some(r=>r[0]===st.reg) && (!free3d || FREE_REGS.includes(st.reg))) isoRegion = st.reg;
   if(st.hid) st.hid.forEach(id=>hidden.add(id));
   if(st.fad) st.fad.forEach(id=>{ if(meshes[id]) faded.add(id); });
   if(st.iso){ const t = GP[st.iso] && meshes[GP[st.iso]] ? GP[st.iso] : st.iso;
@@ -19834,8 +19972,9 @@ function buildScene(gltf, st){
   const applyVis = () => {
     visList.length = 0;
     for(const id in meshes) for(const m of meshes[id]){
-      m.visible = chipOn[m.userData.sys] && !hidden.has(id)
+      m.visible = chipOn[m.userData.sys] && (!free3d || m.userData.sys==="skeletal") && !hidden.has(id)
         && peelOf(m.userData.sys) >= peelN && (!m.userData.aid || aidsOn)
+        && (isoRegion===null || partRegion[id]===isoRegion)
         && (isolated===null || (id===isolated || GP[id]===isolated)
             && (isoSide===null || m.userData.side===null || m.userData.side===isoSide));
       m.userData.ghost = focusSet ? !focusSet.has(id) : false;
@@ -19846,7 +19985,8 @@ function buildScene(gltf, st){
       if(m.visible && !m.userData.ghost) visList.push(m);
     }
     for(const m of loose){
-      m.visible = chipOn[m.userData.sys] && isolated===null
+      m.visible = chipOn[m.userData.sys] && (!free3d || m.userData.sys==="skeletal") && isolated===null
+        && (isoRegion===null || partRegion[m.userData.partId]===isoRegion)
         && peelOf(m.userData.sys) >= peelN && (!m.userData.aid || aidsOn);
       m.userData.ghost = !!focusSet;
       m.material = m.userData.ghost ? ghostOf(m.userData.baseMat||m.material)
@@ -20031,12 +20171,12 @@ function buildScene(gltf, st){
   /* ---- undo: snapshot {hidden,isolated} before each mutating action ---- */
   const undoBtn = $("#b3dundo");
   const syncUndo = () => { if(undoBtn) undoBtn.disabled = !undoStack.length; };
-  const pushHist = () => { undoStack.push({h:[...hidden], f:[...faded], iso:isolated, fs:focusSet?[...focusSet]:null});
+  const pushHist = () => { undoStack.push({h:[...hidden], f:[...faded], iso:isolated, reg:isoRegion, fs:focusSet?[...focusSet]:null});
     if(undoStack.length>30) undoStack.shift(); syncUndo(); };
   const undo = () => { const s = undoStack.pop(); if(!s) return;
     hidden.clear(); s.h.forEach(id=>hidden.add(id));
     faded.clear(); (s.f||[]).forEach(id=>faded.add(id));
-    isolated = s.iso; isoSide = null; focusSet = s.fs ? new Set(s.fs) : null;
+    isolated = s.iso; isoSide = null; isoRegion = s.reg===undefined ? isoRegion : s.reg; focusSet = s.fs ? new Set(s.fs) : null;
     applyVis(); syncHiddenBar(); syncUndo(); };
   if(undoBtn) undoBtn.addEventListener("click",undo);
   const onKey = e => { if(!document.body.contains(cv)){ removeEventListener("keydown",onKey); return; }
@@ -20176,9 +20316,11 @@ function buildScene(gltf, st){
     if(d){
       const oiTbl = d.oi ? `<table class="oitable small">
         ${d.oi.o?`<tr><th>Origin</th><td>${esc(d.oi.o)}</td></tr>`:""}${d.oi.i?`<tr><th>Insertion</th><td>${esc(d.oi.i)}</td></tr>`:""}${d.oi.n?`<tr><th>Innervation</th><td>${esc(d.oi.n)}</td></tr>`:""}${d.oi.a?`<tr><th>Action</th><td>${esc(d.oi.a)}</td></tr>`:""}</table>` : "";
-      const T = [["ov","Overview",`${meta}${im?`<a class="b3d-plate-a" href="${esc(im.url)}" target="_blank" rel="noopener" title="Open full plate"><img class="b3d-plate" src="${esc(im.thumb||im.url)}" alt="" loading="lazy"></a>`:""}<p class="b3d-sum">${esc(d.summary)}</p>${sec("Structure",d.structure)}${sec("Function",d.fn)}`]];
-      if(oiTbl) T.push(["oi","Muscle facts",oiTbl]);
-      if(d.clinical || TC.case || TC.mnemonic) T.push(["cl","Clinical",`${sec("Clinical relevance",d.clinical)}${sec("Classic case",TC.case)}${sec("Memory hook",TC.mnemonic)}`]);
+      const ipl = `<div class="ipl"><span class="ipl-ic">${I("gem")}</span><b>Full notes are Premium</b><p>Structure, function, muscle facts &amp; clinical relevance unlock with Premium.</p><a href="#/premium">Unlock →</a></div>`;
+      const T = [["ov","Overview",`${meta}${im?`<a class="b3d-plate-a" href="${esc(im.url)}" target="_blank" rel="noopener" title="Open full plate"><img class="b3d-plate" src="${esc(im.thumb||im.url)}" alt="" loading="lazy"></a>`:""}<p class="b3d-sum">${esc(d.summary)}</p>${free3d?"":sec("Structure",d.structure)+sec("Function",d.fn)}`]];
+      if(free3d && (d.structure || d.fn)) T.push(["nt","Notes 🔒",ipl]);
+      if(oiTbl) T.push(["oi","Muscle facts",free3d?ipl:oiTbl]);
+      if(d.clinical || TC.case || TC.mnemonic) T.push(["cl","Clinical",free3d?ipl:`${sec("Clinical relevance",d.clinical)}${sec("Classic case",TC.case)}${sec("Memory hook",TC.mnemonic)}`]);
       T.push(["rel","Related",`${lmHtml}${partsHtml}${rel?`<div class="b3d-rel"><b>Related structures</b><div class="b3d-relch">${rel}</div></div>`:""}<a class="b3d-open" href="#/part/${id}">Open full entry →</a>`]);
       if(!T.some(t=>t[0]===infoTab)) infoTab = "ov";
       tabsHtml = `<div class="inf-tabs">${T.map(t=>`<button data-tab="${t[0]}" class="${t[0]===infoTab?"on":""}">${t[1]}</button>`).join("")}</div>`;
@@ -20268,10 +20410,13 @@ function buildScene(gltf, st){
   /* hidden/isolated status bar */
   const hbar = $("#b3dhbar");
   const syncHiddenBar = () => {
-    if(isolated!==null) hbar.innerHTML = `<span>Showing only <b>${esc(nameOf(isolated))}${isoSide?` (${isoSide==="l"?"left":"right"})`:""}</b></span><button id="b3dall">Show all</button>`;
-    else if(focusSet && !lesson.on && !quiz.on) hbar.innerHTML = `<span>Fading other structures</span><button id="b3dall">Show all</button>`;
-    else if(hidden.size||faded.size) hbar.innerHTML = `<span>${hidden.size?`${hidden.size} hidden`:""}${hidden.size&&faded.size?" · ":""}${faded.size?`${faded.size} faded`:""}</span><button id="b3dall">Show all</button>`;
-    else hbar.innerHTML = "";
+    const regSeg = isoRegion ? `<span>Region: <b>${esc((REGIONS_3D.find(r=>r[0]===isoRegion)||[])[2]||isoRegion)}</b>${free3d?" · skeleton preview":""}</span><button id="b3dregx">Whole body</button>` : "";
+    if(isolated!==null) hbar.innerHTML = regSeg + `<span>Showing only <b>${esc(nameOf(isolated))}${isoSide?` (${isoSide==="l"?"left":"right"})`:""}</b></span><button id="b3dall">Show all</button>`;
+    else if(focusSet && !lesson.on && !quiz.on) hbar.innerHTML = regSeg + `<span>Fading other structures</span><button id="b3dall">Show all</button>`;
+    else if(hidden.size||faded.size) hbar.innerHTML = regSeg + `<span>${hidden.size?`${hidden.size} hidden`:""}${hidden.size&&faded.size?" · ":""}${faded.size?`${faded.size} faded`:""}</span><button id="b3dall">Show all</button>`;
+    else hbar.innerHTML = regSeg;
+    const rx = hbar.querySelector("#b3dregx");
+    if(rx) rx.addEventListener("click",()=>{ pushHist(); isoRegion=null; applyVis(); syncHiddenBar(); flyTo(ctr, rad*0.82); });
     const b = hbar.querySelector("#b3dall");
     if(b) b.addEventListener("click",()=>{ pushHist(); hidden.clear(); faded.clear(); isolated=null; isoSide=null; focusSet=null; fxClear(); traceStop(); applyVis(); syncHiddenBar(); });
     queueUrl();
@@ -20828,13 +20973,14 @@ function buildScene(gltf, st){
     const hits = Object.keys(meshes).filter(id=>nameOf(id).toLowerCase().includes(q)).slice(0,8);
     /* landmarks are searchable too — they fly to their parent bone and pulse */
     const lmHits = LMS.filter(x=>x.L.n.toLowerCase().includes(q) || x.L.id.includes(q)).slice(0, Math.max(0, 8-hits.length));
-    qres.innerHTML = hits.map(id=>`<div class="qhit" data-id="${id}">${esc(nameOf(id))}</div>`).join("")
+    qres.innerHTML = hits.map(id=>`<div class="qhit${free3d&&sysOf(id)!=="skeletal"?" lk":""}" data-id="${id}">${esc(nameOf(id))}${free3d&&sysOf(id)!=="skeletal"?" 🔒":""}</div>`).join("")
       + lmHits.map(x=>`<div class="qhit" data-lid="${x.L.id}">${I("map-pin")} ${esc(x.L.n)}</div>`).join("")
       || `<div class="qhit dim">No match</div>`;
     qres.style.display="block";
     qres.querySelectorAll(".qhit[data-id]").forEach(h=>h.addEventListener("pointerdown",ev=>{
       ev.preventDefault(); ev.stopPropagation();
       const id=h.dataset.id; qres.style.display="none"; qin.value=nameOf(id);
+      if(free3d && sysOf(id)!=="skeletal"){ b3dUpsell(`${nameOf(id)} is part of Premium`); return; }
       if(!anyVis(id)){ showOnly(id); }
       focusOn(id);
     }));
@@ -20842,6 +20988,7 @@ function buildScene(gltf, st){
       ev.preventDefault(); ev.stopPropagation();
       const it = lmById(h.dataset.lid); if(!it) return;
       qres.style.display="none"; qin.value=it.L.n;
+      if(free3d && sysOf(it.pid)!=="skeletal"){ b3dUpsell(`${it.L.n} is part of Premium`); return; }
       if(!anyVis(it.pid)){ showOnly(it.pid); }
       select(it.pid); focusOn(it.pid); lmFlash=it.L.id; lmInfo(it);
       setTimeout(()=>{ lmFlash=null; }, 8000);
@@ -20854,15 +21001,18 @@ function buildScene(gltf, st){
      − peels that layer and everything shallower; + reveals down to that layer */
   const f = $("#b3df");
   const syss = Object.keys(bySysM).sort((a,b)=>SYSTEMS[a].name.localeCompare(SYSTEMS[b].name));
-  f.innerHTML = syss.map(s=>`<div class="sysrow"><button class="fchip${s==="integumentary"?"":" on"}" data-s="${s}" style="--fc:#${(SYS_COLOR[s]||0x8d99a6).toString(16).padStart(6,"0")}">${SYSTEMS[s].icon} ${SYSTEMS[s].name}</button><span class="stp"><button data-d="-1" title="Peel — remove ${esc(SYSTEMS[s].name)} and everything shallower">−</button><button data-d="1" title="Reveal down to the ${esc(SYSTEMS[s].name)} layer">+</button></span></div>`).join("");
+  f.innerHTML = syss.map(s=>`<div class="sysrow"><button class="fchip${s==="integumentary"?"":" on"}${free3d&&s!=="skeletal"?" lk":""}" data-s="${s}" data-lk="${free3d&&s!=="skeletal"?"1":"0"}" style="--fc:#${(SYS_COLOR[s]||0x8d99a6).toString(16).padStart(6,"0")}">${SYSTEMS[s].icon} ${SYSTEMS[s].name}${free3d&&s!=="skeletal"?" 🔒":""}</button><span class="stp"><button data-d="-1" title="Peel — remove ${esc(SYSTEMS[s].name)} and everything shallower">−</button><button data-d="1" title="Reveal down to the ${esc(SYSTEMS[s].name)} layer">+</button></span></div>`).join("");
   f.querySelectorAll(".fchip[data-s]").forEach(ch=>ch.classList.toggle("on",!!chipOn[ch.dataset.s]));
   f.querySelectorAll(".fchip").forEach(ch=>ch.addEventListener("click",()=>{
-    const s = ch.dataset.s; const on = ch.classList.toggle("on");
+    const s = ch.dataset.s;
+    if(ch.dataset.lk==="1"){ b3dUpsell(`${SYSTEMS[s].name} is part of Premium`); return; }
+    const on = ch.classList.toggle("on");
     chipOn[s] = on; applyVis();
   }));
   f.querySelectorAll(".stp [data-d]").forEach(b=>b.addEventListener("click",e=>{
     e.stopPropagation();
     const s = b.closest(".sysrow").querySelector(".fchip").dataset.s, r = peelOf(s);
+    if(free3d && s!=="skeletal"){ b3dUpsell(`${SYSTEMS[s].name} is part of Premium`); return; }
     if(r < 0) return;
     pushHist();
     if(b.dataset.d === "-1") peelN = Math.min(PEEL.length, Math.max(peelN, r + 1));
@@ -20875,11 +21025,13 @@ function buildScene(gltf, st){
   function syncSys(){ const ff = $("#b3df"); if(!ff) return;
     ff.querySelectorAll(".fchip[data-s]").forEach(ch=>{ const s = ch.dataset.s;
       ch.classList.toggle("on",!!chipOn[s]);
+      ch.classList.toggle("lk", free3d && s!=="skeletal");
       ch.classList.toggle("peeled", !!chipOn[s] && peelOf(s)<peelN);
       let n=0; for(const id of hidden) if(sysOf(id)===s) n++;
       for(const id of faded) if(sysOf(id)===s) n++;
       ch.classList.toggle("warn",n>0);
       ch.title = n ? `${n} structure${n>1?"s":""} hidden/faded — ↺ below restores` : ""; });
+    const rg = $("#b3dregs"); if(rg) rg.querySelectorAll("[data-reg]").forEach(b=>b.classList.toggle("on", b.dataset.reg===(isoRegion||"")));
     const pp = $("#b3dpre"); if(pp){ const ai = presetIdx();
       pp.querySelectorAll(".pchip").forEach((b,i)=>b.classList.toggle("on",i===ai)); }
     const rb = $("#b3dreshid"); if(rb){ const n = hidden.size + faded.size;
@@ -20919,32 +21071,75 @@ function buildScene(gltf, st){
   aidb.id = "b3daids"; aidb.className = "fchip"; aidb.innerHTML = I("map")+" study aids"; aidb.style.setProperty("--fc","#8d99a6");
   aidb.addEventListener("click",()=>{ aidsOn = aidb.classList.toggle("on"); applyVis(); });
   f.appendChild(aidb);
+  /* free plan — upsell card pinned above the system list so the locked
+     layers always sit next to the offer */
+  if(free3d){ const drB = document.querySelector(".dr-body");
+    if(drB){ const c = document.createElement("div"); c.className = "dr-free";
+      c.innerHTML = `<b>${I("gem")} Skeleton preview</b><span>Muscles, nerves, organs, vessels &amp; skin are Premium.</span><a href="#/premium">Unlock the full body →</a>`;
+      drB.prepend(c); } }
 
   /* guided camera views */
   const VIEWS = [
     ["person","Full", null, null], ["heart-pulse","Heart", ["cardiovascular","lymphatic","skeletal"], "heart", 1.6],
     ["brain","Brain", ["nervous"], "midbrain", 1.4], ["eye","Eye", ["sensory","muscular"], "eye"],
     ["hand","Hand", ["skeletal","muscular","nervous"], "metacarpals"], ["skull","Skull", ["skeletal"], "mandible"] ];
-  const setLayers = sel => {
+  const setLayers = (sel, rstReg) => {
     pushHist();
-    for(const s in chipOn) chipOn[s] = sel===null ? s!=="integumentary" : sel.includes(s);
+    /* a guided view is a saved scene — it resets the region filter; a bare
+       layer preset keeps it so region × system stays a valid combination */
+    if(rstReg){ isoRegion = null;
+      if(regEl) regEl.querySelectorAll("[data-reg]").forEach(x=>x.classList.toggle("on",!x.dataset.reg)); }
+    for(const s in chipOn) chipOn[s] = (!free3d || s==="skeletal") && (sel===null ? s!=="integumentary" : sel.includes(s));
     hidden.clear(); faded.clear(); isolated = null; focusSet = null; peelN = 0;
     if(peelIn){ peelIn.value = 0; peelV.textContent = ""; }
     f.querySelectorAll(".fchip[data-s]").forEach(ch=>ch.classList.toggle("on",!!chipOn[ch.dataset.s]));
     applyVis(); syncHiddenBar(); };
   const preEl = $("#b3dpre"), vwEl = $("#b3dvw");
   const chipIn = v => `<span class="ic">${I(v[0])}</span><span class="lb">${v[1]}</span>`;
-  if(preEl){ preEl.innerHTML = SYSPRESETS.map((p,i)=>`<button class="pchip${i===presetIdx()?" on":""}" data-i="${i}" title="${p[1]}">${chipIn(p)}</button>`).join("");
+  /* lock predicates — consistent 🔒+dim+upsell across all three rail groups */
+  const vLk = v => free3d && v[2] && v[2].some(s=>s!=="skeletal");
+  const rLk = k => free3d && k && !FREE_REGS.includes(k);
+  if(preEl){ preEl.innerHTML = SYSPRESETS.map((p,i)=>`<button class="pchip${i===presetIdx()?" on":""}${free3d&&i!==1?" lk":""}" data-i="${i}" title="${p[1]}" style="--fc:${p[3]}"><span class="ic">${I(p[0])}</span><span class="lb">${p[1]}${free3d&&i!==1?" 🔒":""}</span></button>`).join("");
     preEl.querySelectorAll(".pchip").forEach(b=>b.addEventListener("click",()=>{
+      if(free3d && +b.dataset.i !== 1){ b3dUpsell(`${SYSPRESETS[+b.dataset.i][1]} is part of Premium`); return; }
       setLayers(SYSPRESETS[+b.dataset.i][2]);
       preEl.querySelectorAll(".pchip").forEach(x=>x.classList.toggle("on",x===b)); })); }
-  if(vwEl){ vwEl.innerHTML = VIEWS.map((v,i)=>`<button class="pchip vchip" data-i="${i}" title="${v[1]}">${chipIn(v)}</button>`).join("");
+  if(vwEl){ vwEl.innerHTML = VIEWS.map((v,i)=>`<button class="pchip vchip${vLk(v)?" lk":""}" data-i="${i}" title="${v[1]}"><span class="ic">${I(v[0])}</span><span class="lb">${v[1]}${vLk(v)?" 🔒":""}</span></button>`).join("");
     vwEl.querySelectorAll(".vchip").forEach(b=>b.addEventListener("click",()=>{
-      const v = VIEWS[+b.dataset.i]; setLayers(v[2]);
+      const v = VIEWS[+b.dataset.i];
+      if(vLk(v)){ b3dUpsell(`"${v[1]}" view uses Premium layers`); return; }
+      setLayers(v[2], true);
       if(preEl) preEl.querySelectorAll(".pchip").forEach(x=>x.classList.remove("on"));
       if(v[3] && meshes[v[3]]){ const p = partCenter(v[3]);
         if(p) flyTo(p.c, p.r*(v[4]||1)); select(v[3]); }
       else { fly=null; camera.position.copy(home); controls.target.copy(home2); controls.update(); } })); }
+
+  /* regional dissection chips — CA-style "view just this part of the body",
+     always on the left rail like CA's region list */
+  const regEl = $("#b3dregs");
+  if(regEl){ regEl.innerHTML =
+      `<button class="pchip" data-reg="" title="Show the whole body" style="--fc:#8d99a6">${chipIn(["person","Whole body"])}</button>`
+      + REGIONS_3D.map(r=>`<button class="pchip${rLk(r[0])?" lk":""}" data-reg="${r[0]}" title="Isolate the ${r[2]} — all its layers together" style="--fc:#${(REG_COLOR[r[0]]||0x8d99a6).toString(16).padStart(6,"0")}"><span class="ic">${I(r[1])}</span><span class="lb">${r[2]}${rLk(r[0])?" 🔒":""}</span></button>`).join("");
+    regEl.querySelectorAll("[data-reg]").forEach(b=>b.addEventListener("click",()=>{
+      const k = b.dataset.reg;
+      if(rLk(k)){ b3dUpsell(`Dissecting the ${(REGIONS_3D.find(r=>r[0]===k)||[])[2]||k} is part of Premium`); return; }
+      if(!k){ if(isoRegion){ pushHist(); isoRegion=null; applyVis(); syncHiddenBar(); flyTo(ctr, rad*0.82); } return; }
+      regionGo(k);
+    }));
+    regEl.querySelectorAll("[data-reg]").forEach(b=>b.classList.toggle("on", b.dataset.reg===(isoRegion||""))); }
+
+  /* CA-style rail modes — one control group at a time, not three stacked */
+  const RM_LBL = { layers:"Layers", views:"Views", regions:"Regions" };
+  let railMode = "layers";
+  try{ railMode = localStorage.getItem("atlas-railm") || "layers"; }catch(e){}
+  const railEl = $(".b3d-rail");
+  const setRail = m => { if(!RM_LBL[m]) m = "layers"; railMode = m;
+    try{ localStorage.setItem("atlas-railm",m); }catch(e){}
+    railEl.querySelectorAll(".rmode").forEach(b=>b.classList.toggle("on",b.dataset.m===m));
+    railEl.querySelectorAll(".railgrp").forEach(g=>{ g.style.display = g.dataset.grp===m ? "" : "none"; });
+    const cap = $("#railcap"); if(cap) cap.textContent = RM_LBL[m]; };
+  if(railEl){ railEl.querySelectorAll(".rmode").forEach(b=>b.addEventListener("click",()=>setRail(b.dataset.m)));
+    setRail(railMode); }
 
   /* ambient occlusion — post-processed depth shading (desktop only) */
   let composer = null, ssaoPass = null, aoOn = false;
@@ -21197,7 +21392,10 @@ function buildScene(gltf, st){
     setLbl(s.lbl||"off");
     queueUrl();
   };
+  const FREE_LESSON = lessonsOf("skeletal")[0];
   const lessonStart = (id,sys) => {
+    if(free3d && !(sys==="skeletal" && FREE_LESSON && id===FREE_LESSON.id)){
+      b3dUpsell(`"${nameOf(id)}" — guided lessons are Premium`); return; }
     const steps = buildLesson(id,sys);
     if(!steps || !lesEl) return;
     lesson.on=true; lesson.id=id; lesson.sys=sys; lesson.steps=steps;
@@ -21311,8 +21509,10 @@ function buildScene(gltf, st){
   /* pathways list in the layers drawer */
   { const tEl = $("#b3dtraces"), tSec = $("#dr-traces");
     if(tEl && ATLAS_TRACES.length){ tSec.style.display = "";
-      tEl.innerHTML = ATLAS_TRACES.map(t=>`<button class="pchip" data-tr="${t.id}" title="${esc(t.name)}"><i class="cdot" style="--c:${t.kind==="nerve"?"#eab308":t.kind==="vein"?"#3b82f6":"#ef4444"}"></i>${esc(t.name)}</button>`).join("");
-      tEl.querySelectorAll("[data-tr]").forEach(b=>b.addEventListener("click",()=>traceStart(b.dataset.tr))); } }
+      tEl.innerHTML = ATLAS_TRACES.map(t=>`<button class="pchip${free3d?" lk":""}" data-tr="${t.id}" title="${esc(t.name)}"><i class="cdot" style="--c:${t.kind==="nerve"?"#eab308":t.kind==="vein"?"#3b82f6":"#ef4444"}"></i>${esc(t.name)}${free3d?" 🔒":""}</button>`).join("");
+      tEl.querySelectorAll("[data-tr]").forEach(b=>b.addEventListener("click",()=>{
+        if(free3d){ b3dUpsell("Vessel & nerve pathways are Premium"); return; }
+        traceStart(b.dataset.tr); })); } }
 
   paintPins();
   /* deep-linked part (or landmark's part): enable its system layer and
@@ -21322,15 +21522,26 @@ function buildScene(gltf, st){
   const dsel = selId && meshes[selId] ? selId
     : st.lm && lmById(st.lm) && meshes[lmById(st.lm).pid] ? lmById(st.lm).pid : null;
   if(dsel && !st.lesson){
-    meshes[dsel].forEach(m=>chipOn[m.userData.sys]=true);
-    if(!st.sys && !st.quiz && !st.trace) focusSet = new Set([dsel]);
-    applyVis(); syncHiddenBar(); }
-  select(selId && meshes[selId] ? selId : null);
-  if(selId && meshes[selId]) focusOn(selId);
+    const dsys = meshes[dsel][0] && meshes[dsel][0].userData.sys;
+    if(free3d && dsys!=="skeletal"){
+      b3dUpsell(`${nameOf(dsel)} is part of Premium`);
+    } else {
+      meshes[dsel].forEach(m=>chipOn[m.userData.sys]=true);
+      if(!st.sys && !st.quiz && !st.trace) focusSet = new Set([dsel]);
+      applyVis(); syncHiddenBar(); } }
+  select(selId && meshes[selId] && !(free3d && meshes[selId][0].userData.sys!=="skeletal") ? selId : null);
+  if(selId && meshes[selId] && !(free3d && meshes[selId][0].userData.sys!=="skeletal")) focusOn(selId);
   /* feature-pack deep links */
-  if(st.att && selId) attShow(selId);
-  if(st.trace) traceStart(st.trace);
+  if(st.att && selId && !free3d) attShow(selId);
+  if(st.trace && !free3d) traceStart(st.trace);
   if(st.lesson && selId) lessonStart(selId, st.lesson);
+  /* deep-linked region (?reg=) — frame the region unless a part focus already
+     claimed the camera */
+  if(isoRegion && !(selId && meshes[selId]) && regionBoxes[isoRegion] && !regionBoxes[isoRegion].isEmpty()){
+    const c = regionBoxes[isoRegion].getCenter(new THREE.Vector3());
+    const r = regionBoxes[isoRegion].getSize(new THREE.Vector3()).length()/2;
+    flyTo(c, Math.max(r*0.85, rad*0.05));
+  }
   /* landmark deep link: #/3d/<bone>?lm=<landmark-id> — reveal the layer, select
      the parent bone, fly to it and pulse that landmark's pill */
   if(st.lm){
@@ -21340,6 +21551,13 @@ function buildScene(gltf, st){
   }
   /* quiz deep link: #/3d?quiz=find|name|mix — start a quiz straight away */
   if(st.quiz) quizStart(null, {find:"tap",tap:"tap",name:"spot",spot:"spot"}[st.quiz] || "mix");
+
+  /* one gentle conversion nudge — once per session, ~5 min into a free 3D visit */
+  if(free3d && !sessionStorage.getItem("atlas-3d-nudge")){
+    setTimeout(()=>{ try{ sessionStorage.setItem("atlas-3d-nudge","1"); }catch(e){}
+      if(document.body.contains(cv))
+        b3dUpsell("You're enjoying the explorer — unlock the full body"); }, 5*60*1000);
+  }
 
   let raf;
   const tick = ()=>{ if(!document.body.contains(cv)){ cancelAnimationFrame(raf); quizStop(); return; }
@@ -21391,6 +21609,7 @@ function v3D(sel){
     hid: (q.get("hid")||"").split(",").filter(Boolean).slice(0,60),
     fad: (q.get("fad")||"").split(",").filter(Boolean).slice(0,60),
     iso: q.get("iso") || null,
+    reg: q.get("reg") || null,
     pins: (q.get("pins")||"").split(",").filter(Boolean).slice(0,30),
     sys: q.get("sys") ? q.get("sys").split(",").filter(Boolean) : null,
     peel: Math.max(0, Math.min(13, +q.get("peel")||0)),
@@ -21423,10 +21642,16 @@ function v3D(sel){
       <button class="b3d-iconbtn" id="b3dhelpbtn" title="Help &amp; options" aria-label="Help">?</button>
     </header>
 
-    <nav class="b3d-rail" aria-label="Systems and views">
-      <div class="b3d-presets" id="b3dpre"></div>
-      <div class="rail-cap">Views</div>
-      <div class="b3d-presets b3d-views" id="b3dvw"></div>
+    <nav class="b3d-rail" aria-label="Layers, views and regions">
+      <div class="rail-modes" role="tablist" aria-label="Rail mode">
+        <button class="rmode on" data-m="layers" role="tab" title="Body system layers" aria-label="Body system layers">${I("layers")}</button>
+        <button class="rmode" data-m="views" role="tab" title="Guided views" aria-label="Guided views">${I("eye")}</button>
+        <button class="rmode" data-m="regions" role="tab" title="Dissect by region" aria-label="Dissect by region">${I("map-pin")}</button>
+      </div>
+      <div class="rail-cap" id="railcap">Layers</div>
+      <div class="b3d-presets railgrp" id="b3dpre" data-grp="layers"></div>
+      <div class="b3d-presets b3d-views railgrp" id="b3dvw" data-grp="views"></div>
+      <div class="b3d-presets b3d-views railgrp" id="b3dregs" data-grp="regions"></div>
     </nav>
 
     <div class="b3d-info" id="b3di"><div class="b3d-grab"></div><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">${I("x")}</button><h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p></div>
@@ -21460,16 +21685,15 @@ function v3D(sel){
       </div></div>
 
     <nav class="b3d-dock" aria-label="3D tools"><div class="dock-in">
-      <button class="dock-b" id="b3dst" title="Hide the names — tap a ? to reveal it (self-test)"><i>${I("eye-off")}</i><b>Test</b></button>
-      <button class="dock-b" id="b3dxr" title="X-ray: fade the outer layers"><i>${I("ghost")}</i><b>X-ray</b></button>
-      <span class="dock-sep"></span>
       <button class="dock-b" data-pop="slice" title="Slice through the body"><i>${I("scissors")}</i><b>Slice</b></button>
       <button class="dock-b" data-pop="exp" title="Exploded view"><i>${I("sparkles")}</i><b>Explode</b></button>
-      <button class="dock-b" data-pop="peel" title="Peel layers"><i>${I("layers")}</i><b>Peel</b></button>
+      <button class="dock-b" id="b3dxr" title="X-ray: fade the outer layers"><i>${I("ghost")}</i><b>X-ray</b></button>
       <span class="dock-sep"></span>
+      <button class="dock-b" id="b3dst" title="Hide the names — tap a ? to reveal it (self-test)"><i>${I("eye-off")}</i><b>Test</b></button>
       <button class="dock-b" id="b3dquiz" title="Quiz: find or name structures"><i>${I("target")}</i><b>Quiz</b></button>
-      <button class="dock-b" data-pop="more" title="Wireframe, depth shading, undo, screenshot, reset"><i>⋯</i><b>More</b></button>
+      <span class="dock-sep"></span>
       <button class="dock-b" id="b3dlayers" title="Body systems, colors &amp; more"><i>${I("layers")}</i><b>Layers</b></button>
+      <button class="dock-b" data-pop="more" title="Wireframe, depth shading, undo, screenshot, reset"><i>⋯</i><b>More</b></button>
       <button class="dock-b" id="b3dunpeek" title="Hide the toolbar"><i>${I("chevron-down")}</i><b>Hide</b></button>
     </div></nav>
     <button class="b3d-peekbtn" id="b3dpeek" title="Show the tools">${I("chevron-up")} Tools</button>
@@ -21553,6 +21777,8 @@ function quizPool(c){
   if(c.sys.length) pool = pool.filter(d=>c.sys.includes(d.system));
   if(c.regs.length) pool = pool.filter(d=>c.regs.includes(d.region));
   if(c.plate) pool = pool.filter(d=>imgOf(d.id));
+  /* freemium: plate quizzes are skeletal-only on the free plan */
+  if(!AUTH.isPremium()) pool = pool.filter(d=>d.system==="skeletal");
   return pool;
 }
 const savedQCfg = () => { try{
@@ -21561,6 +21787,7 @@ const savedQCfg = () => { try{
 }catch(e){ return null; } };
 function vQuizHub(){
   const due = srDue().length;
+  const free = !AUTH.isPremium();
   crumbs([{t:"Home",href:"#/"},{t:"Quizzes"}]);
   const q = "&mode=mix&n=20";
   /* lifetime accuracy per region/system from spaced-rep counters */
@@ -21571,20 +21798,25 @@ function vQuizHub(){
   const accTag = (m,k) => { const o=m[k]; if(!o) return "";
     const p=Math.round(o.r/(o.r+o.w)*100);
     return ` · <b class="acc ${p>=80?"good":p>=60?"mid":"bad"}" title="${o.r} right / ${o.w} wrong">${p}%</b>`; };
-  const regionRow = r => `<a class="region-item" href="#/quiz/c:r=${r}${q}">
+  const regionRow = r => free
+    ? `<a class="region-item lk" href="#/premium">
+      <span class="nm">${REGIONS[r].name}<small>${esc(REGIONS[r].blurb)}</small></span>
+      <span class="ct">${I("lock")} Premium</span></a>`
+    : `<a class="region-item" href="#/quiz/c:r=${r}${q}">
       <span class="nm">${REGIONS[r].name}<small>${esc(REGIONS[r].blurb)}</small></span>
       <span class="ct">${regCount[r]} structures${accTag(accR,r)} ›</span></a>`;
-  const sysRow = s => `<a class="region-item" href="#/quiz/c:sys=${s}${q}">
+  const sysRow = s => { const lk = free && s!=="skeletal";
+    return `<a class="region-item${lk?" lk":""}" href="${lk?"#/premium":`#/quiz/c:sys=${s}${q}`}">
       <span class="nm">${SYSTEMS[s].icon} ${SYSTEMS[s].name}<small>${esc(SYSTEMS[s].blurb)}</small></span>
-      <span class="ct">${sysCount[s]} structures${accTag(accS,s)} ›</span></a>`;
+      <span class="ct">${lk?`${I("lock")} Premium`:`${sysCount[s]} structures${accTag(accS,s)} ›`}</span></a>`; };
   view.innerHTML = `
     <div class="list-head"><h1>${I("target")} Quizzes</h1>
-      <p>Pick a region or system to practice — a 20-question set in mixed styles. Or jump into a mixed set below.</p></div>
+      <p>Pick a region or system to practice — a 20-question set in mixed styles. Or jump into a mixed set below.${free?` <b style="color:var(--accent)">Free plan: skeletal quizzes — Premium unlocks every system.</b>`:""}</p></div>
     <div class="path2">
-      <a class="pcard" href="#/quiz/c:mode=mix&n=20"><span class="ic">${I("shuffle")}</span><span class="tx"><b>Mixed quiz</b><small>All regions and systems · 20 questions</small></span><span class="go">›</span></a>
-      <a class="pcard" href="#/quiz/due"><span class="ic">${I("brain")}</span><span class="tx"><b>Review</b><small>${due?`${due} structure${due>1?"s":""} due now`:"Spaced repetition queue — nothing due yet"}</small></span><span class="go">›</span></a>
-      <a class="pcard" href="#/3d?quiz=mix"><span class="ic">${I("box")}</span><span class="tx"><b>3D spot-test</b><small>Tap or name structures on the 3D body</small></span><span class="go">›</span></a>
-      <a class="pcard" href="#/quiz-builder"><span class="ic">${I("sliders")}</span><span class="tx"><b>Custom quiz</b><small>Systems, regions, count, timer, plates only</small></span><span class="go">›</span></a>
+      <a class="pcard${free?" lk":""}" href="${free?"#/premium":"#/quiz/c:mode=mix&n=20"}"><span class="ic">${I("shuffle")}</span><span class="tx"><b>Mixed quiz</b><small>All regions and systems · 20 questions</small></span><span class="go">${free?I("lock"):"›"}</span></a>
+      <a class="pcard${free?" lk":""}" href="${free?"#/premium":"#/quiz/due"}"><span class="ic">${I("brain")}</span><span class="tx"><b>Review</b><small>${due?`${due} structure${due>1?"s":""} due now`:"Spaced repetition queue"}</small></span><span class="go">${free?I("lock"):"›"}</span></a>
+      <a class="pcard" href="#/3d?quiz=mix"><span class="ic">${I("box")}</span><span class="tx"><b>3D spot-test</b><small>Tap or name structures on the 3D body${free?" — skeleton":""}</small></span><span class="go">›</span></a>
+      <a class="pcard${free?" lk":""}" href="${free?"#/premium":"#/quiz-builder"}"><span class="ic">${I("sliders")}</span><span class="tx"><b>Custom quiz</b><small>Systems, regions, count, timer, plates only</small></span><span class="go">${free?I("lock"):"›"}</span></a>
     </div>
     <h2 class="sec-title">By region</h2>
     <div class="region-list">${META.regionOrder.filter(r=>regCount[r]).map(regionRow).join("")}</div>
@@ -21593,6 +21825,7 @@ function vQuizHub(){
 }
 function vQuiz(arg){
   const isDue = arg==="due";
+  if(isDue && !AUTH.isPremium()){ vPaywall("learn"); return; }
   const dueIds = isDue ? srDue() : null;
   if(isDue && !dueIds.length){ location.hash = "/learn/review"; return; }
   const isCfg = arg && arg.startsWith("c:");
@@ -21615,6 +21848,7 @@ function vQuiz(arg){
       <span class="badge">Answered: <b id="qa">0</b></span>
       <span class="badge">Streak: <b id="qk">0</b></span>
       ${cfg.t?`<span class="badge">${I("clock")} <b id="qtimer">${Math.floor(cfg.t/60)}:${String(cfg.t%60).padStart(2,"0")}</b></span>`:""}
+      ${AUTH.isPremium()?"":`<span class="badge qfree">${I("gem")} Free · skeletal only</span>`}
       <select id="qmode" class="qsel" title="Question style">${modeOpts}</select>
       ${isDue?"":`<select id="qsys" class="qsel" title="Filter by system">
         <option value="">All systems</option>${META.systemOrder.map(s=>`<option value="${s}" ${cfg.sys.includes(s)?"selected":""}>${SYSTEMS[s].name}</option>`).join("")}
@@ -21628,6 +21862,7 @@ function vQuiz(arg){
   if(qcu) qcu.addEventListener("click",e=>{ e.preventDefault(); qbcfg.classList.toggle("hidden"); });
   wireQB(qbcfg, {sys:[...cfg.sys], regs:[...cfg.regs], mode:cfg.mode, n:cfg.n, t:cfg.t, plate:cfg.plate});
   const qsel = $("#qsys"); if(qsel) qsel.addEventListener("change",e=>{
+    if(!AUTH.isPremium() && e.target.value && e.target.value!=="skeletal"){ location.hash="/premium"; return; }
     if(e.target.value) location.hash = "/quiz/"+e.target.value;
     else { cfg.sys=[]; location.hash = cfgToHash(cfg); } });
   $("#qmode").addEventListener("change",e=>{ try{localStorage.setItem("atlas-q2mode",e.target.value);}catch(err){}
@@ -21669,7 +21904,7 @@ function qAnswer(right, d, extra){
   if(!right && (d.clinical||d.summary)){
     const qrev=$("#qrev");
     if(qrev){ const why=document.createElement("div"); why.className="qwhy";
-      const t=d.clinical||d.summary||""; const m=t.match(/^[^.!?]+[.!?]?/);
+      const t=(AUTH.isPremium()&&d.clinical)||d.summary||""; const m=t.match(/^[^.!?]+[.!?]?/);
       why.innerHTML=`<b>${esc(d.name)}</b> — ${esc((m?m[0]:t).trim())}`;
       qrev.appendChild(why); } }
   const im = imgOf(d.id);
@@ -21691,10 +21926,11 @@ function nextQ(){
   quiz.cur = d;
   /* decide question kind */
   let kind = quiz.cfg ? quiz.cfg.mode : "choices";
-  if(kind==="mix"){ const ks=["choices","type"]; if(TEACH[d.id]&&TEACH[d.id].case)ks.push("cases"); if(d.oi)ks.push("facts");
+  const qPrem = AUTH.isPremium();
+  if(kind==="mix"){ const ks=["choices","type"]; if(qPrem&&TEACH[d.id]&&TEACH[d.id].case)ks.push("cases"); if(qPrem&&d.oi)ks.push("facts");
     kind = ks[Math.floor(Math.random()*ks.length)]; }
-  if(kind==="cases" && !(TEACH[d.id]&&TEACH[d.id].case)) kind="choices";
-  if(kind==="facts" && !d.oi) kind="choices";
+  if(kind==="cases" && !(qPrem&&TEACH[d.id]&&TEACH[d.id].case)) kind="choices";
+  if(kind==="facts" && !(qPrem&&d.oi)) kind="choices";
   if(kind==="type") return qType(d);
   if(kind==="facts") return qFact(d);
   return qMCQ(d, kind==="cases");
@@ -21856,16 +22092,19 @@ const nextLesson = sys => { const l = lessonsOf(sys).find(d=>!lessonDone(d.id));
   return l || lessonsOf(sys)[0]; };
 
 function vLearn(arg){
+  const free = !AUTH.isPremium();
+  const FREE_LID = (lessonsOf("skeletal")[0]||{}).id;
   crumbs([{t:"Home",href:"#/"},{t:"Learn"}]);
   if(arg && SYSTEMS[arg]){ /* lesson list for one system */
     const c = SYSTEMS[arg], items = lessonsOf(arg);
     const done = items.filter(d=>lessonDone(d.id)).length;
     const nx = nextLesson(arg);
     /* group lessons by body region (TeachMeAnatomy-style subsections) */
-    const lrow = d => `<a class="lrow${lessonDone(d.id)?" done":""}" href="#/3d/${d.id}?lesson=${arg}">
-        <span class="lck">${lessonDone(d.id)?"✓":""}</span>
+    const lrow = d => { const lk = free && d.id!==FREE_LID;
+      return `<a class="lrow${lessonDone(d.id)?" done":""}${lk?" lk":""}" href="${lk?"#/premium":`#/3d/${d.id}?lesson=${arg}`}">
+        <span class="lck">${lessonDone(d.id)?"✓":lk?"🔒":""}</span>
         <span class="lr"><span class="ln2">${esc(d.name)}</span><span class="lm2">${REGIONS[d.region].name}${d.aka?" · "+esc(d.aka):""}</span></span>
-        <span class="lgo">›</span></a>`;
+        <span class="lgo">${lk?I("lock"):"›"}</span></a>`; };
     const byReg = {}; items.forEach(d=>{ (byReg[d.region]=byReg[d.region]||[]).push(d); });
     const regs = META.regionOrder.filter(r=>byReg[r]);
     const rows = regs.length>1
@@ -21873,9 +22112,9 @@ function vLearn(arg){
       : items.map(lrow).join("");
     crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:c.name}]);
     view.innerHTML = `<div class="list-head"><h1><span class="ic">${c.icon}</span>Learn ${c.name.toLowerCase()}</h1>
-      <p>${done}/${items.length} lessons complete — each one walks you through the structure in the 3D body: where it is, what it looks like, what it does and what sits next to it.</p></div>
-      ${nx?`<p><a class="btn primary" href="#/3d/${nx.id}?lesson=${arg}">${I("play")} ${done?"Continue":"Start"}: ${esc(nx.name)}</a>
-        <a class="btn" href="#/quiz/${arg}">${I("target")} Quiz this system</a></p>`:""}
+      <p>${done}/${items.length} lessons complete — each one walks you through the structure in the 3D body: where it is, what it looks like, what it does and what sits next to it.${free?` <b style="color:var(--accent)">First lesson free — the rest are Premium.</b>`:""}</p></div>
+      ${nx?`<p><a class="btn primary" href="${free&&nx.id!==FREE_LID?"#/premium":`#/3d/${nx.id}?lesson=${arg}`}">${I("play")} ${done?"Continue":"Start"}: ${esc(nx.name)}${free&&nx.id!==FREE_LID?" 🔒":""}</a>
+        <a class="btn" href="${free&&arg!=="skeletal"?"#/premium":`#/quiz/${arg}`}">${I("target")} Quiz this system${free&&arg!=="skeletal"?" 🔒":""}</a></p>`:""}
       <div class="grid tight" style="grid-template-columns:1fr">${rows}</div>`;
     return; }
   /* course map */
@@ -21884,8 +22123,8 @@ function vLearn(arg){
   view.innerHTML = `<div class="list-head"><h1>${I("graduation-cap")} Learn anatomy</h1>
     <p>Guided lessons that walk you through each structure inside the 3D body — location, shape, function and neighbours, one step at a time. Method inspired by the "why, not what" approach of TeachMeAnatomy and AnatomyQuest.</p></div>
     <div class="learn-head">
-      ${nx?`<a class="btn primary" href="#/3d/${nx.d.id}?lesson=${nx.s}">${I("play")} Continue learning: ${esc(nx.d.name)}</a>`:`<span class="badge">${I("trophy")} All lessons complete!</span>`}
-      <a class="btn" href="#/learn/review">${I("brain")} Review${due?` (${due} due)`:""}</a>
+      ${nx?`<a class="btn primary" href="${free&&nx.d.id!==FREE_LID?"#/premium":`#/3d/${nx.d.id}?lesson=${nx.s}`}">${I("play")} Continue learning: ${esc(nx.d.name)}${free&&nx.d.id!==FREE_LID?" 🔒":""}</a>`:`<span class="badge">${I("trophy")} All lessons complete!</span>`}
+      <a class="btn" href="${free?"#/premium":"#/learn/review"}">${I("brain")} Review${due?` (${due} due)`:""}</a>
       <a class="btn" href="#/paths">${I("route")} Guided paths</a>
       <span class="xp"><span class="xpbadge">${I("star")} <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">${I("flame")} ${PROG.streak} days</span>`:""}</span>
     </div>
@@ -21896,7 +22135,7 @@ function vLearn(arg){
       return `<a class="lpath${done===items.length&&items.length?" done":""}" href="#/learn/${s}">
         <span class="li">${SYSTEMS[s].icon}</span>
         <span class="lm"><span class="lt">${SYSTEMS[s].name}</span>
-          <span class="ld">${items.length} lessons${done?` · ${done} done`:""}</span>
+          <span class="ld">${items.length} lessons${done?` · ${done} done`:""}${free?" · 🔒":""}</span>
           <span class="lbar"><i style="width:${pct}%"></i></span></span>
         <span class="ln"><b>${pct}%</b>${done===items.length?"✓":"›"}</span></a>`; }).join("")}</div>
     ${Object.keys(ARTICLES).filter(id=>byId[id]).length?`<div class="list-head" style="margin-top:22px"><h1 style="font-size:20px">${I("book-open")} Deep-dive articles</h1>
@@ -21906,6 +22145,7 @@ function vLearn(arg){
         <span class="lr"><span class="ln2">${esc(a.title)}</span><span class="lm2">${esc(d.name)} · ${REGIONS[d.region].name}</span></span><span class="lgo">›</span></a>`; }).join("")}</div>`:""}`;
 }
 function vReview(){
+  if(!AUTH.isPremium()){ vPaywall("learn"); return; }
   const due = srDue();
   crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:"Review"}]);
   if(!due.length){ view.innerHTML = `<div class="list-head"><h1>${I("brain")} Review</h1>
@@ -22120,9 +22360,9 @@ const PLANS = [
   { id:"semester", label:"Semester", price:6000,  days:180, note:"Save 33%" },
   { id:"yearly",   label:"1 Year",   price:10000, days:365, best:true, note:"Save 44%" },
 ];
-const PREMIUM_KINDS = new Set(["3d","quiz","quiz-builder","learn","paths","path","articles","article"]);
+const PREMIUM_KINDS = new Set(["quiz-builder","paths","path","articles","article"]);
 const FEATURE_LABEL = {"3d":"The 3D explorer","quiz":"Quizzes","quiz-builder":"The quiz builder","learn":"Lessons & review","paths":"Guided paths","path":"Guided paths","articles":"Articles","article":"Articles"};
-const PREMIUM_FEATS = [["box","3D body explorer"],["graduation-cap","Guided lessons"],["route","Learning paths"],["target","Quizzes & builder"],["brain","Spaced review"],["book-open","Articles"]];
+const PREMIUM_FEATS = [["box","Full-body 3D — all systems"],["graduation-cap","Guided lessons"],["route","Learning paths"],["target","All quizzes & builder"],["brain","Spaced review"],["book-open","Articles"]];
 const EMBEDDED = (()=>{ try{ return window.parent && window.parent !== window; }catch(e){ return false; } })();
 const GOOGLE_SVG = `<svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A11 11 0 0 0 1 12c0 1.77.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>`;
 
@@ -22194,7 +22434,7 @@ function vLanding(){
     ["bone","500+ atlas entries","Every major bone, muscle, organ, nerve and vessel — with summaries, clinical notes and cross-links.",false],
     ["image","Real anatomical plates","Gray's Anatomy (1918) and open-license illustrations on every entry.",false],
     ["map","Interactive body map","Tap a region to jump straight into its structures.",false],
-    ["box","Full 3D explorer","Rotate, slice, hide and label a complete human body — skeleton to organs.",true],
+    ["box","3D explorer — skeleton free","Rotate, slice, hide and label a complete human body — skeleton free for everyone, every system on Premium.",false],
     ["graduation-cap","Lessons & guided paths","Step-by-step fly-through lessons and curated study paths per system.",true],
     ["target","Quizzes & spaced review","Test yourself on plates or the 3D body; smart review returns cards when you're due.",true],
   ];
@@ -22212,7 +22452,7 @@ function vLanding(){
         <div class="land-cta"><a class="btn primary big" href="#/auth/signup">Create free account</a><a class="btn plain big" href="#/auth">Sign in</a></div>
         <div class="land-mini">Free forever for the atlas reference · Premium unlocks 3D, lessons &amp; quizzes</div>
       </div>
-      <div class="land-art"><div class="halo"></div><div class="land-frame"><img src="img/hero-anatomy.jpg" alt="Golden skeleton with holographic brain and heart"><span class="ftag">${I("gem")} Full 3D explorer · Premium</span></div></div>
+      <div class="land-art"><div class="halo"></div><div class="land-frame"><img src="img/hero-anatomy.jpg" alt="Golden skeleton with holographic brain and heart"><span class="ftag">${I("gem")} Skeleton free · Full body Premium</span></div></div>
     </section>
     <section class="land-stats">
       <div class="land-stat"><b>${total}</b><span>Structures</span></div>
