@@ -363,6 +363,33 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3d-quiz .q-opts .qopt:hover{border-color:#ffd60a}
 .b3d-quiz .q-opts .qopt.right{border-color:#3ddc84;color:#3ddc84}
 .b3d-quiz .q-opts .qopt.wrong{border-color:#ff5d6c;color:#ff5d6c}
+.b3d-quiz .q-opts .qopt.right{background:rgba(61,220,132,.12)}
+.b3d-quiz .q-opts .qopt.wrong{background:rgba(255,93,108,.12)}
+.b3d-quiz .q-opts .qopt[disabled]{pointer-events:none}
+.b3d-quiz .q-bar,.b3d-quiz .q-main,.b3d-quiz .qc-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;row-gap:7px;width:100%}
+.b3d-quiz .q-bar{gap:6px;padding-top:7px;border-top:1px solid #2c2c2c}
+.b3d-quiz .q-prog{color:#a3a3a3;font-variant-numeric:tabular-nums;font-size:12.5px;white-space:nowrap}
+.b3d-quiz button.flip .ico{transform:scaleX(-1)}
+.b3d-quiz button[disabled]{opacity:.35;pointer-events:none}
+.b3d-quiz button.pri{background:#ffd60a;border-color:#ffd60a;color:#0a0a0a}
+.b3d-quiz .qc-h{display:block;width:100%;text-align:center;font-weight:700;font-size:15px}
+.b3d-quiz .qc-scope{display:block;width:100%;text-align:center;color:#a3a3a3;font-size:12.5px}
+.b3d-quiz .qs-stats{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;width:100%}
+.b3d-quiz .qs-stats span{text-align:center;color:#a3a3a3;font-size:12px}
+.b3d-quiz .qs-stats b{display:block;font-size:21px;color:#ffd60a}
+/* quiz mode: only the quiz box stays on screen — everything else returns when it ends */
+.b3d-app.quiz .b3d-regs,.b3d-app.quiz .b3d-rail,.b3d-app.quiz .b3d-dock,.b3d-app.quiz .b3d-pop,.b3d-app.quiz .b3d-hbar,.b3d-app.quiz .b3d-hint,.b3d-app.quiz .b3d-peekbtn,.b3d-app.quiz .b3d-tour,.b3d-app.quiz .b3d-search,.b3d-app.quiz #b3dfocus,.b3d-app.quiz #b3dhelpbtn{display:none!important}
+.b3d-quiz .q-ctl{display:flex;gap:4px}
+.b3d-quiz .q-modes{border-right:0;padding-right:0;margin-right:0}
+.b3d-quiz button .ico{width:13px;height:13px;vertical-align:-2px}
+.b3d-quiz .q-vo.on{border-color:#ffd60a;color:#ffd60a}
+/* phones: the box sits at the bottom, near the thumbs, and keeps the model clear above it */
+@media(max-width:760px){
+.b3d-quiz{top:auto;bottom:calc(14px + var(--safe-b));width:calc(100% - 20px);max-width:none;padding:8px 10px}
+.b3d-quiz .q-bar .ql{display:none}
+.b3d-quiz .q-modes button{padding:6px 10px}
+}
+@media(pointer:coarse){.b3d-quiz button{min-height:40px;padding:6px 12px;font-size:13px}.b3d-quiz .q-opts .qopt{min-height:40px}}
 .b3d-lbls{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}
 .b3dlbl{position:absolute;transform:translate(-50%,-100%);font:600 10.5px var(--font);color:#e8e8e8;background:rgba(18,18,18,.88);border:1px solid rgba(255,214,10,.45);border-radius:5px;padding:2px 7px;white-space:nowrap;pointer-events:auto;cursor:pointer}
 .b3dlbl:hover{border-color:#ffd60a;color:#ffd60a}
@@ -501,18 +528,89 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-rail{position:absolute;left:12px;top:calc(66px + var(--safe-t));z-index:15;width:64px;max-height:calc(100dvh - 66px - var(--safe-t) - var(--above) - 12px);display:flex;flex-direction:column;gap:4px;padding:6px;overflow-y:auto;scrollbar-width:none;background:var(--g);border:1px solid var(--gb);border-radius:18px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .b3d-rail::-webkit-scrollbar{display:none}
 .b3d-rail .b3d-presets{flex-direction:column;flex-wrap:nowrap;gap:2px;margin:0}
-.b3d-rail .rail-cap{font:700 9px var(--font);letter-spacing:.12em;text-transform:uppercase;color:#6f6b60;text-align:center;margin:8px 0 2px;border-top:1px solid #2e2e2e;padding-top:8px}
 .b3d-rail .pchip{display:flex;flex-direction:column;align-items:center;gap:3px;width:100%;padding:8px 2px 6px;border-radius:12px;border:1px solid transparent;background:transparent;color:#bdb8aa;font:600 9.5px var(--font);line-height:1.1}
 .b3d-rail .pchip .ic{font-size:20px;line-height:1;color:var(--fc,#bdb8aa);transition:color .15s}
 .b3d-rail .pchip:hover{background:#242424;color:#fff}
 .b3d-rail .pchip.on{background:color-mix(in srgb,var(--fc,#ffd60a) 16%,transparent);border-color:color-mix(in srgb,var(--fc,#ffd60a) 55%,transparent);color:var(--fc,#ffd60a)}
 .b3d-rail .pchip.lk{opacity:.6}
-.b3d-rail .b3d-views .pchip{opacity:1}
-.rail-modes{display:flex;gap:2px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:3px;flex:none}
-.rmode{flex:1;border:0;background:transparent;color:#8d887a;padding:6px 2px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.rmode .ico{width:14px;height:14px}
-.rmode:hover{color:#e8e8e8}
-.rmode.on{background:rgba(255,214,10,.16);color:#ffd60a}
+.b3d-regs{position:absolute;left:12px;right:12px;top:calc(60px + var(--safe-t));z-index:16;display:flex;align-items:center;gap:6px;padding:5px;overflow-x:auto;scrollbar-width:none;background:var(--g);border:1px solid var(--gb);border-radius:18px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);width:max-content;max-width:calc(100% - 24px);scroll-snap-type:x proximity}
+.b3d-regs::-webkit-scrollbar{display:none}
+.b3d-regs .rg-cap{flex:none;font:700 9px var(--font);letter-spacing:.12em;text-transform:uppercase;color:#8d887a;padding:0 6px 0 8px;border-right:1px solid #3a3a3a;margin-right:2px;line-height:1}
+.b3d-regs .pchip{flex:none;display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:14px;border:1px solid transparent;background:transparent;color:#cfcabc;font:600 12px var(--font);white-space:nowrap;cursor:pointer;scroll-snap-align:start}
+.b3d-regs .pchip .ic{font-size:15px;line-height:1;color:var(--fc,#bdb8aa)}
+.b3d-regs .pchip:hover{background:#242424;color:#fff}
+.b3d-regs .pchip.on{background:color-mix(in srgb,var(--fc,#ffd60a) 18%,transparent);border-color:color-mix(in srgb,var(--fc,#ffd60a) 60%,transparent);color:#fff}
+.b3d-regs .pchip.lk{opacity:.6}
+.b3d-app.sel .b3d-regs{max-width:calc(100% - min(360px,88vw) - 36px)}
+.b3d-app.loading .b3d-regs{opacity:.35;pointer-events:none}
+.b3d-app.lesson .b3d-regs{display:none}
+.b3d-rail{top:calc(114px + var(--safe-t));max-height:calc(100dvh - 114px - var(--safe-t) - var(--above) - 12px);transition:opacity .18s ease}
+.b3d-regs{overflow:hidden;touch-action:pan-x;transition:opacity .18s ease}
+/* region bar: pinned toggle (never scrolls away) + scrolling chips that fold away */
+.rg-tog{flex:none;display:flex;align-items:center;gap:7px;min-height:34px;padding:0 10px 0 8px;border:0;border-right:1px solid #3a3a3a;border-radius:13px 0 0 13px;background:transparent;color:#e8e8e8;font:600 12.5px var(--font);cursor:pointer;white-space:nowrap}
+.rg-tog:hover{background:#242424}
+.rg-tog .ico{width:14px;height:14px;color:#8d887a;transition:transform .2s ease}
+.rg-tog .rd{display:none;width:9px;height:9px;border-radius:50%;background:#8d99a6;flex:none}
+.rg-tog .rt{display:none}
+.rg-tog .rl{font:700 9px var(--font);letter-spacing:.12em;text-transform:uppercase;color:#8d887a}
+.rg-scroll{display:flex;align-items:center;gap:6px;min-width:0;max-width:1400px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;transition:max-width .24s ease,opacity .18s ease,padding .24s ease;padding:0 2px 0 4px}
+.rg-scroll::-webkit-scrollbar{display:none}
+.b3d-regs.min{width:max-content;right:auto}
+.b3d-regs.min .rg-scroll{max-width:0;opacity:0;padding:0;pointer-events:none}
+.b3d-regs.min .rg-tog{border-right:0;border-radius:13px}
+.b3d-regs.min .rg-tog .rd,.b3d-regs.min .rg-tog .rt{display:inline-block}
+.b3d-regs.min .rg-tog .rl{display:none}
+.b3d-regs.min .rg-tog .ico{transform:rotate(180deg)}
+/* layers bar: pinned toggle first in the DOM so it is always reachable */
+.rail-min{flex:none;display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:5px 0;border:0;background:transparent;color:#8d887a;border-radius:10px;cursor:pointer;font:600 12.5px var(--font);white-space:nowrap}
+.rail-min:hover{background:#242424;color:#fff}
+.rail-min .ico{width:13px;height:13px;transform:rotate(-90deg);transition:transform .2s ease}
+.rail-min .rd,.rail-min .rt{display:none}
+@media(min-width:761px){
+.b3d-rail.min{width:18px;padding:5px 3px;gap:3px;overflow:hidden;cursor:pointer}
+.b3d-rail.min .pchip{width:100%;height:9px;min-height:9px;padding:0;border:0;border-radius:5px;background:color-mix(in srgb,var(--fc,#777) 45%,transparent)}
+.b3d-rail.min .pchip .ic,.b3d-rail.min .pchip .lb,.b3d-rail.min .rail-min{display:none}
+.b3d-rail.min .pchip.on{background:var(--fc,#ffd60a)}
+.b3d-rail.min .pchip.lk{opacity:.2}
+}
+@media(max-width:760px){
+.rail-min{flex:none;width:auto;padding:8px 12px;border:1px solid #363636;border-radius:20px;background:var(--g);color:#e8e8e8;scroll-snap-align:start;position:sticky;left:0;z-index:2}
+.rail-min .rd{display:none;width:9px;height:9px;border-radius:50%;background:#8d99a6;flex:none}
+.b3d-rail.min .rail-min .rd,.b3d-rail.min .rail-min .rt{display:inline-block}
+.b3d-rail.min .rail-min .ico{transform:rotate(0)}
+.b3d-rail.min #b3dpre{display:none}
+}
+/* focus mode — every panel hidden, restored via the floating button */
+.b3d-app.focus .b3d-regs,.b3d-app.focus .b3d-rail,.b3d-app.focus .b3d-dock,.b3d-app.focus .b3d-pop,.b3d-app.focus .b3d-hbar,.b3d-app.focus .b3d-hint,.b3d-app.focus .b3d-info,.b3d-app.focus .b3d-peekbtn{opacity:0!important;pointer-events:none}
+.b3d-fshow{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(16px + var(--safe-b));z-index:21;display:none;align-items:center;gap:6px;background:var(--g);border:1px solid var(--gb);color:#cfcabc;border-radius:20px;padding:9px 18px;font:600 12px var(--font);cursor:pointer;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.b3d-fshow:hover{color:#ffd60a;border-color:#ffd60a}
+.b3d-fshow .ico{width:14px;height:14px}
+.b3d-app.focus .b3d-fshow{display:flex;opacity:1;pointer-events:auto}
+/* keyboard focus + touch comfort + reduced motion for the explorer chrome */
+.b3d-app button:focus-visible,.b3d-app a:focus-visible,.b3d-app input:focus-visible{outline:2px solid #ffd60a;outline-offset:2px}
+@media(pointer:coarse){
+.rg-tog{min-height:44px}.b3d-regs .pchip{min-height:40px}.rail-min{min-height:40px}
+.b3d-rail .pchip{min-height:40px}.b3d-iconbtn{min-width:44px;min-height:44px}
+}
+@media(prefers-reduced-motion:reduce){
+.b3d-regs,.b3d-rail,.b3d-quiz,.b3d-info,.b3d-dock,.rg-scroll,.rg-tog .ico,.rail-min .ico,.tour-hl{transition:none!important;animation:none!important}
+}
+/* first-run tour */
+.b3d-tour{position:absolute;z-index:40;width:min(290px,calc(100% - 16px));padding:14px 14px 12px;background:rgba(18,18,18,.97);border:1px solid #4a4a4a;border-radius:16px;color:#e8e8e8;box-shadow:0 14px 40px rgba(0,0,0,.6);font-size:13px;line-height:1.45}
+.b3d-tour b{display:block;font-size:14px;color:#ffd60a;margin-bottom:4px}
+.b3d-tour p{margin:0 0 12px;color:#cfcabc}
+.b3d-tour .tour-ft{display:flex;align-items:center;gap:8px}
+.b3d-tour .tour-dots{display:flex;gap:5px;margin-right:auto}
+.b3d-tour .tour-dots i{width:6px;height:6px;border-radius:50%;background:#444}
+.b3d-tour .tour-dots i.on{background:#ffd60a}
+.b3d-tour button{background:#242424;border:1px solid #3d3d3d;color:#e8e8e8;border-radius:9px;padding:7px 13px;font:600 12px var(--font);cursor:pointer}
+.b3d-tour button.pri{background:#ffd60a;border-color:#ffd60a;color:#0a0a0a}
+.b3d-tour .tour-ar{position:absolute;width:12px;height:12px;background:rgba(18,18,18,.97);border:1px solid #4a4a4a;transform:rotate(45deg)}
+.b3d-tour .tour-ar.up{top:-7px;border-right:0;border-bottom:0}
+.b3d-tour .tour-ar.down{bottom:-7px;border-left:0;border-top:0}
+.b3d-tour .tour-ar.left{left:-7px;border-top:0;border-right:0}
+.tour-hl{outline:2px solid #ffd60a!important;outline-offset:3px;animation:tourPulse 1.6s ease-in-out infinite}
+@keyframes tourPulse{50%{outline-color:rgba(255,214,10,.3)}}
 .b3d-app .b3d-info{display:none;flex:none;position:absolute;z-index:18;right:0;top:calc(64px + var(--safe-t));bottom:0;width:min(360px,88vw);overflow:hidden;padding:0;background:rgba(16,16,16,.92);border:0;border-left:1px solid var(--gb);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#e8e8e8}
 .b3d-app .b3d-info.has-sel{display:flex;flex-direction:column;animation:b3dIn .18s ease-out}
 @keyframes b3dIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
@@ -693,11 +791,11 @@ body.b3d-open .pwa-toast{bottom:112px}
   .dock-b{min-width:50px}
   .b3d-rail{left:0;right:0;top:auto;bottom:var(--above);width:auto;max-height:none;flex-direction:row;align-items:center;gap:6px;padding:6px 10px;background:none;border:0;border-radius:0;backdrop-filter:none;-webkit-backdrop-filter:none;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity}
   .b3d-rail .b3d-presets{flex-direction:row;flex:none;gap:6px}
-  .b3d-rail .rail-cap{display:none}
-  .b3d-rail .rail-modes{flex-direction:row;flex:none;gap:4px;margin:0;padding:0;border:0;border-right:1px solid #3a3a3a;padding-right:8px;background:none}
-  .b3d-rail .rmode{padding:8px 12px;border-radius:20px}
-  .b3d-rail .rmode .ico{width:15px;height:15px}
-  .b3d-rail .b3d-views{padding-left:8px;border-left:1px solid #3a3a3a}
+  .b3d-regs{left:8px;right:8px;top:calc(56px + var(--safe-t));max-width:calc(100% - 16px);width:auto;padding:4px;border-radius:16px}
+  .b3d-regs .rg-cap{display:none}
+  .b3d-regs .pchip{padding:7px 11px;font-size:12px}
+  .b3d-app.sel .b3d-regs{max-width:calc(100% - 16px)}
+  .b3d-rail{top:auto}
   .b3d-rail .pchip{flex-direction:row;gap:6px;width:auto;flex:none;padding:8px 13px;font-size:12.5px;white-space:nowrap;border-radius:20px;border-color:#363636;background:var(--g);scroll-snap-align:start}
   .b3d-rail .pchip .ic{font-size:15px}
   .b3d-app .b3d-info{left:0;right:0;top:auto;width:auto;bottom:0;max-height:46dvh;animation-name:b3dUp;border-radius:20px 20px 0 0;border-bottom:0;border-left:0;border-top:1px solid var(--gb);transition:max-height .22s ease;overscroll-behavior:contain}
@@ -19136,12 +19234,48 @@ const fuzzyMatch = (input, names) => { const i2=normTxt(input); if(!i2) return f
     if(lev(i2,t)<=Math.max(1,Math.floor(t.length*0.12))) return true;
     if(lev(i2,short)<=Math.max(1,Math.floor(short.length*0.12))) return true;
     return triScore(i2,t)>=0.72; }); };
-const _sayVoice = () => { try{ const vs=speechSynthesis.getVoices();
-    return vs.find(v=>/^en(-|_)/i.test(v.lang)&&/female|samantha|zira|google/i.test(v.name))||vs.find(v=>/^en(-|_)/i.test(v.lang))||null;
+/* offline, network voices (e.g. desktop Chrome's "Google …") fail silently — prefer on-device ones then */
+const _sayVoice = () => { try{ const en = speechSynthesis.getVoices().filter(v=>/^en(-|_)/i.test(v.lang));
+    const local = en.filter(v=>v.localService);
+    const pool = navigator.onLine===false && local.length ? local : en;
+    return pool.find(v=>/female|samantha|zira|google/i.test(v.name))||pool[0]||null;
   }catch(e){ return null; } };
+try{ speechSynthesis.getVoices(); speechSynthesis.addEventListener("voiceschanged",()=>speechSynthesis.getVoices()); }catch(e){}
+/* respellings for terms the default voice mangles (matched whole-word, case-insensitive) */
+const PRONOUNCE = { "sternocleidomastoid":"stur-no-kly-doe-mass-toid", "zygomatic":"zy-go-mat-ik", "zygomaticus":"zy-go-mat-ik-us",
+  "brachioradialis":"bray-kee-oh-ray-dee-ay-lis", "brachialis":"bray-kee-ay-lis", "brachii":"bray-key-eye", "biceps":"bye-seps", "triceps":"try-seps",
+  "gastrocnemius":"gas-trok-nee-me-us", "latissimus dorsi":"la-tiss-i-mus dor-sy", "trapezius":"tra-pee-zee-us", "femoris":"fem-or-is",
+  "tibialis":"tib-ee-ay-lis", "fibularis":"fib-yoo-lair-is", "peroneus":"per-oh-nee-us", "humerus":"hyoo-mer-us", "ilium":"il-ee-um", "ischium":"is-kee-um",
+  "coccyx":"kok-six", "sphenoid":"sfee-noid", "ethmoid":"eth-moid", "masseter":"mass-eh-ter", "orbicularis oculi":"or-bik-yoo-lair-is ok-yoo-lie",
+  "orbicularis oris":"or-bik-yoo-lair-is or-is", "pectoralis":"pek-tor-ay-lis", "serratus":"ser-ay-tus", "infraspinatus":"in-fra-spy-nay-tus",
+  "supraspinatus":"soo-pra-spy-nay-tus", "subscapularis":"sub-skap-yoo-lair-is", "sartorius":"sar-tor-ee-us", "gracilis":"gras-i-lis", "soleus":"so-lee-us",
+  "aorta":"ay-or-ta", "vena cava":"vee-na kay-va", "trachea":"tray-kee-a", "esophagus":"ee-sof-a-gus", "duodenum":"doo-oh-dee-num", "jejunum":"jeh-joo-num",
+  "ileum":"il-ee-um", "cecum":"see-kum", "pylorus":"pie-lor-us", "diaphragm":"die-a-fram", "pharynx":"fair-inks", "larynx":"lair-inks", "sciatic":"sigh-at-ik",
+  "ulna":"ul-na", "metacarpals":"met-a-kar-pals", "metatarsals":"met-a-tar-sals", "phalanges":"fa-lan-jeez", "calcaneus":"kal-kay-nee-us", "hyoid":"high-oid",
+  "foramen magnum":"for-ay-men mag-num", "foramen":"for-ay-men", "thoracic":"thor-ass-ik", "xiphoid":"zy-foid", "manubrium":"ma-new-bree-um",
+  "acromion":"a-kro-mee-on", "coracoid":"kor-a-koid", "glenoid":"glee-noid", "olecranon":"oh-lek-ra-non", "trochanter":"tro-kan-ter",
+  "epicondyle":"ep-ee-kon-dyl", "condyle":"kon-dyl", "meatus":"mee-ay-tus", "rhomboid":"rom-boid", "levator scapulae":"le-vay-tor skap-yoo-lee" };
+const _PRON = Object.keys(PRONOUNCE).sort((a,b)=>b.length-a.length).map(k=>[new RegExp("\\b"+k+"\\b","gi"), PRONOUNCE[k]]);
+const speakable = t => { let s = String(t||"").replace(/&/g," and ").replace(/\s*[\/()]\s*/g,", ");
+  for(const [re,r] of _PRON) s = s.replace(re,r); return s; };
 const say = text => { try{ speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text); u.rate=0.92; const v=_sayVoice(); if(v)u.voice=v;
+    const u=new SpeechSynthesisUtterance(speakable(text)); u.rate=0.92; const v=_sayVoice(); if(v)u.voice=v;
     speechSynthesis.speak(u); }catch(e){} };
+/* quiz voice: preference, queued speech with a guaranteed completion callback, stop, iOS unlock */
+const qVoiceOn = () => { try{ return localStorage.getItem("atlas-qvoice")!=="0"; }catch(e){ return true; } };
+const setQVoice = v => { try{ localStorage.setItem("atlas-qvoice", v?"1":"0"); }catch(e){} };
+const sayStop = () => { try{ speechSynthesis.cancel(); }catch(e){} };
+const sayQ = (text, o) => { o = o || {}; let done = false, tm = null;
+  const fin = () => { if(done) return; done = true; clearTimeout(tm); if(o.onend) o.onend(); };
+  tm = setTimeout(fin, o.max || 4500);
+  try{ if(!("speechSynthesis" in window)){ fin(); return; }
+    if(!o.queue) speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(speakable(text)); u.rate = 0.95; const v = _sayVoice(); if(v) u.voice = v;
+    u.onend = fin; u.onerror = fin; speechSynthesis.speak(u);
+  }catch(e){ fin(); } };
+let _sayUnlocked = false;
+const sayUnlock = () => { if(_sayUnlocked) return; _sayUnlocked = true;
+  try{ const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); }catch(e){} };
 /* delegated 🔊 buttons anywhere in the app */
 document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-say]");
   if(b){ e.preventDefault(); e.stopPropagation(); say(b.dataset.say); } });
@@ -19584,6 +19718,7 @@ async function loadBodyGlb(){
    memory pressure that makes iOS Safari force-reload the tab. Shared model
    data (B3D.gltf geometries/materials) is deliberately NOT disposed. */
 function destroyScene(){
+  sayStop();
   try{ if(B3D.composer){ if(B3D.composer.dispose) B3D.composer.dispose(); B3D.composer = null; } }catch(e){}
   try{ if(B3D.ssao){ if(B3D.ssao.dispose) B3D.ssao.dispose(); B3D.ssao = null; } }catch(e){}
   try{ if(B3D.envRT){ B3D.envRT.dispose(); B3D.envRT = null; } }catch(e){}
@@ -19899,6 +20034,8 @@ function buildScene(gltf, st){
   /* free tier gets two showcase regions — skull/neck + arm bones are the demo;
      the organ-heavy trunk regions stay Premium */
   const FREE_REGS = ["head","upper-limb"];
+  const REG_COLOR = { head:0xe3a94e, neck:0xd98e8e, thorax:0xc25b52, abdomen:0xc7864e, pelvis:0x9b68ae,
+    back:0x6fa3a0, "upper-limb":0x5f95c8, "lower-limb":0x4f9a6b, "whole-body":0x8d99a6 };
   const partRegion = {}, regionBoxes = {};
   { const _sp = new THREE.Sphere();
     const boxOf = id => { const bx = new THREE.Box3();
@@ -19939,6 +20076,8 @@ function buildScene(gltf, st){
       const r = regionBoxes[isoRegion].getSize(new THREE.Vector3()).length()/2;
       flyTo(c, Math.max(r*0.85, rad*0.05));
     } else if(!isoRegion){ flyTo(ctr, rad*0.82); }
+    if(typeof scheduleRegMin === "function") scheduleRegMin();
+    if(quiz.on) quizNext();
   };
   /* restore deep-linked state (?sys=&hid=&iso=&peel=&clip=) */
   if(st.sys) for(const s in chipOn) chipOn[s] = st.sys.includes(s);
@@ -20196,34 +20335,114 @@ function buildScene(gltf, st){
      like Complete Anatomy pin-tests — and show 4 name options. ---- */
   const quizPool = () => Object.keys(meshes).filter(id=>byId[id] && anyVis(id) && !id.startsWith("z:"));
   const QUIZ_MODES = [["tap",I("target")+" Find it"],["spot",I("lightbulb")+" Name it"],["mix",I("shuffle")+" Mix"]];
+  const QUIZ_LENS = [5,10,20,0];
+  const OPT_LETTERS = "ABCD";
+  const qBump = () => (quiz.gen = (quiz.gen|0) + 1);
+  const quizLive = () => quiz.on && document.body.contains(cv);
+  const quizScope = () => { const rg = (REGIONS_3D.find(r=>r[0]===isoRegion)||[])[2] || "Whole body";
+    const pi = presetIdx(); return `${rg} · ${pi>=0 ? SYSPRESETS[pi][1] : "Custom"}${free3d?" · skeleton":""}`; };
+  /* spoken form of a question — never includes the answer in Name-it mode */
+  const quizQText = e => e.qtype==="spot" && e.shown
+    ? "Which structure is highlighted? " + e.shown.map((o,i)=>`${OPT_LETTERS[i]}. ${nameOf(o)}.`).join(" ")
+    : `Find the ${nameOf(e.t)}.`;
+  const quizSpeak = (force) => { if(!quizLive() || !quiz.target || (!force && !qVoiceOn())) return;
+    const g = quiz.gen;   /* small delay: Chrome can swallow speech issued right after cancel() */
+    setTimeout(()=>{ if(g!==quiz.gen || !quizLive() || !quiz.target) return;
+      sayQ(quizQText({t:quiz.target, qtype:quiz.qtype, shown:quiz.shown})); }, 80); };
+  /* feedback is spoken, then the next question follows once it finishes (never before the old minimum) */
+  const quizFeedback = (spoken, minMs, next) => { const g = qBump();
+    const go = () => { if(g!==quiz.gen || !quizLive()) return; next(); };
+    if(qVoiceOn()){ const t0 = Date.now();
+      sayQ(spoken, {onend:()=>setTimeout(go, Math.max(0, minMs-(Date.now()-t0)))}); }
+    else setTimeout(go, minMs); };
+
+  /* ---- history: questions already asked, for read-only review ---- */
+  const quizLast = () => quiz.phase==="end" ? quiz.hist.length-1
+    : (quiz.cur && quiz.cur.res!==null ? quiz.hist.length-1 : quiz.hist.length-2);
+  const quizReview = i => { if(i<0 || i>=quiz.hist.length) return;
+    qBump(); sayStop(); quiz.view = i; const e = quiz.hist[i];
+    focusSet = new Set([e.t]); applyVis();
+    const p = partCenter(e.t); if(p) flyTo(p.c, p.r);
+    quizPaint(); };
+  const quizPrev = () => { const i = quiz.view===-1 ? quizLast() : quiz.view-1; if(i>=0) quizReview(i); };
+  const quizBack = () => { qBump(); sayStop(); quiz.view = -1;
+    if(focusSet){ focusSet = null; applyVis(); }
+    if(quiz.phase==="end"){ quizPaint(); return; }
+    if(quiz.target){   /* the live question was never answered — put it back as it was */
+      if(quiz.qtype==="spot"){ focusSet = new Set([quiz.target]); applyVis();
+        const p = partCenter(quiz.target); if(p) flyTo(p.c, p.r); }
+      quizPaint(); quizSpeak(); }
+    else quizNext(); };
+  const quizForward = () => { if(quiz.view>=0 && quiz.view<quizLast()) quizReview(quiz.view+1); else quizBack(); };
+
+  /* ---- painting: start card, running box, review, summary ---- */
+  const qbtn = (a, ic, title, text, cls, dis) =>
+    `<button class="${cls||""}" data-q="${a}" title="${title}" aria-label="${title}"${dis?" disabled":""}>${ic?I(ic):""}${text?`<span class="ql">${text}</span>`:""}</button>`;
+  const quizOptChips = (e, mk, live) => `<span class="q-s">Name it:</span><span class="q-opts">${e.shown.map((o,i)=>
+    `<button class="qopt${o===mk.right?" right":""}${o===mk.wrong?" wrong":""}" data-opt="${esc(o)}"${live?"":" disabled"}><b>${OPT_LETTERS[i]}</b> ${esc(nameOf(o))}</button>`).join("")}</span>`;
   const quizPaint = note => { if(!quizEl) return;
-    quizEl.innerHTML =
-      `<span class="q-modes">${QUIZ_MODES.map(([m,l])=>`<button data-m="${m}" class="${quiz.mode===m?"on":""}">${l}</button>`).join("")}</span>`
-      + (note ? `<span class="${note[0]}">${note[1]}</span>`
-          : quiz.qtype==="spot" && quiz.opts
-            ? `<span class="q-s">Name it:</span><span class="q-opts">${quiz.opts.map((o,i)=>`<button class="qopt" data-opt="${esc(o)}"><b>${"ABCD"[i]}</b> ${esc(nameOf(o))}</button>`).join("")}</span>`
-            : `<span class="q-s">Find:</span><span class="q-t">${esc(nameOf(quiz.target))}</span>`)
-      + `<span class="q-s">✔ ${quiz.score} · ✖ ${quiz.tries}</span>`
-      + (quiz.streak>1 ? `<span class="q-streak">${I("flame")}${quiz.streak}</span>` : "")
-      + `<button data-q="skip">${I("skip-forward")} skip</button><button data-q="quit">${I("x")} quit</button>`;
-    quizEl.querySelectorAll("[data-q]").forEach(b=>b.addEventListener("click",ev=>{
-      ev.stopPropagation();
-      b.dataset.q==="quit" ? quizStop() : quizNext(); }));
-    quizEl.querySelectorAll("[data-m]").forEach(b=>b.addEventListener("click",ev=>{
-      ev.stopPropagation(); quiz.mode = b.dataset.m;
-      try{ localStorage.setItem("atlas-qmode",quiz.mode); }catch(e){}
-      quizNext(); }));
-    quizEl.querySelectorAll("[data-opt]").forEach(b=>b.addEventListener("click",ev=>{
-      ev.stopPropagation(); quizOpt(b.dataset.opt); })); };
-  const quizNext = () => { const pool = quizPool();
-    quiz.target = null; quiz.opts = null;
-    if(focusSet){ focusSet = null; applyVis(); }   /* drop last spotlight */
-    if(!pool.length){ quizPaint(["q-flash-bad","No visible named structures — enable more systems"]); return; }
-    let t = pool[Math.floor(Math.random()*pool.length)], guard = 40;
-    while(pool.length>1 && t===quiz.last && --guard) t = pool[Math.floor(Math.random()*pool.length)];
-    quiz.target = t; quiz.last = t;
-    quiz.qtype = quiz.mode==="mix" ? (Math.random()<.5 ? "tap" : "spot") : quiz.mode;
-    if(quiz.qtype==="spot"){
+    const ph = quiz.phase || "run", vOn = qVoiceOn(), fb = note
+      ? `<span class="${note[0]}" role="status" aria-live="polite">${note[1]}</span>` : "";
+    let h = "";
+    if(ph==="card"){
+      const n = quizPool().length;
+      h = `<span class="qc-h">${I("target")} Quiz</span>`
+        + `<span class="qc-row"><span class="q-s">Mode</span><span class="q-modes">${QUIZ_MODES.map(([m,l])=>`<button data-m="${m}" class="${quiz.mode===m?"on":""}">${l}</button>`).join("")}</span></span>`
+        + `<span class="qc-row"><span class="q-s">Questions</span><span class="q-modes">${QUIZ_LENS.map(k=>`<button data-len="${k}" class="${quiz.total===k?"on":""}">${k||"∞"}</button>`).join("")}</span></span>`
+        + `<span class="qc-scope">${I("map-pin")} ${esc(quizScope())} · ${n} structure${n===1?"":"s"}</span>`
+        + (n ? "" : `<span class="q-flash-bad">No visible named structures — enable more systems</span>`)
+        + `<span class="q-ctl">${qbtn("cancel","","Cancel","Cancel")}${qbtn("start","","Start the quiz","Start","pri",!n)}</span>`;
+    } else if(ph==="end"){ if(quiz.view===-1){
+      const done = quiz.score + quiz.tries, acc = done ? Math.round(quiz.score/done*100) : 0;
+      h = `<span class="qc-h">${I("trophy")} Quiz complete</span>`
+        + `<span class="qs-stats"><span><b>${quiz.score}</b>correct</span><span><b>${quiz.tries}</b>misses</span><span><b>${acc}%</b>accuracy</span><span><b>${quiz.best|0}</b>best streak</span></span>`
+        + `<span class="q-ctl">${quiz.hist.length?qbtn("review","","Review the questions","Review"):""}${qbtn("retry","","Try again","Try again")}${qbtn("done","","Close the quiz","Done","pri")}</span>`; } }
+    if(!h && quiz.view>=0){
+      const e = quiz.hist[quiz.view], ok = e.res==="right" && !e.miss;
+      const verdict = e.res==="skip" ? `<span class="q-s">Skipped</span>` : ok ? `<span class="q-flash-good">✓ Correct</span>`
+        : `<span class="q-flash-bad">✖ ${e.qtype==="spot" ? "It was "+esc(nameOf(e.t)) : "Missed"}</span>`;
+      h = `<span class="q-main">${e.qtype==="spot" && e.shown ? quizOptChips(e, {right:e.t, wrong:e.res==="wrong"?e.picked:null}, false)
+          : `<span class="q-s">Find:</span><span class="q-t">${esc(nameOf(e.t))}</span>`}${verdict}</span>`
+        + `<span class="q-bar">${qbtn("prev","skip-forward","Earlier question","","flip",quiz.view<=0)}${qbtn("next","skip-forward","Later question","")}`
+        + `${qbtn("replay","rotate-ccw","Hear it again","")}<span class="q-prog">Review ${quiz.view+1}/${quiz.hist.length}</span>${qbtn("back","x",ph==="end"?"Back to the summary":"Back to the quiz","back")}</span>`;
+    }
+    if(!h){
+      const mk = quiz.mark || {}, k = quiz.hist.length;
+      h = `<span class="q-main">${quiz.qtype==="spot" && quiz.shown ? quizOptChips({shown:quiz.shown}, mk, !!quiz.opts)
+          : (quiz.target ? `<span class="q-s">Find:</span><span class="q-t">${esc(nameOf(quiz.target))}</span>` : "")}${fb}</span>`
+        + `<span class="q-bar">${qbtn("prev","skip-forward","Previous question","","flip",quizLast()<0)}${qbtn("skip","skip-forward","Skip this question","skip")}`
+        + `<button class="q-vo${vOn?" on":""}" data-q="voice" aria-pressed="${vOn}" title="${vOn?"Mute":"Unmute"} spoken questions" aria-label="${vOn?"Mute":"Unmute"} spoken questions">${I(vOn?"volume-2":"ban")}</button>`
+        + `${qbtn("replay","rotate-ccw","Hear the question again","")}<span class="q-prog">${k}${quiz.total?"/"+quiz.total:""}</span>`
+        + `<span class="q-s">✔ ${quiz.score} · ✖ ${quiz.tries}</span>${quiz.streak>1 ? `<span class="q-streak">${I("flame")}${quiz.streak}</span>` : ""}`
+        + `${qbtn("quit","x","Quit the quiz","quit")}</span>`;
+    }
+    quizEl.innerHTML = h;
+    quizEl.querySelectorAll("[data-q]").forEach(b=>b.addEventListener("click",ev=>{ ev.stopPropagation(); quizAct(b.dataset.q); }));
+    quizEl.querySelectorAll("[data-opt]").forEach(b=>b.addEventListener("click",ev=>{ ev.stopPropagation(); quizOpt(b.dataset.opt); }));
+    quizEl.querySelectorAll("[data-m]").forEach(b=>b.addEventListener("click",ev=>{ ev.stopPropagation();
+      quiz.mode = b.dataset.m; try{ localStorage.setItem("atlas-qmode",quiz.mode); }catch(e){} quizPaint(); }));
+    quizEl.querySelectorAll("[data-len]").forEach(b=>b.addEventListener("click",ev=>{ ev.stopPropagation();
+      quiz.total = +b.dataset.len; try{ localStorage.setItem("atlas-qlen",String(quiz.total)); }catch(e){} quizPaint(); })); };
+  const quizAct = a => {
+    if(a==="quit"){ (quiz.score+quiz.tries>0 || quiz.hist.some(e=>e.res!==null)) ? quizEnd() : quizStop(); }
+    else if(a==="done" || a==="cancel") quizStop();
+    else if(a==="start" || a==="retry") quizBegin();
+    else if(a==="skip"){ if(quiz.cur && quiz.cur.res===null) quiz.cur.res = "skip"; quizNext(); }
+    else if(a==="prev") quizPrev();
+    else if(a==="next") quizForward();
+    else if(a==="back") quizBack();
+    else if(a==="review"){ const mi = quiz.hist.findIndex(e=>e.res!=="right" || e.miss); quizReview(mi>=0 ? mi : 0); }
+    else if(a==="voice"){ const on = !qVoiceOn(); setQVoice(on); sayUnlock();
+      if(on){ quizPaint(); quizSpeak(); } else { sayStop(); quizPaint(); } }
+    else if(a==="replay"){ sayUnlock();
+      if(quiz.view>=0){ const e = quiz.hist[quiz.view];
+        sayQ(e.qtype==="spot" ? `The answer was ${nameOf(e.t)}.` : `That was the ${nameOf(e.t)}.`); }
+      else if(quiz.target) quizSpeak(true); } };
+
+  /* ---- flow ---- */
+  const quizAsk = (t, qt) => { quiz.target = t; quiz.last = t; quiz.qtype = qt; quiz.n++;
+    quiz.cur = {t, qtype:qt, shown:null, res:null, picked:null, miss:0}; quiz.hist.push(quiz.cur);
+    if(qt==="spot"){
       focusSet = new Set([t]); applyVis();
       const p = partCenter(t); if(p) flyTo(p.c, p.r);
       /* distractors from every named part: same system first, then any */
@@ -20231,55 +20450,94 @@ function buildScene(gltf, st){
       const distract = shuffle(named.filter(id=>id!==t && sysOf(id)===sys)).slice(0,3);
       const other = shuffle(named.filter(id=>id!==t && sysOf(id)!==sys)); let i = 0;
       while(distract.length<3 && i<other.length) distract.push(other[i++]);
-      quiz.opts = shuffle([t,...distract]);
+      quiz.opts = shuffle([t,...distract]); quiz.shown = quiz.opts; quiz.cur.shown = quiz.opts;
     }
-    quizPaint(); };
-  const quizOpt = id => { if(!quiz.on || quiz.qtype!=="spot" || !quiz.target) return;
+    quizPaint(); quizSpeak(); };
+  const quizNext = () => { const pool = quizPool();
+    qBump(); sayStop();
+    quiz.view = -1; quiz.target = null; quiz.opts = null; quiz.shown = null; quiz.mark = null;
+    if(focusSet){ focusSet = null; applyVis(); }   /* drop last spotlight */
+    if(quiz.total && quiz.n >= quiz.total){ quizEnd(); return; }
+    if(!pool.length){ quizPaint(["q-flash-bad","No visible named structures — enable more systems"]); return; }
+    let t = pool[Math.floor(Math.random()*pool.length)], guard = 40;
+    while(pool.length>1 && t===quiz.last && --guard) t = pool[Math.floor(Math.random()*pool.length)];
+    quizAsk(t, quiz.mode==="mix" ? (Math.random()<.5 ? "tap" : "spot") : quiz.mode); };
+  const quizBegin = () => { quiz.score = 0; quiz.tries = 0; quiz.streak = 0; quiz.best = 0; quiz.n = 0;
+    quiz.hist = []; quiz.cur = null; quiz.view = -1; quiz.phase = "run"; quizNext(); };
+  const quizEnd = () => { qBump(); sayStop();
+    /* an unanswered live question doesn't count; one with wrong taps counts as skipped */
+    if(quiz.cur && quiz.cur.res===null){ if(quiz.cur.miss) quiz.cur.res = "skip";
+      else if(quiz.hist[quiz.hist.length-1]===quiz.cur){ quiz.hist.pop(); quiz.n--; } }
+    quiz.phase = "end"; quiz.view = -1; quiz.target = null; quiz.opts = null; quiz.shown = null; quiz.mark = null;
+    if(focusSet){ focusSet = null; applyVis(); }
+    quizPaint();
+    if(qVoiceOn()){ const g = quiz.gen;
+      setTimeout(()=>{ if(g===quiz.gen && quizLive()) sayQ(`Quiz complete. ${quiz.score} correct, ${quiz.tries} misses.`); }, 80); } };
+  const quizOpt = id => { if(!quiz.on || quiz.phase!=="run" || quiz.view!==-1 || quiz.qtype!=="spot" || !quiz.target) return;
     const t = quiz.target, right = id===t;
-    if(right){ quiz.score++; quiz.streak++;
+    if(right){ quiz.score++; quiz.streak++; quiz.best = Math.max(quiz.best|0, quiz.streak);
       srRecord(t,true); PROG.quizRight=(PROG.quizRight|0)+1; PROG.xp=(PROG.xp|0)+10; touchStreak(); saveProg(); checkBadges();
       each(t,mm=>glow(mm,0x0f7a3d));
+      quiz.mark = {right:t};
       quizPaint(["q-flash-good","✓ "+esc(nameOf(t))]); }
     else { quiz.tries++; quiz.streak=0;
       srRecord(t,false); saveProg();
       each(t,mm=>glow(mm,0x7a1020));
+      quiz.mark = {right:t, wrong:id};
       quizPaint(["q-flash-bad","✖ It was "+esc(nameOf(t))]); }
+    if(quiz.cur){ quiz.cur.res = right ? "right" : "wrong"; quiz.cur.picked = id; }
     quiz.target = null; quiz.opts = null;
-    setTimeout(()=>{ if(!quiz.on) return; each(t,mm=>glow(mm,0)); quizNext(); }, right?700:1500); };
-  const quizStop = () => { quiz.on=false; quiz.target=null; quiz.opts=null; cv.classList.remove("quizmode");
+    quizFeedback(right ? "Correct." : `Not quite. That was the ${nameOf(t)}.`, right?700:1500,
+      ()=>{ each(t,mm=>glow(mm,0)); quizNext(); }); };
+  const quizStop = () => { quiz.on=false; quiz.phase=null; quiz.target=null; quiz.opts=null; quiz.shown=null; quiz.mark=null; quiz.view=-1;
+    cv.classList.remove("quizmode");
+    qBump(); sayStop();
     focusSet = quiz.savedFS || null; quiz.savedFS = null;   /* restore any pre-quiz fade */
     if(document.body.contains(cv)) applyVis();
     if(quizEl){ quizEl.remove(); quizEl=null; }
+    const ap = $("#b3dapp"); if(ap) ap.classList.remove("quiz");
     const qb=$("#b3dquiz"); if(qb) qb.classList.remove("on");
     updPins(); stSync(); if(labelsOn) updLabels(); };
+  /* a bare Quiz tap opens the start card; "quiz me on this" / deep links start straight away */
   const quizStart = (first, mode) => { if(quiz.on) return;
+    sayUnlock();   /* started from a tap — lets iOS Safari speak later without another gesture */
     quiz.on=true; quiz.savedFS = focusSet; cv.classList.add("quizmode");
     if(mode) quiz.mode = mode;
     else try{ quiz.mode = localStorage.getItem("atlas-qmode") || "mix"; }catch(e){}
     tip.style.display="none"; if(hover){ glow(hover,0); hover=null; }
     select(null);
     quizEl = document.createElement("div"); quizEl.className="b3d-quiz"; stage.appendChild(quizEl);
-    quiz.score=0; quiz.tries=0; quiz.streak=0;
+    quiz.score=0; quiz.tries=0; quiz.streak=0; quiz.best=0; quiz.n=0; quiz.hist=[]; quiz.cur=null; quiz.view=-1;
+    { const ap = $("#b3dapp"); if(ap) ap.classList.add("quiz"); }
     const qb=$("#b3dquiz"); if(qb) qb.classList.add("on");
     updPins(); /* pins + labels hide during the quiz so they don't give answers away */
     stSync(); if(labelsOn) updLabels();
-    if(!quizPool().length){ quizPaint(["q-flash-bad","No visible named structures — enable more systems"]);
-      quiz.target=null; return; }
-    if(first && meshes[first] && byId[first]){ quiz.target = quiz.last = first; quiz.qtype = "tap"; quizPaint(); }
-    else quizNext(); };
+    if(first || mode){
+      quiz.total = 0; quiz.phase = "run";
+      if(!quizPool().length){ quizPaint(["q-flash-bad","No visible named structures — enable more systems"]);
+        quiz.target=null; return; }
+      if(first && meshes[first] && byId[first]) quizAsk(first, "tap");
+      else quizNext();
+    } else {
+      quiz.phase = "card"; quiz.total = 10;
+      try{ const s = localStorage.getItem("atlas-qlen"); if(s!==null && QUIZ_LENS.includes(+s)) quiz.total = +s; }catch(e){}
+      quizPaint(); } };
   const quizAnswer = m => { const id = m && m.userData.partId;
-    if(!quiz.target || quiz.qtype!=="tap") return;
-    if(id===quiz.target){ quiz.score++; quiz.streak++;
+    if(!quiz.target || quiz.qtype!=="tap" || quiz.phase!=="run" || quiz.view!==-1) return;
+    if(id===quiz.target){ quiz.score++; quiz.streak++; quiz.best = Math.max(quiz.best|0, quiz.streak);
       srRecord(id,true); PROG.quizRight=(PROG.quizRight|0)+1; PROG.xp=(PROG.xp|0)+10; touchStreak(); saveProg(); checkBadges();
       each(id,mm=>glow(mm,0x0f7a3d));
-      quizPaint(["q-flash-good","✓ "+esc(nameOf(id))]);
       const done = quiz.target; quiz.target = null;
-      setTimeout(()=>{ if(!quiz.on) return; each(done,mm=>glow(mm,0)); quizNext(); },700); }
+      if(quiz.cur) quiz.cur.res = "right";
+      quizPaint(["q-flash-good","✓ "+esc(nameOf(id))]);
+      quizFeedback("Correct.", 700, ()=>{ each(done,mm=>glow(mm,0)); quizNext(); }); }
     else { quiz.tries++; quiz.streak=0;
       srRecord(quiz.target,false); saveProg();
+      if(quiz.cur) quiz.cur.miss++;
       if(id){ each(id,mm=>glow(mm,0x7a1020));
         setTimeout(()=>each(id,mm=>glow(mm,0)),420); }
-      quizPaint(["q-flash-bad","✖ "+(id?esc(nameOf(id)):"missed")+" — try again"]); } };
+      quizPaint(["q-flash-bad","✖ "+(id?esc(nameOf(id)):"missed")+" — try again"]);
+      if(qVoiceOn()) sayQ(id ? `That's the ${nameOf(id)}. Try again.` : "Missed. Try again."); } };
 
   let infoTab = "ov";
   /* parent→children map built once — showInfo no longer scans all 1766 ids per select */
@@ -20410,6 +20668,7 @@ function buildScene(gltf, st){
   /* hidden/isolated status bar */
   const hbar = $("#b3dhbar");
   const syncHiddenBar = () => {
+    if(typeof syncRegPill === "function") syncRegPill();
     const regSeg = isoRegion ? `<span>Region: <b>${esc((REGIONS_3D.find(r=>r[0]===isoRegion)||[])[2]||isoRegion)}</b>${free3d?" · skeleton preview":""}</span><button id="b3dregx">Whole body</button>` : "";
     if(isolated!==null) hbar.innerHTML = regSeg + `<span>Showing only <b>${esc(nameOf(isolated))}${isoSide?` (${isoSide==="l"?"left":"right"})`:""}</b></span><button id="b3dall">Show all</button>`;
     else if(focusSet && !lesson.on && !quiz.on) hbar.innerHTML = regSeg + `<span>Fading other structures</span><button id="b3dall">Show all</button>`;
@@ -20855,8 +21114,6 @@ function buildScene(gltf, st){
     mats.forEach(t=>{ t.wireframe = wireOn; }); poke(); });
 
   /* color mode: by system / by region */
-  const REG_COLOR = { head:0xe3a94e, neck:0xd98e8e, thorax:0xc25b52, abdomen:0xc7864e, pelvis:0x9b68ae,
-    back:0x6fa3a0, "upper-limb":0x5f95c8, "lower-limb":0x4f9a6b, "whole-body":0x8d99a6 };
   const cmb = $("#b3dcmode");
   if(cmb){ cmb.dataset.m = "z"; cmb.innerHTML = I("palette")+" colors: anatomy";
     cmb.addEventListener("click",()=>{
@@ -21032,6 +21289,7 @@ function buildScene(gltf, st){
       ch.classList.toggle("warn",n>0);
       ch.title = n ? `${n} structure${n>1?"s":""} hidden/faded — ↺ below restores` : ""; });
     const rg = $("#b3dregs"); if(rg) rg.querySelectorAll("[data-reg]").forEach(b=>b.classList.toggle("on", b.dataset.reg===(isoRegion||"")));
+    if(typeof syncLayerPill==="function") syncLayerPill();
     const pp = $("#b3dpre"); if(pp){ const ai = presetIdx();
       pp.querySelectorAll(".pchip").forEach((b,i)=>b.classList.toggle("on",i===ai)); }
     const rb = $("#b3dreshid"); if(rb){ const n = hidden.size + faded.size;
@@ -21104,11 +21362,12 @@ function buildScene(gltf, st){
       if(free3d && +b.dataset.i !== 1){ b3dUpsell(`${SYSPRESETS[+b.dataset.i][1]} is part of Premium`); return; }
       setLayers(SYSPRESETS[+b.dataset.i][2]);
       preEl.querySelectorAll(".pchip").forEach(x=>x.classList.toggle("on",x===b)); })); }
-  if(vwEl){ vwEl.innerHTML = VIEWS.map((v,i)=>`<button class="pchip vchip${vLk(v)?" lk":""}" data-i="${i}" title="${v[1]}"><span class="ic">${I(v[0])}</span><span class="lb">${v[1]}${vLk(v)?" 🔒":""}</span></button>`).join("");
+  if(vwEl){ vwEl.innerHTML = VIEWS.map((v,i)=>`<button class="fchip on vchip${vLk(v)?" lk":""}" data-i="${i}" title="${v[1]}">${I(v[0])} ${v[1]}${vLk(v)?" 🔒":""}</button>`).join("");
     vwEl.querySelectorAll(".vchip").forEach(b=>b.addEventListener("click",()=>{
       const v = VIEWS[+b.dataset.i];
       if(vLk(v)){ b3dUpsell(`"${v[1]}" view uses Premium layers`); return; }
       setLayers(v[2], true);
+      { const dc = $("#b3ddrclose"); if(dc) dc.click(); }
       if(preEl) preEl.querySelectorAll(".pchip").forEach(x=>x.classList.remove("on"));
       if(v[3] && meshes[v[3]]){ const p = partCenter(v[3]);
         if(p) flyTo(p.c, p.r*(v[4]||1)); select(v[3]); }
@@ -21117,29 +21376,71 @@ function buildScene(gltf, st){
   /* regional dissection chips — CA-style "view just this part of the body",
      always on the left rail like CA's region list */
   const regEl = $("#b3dregs");
-  if(regEl){ regEl.innerHTML =
-      `<button class="pchip" data-reg="" title="Show the whole body" style="--fc:#8d99a6">${chipIn(["person","Whole body"])}</button>`
-      + REGIONS_3D.map(r=>`<button class="pchip${rLk(r[0])?" lk":""}" data-reg="${r[0]}" title="Isolate the ${r[2]} — all its layers together" style="--fc:#${(REG_COLOR[r[0]]||0x8d99a6).toString(16).padStart(6,"0")}"><span class="ic">${I(r[1])}</span><span class="lb">${r[2]}${rLk(r[0])?" 🔒":""}</span></button>`).join("");
+  if(regEl){ regEl.innerHTML = `<button class="rg-tog" id="b3drt" aria-expanded="true" title="Collapse the region bar"><span class="rl">Region</span><span class="rd"></span><span class="rt"></span>${I("chevron-up")}</button><div class="rg-scroll" id="b3drsc">`
+      + `<button class="pchip" data-reg="" title="Show the whole body" style="--fc:#8d99a6">${chipIn(["person","Whole body"])}</button>`
+      + REGIONS_3D.map(r=>`<button class="pchip${rLk(r[0])?" lk":""}" data-reg="${r[0]}" title="Isolate the ${r[2]} — all its layers together" style="--fc:#${(REG_COLOR[r[0]]||0x8d99a6).toString(16).padStart(6,"0")}"><span class="ic">${I(r[1])}</span><span class="lb">${r[2]}${rLk(r[0])?" 🔒":""}</span></button>`).join("")
+      + `</div>`;
     regEl.querySelectorAll("[data-reg]").forEach(b=>b.addEventListener("click",()=>{
       const k = b.dataset.reg;
       if(rLk(k)){ b3dUpsell(`Dissecting the ${(REGIONS_3D.find(r=>r[0]===k)||[])[2]||k} is part of Premium`); return; }
-      if(!k){ if(isoRegion){ pushHist(); isoRegion=null; applyVis(); syncHiddenBar(); flyTo(ctr, rad*0.82); } return; }
+      if(!k){ if(isoRegion){ pushHist(); isoRegion=null; applyVis(); syncHiddenBar(); flyTo(ctr, rad*0.82); if(quiz.on) quizNext(); } return; }
       regionGo(k);
     }));
     regEl.querySelectorAll("[data-reg]").forEach(b=>b.classList.toggle("on", b.dataset.reg===(isoRegion||""))); }
 
-  /* CA-style rail modes — one control group at a time, not three stacked */
-  const RM_LBL = { layers:"Layers", views:"Views", regions:"Regions" };
-  let railMode = "layers";
-  try{ railMode = localStorage.getItem("atlas-railm") || "layers"; }catch(e){}
-  const railEl = $(".b3d-rail");
-  const setRail = m => { if(!RM_LBL[m]) m = "layers"; railMode = m;
-    try{ localStorage.setItem("atlas-railm",m); }catch(e){}
-    railEl.querySelectorAll(".rmode").forEach(b=>b.classList.toggle("on",b.dataset.m===m));
-    railEl.querySelectorAll(".railgrp").forEach(g=>{ g.style.display = g.dataset.grp===m ? "" : "none"; });
-    const cap = $("#railcap"); if(cap) cap.textContent = RM_LBL[m]; };
-  if(railEl){ railEl.querySelectorAll(".rmode").forEach(b=>b.addEventListener("click",()=>setRail(b.dataset.m)));
-    setRail(railMode); }
+  /* collapsible bars — the toggle is pinned outside the scrolling chips so it
+     can never scroll out of reach. Manual choices beat auto-collapse:
+     collapse = stays folded (remembered), expand = stays open this session */
+  let regPref = "auto", regMinT = null;
+  try{ if(localStorage.getItem("atlas-regpref")==="closed") regPref = "closed"; }catch(e){}
+  function syncLayerPill(){ const b = $("#b3drailmin"), rl = $(".b3d-rail"); if(!b || !rl) return;
+    const pi = presetIdx(), lay = pi>=0 ? SYSPRESETS[pi] : null;
+    b.querySelector(".rt").textContent = lay ? lay[1] : "Custom";
+    b.querySelector(".rd").style.background = lay ? lay[3] : "#8d99a6";
+    const open = !rl.classList.contains("min");
+    b.setAttribute("aria-expanded", String(open));
+    b.title = open ? "Collapse the layers panel" : "Show the layers panel"; }
+  function syncRegPill(){ const rs = $("#b3dregs"), rt = $("#b3drt"); if(!rs || !rt) return;
+    const rg = (REGIONS_3D.find(r=>r[0]===isoRegion)||[])[2] || "Whole body";
+    const pi = presetIdx(), lay = pi>=0 ? SYSPRESETS[pi][1] : "Custom";
+    rt.querySelector(".rt").textContent = `${rg} · ${lay}${free3d?" · skeleton":""}`;
+    rt.querySelector(".rd").style.background = `#${(REG_COLOR[isoRegion||"whole-body"]||0x8d99a6).toString(16).padStart(6,"0")}`;
+    const open = !rs.classList.contains("min");
+    rt.setAttribute("aria-expanded", String(open));
+    rt.title = open ? "Collapse the region bar" : "Show all regions";
+    syncLayerPill(); }
+  function regApplyMin(v){ const rs = $("#b3dregs"); if(rs){ rs.classList.toggle("min",v); syncRegPill(); } }
+  function regToggle(v){ regPref = v ? "closed" : "open";
+    try{ localStorage.setItem("atlas-regpref", v ? "closed" : "auto"); }catch(e){}
+    clearTimeout(regMinT); regApplyMin(v); }
+  function scheduleRegMin(){ clearTimeout(regMinT); if(!isoRegion || regPref!=="auto") return;
+    regMinT = setTimeout(()=>regApplyMin(true),1400); }
+  { const rt = $("#b3drt");
+    if(rt) rt.addEventListener("click",()=>regToggle(!regEl.classList.contains("min")));
+    /* swipe up on the bar folds it, swipe down opens it */
+    if(regEl){ let sx = 0, sy = null;
+      regEl.addEventListener("pointerdown",e=>{ sx = e.clientX; sy = e.clientY; });
+      regEl.addEventListener("pointerup",e=>{ if(sy===null) return;
+        const dy = e.clientY - sy, dx = e.clientX - sx; sy = null;
+        if(Math.abs(dy) > 24 && Math.abs(dy) > Math.abs(dx)*1.5) regToggle(dy < 0); });
+      regEl.addEventListener("pointercancel",()=>{ sy = null; }); } }
+
+  /* layers bar: desktop folds to a colour-stripe column, mobile to a one-line pill */
+  const railEl = $(".b3d-rail"), railMinB = $("#b3drailmin");
+  const railSet = v => { railEl.classList.toggle("min",v);
+    try{ localStorage.setItem("atlas-railmin", v ? "1" : "0"); }catch(e){}
+    syncLayerPill(); };
+  if(railEl){
+    try{ railEl.classList.toggle("min", localStorage.getItem("atlas-railmin")==="1"); }catch(e){}
+    railEl.addEventListener("click",()=>{ if(matchMedia("(max-width:760px)").matches) return;
+      if(railEl.classList.contains("min")) railSet(false); });
+    if(railMinB) railMinB.addEventListener("click",e=>{ e.stopPropagation(); railSet(!railEl.classList.contains("min")); }); }
+  if(regPref==="closed") regApplyMin(true); else syncRegPill();
+
+  /* focus mode — hide every panel; the floating button restores them */
+  const focB = $("#b3dfocus"), fshB = $("#b3dfshow");
+  if(focB) focB.addEventListener("click",()=>appEl.classList.add("focus"));
+  if(fshB) fshB.addEventListener("click",()=>appEl.classList.remove("focus"));
 
   /* ambient occlusion — post-processed depth shading (desktop only) */
   let composer = null, ssaoPass = null, aoOn = false;
@@ -21559,6 +21860,52 @@ function buildScene(gltf, st){
         b3dUpsell("You're enjoying the explorer — unlock the full body"); }, 5*60*1000);
   }
 
+  /* one-time tour of the region bar, layers, the fold toggle and focus mode */
+  const TOUR_STEPS = [
+    [".b3d-regs","Pick a body region","Tap a region to dissect just that part of the body, then add layers inside it."],
+    [".b3d-rail","Add layers","Skeleton, muscles, nerves and more. A region plus a layer gives you, say, the arm's muscles."],
+    ["#b3drt","Fold bars away","Tap this arrow, or swipe up on the bar, to tuck it away and see more of the body."],
+    ["#b3dfocus","Focus mode","Hides every panel for a clear view. Tap Controls to bring them back."] ];
+  let tourEl = null, tourCur = 0, tourOff = null;
+  const tourValid = () => TOUR_STEPS.map((s,i)=>i).filter(i=>{ const t = appEl.querySelector(TOUR_STEPS[i][0]);
+    if(!t) return false; const r = t.getBoundingClientRect(); return r.width>0 && r.height>0; });
+  const tourEnd = done => { if(done){ try{ localStorage.setItem("atlas-tour-v1","1"); }catch(e){} }
+    if(tourEl){ tourEl.remove(); tourEl = null; }
+    appEl.querySelectorAll(".tour-hl").forEach(x=>x.classList.remove("tour-hl"));
+    if(tourOff){ tourOff(); tourOff = null; } };
+  const tourShow = i => { if(!tourEl) return;
+    const v = tourValid(), j = v.find(k=>k>=i);
+    if(j===undefined){ tourEnd(true); return; }
+    tourCur = j;
+    const [sel, title, body] = TOUR_STEPS[j], t = appEl.querySelector(sel), last = j===v[v.length-1];
+    appEl.querySelectorAll(".tour-hl").forEach(x=>x.classList.remove("tour-hl")); t.classList.add("tour-hl");
+    tourEl.innerHTML = `<b>${title}</b><p>${body}</p><div class="tour-ft"><span class="tour-dots">${v.map(k=>`<i class="${k===j?"on":""}"></i>`).join("")}</span>`
+      + `<button data-t="skip">Skip</button><button class="pri" data-t="next">${last?"Got it":"Next"}</button></div><i class="tour-ar"></i>`;
+    const ar = appEl.getBoundingClientRect(), r = t.getBoundingClientRect(), cw = tourEl.offsetWidth, ch = tourEl.offsetHeight, arw = tourEl.querySelector(".tour-ar");
+    const rx = r.left - ar.left, ry = r.top - ar.top;
+    let x, y, side;
+    if(r.height > ar.height*0.35 && ar.width > 760){ side = "left"; x = rx + r.width + 14; y = ry + 18; }
+    else if(ry < ar.height/2){ side = "up"; y = ry + r.height + 12; x = rx + r.width/2 - cw/2; }
+    else { side = "down"; y = ry - ch - 12; x = rx + r.width/2 - cw/2; }
+    x = Math.max(8, Math.min(ar.width - cw - 8, x)); y = Math.max(8, Math.min(ar.height - ch - 8, y));
+    tourEl.style.left = x+"px"; tourEl.style.top = y+"px";
+    arw.className = "tour-ar " + side;
+    if(side==="left") arw.style.top = "22px";
+    else arw.style.left = Math.max(14, Math.min(cw-26, rx + r.width/2 - x - 6)) + "px"; };
+  const tourStart = force => { if(tourEl){ if(!force) return; tourEnd(false); }
+    try{ if(!force && localStorage.getItem("atlas-tour-v1")) return; }catch(e){}
+    tourEl = document.createElement("div"); tourEl.className = "b3d-tour"; tourEl.setAttribute("role","dialog"); tourEl.setAttribute("aria-label","Quick tour");
+    appEl.appendChild(tourEl);
+    tourEl.addEventListener("click",e=>{ const b = e.target.closest("[data-t]"); if(!b) return;
+      if(b.dataset.t==="skip") { tourEnd(true); return; }
+      const v = tourValid(); if(!v.length || tourCur>=v[v.length-1]) tourEnd(true); else tourShow(tourCur+1); });
+    const onR = () => tourShow(tourCur);
+    window.addEventListener("resize",onR); tourOff = () => window.removeEventListener("resize",onR);
+    tourShow(0); };
+  { const tb = $("#b3dtourbtn"); if(tb) tb.addEventListener("click",()=>{ closeDrawer(); tourStart(true); }); }
+  if(!st.lesson && !st.quiz && !selId)
+    setTimeout(()=>{ if(document.body.contains(cv) && !quiz.on && !lesson.on && !appEl.classList.contains("sel")) tourStart(false); }, 2200);
+
   let raf;
   const tick = ()=>{ if(!document.body.contains(cv)){ cancelAnimationFrame(raf); quizStop(); return; }
     if(fly){ fly.k=Math.min(1,fly.k+0.028); const k=fly.k, e=k<.5?4*k*k*k:1-((-2*k+2)**3)/2;
@@ -21638,20 +21985,16 @@ function v3D(sel){
       <a class="b3d-iconbtn" id="b3dback" href="#/" title="Back to the atlas" aria-label="Back to the atlas">←</a>
       <span class="b3d-title">Anatomy 3D</span>
       <div class="b3d-search"><input id="b3dq" type="search" placeholder="Find a structure… (e.g. heart)" autocomplete="off" aria-label="Find a structure"><div class="b3d-qres" id="b3dqres" style="display:none"></div></div>
+      <button class="b3d-iconbtn" id="b3dfocus" title="Focus mode — hide every panel" aria-label="Focus mode">${I("focus")}</button>
       <button class="b3d-iconbtn" id="b3dfs" title="Fullscreen" aria-label="Fullscreen">⤢</button>
       <button class="b3d-iconbtn" id="b3dhelpbtn" title="Help &amp; options" aria-label="Help">?</button>
     </header>
 
-    <nav class="b3d-rail" aria-label="Layers, views and regions">
-      <div class="rail-modes" role="tablist" aria-label="Rail mode">
-        <button class="rmode on" data-m="layers" role="tab" title="Body system layers" aria-label="Body system layers">${I("layers")}</button>
-        <button class="rmode" data-m="views" role="tab" title="Guided views" aria-label="Guided views">${I("eye")}</button>
-        <button class="rmode" data-m="regions" role="tab" title="Dissect by region" aria-label="Dissect by region">${I("map-pin")}</button>
-      </div>
-      <div class="rail-cap" id="railcap">Layers</div>
-      <div class="b3d-presets railgrp" id="b3dpre" data-grp="layers"></div>
-      <div class="b3d-presets b3d-views railgrp" id="b3dvw" data-grp="views"></div>
-      <div class="b3d-presets b3d-views railgrp" id="b3dregs" data-grp="regions"></div>
+    <div class="b3d-regs" id="b3dregs" role="toolbar" aria-label="Body region"></div>
+
+    <nav class="b3d-rail" aria-label="Body system layers">
+      <button class="rail-min" id="b3drailmin" title="Collapse the layers panel" aria-label="Collapse layers" aria-expanded="true"><span class="rd"></span><span class="rt"></span>${I("chevron-up")}</button>
+      <div class="b3d-presets" id="b3dpre"></div>
     </nav>
 
     <div class="b3d-info" id="b3di"><div class="b3d-grab"></div><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">${I("x")}</button><h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p></div>
@@ -21697,11 +22040,13 @@ function v3D(sel){
       <button class="dock-b" id="b3dunpeek" title="Hide the toolbar"><i>${I("chevron-down")}</i><b>Hide</b></button>
     </div></nav>
     <button class="b3d-peekbtn" id="b3dpeek" title="Show the tools">${I("chevron-up")} Tools</button>
+    <button class="b3d-fshow" id="b3dfshow" title="Show the controls">${I("layers")} Controls</button>
 
     <div class="b3d-scrim" id="b3dscrim"></div>
     <aside class="b3d-drawer" id="b3ddrawer" aria-label="Layers and options">
       <div class="dr-head"><span>Layers &amp; options</span><button class="b3d-iconbtn" id="b3ddrclose" aria-label="Close">${I("x")}</button></div>
       <div class="dr-body">
+        <div class="dr-sec"><h4>${I("eye")} Guided views</h4><div class="b3d-filters" id="b3dvw"></div></div>
         <div class="dr-sec"><h4>Body systems</h4><div class="b3d-filters" id="b3df"></div>
           <button class="fchip" id="b3dreshid" style="display:none;margin-top:8px">${I("rotate-ccw")} Show hidden</button></div>
         <div class="dr-sec"><h4>Colors</h4><button class="fchip on b3d-cmode" id="b3dcmode" data-m="sys">${I("palette")} colors: by system</button>
@@ -21715,7 +22060,8 @@ function v3D(sel){
             <li><b>Select</b> — tap a structure · <b>Zoom to it</b> — double-tap</li>
             <li><b>Hide a part</b> — right-click or long-press, then ⎌ Undo (Ctrl+Z)</li>
             <li><b>${I("pin")} Pin a structure</b> — from its info card; the marker sticks to the body — drag the label, double-click it to add a note</li>
-            <li><b>${I("target")} Quiz</b> — you're given a name, tap the right structure</li>
+            <li><b>${I("target")} Quiz</b> — you're given a name, tap the right structure. Questions are read aloud — mute or replay with the speaker buttons</li>
+            <li><b>${I("sparkles")} Quick tour</b> — <button class="fchip" id="b3dtourbtn" style="margin-left:4px">Replay the tour</button></li>
             <li><b>${I("graduation-cap")} Guided lessons</b> — open <a href="#/learn" style="color:#ffd60a">Learn</a> for step-by-step tours that drive the camera</li>
             <li><b>Share</b> — the address bar always matches your current view; copy it to send</li>
           </ul></div>
@@ -22383,9 +22729,19 @@ function premCacheGet(uid){
 function premCacheSet(uid, exp, plan){ try{ localStorage.setItem("atlas-premium", JSON.stringify({ uid, exp, plan })); }catch(e){} }
 function premCacheClear(){ try{ localStorage.removeItem("atlas-premium"); }catch(e){} }
 
+/* Supabase persists the session in localStorage and only removes it on a real
+   sign-out — so its presence means "still signed in", even with no network
+   (an expired token can't refresh offline, which makes getSession() return null) */
+function storedSession(){
+  try{ for(let i=0;i<localStorage.length;i++){ const k = localStorage.key(i);
+    if(/^sb-.+-auth-token$/.test(k)){ const s = JSON.parse(localStorage.getItem(k)); if(s && s.user && s.user.id) return s; } } }catch(e){}
+  return null;
+}
+
 async function refreshEntitlement(){
-  if(!supa || !AUTH.session){ AUTH.premiumUntil = null; AUTH.lastPlan = null; return; }
+  if(!AUTH.session){ AUTH.premiumUntil = null; AUTH.lastPlan = null; return; }
   const uid = AUTH.session.user.id;
+  if(!supa){ const c = premCacheGet(uid); AUTH.premiumUntil = c ? c.exp : null; AUTH.lastPlan = c ? c.plan : null; return; }
   try{
     const { data, error } = await supa.from("subscriptions").select("plan,expires_at").eq("user_id", uid).order("expires_at", { ascending:false }).limit(1);
     if(error) throw error;  // network failures return error, not a throw — route them to the cache below
@@ -22742,16 +23098,17 @@ function renderAccount(){
 /* ---------- auth init ---------- */
 
 async function initAuth(){
-  if(!supa){ AUTH.ready = true; renderAccount(); return; }
+  if(!supa){ AUTH.session = storedSession(); if(AUTH.session) await refreshEntitlement(); AUTH.ready = true; renderAccount(); route(); return; }
   try{
     const { data: { session } } = await supa.auth.getSession();
-    AUTH.session = session;
-    if(session) await refreshEntitlement();
-  }catch(e){}
+    AUTH.session = session || storedSession();
+  }catch(e){ AUTH.session = storedSession(); }
+  if(AUTH.session) await refreshEntitlement();
   AUTH.ready = true;
   renderAccount();
   route();
   supa.auth.onAuthStateChange(async (event, session) => {
+    if(!session && event !== "SIGNED_OUT") session = storedSession();
     AUTH.session = session;
     if(event === "PASSWORD_RECOVERY"){ vReset(); return; }
     if(session) await refreshEntitlement();

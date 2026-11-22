@@ -1,6 +1,6 @@
 /* Anatomy Atlas service worker — app shell + model + plates + CDN caching. */
 const VERSION = "v17";
-const SHELL = `atlas-shell-${VERSION}-r4`;
+const SHELL = `atlas-shell-${VERSION}-r5`;
 const MODEL = `atlas-model-${VERSION}`;
 const PLATES = `atlas-plates-${VERSION}`;
 const CDN = `atlas-cdn-${VERSION}`;
@@ -53,7 +53,16 @@ const PIXEL = new Response(
 );
 
 self.addEventListener("install", e => {
-  e.waitUntil(caches.open(SHELL).then(c => c.addAll(SHELL_URLS)).then(() => self.skipWaiting()));
+  e.waitUntil((async () => {
+    await caches.open(SHELL).then(c => c.addAll(SHELL_URLS));
+    // the auth library comes from a CDN — cache it up front so offline launches can still restore the session
+    try {
+      const u = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js";
+      const r = await fetch(new Request(u, { mode: "no-cors" }));
+      await (await caches.open(CDN)).put(u, r);
+    } catch (err) {}
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener("activate", e => {
