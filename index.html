@@ -383,6 +383,8 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3d-quiz .q-modes{border-right:0;padding-right:0;margin-right:0}
 .b3d-quiz button .ico{width:13px;height:13px;vertical-align:-2px}
 .b3d-quiz .q-vo.on{border-color:#ffd60a;color:#ffd60a}
+.b3d-quiz .q-dot{display:inline-block;width:9px;height:9px;margin-right:3px;border-radius:50%;background:#ffc400;box-shadow:0 0 9px #ffc400;vertical-align:0;animation:qBlink 1.1s ease-in-out infinite}
+@keyframes qBlink{50%{opacity:.25;box-shadow:0 0 2px #ffc400}}
 /* phones: the box sits at the bottom, near the thumbs, and keeps the model clear above it */
 @media(max-width:760px){
 .b3d-quiz{top:auto;bottom:calc(14px + var(--safe-b));width:calc(100% - 20px);max-width:none;padding:8px 10px}
@@ -593,7 +595,7 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-rail .pchip{min-height:40px}.b3d-iconbtn{min-width:44px;min-height:44px}
 }
 @media(prefers-reduced-motion:reduce){
-.b3d-regs,.b3d-rail,.b3d-quiz,.b3d-info,.b3d-dock,.rg-scroll,.rg-tog .ico,.rail-min .ico,.tour-hl{transition:none!important;animation:none!important}
+.b3d-regs,.b3d-rail,.b3d-quiz,.b3d-info,.b3d-dock,.rg-scroll,.rg-tog .ico,.rail-min .ico,.tour-hl,.q-dot{transition:none!important;animation:none!important}
 }
 /* first-run tour */
 .b3d-tour{position:absolute;z-index:40;width:min(290px,calc(100% - 16px));padding:14px 14px 12px;background:rgba(18,18,18,.97);border:1px solid #4a4a4a;border-radius:16px;color:#e8e8e8;box-shadow:0 14px 40px rgba(0,0,0,.6);font-size:13px;line-height:1.45}
@@ -19953,7 +19955,16 @@ function buildScene(gltf, st){
        in a pass after the body bounding box is known */
     const isMisc = !B3D_MAP[key];
     const id = isMisc ? "__misc" : B3D_MAP[key];
-    const sys = isSkin ? "integumentary" : (isMisc ? (MAT_SYS[mn] || "general") : sysOf(id));
+    let sys = isSkin ? "integumentary" : (isMisc ? (MAT_SYS[mn] || "general") : sysOf(id));
+    /* muscles & muscle-attachment markers mis-filed under bones (or the
+       general bucket) must not render with the skeleton — they belong to
+       the muscular layer.  Matches muscle names and the model's
+       "<muscle>_on_<bone>" / "-insertion" attachment conventions */
+    if((sys === "skeletal" || sys === "general") &&
+      /muscle|insertion|origin|tendon|aponeurosis|_on_|flexor|extensor|abductor|adductor|pronator|supinator|opponens|palmaris|plantaris|lumbric|digitor|digiti|hallucis|pollicis|indicis|thenar|carpi|tibialis|peroneus|fibularis|gastrocnem|soleus|deltoid|latissim|trapezius|biceps|triceps|brachialis|brachiorad|coracobrach|anconeus|gluteus|quadriceps|hamstring|semimembranos|semitendinos|sartorius|gracilis|pectineus|tensor_fascia|serratus|rhombo|masseter|temporalis|sternocleid|scalenus|psoas|iliacus|piriformis|levator|rectus|obliquus|transversus|multifid|rotator|erector|iliocostal|longissim|spinalis|splenius|semispinal|quadratus|coccygeus|gemell|digastric|mylohyoid|omohyoid|sternohyoid|thyrohyoid|geniohyoid|buccinator|orbicularis|platysma|cremaster|dartos|bulbospongiosus|ischiocavernosus|subscapularis|supraspinatus|infraspinatus|teres_major|teres_minor|detrusor|intercostal|diaphragm|pectoralis|obturator_int|obturator_ext/i
+        .test(key + " " + id + " " + mn) &&
+      /* …but ligaments/joint capsules stay skeletal even in "_on_" names */
+      !/ligament|capsul|labrum|menisc|bursa/i.test(key + " " + id)) sys = "muscular";
     o.userData.partId = id;
     o.userData.zName = key;
     o.userData.sys = sys;
@@ -20020,6 +20031,22 @@ function buildScene(gltf, st){
       (meshes[mid] = meshes[mid] || []).push(o);
       (bySysM[sys] = bySysM[sys] || []).push(o);
     } }
+  /* Z-Anatomy lumps hand and foot phalanges/digits into the foot parts —
+     nothing maps to "phalanges-hand". Reassign by world position: fingers
+     hang beside the thighs (the same hand test the misc pass uses), toes
+     stay centered near the ground */
+  { const HAND_FIX = { "phalanges-foot":"phalanges-hand", "metatarsals":"metacarpals" };
+    const bh = bb.max.y - bb.min.y, _c = new THREE.Vector3(), _bx = new THREE.Box3();
+    for(const src in HAND_FIX){ const l = meshes[src]; if(!l) continue;
+      const dst = HAND_FIX[src];
+      for(let i = l.length-1; i>=0; i--){ const o = l[i];
+        _bx.setFromObject(o).getCenter(_c);
+        const yf = (_c.y - bb.min.y)/bh, xf = Math.abs(_c.x)/bh;
+        if(xf > 0.135 && yf > 0.22 && yf < 0.5){
+          l.splice(i,1);
+          o.userData.partId = dst;
+          (meshes[dst] = meshes[dst] || []).push(o);
+        } } } }
   for(const s in bySysM) chipOn[s] = s === "skeletal";
   /* ══ regional dissection — CA-style region isolation ══
      every mesh part resolves to a display region: named parts via
@@ -20356,11 +20383,16 @@ function buildScene(gltf, st){
       sayQ(spoken, {onend:()=>setTimeout(go, Math.max(0, minMs-(Date.now()-t0)))}); }
     else setTimeout(go, minMs); };
 
+  /* Name-it: the structure to identify blinks gold until it is answered */
+  const quizPulseOn = t => { each(t,mm=>glow(mm,0xffc400)); quiz.pulse = t; };
+  const quizPulseOff = clear => { const p = quiz.pulse; if(!p) return; quiz.pulse = null;
+    each(p,mm=>{ if(mm.userData.glowMat) mm.userData.glowMat.emissiveIntensity = 1; if(clear) glow(mm,0); }); };
+
   /* ---- history: questions already asked, for read-only review ---- */
   const quizLast = () => quiz.phase==="end" ? quiz.hist.length-1
     : (quiz.cur && quiz.cur.res!==null ? quiz.hist.length-1 : quiz.hist.length-2);
   const quizReview = i => { if(i<0 || i>=quiz.hist.length) return;
-    qBump(); sayStop(); quiz.view = i; const e = quiz.hist[i];
+    qBump(); sayStop(); quizPulseOff(true); quiz.view = i; const e = quiz.hist[i];
     focusSet = new Set([e.t]); applyVis();
     const p = partCenter(e.t); if(p) flyTo(p.c, p.r);
     quizPaint(); };
@@ -20369,7 +20401,7 @@ function buildScene(gltf, st){
     if(focusSet){ focusSet = null; applyVis(); }
     if(quiz.phase==="end"){ quizPaint(); return; }
     if(quiz.target){   /* the live question was never answered — put it back as it was */
-      if(quiz.qtype==="spot"){ focusSet = new Set([quiz.target]); applyVis();
+      if(quiz.qtype==="spot"){ focusSet = new Set([quiz.target]); applyVis(); quizPulseOn(quiz.target);
         const p = partCenter(quiz.target); if(p) flyTo(p.c, p.r); }
       quizPaint(); quizSpeak(); }
     else quizNext(); };
@@ -20378,7 +20410,7 @@ function buildScene(gltf, st){
   /* ---- painting: start card, running box, review, summary ---- */
   const qbtn = (a, ic, title, text, cls, dis) =>
     `<button class="${cls||""}" data-q="${a}" title="${title}" aria-label="${title}"${dis?" disabled":""}>${ic?I(ic):""}${text?`<span class="ql">${text}</span>`:""}</button>`;
-  const quizOptChips = (e, mk, live) => `<span class="q-s">Name it:</span><span class="q-opts">${e.shown.map((o,i)=>
+  const quizOptChips = (e, mk, live) => `<span class="q-s">${live?`<i class="q-dot" title="The blinking structure"></i> `:""}Name it:</span><span class="q-opts">${e.shown.map((o,i)=>
     `<button class="qopt${o===mk.right?" right":""}${o===mk.wrong?" wrong":""}" data-opt="${esc(o)}"${live?"":" disabled"}><b>${OPT_LETTERS[i]}</b> ${esc(nameOf(o))}</button>`).join("")}</span>`;
   const quizPaint = note => { if(!quizEl) return;
     const ph = quiz.phase || "run", vOn = qVoiceOn(), fb = note
@@ -20443,7 +20475,7 @@ function buildScene(gltf, st){
   const quizAsk = (t, qt) => { quiz.target = t; quiz.last = t; quiz.qtype = qt; quiz.n++;
     quiz.cur = {t, qtype:qt, shown:null, res:null, picked:null, miss:0}; quiz.hist.push(quiz.cur);
     if(qt==="spot"){
-      focusSet = new Set([t]); applyVis();
+      focusSet = new Set([t]); applyVis(); quizPulseOn(t);
       const p = partCenter(t); if(p) flyTo(p.c, p.r);
       /* distractors from every named part: same system first, then any */
       const sys = sysOf(t), named = Object.keys(meshes).filter(id=>byId[id] && !id.startsWith("z:"));
@@ -20454,7 +20486,7 @@ function buildScene(gltf, st){
     }
     quizPaint(); quizSpeak(); };
   const quizNext = () => { const pool = quizPool();
-    qBump(); sayStop();
+    qBump(); sayStop(); quizPulseOff(true);
     quiz.view = -1; quiz.target = null; quiz.opts = null; quiz.shown = null; quiz.mark = null;
     if(focusSet){ focusSet = null; applyVis(); }   /* drop last spotlight */
     if(quiz.total && quiz.n >= quiz.total){ quizEnd(); return; }
@@ -20464,7 +20496,7 @@ function buildScene(gltf, st){
     quizAsk(t, quiz.mode==="mix" ? (Math.random()<.5 ? "tap" : "spot") : quiz.mode); };
   const quizBegin = () => { quiz.score = 0; quiz.tries = 0; quiz.streak = 0; quiz.best = 0; quiz.n = 0;
     quiz.hist = []; quiz.cur = null; quiz.view = -1; quiz.phase = "run"; quizNext(); };
-  const quizEnd = () => { qBump(); sayStop();
+  const quizEnd = () => { qBump(); sayStop(); quizPulseOff(true);
     /* an unanswered live question doesn't count; one with wrong taps counts as skipped */
     if(quiz.cur && quiz.cur.res===null){ if(quiz.cur.miss) quiz.cur.res = "skip";
       else if(quiz.hist[quiz.hist.length-1]===quiz.cur){ quiz.hist.pop(); quiz.n--; } }
@@ -20475,6 +20507,7 @@ function buildScene(gltf, st){
       setTimeout(()=>{ if(g===quiz.gen && quizLive()) sayQ(`Quiz complete. ${quiz.score} correct, ${quiz.tries} misses.`); }, 80); } };
   const quizOpt = id => { if(!quiz.on || quiz.phase!=="run" || quiz.view!==-1 || quiz.qtype!=="spot" || !quiz.target) return;
     const t = quiz.target, right = id===t;
+    quizPulseOff();   /* stop the blink; the verdict colour takes over */
     if(right){ quiz.score++; quiz.streak++; quiz.best = Math.max(quiz.best|0, quiz.streak);
       srRecord(t,true); PROG.quizRight=(PROG.quizRight|0)+1; PROG.xp=(PROG.xp|0)+10; touchStreak(); saveProg(); checkBadges();
       each(t,mm=>glow(mm,0x0f7a3d));
@@ -20489,7 +20522,7 @@ function buildScene(gltf, st){
     quiz.target = null; quiz.opts = null;
     quizFeedback(right ? "Correct." : `Not quite. That was the ${nameOf(t)}.`, right?700:1500,
       ()=>{ each(t,mm=>glow(mm,0)); quizNext(); }); };
-  const quizStop = () => { quiz.on=false; quiz.phase=null; quiz.target=null; quiz.opts=null; quiz.shown=null; quiz.mark=null; quiz.view=-1;
+  const quizStop = () => { quizPulseOff(true); quiz.on=false; quiz.phase=null; quiz.target=null; quiz.opts=null; quiz.shown=null; quiz.mark=null; quiz.view=-1;
     cv.classList.remove("quizmode");
     qBump(); sayStop();
     focusSet = quiz.savedFS || null; quiz.savedFS = null;   /* restore any pre-quiz fade */
@@ -21906,6 +21939,7 @@ function buildScene(gltf, st){
   if(!st.lesson && !st.quiz && !selId)
     setTimeout(()=>{ if(document.body.contains(cv) && !quiz.on && !lesson.on && !appEl.classList.contains("sel")) tourStart(false); }, 2200);
 
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   let raf;
   const tick = ()=>{ if(!document.body.contains(cv)){ cancelAnimationFrame(raf); quizStop(); return; }
     if(fly){ fly.k=Math.min(1,fly.k+0.028); const k=fly.k, e=k<.5?4*k*k*k:1-((-2*k+2)**3)/2;
@@ -21919,6 +21953,8 @@ function buildScene(gltf, st){
       const u = traceFx.t % 1;
       traceFx.ball.position.copy(traceFx.curve.getPointAt(u));
       const s = 1 + 0.4*Math.sin(performance.now()/90); traceFx.ball.scale.setScalar(s); }
+    if(quiz.pulse){ const k = reduceMotion ? 1 : Math.pow(.5 + .5*Math.sin(performance.now()/1000*7.5), 1.4);
+      each(quiz.pulse, m=>{ if(m.userData.glowMat) m.userData.glowMat.emissiveIntensity = .06 + .94*k; }); }
     const moved = controls.update();
     const lifeVis = life.some(L=>effVis(L.m));
     const animated = !!fly || controls.autoRotate || lifeVis || quiz.on || traceFx;
