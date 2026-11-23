@@ -1,6 +1,6 @@
 /* Anatomy Atlas service worker — app shell + model + plates + CDN caching. */
 const VERSION = "v17";
-const SHELL = `atlas-shell-${VERSION}-r5`;
+const SHELL = `atlas-shell-${VERSION}-r11`;
 const MODEL = `atlas-model-${VERSION}`;
 const PLATES = `atlas-plates-${VERSION}`;
 const CDN = `atlas-cdn-${VERSION}`;
@@ -9,6 +9,8 @@ const FONTS = `atlas-fonts-${VERSION}`;
 const SHELL_URLS = [
   "./",
   "index.html",
+  "data.js",
+  "teach.js",
   "manifest.webmanifest",
   "offline.html",
   "img/poster.jpg",
