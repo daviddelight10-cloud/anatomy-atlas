@@ -594,7 +594,6 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-app button:focus-visible,.b3d-app a:focus-visible,.b3d-app input:focus-visible{outline:2px solid #ffd60a;outline-offset:2px}
 @media(pointer:coarse){
 .rg-tog{min-height:44px}.b3d-regs .pchip{min-height:40px}.rail-min{min-height:40px}
-.dock-stp .stp{width:32px;height:26px}
 .b3d-rail .pchip{min-height:40px}.b3d-iconbtn{min-width:44px;min-height:44px}
 }
 @media(prefers-reduced-motion:reduce){
@@ -698,10 +697,25 @@ body.b3d-open .pwa-toast{bottom:112px}
 .dock-b.active::after{content:"";position:absolute;top:7px;right:13px;width:7px;height:7px;border-radius:50%;background:#ffd60a;box-shadow:0 0 0 2px #161616}
 .dock-b[disabled]{opacity:.3;pointer-events:none}
 .dock-sep{flex:none;width:1px;background:#333;margin:9px 5px}
-.dock-stp{flex:none;display:flex;flex-direction:column;gap:3px;margin:0 2px}
-.dock-stp .stp{display:flex;align-items:center;justify-content:center;width:26px;height:24px;padding:0;border:1px solid #3d3d3d;border-radius:9px;background:#1c1c1c;color:#bdb8aa;font:700 14px/1 var(--font);cursor:pointer}
-.dock-stp .stp:hover{border-color:#ffd60a;color:#ffd60a;background:#242424}
-.dock-stp .stp[disabled]{opacity:.3;pointer-events:none}
+.ly-pop{width:min(380px,calc(100% - 24px))}
+.ly-ctl{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ly-st{flex:none;width:48px;height:44px;border:1px solid #3d3d3d;border-radius:12px;background:#1c1c1c;color:#f0ece0;font:700 22px/1 var(--font);cursor:pointer}
+.ly-st:hover{border-color:#ffd60a;color:#ffd60a}
+.ly-st[disabled]{opacity:.3;pointer-events:none}
+.ly-mid{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.ly-mid b{font:700 14px var(--font);color:#fff}
+.ly-mid small{font:500 11.5px var(--font);color:#ffd60a}
+.ly-list{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:42vh;overflow-y:auto}
+.ly-row{display:flex;align-items:center;gap:8px;min-height:42px;padding:0 10px;border:1px solid #333;border-radius:11px;background:#181818;color:#8d887a;font:600 12.5px var(--font);cursor:pointer;text-align:left}
+.ly-row span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ly-row em{font-style:normal;font-size:11px;opacity:.8}
+.ly-row .ly-dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--fc);opacity:.35}
+.ly-row.on{color:#f0ece0;border-color:color-mix(in srgb,var(--fc) 70%,#333);background:color-mix(in srgb,var(--fc) 14%,#181818)}
+.ly-row.on .ly-dot{opacity:1;box-shadow:0 0 6px var(--fc)}
+.ly-row.lk{opacity:.55}
+.ly-foot{display:flex;justify-content:space-between;margin-top:10px}
+.ly-foot button{background:none;border:0;color:#bdb8aa;font:600 12px var(--font);padding:8px 4px;cursor:pointer}
+.ly-foot button:hover{color:#ffd60a}
 .b3d-pop{position:absolute;left:50%;bottom:var(--above);z-index:19;width:min(340px,calc(100% - 24px));padding:12px 16px 14px;background:rgba(16,16,16,.96);border:1px solid var(--gb);border-radius:18px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--shadow);opacity:0;pointer-events:none;transform:translate(-50%,10px);transition:opacity .15s,transform .15s}
 .b3d-pop.on{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
 .b3d-pop .pop-h{display:flex;align-items:baseline;gap:8px;font:700 13px var(--font);color:#fff;margin-bottom:8px}
@@ -3278,18 +3292,13 @@ function buildScene(gltf, st){
      and the drawer steppers so every control stays in sync. peelN counts the
      outermost systems hidden; it is capped one short of PEEL.length so the
      deepest layer (skeleton) can never be peeled away entirely */
-  const peelIn = $("#b3dpeel"), peelV = $("#b3dpeelv"),
-        plAdd = $("#b3dplp"), plRm = $("#b3dplm");
+  const peelIn = $("#b3dpeel"), peelV = $("#b3dpeelv");
   const peelSync = () => {
     if(peelIn){ peelIn.value = peelN/PEEL.length*100;
-      peelV.textContent = peelN ? PEEL.slice(0,peelN).map(s=>SYSTEMS[s].icon).join("") : ""; }
-    if(plAdd) plAdd.disabled = peelN<=0;
-    if(plRm) plRm.disabled = peelN>=PEEL.length-1; };
+      peelV.textContent = peelN ? PEEL.slice(0,peelN).map(s=>SYSTEMS[s].icon).join("") : ""; } };
   const peelSet = n => { peelN = Math.max(0, Math.min(PEEL.length-1, Math.round(n)));
     applyVis(); if(selected && !anyVis(selected)) select(null); peelSync(); };
   if(peelIn) peelIn.addEventListener("input",()=>peelSet(peelIn.value/100*PEEL.length));
-  if(plAdd) plAdd.addEventListener("click",()=>peelSet(peelN-1));
-  if(plRm) plRm.addEventListener("click",()=>peelSet(peelN+1));
   peelSync();
 
   /* exploded view — push every structure outward from the body's center */
@@ -3444,6 +3453,7 @@ function buildScene(gltf, st){
       ch.title = n ? `${n} structure${n>1?"s":""} hidden/faded — ↺ below restores` : ""; });
     const rg = $("#b3dregs"); if(rg) rg.querySelectorAll("[data-reg]").forEach(b=>b.classList.toggle("on", b.dataset.reg===(isoRegion||"")));
     if(typeof syncLayerPill==="function") syncLayerPill();
+    try{ layersSync(); }catch(e){ /* popover not built yet during early boot */ }
     const pp = $("#b3dpre"); if(pp){ const ai = presetIdx();
       pp.querySelectorAll(".pchip").forEach((b,i)=>b.classList.toggle("on",i===ai)); }
     const rb = $("#b3dreshid"); if(rb){ const n = hidden.size + faded.size;
@@ -3655,7 +3665,34 @@ function buildScene(gltf, st){
   const openDrawer = sec => { closePops(); drawer.classList.add("on"); dscrim.classList.add("on"); layersB.classList.add("on");
     updIdx();
     if(sec){ const t = $(sec); if(t) t.scrollIntoView({block:"start"}); } else $(".dr-body").scrollTop = 0; };
-  layersB.addEventListener("click",()=>drawer.classList.contains("on") ? closeDrawer() : openDrawer());
+  /* Layers popover — build the body up in a fixed depth order (bone → vessels →
+     muscle → …): + switches on the next system that is off, − the last one on.
+     Rows toggle any system directly. Locked (Premium) systems upsell. */
+  const LY_ORDER = ["skeletal","cardiovascular","muscular","nervous","lymphatic","respiratory","digestive",
+    "urinary","reproductive","endocrine","sensory","general","integumentary"].filter(s=>bySysM[s]);
+  const lyLocked = s => free3d && s!=="skeletal";
+  const lyOn = s => !!chipOn[s] && peelOf(s) >= peelN;
+  const lyShow = s => { chipOn[s] = true; if(peelOf(s) < peelN) peelN = Math.max(0, peelOf(s)); peelSync(); };
+  const lyChanged = () => { applyVis(); if(selected && !anyVis(selected)) select(null); };
+  function layersSync(){ const lst = $("#b3dlylist"); if(!lst) return;
+    lst.innerHTML = [...LY_ORDER].reverse().map(s=>{ const on = lyOn(s), lk = lyLocked(s);
+      return `<button class="ly-row${on?" on":""}${lk?" lk":""}" data-s="${s}" aria-pressed="${on}" style="--fc:#${(SYS_COLOR[s]||0x8d99a6).toString(16).padStart(6,"0")}"><i class="ly-dot"></i><span>${SYSTEMS[s].icon} ${esc(SYSTEMS[s].name)}</span><em>${lk?"🔒":on?"On":"Off"}</em></button>`; }).join("");
+    const nOn = LY_ORDER.filter(lyOn).length, nxt = LY_ORDER.find(s=>!lyOn(s)), last = [...LY_ORDER].reverse().find(lyOn);
+    $("#b3dlyn").textContent = `${nOn} of ${LY_ORDER.length} layers`;
+    $("#b3dlynext").textContent = nxt ? `+ adds ${SYSTEMS[nxt].name}` : "everything is showing";
+    $("#b3dlya").disabled = !nxt; $("#b3dlyr").disabled = nOn<=1 || !last; }
+  { const lst = $("#b3dlylist");
+    lst.addEventListener("click",e=>{ const r = e.target.closest(".ly-row"); if(!r) return;
+      const s = r.dataset.s; if(lyLocked(s)){ b3dUpsell(`${SYSTEMS[s].name} is part of Premium`); return; }
+      pushHist(); if(lyOn(s)) chipOn[s] = false; else lyShow(s); lyChanged(); });
+    $("#b3dlya").addEventListener("click",()=>{ const s = LY_ORDER.find(x=>!lyOn(x)); if(!s) return;
+      if(lyLocked(s)){ b3dUpsell(`${SYSTEMS[s].name} is part of Premium`); return; }
+      pushHist(); lyShow(s); lyChanged(); });
+    $("#b3dlyr").addEventListener("click",()=>{ const on = LY_ORDER.filter(lyOn); if(on.length<=1) return;
+      pushHist(); chipOn[on[on.length-1]] = false; lyChanged(); });
+    $("#b3dlyreset").addEventListener("click",()=>{ setLayers(free3d?["skeletal"]:null); });
+    $("#b3dlymore").addEventListener("click",()=>openDrawer()); }
+  layersSync();
   $("#b3dhelpbtn").addEventListener("click",()=>openDrawer("#b3dhelp"));
   $("#b3ddrclose").addEventListener("click",closeDrawer);
   dscrim.addEventListener("click",closeDrawer);
@@ -3697,7 +3734,7 @@ function buildScene(gltf, st){
     appEl.classList.remove("lesson");
     if(lesson.lblSaved){ const m = lesson.lblSaved[0] ? (lesson.lblSaved[1]?"mask":"all") : "off";
       lesson.lblSaved=null; setLbl(m); }
-    focusSet=null; setLayers(null);
+    focusSet=null; setLayers(null, !!lesson.regSet); lesson.regSet = false;
     if(selected===lesson.id) select(null); queueUrl(); };
   /* trim written text to its first n sentences — the spoken script stays short */
   const trimSents = (txt,n) => { const s = String(txt||"").replace(/\s+/g," ").trim();
@@ -3719,12 +3756,22 @@ function buildScene(gltf, st){
     /* phonetic respelling for the structure's own name, when we have one */
     const phon = (() => { for(const [re,r] of _PRON) if(re.test(d.name||"")) return r; return null; })();
     /* 0 · Pretest — guess first, then learn (the guess itself builds memory) */
+    /* the guess is scoped to the structure's region + system (e.g. upper-limb
+       bones for the humerus) so it is a fair search, not 85 bones on a whole body */
+    const regK = partRegion[id], regRow = REGIONS_3D.find(r=>r[0]===regK),
+      regBox = regK && regionBoxes[regK] && !regionBoxes[regK].isEmpty() ? regionBoxes[regK] : null,
+      regHint = regBox && regRow ? regRow[2] : null,
+      sysHint = sysMeta ? sysMeta.name.replace(/ system$/i,"").toLowerCase() : "";
     if(meshes[id]) steps.push({ t:"🎯 Find it first", lbl:"off",
-      vo:`Before I tell you anything, try this. Where do you think the ${d.name} is?`,
-      x:`<b>Try it first.</b><br><br>Before the lesson explains anything — where do you think the <b>${esc(d.name)}</b> is? Tap your best guess on the body.<br><br><span class="dim">A wrong guess is fine. Guessing first makes the answer stick.</span>`,
-      s:`Where do you think the <b>${esc(d.name)}</b> is? Tap your best guess.`,
-      q:{id, t:`Where is the <b>${esc(d.name)}</b>? Tap your best guess`},
-      act:()=>{ setLayers(msys); focusSet=null; isolated=null; hidden.clear(); applyVis(); select(null); flyTo(ctr, rad*0.82); } });
+      vo:`Before I tell you anything, try this.${regHint?` We've zoomed to the ${regHint}.`:""} Where do you think the ${d.name} is?`,
+      x:`<b>Try it first.</b><br><br>Before the lesson explains anything — where do you think the <b>${esc(d.name)}</b> is?${regHint?` Hint: it's somewhere in the <b>${esc(regHint)}</b>${sysHint?` (${esc(sysHint)} only)`:""}.`:""} Tap your best guess on the body.<br><br><span class="dim">A wrong guess is fine. Guessing first makes the answer stick.</span>`,
+      s:`Where do you think the <b>${esc(d.name)}</b> is?${regHint?` It's in the <b>${esc(regHint)}</b>.`:""} Tap your best guess.`,
+      q:{id, t:`Where is the <b>${esc(d.name)}</b>?${regHint?` (${esc(regHint)})`:""} Tap your best guess`},
+      act:()=>{ setLayers(msys, true); focusSet=null; isolated=null; hidden.clear(); select(null);
+        lesson.regSet = false;
+        if(regBox){ isoRegion = regK; lesson.regSet = true; applyVis(); syncHiddenBar();
+          flyTo(regBox.getCenter(new THREE.Vector3()), Math.max(regBox.getSize(new THREE.Vector3()).length()/2*0.85, rad*0.05)); }
+        else { applyVis(); flyTo(ctr, rad*0.82); } } });
     /* 1 · Location — anchor it on the body map first */
     steps.push({ t:"📍 Location", lbl:"all",
       cue:{1:()=>flyK(1.8)},
@@ -3733,7 +3780,7 @@ function buildScene(gltf, st){
       x:`${phon?`<div class="les-phon"><button data-say="${esc(d.name)}" title="Hear it pronounced" aria-label="Hear it pronounced">${I("volume-2")}</button><code>${esc(phon)}</code></div>`:""}The <b>${esc(d.name)}</b>${reg?` sits in the <b>${esc(reg)}</b>`:""}${d.aka?` — also called the <b>${esc(d.aka)}</b>`:""}.<br><br>
         ${esc(d.summary||"")}${t.where?`<br><br>${esc(t.where)}`:""}
         ${sysMeta?`<br><br><span class="dim">It belongs to the <b>${esc(sysMeta.name)}</b> — ${esc((sysMeta.blurb||"").split(".")[0].toLowerCase())}.</span>`:""}`,
-      act:()=>{ setLayers(msys); focusIt(); select(id); flyK(3.0); } });
+      act:()=>{ setLayers(msys, true); lesson.regSet = false; focusIt(); select(id); flyK(3.0); } });
     /* 2 · Form — what it actually looks like */
     if(d.structure || t.look || imgOf(id)) steps.push({ t:"🔍 Form & structure", lbl:"all",
       vo:`Look at the shape. ${trimSents(t.look || d.structure)}`,
@@ -4449,6 +4496,12 @@ function v3D(sel){
       <div class="b3d-peel"><span class="b3d-ax" id="b3dax"><button data-a="x">X</button><button data-a="y">Y</button><button data-a="z" class="on">Z</button></span><input id="b3dsl" type="range" min="0" max="100" value="0" aria-label="Slice position"></div></div>
     <div class="b3d-pop" id="pop-exp"><div class="pop-h">${I("expand")} Explode <small>push structures apart</small></div>
       <div class="b3d-peel"><input id="b3dexp" type="range" min="0" max="100" value="0" aria-label="Explode view"><em id="b3dexpv"></em></div></div>
+    <div class="b3d-pop ly-pop" id="pop-layers"><div class="pop-h">${I("layers")} Layers <small>build the body up or strip it back</small></div>
+      <div class="ly-ctl"><button class="ly-st" id="b3dlyr" aria-label="Remove a layer">−</button>
+        <span class="ly-mid"><b id="b3dlyn"></b><small id="b3dlynext"></small></span>
+        <button class="ly-st" id="b3dlya" aria-label="Add a layer">+</button></div>
+      <div class="ly-list" id="b3dlylist" role="group" aria-label="Body systems"></div>
+      <div class="ly-foot"><button id="b3dlyreset">Reset</button><button id="b3dlymore">More options…</button></div></div>
     <div class="b3d-pop" id="pop-peel"><div class="pop-h">${I("layers")} Peel layers <small>skin → muscle → … → bone</small></div>
       <div class="b3d-peel"><input id="b3dpeel" type="range" min="0" max="100" value="0" aria-label="Peel anatomical layers"><em id="b3dpeelv"></em></div></div>
     <div class="b3d-pop" id="pop-more"><div class="pop-h">⋯ More <small>display &amp; actions</small></div>
@@ -4469,11 +4522,7 @@ function v3D(sel){
       <button class="dock-b" id="b3dst" title="Hide the names — tap a ? to reveal it (self-test)"><i>${I("eye-off")}</i><b>Test</b></button>
       <button class="dock-b" id="b3dquiz" title="Quiz: find or name structures"><i>${I("target")}</i><b>Quiz</b></button>
       <span class="dock-sep"></span>
-      <button class="dock-b" id="b3dlayers" title="Body systems, colors &amp; more"><i>${I("layers")}</i><b>Layers</b></button>
-      <span class="dock-stp" role="group" aria-label="Peel depth">
-        <button class="stp" id="b3dplp" title="Add a layer back (deeper → outer)" aria-label="Add a layer back">+</button>
-        <button class="stp" id="b3dplm" title="Peel one layer (outer → deeper)" aria-label="Peel one layer">−</button>
-      </span>
+      <button class="dock-b" id="b3dlayers" data-pop="layers" title="Add or remove body layers"><i>${I("layers")}</i><b>Layers</b></button>
       <button class="dock-b" data-pop="more" title="Wireframe, depth shading, undo, screenshot, reset"><i>⋯</i><b>More</b></button>
       <button class="dock-b" id="b3dunpeek" title="Hide the toolbar"><i>${I("chevron-down")}</i><b>Hide</b></button>
     </div></nav>
