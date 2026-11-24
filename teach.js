@@ -2793,3 +2793,30 @@ Object.assign(window.ATLAS_TEACH, {
   simple:"The placenta is the fetus's lifeline organ — exchange surface for oxygen and nutrients.",
   case:"Placenta previa and abruption are dangerous pregnancy complications."}
 });
+
+/* Plain-language glossary — terms that appear inside lesson text become
+   tappable, so beginners are never blocked by jargon. */
+window.ATLAS_GLOSSARY = {
+"superior":"above; toward the head","inferior":"below; toward the feet",
+"anterior":"at or toward the front of the body","posterior":"at or toward the back",
+"medial":"toward the midline of the body","lateral":"away from the midline",
+"proximal":"nearer to where a limb attaches to the trunk","distal":"further from where a limb attaches",
+"ipsilateral":"on the same side of the body","contralateral":"on the opposite side of the body",
+"superficial":"closer to the skin surface","deep":"further below the surface",
+"prone":"lying face down","supine":"lying face up",
+"flexion":"bending a joint, closing its angle","extension":"straightening a joint",
+"abduction":"moving a limb away from the midline","adduction":"moving a limb toward the midline",
+"medial rotation":"turning a limb inward, toward the midline","lateral rotation":"turning a limb outward",
+"coronal plane":"a vertical slice dividing front from back","sagittal plane":"a vertical slice dividing left from right",
+"transverse plane":"a horizontal slice dividing top from bottom","midline":"the imaginary line down the body's centre",
+"origin":"the fixed end of a muscle — where it starts","insertion":"the moving end of a muscle — where it pulls",
+"innervation":"the nerve supply to a structure","tendon":"the tough cord joining a muscle to bone",
+"ligament":"the tough band joining bone to bone at a joint","fascia":"thin sheets of connective tissue wrapping muscles and organs",
+"fossa":"a hollow or depression in a bone or body region","foramen":"a hole in a bone that nerves or vessels pass through",
+"canal":"a tunnel in bone or tissue carrying vessels or nerves","hiatus":"a normal opening or gap in a structure",
+"condyle":"a rounded knuckle of bone at a joint","epicondyle":"a small bump just above a condyle — a muscle attachment",
+"tubercle":"a small bump on a bone where tissue attaches","process":"any bony projection — usually an attachment point",
+"ramus":"a branch-like part of a bone or nerve","artery":"a vessel carrying blood away from the heart",
+"vein":"a vessel carrying blood back toward the heart","plexus":"a woven network of nerves or vessels",
+"sphincter":"a ring of muscle that opens and closes a passage"
+};

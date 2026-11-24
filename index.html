@@ -925,6 +925,22 @@ body.b3d-open .pwa-toast{bottom:112px}
 .lrow .lck{flex:none;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--panel2);color:var(--text3);font-size:13px}
 .lrow.done .lck{background:color-mix(in srgb,var(--good,#3ddc84) 20%,var(--panel2));color:var(--good,#3ddc84)}
 .lrow .lgo{flex:none;color:var(--text3);font-size:18px}
+.lrow.ckpt{background:color-mix(in srgb,var(--accent) 6%,var(--card));border-style:dashed;border-color:color-mix(in srgb,var(--accent) 35%,var(--border))}
+.lrow.ckpt .lck{background:var(--accent-soft);color:var(--accent)}
+.lrow.ckpt .ln2{font-weight:600}
+.term{border-bottom:1.5px dotted var(--accent);cursor:help}
+.term:hover{color:var(--accent)}
+.gloss-pop{position:fixed;z-index:130;max-width:260px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:10px 12px;box-shadow:var(--shadow);font-size:12.5px;line-height:1.5}
+.gloss-pop b{display:block;margin-bottom:2px;text-transform:capitalize;font-size:13px}
+.gloss-pop span{color:var(--text2)}
+.primer{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:4px 16px 10px;margin-bottom:14px}
+.primer summary{cursor:pointer;font-weight:700;font-size:14px;padding:10px 0;list-style:none}
+.primer summary::-webkit-details-marker{display:none}
+.primer[open] summary{border-bottom:1px solid var(--border);margin-bottom:10px}
+.primer .pg{margin-bottom:10px}
+.primer .pg>b{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:5px}
+.primer .pt{display:inline-block;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:4px 9px;margin:0 6px 5px 0;font-size:12px;color:var(--text2)}
+.primer .pt b{color:var(--text);margin-right:4px}
 .xptoast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(90px);background:var(--panel);border:1px solid var(--accent);color:var(--text);padding:10px 18px;border-radius:12px;font:700 13.5px var(--font);z-index:120;box-shadow:var(--shadow);opacity:0;transition:transform .3s,opacity .3s;pointer-events:none}
 .xptoast.on{transform:translateX(-50%) translateY(0);opacity:1}
 .learn-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
@@ -934,6 +950,7 @@ body.b3d-open .pwa-toast{bottom:112px}
 .today .tstep{display:inline-flex;align-items:center;gap:6px;background:var(--panel2,#1c1c1c);border:1px solid var(--border);border-radius:999px;padding:7px 14px;font:600 12.5px var(--font);color:var(--text);text-decoration:none}
 .today .tstep:hover{border-color:var(--accent)}
 .today .tstep.ok{color:var(--good,#3ddc84);border-color:color-mix(in srgb,var(--good,#3ddc84) 40%,var(--border))}
+.today .tstep.pri{background:var(--accent);border-color:var(--accent);color:#fff}
 .xpbadge{background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:20px;padding:5px 13px;font:700 12.5px var(--font)}
 .xpbadge b{color:var(--accent)}
 .streakb{background:var(--panel2);border:1px solid var(--border);color:#f2a900;border-radius:20px;padding:5px 13px;font:700 12.5px var(--font)}
@@ -1428,8 +1445,7 @@ function buildNav(){
   <a class="nav-link" data-href="#/map"><span class="ic">${I("map")}</span>Body map</a>
   <a class="nav-link" data-href="#/gallery"><span class="ic">${I("image")}</span>Plates gallery</a></div>
   <div class="nav-sec"><h4>Learn</h4>
-  <a class="nav-link" data-href="#/learn"><span class="ic">${I("graduation-cap")}</span>Lessons</a>
-  <a class="nav-link" data-href="#/paths"><span class="ic">${I("route")}</span>Guided paths</a>
+  <a class="nav-link" data-href="#/learn"><span class="ic">${I("graduation-cap")}</span>Learn</a>
   <a class="nav-link" data-href="#/learn/review"><span class="ic">${I("brain")}</span>Review<span class="ct due" id="nav-rev-ct">${due||""}</span></a></div>
   <div class="nav-sec"><h4>Practice</h4>
   <a class="nav-link" data-href="#/quiz"><span class="ic">${I("target")}</span>Quiz</a></div>`;
@@ -1485,7 +1501,10 @@ function vHome(){
   /* system-tinted jump chips + a resume chip for the last thing you opened */
   const chipC = s => "#"+((SYS_COLOR[s]||0x8d99a6).toString(16).padStart(6,"0"));
   let last = null; try{ last = localStorage.getItem("atlas-last"); }catch(e){}
-  const resume = last && byId[last] && B3D_IDS.has(last) ? `<a class="resume" href="#/3d/${last}">${I("undo-2")} ${esc(byId[last].name)}</a>` : "";
+  const resume = (()=>{ const r = PROG.lessonResume;
+    if(r && byId[r.id] && B3D_IDS.has(r.id) && !lessonDone(r.id))
+      return `<a class="resume" href="#/3d/${r.id}?lesson=${r.sys}">${I("undo-2")} Resume lesson: ${esc(byId[r.id].name)}</a>`;
+    return last && byId[last] && B3D_IDS.has(last) ? `<a class="resume" href="#/3d/${last}">${I("undo-2")} ${esc(byId[last].name)}</a>` : ""; })();
   const shortcuts = [["bone","Skeleton","skeletal","skeletal"],["dumbbell","Muscles","muscular","muscular"],["zap","Nerves","nervous","nervous"],["heart-pulse","Blood","cardiovascular,lymphatic","cardiovascular"],["stethoscope","Organs","digestive,respiratory,urinary,reproductive,endocrine,sensory","digestive"]]
     .map(([i,n,s,cs])=>`<a href="#/3d/?sys=${s}" style="--chip-c:${chipC(cs)}">${I(i)} ${n}</a>`).join("");
   /* jump-into-3D cards: open the viewer focused on that structure */
@@ -1734,27 +1753,40 @@ function loadPost(){
     SSAOPass:sa.SSAOPass, GammaCorrectionShader:gs.GammaCorrectionShader }); return true; })
   .catch(()=>false);
 }
-/* Stream model.bin (gzipped GLB) with real progress — the SW caches it on first fetch. */
+/* Stream model.bin (gzipped GLB) with real progress — the SW caches it on
+   first fetch. The chunks are gunzipped on the fly so the compressed and
+   uncompressed copies never coexist — that overlap was a memory spike big
+   enough to kill iOS web processes on a 20 MB download. */
 async function fetchModel(prog){
   const r = await fetch("model.bin");
   if(!r.ok) throw new Error("model.bin download failed: "+r.status);
   const total = +r.headers.get("content-length") || 20565892;
-  if(!r.body || !r.body.getReader) return new Uint8Array(await r.arrayBuffer());
-  const rd = r.body.getReader(), parts = [];
-  let got = 0, last = 0;
-  for(;;){
-    const {done, value} = await rd.read();
-    if(done) break;
-    parts.push(value); got += value.length;
-    const now = performance.now();
-    if(now - last > 120){
-      last = now;
-      prog(`Downloading the 3D body — ${(got/1048576).toFixed(1)} MB (one-time, then offline)`, Math.min(99, got/total*100));
-    }
+  const isGz = (r.headers.get("content-type")||"").includes("gzip");
+  /* no streaming support (older iOS) — single buffer, no duplicated chunks */
+  if(!r.body || !r.body.getReader || typeof DecompressionStream === "undefined"){
+    const raw = new Uint8Array(await r.arrayBuffer());
+    if(raw[0]===0x1f && raw[1]===0x8b)
+      return new Uint8Array(await new Response(new Blob([raw]).stream()
+        .pipeThrough(new DecompressionStream("gzip"))).arrayBuffer());
+    return raw;
   }
-  const out = new Uint8Array(got);
-  for(let o=0, i=0; i<parts.length; i++){ out.set(parts[i], o); o += parts[i].length; }
-  return out;
+  const rd = r.body.getReader();
+  let got = 0, last = 0;
+  const f0 = await rd.read();              /* peek the magic bytes before piping */
+  if(f0.done) return new Uint8Array(0);
+  const first = f0.value; got += first.length;
+  const progStream = new ReadableStream({ start: ctl => ctl.enqueue(first),
+    pull: async ctl => {
+    const {done, value} = await rd.read();
+    if(done){ ctl.close(); return; }
+    ctl.enqueue(value); got += value.length;
+    const now = performance.now();
+    if(now - last > 120){ last = now;
+      prog(`Downloading the 3D body — ${(got/1048576).toFixed(1)} MB (one-time, then offline)`, Math.min(99, got/total*100)); } } });
+  /* gzip-magic check — a plain GLB passes through uncompressed */
+  const stream = (first[0]===0x1f && first[1]===0x8b)
+    ? progStream.pipeThrough(new DecompressionStream("gzip")) : progStream;
+  return new Uint8Array(await new Response(stream).arrayBuffer());
 }
 async function loadBodyGlb(){
   if(B3D.gltf) return B3D.gltf;
@@ -1763,17 +1795,17 @@ async function loadBodyGlb(){
     el.innerHTML = p==null
       ? `<span class="b3d-spin"></span><div class="b3d-prog"><div class="t">${t}</div></div>`
       : `<span class="b3d-spin"></span><div class="b3d-prog"><div class="t">${t}</div><div class="bar"><i style="width:${Math.round(p)}%"></i></div><div class="pct">${Math.round(p)}%</div></div>`; };
-  const gz = await fetchModel(prog);
+  /* fetchModel already streamed the bytes through gzip — what arrives is the plain GLB */
+  const raw = await fetchModel(prog);
   prog("Unpacking the original Z-Anatomy body — a few seconds the first time…");
-  const buf = (gz[0]===0x1f && gz[1]===0x8b)
-    ? await new Response(new Blob([gz]).stream().pipeThrough(new DecompressionStream("gzip"))).arrayBuffer()
-    : gz.buffer;
+  const buf = raw.buffer.slice(raw.byteOffset, raw.byteOffset + raw.byteLength);
   prog("Decoding 2,300+ anatomical meshes…");
   const draco = new THREE.DRACOLoader();
   draco.setDecoderPath("./vendor/draco/");
   const loader = new THREE.GLTFLoader();
   loader.setDRACOLoader(draco);
   const gltf = await new Promise((res,rej)=>loader.parse(buf,"",res,rej));
+  try{ draco.dispose(); }catch(e){}   /* the WASM decoder is a few MB — release it now */
   B3D.gltf = gltf;
   return gltf;
 }
@@ -1828,7 +1860,7 @@ function buildScene(gltf, st){
   const prTarget = () => qual.mode==="low" ? 1 : qual.mode==="high" ? Math.min(devicePixelRatio,2)
     : Math.min(devicePixelRatio, lowPower?1.3:2);
   let renderer = null;
-  try{ renderer = new THREE.WebGLRenderer({canvas:cv, antialias:!lowPower}); }
+  try{ renderer = new THREE.WebGLRenderer({canvas:cv, antialias:!lowPower, powerPreference:"high-performance"}); }
   catch(e){
     /* the browser refused a WebGL context — most often the previous context's
        cleanup is still racing ours (forceContextLoss → new context can fail
@@ -1960,7 +1992,7 @@ function buildScene(gltf, st){
       if(onS.join()!==defS.join()) q.set("sys",onS.join(","));
       const pk = Object.keys(pinsV2);
       if(pk.length && pk.length<=24) q.set("pins",pk.join(","));
-      if(lesson.on && lesson.sys) q.set("lesson",lesson.sys);
+      if(lesson.on && lesson.sys && lesson.id) q.set("lesson",lesson.sys);
       if(quiz.on) q.set("quiz",quiz.mode);
       if(faded.size && faded.size<=24) q.set("fad",[...faded].join(","));
       if(peelN) q.set("peel",peelN);
@@ -1968,7 +2000,8 @@ function buildScene(gltf, st){
       if(clipOn) q.set("clip",clipAxis+":"+Math.round(clipPos*100));
       if(traceFx && traceFx.tr) q.set("trace",traceFx.tr.id);
       const qs = q.toString();
-      history.replaceState(null,"","#/3d/"+(selected||"")+(qs?"?"+qs:""));
+      /* lessons need the structure id in the path — ?lesson= alone can't restore */
+      history.replaceState(null,"","#/3d/"+(selected || (lesson.on ? lesson.id||"" : ""))+(qs?"?"+qs:""));
     }catch(e){} }, 200); };
   const SYS_ROUGH = { skeletal:.62, muscular:.82, nervous:.68, cardiovascular:.52, respiratory:.58,
     digestive:.5, urinary:.55, reproductive:.55, endocrine:.5, lymphatic:.58, integumentary:.88,
@@ -3727,7 +3760,11 @@ function buildScene(gltf, st){
     lblLayer.style.display = "block";
     if(lnSVG) lnSVG.style.display = "block";
     updLabels(); };
-  const lesClose = () => { lesson.on=false; lesson.sys=null; lesson.q=null;
+  const lesClose = () => { lesson.on=false;
+    /* keep resume only if the lesson wasn't finished */
+    if(PROG.lessonResume && lessonDone(lesson.id)) delete PROG.lessonResume;
+    else if(!lessonDone(lesson.id) && PROG.lessonResume && PROG.lessonResume.id!==lesson.id) delete PROG.lessonResume;
+    saveProg(); lesson.sys=null; lesson.q=null;
     ++lesson.tok; clearTimeout(lesAdvTm); sayStop(); lesOrbit(false); lesSpk = false;
     { const c0 = $("#lescap"); if(c0) c0.style.display = "none"; }
     if(lesEl) lesEl.style.display="none";
@@ -3953,14 +3990,44 @@ function buildScene(gltf, st){
     const qst = $("#lesqst"); qst.className = "les-qst"; qst.textContent = `Skipped — it was the ${nameOf(q.id)}.`;
     lesVoBarSync(); };
   /* step body: the teaching text, or the clickable step outline */
+  /* ---------- jargon scaffolding: tappable glossary terms ---------- */
+  const GLOSSARY = window.ATLAS_GLOSSARY || {};
+  const _glossRe = (()=>{ const ks = Object.keys(GLOSSARY).sort((a,b)=>b.length-a.length)
+    .map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));
+    return ks.length ? new RegExp(`\\b(${ks.join("|")})\\b`,"gi") : null; })();
+  /* wrap the FIRST occurrence of each term — text nodes only, never tags */
+  const gloss = html => { if(!_glossRe || !html) return html;
+    const seen = new Set();
+    return html.split(/(<[^>]+>)/g).map((seg,ix)=> ix%2 ? seg
+      : seg.replace(_glossRe, m=>{ const k=m.toLowerCase();
+          if(seen.has(k) || !GLOSSARY[k]) return m;
+          seen.add(k); return `<span class="term" data-t="${k}">${m}</span>`; })).join(""); };
+  const simpleOn = () => { try{ return localStorage.getItem("atlas-simple")==="1"; }catch(e){ return false; } };
+  /* one shared popover — created once, repositioned per tap */
+  if(!window.__glossPop){ const pop = document.createElement("div");
+    pop.className = "gloss-pop"; pop.style.display = "none"; document.body.appendChild(pop);
+    window.__glossPop = pop;
+    document.addEventListener("click", e => {
+      const t = e.target && e.target.closest ? e.target.closest(".term") : null;
+      if(!t){ pop.style.display = "none"; return; }
+      const def = GLOSSARY[t.dataset.t]; if(!def){ pop.style.display="none"; return; }
+      pop.innerHTML = `<b>${esc(t.dataset.t)}</b><span>${esc(def)}</span>`;
+      pop.style.display = "block";
+      const r = t.getBoundingClientRect(), w = pop.offsetWidth;
+      pop.style.left = Math.min(innerWidth-w-10, Math.max(10, r.left+r.width/2-w/2)) + "px";
+      pop.style.top = Math.min(innerHeight-pop.offsetHeight-10, r.bottom+8) + "px"; });
+    document.addEventListener("keydown", e=>{ if(e.key==="Escape") pop.style.display="none"; }); }
   const lesBodyPaint = () => { const s = lesson.steps[lesson.i], bd = $("#lesbody"); if(!s || !bd) return;
     if(lesson.outline){
       bd.innerHTML = `<div class="les-outline">${lesson.steps.map((st,k)=>`<button data-k="${k}" class="${k===lesson.i?"cur":k<lesson.i?"done":""}"><span class="n">${k<lesson.i?"✓":k+1}</span>${esc(st.t)}</button>`).join("")}</div>`;
       bd.querySelectorAll("[data-k]").forEach(b=>b.addEventListener("click",()=>lesGo(+b.dataset.k)));
-    } else bd.innerHTML = lesson.smp ? (s.s || firstSent(s.x)) : s.x; };
+    } else bd.innerHTML = gloss(lesson.smp ? (s.s || firstSent(s.x)) : s.x); };
   const lesGo = i => {
     const tok = ++lesson.tok;
     lesson.i = Math.max(0, Math.min(lesson.steps.length-1, i));
+    /* resume point — survive leaving the 3D view mid-lesson */
+    PROG.lessonResume = {id:lesson.id, sys:lesson.sys, i:lesson.i, n:lesson.steps.length};
+    saveProg();
     const s = lesson.steps[lesson.i];
     lesson.outline = false;
     $("#lest").textContent = s.t;
@@ -4052,10 +4119,12 @@ function buildScene(gltf, st){
     const steps = buildLesson(id,sys);
     if(!steps || !lesEl) return;
     lesson.on=true; lesson.id=id; lesson.sys=sys; lesson.steps=steps;
-    lesson.sc = {ok:0,tot:0,list:[]}; lesson.outline = false;
+    lesson.sc = {ok:0,tot:0,list:[]}; lesson.outline = false; lesson.smp = simpleOn();
     lesson.lblSaved = [labelsOn,stOn];
     appEl.classList.add("lesson");
-    lesEl.style.display="flex"; lesVoSync(); lesGo(0); };
+    lesEl.style.display="flex"; lesVoSync(); lesGo(0);
+    const rs = PROG.lessonResume;
+    if(rs && rs.id===id && rs.sys===sys && rs.i>0) lesGo(rs.i); };
   /* 🧠 explain-it-simply toggle — swaps step text for the plain version */
   const smpB = $("#lessmp");
   if(smpB) smpB.addEventListener("click",()=>{ lesson.smp=!lesson.smp;
@@ -4597,10 +4666,12 @@ function parseQC(s){ const c={sys:[],regs:[],mode:"mix",n:0,t:0,plate:0,path:nul
     else if(k==="r") c.regs=val.split(",").filter(x=>REGIONS[x]);
     else if(k==="mode"&&QMODES.some(m=>m[0]===val)) c.mode=val;
     else if(k==="p"){ const p=(window.ATLAS_PATHS||[]).find(x=>x.id===val); if(p){c.path=val;c.ids=p.steps.filter(id=>byId[id]);} }
+    else if(k==="i") c.ids=val.split(",").filter(id=>byId[id]).slice(0,60);
     else if(k==="n") c.n=+val||0; else if(k==="t") c.t=Math.min(600,+val||0); else if(k==="plate") c.plate=val==="1"; });
   return c; }
 function cfgToHash(c){ const p=[];
-  if(c.path)p.push("p="+c.path); if(c.sys.length)p.push("sys="+c.sys.join(",")); if(c.regs.length)p.push("r="+c.regs.join(","));
+  if(c.path)p.push("p="+c.path); else if(c.ids.length)p.push("i="+c.ids.join(","));
+  if(c.sys.length)p.push("sys="+c.sys.join(",")); if(c.regs.length)p.push("r="+c.regs.join(","));
   if(c.mode)p.push("mode="+c.mode); if(c.n)p.push("n="+c.n); if(c.t)p.push("t="+c.t); if(c.plate)p.push("plate=1");
   return "#/quiz/c:"+p.join("&"); }
 function quizPool(c){
@@ -4670,6 +4741,7 @@ function vQuiz(arg){
   let pool = quizPool(cfg);
   if(!pool.length) pool = DATA.filter(d=>d.summary);
   const scope = cfg.path ? (((window.ATLAS_PATHS||[]).find(x=>x.id===cfg.path))||{}).title||"Path quiz"
+    : cfg.ids.length ? "Custom set"
     : cfg.regs.length ? cfg.regs.map(r=>REGIONS[r].name).join(" + ")
     : cfg.sys.length ? cfg.sys.map(s=>SYSTEMS[s].name).join(" + ") : "Mixed";
   crumbs([{t:"Home",href:"#/"},...(isDue?[{t:"Learn",href:"#/learn"},{t:"Review"}]:[{t:"Quizzes",href:"#/quiz"},{t:scope}])]);
@@ -4717,7 +4789,8 @@ function endQuiz(msg){
     <div class="qsub">${quiz.score} of ${quiz.asked} correct (${pct}%)</div>
     <div class="quiz-foot"><a class="btn primary" href="${quiz.again||"#/quiz"}">Again</a>
       <a class="btn" href="#/quiz" style="margin-left:8px">All quizzes</a>
-      <a class="btn" href="#/quiz-builder" style="margin-left:8px">${I("sliders")} Custom quiz</a></div>`;
+      <a class="btn" href="#/quiz-builder" style="margin-left:8px">${I("sliders")} Custom quiz</a></div>
+    ${(()=>{ const sn = sessionNext(); return sn ? `<p style="margin:12px 0 0"><a class="btn" href="${sn.h}">${I("play")} Next in today's session: ${esc(sn.t)}</a></p>` : `<p class="hint" style="margin:12px 0 0">${I("check")} Today's session complete.</p>`; })()}`;
   if(quiz.asked>=10) giveBadge("review-10");
   if(quiz.score) addXP(quiz.score*2,"quiz session");
   PROG.dayQ = today(); saveProg();   /* "mixed check done today" for the session card */
@@ -4912,7 +4985,19 @@ const learnToast = (msg,ms) => {
 const addXP = (n,why) => { PROG.xp = (PROG.xp|0)+n; touchStreak(); saveProg();
   learnToast(`+${n} XP${why?" · "+why:""}`); };
 const lessonDone = id => !!(PROG.lessons && PROG.lessons[id]);
-const markLesson = id => { (PROG.lessons=PROG.lessons||{})[id]=today(); saveProg(); };
+const markLesson = id => { (PROG.lessons=PROG.lessons||{})[id]=today();
+  if(PROG.lessonResume && PROG.lessonResume.id===id) delete PROG.lessonResume;
+  saveProg(); };
+/* today's session — the next thing to do, computed from today's facts so the
+   chain works however the user navigates */
+const sessionNext = () => {
+  const due = srDue().length;
+  if(due) return {t:`Review ${due} due`, h:"#/quiz/due"};
+  const lesToday = Object.keys(PROG.lessons||{}).some(id=>PROG.lessons[id]===today());
+  if(!lesToday){ const nx = LEARN_ORDER.map(s=>({s,d:nextLesson(s)})).find(x=>x.d && !lessonDone(x.d.id));
+    if(nx) return {t:`Lesson: ${byId[nx.d.id]?nx.d.name:"next"}`, h:`#/3d/${nx.d.id}?lesson=${nx.s}`}; }
+  if(PROG.dayQ!==today()) return {t:"Mixed check", h:"#/quiz/c:mode=mix&n=8"};
+  return null; };
 /* Leitner boxes — an unaided recall advances the box (longer gap); an aided
    answer (after hints, reveal, or multiple choice) holds it without pushing
    toward mastery; a wrong answer resets it. Mastery = box ≥3 plus at least
@@ -4985,28 +5070,7 @@ function vLearn(arg){
   const free = !AUTH.isPremium();
   const FREE_LID = (lessonsOf("skeletal")[0]||{}).id;
   crumbs([{t:"Home",href:"#/"},{t:"Learn"}]);
-  if(arg && SYSTEMS[arg]){ /* lesson list for one system */
-    const c = SYSTEMS[arg], items = lessonsOf(arg);
-    const done = items.filter(d=>lessonDone(d.id)).length;
-    const nx = nextLesson(arg);
-    /* group lessons by body region (TeachMeAnatomy-style subsections) */
-    const lrow = d => { const lk = free && d.id!==FREE_LID;
-      return `<a class="lrow${lessonDone(d.id)?" done":""}${lk?" lk":""}" href="${lk?"#/premium":`#/3d/${d.id}?lesson=${arg}`}">
-        <span class="lck" title="${masteryState(d.id)==="mastered"?"Mastered — recalled unaided on a later day":masteryState(d.id)==="practising"?"Practising — unaided recall on a later day masters it":lessonDone(d.id)?"Lesson complete":""}">${masteryState(d.id)==="mastered"?"★":lessonDone(d.id)?"✓":lk?"🔒":""}</span>
-        <span class="lr"><span class="ln2">${esc(d.name)}</span><span class="lm2">${REGIONS[d.region].name}${d.aka?" · "+esc(d.aka):""}</span></span>
-        <span class="lgo">${lk?I("lock"):"›"}</span></a>`; };
-    const byReg = {}; items.forEach(d=>{ (byReg[d.region]=byReg[d.region]||[]).push(d); });
-    const regs = META.regionOrder.filter(r=>byReg[r]);
-    const rows = regs.length>1
-      ? regs.map(r=>`<div class="lgroup">${REGIONS[r].name} · ${byReg[r].length} lessons</div>`+byReg[r].map(lrow).join("")).join("")
-      : items.map(lrow).join("");
-    crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:c.name}]);
-    view.innerHTML = `<div class="list-head"><h1><span class="ic">${c.icon}</span>Learn ${c.name.toLowerCase()}</h1>
-      <p>${done}/${items.length} lessons complete — each one walks you through the structure in the 3D body: where it is, what it looks like, what it does and what sits next to it.${free?` <b style="color:var(--accent)">First lesson free — the rest are Premium.</b>`:""}</p></div>
-      ${nx?`<p><a class="btn primary" href="${free&&nx.id!==FREE_LID?"#/premium":`#/3d/${nx.id}?lesson=${arg}`}">${I("play")} ${done?"Continue":"Start"}: ${esc(nx.name)}${free&&nx.id!==FREE_LID?" 🔒":""}</a>
-        <a class="btn" href="${free&&arg!=="skeletal"?"#/premium":`#/quiz/${arg}`}">${I("target")} Quiz this system${free&&arg!=="skeletal"?" 🔒":""}</a></p>`:""}
-      <div class="grid tight" style="grid-template-columns:1fr">${rows}</div>`;
-    return; }
+  if(arg && SYSTEMS[arg]){ vCourse(arg); return; }
   /* course map */
   const due = srDue().length;
   const nx = LEARN_ORDER.map(s=>({s,d:nextLesson(s)})).find(x=>x.d && !lessonDone(x.d.id));
@@ -5018,17 +5082,38 @@ function vLearn(arg){
     <a class="tstep${due?"":" ok"}" href="${free?"#/premium":"#/quiz/due"}">${due?`${I("brain")} Review ${due} due`:`${I("check")} Nothing due`}</a>
     <a class="tstep${lesToday?" ok":""}" href="${nx?(free&&nx.d.id!==FREE_LID?"#/premium":`#/3d/${nx.d.id}?lesson=${nx.s}`):"#/learn"}">${lesToday?`${I("check")} Lesson done`:`${I("play")} 1 new lesson${nx?" — "+esc(nx.d.name):""}`}</a>
     <a class="tstep${quizToday?" ok":""}" href="#/quiz">${quizToday?`${I("check")} Check done`:`${I("target")} Mixed check`}</a>
+    ${(()=>{ const sn = sessionNext(); return sn ? `<a class="tstep pri" href="${sn.h}">${I("play")} Continue session →</a>` : `<span class="tstep ok">${I("check")} Session complete</span>`; })()}
   </div>`;
+  const smpNow = (()=>{ try{ return localStorage.getItem("atlas-simple")==="1"; }catch(e){ return false; } })();
+  const PRIMER = [["Directions",[["superior / inferior","above / below"],["anterior / posterior","front / back"],["medial / lateral","toward / away from the midline"],["proximal / distal","near / far from the trunk"],["superficial / deep","nearer / further from the skin"]]],
+    ["Planes",[["sagittal","vertical slice — left vs right"],["coronal","vertical slice — front vs back"],["transverse","horizontal slice — top vs bottom"]]],
+    ["Movements",[["flexion / extension","bend / straighten"],["abduction / adduction","away / toward the midline"],["medial / lateral rotation","turn inward / outward"]]]];
+  const primer = `<details class="primer"><summary>${I("book-open")} Body directions — the language of anatomy</summary>
+    ${PRIMER.map(g=>`<div class="pg"><b>${g[0]}</b>${g[1].map(t=>`<span class="pt"><b>${t[0]}</b> ${t[1]}</span>`).join("")}</div>`).join("")}
+    <p class="hint">In lessons, dotted words like <span class="term">medial</span> are tappable — the plain meaning pops up.</p></details>`;
   view.innerHTML = `<div class="list-head"><h1>${I("graduation-cap")} Learn anatomy</h1>
     <p>Guided lessons that walk you through each structure inside the 3D body — location, shape, function and neighbours, one step at a time. Method inspired by the "why, not what" approach of TeachMeAnatomy and AnatomyQuest.</p></div>
     ${todayCard}
+    ${primer}
     <div class="learn-head">
       ${nx?`<a class="btn primary" href="${free&&nx.d.id!==FREE_LID?"#/premium":`#/3d/${nx.d.id}?lesson=${nx.s}`}">${I("play")} Continue learning: ${esc(nx.d.name)}${free&&nx.d.id!==FREE_LID?" 🔒":""}</a>`:`<span class="badge">${I("trophy")} All lessons complete!</span>`}
+      <button class="btn sm" id="smpl" title="Swap lesson text for the plain-words version">Simple words: ${smpNow?"on":"off"}</button>
       <a class="btn" href="${free?"#/premium":"#/learn/review"}">${I("brain")} Review${due?` (${due} due)`:""}</a>
-      <a class="btn" href="#/paths">${I("route")} Guided paths</a>
       <span class="xp"><span class="xpbadge">${I("star")} <b>${PROG.xp|0}</b> XP</span>${PROG.streak>1?`<span class="streakb">${I("flame")} ${PROG.streak} days</span>`:""}</span>
     </div>
     ${(PROG.badges||[]).length?`<p class="hint" style="margin:-4px 0 14px">Badges: ${PROG.badges.map(b=>{const x=BADGES.find(y=>y[0]===b);return x?x[1]:"";}).filter(Boolean).join(" · ")}</p>`:""}
+    ${(()=>{ const n = confPairs().length; return n>=3 ? `<p class="hint" style="margin:-4px 0 14px">${I("target")} You've mixed up ${n} structure pairs — <a href="#/learn/lookalikes" style="color:var(--accent)">drill them in the look-alike clinic →</a></p>` : ""; })()}
+    <h2 class="sec-title">${I("route")} Featured courses</h2>
+    <div class="grid tight" style="grid-template-columns:1fr">${(window.ATLAS_PATHS||[]).map(p=>{
+      const {done,pct} = pathProg(p);
+      const LVL=["",'<i class="cdot" style="--c:#22c55e"></i>Intro','<i class="cdot" style="--c:#3b82f6"></i>Core','<i class="cdot" style="--c:#a855f7"></i>Advanced'];
+      return `<a class="lpath${pct===100?" done":""}" href="#/path/${p.id}">
+        <span class="li">${I(p.level===3?"graduation-cap":p.level===2?"book-open":"sprout")}</span>
+        <span class="lm"><span class="lt">${esc(p.title)}</span>
+          <span class="ld">${LVL[p.level]||""} · ${p.steps.length} stops · ${esc(p.time)}${done?` · ${done} done`:""}</span>
+          <span class="lbar"><i style="width:${pct}%"></i></span></span>
+        <span class="ln"><b>${pct}%</b>${pct===100?"✓":"›"}</span></a>`; }).join("")}</div>
+    <h2 class="sec-title">${I("graduation-cap")} Body systems</h2>
     <div class="grid tight" style="grid-template-columns:1fr">${LEARN_ORDER.filter(s=>sysCount[s]).map(s=>{
       const items = lessonsOf(s), done = items.filter(d=>lessonDone(d.id)).length;
       const pct = items.length ? Math.round(done/items.length*100) : 0;
@@ -5043,6 +5128,31 @@ function vLearn(arg){
     <div class="grid tight" style="grid-template-columns:1fr">${Object.keys(ARTICLES).filter(id=>byId[id]).slice(0,3).map(id=>{ const d=byId[id],a=ARTICLES[id];
       return `<a class="lrow" href="#/article/${id}"><span class="lck">${SYSTEMS[d.system].icon}</span>
         <span class="lr"><span class="ln2">${esc(a.title)}</span><span class="lm2">${esc(d.name)} · ${REGIONS[d.region].name}</span></span><span class="lgo">›</span></a>`; }).join("")}</div>`:""}`;
+  const smpB2 = view.querySelector("#smpl");
+  if(smpB2) smpB2.addEventListener("click",()=>{
+    const on = !((()=>{ try{ return localStorage.getItem("atlas-simple")==="1"; }catch(e){ return false; } })());
+    try{ localStorage.setItem("atlas-simple", on?"1":"0"); }catch(e){}
+    smpB2.textContent = `Simple words: ${on?"on":"off"}`; smpB2.classList.toggle("on",on);
+    learnToast(on?"Lessons will use plain words":"Lessons will use anatomical terms"); });
+}
+/* confusion pairs collected from quiz misses — "look-alike clinic" drills them */
+const confPairs = () => { const c=PROG.conf||{}, seen=new Set(), out=[];
+  Object.keys(c).forEach(a=>Object.keys(c[a]).forEach(b=>{
+    const k=[a,b].sort().join("|"); if(seen.has(k)||!byId[a]||!byId[b]) return;
+    seen.add(k); out.push({a,b,n:(c[a][b]||0)+((c[b]||{})[a]||0)}); }));
+  return out.sort((x,y)=>y.n-x.n); };
+function vLookalikes(){
+  crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:"Look-alike clinic"}]);
+  const pairs = confPairs();
+  view.innerHTML = `<div class="list-head"><h1>${I("target")} Look-alike clinic</h1>
+    <p>The structures you've mixed up in quizzes, paired side by side. Drill each pair until the difference sticks — drilling counts toward spaced repetition.</p></div>
+    ${pairs.length?`<div class="grid tight" style="grid-template-columns:1fr">`+pairs.slice(0,12).map(p=>{
+      const hint = (TEACH[p.a]&&TEACH[p.a].rel&&TEACH[p.a].rel[p.b]) || (TEACH[p.b]&&TEACH[p.b].rel&&TEACH[p.b].rel[p.a]) || "";
+      return `<a class="lrow" href="#/quiz/c:i=${p.a},${p.b}&mode=mix&n=6">
+        <span class="lck">${I("target")}</span>
+        <span class="lr"><span class="ln2">${esc(byId[p.a].name)} ↔ ${esc(byId[p.b].name)}</span>
+        <span class="lm2">mixed up ${p.n}×${hint?" · "+esc(hint):""}</span></span><span class="lgo">›</span></a>`; }).join("")+`</div>`
+    : `<div class="empty">No confusions yet — take some quizzes and the structures you mix up will collect here.</div>`}`;
 }
 function vReview(){
   if(!AUTH.isPremium()){ vPaywall("learn"); return; }
@@ -5057,37 +5167,67 @@ function vReview(){
 /* ---------- guided learning paths ---------- */
 const pathProg = p => { const done = p.steps.filter(s=>lessonDone(s)).length;
   return {done, pct: p.steps.length ? Math.round(done/p.steps.length*100) : 0}; };
-function vPaths(){
-  crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:"Guided paths"}]);
-  const LVL=["",'<i class="cdot" style="--c:#22c55e"></i>Intro','<i class="cdot" style="--c:#3b82f6"></i>Core','<i class="cdot" style="--c:#a855f7"></i>Advanced'];
-  view.innerHTML = `<div class="list-head"><h1>${I("route")} Guided learning paths</h1>
-    <p>Curated routes through the atlas — each step opens an interactive 3D lesson. Finish a path to earn its badge.</p></div>
-    <div class="grid tight" style="grid-template-columns:1fr">${(window.ATLAS_PATHS||[]).map(p=>{
-      const {done,pct} = pathProg(p);
-      return `<a class="lpath${pct===100?" done":""}" href="#/path/${p.id}">
-        <span class="li">${I(p.level===3?"graduation-cap":p.level===2?"book-open":"sprout")}</span>
-        <span class="lm"><span class="lt">${esc(p.title)}</span>
-          <span class="ld">${LVL[p.level]||""} · ${p.steps.length} stops · ${esc(p.time)}${done?` · ${done} done`:""}</span>
-          <span class="lbar"><i style="width:${pct}%"></i></span></span>
-        <span class="ln"><b>${pct}%</b>${pct===100?"✓":"›"}</span></a>`; }).join("")}</div>`;
-}
-function vPath(pid){
-  const p = (window.ATLAS_PATHS||[]).find(x=>x.id===pid);
-  if(!p){ location.hash="/paths"; return; }
-  crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:"Paths",href:"#/paths"},{t:p.title}]);
-  const {done,pct} = pathProg(p);
-  const nxt = p.steps.find(s=>!lessonDone(s)) || p.steps[0];
-  view.innerHTML = `<div class="list-head"><h1>${esc(p.title)}</h1>
-    <p>${esc(p.desc)} ${done?`Progress: ${done}/${p.steps.length} (${pct}%)`:""}</p></div>
-    <div class="section"><h2>Objectives</h2><ul class="tlist">${(p.objectives||[]).map(o=>`<li>${I("check")} ${esc(o)}</li>`).join("")}</ul></div>
-    <p><a class="btn primary" href="#/3d/${nxt}?lesson=path:${p.id}">${I("play")} ${done?"Continue":"Start"} the path</a>
-      <a class="btn" href="#/quiz/c:p=${p.id}&mode=mix&n=${Math.min(20,p.steps.length)}" style="margin-left:8px">${I("target")} Quiz this path</a></p>
-    ${p.steps.map((s,i)=>{ const d=byId[s]; if(!d) return "";
-      const ok = lessonDone(s);
-      return `<a class="lrow${ok?" done":""}" href="#/3d/${s}?lesson=path:${p.id}">
-        <span class="lck">${ok?"✓":i+1}</span>
-        <span class="lr"><span class="ln2">${esc(d.name)}</span><span class="lm2">${SYSTEMS[d.system].icon} ${SYSTEMS[d.system].name} · ${REGIONS[d.region].name}</span></span>
-        <span class="lgo">›</span></a>`; }).join("")}`;
+/* ---------- unified curriculum: featured paths + system courses ---------- */
+const estMin = d => Math.max(3, 4 + (d.clinical?1:0) + (d.fn?1:0) + ((TEACH[d.id]||{}).supply?1:0));
+const courseOf = key => {
+  if(key.startsWith("path:")){ const p = (window.ATLAS_PATHS||[]).find(x=>x.id===key.slice(5));
+    return p ? {key, isPath:true, title:p.title, desc:p.desc||"", objectives:p.objectives||[],
+      meta:`${p.steps.length} stops · ${p.time||""}`, stops:p.steps.filter(id=>byId[id])} : null; }
+  if(!SYSTEMS[key]) return null;
+  return {key, isPath:false, title:"Learn "+SYSTEMS[key].name.toLowerCase(),
+    desc:"Each stop walks you through a structure inside the 3D body — where it is, what it looks like, what it does and what sits next to it. Stops are grouped by body region.",
+    objectives:[], meta:`${lessonsOf(key).length} stops`, stops:lessonsOf(key).map(d=>d.id)};
+};
+const courseProg = c => { const done = c.stops.filter(lessonDone).length;
+  return {done, total:c.stops.length, pct:c.stops.length?Math.round(done/c.stops.length*100):0}; };
+const courseNext = c => c.stops.find(s=>!lessonDone(s)) || c.stops[0];
+function vCourse(key){
+  const c = courseOf(key); if(!c){ location.hash="/learn"; return; }
+  const free = !AUTH.isPremium(), FREE_LID = (lessonsOf("skeletal")[0]||{}).id;
+  crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:c.title}]);
+  const {done,total,pct} = courseProg(c), nxt = courseNext(c);
+  const lockSt = id => free && !(key==="skeletal" && id===FREE_LID);
+  const res = PROG.lessonResume;
+  const resRow = res && res.sys===key && byId[res.id] && !lessonDone(res.id)
+    ? `<a class="lrow ckpt" href="#/3d/${res.id}?lesson=${key}">
+      <span class="lck">${I("undo-2")}</span><span class="lr"><span class="ln2">Resume: ${esc(byId[res.id].name)}</span>
+      <span class="lm2">Continue from step ${res.i+1} of ${res.n||"?"}</span></span><span class="lgo">›</span></a>` : "";
+  const lrow = (s,i)=>{ const d=byId[s]; if(!d) return "";
+    const ok=lessonDone(s), lk=lockSt(s), ms=masteryState(s);
+    return `<a class="lrow${ok?" done":""}${lk?" lk":""}" href="${lk?"#/premium":`#/3d/${s}?lesson=${c.key}`}">
+      <span class="lck" title="${ms==="mastered"?"Mastered — recalled unaided on a later day":ms==="practising"?"Practising — unaided recall on a later day masters it":ok?"Lesson complete":""}">${ms==="mastered"?"★":ok?"✓":i+1}</span>
+      <span class="lr"><span class="ln2">${esc(d.name)}</span><span class="lm2">${SYSTEMS[d.system].icon} ${SYSTEMS[d.system].name} · ${REGIONS[d.region].name} · ~${estMin(d)} min</span></span>
+      <span class="lgo">${lk?I("lock"):"›"}</span></a>`; };
+  /* checkpoint quiz row after each block of 4 stops — retrieval inside the course */
+  const ckpt = i => { const n = Math.min(5, i+1);
+    return `<a class="lrow ckpt" href="#/quiz/c:i=${c.stops.slice(0,i+1).join(",")}&mode=choices&n=${n}">
+      <span class="lck">${I("target")}</span><span class="lr"><span class="ln2">Checkpoint — quiz the ${i+1} stops so far</span>
+      <span class="lm2">Mixed recall · ${n} questions</span></span><span class="lgo">›</span></a>`; };
+  const rows = c.stops.map((s,i)=> lrow(s,i)
+    + ((i%4===3 || i===c.stops.length-1) && i>=3 ? ckpt(i) : "")).join("");
+  /* system courses group stops under region headers — checkpoint per region */
+  const ckptIds = (ids,n) => { const c2 = Math.min(5, ids.length);
+    return `<a class="lrow ckpt" href="#/quiz/c:i=${ids.join(",")}&mode=choices&n=${c2}">
+      <span class="lck">${I("target")}</span><span class="lr"><span class="ln2">Checkpoint — quiz ${n}</span>
+      <span class="lm2">Mixed recall · ${c2} questions</span></span><span class="lgo">›</span></a>`; };
+  const grouped = !c.isPath && c.stops.length
+    ? (()=>{ const byReg={}; c.stops.forEach((s,i)=>{ const r=(byId[s]||{}).region;
+        (byReg[r]=byReg[r]||[]).push(i); });
+        const order=META.regionOrder.filter(r=>byReg[r]);
+        return order.length>1 ? order.map(r=>`<div class="lgroup">${REGIONS[r].name} · ${byReg[r].length} lessons</div>`
+          + byReg[r].map(i=>lrow(c.stops[i],i)).join("")
+          + (byReg[r].length>=3 ? ckptIds(byReg[r].map(i=>c.stops[i]), `the ${byReg[r].length} lessons of ${REGIONS[r].name}`) : "")).join("")
+        : rows; })()
+    : rows;
+  const quizHref = c.isPath ? `#/quiz/c:p=${c.key.slice(5)}&mode=mix&n=${Math.min(20,total)}`
+    : `#/quiz/c:i=${c.stops.join(",")}&mode=mix&n=${Math.min(20,total)}`;
+  view.innerHTML = `<div class="list-head"><h1>${esc(c.title)}</h1>
+    <p>${esc(c.desc)} ${done?`Progress: ${done}/${total} (${pct}%)`:""}${c.meta?` <span class="dim">${esc(c.meta)}</span>`:""}</p></div>
+    ${c.objectives.length?`<div class="section"><h2>Objectives</h2><ul class="tlist">${c.objectives.map(o=>`<li>${I("check")} ${esc(o)}</li>`).join("")}</ul></div>`:""}
+    ${nxt?`<p><a class="btn primary" href="${lockSt(nxt)?"#/premium":`#/3d/${nxt}?lesson=${c.key}`}">${I("play")} ${done?"Continue":"Start"}${byId[nxt]?`: ${esc(byId[nxt].name)}`:""}${lockSt(nxt)?" 🔒":""}</a>
+      <a class="btn" href="${free&&key!=="skeletal"?"#/premium":quizHref}">${I("target")} Quiz this course${free&&key!=="skeletal"?" 🔒":""}</a></p>`:""}
+    ${resRow}
+    ${grouped}`;
 }
 
 /* ---------- long-form articles ---------- */
@@ -5217,11 +5357,11 @@ function route(){
   else if(kind==="map"){ vMap(); mark("map"); }
   else if(kind==="quiz"){ if(arg){ vQuiz(arg); mark(arg==="due"?"learn/review":"quiz"); } else { vQuizHub(); mark("quiz"); } }
   else if(kind==="quiz-builder"){ vQuizBuilder(); mark("quiz"); }
-  else if(kind==="path" && arg){ vPath(arg); mark("paths"); }
-  else if(kind==="paths"){ vPaths(); mark("paths"); }
+  else if(kind==="path" && arg){ vCourse("path:"+arg); mark("learn"); }
+  else if(kind==="paths"){ vLearn(null); mark("learn"); }
   else if(kind==="article" && arg && ARTICLES[arg] && byId[arg]){ vArticle(arg); mark("learn"); }
   else if(kind==="articles"){ vArticles(); mark("learn"); }
-  else if(kind==="learn"){ if(arg==="review"){ vReview(); mark("learn/review"); } else { vLearn(arg||null); mark("learn"); } }
+  else if(kind==="learn"){ if(arg==="review"){ vReview(); mark("learn/review"); } else if(arg==="lookalikes"){ vLookalikes(); mark("learn"); } else { vLearn(arg||null); mark("learn"); } }
   else if(kind==="gallery"){ vGallery(); mark("gallery"); }
   else if(kind==="3d"){ v3D(arg||null); mark("3d"); }
   else if(kind==="search"){ vSearch(arg||""); }
