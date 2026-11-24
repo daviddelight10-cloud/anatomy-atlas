@@ -378,7 +378,7 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
 .b3d-quiz .qs-stats span{text-align:center;color:#a3a3a3;font-size:12px}
 .b3d-quiz .qs-stats b{display:block;font-size:21px;color:#ffd60a}
 /* quiz mode: only the quiz box stays on screen — everything else returns when it ends */
-.b3d-app.quiz .b3d-regs,.b3d-app.quiz .b3d-rail,.b3d-app.quiz .b3d-dock,.b3d-app.quiz .b3d-pop,.b3d-app.quiz .b3d-hbar,.b3d-app.quiz .b3d-hint,.b3d-app.quiz .b3d-peekbtn,.b3d-app.quiz .b3d-tour,.b3d-app.quiz .b3d-search,.b3d-app.quiz .b3d-lesson,.b3d-app.quiz #b3dfocus,.b3d-app.quiz #b3dhelpbtn{display:none!important}
+.b3d-app.quiz .b3d-regs,.b3d-app.quiz .b3d-rail,.b3d-app.quiz .b3d-dock,.b3d-app.quiz .b3d-pop,.b3d-app.quiz .b3d-hbar,.b3d-app.quiz .b3d-hint,.b3d-app.quiz .b3d-peekbtn,.b3d-app.quiz .b3d-tour,.b3d-app.quiz .b3d-tb,.b3d-app.quiz .b3d-search,.b3d-app.quiz .b3d-lesson,.b3d-app.quiz #b3dfocus,.b3d-app.quiz #b3dhelpbtn{display:none!important}
 .b3d-quiz .q-ctl{display:flex;gap:4px}
 .b3d-quiz .q-modes{border-right:0;padding-right:0;margin-right:0}
 .b3d-quiz button .ico{width:13px;height:13px;vertical-align:-2px}
@@ -558,6 +558,15 @@ body.b3d-open .pwa-toast{bottom:112px}
 .rg-scroll{display:flex;align-items:center;gap:6px;min-width:0;max-width:1400px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;transition:max-width .24s ease,opacity .18s ease,padding .24s ease;padding:0 2px 0 4px}
 .rg-scroll::-webkit-scrollbar{display:none}
 .b3d-regs.min{width:max-content;right:auto}
+.rg-sep{flex:none;width:1px;align-self:stretch;margin:4px 0;background:#3a3a3a}
+.rg-ly{flex:none;display:flex;align-items:center;gap:4px;padding-right:2px}
+.rg-lb{flex:none;width:30px;height:30px;display:grid;place-items:center;border:1px solid #3a3a3a;border-radius:10px;background:#1c1c1c;color:#e8e8e8;font:700 16px/1 var(--font);cursor:pointer}
+.rg-lb:hover:not(:disabled){background:#2a2a2a;border-color:#555}
+.rg-lb:disabled{opacity:.35;cursor:default}
+.rg-lyro{flex:none;display:flex;align-items:center;justify-content:center;gap:3px;min-width:36px;max-width:80px;height:30px;padding:0 8px;border:1px solid #3a3a3a;border-radius:10px;background:#1c1c1c;cursor:pointer;overflow:hidden}
+.rg-lyro:hover,.rg-lyro.on{background:#2a2a2a;border-color:#555}
+.rg-lyro .ly-dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--fc);box-shadow:0 0 5px var(--fc)}
+.rg-lyro b{font:700 10px var(--font);color:#8d887a}
 .b3d-regs.min .rg-scroll{max-width:0;opacity:0;padding:0;pointer-events:none}
 .b3d-regs.min .rg-tog{border-right:0;border-radius:13px}
 .b3d-regs.min .rg-tog .rd,.b3d-regs.min .rg-tog .rt{display:inline-block}
@@ -741,6 +750,16 @@ body.b3d-open .pwa-toast{bottom:112px}
 .b3d-idx .idx-r [data-x]{margin-left:auto;border:0;background:none;color:#8d887a;cursor:pointer;padding:2px 4px;font-size:12px}
 .b3d-idx .idx-r [data-x]:hover{color:#fff}
 .b3d-app .b3d-hbar{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--above) + var(--rail-h));z-index:17;background:var(--g);border:1px solid var(--gb);border-radius:14px;padding:6px 8px 6px 12px;color:#e8e8e8;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);white-space:nowrap;max-width:calc(100% - 24px)}
+.b3d-app .b3d-tb{position:absolute;left:50%;transform:translateX(-50%);top:calc(112px + var(--safe-t));z-index:19;align-items:center;gap:8px;background:var(--g);border:1px solid var(--gb);border-radius:18px;padding:6px 8px 6px 13px;color:#e8e8e8;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);white-space:nowrap;max-width:calc(100% - 24px);box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.b3d-app.lesson .b3d-tb,.b3d-app.focus .b3d-tb{display:none!important}
+.b3d-tb .tb-t{font-weight:700;font-size:12.5px;display:flex;align-items:center;gap:7px}
+.b3d-tb .tb-st{font-size:11.5px;color:#b7b2a4}
+.b3d-tb .tb-dot{width:8px;height:8px;border-radius:50%;background:#f43f5e;display:inline-block;animation:tourPulse 1.4s ease-in-out infinite}
+.b3d-tb button{background:#242424;border:1px solid #3d3d3d;color:#e8e8e8;border-radius:9px;padding:5px 11px;font:600 12px var(--font);cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.b3d-tb button.pri{background:#ffd60a;border-color:#ffd60a;color:#0a0a0a}
+.b3d-tb button:disabled{opacity:.35;cursor:default}
+.b3d-tb button i{width:13px;height:13px;display:inline-flex}
+.b3d-tb button i svg{width:100%;height:100%}
 .b3d-app .b3d-hbar button{background:#242424;color:#ffd60a;border-color:#3d3d3d;padding:5px 11px}
 .b3d-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--above) + var(--rail-h) + 6px);z-index:12;max-width:calc(100% - 32px);text-align:center;padding:7px 14px;border-radius:20px;background:rgba(16,16,16,.78);border:1px solid #333;color:#cfcabc;font:500 12.5px var(--font);pointer-events:none;transition:opacity .35s}
 .b3d-hint.gone{opacity:0}
@@ -928,6 +947,26 @@ body.b3d-open .pwa-toast{bottom:112px}
 .lrow.ckpt{background:color-mix(in srgb,var(--accent) 6%,var(--card));border-style:dashed;border-color:color-mix(in srgb,var(--accent) 35%,var(--border))}
 .lrow.ckpt .lck{background:var(--accent-soft);color:var(--accent)}
 .lrow.ckpt .ln2{font-weight:600}
+/* post-quiz report + cram tables */
+.qreport{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin:16px 0;text-align:left;font-size:13.5px}
+.qreport b{font-size:14.5px}
+.qreport h4{margin:12px 0 5px;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--text3)}
+.qreport ul{margin:0;padding-left:18px;line-height:1.7}
+.cram{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.cram h3{margin:0 0 10px;font-size:16px}
+.cram-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.cram-tbl th{text-align:left;padding:7px 10px;border-bottom:2px solid var(--border);color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+.cram-tbl td{padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+.cram-tbl td:first-child{font-weight:600;color:var(--text)}
+/* course next-stop preview */
+.nxt-card{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 10%,var(--card)),var(--card));border:1px solid var(--border);border-radius:14px;padding:12px 16px;margin:10px 0 6px;text-decoration:none;color:var(--text)}
+.nxt-card img{width:74px;height:52px;object-fit:cover;border-radius:9px;background:#1a1a1a}
+.nxt-ic{font-size:26px;width:40px;text-align:center}
+.nxt-tx{flex:1;min-width:0}
+.nxt-tx b{display:block;font-size:14.5px}
+.nxt-tx small{display:block;color:var(--text3);font-size:12px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nxt-lnks{display:flex;gap:10px;margin-top:5px;font-size:11px;color:var(--accent);font-weight:600}
+.nxt-go{font-size:20px;color:var(--text3)}
 .term{border-bottom:1.5px dotted var(--accent);cursor:help}
 .term:hover{color:var(--accent)}
 .gloss-pop{position:fixed;z-index:130;max-width:260px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:10px 12px;box-shadow:var(--shadow);font-size:12.5px;line-height:1.5}
@@ -941,6 +980,16 @@ body.b3d-open .pwa-toast{bottom:112px}
 .primer .pg>b{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:5px}
 .primer .pt{display:inline-block;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:4px 9px;margin:0 6px 5px 0;font-size:12px;color:var(--text2)}
 .primer .pt b{color:var(--text);margin-right:4px}
+.mmrow{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.mmrow .mmn{flex:none;width:120px;font-size:12.5px;font-weight:600}
+.mmrow .mmbar{flex:1;height:8px;border-radius:99px;background:var(--panel2);overflow:hidden;display:flex}
+.mmrow .mmbar i{display:block;height:100%}
+.mmrow .mmbar .m3{background:var(--good,#3ddc84)}
+.mmrow .mmbar .m2{background:#ffd166}
+.mmrow .mmbar .m1{background:var(--accent)}
+.mmrow .mmc{flex:none;width:44px;font-size:11.5px;color:var(--text3);text-align:right}
+.mmkey{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 3px -1px 8px}
+.mmkey.m3{background:var(--good,#3ddc84)}.mmkey.m2{background:#ffd166}.mmkey.m1{background:var(--accent)}
 .xptoast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(90px);background:var(--panel);border:1px solid var(--accent);color:var(--text);padding:10px 18px;border-radius:12px;font:700 13.5px var(--font);z-index:120;box-shadow:var(--shadow);opacity:0;transition:transform .3s,opacity .3s;pointer-events:none}
 .xptoast.on{transform:translateX(-50%) translateY(0);opacity:1}
 .learn-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
@@ -1498,15 +1547,13 @@ function vHome(){
     + (due?`<span>${I("brain")} <b>${due}</b> review${due===1?"":"s"} due</span>`:"")
     + ((PROG.quizRight|0)?`<span>${I("target")} <b>${PROG.quizRight}</b> quiz hits</span>`:"");
   const hstats = hstatIn ? `<div class="hstats">${hstatIn}</div>` : "";
-  /* system-tinted jump chips + a resume chip for the last thing you opened */
-  const chipC = s => "#"+((SYS_COLOR[s]||0x8d99a6).toString(16).padStart(6,"0"));
+  /* region-tinted jump chips + a resume chip for the last thing you opened */
   let last = null; try{ last = localStorage.getItem("atlas-last"); }catch(e){}
   const resume = (()=>{ const r = PROG.lessonResume;
     if(r && byId[r.id] && B3D_IDS.has(r.id) && !lessonDone(r.id))
       return `<a class="resume" href="#/3d/${r.id}?lesson=${r.sys}">${I("undo-2")} Resume lesson: ${esc(byId[r.id].name)}</a>`;
     return last && byId[last] && B3D_IDS.has(last) ? `<a class="resume" href="#/3d/${last}">${I("undo-2")} ${esc(byId[last].name)}</a>` : ""; })();
-  const shortcuts = [["bone","Skeleton","skeletal","skeletal"],["dumbbell","Muscles","muscular","muscular"],["zap","Nerves","nervous","nervous"],["heart-pulse","Blood","cardiovascular,lymphatic","cardiovascular"],["stethoscope","Organs","digestive,respiratory,urinary,reproductive,endocrine,sensory","digestive"]]
-    .map(([i,n,s,cs])=>`<a href="#/3d/?sys=${s}" style="--chip-c:${chipC(cs)}">${I(i)} ${n}</a>`).join("");
+  const shortcuts = REGIONS_3D.map(([r,ic,lb])=>`<a href="#/3d?reg=${r}" style="--chip-c:${"#"+((REG_COLOR[r]||0x8d99a6).toString(16).padStart(6,"0"))}">${I(ic)} ${lb}${(!AUTH.isPremium() && !FREE_REGS.includes(r))?" 🔒":""}</a>`).join("");
   /* jump-into-3D cards: open the viewer focused on that structure */
   let ids3 = ["heart","brain","femur","deltoid","lungs","kidney","eye","stomach"].filter(id=>byId[id] && B3D_IDS.has(id));
   if(ids3.length<4) ids3 = [...new Set([...ids3,...[...B3D_IDS].filter(id=>byId[id] && IMAGES[id])])].slice(0,8);
@@ -1542,9 +1589,9 @@ function vHome(){
   <section class="main3d">
     <a class="m3d-poster" href="#/3d" aria-label="Open the 3D body"><img src="img/poster.jpg" width="1000" height="751" alt="Golden skeleton with holographic organs" onerror="this.closest('.main3d').classList.add('noimg')"></a>
     <div class="m3d-body"><span class="kick">Interactive</span><h2>3D interactive body</h2>
-      <p>Rotate, peel away layers and tap any structure to learn what it is.</p>
+      <p>Pick a region, add its layers and tap any structure to learn what it is.</p>
       <a class="btn big" href="#/3d">${I("box")} Open 3D body</a>
-      <div class="m3d-chips"><span class="lbl">Jump to:</span>${shortcuts}${resume}</div></div>
+      <div class="m3d-chips"><span class="lbl">Dissect a region:</span>${shortcuts}${resume}</div></div>
   </section>
   ${hstats}
   <div class="path2">
@@ -1719,6 +1766,17 @@ const B3D_SKIP = new Set(window.ATLAS_GLB_SKIP || []);
 const nameOf = id => (byId[id] && byId[id].name) || B3D_LABEL[id] || id.replace(/^z:/,"").replace(/-/g," ");
 const sysOf = id => (byId[id] && byId[id].system) || B3D_SYS[id] || "general";
 const regOf = id => (byId[id] && byId[id].region) || "whole-body";
+
+/* shared region metadata — the home card, the viewer bar and the dissector
+   chips all read from this one list */
+const REGIONS_3D = [["head","skull","Head & neck"],["thorax","heart-pulse","Thorax"],
+  ["abdomen","apple","Abdomen"],["pelvis","bone","Pelvis"],["back","person","Back & spine"],
+  ["upper-limb","hand","Upper limb"],["lower-limb","map-pin","Lower limb"]];
+/* free tier gets two showcase regions — skull/neck + arm bones are the demo;
+   the organ-heavy trunk regions stay Premium */
+const FREE_REGS = ["head","upper-limb"];
+const REG_COLOR = { head:0xe3a94e, neck:0xd98e8e, thorax:0xc25b52, abdomen:0xc7864e, pelvis:0x9b68ae,
+  back:0x6fa3a0, "upper-limb":0x5f95c8, "lower-limb":0x4f9a6b, "whole-body":0x8d99a6 };
 
 const SYS_COLOR = { skeletal:0xcfc7b8, muscular:0xa8473f, nervous:0xd8b13c, cardiovascular:0xb03a30,
   respiratory:0xd98d96, digestive:0xc78f4e, urinary:0xc7b23a, reproductive:0x9b68ae,
@@ -1999,6 +2057,7 @@ function buildScene(gltf, st){
       if(expVal) q.set("exp",expVal);
       if(clipOn) q.set("clip",clipAxis+":"+Math.round(clipPos*100));
       if(traceFx && traceFx.tr) q.set("trace",traceFx.tr.id);
+      if(st.tour){ q.set("tour",st.tour); q.set("ti",st.ti); }
       const qs = q.toString();
       /* lessons need the structure id in the path — ?lesson= alone can't restore */
       history.replaceState(null,"","#/3d/"+(selected || (lesson.on ? lesson.id||"" : ""))+(qs?"?"+qs:""));
@@ -2151,14 +2210,6 @@ function buildScene(gltf, st){
   const REG_LK = { head:"head", neck:"head", thorax:"thorax", abdomen:"abdomen",
     pelvis:"pelvis", back:"back", "upper-limb":"upper-limb", arm:"upper-limb", hand:"upper-limb",
     "lower-limb":"lower-limb", leg:"lower-limb", foot:"lower-limb" };
-  const REGIONS_3D = [["head","skull","Head & neck"],["thorax","heart-pulse","Thorax"],
-    ["abdomen","apple","Abdomen"],["pelvis","bone","Pelvis"],["back","person","Back & spine"],
-    ["upper-limb","hand","Upper limb"],["lower-limb","map-pin","Lower limb"]];
-  /* free tier gets two showcase regions — skull/neck + arm bones are the demo;
-     the organ-heavy trunk regions stay Premium */
-  const FREE_REGS = ["head","upper-limb"];
-  const REG_COLOR = { head:0xe3a94e, neck:0xd98e8e, thorax:0xc25b52, abdomen:0xc7864e, pelvis:0x9b68ae,
-    back:0x6fa3a0, "upper-limb":0x5f95c8, "lower-limb":0x4f9a6b, "whole-body":0x8d99a6 };
   const partRegion = {}, regionBoxes = {};
   { const _sp = new THREE.Sphere();
     const boxOf = id => { const bx = new THREE.Box3();
@@ -3292,6 +3343,46 @@ function buildScene(gltf, st){
         const si = shotBtn.querySelector("i"); si.innerHTML=I("check"); setTimeout(()=>si.innerHTML=I("camera"),1200); });
     }catch(e){}
   });
+  /* ---- my tours: record the current view as stops, replay them step by step ---- */
+  const tb = $("#b3dtb");
+  let tourRec = null;
+  const tbHide = () => { if(tb){ tb.style.display="none"; tb.innerHTML=""; } };
+  const tbPaint = html => { if(!tb) return; tb.innerHTML = html; tb.style.display="flex";
+    const pv = tb.querySelector("[data-tb=prev]"), nx = tb.querySelector("[data-tb=next]"),
+      en = tb.querySelector("[data-tb=end]"), ad = tb.querySelector("[data-tb=add]"),
+      dn = tb.querySelector("[data-tb=done]"), cx = tb.querySelector("[data-tb=cancel]");
+    if(pv) pv.addEventListener("click",()=>{ const t=tourT(); if(t&&st.ti>0) location.hash = tourStepUrl(t,st.ti-1).slice(1); });
+    if(nx) nx.addEventListener("click",()=>{ const t=tourT(); if(t&&st.ti<t.steps.length-1) location.hash = tourStepUrl(t,st.ti+1).slice(1); });
+    if(en) en.addEventListener("click",()=>{ const t=tourT(); if(t) location.hash = t.steps[st.ti].hash.slice(1); });
+    if(ad) ad.addEventListener("click",()=>{ const cnt = tb.querySelector("#tbn");
+      setTimeout(()=>{ tourRec.steps.push({hash:location.hash, sel:selected});
+        if(cnt) cnt.textContent = tourRec.steps.length; }, 260); });
+    if(dn) dn.addEventListener("click",()=>{
+      if(!tourRec || tourRec.steps.length<2){ if(typeof learnToast==="function") learnToast("Add at least 2 stops first"); return; }
+      const nm = (prompt("Name this tour","My tour")||"").trim(); if(!nm) return;
+      PROG.tours = PROG.tours||[]; PROG.tours.push({id:"t"+Date.now().toString(36), name:nm, steps:tourRec.steps});
+      saveProg(); tourRec = null; tbHide();
+      if(typeof learnToast==="function") learnToast("Tour saved — replay it from My tours"); });
+    if(cx) cx.addEventListener("click",()=>{ tourRec=null; tbHide(); }); };
+  const tourT = () => st.tour && (PROG.tours||[]).find(t=>t.id===st.tour);
+  const tbInit = () => { const t = tourT();
+    if(t && t.steps && t.steps[st.ti]){ const s = t.steps[st.ti], n = t.steps.length;
+      tbPaint(`<span class="tb-t">${I("route")} ${esc(t.name)}</span>
+        <span class="tb-st">${st.ti+1}/${n}${s.sel?` · ${esc(nameOf(s.sel))}`:""}</span>
+        <button data-tb="prev" ${st.ti===0?"disabled":""} title="Previous stop">‹</button>
+        <button class="pri" data-tb="next" ${st.ti>=n-1?"disabled":""} title="Next stop">›</button>
+        <button data-tb="end" title="Leave the tour — keep this view">${I("x")}</button>`); }
+    else if(t && t.steps && t.steps.length) location.hash = tourStepUrl(t,0).slice(1); };
+  tbInit();
+  const recB = $("#b3drec");
+  if(recB) recB.addEventListener("click",()=>{
+    if(tourRec){ tourRec=null; tbHide(); recB.classList.remove("on"); return; }
+    closePops();
+    tourRec = {steps:[]}; recB.classList.add("on");
+    tbPaint(`<span class="tb-t"><i class="tb-dot"></i> Recording</span><b id="tbn">0</b><span class="tb-st">stops</span>
+      <button class="pri" data-tb="add">${I("pin")} Add this view</button>
+      <button data-tb="done">${I("check")} Finish</button>
+      <button data-tb="cancel" title="Discard">${I("x")}</button>`); });
   /* wireframe toggle — strips shading so meshes read as pure geometry */
   const wireB = $("#b3dwire");
   if(wireB) wireB.addEventListener("click",()=>{ wireOn=!wireOn; wireB.classList.toggle("on",wireOn);
@@ -3549,23 +3640,17 @@ function buildScene(gltf, st){
     peelSync();
     f.querySelectorAll(".fchip[data-s]").forEach(ch=>ch.classList.toggle("on",!!chipOn[ch.dataset.s]));
     applyVis(); syncHiddenBar(); };
-  const preEl = $("#b3dpre"), vwEl = $("#b3dvw");
+  const vwEl = $("#b3dvw");
   const chipIn = v => `<span class="ic">${I(v[0])}</span><span class="lb">${v[1]}</span>`;
-  /* lock predicates — consistent 🔒+dim+upsell across all three rail groups */
+  /* lock predicates — 🔒+dim+upsell everywhere layers/regions are picked */
   const vLk = v => free3d && v[2] && v[2].some(s=>s!=="skeletal");
   const rLk = k => free3d && k && !FREE_REGS.includes(k);
-  if(preEl){ preEl.innerHTML = SYSPRESETS.map((p,i)=>`<button class="pchip${i===presetIdx()?" on":""}${free3d&&i!==1?" lk":""}" data-i="${i}" title="${p[1]}" style="--fc:${p[3]}"><span class="ic">${I(p[0])}</span><span class="lb">${p[1]}${free3d&&i!==1?" 🔒":""}</span></button>`).join("");
-    preEl.querySelectorAll(".pchip").forEach(b=>b.addEventListener("click",()=>{
-      if(free3d && +b.dataset.i !== 1){ b3dUpsell(`${SYSPRESETS[+b.dataset.i][1]} is part of Premium`); return; }
-      setLayers(SYSPRESETS[+b.dataset.i][2]);
-      preEl.querySelectorAll(".pchip").forEach(x=>x.classList.toggle("on",x===b)); })); }
   if(vwEl){ vwEl.innerHTML = VIEWS.map((v,i)=>`<button class="fchip on vchip${vLk(v)?" lk":""}" data-i="${i}" title="${v[1]}">${I(v[0])} ${v[1]}${vLk(v)?" 🔒":""}</button>`).join("");
     vwEl.querySelectorAll(".vchip").forEach(b=>b.addEventListener("click",()=>{
       const v = VIEWS[+b.dataset.i];
       if(vLk(v)){ b3dUpsell(`"${v[1]}" view uses Premium layers`); return; }
       setLayers(v[2], true);
       { const dc = $("#b3ddrclose"); if(dc) dc.click(); }
-      if(preEl) preEl.querySelectorAll(".pchip").forEach(x=>x.classList.remove("on"));
       if(v[3] && meshes[v[3]]){ const p = partCenter(v[3]);
         if(p) flyTo(p.c, p.r*(v[4]||1)); select(v[3]); }
       else { fly=null; camera.position.copy(home); controls.target.copy(home2); controls.update(); } })); }
@@ -3576,6 +3661,10 @@ function buildScene(gltf, st){
   if(regEl){ regEl.innerHTML = `<button class="rg-tog" id="b3drt" aria-expanded="true" title="Collapse the region bar"><span class="rl">Region</span><span class="rd"></span><span class="rt"></span>${I("chevron-up")}</button><div class="rg-scroll" id="b3drsc">`
       + `<button class="pchip" data-reg="" title="Show the whole body" style="--fc:#8d99a6">${chipIn(["person","Whole body"])}</button>`
       + REGIONS_3D.map(r=>`<button class="pchip${rLk(r[0])?" lk":""}" data-reg="${r[0]}" title="Isolate the ${r[2]} — all its layers together" style="--fc:#${(REG_COLOR[r[0]]||0x8d99a6).toString(16).padStart(6,"0")}"><span class="ic">${I(r[1])}</span><span class="lb">${r[2]}${rLk(r[0])?" 🔒":""}</span></button>`).join("")
+      + `</div><span class="rg-sep"></span><div class="rg-ly">`
+      + `<button class="rg-lb" id="b3dlyrm" title="Strip back one layer" aria-label="Strip back one layer">−</button>`
+      + `<button class="rg-lyro" id="b3dlyro" data-pop="layers" title="Layers — tap to fine-tune what's showing" aria-label="Open layer controls"></button>`
+      + `<button class="rg-lb" id="b3dlyad" title="Add the next layer" aria-label="Add the next layer">+</button>`
       + `</div>`;
     regEl.querySelectorAll("[data-reg]").forEach(b=>b.addEventListener("click",()=>{
       const k = b.dataset.reg;
@@ -3590,13 +3679,6 @@ function buildScene(gltf, st){
      collapse = stays folded (remembered), expand = stays open this session */
   let regPref = "auto", regMinT = null;
   try{ if(localStorage.getItem("atlas-regpref")==="closed") regPref = "closed"; }catch(e){}
-  function syncLayerPill(){ const b = $("#b3drailmin"), rl = $(".b3d-rail"); if(!b || !rl) return;
-    const pi = presetIdx(), lay = pi>=0 ? SYSPRESETS[pi] : null;
-    b.querySelector(".rt").textContent = lay ? lay[1] : "Custom";
-    b.querySelector(".rd").style.background = lay ? lay[3] : "#8d99a6";
-    const open = !rl.classList.contains("min");
-    b.setAttribute("aria-expanded", String(open));
-    b.title = open ? "Collapse the layers panel" : "Show the layers panel"; }
   function syncRegPill(){ const rs = $("#b3dregs"), rt = $("#b3drt"); if(!rs || !rt) return;
     const rg = (REGIONS_3D.find(r=>r[0]===isoRegion)||[])[2] || "Whole body";
     const pi = presetIdx(), lay = pi>=0 ? SYSPRESETS[pi][1] : "Custom";
@@ -3604,8 +3686,7 @@ function buildScene(gltf, st){
     rt.querySelector(".rd").style.background = `#${(REG_COLOR[isoRegion||"whole-body"]||0x8d99a6).toString(16).padStart(6,"0")}`;
     const open = !rs.classList.contains("min");
     rt.setAttribute("aria-expanded", String(open));
-    rt.title = open ? "Collapse the region bar" : "Show all regions";
-    syncLayerPill(); }
+    rt.title = open ? "Collapse the region bar" : "Show all regions"; }
   function regApplyMin(v){ const rs = $("#b3dregs"); if(rs){ rs.classList.toggle("min",v); syncRegPill(); } }
   function regToggle(v){ regPref = v ? "closed" : "open";
     try{ localStorage.setItem("atlas-regpref", v ? "closed" : "auto"); }catch(e){}
@@ -3622,16 +3703,6 @@ function buildScene(gltf, st){
         if(Math.abs(dy) > 24 && Math.abs(dy) > Math.abs(dx)*1.5) regToggle(dy < 0); });
       regEl.addEventListener("pointercancel",()=>{ sy = null; }); } }
 
-  /* layers bar: desktop folds to a colour-stripe column, mobile to a one-line pill */
-  const railEl = $(".b3d-rail"), railMinB = $("#b3drailmin");
-  const railSet = v => { railEl.classList.toggle("min",v);
-    try{ localStorage.setItem("atlas-railmin", v ? "1" : "0"); }catch(e){}
-    syncLayerPill(); };
-  if(railEl){
-    try{ railEl.classList.toggle("min", localStorage.getItem("atlas-railmin")==="1"); }catch(e){}
-    railEl.addEventListener("click",()=>{ if(matchMedia("(max-width:760px)").matches) return;
-      if(railEl.classList.contains("min")) railSet(false); });
-    if(railMinB) railMinB.addEventListener("click",e=>{ e.stopPropagation(); railSet(!railEl.classList.contains("min")); }); }
   if(regPref==="closed") regApplyMin(true); else syncRegPill();
 
   /* focus mode — hide every panel; the floating button restores them */
@@ -3693,7 +3764,7 @@ function buildScene(gltf, st){
     closePops(); closeDrawer(); if(open){ p.classList.add("on"); b.classList.add("on"); } }));
   function syncDock(){ const set = (k,v)=>{ const b = appEl.querySelector(`[data-pop="${k}"]`); if(b) b.classList.toggle("active",!!v); };
     set("slice",clipOn); set("exp",expVal>0); set("peel",peelN>0); }
-  const drawer = $("#b3ddrawer"), dscrim = $("#b3dscrim"), layersB = $("#b3dlayers");
+  const drawer = $("#b3ddrawer"), dscrim = $("#b3dscrim"), layersB = $("#b3dlyro");
   function closeDrawer(){ drawer.classList.remove("on"); dscrim.classList.remove("on"); layersB.classList.remove("on"); }
   const openDrawer = sec => { closePops(); drawer.classList.add("on"); dscrim.classList.add("on"); layersB.classList.add("on");
     updIdx();
@@ -3707,10 +3778,26 @@ function buildScene(gltf, st){
   const lyOn = s => !!chipOn[s] && peelOf(s) >= peelN;
   const lyShow = s => { chipOn[s] = true; if(peelOf(s) < peelN) peelN = Math.max(0, peelOf(s)); peelSync(); };
   const lyChanged = () => { applyVis(); if(selected && !anyVis(selected)) select(null); };
-  function layersSync(){ const lst = $("#b3dlylist"); if(!lst) return;
+  const lyAdd = () => { const s = LY_ORDER.find(x=>!lyOn(x)); if(!s) return;
+    if(lyLocked(s)){ b3dUpsell(`${SYSTEMS[s].name} is part of Premium`); return; }
+    pushHist(); lyShow(s); lyChanged(); };
+  const lyRemove = () => { const on = LY_ORDER.filter(lyOn); if(on.length<=1) return;
+    pushHist(); chipOn[on[on.length-1]] = false; lyChanged(); };
+  function layersSync(){
+    /* the readout on the region bar always mirrors what's on — it lives outside
+       the popover so it must sync even when the panel is closed */
+    const nOn = LY_ORDER.filter(lyOn).length, nxt = LY_ORDER.find(s=>!lyOn(s)), last = [...LY_ORDER].reverse().find(lyOn);
+    const ro = $("#b3dlyro");
+    if(ro){ const on = LY_ORDER.filter(lyOn);
+      ro.innerHTML = on.slice(0,7).map(s=>`<i class="ly-dot" style="--fc:#${(SYS_COLOR[s]||0x8d99a6).toString(16).padStart(6,"0")}"></i>`).join("")
+        + (on.length>7 ? `<b>+${on.length-7}</b>` : "");
+      ro.title = `Layers — ${nOn} of ${LY_ORDER.length} on. Tap to fine-tune`; }
+    const ba = $("#b3dlyad"), br = $("#b3dlyrm");
+    if(ba){ ba.disabled = !nxt; ba.title = nxt ? `Add ${SYSTEMS[nxt].name}` : "Everything is showing"; }
+    if(br){ br.disabled = nOn<=1 || !last; br.title = last && nOn>1 ? `Remove ${SYSTEMS[last].name}` : "Keep at least one layer"; }
+    const lst = $("#b3dlylist"); if(!lst) return;
     lst.innerHTML = [...LY_ORDER].reverse().map(s=>{ const on = lyOn(s), lk = lyLocked(s);
       return `<button class="ly-row${on?" on":""}${lk?" lk":""}" data-s="${s}" aria-pressed="${on}" style="--fc:#${(SYS_COLOR[s]||0x8d99a6).toString(16).padStart(6,"0")}"><i class="ly-dot"></i><span>${SYSTEMS[s].icon} ${esc(SYSTEMS[s].name)}</span><em>${lk?"🔒":on?"On":"Off"}</em></button>`; }).join("");
-    const nOn = LY_ORDER.filter(lyOn).length, nxt = LY_ORDER.find(s=>!lyOn(s)), last = [...LY_ORDER].reverse().find(lyOn);
     $("#b3dlyn").textContent = `${nOn} of ${LY_ORDER.length} layers`;
     $("#b3dlynext").textContent = nxt ? `+ adds ${SYSTEMS[nxt].name}` : "everything is showing";
     $("#b3dlya").disabled = !nxt; $("#b3dlyr").disabled = nOn<=1 || !last; }
@@ -3718,11 +3805,11 @@ function buildScene(gltf, st){
     lst.addEventListener("click",e=>{ const r = e.target.closest(".ly-row"); if(!r) return;
       const s = r.dataset.s; if(lyLocked(s)){ b3dUpsell(`${SYSTEMS[s].name} is part of Premium`); return; }
       pushHist(); if(lyOn(s)) chipOn[s] = false; else lyShow(s); lyChanged(); });
-    $("#b3dlya").addEventListener("click",()=>{ const s = LY_ORDER.find(x=>!lyOn(x)); if(!s) return;
-      if(lyLocked(s)){ b3dUpsell(`${SYSTEMS[s].name} is part of Premium`); return; }
-      pushHist(); lyShow(s); lyChanged(); });
-    $("#b3dlyr").addEventListener("click",()=>{ const on = LY_ORDER.filter(lyOn); if(on.length<=1) return;
-      pushHist(); chipOn[on[on.length-1]] = false; lyChanged(); });
+    $("#b3dlya").addEventListener("click",lyAdd);
+    $("#b3dlyr").addEventListener("click",lyRemove);
+    const ba = $("#b3dlyad"), br = $("#b3dlyrm");
+    if(ba) ba.addEventListener("click",lyAdd);
+    if(br) br.addEventListener("click",lyRemove);
     $("#b3dlyreset").addEventListener("click",()=>{ setLayers(free3d?["skeletal"]:null); });
     $("#b3dlymore").addEventListener("click",()=>openDrawer()); }
   layersSync();
@@ -3762,8 +3849,9 @@ function buildScene(gltf, st){
     updLabels(); };
   const lesClose = () => { lesson.on=false;
     /* keep resume only if the lesson wasn't finished */
-    if(PROG.lessonResume && lessonDone(lesson.id)) delete PROG.lessonResume;
-    else if(!lessonDone(lesson.id) && PROG.lessonResume && PROG.lessonResume.id!==lesson.id) delete PROG.lessonResume;
+    const lkey = lesson.gkey||lesson.id;
+    if(PROG.lessonResume && lessonDone(lkey)) delete PROG.lessonResume;
+    else if(!lessonDone(lkey) && PROG.lessonResume && PROG.lessonResume.id!==lesson.id) delete PROG.lessonResume;
     saveProg(); lesson.sys=null; lesson.q=null;
     ++lesson.tok; clearTimeout(lesAdvTm); sayStop(); lesOrbit(false); lesSpk = false;
     { const c0 = $("#lescap"); if(c0) c0.style.display = "none"; }
@@ -3771,6 +3859,7 @@ function buildScene(gltf, st){
     appEl.classList.remove("lesson");
     if(lesson.lblSaved){ const m = lesson.lblSaved[0] ? (lesson.lblSaved[1]?"mask":"all") : "off";
       lesson.lblSaved=null; setLbl(m); }
+    if(clipOn){ clipOn=false; clipPos=0; if(slIn) slIn.value=0; applyClip(); }
     focusSet=null; setLayers(null, !!lesson.regSet); lesson.regSet = false;
     if(selected===lesson.id) select(null); queueUrl(); };
   /* trim written text to its first n sentences — the spoken script stays short */
@@ -3898,6 +3987,103 @@ function buildScene(gltf, st){
         if(p){ const dir = camera.position.clone().sub(controls.target)
             .applyAxisAngle(new THREE.Vector3(0,1,0), 2.1);
           flyTo(p.c, p.r*1.5, dir); } } });
+    return steps;
+  };
+  /* shared step helpers for the composite lesson types */
+  const keepOnly = ids => { const keep = new Set(ids.filter(i=>meshes[i])); if(!keep.size) return;
+    for(const k of keep) chipOn[meshes[k][0].userData.sys] = true;
+    hidden.clear(); for(const k in meshes) if(!keep.has(k)) hidden.add(k);
+    focusSet=null; isolated=null; applyVis(); };
+  const frameIds = (ids,k) => { const box=new THREE.Box3();
+    ids.forEach(r=>{ const p=partCenter(r); if(p) box.expandByPoint(p.c); });
+    if(!box.isEmpty()) flyTo(box.getCenter(new THREE.Vector3()),
+      Math.max(box.getSize(new THREE.Vector3()).length()/(k||1.8), rad*0.02)); };
+  /* ---------- unit lesson: a functional group taught comparatively ---------- */
+  const buildGroupLesson = gid => {
+    const g = (window.ATLAS_GROUPS||[]).find(x=>x.id===gid); if(!g) return null;
+    const ids = g.ids.filter(i=>byId[i] && meshes[i]);
+    if(ids.length<2) return null;
+    const steps = [];
+    steps.push({ t:`${I("layers")} ${g.title}`, lbl:"off",
+      vo:`This lesson teaches the ${g.title} as one unit — ${ids.length} structures that work together.`,
+      x:`<b>One unit, ${ids.length} structures.</b><br><br>${esc(g.blurb)}<br><br><span class="dim">We'll look at each member, then tell them apart.</span>`,
+      s:`${esc(g.blurb)}`,
+      act:()=>{ keepOnly(ids); frameIds(ids); } });
+    ids.forEach((mid,ix)=>{
+      const d = byId[mid], t = TEACH[mid]||{};
+      steps.push({ t:`${I("link")} ${ix+1}/${ids.length} · ${d.name}`, lbl:"off",
+        vo:`Member ${ix+1} of ${ids.length} — the ${d.name}. ${trimSents(d.summary)}`,
+        x:`<b>${esc(d.name)}</b>${d.aka?` — ${esc(d.aka)}`:""}<br><br>${esc(d.summary||"")}${t.where?`<br><br>${esc(t.where)}`:""}<br><br><span class="dim">Member ${ix+1} of ${ids.length} — it's the one highlighted, everything else is ghosted.</span>`,
+        q:{id:mid, t:`Tap the <b>${esc(d.name)}</b>`},
+        act:()=>{ keepOnly(ids); focusSet=new Set([mid]); applyVis();
+          const p=partCenter(mid); if(p) flyTo(p.c,p.r*2.4); } }); });
+    for(let r=0;r<2;r++){ const tgt = ids[r===0 ? ids.length-1 : 0];
+      steps.push({ t:"🔀 Which is which", lbl:"off",
+        vo:`Labels off. Which one is the ${byId[tgt].name}?`,
+        x:`<b>Tell them apart.</b><br><br>The whole ${esc(g.title)} is on screen, labels hidden. Which one is the <b>${esc(byId[tgt].name)}</b>?`,
+        q:{type:"mcq", id:tgt, answer:tgt, opts:shuffle(ids.slice(0,4)), t:"Which is which?"},
+        act:()=>{ keepOnly(ids); frameIds(ids); } }); }
+    if(g.case) steps.push({ t:"🏥 Why the unit matters", lbl:"off",
+      vo:`Why it matters. ${trimSents(g.case)}`,
+      x:`${esc(g.case)}${g.mnemonic?`<br><br><span class="les-kw">📌</span> ${esc(g.mnemonic)}`:""}`,
+      act:()=>{ keepOnly(ids); frameIds(ids); } });
+    const recap = steps.filter(st=>!st.finish).map(st=>`<li>${esc(stripHTML(st.t))}</li>`).join("");
+    steps.push({ t:"🎉 Unit learned", finish:true, lbl:"off",
+      vo:`${g.title} — done. One last check: name the highlighted member.`,
+      x:`<div class="les-recap"><b>In this lesson</b><ul>${recap}</ul></div>The unit again — one member highlighted, labels off. <b>Type its name</b>.`,
+      q:{id:ids[1], type:"name", t:"What is the highlighted structure? <b>Type its name</b>"},
+      act:()=>{ keepOnly(ids); focusSet=new Set([ids[1]]); applyVis(); frameIds(ids); } });
+    return steps;
+  };
+  /* ---------- space tour: borders → contents in anatomical order → clinical ---------- */
+  const buildSpaceLesson = id => {
+    const d = byId[id]; if(!d || d.system!=="general") return null;
+    const t = TEACH[id]||{};
+    const contents = Object.keys(t.rel||{}).filter(r=>byId[r]);
+    const steps = [];
+    const sysList = () => { const s = new Set(["skeletal"]);
+      if(meshes[id]) meshes[id].forEach(m=>s.add(m.userData.sys));
+      contents.forEach(r=>{ if(meshes[r]) meshes[r].forEach(m=>s.add(m.userData.sys)); });
+      return [...s]; };
+    const frame = () => { if(meshes[id]){ const p=partCenter(id); if(p){ flyTo(p.c,p.r*2.6); return; } }
+      const regK = partRegion[id], regBox = regK && regionBoxes[regK];
+      if(regBox && !regBox.isEmpty()){ isoRegion=regK; applyVis();
+        flyTo(regBox.getCenter(new THREE.Vector3()),
+          Math.max(regBox.getSize(new THREE.Vector3()).length()/2*0.9, rad*0.05)); } };
+    steps.push({ t:`📍 ${d.name}`, lbl:"all",
+      vo:`The ${d.name}. ${trimSents(d.summary)}`,
+      x:`<b>${esc(d.name)}</b>${d.aka?` — ${esc(d.aka)}`:""}<br><br>${esc(d.summary||"")}${d.structure?`<br><br><b class="les-kw">Boundaries:</b> ${esc(d.structure)}`:""}${t.where?`<br><br>${esc(t.where)}`:""}`,
+      s:`${esc(d.summary||"")}`,
+      act:()=>{ setLayers(sysList(),true); if(meshes[id]){ keepOnly(contents.filter(r=>meshes[r]).concat([id])); } frame(); } });
+    contents.filter(r=>meshes[r]).slice(0,6).forEach((r,ix)=>{
+      steps.push({ t:`${ix+1}. ${nameOf(r)}`, lbl:"off",
+        vo:`Content ${ix+1} — the ${nameOf(r)}. ${trimSents(t.rel[r]||"")}`,
+        x:`<b>${esc(nameOf(r))}</b><br><br>${esc(t.rel[r]||"")}<br><br><span class="dim">Content ${ix+1} of ${Math.min(6,contents.length)} — walked in anatomical order.</span>`,
+        q:{id:r, t:`Tap the <b>${esc(nameOf(r))}</b>`},
+        act:()=>{ keepOnly([id,r].filter(k=>meshes[k])); const p=partCenter(r); if(p) flyTo(p.c,p.r*2.2); } }); });
+    const outsider = DATA.find(x=>x.id!==id && x.system!=="general" && x.region===d.region && meshes[x.id] && !contents.includes(x.id));
+    if(outsider && contents.length>=2) steps.push({ t:"🔀 Which doesn't belong", lbl:"off",
+      vo:`Which of these does not belong in the ${d.name}?`,
+      x:`<b>Boundary check.</b><br><br>Which of these is <b>not</b> a content of the ${esc(d.name)}?`,
+      q:{type:"mcq", id:outsider.id, answer:outsider.id, opts:shuffle([outsider.id,...contents.slice(0,2)]), t:"Which doesn't belong?"},
+      act:()=>{ keepOnly([outsider.id,...contents.slice(0,2)].filter(k=>meshes[k])); frameIds([outsider.id,...contents.slice(0,2)]); } });
+    steps.push({ t:"✂️ Slice it open", lbl:"off",
+      vo:`Now a cross-section. The slice plane cuts straight through the ${d.name} — this is how it looks on a CT scan.`,
+      x:`<b>Cross-section.</b><br><br>A transverse slice through the ${esc(d.name)} — contents packed between its boundaries, the way imaging shows them.<br><br><span class="dim">Move it yourself any time — <b>Slice</b> in the toolbar.</span>`,
+      act:()=>{ clipAxis="z"; clipPos=.42; clipOn=true;
+        if(slIn) slIn.value = clipPos*100;
+        axBs.forEach(x=>x.classList.toggle("on",x.dataset.a==="z"));
+        applyClip(); frame(); } });
+    if(d.clinical || t.case || t.mnemonic) steps.push({ t:"🏥 Why the space matters", lbl:"off",
+      vo:`Why it matters. ${trimSents(d.clinical||t.case||"")}`,
+      x:`${d.clinical?esc(d.clinical):""}${t.case?`<br><br><b class="les-kw">Classic case:</b> ${esc(t.case)}`:""}${t.mnemonic?`<br><br><span class="les-kw">📌</span> ${esc(t.mnemonic)}`:""}`,
+      act:()=>{ setLayers(sysList(),true); frame(); } });
+    const recap = steps.filter(st=>!st.finish).map(st=>`<li>${esc(stripHTML(st.t))}</li>`).join("");
+    steps.push({ t:"🎉 Space mapped", finish:true, lbl:"off",
+      vo:`${d.name} mapped. ${contents.length?`Last check — tap the ${nameOf(contents[0])} again.`:""}`,
+      x:`<div class="les-recap"><b>In this tour</b><ul>${recap}</ul></div>${contents[0]&&meshes[contents[0]]?`One last check — <b>tap the ${esc(nameOf(contents[0]))}</b>.`:""}`,
+      q: contents[0]&&meshes[contents[0]] ? {id:contents[0], t:`Tap the <b>${esc(nameOf(contents[0]))}</b>`} : null,
+      act:()=>{ setLayers(sysList(),true); frame(); } });
     return steps;
   };
   /* retrieval checks feed spaced repetition — but only once, when the
@@ -4076,7 +4262,7 @@ function buildScene(gltf, st){
       lesGo(lesson.i+1); });
     const tt=$("#lestest"); if(tt) tt.addEventListener("click",()=>quizStart(lesson.id));
     const dn=$("#lesdone"); if(dn) dn.addEventListener("click",()=>{
-      markLesson(lesson.id); addXP(30,"lesson complete"); checkBadges();
+      markLesson(lesson.gkey||lesson.id); addXP(30,"lesson complete"); checkBadges();
       /* next structure: path steps run in order; system lessons take next undone */
       let nxt = null;
       if(lesson.sys && lesson.sys.startsWith("path:")){
@@ -4085,6 +4271,12 @@ function buildScene(gltf, st){
           const nid = i>=0 ? p.steps[i+1] : p.steps.find(s=>!lessonDone(s));
           nxt = nid && byId[nid] ? {id:nid, name:byId[nid].name} : null;
           if(!nxt){ giveBadge("path-1"); if((window.ATLAS_PATHS||[]).every(x=>x.steps.every(s=>lessonDone(s)))) giveBadge("path-all"); } }
+      } else if(lesson.gkey){
+        /* composite lesson — point at an undone member's own lesson */
+        if(lesson.sys && lesson.sys.startsWith("group:")){
+          const g = (window.ATLAS_GROUPS||[]).find(x=>x.id===lesson.sys.slice(6));
+          const mem = g && g.ids.find(i=>!lessonDone(i) && byId[i]);
+          if(mem) nxt = {id:mem, name:byId[mem].name+" — member lesson"}; }
       } else nxt = lessonsOf(lesson.sys).find(x=>!lessonDone(x.id));
       /* honest finish card: completed ≠ mastered. Mastery needs an unaided
          recall plus a successful review on a later day (see srRecord) */
@@ -4098,7 +4290,7 @@ function buildScene(gltf, st){
         ? `<br>★ <b>Mastered</b> — you've recalled it unaided on a later day.`
         : `<br>◐ <b>Practising</b>${due!==null?` — review again ${due===0?"today":`in ${due} day${due>1?"s":""}`}. Correct unaided on a later day to master it`:"."}`;
       const canPractise = missed.length && (!free3d || sysOf(missed[0])==="skeletal");
-      $("#lesbody").innerHTML = `${I("trophy")} <b>${esc(nameOf(lesson.id))}</b> — lesson complete.${stat}${mrow}${nxt?` Next up: <b>${esc(nxt.name)}</b>.`:" You've finished this path!"}`;
+      $("#lesbody").innerHTML = `${I("trophy")} <b>${esc(lesson.dispName||nameOf(lesson.id))}</b> — lesson complete.${stat}${mrow}${nxt?` Next up: <b>${esc(nxt.name)}</b>.`:` You've finished this ${lesson.gkey?"unit":"path"}!`}`;
       $("#lesnav").innerHTML = (nxt?`<button class="pri" id="lesgo2">Next lesson →</button>`:"")
         + (canPractise?`<button id="lesprac">Practise what I missed</button>`:"")
         + `<button class="dim" id="lesout">Exit</button>`;
@@ -4116,9 +4308,16 @@ function buildScene(gltf, st){
   const lessonStart = (id,sys) => {
     if(free3d && !(sys==="skeletal" && FREE_LESSON && id===FREE_LESSON.id)){
       b3dUpsell(`"${nameOf(id)}" — guided lessons are Premium`); return; }
-    const steps = buildLesson(id,sys);
+    const gkind = sys.startsWith("group:") ? "group" : sys.startsWith("space:") ? "space" : null;
+    const steps = gkind==="group" ? buildGroupLesson(sys.slice(6))
+      : gkind==="space" ? buildSpaceLesson(sys.slice(6)) : buildLesson(id,sys);
     if(!steps || !lesEl) return;
     lesson.on=true; lesson.id=id; lesson.sys=sys; lesson.steps=steps;
+    /* composite lessons track progress under their own key and show a label */
+    lesson.gkey = gkind ? sys : null;
+    lesson.dispName = gkind==="group"
+      ? ((window.ATLAS_GROUPS||[]).find(x=>x.id===sys.slice(6))||{}).title || nameOf(id)
+      : nameOf(id);
     lesson.sc = {ok:0,tot:0,list:[]}; lesson.outline = false; lesson.smp = simpleOn();
     lesson.lblSaved = [labelsOn,stOn];
     appEl.classList.add("lesson");
@@ -4398,11 +4597,11 @@ function buildScene(gltf, st){
         b3dUpsell("You're enjoying the explorer — unlock the full body"); }, 5*60*1000);
   }
 
-  /* one-time tour of the region bar, layers, the fold toggle and focus mode */
+  /* one-time tour of the region bar, the layer controls, the fold toggle and focus mode */
   const TOUR_STEPS = [
     [".b3d-regs","Pick a body region","Tap a region to dissect just that part of the body, then add layers inside it."],
-    [".b3d-rail","Add layers","Skeleton, muscles, nerves and more. A region plus a layer gives you, say, the arm's muscles."],
-    ["#b3drt","Fold bars away","Tap this arrow, or swipe up on the bar, to tuck it away and see more of the body."],
+    [".rg-ly","Add layers","+ builds up: skeleton, vessels, muscles and more. A region plus a layer gives you, say, the arm's muscles. Tap the dots to fine-tune."],
+    ["#b3drt","Fold the bar away","Tap this arrow, or swipe up on the bar, to tuck the region chips away and see more of the body."],
     ["#b3dfocus","Focus mode","Hides every panel for a clear view. Tap Controls to bring them back."] ];
   let tourEl = null, tourCur = 0, tourOff = null;
   const tourValid = () => TOUR_STEPS.map((s,i)=>i).filter(i=>{ const t = appEl.querySelector(TOUR_STEPS[i][0]);
@@ -4507,6 +4706,7 @@ function v3D(sel){
     lm: q.get("lm") || null,
     quiz: q.get("quiz") || null,
     att: q.get("att") || null,
+    tour: q.get("tour") || null, ti: Math.max(0, +q.get("ti")||0),
     trace: q.get("trace") || null };
   const ids = Object.keys(MODELS).filter(id=>byId[id]);
   document.body.classList.add("b3d-open");
@@ -4531,15 +4731,11 @@ function v3D(sel){
       <button class="b3d-iconbtn" id="b3dhelpbtn" title="Help &amp; options" aria-label="Help">?</button>
     </header>
 
-    <div class="b3d-regs" id="b3dregs" role="toolbar" aria-label="Body region"></div>
-
-    <nav class="b3d-rail" aria-label="Body system layers">
-      <button class="rail-min" id="b3drailmin" title="Collapse the layers panel" aria-label="Collapse layers" aria-expanded="true"><span class="rl">Layers</span><span class="rd"></span><span class="rt"></span>${I("chevron-up")}</button>
-      <div class="b3d-presets" id="b3dpre"></div>
-    </nav>
+    <div class="b3d-regs" id="b3dregs" role="toolbar" aria-label="Body regions and layers"></div>
 
     <div class="b3d-info" id="b3di"><div class="b3d-grab"></div><button class="b3d-iclose" id="b3dic" title="Close" aria-label="Close">${I("x")}</button><h3>Tap a structure</h3><p class="hint">Click any part of the body — a bone, muscle, organ, vessel or nerve — to see what it is.</p></div>
     <div class="b3d-hbar" id="b3dhbar"></div>
+    <div class="b3d-tb" id="b3dtb" style="display:none"></div>
     <div class="b3d-lesson" id="b3dles" style="display:none">
       <div class="les-top"><b class="les-step" id="lest"></b><span class="les-dots" id="lesdots"></span>
         <button class="les-smp" id="lesvo" title="Read aloud: on" aria-label="Toggle read aloud">${I("volume-2")}</button>
@@ -4571,14 +4767,14 @@ function v3D(sel){
         <button class="ly-st" id="b3dlya" aria-label="Add a layer">+</button></div>
       <div class="ly-list" id="b3dlylist" role="group" aria-label="Body systems"></div>
       <div class="ly-foot"><button id="b3dlyreset">Reset</button><button id="b3dlymore">More options…</button></div></div>
-    <div class="b3d-pop" id="pop-peel"><div class="pop-h">${I("layers")} Peel layers <small>skin → muscle → … → bone</small></div>
-      <div class="b3d-peel"><input id="b3dpeel" type="range" min="0" max="100" value="0" aria-label="Peel anatomical layers"><em id="b3dpeelv"></em></div></div>
+
     <div class="b3d-pop" id="pop-more"><div class="pop-h">⋯ More <small>display &amp; actions</small></div>
       <div class="pop-tools">
         <button class="dock-b" id="b3dwire" title="Wireframe on/off"><i>${I("grid")}</i><b>Wire</b></button>
         <button class="dock-b" id="b3dao" title="Depth shading (ambient occlusion)"><i>${I("contrast")}</i><b>AO</b></button>
         <button class="dock-b" id="b3dundo" title="Undo hide/isolate (Ctrl+Z)" disabled><i>${I("undo-2")}</i><b>Undo</b></button>
         <button class="dock-b" id="b3dshot" title="Save a screenshot (PNG)"><i>${I("camera")}</i><b>Photo</b></button>
+        <button class="dock-b" id="b3drec" title="Record a tour — save each view as a stop, then replay it"><i>${I("route")}</i><b>Tour</b></button>
         <button class="dock-b" id="b3dreset" title="Reset view"><i>${I("rotate-ccw")}</i><b>Reset</b></button>
         <button class="dock-b" id="b3dqual" title="Render quality — Auto adapts to the device, High forces crisp, Low saves battery"><i>${I("sliders")}</i><b id="b3dqb">Auto</b></button>
       </div></div>
@@ -4591,7 +4787,7 @@ function v3D(sel){
       <button class="dock-b" id="b3dst" title="Hide the names — tap a ? to reveal it (self-test)"><i>${I("eye-off")}</i><b>Test</b></button>
       <button class="dock-b" id="b3dquiz" title="Quiz: find or name structures"><i>${I("target")}</i><b>Quiz</b></button>
       <span class="dock-sep"></span>
-      <button class="dock-b" id="b3dlayers" data-pop="layers" title="Add or remove body layers"><i>${I("layers")}</i><b>Layers</b></button>
+
       <button class="dock-b" data-pop="more" title="Wireframe, depth shading, undo, screenshot, reset"><i>⋯</i><b>More</b></button>
       <button class="dock-b" id="b3dunpeek" title="Hide the toolbar"><i>${I("chevron-down")}</i><b>Hide</b></button>
     </div></nav>
@@ -4619,6 +4815,7 @@ function v3D(sel){
             <li><b>${I("target")} Quiz</b> — you're given a name, tap the right structure. Questions are read aloud — mute or replay with the speaker buttons</li>
             <li><b>${I("sparkles")} Quick tour</b> — <button class="fchip" id="b3dtourbtn" style="margin-left:4px">Replay the tour</button></li>
             <li><b>${I("graduation-cap")} Guided lessons</b> — open <a href="#/learn" style="color:#ffd60a">Learn</a> for step-by-step tours that drive the camera</li>
+            <li><b>${I("route")} My tours</b> — record your own walkthrough (More → Tour), replay it from <a href="#/tours" style="color:#ffd60a">My tours</a></li>
             <li><b>Share</b> — the address bar always matches your current view; copy it to send</li>
           </ul></div>
         <div class="dr-sec"><details><summary>Close-up models</summary><div class="grid">${ids.map(id=>cardHTML(byId[id])).join("")}</div></details></div>
@@ -4667,7 +4864,7 @@ function parseQC(s){ const c={sys:[],regs:[],mode:"mix",n:0,t:0,plate:0,path:nul
     else if(k==="mode"&&QMODES.some(m=>m[0]===val)) c.mode=val;
     else if(k==="p"){ const p=(window.ATLAS_PATHS||[]).find(x=>x.id===val); if(p){c.path=val;c.ids=p.steps.filter(id=>byId[id]);} }
     else if(k==="i") c.ids=val.split(",").filter(id=>byId[id]).slice(0,60);
-    else if(k==="n") c.n=+val||0; else if(k==="t") c.t=Math.min(600,+val||0); else if(k==="plate") c.plate=val==="1"; });
+    else if(k==="n") c.n=+val||0; else if(k==="t") c.t=Math.min(7200,+val||0); else if(k==="plate") c.plate=val==="1"; });
   return c; }
 function cfgToHash(c){ const p=[];
   if(c.path)p.push("p="+c.path); else if(c.ids.length)p.push("i="+c.ids.join(","));
@@ -4719,6 +4916,7 @@ function vQuizHub(){
     <div class="path2">
       <a class="pcard${free?" lk":""}" href="${free?"#/premium":"#/quiz/c:mode=mix&n=20"}"><span class="ic">${I("shuffle")}</span><span class="tx"><b>Mixed quiz</b><small>All regions and systems · 20 questions</small></span><span class="go">${free?I("lock"):"›"}</span></a>
       <a class="pcard${free?" lk":""}" href="${free?"#/premium":"#/quiz/due"}"><span class="ic">${I("brain")}</span><span class="tx"><b>Review</b><small>${due?`${due} structure${due>1?"s":""} due now`:"Spaced repetition queue"}</small></span><span class="go">${free?I("lock"):"›"}</span></a>
+      <a class="pcard${free?" lk":""}" href="${free?"#/premium":"#/quiz/c:mode=mix&n=50&t=2400"}"><span class="ic">${I("clock")}</span><span class="tx"><b>Mock exam</b><small>50 questions · 40-minute timer · per-region report at the end</small></span><span class="go">${free?I("lock"):"›"}</span></a>
       <a class="pcard" href="#/3d?quiz=mix"><span class="ic">${I("box")}</span><span class="tx"><b>3D spot-test</b><small>Tap or name structures on the 3D body${free?" — skeleton":""}</small></span><span class="go">›</span></a>
       <a class="pcard${free?" lk":""}" href="${free?"#/premium":"#/quiz-builder"}"><span class="ic">${I("sliders")}</span><span class="tx"><b>Custom quiz</b><small>Systems, regions, count, timer, plates only</small></span><span class="go">${free?I("lock"):"›"}</span></a>
     </div>
@@ -4785,8 +4983,22 @@ function endQuiz(msg){
   if(quiz.timer){ clearInterval(quiz.timer); quiz.timer=null; }
   const pct = quiz.asked ? Math.round(quiz.score/quiz.asked*100) : 0;
   const qc = $("#qcard"); if(!qc) return;
+  /* post-quiz report: weakest regions/systems when the set was big enough to read */
+  const rep = (()=>{ const r = quiz.regS; if(!r || quiz.asked<15) return "";
+    const row = (m,nm) => Object.keys(m).map(k=>{ const [ok,no]=m[k], n=ok+no;
+      return {k, nm:nm(k), ok, no, n, p:n?Math.round(ok/n*100):0}; })
+      .filter(x=>x.n>=2).sort((a,b)=>a.p-b.p||b.n-a.n).slice(0,4);
+    const R = row(r,k=>REGIONS[k].name), S = row(quiz.sysS||{},k=>SYSTEMS[k].name);
+    if(!R.length && !S.length) return "";
+    const li = p => x=>`<li><b>${esc(x.nm)}</b> — ${x.ok}/${x.n} (${x.p}%)${x.p<60?` <a href="#/quiz/c:${p}=${x.k}&mode=mix&n=10" style="color:var(--accent)">drill it →</a>`:""}</li>`;
+    const worst = R[0];
+    return `<div class="qreport"><b>${I("target")} Where you lost points</b>
+      ${R.length?`<h4>By region</h4><ul>${R.map(li("r")).join("")}</ul>`:""}
+      ${S.length?`<h4>By system</h4><ul>${S.map(li("sys")).join("")}</ul>`:""}
+      ${worst?`<a class="btn" href="#/quiz/c:r=${worst.k}&mode=mix&n=12" style="margin-top:8px">${I("brain")} Re-drill ${esc(worst.nm)}</a>`:""}</div>`; })();
   qc.innerHTML = `<div class="q">${msg||"Quiz complete"}</div>
     <div class="qsub">${quiz.score} of ${quiz.asked} correct (${pct}%)</div>
+    ${rep}
     <div class="quiz-foot"><a class="btn primary" href="${quiz.again||"#/quiz"}">Again</a>
       <a class="btn" href="#/quiz" style="margin-left:8px">All quizzes</a>
       <a class="btn" href="#/quiz-builder" style="margin-left:8px">${I("sliders")} Custom quiz</a></div>
@@ -4797,6 +5009,9 @@ function endQuiz(msg){
 }
 function qAnswer(right, d, extra, o){
   quiz.asked++; if(right){quiz.score++; quiz.streak=(quiz.streak||0)+1;} else quiz.streak=0;
+  /* per-region/system tally for the post-quiz report (mock exams) */
+  if(d && d.region){ const bump=(m,k)=>{const x=m[k]=m[k]||[0,0]; x[right?0:1]++;};
+    bump(quiz.regS=quiz.regS||{},d.region); bump(quiz.sysS=quiz.sysS||{},d.system); }
   srRecord(d.id, right, o);
   if(right){ PROG.quizRight=(PROG.quizRight|0)+1; PROG.xp=(PROG.xp|0)+10; touchStreak(); saveProg(); checkBadges(); }
   try{ if(right && window.parent !== window) parent.postMessage({type:"atlas:quiz-correct", id:d.id}, location.origin); }catch(e){}
@@ -4986,7 +5201,7 @@ const addXP = (n,why) => { PROG.xp = (PROG.xp|0)+n; touchStreak(); saveProg();
   learnToast(`+${n} XP${why?" · "+why:""}`); };
 const lessonDone = id => !!(PROG.lessons && PROG.lessons[id]);
 const markLesson = id => { (PROG.lessons=PROG.lessons||{})[id]=today();
-  if(PROG.lessonResume && PROG.lessonResume.id===id) delete PROG.lessonResume;
+  if(PROG.lessonResume && (PROG.lessonResume.id===id || PROG.lessonResume.sys===id)) delete PROG.lessonResume;
   saveProg(); };
 /* today's session — the next thing to do, computed from today's facts so the
    chain works however the user navigates */
@@ -5062,7 +5277,10 @@ const checkBadges = () => {
 /* ---------- learn mode: guided paths through the systems ---------- */
 const LEARN_ORDER = ["skeletal","muscular","cardiovascular","nervous","respiratory",
   "digestive","urinary","reproductive","endocrine","lymphatic","integumentary","sensory"];
-const lessonsOf = sys => DATA.filter(d=>d.system===sys && d.summary && !d.of);
+const tierOf = id => { const T = window.ATLAS_TIER||{};
+  return (T[1]||[]).includes(id) ? 1 : (T[3]||[]).includes(id) ? 3 : 2; };
+const lessonsOf = sys => DATA.filter(d=>d.system===sys && d.summary && !d.of)
+  .sort((a,b)=> tierOf(a.id)-tierOf(b.id) || a.name.localeCompare(b.name));
 const nextLesson = sys => { const l = lessonsOf(sys).find(d=>!lessonDone(d.id));
   return l || lessonsOf(sys)[0]; };
 
@@ -5103,7 +5321,16 @@ function vLearn(arg){
     </div>
     ${(PROG.badges||[]).length?`<p class="hint" style="margin:-4px 0 14px">Badges: ${PROG.badges.map(b=>{const x=BADGES.find(y=>y[0]===b);return x?x[1]:"";}).filter(Boolean).join(" · ")}</p>`:""}
     ${(()=>{ const n = confPairs().length; return n>=3 ? `<p class="hint" style="margin:-4px 0 14px">${I("target")} You've mixed up ${n} structure pairs — <a href="#/learn/lookalikes" style="color:var(--accent)">drill them in the look-alike clinic →</a></p>` : ""; })()}
-    <h2 class="sec-title">${I("route")} Featured courses</h2>
+    ${(()=>{ const rows = META.regionOrder.filter(r=>regCount[r]).map(r=>{
+        const c={introduced:0,practising:0,mastered:0,none:0};
+        DATA.filter(d=>d.region===r&&d.summary&&!d.of).forEach(d=>{ c[masteryState(d.id)||"none"]++; });
+        const tot = c.introduced+c.practising+c.mastered+c.none || 1;
+        return `<div class="mmrow"><span class="mmn">${REGIONS[r].name}</span>
+          <span class="mmbar"><i class="m3" style="width:${c.mastered/tot*100}%"></i><i class="m2" style="width:${c.practising/tot*100}%"></i><i class="m1" style="width:${c.introduced/tot*100}%"></i></span>
+          <span class="mmc">${c.mastered?`${c.mastered}★`:""}</span></div>`; }).join("");
+      return `<details class="primer"><summary>${I("target")} Your mastery map — region by region</summary>${rows}
+        <p class="hint"><i class="mmkey m3"></i> mastered · <i class="mmkey m2"></i> practising · <i class="mmkey m1"></i> introduced — recall unaided on a later day to master a structure.</p></details>`; })()}
+    <h2 class="sec-title">${I("route")} Featured courses <a class="more" href="#/cram" style="margin-left:auto">Cram tables ›</a></h2>
     <div class="grid tight" style="grid-template-columns:1fr">${(window.ATLAS_PATHS||[]).map(p=>{
       const {done,pct} = pathProg(p);
       const LVL=["",'<i class="cdot" style="--c:#22c55e"></i>Intro','<i class="cdot" style="--c:#3b82f6"></i>Core','<i class="cdot" style="--c:#a855f7"></i>Advanced'];
@@ -5113,6 +5340,21 @@ function vLearn(arg){
           <span class="ld">${LVL[p.level]||""} · ${p.steps.length} stops · ${esc(p.time)}${done?` · ${done} done`:""}</span>
           <span class="lbar"><i style="width:${pct}%"></i></span></span>
         <span class="ln"><b>${pct}%</b>${pct===100?"✓":"›"}</span></a>`; }).join("")}</div>
+    ${(window.ATLAS_GROUPS||[]).length?`<h2 class="sec-title">${I("layers")} Unit lessons — learn a group, not a part</h2>
+    <div class="grid tight" style="grid-template-columns:1fr">${window.ATLAS_GROUPS.map(g=>{
+      const gDone = lessonDone("group:"+g.id), lk = free;
+      return `<a class="lrow${gDone?" done":""}${lk?" lk":""}" href="${lk?"#/premium":`#/3d/${g.ids[0]}?lesson=group:${g.id}`}">
+        <span class="lck">${gDone?"✓":I("layers")}</span>
+        <span class="lr"><span class="ln2">${esc(g.title)}</span><span class="lm2">${g.ids.length} structures · one comparative lesson${gDone?" · done":""}</span></span>
+        <span class="lgo">${lk?I("lock"):"›"}</span></a>`;}).join("")}</div>`:""}
+    ${(()=>{ const sp = DATA.filter(d=>d.system==="general" && d.summary);
+      return sp.length?`<h2 class="sec-title">${I("map-pin")} Anatomical spaces — guided tours</h2>
+    <div class="grid tight" style="grid-template-columns:1fr">${sp.map(s=>{
+      const sDone = lessonDone("space:"+s.id), lk = free;
+      return `<a class="lrow${sDone?" done":""}${lk?" lk":""}" href="${lk?"#/premium":`#/3d/${s.id}?lesson=space:${s.id}`}">
+        <span class="lck">${sDone?"✓":I("map-pin")}</span>
+        <span class="lr"><span class="ln2">${esc(s.name)}</span><span class="lm2">Boundaries → contents → clinical · ${REGIONS[s.region]?esc(REGIONS[s.region].name):""}</span></span>
+        <span class="lgo">${lk?I("lock"):"›"}</span></a>`;}).join("")}</div>`:""; })()}
     <h2 class="sec-title">${I("graduation-cap")} Body systems</h2>
     <div class="grid tight" style="grid-template-columns:1fr">${LEARN_ORDER.filter(s=>sysCount[s]).map(s=>{
       const items = lessonsOf(s), done = items.filter(d=>lessonDone(d.id)).length;
@@ -5225,9 +5467,36 @@ function vCourse(key){
     <p>${esc(c.desc)} ${done?`Progress: ${done}/${total} (${pct}%)`:""}${c.meta?` <span class="dim">${esc(c.meta)}</span>`:""}</p></div>
     ${c.objectives.length?`<div class="section"><h2>Objectives</h2><ul class="tlist">${c.objectives.map(o=>`<li>${I("check")} ${esc(o)}</li>`).join("")}</ul></div>`:""}
     ${nxt?`<p><a class="btn primary" href="${lockSt(nxt)?"#/premium":`#/3d/${nxt}?lesson=${c.key}`}">${I("play")} ${done?"Continue":"Start"}${byId[nxt]?`: ${esc(byId[nxt].name)}`:""}${lockSt(nxt)?" 🔒":""}</a>
-      <a class="btn" href="${free&&key!=="skeletal"?"#/premium":quizHref}">${I("target")} Quiz this course${free&&key!=="skeletal"?" 🔒":""}</a></p>`:""}
+      <a class="btn" href="${free&&key!=="skeletal"?"#/premium":quizHref}">${I("target")} Quiz this course${free&&key!=="skeletal"?" 🔒":""}</a></p>
+      ${(()=>{ const d=byId[nxt]; if(!d) return ""; const im=imgOf(nxt);
+        return `<a class="nxt-card" href="#/part/${nxt}">
+          ${im?`<img src="${esc(im.url)}" alt="" loading="lazy">`:`<span class="nxt-ic">${SYSTEMS[d.system].icon}</span>`}
+          <span class="nxt-tx"><b>Next: ${esc(d.name)}</b><small>${esc(d.summary||"")}</small>
+          <span class="nxt-lnks">${ARTICLES[nxt]?`<span>${I("book-open")} article</span>`:""}${B3D_IDS.has(nxt)?`<span>${I("box")} 3D</span>`:""}<span>${I("bone")} entry</span></span></span>
+          <span class="nxt-go">›</span></a>`; })()}`:""}
     ${resRow}
-    ${grouped}`;
+    ${grouped}
+    ${(()=>{ /* comparative lessons + space tours belonging to this course */
+      const gs = (window.ATLAS_GROUPS||[]).filter(g=>
+        (!c.isPath && g.sys===key) || g.ids.filter(i=>c.stops.includes(i)).length>=2);
+      const regs = new Set(c.stops.map(s=>(byId[s]||{}).region));
+      const sps = DATA.filter(d=>d.system==="general" && d.summary && regs.has(d.region));
+      if(!gs.length && !sps.length) return "";
+      const gRow = g=>{ const gDone=lessonDone("group:"+g.id), lk=free;
+        return `<a class="lrow${gDone?" done":""}${lk?" lk":""}" href="${lk?"#/premium":`#/3d/${g.ids[0]}?lesson=group:${g.id}`}">
+          <span class="lck">${gDone?"✓":I("layers")}</span>
+          <span class="lr"><span class="ln2">${esc(g.title)} — unit lesson</span><span class="lm2">${g.ids.length} structures · learn them comparatively</span></span>
+          <span class="lgo">${lk?I("lock"):"›"}</span></a>`; };
+      const sRow = s=>{ const sDone=lessonDone("space:"+s.id), lk=free;
+        return `<a class="lrow${sDone?" done":""}${lk?" lk":""}" href="${lk?"#/premium":`#/3d/${s.id}?lesson=space:${s.id}`}">
+          <span class="lck">${sDone?"✓":I("map-pin")}</span>
+          <span class="lr"><span class="ln2">${esc(s.name)} — space tour</span><span class="lm2">Boundaries → contents → clinical</span></span>
+          <span class="lgo">${lk?I("lock"):"›"}</span></a>`; };
+      return `<h2 class="sec-title">${I("layers")} Units &amp; spaces</h2>`+gs.map(gRow).join("")+sps.map(sRow).join(""); })()}
+    ${(()=>{ /* cram tables whose region appears in this course's stops */
+      const regs = new Set(c.stops.map(s=>(byId[s]||{}).region));
+      const ts = (window.ATLAS_TABLES||[]).filter(t=>regs.has(t.region));
+      return ts.length ? `<h2 class="sec-title">${I("zap")} Cram tables <a class="more" href="#/cram">All tables ›</a></h2>` + ts.map(cramTbl).join("") : ""; })()}`;
 }
 
 /* ---------- long-form articles ---------- */
@@ -5271,6 +5540,38 @@ function vArticle(id){
     <a class="next" href="#/quiz/c:sys=${d.system}&mode=mix&n=20"><div class="dir">Test yourself →</div><div class="nm">Quiz the ${esc(c.name)}</div></a></div>`;
   const afig = view.querySelector("#afigimg");
   if(afig) afig.addEventListener("click",()=>lightbox(im));
+}
+
+/* ---------- cram tables & my tours ---------- */
+const cramTbl = t => `<div class="cram"><h3>${esc(t.title)}</h3>
+  <table class="cram-tbl"><thead><tr>${t.cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead>
+  <tbody>${t.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+function vCram(){
+  crumbs([{t:"Home",href:"#/"},{t:"Learn",href:"#/learn"},{t:"Cram tables"}]);
+  const ts = window.ATLAS_TABLES||[];
+  view.innerHTML = `<div class="list-head"><h1>${I("zap")} Exam-cram tables</h1>
+    <p>High-yield one-screen summaries — read them the night before, then prove it with a quiz.</p></div>
+    ${ts.map(cramTbl).join("")||`<div class="empty">No tables yet.</div>`}
+    <p style="margin-top:22px"><a class="btn" href="#/quiz/c:mode=mix&n=20">${I("target")} Now test it — mixed quiz</a></p>`;
+}
+const tourStepUrl = (t,i) => { const h = t.steps[i].hash;
+  return h + (h.includes("?")?"&":"?") + "tour="+encodeURIComponent(t.id)+"&ti="+i; };
+function vTours(){
+  crumbs([{t:"Home",href:"#/"},{t:"My tours"}]);
+  const tours = PROG.tours||[];
+  view.innerHTML = `<div class="list-head"><h1>${I("route")} My tours</h1>
+    <p>Your own walkthroughs of the 3D body — record a route in 3D (Layers &amp; options → "● Record tour"), then replay it here step by step.</p></div>
+    ${tours.length?`<div class="grid tight" style="grid-template-columns:1fr">${tours.map((t,i)=>{
+      const nm = t.steps.map(s=>(s.sel&&nameOf(s.sel))||"").filter(Boolean);
+      return `<div class="lrow"><span class="lck">${I("route")}</span>
+        <span class="lr"><span class="ln2">${esc(t.name)}</span>
+        <span class="lm2">${t.steps.length} stops${nm.length?" — "+esc(nm.slice(0,3).join(" · "))+(nm.length>3?" …":""):""}</span></span>
+        <a class="btn sm" href="${tourStepUrl(t,0)}">${I("play")} Play</a>
+        <button class="btn sm" data-del="${i}" title="Delete this tour">${I("x")}</button></div>`; }).join("")}</div>`
+    :`<div class="empty">No tours yet — open the <a href="#/3d" style="color:var(--accent)">3D body</a>, arrange a view, then hit <b>More → ● Record</b> to save each stop.</div>`}`;
+  view.querySelectorAll("[data-del]").forEach(b=>b.addEventListener("click",()=>{
+    if(!confirm("Delete this tour?")) return;
+    PROG.tours.splice(+b.dataset.del,1); saveProg(); vTours(); }));
 }
 
 /* ---------- search ---------- */
@@ -5361,6 +5662,8 @@ function route(){
   else if(kind==="paths"){ vLearn(null); mark("learn"); }
   else if(kind==="article" && arg && ARTICLES[arg] && byId[arg]){ vArticle(arg); mark("learn"); }
   else if(kind==="articles"){ vArticles(); mark("learn"); }
+  else if(kind==="cram"){ vCram(); mark("learn"); }
+  else if(kind==="tours"){ vTours(); mark("3d"); }
   else if(kind==="learn"){ if(arg==="review"){ vReview(); mark("learn/review"); } else if(arg==="lookalikes"){ vLookalikes(); mark("learn"); } else { vLearn(arg||null); mark("learn"); } }
   else if(kind==="gallery"){ vGallery(); mark("gallery"); }
   else if(kind==="3d"){ v3D(arg||null); mark("3d"); }
